@@ -10,7 +10,7 @@
 </p>
 <p align="center">
   </a>
-  <a href="https://github.com/Rumblemike/Assist/releases/latest/download/Assist-Setup.exe"><img src="https://cdn.discordapp.com/attachments/758020329447620628/939632726347247706/Download_Pic.png" ></a>
+  <a href="https://github.com/Rumblemike/Assist/releases/latest/download/AssistSetup.exe"><img src="https://cdn.discordapp.com/attachments/758020329447620628/939632726347247706/Download_Pic.png" ></a>
   </p>
 
 ## Features
