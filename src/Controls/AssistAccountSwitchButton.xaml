@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Assist.Controls.AssistAccountSwitchButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Assist.Controls"
+             mc:Ignorable="d" 
+             MinHeight="50" MinWidth="340" x:Name="_this">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate x:Name="btnTemplate" TargetType="{x:Type Button}">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <TextBlock Grid.Column="0"
+                                           x:Name="usernameText"
+                                           Text="{Binding accountName, Mode=TwoWay, ElementName=_this}"
+                                           TextWrapping="Wrap"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"   
+                                           Margin="10,0,10,0"
+                                           Foreground="White" FontFamily="Bahnschrift SemiBold">
+
+                                    </TextBlock>
+
+                                    <TextBlock
+                                           x:Name="regionText"
+                                           Text="{Binding accountRegion, Mode=TwoWay, ElementName=_this}"
+                                           TextWrapping="Wrap"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"   
+                                           Margin="10,0,10,0"
+                                           Foreground="White" 
+                                           Opacity=".5"
+                                           FontFamily="Bahnschrift SemiBold">
+
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <Path Name="ButtonIcon"
+                                      Grid.Column="1"
+                                      Fill="White"
+                                      Data="{StaticResource checkMark}"
+                                      Width="23"
+                                      Height="23"
+                                      Opacity="{Binding checkmarkOpac, Mode=TwoWay, ElementName=_this}"/>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+                
+                
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource BackingBlack15}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="{StaticResource BackingBlack12}"/>
+                </Trigger>
+            </Style.Triggers>
+            
+        </Style>
+    </UserControl.Resources>
+    
+    <Button x:Name="accSwitchBtn" Click="accSwitchBtn_Click"/>
+</UserControl>

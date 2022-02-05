@@ -1,0 +1,68 @@
+﻿<Window x:Class="Assist.MVVM.View.Extra.ErrorScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assist.MVVM.View.Extra"
+        mc:Ignorable="d"
+        Title="Assist Error" Height="250" Width="400" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
+            <Grid>
+                <Label Content="Assist Error" Foreground="White" FontFamily="Bahnschrift SemiBold" Opacity=".5"/>
+                <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click" ></Button>
+                <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0" ></Button>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Background="{StaticResource BackingBlack1}">
+            <Grid.Resources>
+                <Style x:Key="BtnStyle" TargetType="{x:Type Button}">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Background" Value="#444444"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Width" Value="80"/>
+                    <Setter Property="Margin" Value="0,0,20,5"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontFamily" Value="Bahnschrift Light"/>
+                    <Setter Property="Content" Value="UPDATE"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Border CornerRadius="5" Background="{TemplateBinding Background}">
+
+                                    </Border>
+                                    <TextBlock Text="OK" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Bahnschrift SemiBold"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BackingBlack15}">
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="{StaticResource BackingBlack12}">
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Foreground="White" Background="{StaticResource BackingBlack12}" Margin="10" BorderThickness="0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+            <Button Grid.Row="1" x:Name="errorOkBTn" Style="{StaticResource BtnStyle}" Click="errorOkBTn_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0"></Button>
+        </Grid>
+    </Grid>
+</Window>

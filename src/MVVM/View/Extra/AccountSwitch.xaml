@@ -1,0 +1,24 @@
+﻿<Window xmlns:Controls="clr-namespace:Assist.Controls"  x:Class="Assist.MVVM.View.Extra.AccountSwitch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assist.MVVM.View.Extra"
+        mc:Ignorable="d"
+        Title="AccountSwitch" Height="525" Width="400" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="Transparent" BorderBrush="{StaticResource BackingBlack2}" BorderThickness="1" AllowsTransparency="True">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
+            
+            <Grid>
+                <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click" ></Button>
+                <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0" ></Button>
+            </Grid>
+        </Border>
+        <Controls:AssistAccountSwitch Grid.Row="1" />
+    </Grid>
+</Window>

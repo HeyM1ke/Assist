@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Assist.Controls.AssistStoreBundleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Assist.Controls"
+             mc:Ignorable="d" 
+             Width="1168" Height="570" x:Name="_this" Initialized="BundleControl_Initialized">
+
+    <UserControl.Resources>
+        <Style x:Key="priceBorder" TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Background" Value="{StaticResource BackingBlack15}"/>
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, ElementName=gridContainer}" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ValorantRed}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsMouseOver, ElementName=gridContainer}" Value="False">
+                    <Setter Property="Background" Value="{StaticResource BackingBlack15}"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid x:Name="gridContainer">
+        <Image x:Name="bundleImageContainer" Width="1168" Height="570"/>
+        <StackPanel VerticalAlignment="Top">
+            <Border>
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#268A8A8A" Offset="0.6"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel VerticalAlignment="Top" Margin="5,10,0,5">
+                        <Grid Height="110">
+                            <Label Content="B U N D L E" Foreground="White" FontSize="24" FontFamily="Bahnschrift Semilight" VerticalAlignment="Top" Margin="4,74,-3,0" />
+                            <Label Content="{Binding bundleName, Mode=TwoWay, ElementName=_this}" Foreground="White" FontSize="82" Height="100" VerticalAlignment="Top" FontFamily="Bahnschrift SemiCondensed" Margin="1,0,0,0">
+                                <Label.Effect>
+                                    <DropShadowEffect Opacity="0.3"/>
+                                </Label.Effect>
+                            </Label>
+
+
+                        </Grid>
+                        <TextBox Margin="5,0,0,0" Text="{Binding bundleDescription, Mode=TwoWay, ElementName=_this}" Background="Transparent" Foreground="White" SelectionBrush="{x:Null}" TextWrapping="Wrap" FontSize="14" FontFamily="Bahnschrift Light" TextAlignment="Left" BorderThickness="0"  HorizontalAlignment="Left" Width="250"/>
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </StackPanel>
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Border Style="{StaticResource priceBorder}" Height="65" Width="175" Margin="0,0,40,20" BorderThickness="2" BorderBrush="{StaticResource BackingBlack2}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="55"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="2,0,0,0" Source="https://cdn.rumblemike.com/Icons/vp_icon.png" Width="45"/>
+                    <Label Grid.Column="1" x:Name="priceLabel" Content="{Binding bundlePrice, Mode=TwoWay, ElementName=_this}" Foreground="White" FontSize="36" FontFamily="Bahnschrift" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
