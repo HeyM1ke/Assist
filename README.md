@@ -8,6 +8,10 @@
   <a href="https://discord.gg/C3AbvyM3dj"><img src="https://discordapp.com/api/guilds/939378402283118643/widget.png"></a>
   <a href="https://twitter.com/Hey_M1ke"><img src="https://img.shields.io/badge/Twitter-@Hey_M1ke-1da1f2.svg?logo=twitter?style=for-the-badge&logo=appveyor"></a>
 </p>
+<p align="center">
+  </a>
+  <a href="https://github.com/Rumblemike/Assist/releases/latest/download/Assist-Setup.exe"><img src="https://cdn.discordapp.com/attachments/758020329447620628/939632726347247706/Download_Pic.png" ></a>
+  </p>
 
 ## Features
   * Account Switcher
