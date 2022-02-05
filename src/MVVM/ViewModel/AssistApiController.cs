@@ -9,6 +9,7 @@ using RestSharp;
 using Assist.MVVM.Model;
 using System.IO;
 using System.Net;
+using System.Diagnostics;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -21,21 +22,22 @@ namespace Assist.MVVM.ViewModel
         private const string skinUrl = "https://assist.rumblemike.com/Skins/";
         private const string offerUrl = "https://assist.rumblemike.com/Offers/";
         private const string maintUrl = "https://assist.rumblemike.com/prod/maintenance/status";
-
-        public RestClient client = new RestClient();   
-
+        internal bool bIsUpdate = false;
+        public RestClient client = new RestClient();
         public void CheckForAssistUpdates()
         {
             AutoUpdater.ParseUpdateInfoEvent += ParseUpdateData;
             AutoUpdater.CheckForUpdateEvent += CheckForUpdate;
             try
             {
-                AutoUpdater.Start(updateUrl);
+               AutoUpdater.Start(updateUrl);
             }
             catch (Exception ex)
             {
-
+                Trace.WriteLine(ex);
             }
+
+            
         }
         private void CheckForUpdate(UpdateInfoEventArgs args)
         {
@@ -43,6 +45,7 @@ namespace Assist.MVVM.ViewModel
             {
                 return;
             }
+
             var currentVersion = new Version(args.CurrentVersion);
 
             if (currentVersion == args.InstalledVersion)
@@ -74,11 +77,12 @@ namespace Assist.MVVM.ViewModel
         }
         private void OpenUpdateScreen(UpdateInfoEventArgs args)
         {
+            bIsUpdate = true;
             var temp = Application.Current.MainWindow;
             temp.Visibility = Visibility.Hidden;
-            Application.Current.MainWindow = new Assist.MVVM.View.Extra.UpdateWindow(args);
-            Application.Current.MainWindow.Show();
+            new View.Extra.UpdateWindow(args).ShowDialog();
             temp.Close();
+            Trace.WriteLine("ran?");
         }
 
         public async Task<List<News>> GetAssistNews()

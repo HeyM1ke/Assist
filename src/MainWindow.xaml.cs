@@ -25,6 +25,8 @@ namespace Assist
             MainWindowInstance = this;
 
             InitializeComponent();
+
+
         }
         private void minimizeBTN_Click(object sender, RoutedEventArgs e)
         {

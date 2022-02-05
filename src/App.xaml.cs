@@ -24,7 +24,6 @@ namespace Assist
             AssistApplication.AppInstance.Log.Normal("Program Started");
             //Startup Code here.
             base.OnStartup(e);
-
             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist"));
 
 
@@ -45,6 +44,7 @@ namespace Assist
 
 
             AssistApplication.AppInstance.Log.Normal("Starting InitPage");
+            AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
             Current.MainWindow = new InitPage();
             Current.MainWindow.Show();
         }

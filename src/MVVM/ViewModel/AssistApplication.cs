@@ -61,11 +61,12 @@ namespace Assist.MVVM.ViewModel
 
         public void OpenAssistMainWindow()
         {
-            var temp = Application.Current.MainWindow;
-            temp.Visibility = Visibility.Hidden;
-            Application.Current.MainWindow = new MainWindow();
-            Application.Current.MainWindow.Show();
-            temp.Close();
+                var temp = Application.Current.MainWindow;
+                temp.Visibility = Visibility.Hidden;
+                Application.Current.MainWindow = new MainWindow();
+                Application.Current.MainWindow.Show();
+                temp.Close();
+            
         }
         public void OpenAssistMainWindowToSettings()
         {

@@ -26,17 +26,12 @@ namespace Assist.MVVM.ViewModel
             currentStatusMessage = "Welcome!";
         }
 
-        public void Startup()
-        {
-            if (isFirstTime())
-                FirstTimeSetup();
-            else
-                DefaultStartup();
-        }
-
         public async Task FirstTimeSetup()
         {
-            AssistApplication.AppInstance.Log.Normal("Running First Time Setup");
+            if (AssistApplication.AppInstance.AssistApiController.bIsUpdate)
+                return;
+
+                AssistApplication.AppInstance.Log.Normal("Running First Time Setup");
             var clientPath = await UserSettings.Instance.FindRiotClientPath();
             CurrentStatusMessage = clientPath;
             if (!File.Exists(clientPath) || string.IsNullOrEmpty(clientPath))
@@ -50,15 +45,16 @@ namespace Assist.MVVM.ViewModel
             UserSettings.Instance.RiotClientInstallPath = clientPath; // Set the Client path to settings.
 
             // Next Step, Add account.
-            CheckForUpdate();
             OpenAccountLogin();
 
         }
 
         public async Task DefaultStartup()
         {
+            if (AssistApplication.AppInstance.AssistApiController.bIsUpdate)
+                return;
+
             AssistApplication.AppInstance.Log.Normal("Calling Default Startup");
-            CheckForUpdate();
             //Check if RiotClient is Valid
             var clientPath = await UserSettings.Instance.FindRiotClientPath();
             UserSettings.Instance.RiotClientInstallPath = clientPath; // Set the Client path to settings.
@@ -167,6 +163,8 @@ namespace Assist.MVVM.ViewModel
         {
             AssistApplication.AppInstance.Log.Normal("Checking For Updates");
             AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
+            Trace.WriteLine("Update Done?");
+            
         }
         public bool isFirstTime()
         {

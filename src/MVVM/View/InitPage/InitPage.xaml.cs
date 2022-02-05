@@ -33,10 +33,13 @@ namespace Assist.MVVM.View.InitPage
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
+
             var resp = await _viewModel.AssistApiController.GetMaintenanceStatus();
+
             if (resp.bDownForMaintenance)
                 new MaintenanceWindow().ShowDialog();
 
+            
             AssistApplication.AppInstance.Log.Normal("InitWindow_Loaded Called");
             if (_viewModel.InitPageViewModel.isFirstTime())
             {

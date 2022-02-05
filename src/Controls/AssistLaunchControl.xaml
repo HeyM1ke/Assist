@@ -178,7 +178,7 @@
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="5">
                                             <Grid>
-                                                <Label Content="Open" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Foreground="{StaticResource ValorantOffWhite}" Opacity=".5" FontFamily="Bahnschrift"/>
+                                                <Label Content="Disabled" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Foreground="{StaticResource ValorantOffWhite}" Opacity=".5" FontFamily="Bahnschrift"/>
                                             </Grid>
                                         </Border>
                                     </ControlTemplate>
