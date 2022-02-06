@@ -49,10 +49,12 @@ namespace Assist.MVVM.ViewModel
             var currentVersion = new Version(args.CurrentVersion);
 
             if (currentVersion == args.InstalledVersion)
-            {
                 //Update isnt needed as Versions of both the latest from update api and local version are the same.
                 return;
-            }
+
+
+            if (args.InstalledVersion > currentVersion)
+                return;
 
             OpenUpdateScreen(args);
         }

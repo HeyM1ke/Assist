@@ -29,7 +29,7 @@ namespace Assist
             DataContext = _viewModel;
             current = this;
             InitializeComponent();
-            loginFrame.Navigate(new Uri("/MVVM/View/LoginPage/Pages/LoginSelector.xaml", UriKind.RelativeOrAbsolute));
+            loginFrame.Content = new LoginSelector(addAccMode);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

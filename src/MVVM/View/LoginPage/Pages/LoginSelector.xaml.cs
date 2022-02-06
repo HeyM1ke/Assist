@@ -20,9 +20,12 @@ namespace Assist.MVVM.View.LoginPage.Pages
     /// </summary>
     public partial class LoginSelector : Page
     {
-        public LoginSelector()
+        public LoginSelector(bool addAccMode)
         {
             InitializeComponent();
+            if (addAccMode)
+                HomeBTN.Visibility = Visibility.Visible;
+
         }
 
         private void userPassLogin_Click(object sender, RoutedEventArgs e)
@@ -33,6 +36,11 @@ namespace Assist.MVVM.View.LoginPage.Pages
         private void riotGamesLogin_Click(object sender, RoutedEventArgs e)
         {
             AccountLogin.current.loginFrame.Navigate(new Uri("/MVVM/View/LoginPage/Pages/LoginPagev2.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void HomeBTN_Click(object sender, RoutedEventArgs e)
+        {
+            MVVM.ViewModel.AssistApplication.AppInstance.OpenAssistMainWindow();
         }
     }
 }
