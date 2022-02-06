@@ -49,9 +49,9 @@ namespace Assist.MVVM.View.LoginPage.Pages
             await _viewModel.LoginPageViewModel.Login();
         }
 
-        private async void backBTN_Click(object sender, RoutedEventArgs e)
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            AssistApplication.AppInstance.OpenAssistMainWindow();
+            AccountLogin.current.loginFrame.GoBack();
         }
     }
 }

@@ -28,6 +28,7 @@
     <None Remove="Fonts\Montserrat-Black.ttf" />
     <None Remove="Resources\Assist_Logo_White.png" />
     <None Remove="Resources\Assist_Progression_Template.png" />
+    <None Remove="Resources\backImage.png" />
     <None Remove="Resources\BattlepassBacking.jpg" />
     <None Remove="Resources\Earned.png" />
     <None Remove="Resources\person_icon.png" />
@@ -62,6 +63,7 @@
 
   <ItemGroup>
     <Content Include="assistLogo.ico" />
+    <Resource Include="Resources\backImage.png" />
     <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />
   </ItemGroup>
 
