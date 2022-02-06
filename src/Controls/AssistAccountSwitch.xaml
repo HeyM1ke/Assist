@@ -31,17 +31,19 @@
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
+
                 </Setter>
 
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{StaticResource BackingBlack15}">
-                        </Setter>
+                        <Setter Property="Background" Value="{StaticResource BackingBlack15}"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+
                     </Trigger>
                     <Trigger Property="IsMouseOver" Value="False">
-                        <Setter Property="Background" Value="{StaticResource BackingBlack12}">
-                        </Setter>
+                        <Setter Property="Background" Value="{StaticResource BackingBlack12}"/>
+                        <Setter Property="Cursor" Value="Arrow"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>

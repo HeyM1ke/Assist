@@ -53,10 +53,18 @@ namespace Assist.MVVM.ViewModel
 
             // Run RiotCServices with correct parameters, check if custom parameters are entered.
             ProcessStartInfo riotClient;
+
             /*if (UserSettings.Instance.LaunchSettings.EnableCustomParams)
                 riotClient = new ProcessStartInfo(UserSettings.Instance.RiotClientInstallPath, $" --launch-product=valorant --launch-patchline={currentPatchlineAddress}" + UserSettings.Instance.LaunchSettings.CustomValParams);
             else*/
-                riotClient = new ProcessStartInfo(UserSettings.Instance.RiotClientInstallPath, $" --launch-product=valorant --launch-patchline={currentPatchlineAddress}");
+
+            
+
+            riotClient = new ProcessStartInfo(UserSettings.Instance.RiotClientInstallPath, $" --launch-product=valorant --launch-patchline={currentPatchlineAddress}");
+
+            // This line is a fallback to make sure if a user has RiotClient running in admin, the program does not fail to launch the client.
+            riotClient.UseShellExecute = true;
+
 
             var processEntry = Process.Start(riotClient);
 
