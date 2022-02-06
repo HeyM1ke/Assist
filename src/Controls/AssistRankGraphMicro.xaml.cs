@@ -80,26 +80,40 @@ namespace Assist.Controls
 
         private BitmapImage RRChangeImage(int index)
         {
-            Trace.WriteLine(_viewModel.RankMicroGraphViewModel.rrDiff[index]);
-            if(_viewModel.RankMicroGraphViewModel.rrDiff[index] > 0)
+            if (index < _viewModel.RankMicroGraphViewModel.rrDiff.Length)
             {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = new Uri($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTierMovement_Increase.png");
-                image.EndInit();
+                Trace.WriteLine(_viewModel.RankMicroGraphViewModel.rrDiff[index]);
+                if (_viewModel.RankMicroGraphViewModel.rrDiff[index] > 0)
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = new Uri($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTierMovement_Increase.png");
+                    image.EndInit();
 
-                return image;
-            }
-            else if (_viewModel.RankMicroGraphViewModel.rrDiff[index] < 0)
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = new Uri($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTierMovement_Decrease.png");
-                image.EndInit();
+                    return image;
+                }
+                else if (_viewModel.RankMicroGraphViewModel.rrDiff[index] < 0)
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = new Uri($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTierMovement_Decrease.png");
+                    image.EndInit();
 
-                return image;
+                    return image;
+                }
+                else
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = new Uri($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTierMovement_Stable.png");
+                    image.EndInit();
+
+                    return image;
+
+                }
             }
             else
             {
@@ -110,8 +124,8 @@ namespace Assist.Controls
                 image.EndInit();
 
                 return image;
-
             }
+            
 
         }
     }

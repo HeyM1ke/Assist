@@ -36,14 +36,14 @@
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="Width" From="200" To="70" Duration="0:0:.1" />
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" From="200" To="70" Duration="0:0:.15" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="Width" From="70" To="200" Duration="0:0:.1" />
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" From="70" To="200" Duration="0:0:.15" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
