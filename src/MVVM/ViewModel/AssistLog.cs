@@ -14,7 +14,8 @@ namespace Assist.MVVM.ViewModel
         {
             // Create Log file
             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs"));
-            logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs", $"Assist_Log.txt");
+            int fileCount = Directory.GetFiles(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs"), "*.*", SearchOption.TopDirectoryOnly).Length;
+            logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs", $"Assist_Log_{fileCount++}.txt");
             File.CreateText(logPath).Dispose();
         }
 

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Assist.MVVM.ViewModel;
 using System.Net;
+using System.IO;
 
 namespace Assist.MVVM.View.LoginPage.Pages
 {
@@ -23,12 +24,12 @@ namespace Assist.MVVM.View.LoginPage.Pages
     public partial class LoginWindow : Window
     {
         private const string authUrl = "https://auth.riotgames.com/authorize?redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&client_id=play-valorant-web-prod&response_type=token%20id_token&nonce=1";
+        private string cacheLoc = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Cache");
         public LoginWindow()
         {
+            Directory.CreateDirectory(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Cache"));
             InitializeComponent();
-            webView.NavigationStarting += EnsureHttps;
-            webView.Source = new Uri(authUrl);
-            webView.SourceChanged += SourceChanged;
+            
         }
 
         private void SourceChanged(object? sender, CoreWebView2SourceChangedEventArgs e)
@@ -81,6 +82,15 @@ namespace Assist.MVVM.View.LoginPage.Pages
             }
 
             
+        }
+
+        private async void Window_Initialized(object sender, EventArgs e)
+        {
+            var webView2Environment = await CoreWebView2Environment.CreateAsync(null, cacheLoc);
+            await webView.EnsureCoreWebView2Async(webView2Environment);
+            webView.NavigationStarting += EnsureHttps;
+            webView.Source = new Uri(authUrl);
+            webView.SourceChanged += SourceChanged;
         }
     }
 }

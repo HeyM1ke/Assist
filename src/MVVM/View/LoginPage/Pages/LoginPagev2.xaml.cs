@@ -19,9 +19,9 @@ namespace Assist.MVVM.View.LoginPage.Pages
             InitializeComponent();
         }
 
-        private async void backBTN_Click(object sender, RoutedEventArgs e)
+        private void backBTN_Click(object sender, RoutedEventArgs e)
         {
-            AssistApplication.AppInstance.OpenAssistMainWindow();
+            AccountLogin.current.loginFrame.GoBack();
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)

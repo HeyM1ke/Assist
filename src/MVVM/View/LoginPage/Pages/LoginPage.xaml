@@ -108,11 +108,43 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="10"/>
-                        </Grid.RowDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource BackingBlack2}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                <Grid>
+                                                    <Image Source="/Resources/backImage.png" Width="30" Height="30">
+                                                        <Image.Effect>
+                                                            <DropShadowEffect BlurRadius="5" Opacity="0.5"/>
+                                                        </Image.Effect>
 
+                                                    </Image>
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource BackingBlack3}"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="{StaticResource BackingBlack2}"/>
+                                        <Setter Property="Cursor" Value="Arrow"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
+                        <Button x:Name="BackBtn" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackBtn_Click">
+                            
+                        </Button>
+                        
+                        
                     </Grid>
                     <Button x:Name="LoginBTN" Content="LOGIN"
                             Style="{StaticResource loginButton}" 
@@ -123,28 +155,6 @@
                             Height="40" 
                             Width="120" Click="LoginBTN_Click"/>
 
-                    <Button x:Name="addBTN" Content="ADD"
-                            Style="{StaticResource loginButton}" 
-                            Margin="0,2,0,0" 
-                            Grid.Column="1" 
-                            FontSize="16"
-                            VerticalAlignment="Top" 
-                            HorizontalAlignment="Right" 
-                            Height="40" 
-                            Width="80" Click="addBTN_Click"
-                            Visibility="Hidden"/>
-
-                    <Button x:Name="backBtn" Content="BACK"
-                            Style="{StaticResource backButton}" 
-                            Background="Black"
-                            Margin="0,2,0,0" 
-                            Grid.Column="0" 
-                            FontSize="16"
-                            VerticalAlignment="Top" 
-                            HorizontalAlignment="Left" 
-                            Height="40" 
-                            Width="80"
-                            Visibility="Hidden" Click="backBTN_Click"/>
 
                 </Grid>
             </Grid>

@@ -76,6 +76,7 @@ namespace Assist.Controls
         private async void generatedButton_Click(object sender, EventArgs e)
         {
             await _viewModel.AccountSwitchControlViewModel.LoginIntoAccount(sender);
+            MVVM.View.Extra.AccountSwitch.instance.Close();
         }
 
         private async void addAccountBTN_Click(object sender, RoutedEventArgs e)
