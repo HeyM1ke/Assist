@@ -20,7 +20,6 @@ namespace Assist.Settings
         private const string _riotClientDownloadUrl = "https://valorant.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.live.na.exe";
 
         public static string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Settings.json");
-
         // Instance to get user settings from everywhere.
         public static UserSettings Instance { get; set; }
         // Stores RiotClient Install Path for PC
