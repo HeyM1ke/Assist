@@ -53,15 +53,15 @@ namespace Assist.MVVM.ViewModel
 
             // Run RiotCServices with correct parameters, check if custom parameters are entered.
             ProcessStartInfo riotClient;
-            if (UserSettings.Instance.LaunchSettings.EnableCustomParams)
+            /*if (UserSettings.Instance.LaunchSettings.EnableCustomParams)
                 riotClient = new ProcessStartInfo(UserSettings.Instance.RiotClientInstallPath, $" --launch-product=valorant --launch-patchline={currentPatchlineAddress}" + UserSettings.Instance.LaunchSettings.CustomValParams);
-            else
+            else*/
                 riotClient = new ProcessStartInfo(UserSettings.Instance.RiotClientInstallPath, $" --launch-product=valorant --launch-patchline={currentPatchlineAddress}");
 
             var processEntry = Process.Start(riotClient);
 
             // Concider Settings Panel, Which LNModules are enabled
-            if (UserSettings.Instance.LaunchSettings.ValDscRpcEnabled)
+            if (true)
             {
                 // Run Discord RPC
                 await RunAssistBgClient();

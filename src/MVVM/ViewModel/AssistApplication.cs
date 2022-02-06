@@ -96,15 +96,21 @@ namespace Assist.MVVM.ViewModel
         public async Task CreateAuthenticationFile()
         {
             string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
-
+            string pSettingsPathBackup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
             // Create File
-            var settings = new ClientPrivateModel(currentUser);
-
+            var settings = new ClientGameModel(currentUser);
+            var settings2 = new ClientPrivateModel(currentUser);
             // Create RiotClientPrivateSettings.yaml
             using (TextWriter writer = File.CreateText(pSettingsPath))
             {
                 settings.CreateFile().Save(writer, false);
             }
+
+            using (TextWriter writer = File.CreateText(pSettingsPathBackup))
+            {
+                settings2.CreateFile().Save(writer, false);
+            }
+
 
         }
         public async Task AuthenticateWithAccountSetting(AccountSettings account)
