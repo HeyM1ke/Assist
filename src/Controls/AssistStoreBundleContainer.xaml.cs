@@ -38,8 +38,6 @@ namespace Assist.Controls
                 var bundleControl = new AssistStoreBundleControl(bundle)
                 {
                     VerticalAlignment = VerticalAlignment.Bottom,
-                    Height = 570,
-                    Width = 1168
                 };
 
                 bundles.Add(bundleControl);

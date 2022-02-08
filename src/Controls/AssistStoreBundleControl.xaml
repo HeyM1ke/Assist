@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls"
              mc:Ignorable="d" 
-             Width="1168" Height="570" x:Name="_this" Initialized="BundleControl_Initialized">
+             d:DesignWidth="1168" d:DesignHeight="570" x:Name="_this" Initialized="BundleControl_Initialized">
 
     <UserControl.Resources>
         <Style x:Key="priceBorder" TargetType="{x:Type Border}">
@@ -37,7 +37,7 @@
 
     </UserControl.Resources>
     <Grid x:Name="gridContainer">
-        <Image x:Name="bundleImageContainer" Width="1168" Height="570"/>
+        <Image x:Name="bundleImageContainer"/>
         <StackPanel VerticalAlignment="Top">
             <Border>
                 <Border.Background>

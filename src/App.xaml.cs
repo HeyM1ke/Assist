@@ -20,7 +20,7 @@ namespace Assist
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls11;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             AssistApplication.AppInstance.Log.Normal("Program Started");
             //Startup Code here.
             base.OnStartup(e);
