@@ -93,7 +93,11 @@
             ScrollViewer.CanContentScroll="True">
         <Grid Background="{StaticResource BackingBlack1}">
             <StackPanel>
-                <Controls:AssistStoreBundleContainer Width="1168" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True"/>
+                <Controls:AssistStoreBundleContainer Width="960" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Margin="0,10,0,0">
+                    <Controls:AssistStoreBundleContainer.BitmapEffect>
+                        <OuterGlowBitmapEffect GlowSize="10" GlowColor="Red"></OuterGlowBitmapEffect>
+                    </Controls:AssistStoreBundleContainer.BitmapEffect>
+                </Controls:AssistStoreBundleContainer>
                 <StackPanel Margin="20,10,20,0">
                 
                 <StackPanel Orientation="Horizontal">

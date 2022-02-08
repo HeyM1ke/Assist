@@ -35,6 +35,7 @@ namespace Assist.MVVM.ViewModel
         public AccountSettings currentAccount { get; set; }
         public AssistLog Log { get; }
 
+        
         public AssistApplication()
         {
             // Application Models
