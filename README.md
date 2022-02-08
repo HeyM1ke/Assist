@@ -2,7 +2,7 @@
   <img src="https://cdn.discordapp.com/attachments/758020329447620628/939627516455428106/Assist_Github_Banner.png">
   <br>
 </h1>
-<h4 align="center">C# VALORANT Extension Launcher that adds cotains different features regarding VALORANT.</h4>
+<h4 align="center">C# VALORANT Extension Launcher that adds contains different features regarding VALORANT.</h4>
 <p align="center">
   </a>
   <a href="https://discord.gg/C3AbvyM3dj"><img src="https://discordapp.com/api/guilds/939378402283118643/widget.png"></a>
