@@ -36,6 +36,12 @@ namespace Assist.MVVM.View.StorePage
             await _viewModel.StorePageViewModel.GetUserStore();
             Load_DailyStore();
 
+            var bNightMarketMode = await isNightMarketActive();
+
+            if (bNightMarketMode)
+            {
+                Load_NightMarket();
+            }
         }
 
 
@@ -60,6 +66,39 @@ namespace Assist.MVVM.View.StorePage
                 }
 
                 
+            }
+        }
+
+        private async Task<bool> isNightMarketActive()
+        {
+            return _viewModel.StorePageViewModel.playerStore.BonusStore is null ? false : true;
+        }
+
+        private async void Load_NightMarket()
+        {
+
+            NightMarketPanel.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < _viewModel.StorePageViewModel.playerStore.BonusStore.NightMarketOffers.Count; i++)
+            {
+                if (i == _viewModel.StorePageViewModel.playerStore.BonusStore.NightMarketOffers.Count - 1)
+                {
+                    var skinOffer = new AssistStoreNightMarketItem(_viewModel.StorePageViewModel.playerStore.BonusStore.NightMarketOffers[i])
+                    {
+                        Width = 175
+                    };
+
+                    NightMarketItemgrid.Children.Add(skinOffer);
+                }
+                else
+                {
+                    var skinOffer = new AssistStoreNightMarketItem(_viewModel.StorePageViewModel.playerStore.BonusStore.NightMarketOffers[i])
+                    {
+                        Width = 175,
+                        Margin = new Thickness(0, 0, 10, 0)
+                    };
+                    NightMarketItemgrid.Children.Add(skinOffer);
+                }
             }
         }
     }
