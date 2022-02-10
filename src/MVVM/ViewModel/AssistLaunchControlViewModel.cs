@@ -82,7 +82,7 @@ namespace Assist.MVVM.ViewModel
         {
             AssistApplication.AppInstance.Log.Debug("Running BG Client");
             var path = Path.Combine(
-               Environment.CurrentDirectory, "Modules", "ABGC",
+               Environment.CurrentDirectory,"ABGC",
                 "AssistBackgroundClient.exe");
             if (File.Exists(path))
             {

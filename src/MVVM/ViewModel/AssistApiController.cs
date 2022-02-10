@@ -180,7 +180,7 @@ namespace Assist.MVVM.ViewModel
             if (resp.IsSuccessful)
                 return JsonSerializer.Deserialize<AssistMaintenanceObj>(resp.Content);
             else
-                return new() { bDownForMaintenance = true };
+                return new() { bDownForMaintenance = false };
         }
     }
 }

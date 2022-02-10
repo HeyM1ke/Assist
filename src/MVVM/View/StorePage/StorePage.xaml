@@ -107,6 +107,18 @@
                     <UniformGrid x:Name="DailyItemGrid" Rows="1" Columns="4" Margin="0,0,0,10">
                     </UniformGrid>
             </StackPanel>
+                <DockPanel x:Name="NightMarketPanel" Visibility="Collapsed">
+                    <StackPanel DockPanel.Dock="Top" Margin="20,10,20,0">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="NIGHT.MARKET" Foreground="{StaticResource ValorantOffWhite}" FontFamily="Bahnschrift SemiBold" FontSize="36"/>
+                        </StackPanel>
+                        <Rectangle  Fill="White" Height="5" StrokeThickness="0" Margin="0,0,0,10"></Rectangle>
+                    </StackPanel>
+                    <UniformGrid x:Name="NightMarketItemgrid" Rows="1" Columns="6" Margin="0,0,0,10">
+                       
+                    </UniformGrid>
+                </DockPanel>
             </StackPanel>
         </Grid>
     </ScrollViewer>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Assist.MVVM.View.HomePage;
 using Assist.MVVM.ViewModel;
 namespace Assist
