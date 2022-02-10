@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls"
              mc:Ignorable="d" 
-             MinHeight="300" d:DesignHeight="300" d:DesignWidth="215" Name="NightMarketItem" Initialized="NightMarketItem_Initialized">
+             MinHeight="150" d:DesignHeight="150" d:DesignWidth="215" Name="NightMarketItem" Initialized="NightMarketItem_Initialized">
     <Border Background="{StaticResource BackingBlack15}">
         <Grid>
             <Label x:Name="discountPercentage" Foreground="{StaticResource ValorantRed}" FontSize="16" FontFamily="Bahnschrift SemiLight" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -17,23 +17,10 @@
                 </Label.Background>
             </Label>
             <DockPanel>
-                <Image x:Name="skinImage" Margin="5" DockPanel.Dock="Left" HorizontalAlignment="Left" RenderTransformOrigin="0.5, 0.5" Source="https://cdn.rumblemike.com/Skin/c21e2f34-4b8c-4350-33c8-a8b626ecaadc_DisplayIcon.png" Stretch="Uniform">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="25"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-            </DockPanel>
-            <DockPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right">
                     <Image Margin="2,0,0,0" Source="https://cdn.rumblemike.com/Icons/vp_icon.png" Width="12" Height="12"/>
                     <Label x:Name="priceLabel" Foreground="White" FontSize="12" FontFamily="Bahnschrift SemiLight" HorizontalAlignment="Right" VerticalAlignment="Center" />
                 </StackPanel>
-
                 <Grid DockPanel.Dock="Bottom" Height="auto">
                     <Rectangle DockPanel.Dock="Bottom" Height="33" VerticalAlignment="Bottom">
                         <Rectangle.Fill>
@@ -48,6 +35,9 @@
                     </Rectangle>
                     <TextBlock x:Name="skinName" TextWrapping="Wrap" DockPanel.Dock="Bottom" Foreground="{StaticResource ValorantOffWhite}" FontFamily="Bahnschrift" VerticalAlignment="Bottom"/>
                 </Grid>
+                <Image x:Name="skinImage"  DockPanel.Dock="Bottom" Source="https://cdn.rumblemike.com/Skin/c21e2f34-4b8c-4350-33c8-a8b626ecaadc_DisplayIcon.png" Stretch="Uniform">
+                </Image>
+                
 
 
             </DockPanel>

@@ -226,7 +226,7 @@
                         <Button Style="{StaticResource socialButtonPat}" x:Name="socialButton3" Height="24" Width="24" Margin="5,0,5,0" Click="socialButton3_Click"/>
                         
                     </StackPanel>
-                    <TextBox Opacity="0.5" IsReadOnly="True" Grid.Row="1" Text="V1.0.4 EA" Foreground="White" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" BorderThickness="0" Margin="0,36,0,0"/>
+                    <TextBox Opacity="0.5" IsReadOnly="True" Grid.Row="1" Text="V1.0.5 EA" Foreground="White" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" BorderThickness="0" Margin="0,36,0,0"/>
                 </Grid>
 
             </Grid>
