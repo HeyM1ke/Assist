@@ -21,7 +21,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" CornerRadius="5" Background="{StaticResource ValorantOffWhite}" Width="60" Height="60">
-                                    <Image Source="/Resources/riot_gamesLogo.png" Width="40" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <Label Content="R" FontSize="28" Opacity=".8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontFamily="Bahnschrift SemiBold"/>
                                 </Border>
                                 <Label Grid.Column="1" Content="Login with Riot Games" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground ="{StaticResource ValorantOffWhite}" FontFamily="Bahnschrift SemiLight" FontSize="14">
                                 </Label>
