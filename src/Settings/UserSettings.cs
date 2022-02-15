@@ -43,53 +43,36 @@ namespace Assist.Settings
         internal async Task<string> FindRiotClientPath(){
             string path = "";
 
-            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Riot Games", "RiotClientInstalls.json")))
-            {
-                var config = JsonDocument.Parse(File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Riot Games", "RiotClientInstalls.json")));
+            string riotInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "Riot Games/RiotClientInstalls.json"); ;
 
-                if (config.RootElement.TryGetProperty("rc_default", out JsonElement gradeElement))
+            if (File.Exists(riotInstallPath))
+            {
+                var config = JsonDocument.Parse(File.ReadAllText(riotInstallPath));
+
+                if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault))
                 {
-                    path = gradeElement.GetString();
+                    path = rcDefault.GetString();
+                }
+
+                if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive))
+                {
+                    path = rcLive.GetString();
+                }
+
+                if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta))
+                {
+                    path = rcBeta.GetString();
                 }
             }
+
+            if(File.Exists(path))
+                return path;
             else
-            {
-                // Well shit... i guess install riot client? 
-                using (var Client = new WebClient())
-                {
-                    Client.DownloadFileAsync(new Uri(_riotClientDownloadUrl), "InstallVal.exe");
-
-                    if (File.Exists("InstallVal.exe"))
-                    {
-                        ProcessStartInfo startInfo = new ProcessStartInfo()
-                        {
-                            FileName = "InstallVal.exe"
-                        };
-
-                        try
-                        {
-                            using (Process Process = Process.Start(startInfo))
-                            {
-                                Process.WaitForExit();
-                            }
-                        }
-                        catch(Exception ex)
-                        {
-                            MVVM.ViewModel.AssistApplication.AppInstance.Log.Error(ex.Message);
-                        }
-
-                        File.Delete("InstallVal.exe");
-
-                    }
-
-                    
-                }
-
-                await FindRiotClientPath();
-            }
-
-            return path;
+                return null;
         }
+
+
         internal AccountSettings FindAccountById(string id)
         {
             var account = Instance.Accounts.Find(account => account.puuid == id);
