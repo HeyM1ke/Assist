@@ -3,6 +3,8 @@
   <br>
 </h1>
 <h4 align="center">C# VALORANT Extension Launcher that adds contains different features regarding VALORANT.</h4>
+<h5 align="center">Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games.</h5>
+<h5 align="center">Riot Games does not endorse or sponsor this project.</h5>
 <p align="center">
   </a>
   <a href="https://discord.gg/C3AbvyM3dj"><img src="https://discordapp.com/api/guilds/939378402283118643/widget.png"></a>
