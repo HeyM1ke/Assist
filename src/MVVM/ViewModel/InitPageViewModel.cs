@@ -31,10 +31,9 @@ namespace Assist.MVVM.ViewModel
             if (AssistApplication.AppInstance.AssistApiController.bIsUpdate)
                 return;
 
-                AssistApplication.AppInstance.Log.Normal("Running First Time Setup");
+            AssistApplication.AppInstance.Log.Normal("Running First Time Setup");
             var clientPath = await UserSettings.Instance.FindRiotClientPath();
-            CurrentStatusMessage = clientPath;
-            if (!File.Exists(clientPath) || string.IsNullOrEmpty(clientPath))
+            if (clientPath is null)
             {
                 // Do Something if the client path is invalid and the client does not excist.
                 AssistApplication.AppInstance.Log.Error("NO RIOT CLIENT FOUND ON COMPUTER / IN SETTINGS FILE");
@@ -57,8 +56,9 @@ namespace Assist.MVVM.ViewModel
             AssistApplication.AppInstance.Log.Normal("Calling Default Startup");
             //Check if RiotClient is Valid
             var clientPath = await UserSettings.Instance.FindRiotClientPath();
-            UserSettings.Instance.RiotClientInstallPath = clientPath; // Set the Client path to settings.
-
+            if (clientPath is not null)
+                UserSettings.Instance.RiotClientInstallPath = clientPath; // Set the Client path to settings.
+            
             //Check if There are accounts
             if(UserSettings.Instance.Accounts.Count == 0)
             {

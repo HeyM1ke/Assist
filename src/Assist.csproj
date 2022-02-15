@@ -7,7 +7,7 @@
     <UseWPF>true</UseWPF>
     <StartupObject>Assist.App</StartupObject>
     <Authors>Mike</Authors>
-    <Version>0.1.0.5</Version>
+    <Version>0.1.0.6</Version>
     <Product>Assist</Product>
     <Description>Valorant Program made by Rumblemike</Description>
     <PackageIcon>assistlogoIcon.png</PackageIcon>
@@ -58,7 +58,6 @@
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_7.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_8.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_9.png" />
-    <None Remove="Resources\riot_gamesLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -112,7 +111,6 @@
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_7.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_8.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_9.png" />
-	  <Resource Include="Resources\riot_gamesLogo.png" />
 	</ItemGroup>
 
 	<ItemGroup>
