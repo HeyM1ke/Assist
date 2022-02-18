@@ -27,13 +27,21 @@ namespace Assist.MVVM.ViewModel
                 PatchlineName = "Live",
                 PatchlinePath = "live"
             });
-
-            var entitlements = await AssistApplication.AppInstance.currentUser.Authentication.GetPlayerGameEntitlements();
-
-            foreach (var entitlement in entitlements)
+            try
             {
-                entitledPatchlines.Add(entitlement);
+                var entitlements = await AssistApplication.AppInstance.currentUser.Authentication.GetPlayerGameEntitlements();
+                foreach (var entitlement in entitlements)
+                {
+                    entitledPatchlines.Add(entitlement);
+                }
             }
+            catch (Exception e)
+            {
+                return;
+            }
+            
+
+            
         }
 
         // Create a method to open launch settings menu

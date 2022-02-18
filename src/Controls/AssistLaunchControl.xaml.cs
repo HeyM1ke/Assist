@@ -39,7 +39,16 @@ namespace Assist.Controls
         {
             accNameLabel.Content = $"{_viewModel.currentAccount.Gamename}#{_viewModel.currentAccount.Tagline}";
 
-            await _viewModel.LaunchControlViewModel.GetUserPatchlines();
+            try
+            {
+                await _viewModel.LaunchControlViewModel.GetUserPatchlines();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
+            
 
             PatchlineComboBox.SelectedIndex = 0;
 
