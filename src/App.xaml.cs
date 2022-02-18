@@ -59,7 +59,11 @@ namespace Assist
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            AssistApplication.AppInstance.Log.Error("Unhandled Ex Source: " + e.Exception.Source);
+            AssistApplication.AppInstance.Log.Error("Unhandled Ex StackTrace: " + e.Exception.StackTrace);
+            AssistApplication.AppInstance.Log.Error("Unhandled Ex Message: " + e.Exception.Message);
             MessageBox.Show(e.Exception.Message, "Assist Hit an Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+
         }
     }
 }
