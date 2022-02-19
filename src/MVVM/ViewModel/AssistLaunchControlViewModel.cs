@@ -27,13 +27,23 @@ namespace Assist.MVVM.ViewModel
                 PatchlineName = "Live",
                 PatchlinePath = "live"
             });
-
-            var entitlements = await AssistApplication.AppInstance.currentUser.Authentication.GetPlayerGameEntitlements();
-
-            foreach (var entitlement in entitlements)
+            try
             {
-                entitledPatchlines.Add(entitlement);
+                var entitlements = await AssistApplication.AppInstance.currentUser.Authentication.GetPlayerGameEntitlements();
+                foreach (var entitlement in entitlements)
+                {
+                    entitledPatchlines.Add(entitlement);
+                }
             }
+            catch (Exception e)
+            {
+                AssistApplication.AppInstance.Log.Error("Unhandled Ex Source: " + e.Source);
+                AssistApplication.AppInstance.Log.Error("Unhandled Ex StackTrace: " + e.StackTrace);
+                AssistApplication.AppInstance.Log.Error("Unhandled Ex Message: " + e.Message);
+            }
+            
+
+            
         }
 
         // Create a method to open launch settings menu

@@ -21,14 +21,17 @@ namespace Assist.MVVM.ViewModel
 
              rrDiff = new double[] {0,0,0};
 
-                for (int i = 0; i < 3 && CompetitiveUpdates.Matches.Count != 0; i++)
+             if(CompetitiveUpdates is not null && CompetitiveUpdates.Matches is not null){
+                for (int i = 0; i < CompetitiveUpdates.Matches.Count && i < 3; i++)
                 {
                     if (CompetitiveUpdates.Matches[i] != null)
                         rrDiff[i] = CompetitiveUpdates.Matches[i].RankedRatingEarned;
                     else
                         rrDiff[i] = 0;
                 }
-            
+             }
+
+             rrDiff.Reverse();
 
             SeriesCollection = new SeriesCollection()
             {

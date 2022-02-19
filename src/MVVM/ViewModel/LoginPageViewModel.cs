@@ -61,7 +61,7 @@ namespace Assist.MVVM.ViewModel
             if(!cookie_Ssid.Expires.ToString().Contains("1/1/0001") && UserSettings.Instance.FindAccountById(userSettings.puuid) is null)
                 UserSettings.Instance.Accounts.Add(userSettings);
 
-            if (UserSettings.Instance.DefaultAccount is null)
+            if (UserSettings.Instance.DefaultAccount == null)
                 UserSettings.Instance.DefaultAccount = userSettings.puuid;
 
             AssistApplication.AppInstance.currentUser = user;
