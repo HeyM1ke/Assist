@@ -31,6 +31,8 @@ namespace Assist.MVVM.ViewModel
                 }
              }
 
+             rrDiff.Reverse();
+
             SeriesCollection = new SeriesCollection()
             {
                 new LineSeries

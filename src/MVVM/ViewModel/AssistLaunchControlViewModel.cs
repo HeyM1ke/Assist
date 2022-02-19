@@ -37,7 +37,9 @@ namespace Assist.MVVM.ViewModel
             }
             catch (Exception e)
             {
-                return;
+                AssistApplication.AppInstance.Log.Error("Unhandled Ex Source: " + e.Source);
+                AssistApplication.AppInstance.Log.Error("Unhandled Ex StackTrace: " + e.StackTrace);
+                AssistApplication.AppInstance.Log.Error("Unhandled Ex Message: " + e.Message);
             }
             
 
