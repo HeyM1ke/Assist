@@ -105,11 +105,6 @@ namespace Assist.MVVM.ViewModel
             string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
             string pSettingsPathBackup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
 
-            //Beta Version Testing
-
-            string pSettingsPathBeta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "output", "Data", "RiotGamesPrivateSettings.yaml");
-            string pSettingsPathBackupBeta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "output", "Data", "RiotClientPrivateSettings.yaml");
-
 
             var fileInfo = FileVersionInfo.GetVersionInfo(UserSettings.Instance.RiotClientInstallPath);
 
@@ -117,42 +112,33 @@ namespace Assist.MVVM.ViewModel
 
             var verSplit = fileInfo.FileVersion.Split('.');
 
-            if (verSplit[0] == "46")
+            var settings = new ClientGameModel(currentUser);
+            var settings2 = new ClientPrivateModel(currentUser);
+
+            if (Convert.ToInt32(verSplit[0]) >= 46)
             {
                 // Create File
-                var settings = new ClientGameModel(currentUser);
-                var settings2 = new ClientPrivateModel(currentUser);
+                
                 // Create RiotClientPrivateSettings.yaml
                 using (TextWriter writer = File.CreateText(pSettingsPath))
                 {
                     settings.CreateFileWRegion().Save(writer, false);
                 }
 
-                using (TextWriter writer = File.CreateText(pSettingsPathBeta))
+                using (TextWriter writer = File.CreateText(pSettingsPathBackup))
                 {
-                    settings.CreateFileWRegion().Save(writer, false);
+                    settings2.CreateFile().Save(writer, false);
                 }
             }
             else
             {
                 // Create File
-                var settings = new ClientGameModel(currentUser);
-                var settings2 = new ClientPrivateModel(currentUser);
                 // Create RiotClientPrivateSettings.yaml
                 using (TextWriter writer = File.CreateText(pSettingsPath))
                 {
                     settings.CreateFile().Save(writer, false);
                 }
 
-                using (TextWriter writer = File.CreateText(pSettingsPathBeta))
-                {
-                    settings.CreateFile().Save(writer, false);
-                }
-
-                using (TextWriter writer = File.CreateText(pSettingsPathBackupBeta))
-                {
-                    settings2.CreateFile().Save(writer, false);
-                }
 
                 using (TextWriter writer = File.CreateText(pSettingsPathBackup))
                 {
