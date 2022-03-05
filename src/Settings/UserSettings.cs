@@ -50,10 +50,7 @@ namespace Assist.Settings
             {
                 var config = JsonDocument.Parse(File.ReadAllText(riotInstallPath));
 
-                if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault))
-                {
-                    path = rcDefault.GetString();
-                }
+                
 
                 if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive))
                 {
@@ -63,6 +60,11 @@ namespace Assist.Settings
                 if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta))
                 {
                     path = rcBeta.GetString();
+                }
+
+                if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault))
+                {
+                    path = rcDefault.GetString();
                 }
             }
 
