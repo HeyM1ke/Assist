@@ -435,14 +435,15 @@ namespace Assist.MVVM.Model
                 new YamlDocument(
                     new YamlMappingNode(
                         new YamlScalarNode("install"), new YamlMappingNode(
+                            new YamlScalarNode("cohorts"),
+                                             new YamlMappingNode(new YamlScalarNode("RC_15.new_lifecycle"), new YamlScalarNode($"betaEnable")), 
                             new YamlScalarNode("globals"), new YamlMappingNode(
-                                new YamlScalarNode("region"),
-                                new YamlScalarNode($"NA") // change to actual region for enum in riotuser
-                                    { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }),
-                                new YamlScalarNode("multigame-client"), new YamlMappingNode(
+                                new YamlScalarNode("region"), new YamlScalarNode($"NA") { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
+                                             new YamlScalarNode("locale"), new YamlScalarNode($"en_US") { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }),
+                            new YamlScalarNode("multigame-client"), new YamlMappingNode(
                                     new YamlScalarNode("shortcut_created"), new YamlScalarNode("true")
-
-                                )))));
+                                    
+                            )))));
 
             return settings;
         }
