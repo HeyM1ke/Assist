@@ -108,14 +108,14 @@ namespace Assist.MVVM.ViewModel
 
             var fileInfo = FileVersionInfo.GetVersionInfo(UserSettings.Instance.RiotClientInstallPath);
 
-            Trace.WriteLine(fileInfo.FileVersion);
+            AssistApplication.AppInstance.Log.Normal("Version of Client: " + fileInfo.FileVersion);
 
-            var verSplit = fileInfo.FileVersion.Split('.');
+
 
             var settings = new ClientGameModel(currentUser);
             var settings2 = new ClientPrivateModel(currentUser);
 
-            if (Convert.ToInt32(verSplit[0]) >= 46)
+            if (fileInfo.FileMajorPart >= 46)
             {
                 // Create File
                 
