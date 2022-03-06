@@ -320,7 +320,9 @@ namespace Assist.MVVM.Model
                     new YamlMappingNode(
                             new YamlScalarNode("riot-login"), new YamlMappingNode(
                                 new YamlScalarNode("persist"), new YamlMappingNode(
-                                    new YamlScalarNode("region"), new YamlScalarNode("NA") { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
+                                    new YamlScalarNode("region"),
+                                    new YamlScalarNode($"NA") // change to actual region for enum in riotuser
+                                        { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
                                     new YamlScalarNode("session"), new YamlMappingNode(
                                         new YamlScalarNode("cookies"), new YamlSequenceNode(
                                             // TDID Cookie Section
@@ -424,4 +426,25 @@ namespace Assist.MVVM.Model
         }
     }
 
+    internal class ClientSettingsModel
+    {
+
+        public YamlStream CreateSettings()
+        {
+            var settings = new YamlStream(
+                new YamlDocument(
+                    new YamlMappingNode(
+                        new YamlScalarNode("install"), new YamlMappingNode(
+                            new YamlScalarNode("globals"), new YamlMappingNode(
+                                new YamlScalarNode("region"),
+                                new YamlScalarNode($"NA") // change to actual region for enum in riotuser
+                                    { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }),
+                                new YamlScalarNode("multigame-client"), new YamlMappingNode(
+                                    new YamlScalarNode("shortcut_created"), new YamlScalarNode("true")
+
+                                )))));
+
+            return settings;
+        }
+    }
 }

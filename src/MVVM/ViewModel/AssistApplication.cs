@@ -104,7 +104,7 @@ namespace Assist.MVVM.ViewModel
 
             string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
             string pSettingsPathBackup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
-
+            string pClientSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config", "RiotClientSettings.yaml");
 
             var fileInfo = FileVersionInfo.GetVersionInfo(UserSettings.Instance.RiotClientInstallPath);
 
@@ -114,6 +114,13 @@ namespace Assist.MVVM.ViewModel
 
             var settings = new ClientGameModel(currentUser);
             var settings2 = new ClientPrivateModel(currentUser);
+            var cSettings = new ClientSettingsModel();
+
+            using (TextWriter writer = File.CreateText(pClientSettingsPath))
+            {
+                cSettings.CreateSettings().Save(writer, false);
+            }
+
 
             if (fileInfo.FileMajorPart >= 46)
             {
