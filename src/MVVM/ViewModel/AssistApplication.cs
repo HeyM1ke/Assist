@@ -116,16 +116,16 @@ namespace Assist.MVVM.ViewModel
             var settings2 = new ClientPrivateModel(currentUser);
             var cSettings = new ClientSettingsModel();
 
-            using (TextWriter writer = File.CreateText(pClientSettingsPath))
-            {
-                cSettings.CreateSettings().Save(writer, false);
-            }
+            
 
 
             if (fileInfo.FileMajorPart >= 46)
             {
                 // Create File
-                
+                using (TextWriter writer = File.CreateText(pClientSettingsPath))
+                {
+                    cSettings.CreateSettings().Save(writer, false);
+                }
                 // Create RiotClientPrivateSettings.yaml
                 using (TextWriter writer = File.CreateText(pSettingsPath))
                 {
