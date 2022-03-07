@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.IO;
 using YamlDotNet;
 using System;
+using System.Diagnostics;
 using Assist.MVVM.Model;
 using System.Net;
 using Assist.MVVM.View.Extra;
@@ -96,20 +97,60 @@ namespace Assist.MVVM.ViewModel
         }
         public async Task CreateAuthenticationFile()
         {
+            Directory.CreateDirectory(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "output",
+                "Data"));
+
+
             string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
             string pSettingsPathBackup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
-            // Create File
+            string pClientSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config", "RiotClientSettings.yaml");
+
+            var fileInfo = FileVersionInfo.GetVersionInfo(UserSettings.Instance.RiotClientInstallPath);
+
+            AssistApplication.AppInstance.Log.Normal("Version of Client: " + fileInfo.FileVersion);
+
+
+
             var settings = new ClientGameModel(currentUser);
             var settings2 = new ClientPrivateModel(currentUser);
-            // Create RiotClientPrivateSettings.yaml
-            using (TextWriter writer = File.CreateText(pSettingsPath))
-            {
-                settings.CreateFile().Save(writer, false);
-            }
+            var cSettings = new ClientSettingsModel();
 
-            using (TextWriter writer = File.CreateText(pSettingsPathBackup))
+            
+
+
+            if (fileInfo.FileMajorPart >= 46)
             {
-                settings2.CreateFile().Save(writer, false);
+                // Create File
+                using (TextWriter writer = File.CreateText(pClientSettingsPath))
+                {
+                    cSettings.CreateSettings().Save(writer, false);
+                }
+                // Create RiotClientPrivateSettings.yaml
+                using (TextWriter writer = File.CreateText(pSettingsPath))
+                {
+                    settings.CreateFileWRegion().Save(writer, false);
+                }
+
+                using (TextWriter writer = File.CreateText(pSettingsPathBackup))
+                {
+                    settings2.CreateFile().Save(writer, false);
+                }
+            }
+            else
+            {
+                // Create File
+                // Create RiotClientPrivateSettings.yaml
+                using (TextWriter writer = File.CreateText(pSettingsPath))
+                {
+                    settings.CreateFile().Save(writer, false);
+                }
+
+
+                using (TextWriter writer = File.CreateText(pSettingsPathBackup))
+                {
+                    settings2.CreateFile().Save(writer, false);
+                }
             }
 
 

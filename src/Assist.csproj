@@ -4,10 +4,10 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
+    <UseWPF>True</UseWPF>
     <StartupObject>Assist.App</StartupObject>
     <Authors>Mike</Authors>
-    <Version>0.1.0.7</Version>
+    <Version>0.1.0.8</Version>
     <Product>Assist</Product>
     <Description>Valorant Program made by Mike</Description>
     <PackageIcon>assistlogoIcon.png</PackageIcon>
