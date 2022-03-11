@@ -13,7 +13,7 @@ namespace Assist.MVVM.ViewModel
 {
     internal class ProgressionBattlepassViewmodel : INotifyPropertyChanged
     {
-        private const string battlepassUrl = "https://assist-api.jaren.workers.dev/battlepass";
+        private const string battlepassUrl = "https://assist.rumblemike.com/Battlepass";
         internal List<BattlePassObj> battlepass;
         public AssistBattlepassItem currentItem { get; set; }
 
