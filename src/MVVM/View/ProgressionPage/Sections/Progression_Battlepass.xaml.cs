@@ -40,6 +40,7 @@ namespace Assist.MVVM.View.ProgressionPage.Sections
             if(_viewModel.battlepass is not null)
             {
                 int totalRewards = 1;
+                int tierNum = 1;
                 for(int i = 0; i < _viewModel.battlepass.Count; i++)
                 {
                     for (int j = 0; j < _viewModel.battlepass[i].itemsInChapter.Count; j++)
@@ -47,6 +48,8 @@ namespace Assist.MVVM.View.ProgressionPage.Sections
                         double dIsEarned = data.ProgressionLevelReached >= totalRewards ? 0.9 : 0;
                         bool bIsEarned = data.ProgressionLevelReached >= totalRewards ? true : false;
                         bool bCurrent = data.ProgressionLevelReached + 1 == totalRewards ? true : false;
+                        _viewModel.battlepass[i].itemsInChapter[j].tierNumber = tierNum++;
+
                         var control = new AssistBattlepassItem(_viewModel.battlepass[i].itemsInChapter[j])
                         {
                             Margin = new Thickness(7),
