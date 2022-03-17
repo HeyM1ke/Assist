@@ -299,8 +299,4 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Controls\Progression\" />
-	</ItemGroup>
-
 </Project>

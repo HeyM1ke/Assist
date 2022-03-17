@@ -223,6 +223,15 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BATTLEPASS.
+        /// </summary>
+        public static string Progression_Battlepass {
+            get {
+                return ResourceManager.GetString("Progression_Battlepass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Language:.
         /// </summary>
         public static string SettingsGeneral_SelLang {

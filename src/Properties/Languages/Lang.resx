@@ -178,6 +178,9 @@
     <value>Switch Profile</value>
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
+  <data name="Progression_Battlepass" xml:space="preserve">
+    <value>BATTLEPASS</value>
+  </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
     <value>Select Language:</value>
   </data>

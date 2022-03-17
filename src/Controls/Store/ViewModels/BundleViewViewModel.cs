@@ -13,7 +13,7 @@ namespace Assist.Controls.Store.ViewModels
 {
     internal class BundleViewViewModel : ViewModelBase
     {
-        private BitmapImage _bundleImage = App.LoadImageUrl("https://cdn.rumblemike.com/Bundles/1b632bcd-4e3d-eb8e-cca6-cebf937e6ebb_DisplayIcon.png", 673, 328).Result;
+        private BitmapImage _bundleImage = App.LoadImageUrl("https://cdn.rumblemike.com/AssistHome.png", 673, 328).Result;
         public BitmapImage BundleImage
         {
             get => _bundleImage;
