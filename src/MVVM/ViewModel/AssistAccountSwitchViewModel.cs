@@ -16,7 +16,7 @@ namespace Assist.MVVM.ViewModel
     {
         public async Task LoginIntoAccount(object obj)
         {
-            await AssistApplication.AppInstance.AuthenticateWithAccountSetting(((AssistAccountSwitchButton)obj).Account);
+            await AssistApplication.AppInstance.AuthenticateWithProfileSetting(null);
         }
 
     }

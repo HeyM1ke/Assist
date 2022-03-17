@@ -112,7 +112,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.Resources>
-                    <Style TargetType="{x:Type Button}">
+                    <Style x:Key="homeBtn" TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="{StaticResource BackingBlack2}"/>
                         <Setter Property="Template">
                             <Setter.Value>
@@ -144,8 +144,7 @@
                 
                 <Button x:Name="riotGamesLogin" Style="{StaticResource RiotGamesAuthButton}" Width="300" Height="75" Margin="0,0,0,20" Click="riotGamesLogin_Click"/>
                 <Button x:Name="userPassLogin" Style="{StaticResource UsernameAuthButton}" Width="300" Height="75" Click="userPassLogin_Click"/>
-
-                <Button x:Name="HomeBTN" Width="40" Height="40" Margin="0,10,0,0" Click="HomeBTN_Click" Visibility="Collapsed"/>
+                <Button x:Name="HomeBTN" Style="{StaticResource homeBtn}" Width="40" Height="40" Margin="0,10,0,0" Click="HomeBTN_Click" Visibility="Collapsed"/>
 
             </StackPanel>
             <StackPanel Grid.Row="1" VerticalAlignment="Bottom">

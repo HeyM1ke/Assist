@@ -17,39 +17,35 @@ namespace Assist.MVVM.View.InitPage
     /// </summary>
     public partial class InitPage : Window
     {
-        AssistApplication _viewModel => AssistApplication.AppInstance;
+        private InitPageViewModel _viewModel;
 
         public InitPage()
         {
-            AssistApplication.AppInstance.Log.Normal("InitPage Constructor Called");
-            DataContext = _viewModel;
+            AssistLog.Normal("InitPage Constructor Called");
+            DataContext = _viewModel = new InitPageViewModel();
             InitializeComponent();
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
 
-            var resp = await _viewModel.AssistApiController.GetMaintenanceStatus();
+            var resp = await AssistApplication.AppInstance.AssistApiController.GetMaintenanceStatus();
 
             if (resp.bDownForMaintenance)
                 new MaintenanceWindow().ShowDialog();
 
             
-            AssistApplication.AppInstance.Log.Normal("InitWindow_Loaded Called");
-            if (_viewModel.InitPageViewModel.isFirstTime())
+            AssistLog.Normal("InitWindow_Loaded Called");
+
+            if (AssistSettings.Current.bNewUser)
             {
-                AssistApplication.AppInstance.Log.Normal("First Time found");
-                await _viewModel.InitPageViewModel.FirstTimeSetup();
+                AssistLog.Normal("New User Flag is True, Running First Time Setup.");
+                await _viewModel.FirstTimeSetup();
             }
             else
             {
-                AssistApplication.AppInstance.Log.Normal("Default Startup");
-                await _viewModel.InitPageViewModel.DefaultStartup();
+                AssistLog.Normal("Returning User, Running Default Startup");
+                await _viewModel.DefaultStartup();
             }
         }
     }

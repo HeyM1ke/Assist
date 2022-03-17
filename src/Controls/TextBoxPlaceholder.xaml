@@ -188,7 +188,9 @@
     
     <Border
         CornerRadius="10"
-        Background="{StaticResource BackingBlack2}"
+        Background="{StaticResource AssistNavigationButton_NotSelectedFill}"
+        BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}"
+        BorderThickness="1"
         Height="60">
         
 

@@ -18,6 +18,6 @@
 
             </StackPanel>
         </ScrollViewer>
-        <Controls:AssistLaunchControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Width="600" Height="120"/>
+        
     </Grid>
 </Page>

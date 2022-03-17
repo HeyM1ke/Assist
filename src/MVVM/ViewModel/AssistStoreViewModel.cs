@@ -21,7 +21,7 @@ namespace Assist.MVVM.ViewModel
 
         public async Task GetUserStore()
         {
-            playerStore = await AssistApplication.AppInstance.currentUser.Store.GetPlayerStore();
+            playerStore = await AssistApplication.AppInstance.CurrentUser.Store.GetPlayerStore();
         }
 
         public async Task<BitmapImage> SetupImage()

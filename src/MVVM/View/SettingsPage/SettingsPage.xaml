@@ -56,7 +56,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Controls:AssistAccountSettingsManager VerticalAlignment="Top" Margin="2" Height="500"/>
+                   
 
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -64,7 +64,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Controls:AssistAccountSettingsDefaultAccount />
+                        
                     </Grid>
                     
 

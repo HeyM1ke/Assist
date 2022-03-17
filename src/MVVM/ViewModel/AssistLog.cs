@@ -9,31 +9,33 @@ namespace Assist.MVVM.ViewModel
 {
     public class AssistLog
     {
-        string logPath;
-        public AssistLog()
+        private static string logPath { get; }
+        private static string logfolderpath =>
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs");
+        static AssistLog()
         {
             // Create Log file
-            Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs"));
-            int fileCount = Directory.GetFiles(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs"), "*.*", SearchOption.TopDirectoryOnly).Length;
-            logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs", $"Assist_Log_{fileCount++}.txt");
+            Directory.CreateDirectory(logfolderpath);
+            int fileCount = Directory.GetFiles(logfolderpath, "*.*", SearchOption.TopDirectoryOnly).Length;
+            logPath = Path.Combine(logfolderpath, $"Assist_Log_{++fileCount}.txt");
             File.CreateText(logPath).Dispose();
         }
 
-        public void Normal(string message)
+        public static void Normal(string message)
         {
             WriteToLog("[NORMAL] " + message);
         }
-        public void Error(string message)
+        public static void Error(string message)
         {
             WriteToLog("[ERROR] " + message);
         }
 
-        public void Debug(string message)
+        public static void Debug(string message)
         {
             WriteToLog("[DEBUG] " + message);
         }
 
-        private void WriteToLog(string message)
+        private static void WriteToLog(string message)
         {
             using (StreamWriter sw = new StreamWriter(logPath, append: true))
             {

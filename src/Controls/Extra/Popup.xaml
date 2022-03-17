@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Assist.Controls.Extra.Popup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Assist.Controls.Extra"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d" 
+             d:DesignHeight="576" 
+             d:DesignWidth="1024"
+             Height="576"
+             Width="1024" Loaded="Popup_Loaded"
+             >
+    <Grid Background="#4C000000">
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="{StaticResource AssistBackgroundLight}"
+                Width="500" Height="200">
+            <Grid>
+                <StackPanel>
+                    <Image Source="../../Resources/Assist_Logo_White.png" Width="70" Margin="10"></Image>
+                    <Label FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding Title}" Foreground="White" HorizontalAlignment="Center"></Label>
+                    <Label FontFamily="{StaticResource WorkSans}" FontWeight="Regular" Content="{Binding Description}" Foreground="White" HorizontalAlignment="Center" Padding="0"></Label>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Image Name="Loading" gif:ImageBehavior.RepeatBehavior="0x" gif:ImageBehavior.AnimatedSource="../../Resources/Icons/Loading.gif"  Height="70" Visibility="Collapsed"/>
+                    <Button Name="OK_BTN" Width="30" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5" Content="OK" Visibility="Collapsed"></Button>
+                    <Button Name="ERR_BTN" Width="30" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"  Content="EXIT" Visibility="Collapsed"></Button>
+                </StackPanel>
+            </Grid>
+            
+            
+        </Border>
+    </Grid>
+</UserControl>

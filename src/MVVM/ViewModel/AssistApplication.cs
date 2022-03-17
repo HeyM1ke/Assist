@@ -3,11 +3,13 @@ using Assist.Settings;
 using System.Windows;
 using System.Threading.Tasks;
 using System.IO;
-using YamlDotNet;
 using System;
+using System.Diagnostics;
 using Assist.MVVM.Model;
 using System.Net;
+using Assist.MVVM.View.Authentication;
 using Assist.MVVM.View.Extra;
+using RestSharp;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -17,8 +19,6 @@ namespace Assist.MVVM.ViewModel
 
         public AssistApiController AssistApiController { get; set; }
         //Page Models
-        public AssistMainWindowViewModel MainWindowViewModel {  get; set; }
-        public InitPageViewModel InitPageViewModel {  get; set; }
         public LoginPageViewModel LoginPageViewModel {  get; set; }
         public AssistFeaturedViewModel assistFeaturedViewModel { get; set; }
         public AssistStoreViewModel StorePageViewModel { get; set; }
@@ -29,20 +29,18 @@ namespace Assist.MVVM.ViewModel
         public AssistStoreBundleViewModel StoreBundleViewModel { get; set; }
         public AssistStoreItemViewModel StoreItemViewModel { get; set;}
         public ProgressionBattlepassViewmodel BattlepassViewModel { get; set; }
-        public AssistLaunchControlViewModel LaunchControlViewModel { get; set; }
-        // Backbone
-        public RiotUser currentUser { get; set; }
-        public AccountSettings currentAccount { get; set; }
-        public AssistLog Log { get; }
 
-        
+        // Backbone
+        public RiotUser CurrentUser { get; set; }
+        public ProfileSetting CurrentProfile { get; set; }
+
+        public static double GlobalScaleRate { get; set; } = 1.00;
+
         public AssistApplication()
         {
             // Application Models
             AssistApiController = new();
-            InitPageViewModel = new();
-            Log = new AssistLog();
-            
+
             // General Viewmodels
             AccountSwitchControlViewModel = new();
 
@@ -53,7 +51,6 @@ namespace Assist.MVVM.ViewModel
             StoreItemViewModel = new();
             StoreBundleViewModel = new();
             LoginPageViewModel = new();
-            LaunchControlViewModel = new();
 
             //Control Models
             RankMicroGraphViewModel = new();
@@ -64,7 +61,7 @@ namespace Assist.MVVM.ViewModel
         {
                 var temp = Application.Current.MainWindow;
                 temp.Visibility = Visibility.Hidden;
-                Application.Current.MainWindow = new MainWindow();
+                Application.Current.MainWindow = new AssistMainWindow();
                 Application.Current.MainWindow.Show();
                 temp.Close();
             
@@ -73,87 +70,133 @@ namespace Assist.MVVM.ViewModel
         {
             var temp = Application.Current.MainWindow;
             temp.Visibility = Visibility.Hidden;
-            Application.Current.MainWindow = new MainWindow();
+            Application.Current.MainWindow = new AssistMainWindow();
             Application.Current.MainWindow.Show();
-            MainWindow.MainWindowInstance.mainContentFrame.Navigate(new Uri("/MVVM/View/SettingsPage/SettingsPage.xaml", UriKind.RelativeOrAbsolute));
+            //MainWindow.MainWindowInstance.mainContentFrame.Navigate(new Uri("/MVVM/View/SettingsPage/SettingsPage.xaml", UriKind.RelativeOrAbsolute));
             temp.Close();
         }
-        public void OpenAccountLoginWindow()
+        public void OpenAccountLoginWindow(bool bAddProfile)
         {
             Application.Current.MainWindow.Visibility = Visibility.Hidden;
-            AccountLogin accLogin = new AccountLogin(true);
+            Authentication accLogin = new Authentication();
             Application.Current.MainWindow.Close();
             accLogin.Show();
             Application.Current.MainWindow = accLogin;
         }
         public void OpenAssistErrorWindow(Exception ex, string extraParam = null)
         {
-            this.Log.Error($"Opened Error Window Method Called ; MESSAGE: {ex.Message} | CUSTOM MESSAGE: {extraParam} ");
+            AssistLog.Error($"Opened Error Window Method Called ; MESSAGE: {ex.Message} | CUSTOM MESSAGE: {extraParam} ");
             var errorS = new ErrorScreen(ex, extraParam);
-            this.Log.Error("Opened Error Window");
+            AssistLog.Error("Opened Error Window");
             errorS.ShowDialog();
-            this.Log.Error("Closed Error Window");
+            AssistLog.Error("Closed Error Window");
         }
         public async Task CreateAuthenticationFile()
         {
             string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
             string pSettingsPathBackup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
+            string pClientSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config", "RiotClientSettings.yaml");
+
+            var fileInfo = FileVersionInfo.GetVersionInfo(AssistSettings.Current.RiotClientInstallPath);
+
+            AssistLog.Normal("Version of Client: " + fileInfo.FileVersion);
+
             // Create File
-            var settings = new ClientGameModel(currentUser);
-            var settings2 = new ClientPrivateModel(currentUser);
-            // Create RiotClientPrivateSettings.yaml
-            using (TextWriter writer = File.CreateText(pSettingsPath))
+            var settings = new ClientGameModel(CurrentUser);
+            var settings2 = new ClientPrivateModel(CurrentUser);
+            var cSettings = new ClientSettingsModel();
+
+            if (fileInfo.FileMajorPart >= 46)
             {
-                settings.CreateFile().Save(writer, false);
+                // Create File
+                using (TextWriter writer = File.CreateText(pClientSettingsPath))
+                {
+                    cSettings.CreateSettings().Save(writer, false);
+                }
+                // Create RiotClientPrivateSettings.yaml
+                using (TextWriter writer = File.CreateText(pSettingsPath))
+                {
+                    settings.CreateFileWRegion().Save(writer, false);
+                }
+
+                using (TextWriter writer = File.CreateText(pSettingsPathBackup))
+                {
+                    settings2.CreateFile().Save(writer, false);
+                }
+            }
+            else
+            {
+                // Create File
+                // Create RiotClientPrivateSettings.yaml
+                using (TextWriter writer = File.CreateText(pSettingsPath))
+                {
+                    settings.CreateFile().Save(writer, false);
+                }
+
+
+                using (TextWriter writer = File.CreateText(pSettingsPathBackup))
+                {
+                    settings2.CreateFile().Save(writer, false);
+                }
             }
 
-            using (TextWriter writer = File.CreateText(pSettingsPathBackup))
-            {
-                settings2.CreateFile().Save(writer, false);
-            }
 
+            await RedoCookies(CurrentUser);
 
         }
-        public async Task AuthenticateWithAccountSetting(AccountSettings account)
+        public async Task AuthenticateWithProfileSetting(ProfileSetting profile)
         {
             RiotUser user = new RiotUser();
 
-            foreach (Cookie cookie in account.Convert64ToCookies().GetAllCookies())
+            foreach (Cookie cookie in profile.Convert64ToCookies().GetAllCookies())
             {
                 user.UserClient.CookieContainer.Add(cookie);
             }
 
-            var gamename = account.Gamename;
-            var tagLine = account.Tagline;
+            var gamename = profile.Gamename;
+            var tagLine = profile.Tagline;
             try
             {
-                this.Log.Normal($"Authentcating with Cookies for User {account.puuid} / {gamename}#{tagLine}");
+                AssistLog.Normal($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
                 await user.Authentication.AuthenticateWithCookies();
             }
             catch (Exception ex)
             {
-                this.Log.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine}");
+                AssistLog.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine}");
 
                 string errorMess = $"Login to account: {gamename}#{tagLine}, has expired. Please re-add the account.";
                 AssistApplication.AppInstance.OpenAssistErrorWindow(ex, errorMess);
+
+
+                AssistLog.Normal("Removing Account");
+                AssistSettings.Current.Profiles.Remove(profile);
+                AssistSettings.Save();
                 
-                
-                this.Log.Normal("Removing Account");
-                UserSettings.Instance.Accounts.Remove(account);
-                UserSettings.Instance.Save();
             }
 
 
-            account.ConvertCookiesTo64(user.UserClient.CookieContainer); // Resaves cookies after each login to prevent invalid cookies.
+            profile.ConvertCookiesTo64(user.UserClient.CookieContainer); // Resaves cookies after each login to prevent invalid cookies.
 
             if (!string.IsNullOrEmpty(user.tokenData.entitle) && !string.IsNullOrEmpty(user.tokenData.access))
             {
-                AppInstance.currentAccount = account;
-                AppInstance.currentUser = user;
+                AppInstance.CurrentProfile = profile;
+                AppInstance.CurrentUser = user;
             }
 
             OpenAssistMainWindow();
         }
 
+        private async Task RedoCookies(RiotUser user)
+        {
+            var tempUser = new RiotUser();
+            foreach (Cookie cook in user.UserClient.CookieContainer.GetAllCookies())
+            {
+                tempUser.UserClient.CookieContainer.Add(cook);
+            }
+
+            await tempUser.Authentication.AuthenticateWithCookies();
+
+            AssistApplication.AppInstance.CurrentUser = tempUser;
+        }
     }
 }

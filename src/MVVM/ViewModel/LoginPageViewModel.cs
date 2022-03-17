@@ -47,27 +47,28 @@ namespace Assist.MVVM.ViewModel
             // Implement a way to check if auth is successuful
 
             // Save Cookies
-            AccountSettings userSettings = new AccountSettings()
+            ProfileSetting profileSetting = new ProfileSetting()
             {
                 Gamename = user.UserData.acct.game_name,
                 Tagline = user.UserData.acct.tag_line,
-                puuid = user.UserData.sub,
+                ProfileUuid = user.UserData.sub,
                 Region = user.UserRegion,
             };
 
-            userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
+            profileSetting.SetupProfile(user);
+            profileSetting.ConvertCookiesTo64(user.UserClient.CookieContainer);
 
             // Add login to Local Settings for future use, if Remember Me is chosen.
-            if(!cookie_Ssid.Expires.ToString().Contains("1/1/0001") && UserSettings.Instance.FindAccountById(userSettings.puuid) is null)
-                UserSettings.Instance.Accounts.Add(userSettings);
+            if(!cookie_Ssid.Expires.ToString().Contains("1/1/0001") && AssistSettings.Current.FindProfileById(profileSetting.ProfileUuid) is null)
+                AssistSettings.Current.Profiles.Add(profileSetting);
 
-            if (UserSettings.Instance.DefaultAccount == null)
-                UserSettings.Instance.DefaultAccount = userSettings.puuid;
+            if (AssistSettings.Current.DefaultAccount == null)
+                AssistSettings.Current.DefaultAccount = profileSetting.ProfileUuid;
 
-            AssistApplication.AppInstance.currentUser = user;
-            AssistApplication.AppInstance.currentAccount = userSettings;
+            AssistApplication.AppInstance.CurrentUser = user;
+            AssistApplication.AppInstance.CurrentProfile = profileSetting;
             AssistApplication.AppInstance.OpenAssistMainWindow();
-
+            AssistSettings.Current.bNewUser = false;
         }
 
         public async Task Login(RiotLoginData data)
@@ -97,27 +98,27 @@ namespace Assist.MVVM.ViewModel
             // Implement a way to check if auth is successuful
 
             // Save Cookies
-            AccountSettings userSettings = new AccountSettings()
+            ProfileSetting profileSetting = new ProfileSetting()
             {
                 Gamename = user.UserData.acct.game_name,
                 Tagline = user.UserData.acct.tag_line,
-                puuid = user.UserData.sub,
+                ProfileUuid = user.UserData.sub,
                 Region = user.UserRegion,
             };
 
-            userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
-
+            profileSetting.ConvertCookiesTo64(user.UserClient.CookieContainer);
+            profileSetting.SetupProfile(user);
             // Add login to Local Settings for future use, if Remember Me is chosen.
-            if(UserSettings.Instance.FindAccountById(userSettings.puuid) is null)
-                UserSettings.Instance.Accounts.Add(userSettings);
+            if (AssistSettings.Current.FindProfileById(profileSetting.ProfileUuid) is null)
+                AssistSettings.Current.Profiles.Add(profileSetting);
 
-            if (UserSettings.Instance.DefaultAccount is null)
-                UserSettings.Instance.DefaultAccount = userSettings.puuid;
+            if (AssistSettings.Current.DefaultAccount == null)
+                AssistSettings.Current.DefaultAccount = profileSetting.ProfileUuid;
 
-            AssistApplication.AppInstance.currentUser = user;
-            AssistApplication.AppInstance.currentAccount = userSettings;
+            AssistApplication.AppInstance.CurrentUser = user;
+            AssistApplication.AppInstance.CurrentProfile = profileSetting;
             AssistApplication.AppInstance.OpenAssistMainWindow();
-
+            AssistSettings.Current.bNewUser = false;
         }
 
 

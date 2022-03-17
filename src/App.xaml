@@ -35,6 +35,19 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="PageFadeIn" TargetType="{x:Type Page}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="Opacity" SpeedRatio="5">
+                            <DoubleAnimation From="0" To="1">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="slideRight" TargetType="{x:Type UserControl}">
             <Style.Triggers>
                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
@@ -68,8 +81,27 @@
         <PathGeometry x:Key="trashCan" Figures="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"/>
         <PathGeometry x:Key="checkCircle" Figures="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2,4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"/>
         <Color x:Key="buttonBackground" A="100" R="49" G="49" B="49"/>
-        
-        
+
+
+        <!-- Color Resources -->
+        <SolidColorBrush x:Key="AssistNavigationBar" Color="#242B3B"/>
+        <SolidColorBrush x:Key="AssistBackgroundLight" Color="#242B3B"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistBackground2" Color="#0F131A"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistBackground" Color="#171C26"/>
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedFill" Color="#33CF1439"/>
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedOutline" Color="#CF1439"/>
+
+        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedFill" Color="#33414958"/>
+        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedOutline" Color="#33111822"/>
+
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedHighlightFill" Color="#33EA1842"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedHighlightOutline" Color="#FFF12E54"/>
+
+        <SolidColorBrush x:Key="StoreBorderColor" Color="#FFF"></SolidColorBrush>
+
+        <!-- Font Family -->
+        <FontFamily x:Key="WorkSans">pack://application:,,,/Resources/Fonts/#Work Sans</FontFamily>
+
         <!-- Program Color Resources -->
         <SolidColorBrush x:Key="ValorantLightRed" Color="#ff4655"/>
         
@@ -101,5 +133,26 @@
         <!-- Colors-->
         <Color x:Key="ValorantRedColor">#ff4655</Color>
         <Color x:Key="HighlightColor">#FFFFB6BC</Color>
+
+
+        <!-- Content Tier Colors -->
+        <SolidColorBrush x:Key="ExclusiveTierColor" Color="#FFF97F39"></SolidColorBrush>
+        <SolidColorBrush x:Key="DeluxeTierColor" Color="#008F77"></SolidColorBrush>
+        <SolidColorBrush x:Key="SelectTierColor" Color="#FF3087D9"></SolidColorBrush>
+        <SolidColorBrush x:Key="PremiumTierColor" Color="#FFCE548B"></SolidColorBrush>
+        <SolidColorBrush x:Key="UltraTierColor" Color="#FFC31F"></SolidColorBrush>
+
+        <LinearGradientBrush x:Key="DeluxeGrad" EndPoint="0.5,1" StartPoint="0.5,0">
+            <LinearGradientBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                    <RotateTransform Angle="-181.245" CenterX="0.5" CenterY="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="#008F77" Offset="0"/>
+            <GradientStop Color="#FF267468" Offset="1"/>
+        </LinearGradientBrush>
     </Application.Resources>
 </Application>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assist.MVVM.Model
 {
-    internal class SkinObj
+    public class SkinObj
     {
 
         public string uuid { get; set; }

@@ -24,6 +24,8 @@ namespace Assist.MVVM.ViewModel
         private const string maintUrl = "https://assist.rumblemike.com/prod/maintenance/status";
         internal bool bIsUpdate = false;
         public RestClient client = new RestClient();
+
+
         public void CheckForAssistUpdates()
         {
             AutoUpdater.ParseUpdateInfoEvent += ParseUpdateData;

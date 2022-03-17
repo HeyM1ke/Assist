@@ -15,7 +15,6 @@ namespace Assist.MVVM.View.LoginPage.Pages
         public LoginPagev2()
         {
             DataContext = _viewModel = new LoginPageViewModel();
-            AssistApplication.AppInstance.LoginPageViewModel = _viewModel;
             InitializeComponent();
         }
 
@@ -27,9 +26,9 @@ namespace Assist.MVVM.View.LoginPage.Pages
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             var screen = new LoginWindow();
-            AssistApplication.AppInstance.Log.Normal("Login Window is Open");
+            AssistLog.Normal("Login Window is Open");
             screen.ShowDialog();
-            AssistApplication.AppInstance.Log.Normal("Login Window is Completed");
+            AssistLog.Normal("Login Window is Completed");
             if(AssistApplication.AppInstance.LoginPageViewModel.cookie_Ssid != null)
                 await _viewModel.Login();
         }

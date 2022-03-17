@@ -39,26 +39,31 @@ namespace Assist.MVVM.View.LoginPage.Pages
 
             if (resp.bIsAuthComplete)
             {
+
+
                 // Save Cookies
-                AccountSettings userSettings = new AccountSettings()
+                ProfileSetting profile = new ProfileSetting()
                 {
                     Gamename = AssistApplication.AppInstance.LoginPageViewModel.user.UserData.acct.game_name,
                     Tagline = AssistApplication.AppInstance.LoginPageViewModel.user.UserData.acct.tag_line,
-                    puuid = AssistApplication.AppInstance.LoginPageViewModel.user.UserData.sub,
+                    ProfileUuid = AssistApplication.AppInstance.LoginPageViewModel.user.UserData.sub,
                     Region = AssistApplication.AppInstance.LoginPageViewModel.user.UserRegion,
-                };
+                }; 
 
-                userSettings.ConvertCookiesTo64(AssistApplication.AppInstance.LoginPageViewModel.user.UserClient.CookieContainer);
+                profile.SetupProfile(AssistApplication.AppInstance.LoginPageViewModel.user);
+
+                profile.ConvertCookiesTo64(AssistApplication.AppInstance.LoginPageViewModel.user.UserClient.CookieContainer);
 
                 // Add login to Local Settings for future use, if Remember Me is chosen.
-                UserSettings.Instance.Accounts.Add(userSettings);
+                AssistSettings.Current.Profiles.Add(profile);
 
                 // Open Mainwindow
                 //Application.Current.MainWindow.Close();
 
-                AssistApplication.AppInstance.currentUser = AssistApplication.AppInstance.LoginPageViewModel.user;
-                AssistApplication.AppInstance.currentAccount = userSettings;
+                AssistApplication.AppInstance.CurrentUser = AssistApplication.AppInstance.LoginPageViewModel.user;
+                AssistApplication.AppInstance.CurrentProfile = profile;
                 AssistApplication.AppInstance.OpenAssistMainWindow();
+                AssistSettings.Current.bNewUser = false;
             }
         }
     }

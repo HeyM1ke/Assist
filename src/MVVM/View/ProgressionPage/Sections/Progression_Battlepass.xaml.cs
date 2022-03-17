@@ -33,7 +33,7 @@ namespace Assist.MVVM.View.ProgressionPage.Sections
         private async void BattlepassPage_Initialized(object sender, EventArgs e)
         {
             // Get Current Riotuser Battlepass Contract Data
-            var data = await AssistApplication.AppInstance.currentUser.Contracts.GetCurrentBattlepass();
+            var data = await AssistApplication.AppInstance.CurrentUser.Contracts.GetCurrentBattlepass();
 
             // Get Assist Api data
             await _viewModel.GetBattlepassData();

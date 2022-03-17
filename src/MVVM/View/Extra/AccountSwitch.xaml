@@ -19,6 +19,5 @@
                 <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0" ></Button>
             </Grid>
         </Border>
-        <Controls:AssistAccountSwitch Grid.Row="1" />
     </Grid>
 </Window>

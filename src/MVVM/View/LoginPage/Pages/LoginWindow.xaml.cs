@@ -56,7 +56,7 @@ namespace Assist.MVVM.View.LoginPage.Pages
                 //AssistApplication.AppInstance.Log.Debug(cookie.Name);
                 if(cookie.Name.Equals("ssid"))
                 {
-                    AssistApplication.AppInstance.Log.Debug(cookie.Expires.ToString());
+                    AssistLog.Debug(cookie.Expires.ToString());
 
                     var cook = new Cookie
                     {

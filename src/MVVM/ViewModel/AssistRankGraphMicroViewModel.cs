@@ -17,7 +17,7 @@ namespace Assist.MVVM.ViewModel
         public double[] rrDiff { get; set; }
         public async Task SetupGraph()
         {
-            CompetitiveUpdates = await AssistApplication.AppInstance.currentUser.Player.GetCompetitiveUpdates();
+            CompetitiveUpdates = await AssistApplication.AppInstance.CurrentUser.Player.GetCompetitiveUpdates();
 
              rrDiff = new double[] {0,0,0};
 
