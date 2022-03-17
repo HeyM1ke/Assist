@@ -86,6 +86,7 @@
         <!-- Color Resources -->
         <SolidColorBrush x:Key="AssistNavigationBar" Color="#242B3B"/>
         <SolidColorBrush x:Key="AssistBackgroundLight" Color="#242B3B"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistBackgroundSuperLight" Color="#364159"></SolidColorBrush>
         <SolidColorBrush x:Key="AssistBackground2" Color="#0F131A"></SolidColorBrush>
         <SolidColorBrush x:Key="AssistBackground" Color="#171C26"/>
         <SolidColorBrush x:Key="AssistNavigationButton_SelectedFill" Color="#33CF1439"/>

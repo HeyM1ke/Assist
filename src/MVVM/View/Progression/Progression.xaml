@@ -62,7 +62,7 @@
             </Style>
         </Grid.Resources>
 
-        <Button Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="BATTLEPASS"/>
+        <Button x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="BATTLEPASS" Click="BattlepassButton_Click"/>
         <Button Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
     </Grid>
 </Page>

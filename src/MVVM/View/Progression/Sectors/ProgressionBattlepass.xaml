@@ -21,11 +21,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Column="0" Name="DataGrid" Background="{StaticResource AssistNavigationBar}">
+        <Grid Column="0" Name="DataGrid" Background="{StaticResource AssistBackground}">
             <DockPanel>
                 <Label x:Name="HeaderLabel" DockPanel.Dock="top" Content="{x:Static lang:Lang.Progression_Battlepass}" Foreground="{StaticResource ValorantOffWhite}"
-                       FontFamily="{StaticResource WorkSans}" FontWeight="Bold" FontSize="24"></Label>
-                <Progression:BattlepassConcurrentItem  DockPanel.Dock="top" VerticalAlignment="Top" Margin="10"/>
+                       FontFamily="{StaticResource WorkSans}" FontWeight="Bold" FontSize="24"
+                       Padding="10" ></Label>
+                <Progression:BattlepassConcurrentItem  DockPanel.Dock="top" VerticalAlignment="Top" Margin="0,0,0,00" Height="125" Width="465"/>
             </DockPanel>
         </Grid>
 

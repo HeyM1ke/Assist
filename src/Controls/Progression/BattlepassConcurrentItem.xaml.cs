@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assist.Controls.Progression.Viewmodels;
 
 namespace Assist.Controls.Progression
 {
@@ -20,8 +21,10 @@ namespace Assist.Controls.Progression
     /// </summary>
     public partial class BattlepassConcurrentItem : UserControl
     {
+        private BattlepassConcurrentViewModel _viewModel;
         public BattlepassConcurrentItem()
         {
+            DataContext = _viewModel = new BattlepassConcurrentViewModel();
             InitializeComponent();
         }
     }

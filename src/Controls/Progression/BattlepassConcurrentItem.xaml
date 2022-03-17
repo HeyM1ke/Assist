@@ -5,25 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Progression"
              mc:Ignorable="d" 
-             d:DesignHeight="125" d:DesignWidth="485"
+             d:DesignHeight="125" d:DesignWidth="465"
              >
-    <Border Background="{StaticResource AssistBackground2}" CornerRadius="10">
+    <Border Background="{StaticResource AssistBackgroundLight}" CornerRadius="10">
         <Grid>
             <DockPanel>
-                <Canvas DockPanel.Dock="Left" HorizontalAlignment="Left" Height="100" Width="100" >
-                    <Ellipse Height="100" Width="100"  Margin="5,0" Fill="{StaticResource AssistBackgroundLight}"/>
-                    <Ellipse Height="100" Width="100" Margin="5,0">
+                <Canvas DockPanel.Dock="Left" HorizontalAlignment="Left" Height="105" Width="105" >
+                    <Ellipse Height="105" Width="105" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0" Fill="{StaticResource ValorantOffWhite}"/>
+                    <Ellipse Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="7.5,2.5" Fill="{StaticResource AssistBackgroundSuperLight}"/>
+                    <Ellipse Height="100" Width="100" Margin="7.5,2.5">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="../../Resources/Earned.png" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center"/>
+                            <ImageBrush ImageSource="{Binding ContractRewardImage}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center"/>
                         </Ellipse.Fill>
                     </Ellipse>
                     
                 </Canvas>
                 <Grid Margin="10,5">
-                    <Label DockPanel.Dock="Left" Content="EPILOGUE: Golden Penguin Card" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Bold" FontSize="22"></Label>
+                    <Label DockPanel.Dock="Left" Content="EPILOGUE: Golden Penguin Card" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Bold" FontSize="19"></Label>
                     <StackPanel VerticalAlignment="Bottom" Margin="0,10">
-                        <Label Padding="0" Content="Current Tier: 55" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Normal" FontSize="22"></Label>
-                        <ProgressBar Height="20"></ProgressBar>
+                        <Grid>
+                            <Label Padding="0" Content="Current Tier: 55" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Normal" FontSize="14"/>
+                            <Label Padding="0" Content="18,900XP / 23,800XP" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                        </Grid>
+                        <ProgressBar Height="20" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" BorderThickness="2" BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}" Foreground="{StaticResource AssistNavigationButton_SelectedFill}" Value="20"></ProgressBar>
                     </StackPanel>
                     
                 </Grid>
