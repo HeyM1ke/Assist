@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Assist.Modules.XMPP;
+using Assist.MVVM.Model;
 using Assist.MVVM.View.Dashboard;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
@@ -48,13 +49,13 @@ namespace Assist
         {
             switch (AssistSettings.Current.Resolution)
             {
-                case "745":
+                case Enums.EWindowSize.R720:
                     Width = 1280;
                     Height = 745;
                     AssistApplication.GlobalScaleRate = 1.25;
                     myCanvas.LayoutTransform = new ScaleTransform(AssistApplication.GlobalScaleRate, AssistApplication.GlobalScaleRate);
                     break;
-                case "601":
+                case Enums.EWindowSize.R576:
                     Width = 1024;
                     Height = 601;
                     AssistApplication.GlobalScaleRate = 1;

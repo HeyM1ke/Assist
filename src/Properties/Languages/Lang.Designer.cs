@@ -232,11 +232,38 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Tier: .
+        /// </summary>
+        public static string Progression_Battlepass_CurrTier {
+            get {
+                return ResourceManager.GetString("Progression_Battlepass_CurrTier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language: .
+        /// </summary>
+        public static string SettingsGeneral_LanguageChange {
+            get {
+                return ResourceManager.GetString("SettingsGeneral_LanguageChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Language:.
         /// </summary>
         public static string SettingsGeneral_SelLang {
             get {
                 return ResourceManager.GetString("SettingsGeneral_SelLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window Size:.
+        /// </summary>
+        public static string SettingsGeneral_WindowSize {
+            get {
+                return ResourceManager.GetString("SettingsGeneral_WindowSize", resourceCulture);
             }
         }
         

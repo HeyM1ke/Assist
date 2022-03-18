@@ -17,5 +17,40 @@ namespace Assist.Controls.Progression.Viewmodels
             get => _contractRewardImage;
             set => SetProperty(ref _contractRewardImage, value);
         }
+
+        private string _contractRewardName = "Poggers";
+        public string ContractRewardName
+        {
+            get => _contractRewardName;
+            set => SetProperty(ref _contractRewardName, value);
+        }
+
+        public string ContractTier => $"{Properties.Languages.Lang.Progression_Battlepass_CurrTier} {ContractTierNumber}";
+
+        private int _contractTierNumber = 5;
+
+        public int ContractTierNumber
+        {
+            get => _contractTierNumber;
+            set => SetProperty(ref _contractTierNumber, value);
+        }
+
+        public string ContractTierXp => $"{CurrentXp}XP / {NeededXp}XP";
+
+        private int _currentXp = 400;
+
+        public int CurrentXp
+        {
+            get => _currentXp;
+            set => SetProperty(ref _currentXp, value);
+        }
+
+        private int _neededXp = 500;
+
+        public int NeededXp
+        {
+            get => _neededXp;
+            set => SetProperty(ref _neededXp, value);
+        }
     }
 }

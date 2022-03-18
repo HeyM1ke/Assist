@@ -21,11 +21,11 @@
                     
                 </Canvas>
                 <Grid Margin="10,5">
-                    <Label DockPanel.Dock="Left" Content="EPILOGUE: Golden Penguin Card" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Bold" FontSize="19"></Label>
+                    <Label DockPanel.Dock="Left" Content="{Binding ContractRewardName}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Bold" FontSize="19" Padding="0"></Label>
                     <StackPanel VerticalAlignment="Bottom" Margin="0,10">
                         <Grid>
-                            <Label Padding="0" Content="Current Tier: 55" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Normal" FontSize="14"/>
-                            <Label Padding="0" Content="18,900XP / 23,800XP" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                            <Label Padding="0" Content="{Binding ContractTier}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Normal" FontSize="14"/>
+                            <Label Padding="0" Content="{Binding ContractTierXp}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
                         </Grid>
                         <ProgressBar Height="20" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" BorderThickness="2" BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}" Foreground="{StaticResource AssistNavigationButton_SelectedFill}" Value="20"></ProgressBar>
                     </StackPanel>

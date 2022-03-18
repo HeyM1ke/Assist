@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using Assist.Modules.XMPP;
+using Assist.MVVM.Model;
 using ValNet;
 using ValNet.Objects.Authentication;
 using Application = System.Windows.Application;
@@ -49,8 +50,7 @@ namespace Assist
                 AssistSettings.Current = new AssistSettings();
             }
 
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(AssistSettings.Current.Language, true);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(AssistSettings.Current.Language, true);
+            ChangeLanguage();
 
 
             AssistLog.Normal("Starting InitPage");
@@ -113,6 +113,23 @@ namespace Assist
             
 
             return image;
+        }
+
+        public static void ChangeLanguage()
+        {
+            var curr = AssistSettings.Current.Language;
+
+            switch (curr)
+            {
+                case Enums.ELanguage.en_us:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", true);
+                    break;
+                case Enums.ELanguage.ja_jp:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
+                    break;
+            }
         }
     }
 }

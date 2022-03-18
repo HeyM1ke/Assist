@@ -52,14 +52,14 @@ namespace Assist.Settings
             set => SetProperty(ref _bNewUser, value);
         }
 
-        private string _resolution = "601";
-        public string Resolution {
+        private Enums.EWindowSize _resolution = Enums.EWindowSize.R576;
+        public Enums.EWindowSize Resolution {
             get => _resolution;
             set => SetProperty(ref _resolution, value);
         }
 
-        private string _language = "en_us";
-        public string Language
+        private Enums.ELanguage _language = 0;
+        public Enums.ELanguage Language
         {
             get => _language;
             set => SetProperty(ref _language, value);

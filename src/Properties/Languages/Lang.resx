@@ -181,8 +181,17 @@
   <data name="Progression_Battlepass" xml:space="preserve">
     <value>BATTLEPASS</value>
   </data>
+  <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
+    <value>Current Tier: </value>
+  </data>
+  <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
+    <value>Language: </value>
+  </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
     <value>Select Language:</value>
+  </data>
+  <data name="SettingsGeneral_WindowSize" xml:space="preserve">
+    <value>Window Size:</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
     <value>About</value>

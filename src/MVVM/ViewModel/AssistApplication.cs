@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using System.IO;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using Assist.MVVM.Model;
 using System.Net;
+using System.Threading;
 using Assist.MVVM.View.Authentication;
 using Assist.MVVM.View.Extra;
 using RestSharp;
@@ -72,7 +74,7 @@ namespace Assist.MVVM.ViewModel
             temp.Visibility = Visibility.Hidden;
             Application.Current.MainWindow = new AssistMainWindow();
             Application.Current.MainWindow.Show();
-            //MainWindow.MainWindowInstance.mainContentFrame.Navigate(new Uri("/MVVM/View/SettingsPage/SettingsPage.xaml", UriKind.RelativeOrAbsolute));
+            AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Settings/Settings.xaml", UriKind.RelativeOrAbsolute));
             temp.Close();
         }
         public void OpenAccountLoginWindow(bool bAddProfile)
@@ -197,6 +199,23 @@ namespace Assist.MVVM.ViewModel
             await tempUser.Authentication.AuthenticateWithCookies();
 
             AssistApplication.AppInstance.CurrentUser = tempUser;
+        }
+
+        public void ChangeLanguage()
+        {
+            var curr = AssistSettings.Current.Language;
+
+            switch (curr)
+            {
+                case Enums.ELanguage.en_us:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en_us", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en_us", true);
+                    break;
+                case Enums.ELanguage.ja_jp:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
+                    break;
+            }
         }
     }
 }

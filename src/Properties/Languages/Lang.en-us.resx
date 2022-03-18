@@ -117,11 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Authentication_2FactorPlaceholder" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Authentication_LoginBtn" xml:space="preserve">
+    <value>LOGIN</value>
+  </data>
+  <data name="Authentication_MultifactorFail" xml:space="preserve">
+    <value>Multifactor Code is not correct.</value>
+  </data>
+  <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
+    <value>Password</value>
+  </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
     <value>Selecting Rito Login allows you to login to the riot website and then use Assist. Note: Google Login does not work.</value>
   </data>
+  <data name="Authentication_SubmitBtn" xml:space="preserve">
+    <value>SUBMIT</value>
+  </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
     <value>Selecting Username and Password allows you to directly login with your Riot Games Username and Password.</value>
+  </data>
+  <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
+    <value>Username</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
     <value>Welcome to Assist, please select a way to login below. You can read more about them on the right hand side.</value>
@@ -136,6 +154,9 @@
   <data name="Navigation_DashboardHover" xml:space="preserve">
     <value>Dashboard</value>
     <comment>Text on Dashboard Button Hover</comment>
+  </data>
+  <data name="Navigation_ProgressionHover" xml:space="preserve">
+    <value>Progression</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
     <value>Settings</value>
@@ -157,8 +178,20 @@
     <value>Switch Profile</value>
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
+  <data name="Progression_Battlepass" xml:space="preserve">
+    <value>BATTLEPASS</value>
+  </data>
+  <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
+    <value>Current Tier: </value>
+  </data>
+  <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
+    <value>Language: </value>
+  </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
     <value>Select Language:</value>
+  </data>
+  <data name="SettingsGeneral_WindowSize" xml:space="preserve">
+    <value>Window Size:</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
     <value>About</value>

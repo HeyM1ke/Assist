@@ -117,17 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Authentication_2FactorPlaceholder" xml:space="preserve">
+    <value>コード</value>
+  </data>
+  <data name="Authentication_LoginBtn" xml:space="preserve">
+    <value>ログイン</value>
+  </data>
+  <data name="Authentication_MultifactorFail" xml:space="preserve">
+    <value>マルチファクターコードが正しくありません。</value>
+  </data>
+  <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Selecting Rito Login allows you to login to the riot website and then use Assist. Note: Google Login does not work.</value>
+    <value>Rito Loginを選択すると、riot Webサイトにログインして、Assistを使用できます。注：Googleログインは機能しません。</value>
+  </data>
+  <data name="Authentication_SubmitBtn" xml:space="preserve">
+    <value>参加する</value>
   </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
-    <value>Selecting Username and Password allows you to directly login with your Riot Games Username and Password.</value>
+    <value>ユーザー名とパスワードを選択すると、RiotGamesのユーザー名とパスワードで直接ログインできます。</value>
+  </data>
+  <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
+    <value>ユーザー名</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
-    <value>Welcome to Assist, please select a way to login below. You can read more about them on the right hand side.</value>
+    <value>アシストへようこそ。以下からログイン方法を選択してください。あなたは右側でそれらについてもっと読むことができます。</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
-    <value>WELCOME</value>
+    <value>ようこそ</value>
   </data>
   <data name="InitPage_Loading" xml:space="preserve">
     <value>読み込み中...</value>
@@ -157,8 +175,20 @@
     <value>プロファイルの切り替え</value>
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
+  <data name="Progression_Battlepass" xml:space="preserve">
+    <value>バトルパス</value>
+  </data>
+  <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
+    <value>現在のティア：</value>
+  </data>
+  <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
+    <value>言語：</value>
+  </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
     <value>言語を選択する:</value>
+  </data>
+  <data name="SettingsGeneral_WindowSize" xml:space="preserve">
+    <value>ウィンドウサイズ：</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
     <value>だいたい</value>
@@ -170,13 +200,13 @@
     <value>VALORANT 設定</value>
   </data>
   <data name="StorePopup_BackLabel" xml:space="preserve">
-    <value>BACK</value>
+    <value>戻る</value>
   </data>
   <data name="StorePopup_ChromaLabel" xml:space="preserve">
-    <value>CHROMAS</value>
+    <value>クロマス</value>
   </data>
   <data name="StorePopup_LevelsLabel" xml:space="preserve">
-    <value>LEVELS</value>
+    <value>レベル</value>
   </data>
   <data name="Store_FeaturedBundleLabel" xml:space="preserve">
     <value>注目のバンドル</value>
