@@ -16,9 +16,10 @@
       Background="{StaticResource AssistBackground}" Loaded="Profiles_Loaded">
 
     <Grid>
+        <Profile:DefaultProfile VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10" />
         <DockPanel>
             <WrapPanel x:Name="ProfilePanel" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center">
-                
+
             </WrapPanel>
 
         </DockPanel>
