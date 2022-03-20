@@ -92,7 +92,7 @@
                                 Content="/Resources/Icons/GeneralSlider_Icon.png"
                                 Tag="{x:Static lang:Lang.SettingsTab_General}" 
                                 Padding="0" Click="GeneralBTN_Click"/>
-                                <RadioButton x:Name="ValSetBTN" 
+                                <RadioButton Visibility="Collapsed" x:Name="ValSetBTN" 
                                     Height="50"
                                     Content="/Resources/Assist_Logo_White.png"
                                     Tag="{x:Static lang:Lang.SettingsTab_VALSet}"

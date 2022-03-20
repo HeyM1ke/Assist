@@ -13,7 +13,7 @@
       Height="576"
       d:DesignWidth="970"
       d:DesignHeight="576"
-      Title="ProgressionBattlepass">
+      Title="ProgressionBattlepass" Loaded="Battlepass_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,6 +27,11 @@
                        FontFamily="{StaticResource WorkSans}" FontWeight="Bold" FontSize="24"
                        Padding="10" ></Label>
                 <Progression:BattlepassConcurrentItem  DockPanel.Dock="top" VerticalAlignment="Top" Margin="0,0,0,00" Height="125" Width="465"/>
+                <ScrollViewer>
+                    <UniformGrid x:Name="BattlepassContainer" Columns="5" Margin="25,15,25,0"> 
+                        
+                    </UniformGrid>
+                </ScrollViewer>
             </DockPanel>
         </Grid>
 

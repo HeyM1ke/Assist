@@ -17,9 +17,11 @@
 
     <Grid>
         <DockPanel>
-            <Grid x:Name="LanguageSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
-                <Label Content="{x:Static lang:Lang.SettingsTab_About}" Foreground="White" HorizontalAlignment="Left"></Label>
-            </Grid>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="../../../../Resources/Assist_Logo_White.png" Width="200"/>
+                <Label Content="Assist Test Version 1.0.0.0T" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" FontWeight="Regular"/>
+                <Label Content="Created by M1ke (3/20/21)" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" Opacity=".5"/>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </Page>

@@ -138,7 +138,7 @@
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
-                        <RadioButton  Name="ProgressionBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="10" Content="/Resources/Icons/Progression_Icon.png" Click="ProgressionBTN_Click">
+                        <RadioButton Visibility="Collapsed" Name="ProgressionBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="10" Content="/Resources/Icons/Progression_Icon.png" Click="ProgressionBTN_Click">
                             <RadioButton.ToolTip>
                                 <ToolTip Placement="Right"
                                          Background="Transparent"

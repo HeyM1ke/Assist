@@ -23,6 +23,11 @@ namespace Assist.Controls
     public partial class AssistBattlepassItem : UserControl
     {
         public readonly BattlePassObj.RewardItem itemData;
+
+        public AssistBattlepassItem()
+        {
+            InitializeComponent();
+        }
         public AssistBattlepassItem(BattlePassObj.RewardItem data)
         {
             itemData = data;
