@@ -18,8 +18,7 @@ namespace Assist.Settings
         public string AssCAuth64 { get; set; }
         public int playerLevel { get; set; }
         public DateTime TimeOfLogin { get; set; }
-
-        public ProfileOptions ProfileOptions { get; set; } = new();
+        public string profileNote { get; set; }
 
         /// <summary>
         /// Converts Cookies within container to AssCAuth64 Format.

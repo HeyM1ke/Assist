@@ -42,7 +42,7 @@ namespace Assist.Controls.Profile
         private async void ProfileShowcase_Loaded(object sender, RoutedEventArgs e)
         {
 
-            NoteBox.Text = _viewModel.Profile.ProfileOptions.profileNote;
+            NoteBox.Text = _viewModel.Profile.profileNote;
             _viewModel.ProfileImage = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + _viewModel.Profile.PCID + "/smallart.png", 64, 64);
             _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 176, 72);
         }
@@ -66,7 +66,7 @@ namespace Assist.Controls.Profile
 
         private void NoteInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.UpdateProfileNote(((TextBox)sender).Text);
+            _viewModel.UpdateProfileNote(NoteBox.Text);
         }
     }
 }

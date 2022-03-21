@@ -48,7 +48,8 @@
 
                     <Grid>
                         <TextBox x:Name="NoteBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="176" Height="100"
-                                 Background="{StaticResource AssistNavigationButton_NotSelectedFill}" BorderThickness="0" Margin="5" TextChanged="NoteInput_TextChanged"></TextBox>
+                                 Background="{StaticResource AssistNavigationButton_NotSelectedFill}" BorderThickness="0" Margin="5" TextChanged="NoteInput_TextChanged"
+                                 Foreground="White" FontFamily="{StaticResource WorkSans}" Padding="5" HorizontalContentAlignment="Center"></TextBox>
                     </Grid>
                 </StackPanel>
 

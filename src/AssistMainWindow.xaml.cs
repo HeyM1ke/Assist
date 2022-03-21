@@ -160,7 +160,7 @@ namespace Assist
 
             Current.ContentFrame.Navigate(new Uri("/MVVM/View/Progression/Progression.xaml", UriKind.RelativeOrAbsolute));
         }
-        private void SettingsBTN_Click(object sender, RoutedEventArgs e)
+        public void SettingsBTN_Click(object sender, RoutedEventArgs e)
         {
             UncheckBtns();
             SettingsBTN.IsChecked = true;

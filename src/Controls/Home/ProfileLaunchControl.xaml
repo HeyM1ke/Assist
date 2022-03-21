@@ -71,7 +71,7 @@
                         <Button
                             Padding="5"
                             Width="28"
-                            Height="28" ToolTipService.InitialShowDelay="10">
+                            Height="28" ToolTipService.InitialShowDelay="10" Click="Switch_Click">
                             <Button.ToolTip>
                                 <ToolTip Placement="Right"
                                          Background="Transparent"

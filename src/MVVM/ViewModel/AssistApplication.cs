@@ -73,7 +73,7 @@ namespace Assist.MVVM.ViewModel
             temp.Visibility = Visibility.Hidden;
             Application.Current.MainWindow = new AssistMainWindow();
             Application.Current.MainWindow.Show();
-            AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Settings/Settings.xaml", UriKind.RelativeOrAbsolute));
+            AssistMainWindow.Current.SettingsBTN_Click(null, null);
             temp.Close();
         }
         public void OpenAccountLoginWindow(bool bAddProfile)

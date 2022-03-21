@@ -56,7 +56,7 @@ namespace Assist.Controls.Profile.ViewModel
 
         public void UpdateProfileNote(string message)
         {
-            this.Profile.ProfileOptions.profileNote = message;
+            this.Profile.profileNote = message;
         }
 
     }

@@ -69,5 +69,10 @@ namespace Assist.Controls.Home
             await _viewModel.LaunchGame();
         }
 
+        private void Switch_Click(object sender, RoutedEventArgs e)
+        {
+            AssistMainWindow.Current.UncheckBtns();
+            AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Profiles/Profiles.xaml", UriKind.RelativeOrAbsolute));
+        }
     }
 }
