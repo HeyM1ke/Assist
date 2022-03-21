@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assist.Controls.Extra;
 using Assist.Modules.Popup;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
@@ -73,6 +74,11 @@ namespace Assist.Controls.Home
         {
             AssistMainWindow.Current.UncheckBtns();
             AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Profiles/Profiles.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void LS_Click(object sender, RoutedEventArgs e)
+        {
+            PopupSystem.SpawnCustomPopup(new LaunchSettingsPopup());
         }
     }
 }

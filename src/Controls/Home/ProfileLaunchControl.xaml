@@ -194,7 +194,7 @@
                 <Button
                     Margin="-33,8,137,23"
                     Width="28"
-                    Height="28" ToolTipService.InitialShowDelay="10">
+                    Height="28" ToolTipService.InitialShowDelay="10" Click="LS_Click">
                     <Button.ToolTip>
                         <ToolTip Placement="Left"
                                  Background="Transparent"

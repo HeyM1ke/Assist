@@ -83,7 +83,7 @@ namespace AssistWPFTest.MVVM.ViewModel
             {
                 // Launch BG Client
                 ProcessStartInfo ASSBGINFO =
-                    new ProcessStartInfo(ASSBGCLIENTPATH, "--patchline:live --discord:true");
+                    new ProcessStartInfo(ASSBGCLIENTPATH, $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
                 Process.Start(ASSBGINFO);
 
                 Thread.Sleep(1000);
