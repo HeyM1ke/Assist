@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ using Assist.Modules.Popup;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
 using AssistWPFTest.MVVM.ViewModel;
+using ValNet;
 using ValNet.Objects;
 
 namespace Assist.Controls.Home
@@ -52,7 +54,6 @@ namespace Assist.Controls.Home
             });
 
             await AssistApplication.AppInstance.CreateAuthenticationFile();
-
             var worker = new BackgroundWorker();
             worker.DoWork += WorkerOnDoWork;
             worker.RunWorkerCompleted += WorkerOnRunWorkerCompleted;
@@ -67,5 +68,6 @@ namespace Assist.Controls.Home
             Thread.Sleep(1000);
             await _viewModel.LaunchGame();
         }
+
     }
 }

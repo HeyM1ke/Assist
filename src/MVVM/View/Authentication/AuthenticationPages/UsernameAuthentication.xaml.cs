@@ -39,6 +39,7 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
+            LoginBtn.IsEnabled = false;
             RiotLoginData loginData = new RiotLoginData()
             {
                 username = usernameBox.Text,
@@ -46,6 +47,7 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
             };
 
             await _viewModel.Login(loginData);
+            LoginBtn.IsEnabled = true;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using ValNet;
 using ValNet.Objects;
 
@@ -55,7 +56,7 @@ namespace Assist.Settings
 
         }
 
-        public async void SetupProfile(RiotUser pUser)
+        public async Task SetupProfile(RiotUser pUser)
         {
             await pUser.Inventory.GetPlayerInventory();
 

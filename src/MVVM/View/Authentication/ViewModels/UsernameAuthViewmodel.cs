@@ -24,8 +24,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
 
         public UsernameAuthViewmodel()
         {
-            if (instanceModel is null)
-                instanceModel = this;
+            instanceModel = this;
         }
 
 
@@ -64,7 +63,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
             };
 
             userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
-            userSettings.SetupProfile(user);
+            await userSettings.SetupProfile(user);
 
             if (UserSettings.Instance.DefaultAccount == null)
                 UserSettings.Instance.DefaultAccount = userSettings.ProfileUuid;
@@ -97,7 +96,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
                 };
 
                 userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
-                userSettings.SetupProfile(user);
+                await userSettings.SetupProfile(user);
 
                 AssistSettings.Current.Profiles.Add(userSettings);
                 AssistApplication.AppInstance.CurrentUser = user;

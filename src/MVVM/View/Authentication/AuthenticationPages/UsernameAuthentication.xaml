@@ -107,7 +107,7 @@
                 <Controls:TextBoxPlaceholder x:Name="usernameBox"  PlaceHolder="{x:Static lang:Lang.Authentication_UsernamePlaceholder}" Width="300" IsPassword="False" Margin="5"/>
                 <Controls:TextBoxPlaceholder x:Name="passwordBox" PlaceHolder="{x:Static lang:Lang.Authentication_PasswordPlaceholder}" Width="300" IsPassword="True" Margin="5"/>
                 <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Foreground="{StaticResource ValorantLightRed}" FontFamily="{StaticResource WorkSans}"></Label>
-                <Button Height="45" Width="150" Margin="10" Content="{x:Static lang:Lang.Authentication_LoginBtn}" Click="Login_Click"></Button>
+                <Button x:Name="LoginBtn" Height="45" Width="150" Margin="10" Content="{x:Static lang:Lang.Authentication_LoginBtn}" Click="Login_Click"></Button>
             </StackPanel>
         </Grid>
 
