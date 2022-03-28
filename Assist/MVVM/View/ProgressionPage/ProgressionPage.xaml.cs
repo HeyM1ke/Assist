@@ -28,7 +28,7 @@ namespace Assist.MVVM.View.ProgressionPage
 
         private void Battlepass_Btn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.MainWindowInstance.mainContentFrame.Navigate(new Uri("/MVVM/View/ProgressionPage/Sections/Progression_Battlepass.xaml", UriKind.RelativeOrAbsolute));
+            
         }
     }
 }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Progression"
              mc:Ignorable="d" 
-             d:DesignHeight="68" d:DesignWidth="68">
+             d:DesignHeight="88" d:DesignWidth="68">
     <UserControl.Resources>
         <Style TargetType="{x:Type Border}">
             
@@ -16,12 +16,16 @@
             <DropShadowEffect Opacity="0.2"/>
         </Border.Effect>
         <Grid>
-            <Image Source="{Binding RewardImage}" Stretch="Uniform" Width="58" Height="58"></Image>
-            <TextBox x:Name="TierLevel" Text="00" FontFamily="{StaticResource WorkSans}" Foreground="White" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Padding="3" HorizontalAlignment="Right">
-                <TextBox.Effect>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Image Source="{Binding RewardImage}"  Width="58" Height="58" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+            <Label Grid.Row="1" x:Name="TierLevel" Content="00" FontFamily="{StaticResource WorkSans}" Foreground="White" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Padding="3" HorizontalAlignment="Center">
+                <Label.Effect>
                     <DropShadowEffect Opacity="0.2"/>
-                </TextBox.Effect>
-            </TextBox>
+                </Label.Effect>
+            </Label>
         </Grid>
     </Border>
 </UserControl>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Progression"
              mc:Ignorable="d" 
-             d:DesignHeight="125" d:DesignWidth="465"
+             d:DesignHeight="125" d:DesignWidth="465" Loaded="BPConcurrent_Loaded"
              >
     <Border Background="{StaticResource AssistBackgroundLight}" CornerRadius="10">
         <Grid>
@@ -27,7 +27,7 @@
                             <Label Padding="0" Content="{Binding ContractTier}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Normal" FontSize="14"/>
                             <Label Padding="0" Content="{Binding ContractTierXp}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
                         </Grid>
-                        <ProgressBar Height="20" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" BorderThickness="2" BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}" Foreground="{StaticResource AssistNavigationButton_SelectedFill}" Value="20"></ProgressBar>
+                        <ProgressBar x:Name="ProgressionBar" Height="20" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" BorderThickness="2" BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}" Foreground="{StaticResource AssistNavigationButton_SelectedFill}" Value="{Binding Progression}"></ProgressBar>
                     </StackPanel>
                     
                 </Grid>

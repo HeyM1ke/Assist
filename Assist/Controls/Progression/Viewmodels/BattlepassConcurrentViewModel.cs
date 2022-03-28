@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Assist.MVVM.ViewModel;
 using AssistWPFTest.MVVM.ViewModel;
 
 namespace Assist.Controls.Progression.Viewmodels
 {
     internal class BattlepassConcurrentViewModel : ViewModelBase
     {
-        private BitmapImage _contractRewardImage = App.LoadImageUrl("https://cdn.rumblemike.com/PlayerCards/6a82ba95-436f-9d3c-8710-d3a9e09e8445_DisplayIcon.png").Result;
+        private BitmapImage _contractRewardImage;
 
         public BitmapImage ContractRewardImage
         {
@@ -18,16 +20,23 @@ namespace Assist.Controls.Progression.Viewmodels
             set => SetProperty(ref _contractRewardImage, value);
         }
 
-        private string _contractRewardName = "Poggers";
+        private string _contractRewardName = "Loading..";
         public string ContractRewardName
         {
             get => _contractRewardName;
             set => SetProperty(ref _contractRewardName, value);
         }
 
-        public string ContractTier => $"{Properties.Languages.Lang.Progression_Battlepass_CurrTier} {ContractTierNumber}";
+        public string _contractTier;
 
-        private int _contractTierNumber = 5;
+        public string ContractTier
+        {
+            get => _contractTier;
+            set => SetProperty(ref _contractTier, value);
+        }
+
+
+        private int _contractTierNumber;
 
         public int ContractTierNumber
         {
@@ -35,9 +44,15 @@ namespace Assist.Controls.Progression.Viewmodels
             set => SetProperty(ref _contractTierNumber, value);
         }
 
-        public string ContractTierXp => $"{CurrentXp}XP / {NeededXp}XP";
+        public string _ContractTierXp;
 
-        private int _currentXp = 400;
+        public string ContractTierXp
+        {
+            get => _ContractTierXp;
+            set => SetProperty(ref _ContractTierXp, value);
+        }
+
+        private int _currentXp;
 
         public int CurrentXp
         {
@@ -45,12 +60,42 @@ namespace Assist.Controls.Progression.Viewmodels
             set => SetProperty(ref _currentXp, value);
         }
 
-        private int _neededXp = 500;
+        private int _neededXp;
 
         public int NeededXp
         {
             get => _neededXp;
             set => SetProperty(ref _neededXp, value);
+        }
+
+        public double _progression;
+
+        public double Progression
+        {
+            get => _progression;
+            set => SetProperty(ref _progression, value);
+        }
+
+        public async void SetupControl()
+        {
+            
+            var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetCurrentBattlepass();
+            bpContract.ContractProgression.HighestRewardedLevel.TryGetValue("38715fd3-4575-c78e-bc13-d8b3cf1c7546", out var highestTier);
+            NeededXp = (highestTier * 750) + 2000;
+            ContractTierNumber = bpContract.ProgressionLevelReached;
+            CurrentXp = bpContract.ProgressionTowardsNextLevel;
+            ContractTierXp = $"{CurrentXp}XP / {NeededXp}XP";
+            ContractTier = $"{Properties.Languages.Lang.Progression_Battlepass_CurrTier} {ContractTierNumber+1}";
+            Progression = (((double)CurrentXp / NeededXp) * 100);
+
+            //Get Reward Information
+            var bpData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
+            var contactLevel = ContractTierNumber / 5;
+            var contactLevelTier = ContractTierNumber - (contactLevel * 5);
+            var itemData = bpData[contactLevel].itemsInChapter[contactLevelTier];
+            ContractRewardImage = await App.LoadImageUrl(itemData.imageUrl);
+            ContractRewardName = itemData.rewardName;
+            
         }
     }
 }
