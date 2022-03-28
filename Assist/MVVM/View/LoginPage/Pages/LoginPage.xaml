@@ -1,0 +1,163 @@
+﻿<Page xmlns:Controls="clr-namespace:Assist.Controls"  x:Class="Assist.MVVM.View.LoginPage.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Assist.MVVM.View.LoginPage.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="450"
+      Title="LoginPage">
+
+    <Page.Resources>
+        <Style x:Key="loginButton" TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Bahnschrift SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#ff4654"/>
+            <Setter Property="FontSize" Value="21"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="bd"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#b82d37"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="black"/>
+                                <Setter Property="Foreground" Value="Wheat"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="backButton" TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Bahnschrift SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#ff4654"/>
+            <Setter Property="FontSize" Value="21"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="bd"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#FF1F1F1F"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="black"/>
+                                <Setter Property="Foreground" Value="Wheat"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="LoginDataPlaceholderGrid" Grid.Column="1" Background="{StaticResource BackingBlack1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border Background="{StaticResource BackingBlack12}" CornerRadius="8"></Border>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="109"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="10,0,10,0" VerticalAlignment="Center" Width="300">
+                    <Label Grid.Row="0" Content="LOGIN" FontSize="30" Foreground="White" FontWeight="SemiBold" FontFamily="Bahnschrift SemiBold"></Label>
+                    <Rectangle Grid.Row="0" Fill="White" Height="5" StrokeThickness="0" ></Rectangle>
+                </StackPanel>
+                <Controls:TextBoxPlaceholder x:Name="usernameInput" Grid.Row="1" PlaceHolder="Username" Width="300" IsPassword="False" />
+                <Controls:TextBoxPlaceholder x:Name="passwordInput" Grid.Row="3" PlaceHolder="Password" Width="300" IsPassword="True"/>
+                <Grid Grid.Row="4" Margin="25,10,25,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="105"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource BackingBlack2}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                                <Grid>
+                                                    <Image Source="/Resources/backImage.png" Width="30" Height="30">
+                                                        <Image.Effect>
+                                                            <DropShadowEffect BlurRadius="5" Opacity="0.5"/>
+                                                        </Image.Effect>
+
+                                                    </Image>
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource BackingBlack3}"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="{StaticResource BackingBlack2}"/>
+                                        <Setter Property="Cursor" Value="Arrow"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
+                        <Button x:Name="BackBtn" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackBtn_Click">
+                            
+                        </Button>
+                        
+                        
+                    </Grid>
+                    <Button x:Name="LoginBTN" Content="LOGIN"
+                            Style="{StaticResource loginButton}" 
+                            Margin="0,2,0,0" 
+                            Grid.Column="1" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Right" 
+                            Height="40" 
+                            Width="120" Click="LoginBTN_Click"/>
+
+
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

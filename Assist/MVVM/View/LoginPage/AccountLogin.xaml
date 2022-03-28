@@ -1,0 +1,41 @@
+﻿<Window x:Class="Assist.AccountLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assist"
+        mc:Ignorable="d"
+        Title="Assist Login" Width="700" Height="425" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" MouseDown="windowBorder_MouseDown">
+            <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click" ></Button>
+        </Border>
+        <Grid Background="Transparent" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="ValorantImagePlaceholderGrid" Grid.Column="0" Background="#212326" >
+                    <Border>
+                        <Image Source="https://cdn.vox-cdn.com/thumbor/57iNIz-0ArqnU4xgCl_ZMcGK5SI=/1400x788/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/20014523/Jett.jpg" Stretch="UniformToFill" StretchDirection="Both" Width="250" HorizontalAlignment="Left">
+                            <Image.Effect>
+                                <BlurEffect Radius="20" RenderingBias="Performance"/>
+                            </Image.Effect>
+                        </Image>
+                    </Border>
+                    <Image Height="200" Source="https://i.imgur.com/672xs90.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Grid>
+
+                <Frame Name="loginFrame"  Grid.Column="1" Background="{StaticResource BackingBlack1}" NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+</Window>

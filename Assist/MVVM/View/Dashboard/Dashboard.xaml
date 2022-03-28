@@ -1,0 +1,27 @@
+﻿<Page x:Class="Assist.MVVM.View.Dashboard.Dashboard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Assist.MVVM.View.Dashboard"
+      xmlns:home="clr-namespace:Assist.Controls.Home"
+      Style="{StaticResource PageFadeIn}"
+      mc:Ignorable="d" 
+      MinWidth="970"
+      MinHeight="576"
+      Width="970"
+      Height="576"
+      d:DesignWidth="970"
+      d:DesignHeight="576"  
+      Title="Dashboard"
+      Background="{StaticResource AssistBackground}">
+
+    <Grid>
+        <DockPanel HorizontalAlignment="Left" Margin="18">
+            <StackPanel Width="731">
+                <home:ProfileLaunchControl/>
+                
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,23 @@
+﻿<Page xmlns:Controls="clr-namespace:Assist.Controls"  x:Class="Assist.MVVM.View.HomePage.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Assist.MVVM.View.HomePage"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1230"
+      Title="HomePage"
+      Style="{StaticResource ResourceKey=slideUp}">
+
+    <Grid Background="{StaticResource BackingBlack1}">
+
+        <Controls:AssistFeaturedControl HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20"/>
+        <Controls:AssistRankGraphMicro HorizontalAlignment="Right" VerticalAlignment="Top" Width="370" Height="210" Margin="20"/>
+        <ScrollViewer VerticalAlignment="Bottom" Margin="10" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Width="auto">
+            <StackPanel x:Name="StatusMessageStackPanel">
+
+            </StackPanel>
+        </ScrollViewer>
+        
+    </Grid>
+</Page>

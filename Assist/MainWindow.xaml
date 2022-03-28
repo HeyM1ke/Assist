@@ -1,0 +1,244 @@
+﻿<Window xmlns:Controls="clr-namespace:Assist.Controls"  x:Class="Assist.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assist"
+        mc:Ignorable="d"
+        Title="Assist" Height="775" Width="1300" WindowStartupLocation="CenterScreen" Background="Transparent" WindowStyle="None" ResizeMode="CanMinimize" Name="_this">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
+            <Grid>
+                <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click" ></Button>
+                <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0" ></Button>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Background="{StaticResource BackingBlack1}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MaxWidth="225"/>
+                <ColumnDefinition Width="1230" MaxWidth="1230"/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region navBar-->
+            <!--Navigation Bar-->
+            <Grid Grid.Column="0"
+                Background="{StaticResource BackingBlack12}" Name="NavBar" MouseEnter="NavBar_MouseEnter" MouseLeave="NavBar_MouseLeave">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" From="200" To="70" Duration="0:0:.15" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" From="70" To="200" Duration="0:0:.15" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+
+                </Grid.Style>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#282a2f"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Height" Value="60"/>
+                        <Setter Property="Foreground" Value="White"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate x:Name="btnControlTemp" TargetType="{x:Type Button}">
+                                    <Border CornerRadius="10" Background="{TemplateBinding Background}" Height="60">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="70"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Path Name="ButtonIcon"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Data="{StaticResource homeBTNIcon}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Width="23"/>
+
+                                            <TextBlock Grid.Column="1" 
+                                           Text="{TemplateBinding Content}"
+                                           TextWrapping="Wrap"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,0,0"
+                                           Foreground="White">
+
+                                            </TextBlock>
+
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#444444"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Background" Value="#313131"/>
+                            </Trigger>
+
+
+                        </Style.Triggers>
+                    </Style>
+                    <Style x:Key="navBTN" TargetType="{x:Type Label}">
+                        <Setter Property="Content" Value="{Binding ButtonText, Mode=TwoWay, ElementName=_this}"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                </Grid.Resources>
+
+
+                <Image Height="75" Source="https://i.imgur.com/672xs90.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <StackPanel x:Name="navContainer" HorizontalAlignment="Left" Width="200" Grid.Row="1">
+                    <Controls:AssistNavButton x:Name="navHomeBTN" ButtonText="Home" pathGeometry="{StaticResource homeBTNIcon}" ButtonClick="navHomeBTN_ButtonClick" />
+                    <Controls:AssistNavButton x:Name="navProgressBTN" ButtonText="Progression (BETA)" pathGeometry="{StaticResource progressionIcon}" ButtonClick="navProgressBTN_ButtonClick" />
+                    <Controls:AssistNavButton x:Name="navStoreBTN" ButtonText="Store" pathGeometry="{StaticResource shopIcon}" ButtonClick="navStoreBTN_ButtonClick" />
+                    <Controls:AssistNavButton x:Name="navSettingsBTN" ButtonText="Settings" pathGeometry="{StaticResource settingsIcon}" ButtonClick="navSettingsBTN_ButtonClick"/>
+                </StackPanel>
+                <Controls:AssistNavButton VerticalAlignment="Bottom" Grid.Row="1" Width="200" x:Name="navAccSwitchBTN" ButtonText="Switch Account" pathGeometry="{StaticResource switchAcc48}" ButtonClick="navAccSwitchBTN_ButtonClick"/>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="supportPanel" Visibility="Collapsed" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <StackPanel.Resources>
+                            <Style x:Key="socialButtonTwit" TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FF1F1F1F"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}"
+                                CornerRadius="50">
+                                                <Path Name="ButtonIcon"
+                                      Fill="White"
+                                      Data="{StaticResource ResourceKey=twitterLogo}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Width="12" Height="10" Stretch="UniformToFill"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="#FF1F1F1F"/>
+                                        <Setter Property="Cursor" Value="Arrow"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <Style x:Key="socialButtonDiscord" TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FF1F1F1F"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}"
+                                CornerRadius="50">
+                                                <Path Name="ButtonIcon"
+                                      Fill="White"
+                                      Data="{StaticResource ResourceKey=discordLogo}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Width="10" Height="11" Stretch="UniformToFill"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="#FF1F1F1F"/>
+                                        <Setter Property="Cursor" Value="Arrow"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <Style x:Key="socialButtonPat" TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FF1F1F1F"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}"
+                                CornerRadius="50">
+                                                <Path Name="ButtonIcon"
+                                      Fill="White"
+                                      Data="{StaticResource ResourceKey=patreonLogo}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Width="8" Height="8" Stretch="UniformToFill"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Background" Value="#FF1F1F1F"/>
+                                        <Setter Property="Cursor" Value="Arrow"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Resources>
+                        
+                        <Button Style="{StaticResource socialButtonTwit}" x:Name="socialButton1" Height="24" Width="24" Margin="5,0,5,0" Click="socialButton1_Click"/>
+                        <Button Style="{StaticResource socialButtonDiscord}" x:Name="socialButton2" Height="24" Width="24" Margin="5,0,5,0" Click="socialButton2_Click"/>
+                        <Button Style="{StaticResource socialButtonPat}" x:Name="socialButton3" Height="24" Width="24" Margin="5,0,5,0" Click="socialButton3_Click"/>
+                        
+                    </StackPanel>
+                    <TextBox Opacity="0.5" IsReadOnly="True" Grid.Row="1" Text="V1.0.7 EA" Foreground="White" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift SemiBold" BorderThickness="0" Margin="0,36,0,0"/>
+                </Grid>
+
+            </Grid>
+            <!--#endregion-->
+
+            <Frame x:Name="mainContentFrame" Grid.Column="1" Loaded="mainContentFrame_Loaded" NavigationUIVisibility="Hidden">
+            </Frame>
+
+
+        </Grid>
+
+       
+    </Grid>
+
+</Window>
