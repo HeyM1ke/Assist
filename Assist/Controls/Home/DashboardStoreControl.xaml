@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Assist.Controls.Home.DashboardStoreControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Assist.Controls.Home"
+             mc:Ignorable="d" 
+             MinWidth="704" MinHeight="265" Background="Transparent">
+    <Grid>
+            <!--Bundle Showcase-->
+        <Border x:Name="Background" CornerRadius="12" Height="155" Background="{StaticResource AssistBackgroundLight}">
+            <Border x:Name="mask" CornerRadius="12" Height="155">
+                <Grid>
+                    
+
+                    <Grid>
+                        <Image Source="https://pbs.twimg.com/media/FGga2SMXwAUi5Ii.jpg" Stretch="UniformToFill"></Image>
+                        <DockPanel>
+                            <Label x:Name="BundleNameLabel" Content="Loading.." FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"
+                       FontSize="48"/>
+                        </DockPanel>
+                    </Grid>
+
+
+                </Grid>
+
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>
