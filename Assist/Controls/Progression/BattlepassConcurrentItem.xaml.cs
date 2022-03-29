@@ -29,11 +29,5 @@ namespace Assist.Controls.Progression
             _viewModel.SetupControl();
             InitializeComponent();
         }
-
-        private async void BPConcurrent_Loaded(object sender, RoutedEventArgs e)
-        {
-           Trace.WriteLine(_viewModel.Progression);
-           Trace.WriteLine(ProgressionBar.Value);
-        }
     }
 }

@@ -20,8 +20,8 @@
                 <RowDefinition/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-            <Image Source="{Binding RewardImage}"  Width="58" Height="58" RenderOptions.BitmapScalingMode="HighQuality"></Image>
-            <Label Grid.Row="1" x:Name="TierLevel" Content="00" FontFamily="{StaticResource WorkSans}" Foreground="White" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Padding="3" HorizontalAlignment="Center">
+            <Image Source="{Binding RewardImage}" Margin="4" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+            <Label Grid.Row="1" x:Name="TierLevel" Content="{Binding TierNumber}" FontFamily="{StaticResource WorkSans}" Foreground="White" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Padding="3" HorizontalAlignment="Center">
                 <Label.Effect>
                     <DropShadowEffect Opacity="0.2"/>
                 </Label.Effect>

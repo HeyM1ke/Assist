@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Progression"
              mc:Ignorable="d" 
-             d:DesignHeight="125" d:DesignWidth="465" Loaded="BPConcurrent_Loaded"
+             d:DesignHeight="125" d:DesignWidth="465"
              >
     <Border Background="{StaticResource AssistBackgroundLight}" CornerRadius="10">
         <Grid>

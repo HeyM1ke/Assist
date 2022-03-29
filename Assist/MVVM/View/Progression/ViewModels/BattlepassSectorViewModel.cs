@@ -41,8 +41,7 @@ namespace Assist.MVVM.View.Progression.ViewModels
                     ItemContainer.Children.Add(new BattlepassItem(Item)
                     {
                         Margin = new Thickness(8, 6, 8, 6),
-                        Height = 88,
-                        Width = 68
+                        
                     });
                     tier++;
                 }
