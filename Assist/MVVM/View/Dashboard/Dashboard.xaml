@@ -20,7 +20,7 @@
         <DockPanel HorizontalAlignment="Left" Margin="18">
             <StackPanel Width="731">
                 <home:ProfileLaunchControl/>
-                
+                <home:DashboardStoreControl Margin="0,10"/>
             </StackPanel>
         </DockPanel>
     </Grid>
