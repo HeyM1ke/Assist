@@ -53,7 +53,7 @@ namespace Assist.Controls.Home.ViewModels
         private async Task SetupBundle(Bundle bundle)
         {
             var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(bundle.DataAssetID);
-            BundleImage = await App.LoadImageUrl(temp.bundleDisplayIcon,(int)(705 * AssistApplication.GlobalScaleRate) , (int)(344 * AssistApplication.GlobalScaleRate));
+            BundleImage = await App.LoadImageUrl(temp.bundleDisplayIcon,705 , 344);
             BundleName = temp.bundleDisplayName.ToUpper();
             BundlePrice = await GetBundlePrice(bundle);
         }

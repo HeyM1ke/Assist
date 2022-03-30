@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Assist.Controls.Home.ViewModels;
+using Assist.MVVM.ViewModel;
 
 namespace Assist.Controls.Home
 {
@@ -33,7 +34,6 @@ namespace Assist.Controls.Home
         {
             DataContext = _viewModel = new ItemControlViewModel();
             InitializeComponent();
-
             SetupControl(skinId);
         }
 
@@ -41,6 +41,11 @@ namespace Assist.Controls.Home
         {
             await _viewModel.SetupSkin(skinId);
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AssistMainWindow.Current.GoToStore();
         }
     }
 }

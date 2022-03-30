@@ -83,7 +83,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>
+                                
                                 <Setter TargetName="SkinImageContainer" Property="Width" Value="210"></Setter>
                                 <Setter TargetName="SkinImageContainer" Property="Height" Value="110"></Setter>
                             </Trigger>

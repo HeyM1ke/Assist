@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,11 +44,13 @@ namespace Assist.Controls.Home
         {
             for (int i = 0; i < _viewModel.StoreItemOffers.Count; i++)
             {
-                ItemsGrid.Children.Add(new DashboardItemControl(_viewModel.StoreItemOffers[i])
+                var item = new DashboardItemControl(_viewModel.StoreItemOffers[i])
                 {
                     Width = 170,
                     Height = 95
-                });
+                };
+
+                ItemsGrid.Children.Add(item);
                 
 
             }

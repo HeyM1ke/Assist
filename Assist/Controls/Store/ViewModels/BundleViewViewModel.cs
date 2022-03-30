@@ -13,8 +13,7 @@ namespace Assist.Controls.Store.ViewModels
 {
     internal class BundleViewViewModel : ViewModelBase
     {
-        private BitmapImage _bundleImage = App.LoadImageUrl("https://cdn.rumblemike.com/AssistHome.png", (int)(673 * AssistApplication.GlobalScaleRate),
-            (int)(328 * AssistApplication.GlobalScaleRate)).Result;
+        private BitmapImage _bundleImage = App.LoadImageUrl("https://cdn.rumblemike.com/AssistHome.png", 673, 328).Result;
         public BitmapImage BundleImage
         {
             get => _bundleImage;
@@ -58,7 +57,7 @@ namespace Assist.Controls.Store.ViewModels
             Bundle.DurationRemainingInSeconds += 10;
             var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(Bundle.DataAssetID);
             await StartCountdown();
-            this.BundleImage = await App.LoadImageUrl(temp.bundleDisplayIcon);
+            this.BundleImage = await App.LoadImageUrl(temp.bundleDisplayIcon, 673, 328);
             this.BundleName = temp.bundleDisplayName.ToUpper();
             this.BundlePrice = await GetBundlePrice(Bundle);
         }

@@ -11,12 +11,6 @@ namespace Assist.Controls.Home.ViewModels
 {
     internal class ItemControlViewModel : ViewModelBase
     {
-        private string _skinName = "Loading..";
-        public string SkinName
-        {
-            get => _skinName;
-            set => SetProperty(ref _skinName, value);
-        }
 
         private BitmapImage _skinImage;
         public BitmapImage SkinImage

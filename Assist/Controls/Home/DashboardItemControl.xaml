@@ -17,9 +17,7 @@
 
                                 <Border x:Name="Background" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{StaticResource StoreBorderColor}" BorderThickness="1"/>
                                 <Grid>
-                                    <Grid.OpacityMask>
-                                        <VisualBrush Visual="{Binding ElementName=Background}"></VisualBrush>
-                                    </Grid.OpacityMask>
+                                    
                                     
                                     <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="75" Width="150" Stretch="Uniform">
                                         <Image.RenderTransform>
@@ -51,7 +49,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Cursor" Value="Hand"/>
-                                <Setter TargetName="SkinImageContainer" Property="Width" Value="170"></Setter>
+                                <Setter TargetName="SkinImageContainer" Property="Width" Value="160"></Setter>
                                 <Setter TargetName="SkinImageContainer" Property="Height" Value="85"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -61,7 +59,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Button>
+    <Button Click="Button_Click">
 
     </Button>
 </UserControl>

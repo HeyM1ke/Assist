@@ -178,6 +178,17 @@ namespace Assist
 
             Current.ContentFrame.Navigate(new Uri("/MVVM/View/Profiles/Profiles.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        public void GoToStore()
+        {
+            UncheckBtns();
+            StoreBTN.IsChecked = true;
+
+            MemClear();
+            // Open Page
+
+            Current.ContentFrame.Navigate(new Uri("/MVVM/View/Store/Store.xaml", UriKind.RelativeOrAbsolute));
+        }
         #endregion
         private void MemClear()
         {
@@ -191,6 +202,7 @@ namespace Assist
         {
             ProfilePC.Content = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + AssistApplication.AppInstance.CurrentProfile.PCID + "/smallart.png",35,35);
         }
+
 
        
     }
