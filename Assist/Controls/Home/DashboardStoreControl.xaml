@@ -5,26 +5,45 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Home"
              mc:Ignorable="d" 
-             MinWidth="704" MinHeight="265" Background="Transparent">
+             MinWidth="704" MinHeight="265" Background="Transparent" Loaded="StoreControl_Loaded">
     <Grid>
-            <!--Bundle Showcase-->
-        <Border x:Name="Background" CornerRadius="12" Height="155" Background="{StaticResource AssistBackgroundLight}">
-            <Border x:Name="mask" CornerRadius="12" Height="155">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--Bundle Showcase-->
+        <Border x:Name="Background" CornerRadius="12" Height="155" Background="Wheat" VerticalAlignment="Top" BorderThickness="0">
+            <Grid>
+                <Border x:Name="mask" CornerRadius="12" Height="155" Background="{StaticResource AssistBackgroundLight}"/>
                 <Grid>
-                    
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=mask}"></VisualBrush>
+                    </Grid.OpacityMask>
+                    <Image Source="{Binding BundleImage}" Stretch="UniformToFill"/>
+                    <DockPanel>
 
-                    <Grid>
-                        <Image Source="https://pbs.twimg.com/media/FGga2SMXwAUi5Ii.jpg" Stretch="UniformToFill"></Image>
-                        <DockPanel>
-                            <Label x:Name="BundleNameLabel" Content="Loading.." FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"
-                       FontSize="48"/>
-                        </DockPanel>
-                    </Grid>
+                        <Label x:Name="BundleNameLabel" Content="{Binding BundleName}" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White" DockPanel.Dock="Top" VerticalAlignment="Top"
+                               FontSize="48">
 
+                            <Label.Effect>
+                                <DropShadowEffect BlurRadius="4" Opacity="0.25"/>
+                            </Label.Effect>
+                        </Label>
+                        <Border Width="111" Height="30" Background="#B2171C26" CornerRadius="4" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                            <Grid>
+                                <Image HorizontalAlignment="Left" Source="../../Resources/Icons/VP_Icon.png" Width="24" Margin="5,0,0,0"/>
+                                <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="{Binding BundlePrice}" Padding="5"
+                                       FontFamily="{StaticResource WorkSans}" FontWeight="Medium" Foreground="White" FontSize="12"></Label>
+                            </Grid>
 
+                        </Border>
+                    </DockPanel>
                 </Grid>
+            </Grid>
 
-            </Border>
         </Border>
+        <UniformGrid Name="ItemsGrid" Grid.Row="1" Columns="4" Rows="1" Margin="0,10,0,0" />
     </Grid>
 </UserControl>
+
+    

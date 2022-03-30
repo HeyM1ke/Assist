@@ -23,7 +23,7 @@ namespace Assist.Controls.Store
     /// </summary>
     public partial class BundleView : UserControl
     {
-        private BundleViewViewModel _viewModel;
+        private readonly BundleViewViewModel _viewModel;
 
         public BundleView()
         {
