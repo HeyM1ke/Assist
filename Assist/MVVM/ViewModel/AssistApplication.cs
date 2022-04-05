@@ -79,7 +79,7 @@ namespace Assist.MVVM.ViewModel
         public void OpenAccountLoginWindow(bool bAddProfile)
         {
             Application.Current.MainWindow.Visibility = Visibility.Hidden;
-            Authentication accLogin = new Authentication();
+            Authentication accLogin = new Authentication(bAddProfile);
             Application.Current.MainWindow.Close();
             accLogin.Show();
             Application.Current.MainWindow = accLogin;

@@ -6,26 +6,24 @@
       xmlns:local="clr-namespace:Assist.MVVM.View.Authentication.AuthenticationPages"
       xmlns:lang="clr-namespace:Assist.Properties.Languages"
       mc:Ignorable="d"
-      d:DesignWidth="1024"
-      d:DesignHeight="576"
-      Width="1280"
-      Height="720"
       MinWidth="1024"
       MinHeight="576"
-      MaxWidth="1280"
-      MaxHeight="720"
+      Width="1024"
+      Height="576"
+      d:DesignWidth="1024"
+      d:DesignHeight="576" 
       Style="{StaticResource PageFadeIn}"
       Title="InitialAuthentication">
 
     <Grid>
-        <Grid Height="300" Background="{StaticResource AssistBackgroundLight}">
+        <Grid Height="250" Background="{StaticResource AssistBackgroundLight}">
             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid x:Name="Login" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Left">
                     <StackPanel>
-                        <Image Source="../../../../Assist_Logo_White.png" Width="60"></Image>
+                        <Image Source="../../../../Assist_Logo_White.png" Width="50"></Image>
                         <Label Content="{x:Static lang:Lang.Authentication_WelcomeLabel}" Foreground="White"
                                FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold"
-                               FontSize="36" Padding="0" 
+                               FontSize="28" Padding="0" 
                                HorizontalContentAlignment="Center"></Label>
                         <TextBox Background="Transparent" Foreground="White" IsReadOnly="True" BorderThickness="0"
                                      Text="{x:Static lang:Lang.Authentication_WelcomeInfoLabel}" TextWrapping="WrapWithOverflow"
@@ -75,8 +73,8 @@
                                 </Style>
                             </UniformGrid.Resources>
 
-                            <Button x:Name="UsernameBTN" Width="60" Height="60" Content="../../../../Resources/Icons/Profile_Icon.png" Click="UsernameBTN_Click"/>
-                            <Button x:Name="RitoBTN" Width="60" Height="60" Content="../../../../Resources/Icons/Fist_Icon.png" Click="RitoBTN_Click"/>
+                            <Button x:Name="UsernameBTN" Width="50" Height="50" Content="../../../../Resources/Icons/Profile_Icon.png" Click="UsernameBTN_Click"/>
+                            <Button x:Name="RitoBTN" Width="50" Height="50" Content="../../../../Resources/Icons/Fist_Icon.png" Click="RitoBTN_Click"/>
                         </UniformGrid>
                     </StackPanel>
                 </Grid>

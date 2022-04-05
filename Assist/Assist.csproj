@@ -75,6 +75,7 @@
     <None Remove="Resources\Icons\Switch.png" />
     <None Remove="Resources\Icons\Timer_Icon.png" />
     <None Remove="Resources\Icons\VP_Icon.png" />
+    <None Remove="Resources\Other\InitBacking.png" />
     <None Remove="Resources\person_icon.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
@@ -215,6 +216,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Icons\VP_Icon.png" />
+    <Resource Include="Resources\Other\InitBacking.png" />
     <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />
   </ItemGroup>
 

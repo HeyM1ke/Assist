@@ -22,22 +22,36 @@
             <RowDefinition/>
             <RowDefinition Height="23"/>
         </Grid.RowDefinitions>
+        <Image Source="../../../Resources/Other/InitBacking.png" Stretch="UniformToFill">
+            <Image.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Offset="1" Color="Black"></GradientStop>
+                    <GradientStop Offset="0" Color="Transparent"></GradientStop>
+                </LinearGradientBrush>
+            </Image.OpacityMask>
+
+        </Image>
         <DockPanel>
             <Image DockPanel.Dock="Left" Source="../../../Resources/Icons/Assist_Logo_SweetRed.png" VerticalAlignment="Center" HorizontalAlignment="Left" Height="150" RenderOptions.BitmapScalingMode="HighQuality" Margin="20,0">
 
             </Image>
-            <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
-                <Label Padding="2" Content="Assist" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" FontSize="32" Foreground="White" Opacity=".9" Width="auto">
-                    <Label.Effect>
-                        <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
-                    </Label.Effect>
-                </Label>
-                <Label Padding="2" Content="V1.0.0.0" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" FontSize="18" Foreground="White" Opacity=".9" Width="auto">
-                    <Label.Effect>
-                        <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
-                    </Label.Effect>
-                </Label>
-            </StackPanel>
+            <Grid DockPanel.Dock="Left">
+
+                
+                <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
+                    <Label Padding="2" Content="Assist" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" FontSize="32" Foreground="White" Opacity=".9" Width="auto">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
+                        </Label.Effect>
+                    </Label>
+                    <Label Padding="2" Content="V1.0.0.0" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" FontSize="18" Foreground="White" Opacity=".9" Width="auto">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
+                        </Label.Effect>
+                    </Label>
+
+                </StackPanel>
+            </Grid>
         </DockPanel>
 
         <Grid Grid.Row="1"  Height="25" Background="{StaticResource AssistNavigationBar}" VerticalAlignment="Bottom">
@@ -48,5 +62,6 @@
             </Label>
         </Grid>
         
+
     </Grid>
 </Window>

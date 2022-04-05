@@ -18,8 +18,12 @@
         ResizeMode="CanMinimize"
         Background="{StaticResource AssistBackground}"
         AllowsTransparency="True"
-        SizeChanged="MainWindow_SizeChanged" Loaded="MainWindow_Loaded" >
-
+        SizeChanged="MainWindow_SizeChanged" Loaded="MainWindow_Loaded" Name="Assist" >
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>

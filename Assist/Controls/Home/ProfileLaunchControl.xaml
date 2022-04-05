@@ -124,7 +124,7 @@
                             <Setter.Value>
                                 <ControlTemplate>
                                     <Border
-                                        CornerRadius="4"
+                                        CornerRadius="0"
                                         Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="1">

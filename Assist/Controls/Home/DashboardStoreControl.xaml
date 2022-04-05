@@ -16,10 +16,9 @@
             <Grid>
                 <Border x:Name="mask" CornerRadius="0" Height="155" Background="{StaticResource AssistBackgroundLight}" BorderBrush="{StaticResource ShopBorderColorNormal}" BorderThickness="2"/>
                 <Grid>
-                    <Grid.OpacityMask>
-                        <VisualBrush Visual="{Binding ElementName=mask}"></VisualBrush>
-                    </Grid.OpacityMask>
+                    
                     <Image Source="{Binding BundleImage}" Stretch="UniformToFill"/>
+                    <Border x:Name="BorderOverlay" CornerRadius="0" Height="155" BorderBrush="{StaticResource ShopBorderColorNormal}" BorderThickness="2"/>
                     <DockPanel>
 
                         <Label x:Name="BundleNameLabel" Content="{Binding BundleName}" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White" DockPanel.Dock="Top" VerticalAlignment="Top"

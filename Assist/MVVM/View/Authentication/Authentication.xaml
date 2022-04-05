@@ -9,8 +9,8 @@
         mc:Ignorable="d"
         d:DesignWidth="1024"
         d:DesignHeight="601"
-        Width="1280"
-        Height="745"
+        Width="1024"
+        Height="601"
         MinWidth="1024"
         MinHeight="601"
         MaxWidth="1280"
@@ -34,8 +34,8 @@
             </Grid>
         </Border>
 
-        <Image Grid.Row="1" Name="Loading" gif:ImageBehavior.RepeatBehavior="0x" gif:ImageBehavior.AnimatedSource="../../../Resources/Icons/Loading.gif"  Height="70" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Grid Grid.Row="1">
+        
+        <Grid Name="myCanvas" Grid.Row="1">
             <Frame x:Name="LoginFrame" NavigationUIVisibility="Hidden"></Frame>
         </Grid>
     </Grid>

@@ -46,9 +46,7 @@
                                     </StackPanel>
 
                                     <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="100" Width="150" Stretch="Uniform">
-                                        <Image.Effect>
-                                            <DropShadowEffect Opacity="0.5"></DropShadowEffect>
-                                        </Image.Effect>
+                                        
                                     </Image>
 
                                     <StackPanel VerticalAlignment="Bottom">
@@ -70,6 +68,7 @@
                                 <Setter Property="BorderBrush" Value="#eb1e67"/>
                                 <Setter TargetName="SkinImageContainer" Property="Width" Value="160"></Setter>
                                 <Setter TargetName="SkinImageContainer" Property="Height" Value="110"></Setter>
+
                                 
                             </Trigger>
                         </ControlTemplate.Triggers>

@@ -46,7 +46,7 @@
 
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="false">
-                                                        <Setter Property="Background" Value="{StaticResource AssistBackground}"/>
+                                                        <Setter Property="Background" Value="{StaticResource SettingsNavigationBar}"/>
                                                         <Setter Property="Cursor" Value="Arrow"/>
                                                     </Trigger>
                                                     <Trigger Property="IsMouseOver" Value="true">
@@ -82,7 +82,7 @@
                             Width="200"
                             HorizontalAlignment="Left"
                             DockPanel.Dock="Left"
-                            Background="{StaticResource AssistBackground}"
+                            Background="{StaticResource SettingsNavigationBar}"
                         >
 
 

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Assist.Controls.Profile"
              mc:Ignorable="d" 
              d:DesignHeight="65" d:DesignWidth="300" Loaded="DefaultAcc_Loaded">
-    <Border Width="300" Height="65" Background="{StaticResource AssistBackgroundLight}" CornerRadius="5">
+    <Border Width="300" Height="65" Background="{StaticResource AssistNavigationBar}" CornerRadius="5">
         <Grid>
             <Grid.Resources>
                 <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">

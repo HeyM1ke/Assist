@@ -33,7 +33,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
-                    <Label Margin="10,0,0,0" Content="{x:Static lang:Lang.Store_FeaturedBundleLabel}" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" FontSize="18"></Label>
+                    <Label Margin="10,0,0,5" Content="{x:Static lang:Lang.Store_FeaturedBundleLabel}" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" FontSize="18" Padding="0"></Label>
                     <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
 
                         <Grid x:Name="BundleView"  Height="344" Width="688" VerticalAlignment="Top"></Grid>
@@ -48,9 +48,9 @@
 
             <StackPanel Grid.Row="1" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <Label Margin="10,0,0,0" Content="{x:Static lang:Lang.Store_FeaturedDailyLabel}" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" FontSize="18"></Label>
-                    <Image Source="../../../Resources/Icons/Timer_Icon.png" Width="15" Margin="10,0,3,0"></Image>
-                    <Label x:Name="DailyTimeRemaining" Content="{Binding TimeRemaining}" Padding="0" VerticalContentAlignment="Center" Foreground="White" FontFamily="{StaticResource WorkSans}" FontStyle="Italic">
+                    <Label Margin="10,0,10,5" Content="{x:Static lang:Lang.Store_FeaturedDailyLabel}" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" FontSize="18" Padding="0" VerticalContentAlignment="Center"></Label>
+                    <Image Source="../../../Resources/Icons/Timer_Icon.png" Width="15" Margin="10,0,3,0" Visibility="Collapsed"></Image>
+                    <Label x:Name="DailyTimeRemaining" Content="{Binding TimeRemaining}" Padding="0,0,0,4" VerticalContentAlignment="Center" Foreground="White" FontFamily="{StaticResource WorkSans}" FontStyle="Italic">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="4" Opacity="0.25"/>
                         </Label.Effect>
