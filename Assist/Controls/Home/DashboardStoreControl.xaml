@@ -12,14 +12,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--Bundle Showcase-->
-        <Border x:Name="Background" CornerRadius="12" Height="155" Background="Wheat" VerticalAlignment="Top" BorderThickness="0">
+        <Border x:Name="Background" CornerRadius="12" Height="155" VerticalAlignment="Top" BorderThickness="0">
             <Grid>
-                <Border x:Name="mask" CornerRadius="12" Height="155" Background="{StaticResource AssistBackgroundLight}"/>
+                <Border x:Name="mask" CornerRadius="0" Height="155" Background="{StaticResource AssistBackgroundLight}" BorderBrush="{StaticResource ShopBorderColorNormal}" BorderThickness="2"/>
                 <Grid>
-                    <Grid.OpacityMask>
-                        <VisualBrush Visual="{Binding ElementName=mask}"></VisualBrush>
-                    </Grid.OpacityMask>
+                    
                     <Image Source="{Binding BundleImage}" Stretch="UniformToFill"/>
+                    <Border x:Name="BorderOverlay" CornerRadius="0" Height="155" BorderBrush="{StaticResource ShopBorderColorNormal}" BorderThickness="2"/>
                     <DockPanel>
 
                         <Label x:Name="BundleNameLabel" Content="{Binding BundleName}" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White" DockPanel.Dock="Top" VerticalAlignment="Top"
@@ -31,7 +30,7 @@
                         </Label>
                         <Border Width="111" Height="30" Background="#B2171C26" CornerRadius="4" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                             <Grid>
-                                <Image HorizontalAlignment="Left" Source="../../Resources/Icons/VP_Icon.png" Width="24" Margin="5,0,0,0"/>
+                                <Image HorizontalAlignment="Left" Source="../../Resources/Icons/VP_Icon.png" Width="18" Margin="5,0,0,0"/>
                                 <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="{Binding BundlePrice}" Padding="5"
                                        FontFamily="{StaticResource WorkSans}" FontWeight="Medium" Foreground="White" FontSize="12"></Label>
                             </Grid>

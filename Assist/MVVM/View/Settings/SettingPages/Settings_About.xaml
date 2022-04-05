@@ -18,7 +18,7 @@
     <Grid>
         <DockPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image Source="../../../../Resources/Assist_Logo_White.png" Width="200"/>
+                <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed.png" Width="200"/>
                 <Label Content="Assist Test Version 1.0.0.0T" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" FontWeight="Regular"/>
                 <Label Content="Created by M1ke (3/20/21)" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" Opacity=".5"/>
                 
@@ -26,6 +26,6 @@
             
         </DockPanel>
         <TextBox Text="Assist was created under Riot Games' &quot;Legal Jibber Jabber&quot; policy using assets owned by Riot Games.
-Riot Games does not endorse or sponsor this project." FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity=".5" Background="Transparent" TextWrapping="WrapWithOverflow" HorizontalContentAlignment="Center" BorderBrush="Transparent" Margin="10,20" IsReadOnly="True"/>
+Riot Games does not endorse or sponsor this project." IsHitTestVisible="False" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity=".5" Background="Transparent" TextWrapping="WrapWithOverflow" HorizontalContentAlignment="Center" BorderBrush="Transparent" Margin="10,20" IsReadOnly="True"/>
     </Grid>
 </Page>

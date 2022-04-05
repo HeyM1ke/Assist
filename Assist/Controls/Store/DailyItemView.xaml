@@ -6,22 +6,24 @@
              xmlns:local="clr-namespace:Assist.Controls.Store"
              mc:Ignorable="d" 
              d:DesignHeight="120" d:DesignWidth="220" Background="Transparent"
+             MinHeight="120" MinWidth="220"
              >
 
     <UserControl.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"></Setter>
+            <Setter Property="BorderBrush" Value="{StaticResource ShopBorderColorNormal}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="d" CornerRadius="5">
+                        <Border x:Name="d" CornerRadius="0">
                             <Border.Resources>
                                 
                             </Border.Resources>
                             
                             <Grid>
-
-                                <Border x:Name="Background" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{StaticResource StoreBorderColor}" BorderThickness="1">
+                                
+                                <Border x:Name="Background" CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
 
                                 </Border>
                                 <Grid>
@@ -43,33 +45,13 @@
                                         </Image>
                                     </StackPanel>
 
-                                    <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="100" Width="200" Stretch="Uniform">
-                                        <Image.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                                <SkewTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.RenderTransform>
-                                        <Image.LayoutTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="8"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.LayoutTransform>
-                                        <Image.OpacityMask>
-                                            <VisualBrush Visual="{Binding ElementName=Background}"></VisualBrush>
-                                        </Image.OpacityMask>
-                                        <Image.Effect>
-                                            <DropShadowEffect Opacity="0.5"></DropShadowEffect>
-                                        </Image.Effect>
+                                    <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="100" Width="150" Stretch="Uniform">
+                                        
                                     </Image>
 
                                     <StackPanel VerticalAlignment="Bottom">
 
-                                        <Label Padding="3" Margin="2" Content="{Binding SkinName}" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" FontSize="12">
+                                        <Label Padding="3" Margin="2" Content="{Binding SkinName}" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" FontSize="9" HorizontalContentAlignment="Center">
                                             <Label.Effect>
                                                 <DropShadowEffect BlurRadius="4" Opacity="0.6" ShadowDepth="2"></DropShadowEffect>
                                             </Label.Effect>
@@ -78,14 +60,16 @@
                                     </StackPanel>
 
                                 </Grid>
-
+                                <Rectangle Fill="{StaticResource ShopBorderColorAccent}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                
-                                <Setter TargetName="SkinImageContainer" Property="Width" Value="210"></Setter>
+                                <Setter Property="BorderBrush" Value="#eb1e67"/>
+                                <Setter TargetName="SkinImageContainer" Property="Width" Value="160"></Setter>
                                 <Setter TargetName="SkinImageContainer" Property="Height" Value="110"></Setter>
+
+                                
                             </Trigger>
                         </ControlTemplate.Triggers>
 

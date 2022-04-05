@@ -8,41 +8,21 @@
              d:DesignHeight="95" d:DesignWidth="170">
     <UserControl.Resources>
         <Style TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"></Setter>
+            <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"></Setter>
+            <Setter Property="BorderBrush" Value="{StaticResource ShopBorderColorNormal}"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="BaseBacking" CornerRadius="5">
+                        <Border x:Name="BaseBacking" CornerRadius="0">
                             <Grid>
 
-                                <Border x:Name="Background" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{StaticResource StoreBorderColor}" BorderThickness="1"/>
+                                <Border x:Name="Background" CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1"/>
                                 <Grid>
                                     
                                     
-                                    <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="75" Width="150" Stretch="Uniform">
-                                        <Image.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                                <SkewTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.RenderTransform>
-                                        <Image.LayoutTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform/>
-                                                <SkewTransform/>
-                                                <RotateTransform Angle="8"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Image.LayoutTransform>
-                                        <Image.OpacityMask>
-                                            <VisualBrush Visual="{Binding ElementName=Background}"></VisualBrush>
-                                        </Image.OpacityMask>
-                                        <Image.Effect>
-                                            <DropShadowEffect Opacity="0.5"></DropShadowEffect>
-                                        </Image.Effect>
-                                    </Image>
+                                    <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="75" Width="150" Stretch="Uniform"/>
                                 </Grid>
+                                <Rectangle Fill="{StaticResource ShopBorderColorAccent}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
                             </Grid>
                         </Border>
 
