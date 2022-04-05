@@ -113,6 +113,12 @@
             </DockPanel>
         </Grid>
 
-        <Grid Column="1" Name="ContentGrid" Background="{StaticResource AssistBackground}"></Grid>
+        <Grid Column="1" Name="ContentGrid" Background="{StaticResource AssistBackground}">
+            <StackPanel>
+                <Image Source="{Binding ShowcaseImage}"></Image>
+                <Label Foreground="White" FontFamily="{StaticResource WorkSans}" Content="{Binding ShowcaseName}" FontSize="36"></Label>
+                <Label Foreground="White" FontFamily="{StaticResource WorkSans}" Content="{Binding ShowcaseTier}" FontSize="36"></Label>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
