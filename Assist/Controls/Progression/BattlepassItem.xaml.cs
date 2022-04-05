@@ -74,5 +74,11 @@ namespace Assist.Controls.Progression
 
             _viewModel.LoadItem();
         }
+
+
+        public async Task<BattlePassObj.RewardItem> GetItem()
+        {
+            return _viewModel.Reward;
+        }
     }
 }

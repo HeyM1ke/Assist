@@ -10,7 +10,7 @@ using AssistWPFTest.MVVM.ViewModel;
 
 namespace Assist.Controls.Progression.Viewmodels
 {
-    internal class BattlepassItemViewModel : ViewModelBase
+    public class BattlepassItemViewModel : ViewModelBase
     {
         private int _tierNumber = 00;
 
