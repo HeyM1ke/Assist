@@ -23,6 +23,38 @@ namespace Assist.Controls.Progression
     public partial class BattlepassItem : UserControl
     {
         private BattlepassItemViewModel _viewModel;
+
+        public bool bIsEarned
+        {
+            get { return (bool)GetValue(bIsEarnedProperty); }
+            set { SetValue(bIsEarnedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for isEarned.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty bIsEarnedProperty =
+            DependencyProperty.Register("bIsEarned", typeof(bool), typeof(BattlepassItem));
+
+
+        public bool bIsSelected
+        {
+            get { return (bool)GetValue(bIsSelectedProperty); }
+            set { SetValue(bIsSelectedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for bIsSelected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty bIsSelectedProperty =
+            DependencyProperty.Register("bIsSelected", typeof(bool), typeof(BattlepassItem));
+
+        public bool bCurrentItem
+        {
+            get { return (bool)GetValue(bCurrentItemProperty); }
+            set { SetValue(bCurrentItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for bCurrentItem.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty bCurrentItemProperty =
+            DependencyProperty.Register("bCurrentItem", typeof(bool), typeof(BattlepassItem));
+
         public BattlepassItem()
         {
             InitializeComponent();
@@ -33,6 +65,12 @@ namespace Assist.Controls.Progression
             DataContext = _viewModel = new BattlepassItemViewModel();
             _viewModel.Reward = item;
             InitializeComponent();
+
+            if (bIsEarned)
+                earnedImage.Opacity = .2;
+
+            
+
             _viewModel.LoadItem();
         }
     }
