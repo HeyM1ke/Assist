@@ -39,7 +39,7 @@
             <!-- Navigation -->
             <DockPanel>
                 <DockPanel Background="{StaticResource AssistNavigationBar}" HorizontalAlignment="Left" Width="54"  RenderOptions.BitmapScalingMode="HighQuality">
-                <Image Width="42" Height="42" DockPanel.Dock="Top" Source="Resources/Icons/Assist_Logo_SweetRed.png" Margin="4" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Image Width="38" Height="38" DockPanel.Dock="Top" Source="Resources/Icons/Assist_Logo_SweetRed.png" Margin="7" RenderOptions.BitmapScalingMode="HighQuality"/>
                 <ScrollViewer DockPanel.Dock="Top" Background="{StaticResource AssistNavigationBar}" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Margin="0,40,0,0">
                     <ScrollViewer.Resources>
                             <Style TargetType="{x:Type RadioButton}">

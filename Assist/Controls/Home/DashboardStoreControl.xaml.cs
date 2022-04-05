@@ -46,8 +46,7 @@ namespace Assist.Controls.Home
             {
                 var item = new DashboardItemControl(_viewModel.StoreItemOffers[i])
                 {
-                    Width = 170,
-                    Height = 95
+                    Margin = new Thickness(1,0,1,0)
                 };
 
                 ItemsGrid.Children.Add(item);

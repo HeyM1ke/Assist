@@ -144,6 +144,21 @@
         </LinearGradientBrush>
 
 
+        <!-- Dashboard -->
+        <SolidColorBrush x:Key="ProfileLaunchLevel_Fill" Color="#54F61E51"/>
+        <SolidColorBrush x:Key="ProfileLaunchLevel_Outline" Color="#F61E51"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchButton_Fill" Color="#17181D"/>
+        <SolidColorBrush x:Key="ProfileLaunchButton_Outline" Color="#232731"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchButton_SelectedFill" Color="#54F61E51"/>
+        <SolidColorBrush x:Key="ProfileLaunchButton_SelectedOutline" Color="#F61E51"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_SelectedFill" Color="#54F61E51"/>
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_SelectedOutline" Color="#F61E51"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_HoverHighlightFill" Color="#33EA1842"></SolidColorBrush>
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_HoverHighlightOutline" Color="#FFF12E54"/>
 
         <!-- Color Redesign -->
         <SolidColorBrush x:Key="AssistBackground" Color="#17181D"/>
