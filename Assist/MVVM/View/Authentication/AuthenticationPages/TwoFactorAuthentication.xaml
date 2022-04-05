@@ -7,19 +7,17 @@
       xmlns:lang="clr-namespace:Assist.Properties.Languages"
       xmlns:controls="clr-namespace:Assist.Controls"
       mc:Ignorable="d"
-      d:DesignWidth="1024"
-      d:DesignHeight="576"
-      Width="1280"
-      Height="720"
       MinWidth="1024"
       MinHeight="576"
-      MaxWidth="1280"
-      MaxHeight="720"
+      Width="1024"
+      Height="576"
+      d:DesignWidth="1024"
+      d:DesignHeight="576"
       Style="{StaticResource PageFadeIn}"
       Title="TwoFactorAuthentication">
 
     <Grid Background="{StaticResource AssistBackground}">
-        <Grid Height="300" Background="{StaticResource AssistBackgroundLight}">
+        <Grid Height="250" Background="{StaticResource AssistBackgroundLight}">
 
             <StackPanel VerticalAlignment="Center">
                 <StackPanel.Resources>
@@ -66,7 +64,7 @@
                 <Image Source="../../../../Assist_Logo_White.png" Width="60"></Image>
                 <controls:TextBoxPlaceholder x:Name="CodeBox"  PlaceHolder="{x:Static lang:Lang.Authentication_2FactorPlaceholder}" Width="300" IsPassword="False" Margin="5"/>
                 <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Foreground="{StaticResource ValorantLightRed}" FontFamily="{StaticResource WorkSans}"></Label>
-                <Button Height="45" Width="150" Margin="10" Click="Submit_Btn"></Button>
+                <Button x:Name="SubmitCode" Height="45" Width="140" Margin="10" Click="Submit_Btn"></Button>
             </StackPanel>
         </Grid>
 

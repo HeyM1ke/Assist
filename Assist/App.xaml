@@ -84,19 +84,14 @@
 
 
         <!-- Color Resources -->
-        <SolidColorBrush x:Key="AssistNavigationBar" Color="#242B3B"/>
-        <SolidColorBrush x:Key="AssistBackgroundLight" Color="#242B3B"></SolidColorBrush>
+        
+        <SolidColorBrush x:Key="AssistBackgroundLight" Color="#0f1115"></SolidColorBrush>
         <SolidColorBrush x:Key="AssistBackgroundSuperLight" Color="#364159"></SolidColorBrush>
-        <SolidColorBrush x:Key="AssistBackground2" Color="#0F131A"></SolidColorBrush>
-        <SolidColorBrush x:Key="AssistBackground" Color="#171C26"/>
-        <SolidColorBrush x:Key="AssistNavigationButton_SelectedFill" Color="#33CF1439"/>
-        <SolidColorBrush x:Key="AssistNavigationButton_SelectedOutline" Color="#CF1439"/>
-
-        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedFill" Color="#33414958"/>
-        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedOutline" Color="#33111822"/>
+        
 
         <SolidColorBrush x:Key="AssistNavigationButton_SelectedHighlightFill" Color="#33EA1842"></SolidColorBrush>
         <SolidColorBrush x:Key="AssistNavigationButton_SelectedHighlightOutline" Color="#FFF12E54"/>
+        
 
         <SolidColorBrush x:Key="StoreBorderColor" Color="#FFF"></SolidColorBrush>
 
@@ -116,8 +111,6 @@
         <SolidColorBrush x:Key="ValGray" Color="#464646"/>
         <SolidColorBrush x:Key="AssistScreenBackingColor" Color="#FF181B27"/>
 
-        <SolidColorBrush x:Key="RiotGamesRed" Color="#D32936"/>
-
         <SolidColorBrush x:Key="BackingBlack" Color="#000000"/>
         <SolidColorBrush x:Key="BackingBlack1" Color="#191919"/>
         <SolidColorBrush x:Key="BackingBlack12" Color="#202020"/>
@@ -127,13 +120,7 @@
         <SolidColorBrush x:Key="BackingBlack3" Color="#666666"/>
         <SolidColorBrush x:Key="BackingBlack4" Color="#999999"/>
 
-        <!-- Fonts -->
-        <FontFamily x:Key="Black" >/Fonts/#Montserrat</FontFamily>
-        <FontFamily x:Key="Ding" >/Fonts/#DINNextW1G</FontFamily>
-        <FontFamily x:Key="Bold" >/Fonts/#ding</FontFamily>
-        <!-- Colors-->
-        <Color x:Key="ValorantRedColor">#ff4655</Color>
-        <Color x:Key="HighlightColor">#FFFFB6BC</Color>
+        
 
 
         <!-- Content Tier Colors -->
@@ -155,5 +142,50 @@
             <GradientStop Color="#008F77" Offset="0"/>
             <GradientStop Color="#FF267468" Offset="1"/>
         </LinearGradientBrush>
+
+
+        <!-- Dashboard -->
+        <SolidColorBrush x:Key="ProfileLaunchLevel_Fill" Color="#54F61E51"/>
+        <SolidColorBrush x:Key="ProfileLaunchLevel_Outline" Color="#F61E51"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchButton_Fill" Color="#17181D"/>
+        <SolidColorBrush x:Key="ProfileLaunchButton_Outline" Color="#232731"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchButton_SelectedFill" Color="#54F61E51"/>
+        <SolidColorBrush x:Key="ProfileLaunchButton_SelectedOutline" Color="#F61E51"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_SelectedFill" Color="#54F61E51"/>
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_SelectedOutline" Color="#F61E51"/>
+
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_HoverHighlightFill" Color="#33EA1842"></SolidColorBrush>
+        <SolidColorBrush x:Key="ProfileLaunchPlayButton_HoverHighlightOutline" Color="#FFF12E54"/>
+
+        <!-- Color Redesign -->
+        <SolidColorBrush x:Key="AssistBackground" Color="#17181D"/>
+        <SolidColorBrush x:Key="Background" Color="#17181D"/>
+        <SolidColorBrush x:Key="AssistNavigationBar" Color="#101115"/>
+        <SolidColorBrush x:Key="AssistBackground2" Color="#17181D"/>
+
+        <!-- Navigation Buttons -->
+        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedFill" Color="#17181D"/>
+        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedOutline" Color="#232731"/>
+
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedFill" Color="#54F61E51"/>
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedOutline" Color="#F61E51"/>
+
+        <SolidColorBrush x:Key="AssistNavigationButton_HoverHighlightFill" Color="#17181D"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistNavigationButton_HoverHighlightOutline" Color="#F61E51"/>
+
+
+        <!-- Shop Colors -->
+        <SolidColorBrush x:Key="ShopBorderColorNormal" Color="#1C1F26"/>
+        <SolidColorBrush x:Key="ShopBorderColorHover" Color="#F71D50"/>
+        <SolidColorBrush x:Key="ShopBorderColorAccent" Color="#E21D4C"/>
+
+        <SolidColorBrush x:Key="ShopBundleBorderColor" Color="#21242B"/>
+
+
+        <!-- Settings Colors -->
+        <SolidColorBrush x:Key="SettingsNavigationBar" Color="#1C1F26"/>
     </Application.Resources>
 </Application>

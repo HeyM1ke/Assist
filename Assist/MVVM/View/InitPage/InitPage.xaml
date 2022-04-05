@@ -6,7 +6,7 @@
         xmlns:lang="clr-namespace:Assist.Properties.Languages"
         xmlns:local="clr-namespace:Assist.MVVM.View.InitPage"
         mc:Ignorable="d"
-        Title="ValorAssist" Height="350" Width="550" WindowStyle="None" WindowStartupLocation="Manual" AllowsTransparency="True" Loaded="InitWindow_Loaded" Background="Transparent">
+        Title="ValorAssist" Height="200" Width="600" WindowStyle="None" WindowStartupLocation="Manual" AllowsTransparency="True" Loaded="InitWindow_Loaded" Background="Transparent">
     <Window.Resources>
         <Style x:Key="statusText" TargetType="{x:Type Label}">
             <Setter Property="Background" Value="Transparent"/>
@@ -18,15 +18,50 @@
     
     
     <Grid Background="{StaticResource AssistBackground}">
-        <Image Source="/Resources/Assist_Logo_White.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" RenderOptions.BitmapScalingMode="HighQuality">
-            <Image.Effect>
-                <DropShadowEffect BlurRadius="50" ShadowDepth="7"></DropShadowEffect>
-            </Image.Effect>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="23"/>
+        </Grid.RowDefinitions>
+        <Image Source="../../../Resources/Other/InitBacking.png" Stretch="UniformToFill">
+            <Image.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Offset="1" Color="Black"></GradientStop>
+                    <GradientStop Offset="0" Color="Transparent"></GradientStop>
+                </LinearGradientBrush>
+            </Image.OpacityMask>
+
         </Image>
-        <Label Content="{Binding Path=CurrentStatusMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Bahnschrift Light" FontSize="24" Foreground="White" Opacity=".8" Margin="0,200,0,0" Width="auto">
-            <Label.Effect>
-                <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
-            </Label.Effect>
-        </Label>
+        <DockPanel>
+            <Image DockPanel.Dock="Left" Source="../../../Resources/Icons/Assist_Logo_SweetRed.png" VerticalAlignment="Center" HorizontalAlignment="Left" Height="150" RenderOptions.BitmapScalingMode="HighQuality" Margin="20,0">
+
+            </Image>
+            <Grid DockPanel.Dock="Left">
+
+                
+                <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
+                    <Label Padding="2" Content="Assist" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" FontSize="32" Foreground="White" Opacity=".9" Width="auto">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
+                        </Label.Effect>
+                    </Label>
+                    <Label Padding="2" Content="V1.0.0.0" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" FontSize="18" Foreground="White" Opacity=".9" Width="auto">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
+                        </Label.Effect>
+                    </Label>
+
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+
+        <Grid Grid.Row="1"  Height="25" Background="{StaticResource AssistNavigationBar}" VerticalAlignment="Bottom">
+            <Label Content="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource WorkSans}" FontWeight="Light" FontSize="13" Foreground="White" Opacity=".9" Width="auto">
+                <Label.Effect>
+                    <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
+                </Label.Effect>
+            </Label>
+        </Grid>
+        
+
     </Grid>
 </Window>

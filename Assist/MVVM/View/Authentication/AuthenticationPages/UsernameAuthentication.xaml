@@ -6,14 +6,12 @@
       xmlns:local="clr-namespace:Assist.MVVM.View.Authentication.AuthenticationPages"
       xmlns:lang="clr-namespace:Assist.Properties.Languages"
       mc:Ignorable="d"
-      d:DesignWidth="1024"
-      d:DesignHeight="576"
-      Width="1280"
-      Height="720"
       MinWidth="1024"
       MinHeight="576"
-      MaxWidth="1280"
-      MaxHeight="720"
+      Width="1024"
+      Height="576"
+      d:DesignWidth="1024"
+      d:DesignHeight="576"
       Style="{StaticResource PageFadeIn}"
       Title="UsernameAuthentication">
 

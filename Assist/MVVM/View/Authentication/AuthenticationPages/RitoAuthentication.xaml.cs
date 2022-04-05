@@ -24,5 +24,10 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
         {
             InitializeComponent();
         }
+
+        private void BackBTN_Click(object sender, RoutedEventArgs e)
+        {
+            Authentication.ContentFrame.GoBack();
+        }
     }
 }

@@ -30,8 +30,9 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
 
         private async void Submit_Btn(object sender, RoutedEventArgs e)
         {
+            SubmitCode.IsEnabled = false;
             await UsernameAuthViewmodel.instanceModel.SubmitFactorCode(CodeBox.Text);
-            
+            SubmitCode.IsEnabled = true;
         }
     }
 }

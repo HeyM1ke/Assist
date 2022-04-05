@@ -31,7 +31,6 @@
     <None Remove="Controls\Home\smallart %281%29.png" />
     <None Remove="Controls\Home\splash.png" />
     <None Remove="Fonts\Montserrat-Black.ttf" />
-    <None Remove="Resources\Assist_Logo_White.png" />
     <None Remove="Resources\Assist_Progression_Template.png" />
     <None Remove="Resources\backImage.png" />
     <None Remove="Resources\BattlepassBacking.jpg" />
@@ -60,6 +59,8 @@
     <None Remove="Resources\Fonts\WorkSans-Thin.ttf" />
     <None Remove="Resources\Fonts\WorkSans-ThinItalic.ttf" />
     <None Remove="Resources\Icons\Add_Icon.png" />
+    <None Remove="Resources\Icons\Assist_Logo_SweetRed.png" />
+    <None Remove="Resources\Icons\Assist_Logo_White.png" />
     <None Remove="Resources\Icons\Dashboard_Icon.png" />
     <None Remove="Resources\Icons\Fist_Icon.png" />
     <None Remove="Resources\Icons\GeneralSlider_Icon.png" />
@@ -74,6 +75,7 @@
     <None Remove="Resources\Icons\Switch.png" />
     <None Remove="Resources\Icons\Timer_Icon.png" />
     <None Remove="Resources\Icons\VP_Icon.png" />
+    <None Remove="Resources\Other\InitBacking.png" />
     <None Remove="Resources\person_icon.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
@@ -179,6 +181,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Icons\Add_Icon.png" />
+    <Resource Include="Resources\Icons\Assist_Logo_White.png" />
     <Resource Include="Resources\Icons\Dashboard_Icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -213,6 +216,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Icons\VP_Icon.png" />
+    <Resource Include="Resources\Other\InitBacking.png" />
     <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />
   </ItemGroup>
 
@@ -231,11 +235,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Resources\Assist_Logo_White.png" />
 	  <Resource Include="Resources\Assist_Progression_Template.png" />
 	  <Resource Include="Resources\BattlepassBacking.jpg" />
 	  <Resource Include="Resources\Earned.png" />
-	  <Resource Include="Resources\person_icon.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_0.png" />
@@ -261,6 +263,10 @@
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_7.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_8.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_9.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Resources\Icons\Assist_Logo_SweetRed.png" />
 	</ItemGroup>
 
 	<ItemGroup>
