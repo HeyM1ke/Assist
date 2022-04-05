@@ -91,7 +91,7 @@ namespace Assist
 
             var image = new BitmapImage();
             image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.CacheOption = BitmapCacheOption.OnDemand;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             

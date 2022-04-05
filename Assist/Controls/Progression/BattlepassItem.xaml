@@ -9,6 +9,41 @@
     <UserControl.Resources>
         <Style TargetType="{x:Type Border}">
             
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding IsSelected, Mode=TwoWay, ElementName=_this}" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="{StaticResource HighlightColor}" BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3"/>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect x:Name="imageDropsShadow" Color="{StaticResource HighlightColor}" BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding CurrentItem, Mode=TwoWay, ElementName=_this}" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3" Color="{StaticResource ValorantRedColor}"/>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding IsEarned, Mode=TwoWay, ElementName=_this}" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3" Color="White"/>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Border BorderBrush="White" Background="{StaticResource AssistBackgroundLight}" CornerRadius="10" BorderThickness="1">
@@ -20,12 +55,14 @@
                 <RowDefinition/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
+            <Image Grid.RowSpan="2" x:Name="earnedImage" Source="../../Resources/Earned.png" HorizontalAlignment="Center" Opacity=".5" Stretch="Uniform" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" />
             <Image Source="{Binding RewardImage}" Margin="4" RenderOptions.BitmapScalingMode="HighQuality"></Image>
             <Label Grid.Row="1" x:Name="TierLevel" Content="{Binding TierNumber}" FontFamily="{StaticResource WorkSans}" Foreground="White" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Padding="3" HorizontalAlignment="Center">
                 <Label.Effect>
                     <DropShadowEffect Opacity="0.2"/>
                 </Label.Effect>
             </Label>
+            
         </Grid>
     </Border>
 </UserControl>
