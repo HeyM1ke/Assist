@@ -37,11 +37,15 @@ namespace Assist.MVVM.View.Progression.ViewModels
                 var listOfItems = BattlePassData[i].itemsInChapter;
                 foreach (var Item in listOfItems)
                 {
+                    
+
                     Item.tierNumber = tier;
                     ItemContainer.Children.Add(new BattlepassItem(Item)
                     {
                         Margin = new Thickness(8, 6, 8, 6),
-                        bIsEarned = true
+                        bIsEarned = BattlepassContractData.ProgressionLevelReached >= tier,
+                        bCurrentItem = tier == BattlepassContractData.ProgressionLevelReached+1,
+
                     });
                     tier++;
                 }

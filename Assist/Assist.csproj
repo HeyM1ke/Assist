@@ -60,7 +60,9 @@
     <None Remove="Resources\Fonts\WorkSans-ThinItalic.ttf" />
     <None Remove="Resources\Icons\Add_Icon.png" />
     <None Remove="Resources\Icons\Assist_Logo_SweetRed.png" />
+    <None Remove="Resources\Icons\Assist_Logo_SweetRed_LQ.png" />
     <None Remove="Resources\Icons\Assist_Logo_White.png" />
+    <None Remove="Resources\Icons\Check_Icon.png" />
     <None Remove="Resources\Icons\Dashboard_Icon.png" />
     <None Remove="Resources\Icons\Fist_Icon.png" />
     <None Remove="Resources\Icons\GeneralSlider_Icon.png" />
@@ -181,7 +183,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Icons\Add_Icon.png" />
+    <Resource Include="Resources\Icons\Assist_Logo_SweetRed_LQ.png" />
     <Resource Include="Resources\Icons\Assist_Logo_White.png" />
+    <Resource Include="Resources\Icons\Check_Icon.png" />
     <Resource Include="Resources\Icons\Dashboard_Icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

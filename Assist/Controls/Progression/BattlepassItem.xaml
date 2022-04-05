@@ -5,57 +5,75 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Progression"
              mc:Ignorable="d" 
-             d:DesignHeight="88" d:DesignWidth="68">
+             d:DesignHeight="88" d:DesignWidth="68" x:Name="_this">
     <UserControl.Resources>
         <Style TargetType="{x:Type Border}">
-            
+            <Setter Property="BorderBrush" Value="{StaticResource ShopBorderColorNormal}"></Setter>
             <Style.Triggers>
 
-                <DataTrigger Binding="{Binding IsSelected, Mode=TwoWay, ElementName=_this}" Value="true">
+                <DataTrigger Binding="{Binding bIsSelected, Mode=TwoWay, ElementName=_this}" Value="true">
                     <Setter Property="Effect">
                         <Setter.Value>
-                            <DropShadowEffect Color="{StaticResource HighlightColor}" BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3"/>
+                            <DropShadowEffect Color="{StaticResource BpItemSelectedColor}" BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3"/>
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
 
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource ShopBorderColorHover}"></Setter>
                     <Setter Property="Effect">
                         <Setter.Value>
-                            <DropShadowEffect x:Name="imageDropsShadow" Color="{StaticResource HighlightColor}" BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3"/>
+                            <DropShadowEffect Color="{StaticResource BpItemHoverColor}" BlurRadius="5" ShadowDepth="4" Direction="270" Opacity=".2"/>
                         </Setter.Value>
                     </Setter>
                 </Trigger>
 
-                <DataTrigger Binding="{Binding CurrentItem, Mode=TwoWay, ElementName=_this}" Value="true">
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3" Color="{StaticResource ValorantRedColor}"/>
-                        </Setter.Value>
-                    </Setter>
+                <DataTrigger Binding="{Binding bCurrentItem, Mode=TwoWay, ElementName=_this}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource BpItemCurrentItem}"/>
                 </DataTrigger>
 
-                <DataTrigger Binding="{Binding IsEarned, Mode=TwoWay, ElementName=_this}" Value="true">
+                <DataTrigger Binding="{Binding bIsEarned, Mode=TwoWay, ElementName=_this}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource BpItemEarnedItem}"/>
                     <Setter Property="Effect">
                         <Setter.Value>
-                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3" Color="White"/>
+                            <DropShadowEffect Color="{StaticResource BpItemEarnedColor}" BlurRadius="5" ShadowDepth="4" Direction="270" Opacity=".2"/>
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="EarnedImg" TargetType="{x:Type Rectangle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding bIsEarned, Mode=TwoWay, ElementName=_this}" Value="true">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding bIsEarned, Mode=TwoWay, ElementName=_this}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
-    <Border BorderBrush="White" Background="{StaticResource AssistBackgroundLight}" CornerRadius="10" BorderThickness="1">
-        <Border.Effect>
-            <DropShadowEffect Opacity="0.2"/>
-        </Border.Effect>
+    <Border  Background="{StaticResource AssistNavigationBar}" CornerRadius="0" BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-            <Image Grid.RowSpan="2" x:Name="earnedImage" Source="../../Resources/Earned.png" HorizontalAlignment="Center" Opacity=".5" Stretch="Uniform" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" />
+            
+            
+            <Rectangle Style="{StaticResource EarnedImg}" Width="20" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-10,-10,0">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="White"/>
+                </Rectangle.Fill>
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="../../Resources/Icons/Check_Icon.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
             <Image Source="{Binding RewardImage}" Margin="4" RenderOptions.BitmapScalingMode="HighQuality"></Image>
             <Label Grid.Row="1" x:Name="TierLevel" Content="{Binding TierNumber}" FontFamily="{StaticResource WorkSans}" Foreground="White" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Padding="3" HorizontalAlignment="Center">
                 <Label.Effect>

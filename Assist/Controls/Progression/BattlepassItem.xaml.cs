@@ -66,8 +66,9 @@ namespace Assist.Controls.Progression
             _viewModel.Reward = item;
             InitializeComponent();
 
-            if (bIsEarned)
-                earnedImage.Opacity = .2;
+            
+
+            
 
             
 
