@@ -88,7 +88,7 @@ namespace Assist.Controls.Store.ViewModels
             if (Bundle.DurationRemainingInSeconds == 0)
             {
                 bundleTimer.Stop();
-                AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Store/Store.xaml", UriKind.RelativeOrAbsolute));
+                AssistMainWindow.Current.ContentFrame.Refresh();
             }
             else
             {

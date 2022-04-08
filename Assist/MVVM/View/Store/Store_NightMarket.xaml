@@ -22,7 +22,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Height="50" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"></Button>
+        <Button x:Name="BackBtn" Height="50" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Click="BackBtn_Click"></Button>
 
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Grid.Row="0" Content="NIGHT MARKET" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White"

@@ -37,14 +37,11 @@ namespace Assist.MVVM.View.Store
             await GetUserStore();
             Load_Bundle();
             Load_DailyStore();
+            await NightMarketCheck();
 
-            /*var bNightMarketMode = await isNightMarketActive();
-
-            if (bNightMarketMode)
-            {
-                Load_NightMarket();
-            }*/
         }
+
+        
 
         private async void Load_Bundle()
         {
@@ -53,17 +50,43 @@ namespace Assist.MVVM.View.Store
         private async void Load_DailyStore()
         {
             for (int i = 0; i < _playerStore.SkinsPanelLayout.SingleItemOffers.Count; i++)
-            { 
-                var skinOffer = new DailyItemView(_playerStore.SkinsPanelLayout.SingleItemOffers[i])
+            {
+                if (i == 0)
                 {
-                    Margin = new Thickness(10, 0, 10, 0),
-                    Width = 220
-                };
+                    var skinControl = new DailyItemView(_playerStore.SkinsPanelLayout.SingleItemOffers[i])
+                    {
+                        Margin = new Thickness(0, 0, 10, 0),
+                        Width = 220
+                    };
 
-                ItemContainer.Children.Add(skinOffer);
+                    ItemContainer.Children.Add(skinControl);
+                }
+                else
+                {
+                    var skinOffer = new DailyItemView(_playerStore.SkinsPanelLayout.SingleItemOffers[i])
+                    {
+                        Margin = new Thickness(10, 0, 10, 0),
+                        Width = 220
+                    };
+
+                    ItemContainer.Children.Add(skinOffer);
+                }
+
+                
             }
 
             StartCountdown();
+        }
+        private async Task NightMarketCheck()
+        {
+            if (await isNightMarketActive())
+            {
+                NightMarketBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NightMarketBtn.Visibility = Visibility.Collapsed;
+            }
         }
 
         private Timer dailyTimer;
@@ -80,9 +103,8 @@ namespace Assist.MVVM.View.Store
             if (_playerStore.SkinsPanelLayout.SingleItemOffersRemainingDurationInSeconds == 0)
             {
                 dailyTimer.Stop();
-                AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Store/Store.xaml", UriKind.RelativeOrAbsolute));
+                AssistMainWindow.Current.ContentFrame.Refresh();
             }
-                
             else
             {
                 _playerStore.SkinsPanelLayout.SingleItemOffersRemainingDurationInSeconds--;
@@ -97,6 +119,15 @@ namespace Assist.MVVM.View.Store
             _playerStore = await AssistApplication.AppInstance.CurrentUser.Store.GetPlayerStore();
         }
 
+        private async Task<bool> isNightMarketActive()
+        {
+            return AssistApplication.AppInstance.CurrentUser.Store.PlayerStore.BonusStore is null ? false : true;
+        }
 
+        private void NightMarketBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AssistMainWindow.Current.ContentFrame.Navigate(new Uri("MVVM/View/Store/Store_NightMarket.xaml",
+                UriKind.RelativeOrAbsolute));
+        }
     }
 }

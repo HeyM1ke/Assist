@@ -186,7 +186,6 @@ namespace Assist
 
             MemClear();
             // Open Page
-
             Current.ContentFrame.Navigate(new Uri("/MVVM/View/Store/Store.xaml", UriKind.RelativeOrAbsolute));
         }
         #endregion
