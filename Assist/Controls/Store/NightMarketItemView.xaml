@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Assist.Controls.Store.NightMarketItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Assist.Controls.Store"
+             mc:Ignorable="d"
+             MinWidth="156" MinHeight="290">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource AssistNavigationBar}"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Button></Button>
+</UserControl>

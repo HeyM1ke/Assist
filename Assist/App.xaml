@@ -184,6 +184,10 @@
 
         <SolidColorBrush x:Key="ShopBundleBorderColor" Color="#21242B"/>
 
+        <SolidColorBrush x:Key="NMItem_Background" Color="#17181D"></SolidColorBrush>
+        <SolidColorBrush x:Key="NMItem_NormalBorder" Color="#21242B"></SolidColorBrush>
+        <SolidColorBrush x:Key="NMItem_HoverBorder" Color="#F71D50"></SolidColorBrush>
+        <SolidColorBrush x:Key="NMItem_AccentColor" Color="#E21D4C"></SolidColorBrush>
 
         <!-- Settings Colors -->
         <SolidColorBrush x:Key="SettingsNavigationBar" Color="#1C1F26"/>
