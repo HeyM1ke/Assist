@@ -163,6 +163,12 @@
     <value>店</value>
     <comment>Text on Store Button Hover</comment>
   </data>
+  <data name="NightMarket_EndsIn" xml:space="preserve">
+    <value>で終わる</value>
+  </data>
+  <data name="NightMarket_Name" xml:space="preserve">
+    <value>夜市</value>
+  </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
     <value>起動設定</value>
     <comment>Text on Launch Settings Button Hover</comment>

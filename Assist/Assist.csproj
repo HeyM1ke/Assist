@@ -110,7 +110,7 @@
     <Resource Include="Assist_Logo_White.png" />
     <Resource Include="Controls\Home\smallart (1).png" />
     <Resource Include="Controls\Home\splash.png" />
-    <Resource Include="Resources\backImage.png" />
+    <Resource Include="Resources\Icons\backImage.png" />
     <Resource Include="Resources\ContentTiers\DeluxeTier_Icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

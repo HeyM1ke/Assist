@@ -28,7 +28,7 @@
                                             BorderBrush="{TemplateBinding BorderBrush}"
                                             Background="{TemplateBinding Background}">
                                     <Grid>
-                                        <Image x:Name="Icon" Source="../../../../Resources/backImage.png" Width="30"/>
+                                        <Image x:Name="Icon" Source="../../../../Resources/Icons/backImage.png" Width="30"/>
                                     </Grid>
                                 </Border>
 
