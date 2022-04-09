@@ -43,7 +43,7 @@
             <!-- Navigation -->
             <DockPanel>
                 <DockPanel Background="{StaticResource AssistNavigationBar}" HorizontalAlignment="Left" Width="54"  RenderOptions.BitmapScalingMode="HighQuality">
-                <Image Width="38" Height="38" DockPanel.Dock="Top" Source="Resources/Icons/Assist_Logo_SweetRed.png" Margin="7" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <Image Width="36" Height="36" DockPanel.Dock="Top" Source="Resources/Icons/Assist_Logo_SweetRed_LQ.png" Margin="0,10,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
                 <ScrollViewer DockPanel.Dock="Top" Background="{StaticResource AssistNavigationBar}" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" Margin="0,40,0,0">
                     <ScrollViewer.Resources>
                             <Style TargetType="{x:Type RadioButton}">
@@ -98,6 +98,7 @@
                             </Setter>
                             </Style>
                     </ScrollViewer.Resources>
+
                     <StackPanel x:Name="Buttonpanel">
                             <RadioButton  Name="DashboardBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="300" Content="/Resources/Icons/Dashboard_Icon.png" Click="DashboardBTN_Click">
                                 <RadioButton.ToolTip>
@@ -141,7 +142,7 @@
                                 </RadioButton.ToolTip>
                             </RadioButton>
 
-                        <RadioButton Visibility="Visible" Name="ProgressionBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="10" Content="/Resources/Icons/Progression_Icon.png" Click="ProgressionBTN_Click">
+                            <RadioButton Visibility="Visible" Name="ProgressionBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="10" Content="/Resources/Icons/Progression_Icon.png" Click="ProgressionBTN_Click">
                             <RadioButton.ToolTip>
                                 <ToolTip Placement="Right"
                                          Background="Transparent"
@@ -186,7 +187,7 @@
                         </RadioButton>
                     </StackPanel>
                 </ScrollViewer>
-                <Grid>
+                <Grid DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,150,0,0">
                     <Grid.Resources>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Template">

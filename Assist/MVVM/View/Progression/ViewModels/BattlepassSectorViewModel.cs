@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media.Imaging;
 using Assist.Controls;
 using Assist.Controls.Progression;
 using Assist.MVVM.Model;
+using Assist.MVVM.View.Progression.Sectors;
 using Assist.MVVM.ViewModel;
 using AssistWPFTest.MVVM.ViewModel;
 using ValNet;
@@ -21,6 +23,33 @@ namespace Assist.MVVM.View.Progression.ViewModels
     {
         private ContactsFetchObj.Contract BattlepassContractData;
         private List<BattlePassObj> BattlePassData = null;
+
+        private string _showcaseName;
+
+        public string ShowcaseName
+        {
+            get => _showcaseName;
+            set => SetProperty(ref _showcaseName, value);
+        }
+
+        private string _showcaseTier;
+
+        public string ShowcaseTier
+        {
+            get => _showcaseTier;
+            set => SetProperty(ref _showcaseTier, value);
+        }
+
+        private BitmapImage _showcaseImage;
+
+        public BitmapImage ShowcaseImage
+        {
+            get => _showcaseImage;
+            set => SetProperty(ref _showcaseImage, value);
+        }
+
+
+
         public async Task LoadBattlepass(object container)
         {
             UniformGrid ItemContainer = (UniformGrid) container;
@@ -38,11 +67,22 @@ namespace Assist.MVVM.View.Progression.ViewModels
                 foreach (var Item in listOfItems)
                 {
                     Item.tierNumber = tier;
-                    ItemContainer.Children.Add(new BattlepassItem(Item)
+                    var control = new BattlepassItem(Item)
                     {
                         Margin = new Thickness(8, 6, 8, 6),
-                        
-                    });
+                        bIsEarned = BattlepassContractData.ProgressionLevelReached >= tier,
+                        bCurrentItem = tier == BattlepassContractData.ProgressionLevelReached + 1,
+
+                    };
+
+                    control.PreviewMouseLeftButtonUp += Control_PreviewMouseLeftButtonUp;
+
+                    
+                    ItemContainer.Children.Add(control);
+
+                    if(tier == BattlepassContractData.ProgressionLevelReached+1)
+                        ChangeShowcase(control);
+
                     tier++;
                 }
                 
@@ -51,5 +91,42 @@ namespace Assist.MVVM.View.Progression.ViewModels
             }
         }
 
+        private async void Control_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ProgressionBattlepass.ClearSelected();
+            var control  = sender as BattlepassItem;
+
+            ChangeShowcase(control);
+        }
+
+        private async void ChangeShowcase(BattlepassItem control)
+        {
+            if (control != null)
+            {
+                var item = await control.GetItem();
+                ShowcaseName = item.rewardName;
+                ShowcaseTier = $"Tier: {item.tierNumber}";
+                await GetShowcaseImage(item);
+            }
+
+            control.bIsSelected = true;
+        }
+
+        private async Task GetShowcaseImage(BattlePassObj.RewardItem item)
+        {
+            if (item.extraData.rewardType == "Spray")
+            {
+                ShowcaseImage = await App.LoadImageUrl(item.extraData.spray_FullImage);
+                return;
+            }
+
+            if (item.extraData.rewardType == "PlayerCard")
+            {
+                ShowcaseImage = await App.LoadImageUrl(item.extraData.playercard_LargeArt);
+                return;
+            }
+
+            ShowcaseImage = await App.LoadImageUrl(item.imageUrl);
+        }
     }
 }

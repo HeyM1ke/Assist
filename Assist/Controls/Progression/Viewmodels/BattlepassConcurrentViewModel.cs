@@ -81,8 +81,9 @@ namespace Assist.Controls.Progression.Viewmodels
             
             var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetCurrentBattlepass();
             bpContract.ContractProgression.HighestRewardedLevel.TryGetValue("38715fd3-4575-c78e-bc13-d8b3cf1c7546", out var highestTier);
-            NeededXp = (highestTier * 750) + 2000;
             ContractTierNumber = bpContract.ProgressionLevelReached;
+            var xpTier = bpContract.ProgressionLevelReached - 1;
+            NeededXp = (xpTier * 750) + 2000;
             CurrentXp = bpContract.ProgressionTowardsNextLevel;
             ContractTierXp = $"{CurrentXp}XP / {NeededXp}XP";
             ContractTier = $"{Properties.Languages.Lang.Progression_Battlepass_CurrTier} {ContractTierNumber+1}";

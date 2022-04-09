@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -9,7 +10,7 @@ using AssistWPFTest.MVVM.ViewModel;
 
 namespace Assist.Controls.Progression.Viewmodels
 {
-    internal class BattlepassItemViewModel : ViewModelBase
+    public class BattlepassItemViewModel : ViewModelBase
     {
         private int _tierNumber = 00;
 

@@ -113,6 +113,21 @@
             </DockPanel>
         </Grid>
 
-        <Grid Column="1" Name="ContentGrid" Background="{StaticResource AssistBackground}"></Grid>
+        <Grid Column="1" Name="ContentGrid" Background="{StaticResource AssistBackgroundLight}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="BackingImage" Source="/Resources/BattlepassBacking.jpg" Grid.RowSpan="2">
+                <Image.Effect>
+                    <BlurEffect Radius="40"/>
+                </Image.Effect>
+            </Image>
+            <Image Source="{Binding ShowcaseImage}" VerticalAlignment="Center"></Image>
+            <DockPanel Grid.Row="1" HorizontalAlignment="Center">
+                <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" Content="{Binding ShowcaseTier}" FontSize="22" Padding="0" Margin="6,0"/>
+                <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding ShowcaseName}" FontSize="28"/>
+            </DockPanel>
+        </Grid>
     </Grid>
 </Page>

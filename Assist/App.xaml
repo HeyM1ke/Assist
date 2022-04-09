@@ -190,6 +190,17 @@
         <SolidColorBrush x:Key="NMItem_HoverBorder" Color="#F71D50"></SolidColorBrush>
         <SolidColorBrush x:Key="NMItem_AccentColor" Color="#E21D4C"></SolidColorBrush>
 
+
+        <!-- Progression-->
+
+        <!-- Battlepass -->
+        <SolidColorBrush x:Key="BpItemCurrentItem" Color="#E21D4C"/>
+        <SolidColorBrush x:Key="BpItemEarnedItem" Color="#FFEF5F5F"/>
+
+        <Color x:Key="BpItemHoverColor" A="255" R="246" G="30" B="81"/>
+        <Color x:Key="BpItemEarnedColor" A="255" R="49" G="49" B="49"/>
+        <Color x:Key="BpItemSelectedColor" A="255" R="246" G="30" B="81"/>
+
         <!-- Settings Colors -->
         <SolidColorBrush x:Key="SettingsNavigationBar" Color="#1C1F26"/>
     </Application.Resources>

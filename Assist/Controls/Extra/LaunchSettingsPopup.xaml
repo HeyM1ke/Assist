@@ -18,7 +18,7 @@
             <Grid HorizontalAlignment="Center">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" >
-                        <Image Source="../../Resources/Assist_Logo_White.png" Width="40" Margin="10"></Image>
+                        <Image Source="../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="40" Margin="10"></Image>
                         <Label FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding Title}" Foreground="White" HorizontalAlignment="Center"></Label>
                     </StackPanel>
 

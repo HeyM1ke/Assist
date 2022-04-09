@@ -21,29 +21,68 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Resources>
-            <Style TargetType="{x:Type Button}">
+            <Style x:Key="BattlepassBtn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
                 <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate>
-                            <Grid>
-                                
-                                <Border x:Name="Border" CornerRadius="12" BorderThickness="3" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"></Border>
-
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="0" BorderThickness="3" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
                                 <Grid>
-                                    <Grid.OpacityMask>
-                                        <VisualBrush Visual="{Binding ElementName=Border}"/>
-                                    </Grid.OpacityMask>
-                                    
-                                    
-                                </Grid>
-                                <DockPanel>
-                                    <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="{TemplateBinding Tag}" Foreground="White" Padding="4" FontFamily="{StaticResource WorkSans}" Margin="2,2"
+
+                                    <Grid>
+                                       
+
+                                        <Image Source="../../../Resources/Assist_Progression_Template.png" Stretch="UniformToFill">
+                                            
+                                        </Image>
+
+                                    </Grid>
+                                    <DockPanel>
+                                        <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="{TemplateBinding Tag}" Foreground="White" Padding="4" FontFamily="{StaticResource WorkSans}" Margin="2,2"
                                            FontSize="36" FontStyle="Normal" FontWeight="Bold"></Label>
-                                </DockPanel>
-                            </Grid>
+                                    </DockPanel>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"></Setter>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect></DropShadowEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="AgentBtn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="0" BorderThickness="3" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <Grid>
+                                        
+
+                                        <Image Stretch="UniformToFill"/>
+
+                                    </Grid>
+                                    <DockPanel>
+                                        <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="{TemplateBinding Tag}" Foreground="White" Padding="4" FontFamily="{StaticResource WorkSans}" Margin="2,2"
+                                           FontSize="36" FontStyle="Normal" FontWeight="Bold"></Label>
+                                    </DockPanel>
+                                </Grid>
+                            </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -62,7 +101,7 @@
             </Style>
         </Grid.Resources>
 
-        <Button x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="BATTLEPASS" Click="BattlepassButton_Click"/>
-        <Button Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
+        <Button Style="{StaticResource BattlepassBtn}" x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="BATTLEPASS" Click="BattlepassButton_Click"/>
+        <Button Visibility="Collapsed"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
     </Grid>
 </Page>

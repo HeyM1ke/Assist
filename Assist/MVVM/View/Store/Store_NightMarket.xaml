@@ -68,7 +68,7 @@
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Grid.Row="0" Content="{x:Static lang:Lang.NightMarket_Name}" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White"
                    VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="64" Padding="0"/>
-            <Label Grid.Row="0" Name="EndsTimer" Content="ENDS IN" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White"
+            <Label Grid.Row="0" Name="EndsTimer" Content="{x:Static lang:Lang.NightMarket_EndsIn}" FontFamily="{StaticResource WorkSans}" FontWeight="ExtraBold" Foreground="White"
                    VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Padding="0"/>
         </StackPanel>
 
