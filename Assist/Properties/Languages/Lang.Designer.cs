@@ -196,6 +196,24 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ENDS IN.
+        /// </summary>
+        public static string NightMarket_EndsIn {
+            get {
+                return ResourceManager.GetString("NightMarket_EndsIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NIGHT MARKET.
+        /// </summary>
+        public static string NightMarket_Name {
+            get {
+                return ResourceManager.GetString("NightMarket_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Launch Settings.
         /// </summary>
         public static string ProfileLaunchControl_LaunchSettingsHover {

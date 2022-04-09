@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"></Setter>
+            <Setter Property="Background" Value="{StaticResource ShopItemNormalBackground}"></Setter>
             <Setter Property="BorderBrush" Value="{StaticResource ShopBorderColorNormal}"/>
             <Setter Property="Template">
                 <Setter.Value>

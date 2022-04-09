@@ -166,6 +166,12 @@
     <value>Store</value>
     <comment>Text on Store Button Hover</comment>
   </data>
+  <data name="NightMarket_EndsIn" xml:space="preserve">
+    <value>ENDS IN</value>
+  </data>
+  <data name="NightMarket_Name" xml:space="preserve">
+    <value>NIGHT MARKET</value>
+  </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
     <value>Launch Settings</value>
     <comment>Text on Launch Settings Button Hover</comment>

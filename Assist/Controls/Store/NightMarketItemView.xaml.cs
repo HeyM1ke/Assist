@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assist.Controls.Store.ViewModels;
+using Assist.MVVM.ViewModel;
+using ValNet.Objects.Store;
 
 namespace Assist.Controls.Store
 {
@@ -20,9 +23,19 @@ namespace Assist.Controls.Store
     /// </summary>
     public partial class NightMarketItemView : UserControl
     {
+        private readonly NightMarketItemViewModel _viewModel;
         public NightMarketItemView()
         {
             InitializeComponent();
         }
+
+        public NightMarketItemView(NightMarket.NightMarketOffer a)
+        {
+            DataContext = _viewModel = new NightMarketItemViewModel();
+            InitializeComponent();
+            _viewModel.Offer = a;
+        }
+
+        
     }
 }
