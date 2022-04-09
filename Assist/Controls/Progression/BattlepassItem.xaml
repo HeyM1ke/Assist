@@ -12,9 +12,11 @@
             <Style.Triggers>
 
                 <DataTrigger Binding="{Binding bIsSelected, Mode=TwoWay, ElementName=_this}" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource ShopBorderColorHover}"></Setter>
                     <Setter Property="Effect">
                         <Setter.Value>
-                            <DropShadowEffect Color="{StaticResource BpItemSelectedColor}" BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.3"/>
+
+                            <DropShadowEffect Color="{StaticResource BpItemSelectedColor}" BlurRadius="5" ShadowDepth="4" Direction="270" Opacity=".2"/>
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>

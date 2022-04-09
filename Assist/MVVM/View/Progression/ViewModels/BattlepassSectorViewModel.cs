@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using Assist.Controls;
 using Assist.Controls.Progression;
 using Assist.MVVM.Model;
+using Assist.MVVM.View.Progression.Sectors;
 using Assist.MVVM.ViewModel;
 using AssistWPFTest.MVVM.ViewModel;
 using ValNet;
@@ -78,6 +79,10 @@ namespace Assist.MVVM.View.Progression.ViewModels
 
                     
                     ItemContainer.Children.Add(control);
+
+                    if(tier == BattlepassContractData.ProgressionLevelReached+1)
+                        ChangeShowcase(control);
+
                     tier++;
                 }
                 
@@ -88,8 +93,14 @@ namespace Assist.MVVM.View.Progression.ViewModels
 
         private async void Control_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            ProgressionBattlepass.ClearSelected();
             var control  = sender as BattlepassItem;
 
+            ChangeShowcase(control);
+        }
+
+        private async void ChangeShowcase(BattlepassItem control)
+        {
             if (control != null)
             {
                 var item = await control.GetItem();
@@ -97,6 +108,8 @@ namespace Assist.MVVM.View.Progression.ViewModels
                 ShowcaseTier = $"Tier: {item.tierNumber}";
                 await GetShowcaseImage(item);
             }
+
+            control.bIsSelected = true;
         }
 
         private async Task GetShowcaseImage(BattlePassObj.RewardItem item)

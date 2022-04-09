@@ -199,7 +199,7 @@
 
         <Color x:Key="BpItemHoverColor" A="255" R="246" G="30" B="81"/>
         <Color x:Key="BpItemEarnedColor" A="255" R="49" G="49" B="49"/>
-        <Color x:Key="BpItemSelectedColor" A="100" R="49" G="49" B="49"/>
+        <Color x:Key="BpItemSelectedColor" A="255" R="246" G="30" B="81"/>
 
         <!-- Settings Colors -->
         <SolidColorBrush x:Key="SettingsNavigationBar" Color="#1C1F26"/>

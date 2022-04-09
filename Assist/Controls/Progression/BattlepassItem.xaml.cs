@@ -66,12 +66,6 @@ namespace Assist.Controls.Progression
             _viewModel.Reward = item;
             InitializeComponent();
 
-            
-
-            
-
-            
-
             _viewModel.LoadItem();
         }
 

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assist.Controls.Progression;
 using Assist.MVVM.View.Progression.ViewModels;
 
 namespace Assist.MVVM.View.Progression.Sectors
@@ -24,8 +25,10 @@ namespace Assist.MVVM.View.Progression.Sectors
     public partial class ProgressionBattlepass : Page
     {
         private BattlepassSectorViewModel _viewModel;
+        public static ProgressionBattlepass instance;
         public ProgressionBattlepass()
         {
+            instance = this;
             DataContext = _viewModel = new BattlepassSectorViewModel();
             InitializeComponent();
         }
@@ -36,5 +39,17 @@ namespace Assist.MVVM.View.Progression.Sectors
 
 
         }
+
+        public static void ClearSelected()
+        {
+            if (instance != null)
+
+                foreach (var obj in instance.BattlepassContainer.Children)
+                {
+                    var item = obj as BattlepassItem;
+                    item.bIsSelected = false;
+                }
+            }
+            
+        }
     }
-}
