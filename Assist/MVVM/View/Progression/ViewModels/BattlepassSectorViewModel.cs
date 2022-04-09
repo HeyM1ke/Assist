@@ -95,8 +95,25 @@ namespace Assist.MVVM.View.Progression.ViewModels
                 var item = await control.GetItem();
                 ShowcaseName = item.rewardName;
                 ShowcaseTier = $"Tier: {item.tierNumber}";
-                ShowcaseImage = await App.LoadImageUrl(item.imageUrl);
+                await GetShowcaseImage(item);
             }
+        }
+
+        private async Task GetShowcaseImage(BattlePassObj.RewardItem item)
+        {
+            if (item.extraData.rewardType == "Spray")
+            {
+                ShowcaseImage = await App.LoadImageUrl(item.extraData.spray_FullImage);
+                return;
+            }
+
+            if (item.extraData.rewardType == "PlayerCard")
+            {
+                ShowcaseImage = await App.LoadImageUrl(item.extraData.playercard_LargeArt);
+                return;
+            }
+
+            ShowcaseImage = await App.LoadImageUrl(item.imageUrl);
         }
     }
 }
