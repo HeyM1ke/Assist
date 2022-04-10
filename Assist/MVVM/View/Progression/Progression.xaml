@@ -23,7 +23,7 @@
         <Grid.Resources>
             <Style x:Key="BattlepassBtn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
-                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Template">
                     <Setter.Value>
@@ -34,14 +34,14 @@
                                     <Grid>
                                        
 
-                                        <Image Source="../../../Resources/Assist_Progression_Template.png" Stretch="UniformToFill">
+                                        <Image Source="../../../Resources/Other/Assist_Battlepass.png" Stretch="UniformToFill">
                                             
                                         </Image>
 
                                     </Grid>
                                     <DockPanel>
                                         <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="{TemplateBinding Tag}" Foreground="White" Padding="4" FontFamily="{StaticResource WorkSans}" Margin="2,2"
-                                           FontSize="36" FontStyle="Normal" FontWeight="Bold"></Label>
+                                           FontSize="36" FontStyle="Normal" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                                     </DockPanel>
                                 </Grid>
                             </Border>
@@ -64,7 +64,7 @@
 
             <Style x:Key="AgentBtn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
-                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Template">
                     <Setter.Value>
@@ -74,12 +74,12 @@
                                     <Grid>
                                         
 
-                                        <Image Stretch="UniformToFill"/>
+                                        <Image Stretch="UniformToFill" Source="../../../Resources/Other/Assist_Agents.png"/>
 
                                     </Grid>
                                     <DockPanel>
                                         <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="{TemplateBinding Tag}" Foreground="White" Padding="4" FontFamily="{StaticResource WorkSans}" Margin="2,2"
-                                           FontSize="36" FontStyle="Normal" FontWeight="Bold"></Label>
+                                           FontSize="36" FontStyle="Normal" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                                     </DockPanel>
                                 </Grid>
                             </Border>
@@ -102,6 +102,6 @@
         </Grid.Resources>
 
         <Button Style="{StaticResource BattlepassBtn}" x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="BATTLEPASS" Click="BattlepassButton_Click"/>
-        <Button Visibility="Collapsed"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
+        <Button Visibility="Visible"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
     </Grid>
 </Page>

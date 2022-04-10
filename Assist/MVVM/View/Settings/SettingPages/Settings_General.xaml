@@ -158,18 +158,25 @@
                 </Style>
             </DockPanel.Resources>
             <Grid x:Name="LanguageSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
-                <Label Content="{x:Static lang:Lang.SettingsGeneral_SelLang}" Foreground="White" HorizontalAlignment="Left"></Label>
+                <Label Content="{x:Static lang:Lang.SettingsGeneral_SelLang}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
                 <ComboBox x:Name="LanguageChangeComboBox" HorizontalAlignment="Right" Height="30" Width="130" SelectionChanged="LanguageChangeComboBox_SelectionChanged">
                     <ComboBoxItem Content="English"/>
                     <ComboBoxItem Content="Japanese"/>
                 </ComboBox>
             </Grid>
             <Grid x:Name="WindowSizeSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
-                <Label Content="{x:Static lang:Lang.SettingsGeneral_WindowSize}" Foreground="White" HorizontalAlignment="Left"></Label>
+                <Label Content="{x:Static lang:Lang.SettingsGeneral_WindowSize}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
                 <ComboBox x:Name="WindowSizeComboBox" HorizontalAlignment="Right" Height="30" Width="130" SelectionChanged="WindowSizeComboBox_SelectionChanged">
                     <ComboBoxItem Content="576p"/>
                     <ComboBoxItem Content="720p"/>
                 </ComboBox>
+            </Grid>
+            <Grid x:Name="SoundSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
+                <Label Content="{x:Static lang:Lang.SettingsGeneral_SoundSetting}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Slider Name="SoundVol_Slider" Maximum="1" Width="100" VerticalAlignment="Center" ValueChanged="SoundVolume_ValueChanged"></Slider>
+                    <Label Name="SoundVol_Label" Content="100%" Foreground="White" FontFamily="{StaticResource WorkSans}" Width="40" HorizontalContentAlignment="Center"></Label>
+                </StackPanel>
             </Grid>
 
         </DockPanel>
