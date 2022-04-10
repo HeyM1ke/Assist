@@ -277,6 +277,15 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sound Volume.
+        /// </summary>
+        public static string SettingsGeneral_SoundSetting {
+            get {
+                return ResourceManager.GetString("SettingsGeneral_SoundSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Window Size:.
         /// </summary>
         public static string SettingsGeneral_WindowSize {

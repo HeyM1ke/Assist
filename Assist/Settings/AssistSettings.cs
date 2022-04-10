@@ -65,6 +65,10 @@ namespace Assist.Settings
             set => SetProperty(ref _language, value);
         }
 
+
+        private double _soundVolume = 0.5;
+        public double SoundVolume { get => _soundVolume; set => SetProperty(ref _soundVolume, value); }
+
         #region Settings Methods
 
         /// <summary>

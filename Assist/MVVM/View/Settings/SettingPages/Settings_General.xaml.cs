@@ -34,6 +34,7 @@ namespace Assist.MVVM.View.Settings.SettingPages
         {
             WindowSizeComboBox.SelectedIndex = (int)AssistSettings.Current.Resolution;
             LanguageChangeComboBox.SelectedIndex = (int)AssistSettings.Current.Language;
+            SoundVol_Slider.Value = AssistSettings.Current.SoundVolume;
         }
 
         #region Language Selection Settings
@@ -64,8 +65,14 @@ namespace Assist.MVVM.View.Settings.SettingPages
         }
 
 
+
         #endregion
 
-        
+        private void SoundVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+            AssistSettings.Current.SoundVolume = SoundVol_Slider.Value;
+            SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
+        }
     }
 }

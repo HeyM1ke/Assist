@@ -34,14 +34,17 @@ namespace Assist
     /// </summary>
     public partial class AssistMainWindow : Window
     {
+        private const string clickSoundHost = "https://cdn.rumblemike.com/Static/Click.mp3";
         public static AssistMainWindow Current;
         public static Grid PopupContainer;
+        private MediaPlayer _mPlayer;
         public AssistMainWindow()
         {
             AssistSettings.Current.bNewUser = false;
             InitializeComponent();
             DetermineResolution();
             Current = this;
+            _mPlayer = new MediaPlayer();
             PopupContainer = PopupHolder;
         }
 
@@ -129,6 +132,8 @@ namespace Assist
             {
                 button.IsChecked = false;
             }
+
+            Play();
         }
 
         private void DashboardBTN_Click(object sender, RoutedEventArgs e)
@@ -202,7 +207,12 @@ namespace Assist
             ProfilePC.Content = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + AssistApplication.AppInstance.CurrentProfile.PCID + "/smallart.png",35,35);
         }
 
-
+        public static void Play()
+        {
+            Current._mPlayer.Volume = AssistSettings.Current.SoundVolume;
+            Current._mPlayer.Open(new Uri(clickSoundHost));
+            Current._mPlayer.Play();
+        }
        
     }
 }

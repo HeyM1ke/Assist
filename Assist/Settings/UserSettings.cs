@@ -71,8 +71,6 @@ namespace Assist.Settings
             else
                 return null;
         }
-
-
         internal AccountSettings FindAccountById(string id)
         {
             var account = Instance.Accounts.Find(account => account.puuid == id);

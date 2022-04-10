@@ -196,6 +196,9 @@
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
     <value>Select Language:</value>
   </data>
+  <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
+    <value>Sound Volume</value>
+  </data>
   <data name="SettingsGeneral_WindowSize" xml:space="preserve">
     <value>Window Size:</value>
   </data>
