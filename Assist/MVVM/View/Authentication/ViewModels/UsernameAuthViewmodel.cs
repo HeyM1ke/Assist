@@ -65,15 +65,14 @@ namespace Assist.MVVM.View.Authentication.ViewModels
             userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
             await userSettings.SetupProfile(user);
 
-            if (UserSettings.Instance.DefaultAccount == null)
-                UserSettings.Instance.DefaultAccount = userSettings.ProfileUuid;
+            if (AssistSettings.Current.DefaultAccount == null)
+                AssistSettings.Current.DefaultAccount = userSettings.ProfileUuid;
 
             AssistSettings.Current.Profiles.Add(userSettings);
             AssistApplication.AppInstance.CurrentUser = user;
             AssistApplication.AppInstance.CurrentProfile = userSettings;
             AssistApplication.AppInstance.OpenAssistMainWindow();
         }
-
         public async Task SubmitFactorCode(string code)
         {
             var resp = await user.Authentication.AuthenticateTwoFactorCode(code);

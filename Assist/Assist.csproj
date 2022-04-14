@@ -243,9 +243,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Resources\Assist_Progression_Template.png" />
 	  <Resource Include="Resources\BattlepassBacking.jpg" />
-	  <Resource Include="Resources\Earned.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_0.png" />
