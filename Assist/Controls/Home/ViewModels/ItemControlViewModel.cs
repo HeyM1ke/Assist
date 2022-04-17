@@ -23,7 +23,7 @@ namespace Assist.Controls.Home.ViewModels
         public async Task SetupSkin(string skinId)
         {
             var data = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
-            this.SkinImage = await App.LoadImageUrl(data.levels[0].displayIcon);
+            this.SkinImage = await App.LoadImageUrl(data.Levels[0].DisplayIcon);
             
         }
     }

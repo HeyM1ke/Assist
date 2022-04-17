@@ -15,10 +15,13 @@ namespace Assist.MVVM.ViewModel
 {
     internal class AssistApiController
     {
+        private const string baseUrl = "https://api.assistapp.dev";
+        private const string valUrl = $"{baseUrl}/valorant/";
+        private const string dataUrl = $"{baseUrl}/data";
         private const string updateUrl = "https://assist.rumblemike.com/Update";
         private const string statusUrl = "https://assist.rumblemike.com/Status";
         private const string newsUrl = "https://assist.rumblemike.com/News/FeaturedNews";
-        private const string bundleUrl = "https://assist.rumblemike.com/Bundle/";
+        private const string bundleUrl = "https://api.assistapp.dev/valorant/bundles/";
         private const string skinUrl = "https://assist.rumblemike.com/Skins/";
         private const string offerUrl = "https://assist.rumblemike.com/Offers/";
         private const string maintUrl = "https://assist.rumblemike.com/prod/maintenance/status";
@@ -148,23 +151,23 @@ namespace Assist.MVVM.ViewModel
             {
                 return new()
                 {
-                    bundleDisplayName = "Could Not Find Bundle on Server",
-                    bundleDescription = "Please Contact Mike to fix this issue.",
-                    bundleDisplayIcon = "https://cdn.rumblemike.com/Bundles/2116a38e-4b71-f169-0d16-ce9289af4bfa_DisplayIcon.png"
+                    BundleName = "Could Not Find Bundle on Server",
+                    Description = "Please Contact Mike to fix this issue.",
+                    DisplayIcon = "https://cdn.rumblemike.com/Bundles/2116a38e-4b71-f169-0d16-ce9289af4bfa_DisplayIcon.png"
                 };
             }
         }
-        public async Task<SkinObj> GetSkinObj (string dataAssetId)
+        public async Task<AssistSkin> GetSkinObj (string dataAssetId)
         {
-            var resp = await client.ExecuteAsync<SkinObj>(new RestRequest(skinUrl + dataAssetId), Method.Get);
+            var resp = await client.ExecuteAsync<AssistSkin>(new RestRequest(valUrl + "skins/" + dataAssetId), Method.Get);
 
             if (resp.IsSuccessful)
-                return JsonSerializer.Deserialize<SkinObj>(resp.Content);
+                return JsonSerializer.Deserialize<AssistSkin>(resp.Content);
             else
                 return new()
                 {
-                    displayName = "Could Not Find Skin on Server",
-                    displayIcon = "https://cdn.rumblemike.com/Bundles/2116a38e-4b71-f169-0d16-ce9289af4bfa_DisplayIcon.png"
+                    DisplayName = "Could Not Find Skin on Server",
+                    DisplayIcon = "https://cdn.rumblemike.com/Skins/2116a38e-4b71-f169-0d16-ce9289af4bfa_DisplayIcon.png"
                 };
         }
         public async Task<string> GetSkinPricing(string dataAssetId)
@@ -185,7 +188,6 @@ namespace Assist.MVVM.ViewModel
             else
                 return new() { bDownForMaintenance = false };
         }
-
         public async Task<List<BattlePassObj>> GetBattlepassData()
         {
             var resp = await new RestClient().ExecuteAsync(new RestRequest(battlepassUrl, Method.Get));

@@ -71,11 +71,11 @@ namespace Assist.Controls.Store.ViewModels
 
             var skinData = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(Offer.Offer.OfferID);
 
-            SkinName = skinData.displayName.ToUpper();
+            SkinName = skinData.DisplayName.ToUpper();
             await DetermineFontSize();
             SkinDiscount = $"-{Offer.DiscountPercent}%";
             SkinPrice = $"{string.Format("{0:n0}", Offer.DiscountCosts.ValorantPointCost)}";
-            SkinImage = await App.LoadImageUrl(skinData.levels[0].displayIcon);
+            SkinImage = await App.LoadImageUrl(skinData.Levels[0].DisplayIcon);
         }
 
         private async Task DetermineFontSize()

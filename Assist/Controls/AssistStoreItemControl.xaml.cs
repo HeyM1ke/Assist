@@ -78,10 +78,10 @@ namespace Assist.Controls
             priceLabel.Content = await _viewmodel.StoreItemViewModel.GetSkinPrice(skinId);
         }
 
-        private void LoadData(SkinObj data)
+        private void LoadData(AssistSkin data)
         {
-            skinName = data.displayName;
-            loadImage(data.levels[0].displayIcon);
+            skinName = data.DisplayName;
+            loadImage(data.Levels[0].DisplayIcon);
         }
     }
 }

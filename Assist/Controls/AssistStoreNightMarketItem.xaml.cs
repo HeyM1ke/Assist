@@ -36,7 +36,7 @@ namespace Assist.Controls
             skinName.Text = _viewModel.SkinName;
             discountPercentage.Content = _viewModel.DiscountPercentage;
             priceLabel.Content = _viewModel.ValorantPointCost;
-            loadImage(_viewModel.skinData.levels[0].displayIcon);
+            loadImage(_viewModel.skinData.Levels[0].DisplayIcon);
             
         }
 

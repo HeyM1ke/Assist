@@ -60,7 +60,9 @@ namespace Assist.Settings
             await pUser.Inventory.GetPlayerInventory();
 
             PCID = pUser.Inventory.CurrentInventory.PlayerData.PlayerCardID;
-            playerLevel = pUser.Inventory.CurrentInventory.PlayerData.AccountLevel;
+
+            var r = await pUser.Player.GetPlayerProgression();
+            playerLevel = r.Progress.Level;
         }
     }
 

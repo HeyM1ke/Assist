@@ -9,13 +9,13 @@ namespace Assist.MVVM.ViewModel
         public string SkinName { get; set; }
         public string DiscountPercentage { get; set; }
         public string ValorantPointCost { get; set; }
-        public SkinObj skinData { get; set; }
+        public AssistSkin skinData { get; set; }
 
         public async Task LoadSkin(NightMarket.NightMarketOffer skinOffer)
         {
             skinData = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinOffer.Offer.OfferID);
 
-            SkinName = skinData.displayName;
+            SkinName = skinData.DisplayName;
             DiscountPercentage = $"-{skinOffer.DiscountPercent}%";
             ValorantPointCost = $"{string.Format("{0:n0}", skinOffer.DiscountCosts.ValorantPointCost)}";
 

@@ -13,7 +13,7 @@ namespace Assist.MVVM.ViewModel
     {
        
        
-        public async Task<SkinObj> GetSkinInformation(string skinId)
+        public async Task<AssistSkin> GetSkinInformation(string skinId)
         {
             return await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
         }

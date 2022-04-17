@@ -24,7 +24,7 @@ namespace Assist.Controls.Store
     public partial class StorePopup : UserControl
     {
         private StorePopupViewModel _viewModel;
-        public StorePopup(SkinObj skin)
+        public StorePopup(AssistSkin skin)
         {
             DataContext = _viewModel = new StorePopupViewModel();
             _viewModel.Skin = skin;
@@ -34,9 +34,9 @@ namespace Assist.Controls.Store
 
         void Setup()
         {
-            for (int i = 0; i < _viewModel.Skin.levels.Count; i++)
+            for (int i = 0; i < _viewModel.Skin.Levels.Count; i++)
             {
-                if (_viewModel.Skin.levels[i].streamedVideoUrl is not null)
+                if (_viewModel.Skin.Levels[i].StreamedVideoUrl is not null)
                 {
                     var btn = new RadioButton()
                     {
@@ -50,9 +50,9 @@ namespace Assist.Controls.Store
             }
 
 
-            for (int i = 0; i < _viewModel.Skin.chromas.Count; i++)
+            for (int i = 0; i < _viewModel.Skin.Chromas.Count; i++)
             {
-                if (_viewModel.Skin.chromas[i].streamedVideoUrl is not null)
+                if (_viewModel.Skin.Chromas[i].StreamedVideoUrl is not null)
                 {
                     var btn = new RadioButton()
                     {

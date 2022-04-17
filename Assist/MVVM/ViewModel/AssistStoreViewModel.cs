@@ -34,7 +34,7 @@ namespace Assist.MVVM.ViewModel
             image.DecodePixelWidth = 974;
             image.DecodePixelHeight = 474;
             image.CacheOption = BitmapCacheOption.OnLoad;
-            image.UriSource = new Uri(currentBundle.bundleDisplayIcon, UriKind.Absolute);
+            image.UriSource = new Uri(currentBundle.DisplayIcon, UriKind.Absolute);
             image.EndInit();
 
             return image;

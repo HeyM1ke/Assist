@@ -12,11 +12,11 @@ namespace Assist.Controls.Store.ViewModels
 {
     internal class DailyItemViewModel : ViewModelBase
     {
-        private SkinObj _itemObj = new SkinObj()
+        private AssistSkin _itemObj = new AssistSkin()
         {
 
         };
-        public SkinObj ItemObj
+        public AssistSkin ItemObj
         {
             get => _itemObj;
             set => SetProperty(ref _itemObj, value);
@@ -56,8 +56,8 @@ namespace Assist.Controls.Store.ViewModels
         {
             this.ItemObj = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
             this.SkinPrice = await AssistApplication.AppInstance.AssistApiController.GetSkinPricing(skinId);
-            this.SkinImage = await App.LoadImageUrl(ItemObj.levels[0].displayIcon);
-            this.SkinName = ItemObj.displayName;
+            this.SkinImage = await App.LoadImageUrl(ItemObj.Levels[0].DisplayIcon);
+            this.SkinName = ItemObj.DisplayName;
         }
     }
 }

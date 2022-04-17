@@ -68,5 +68,11 @@ namespace Assist.Controls.Profile
         {
             _viewModel.UpdateProfileNote(NoteBox.Text);
         }
+
+        private async void RemoveBTN_Click(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.RemoveProfile();
+            this.Visibility = Visibility.Hidden;
+        }
     }
 }

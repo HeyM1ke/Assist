@@ -40,8 +40,8 @@ namespace Assist.Controls
             _bundleData =  await _viewModel.StoreBundleViewModel.GetBundleData(_bundleControlBundle.DataAssetID);
             loadImage(_bundleData);
 
-            bundleName = _bundleData.bundleDisplayName.ToUpper();
-            bundleDescription = _bundleData.bundleExtraDescription;
+            bundleName = _bundleData.BundleName.ToUpper();
+            bundleDescription = _bundleData.ExtraDescription;
             bundlePrice = await _viewModel.StoreBundleViewModel.GetBundlePrice(_bundleControlBundle);
         }
 
@@ -58,7 +58,7 @@ namespace Assist.Controls
             image.DecodePixelWidth = 974;
             image.DecodePixelHeight = 474;
             image.CacheOption = BitmapCacheOption.OnLoad;
-            image.UriSource = new Uri(bundleObj.bundleDisplayIcon, UriKind.Absolute);
+            image.UriSource = new Uri(bundleObj.DisplayIcon, UriKind.Absolute);
             image.EndInit();
 
             bundleImageContainer.Source = image;
