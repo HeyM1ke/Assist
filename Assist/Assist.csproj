@@ -276,21 +276,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MVVM\View\LoginPage\Pages\LoginPagev2.xaml.cs">
-	    <SubType>Code</SubType>
-	  </Compile>
 	  <Compile Update="Properties\Languages\Lang.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Lang.resx</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Page Update="MVVM\View\LoginPage\Pages\LoginPagev2.xaml">
-	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-	    <SubType>Designer</SubType>
-	  </Page>
 	</ItemGroup>
 
 	<ItemGroup>

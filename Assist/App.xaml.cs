@@ -89,7 +89,7 @@ namespace Assist
 
             var image = new BitmapImage();
             image.BeginInit();
-            //image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = BitmapCacheOption.OnDemand;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             
@@ -104,7 +104,7 @@ namespace Assist
             image.BeginInit();
             image.DecodePixelHeight = (int)(imageHeight * AssistApplication.GlobalScaleRate);
             image.DecodePixelWidth = (int)(imageWidth * AssistApplication.GlobalScaleRate);
-            //image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = BitmapCacheOption.OnDemand;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             

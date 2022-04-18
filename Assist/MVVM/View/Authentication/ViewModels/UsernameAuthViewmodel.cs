@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet;
 using ValNet.Objects.Authentication;
 using System.Globalization;

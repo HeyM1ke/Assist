@@ -13,7 +13,7 @@ using ValNet;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
-using AssistWPFTest.MVVM.ViewModel;
+using Assist.MVVM.ViewModel;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -58,7 +58,7 @@ namespace Assist.MVVM.ViewModel
             AssistLog.Normal("Calling Default Startup");
             //Check if RiotClient is Valid
             var clientPath = await AssistSettings.Current.FindRiotClient();
-            if (clientPath is not null)
+            if (clientPath != null)
                 AssistSettings.Current.RiotClientInstallPath = clientPath; // Set the Client path to settings.
             
             //Check if There are accounts within settings.
@@ -73,7 +73,7 @@ namespace Assist.MVVM.ViewModel
                 {
                     var profile = AssistSettings.Current.FindProfileById(AssistSettings.Current.DefaultAccount);
 
-                    if (profile is not null)
+                    if (profile != null)
                     {
                         RiotUser user = new RiotUser();
 

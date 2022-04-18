@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Assist.MVVM.ViewModel;
-using AssistWPFTest.MVVM.ViewModel;
 
 namespace Assist.Controls.Home.ViewModels
 {

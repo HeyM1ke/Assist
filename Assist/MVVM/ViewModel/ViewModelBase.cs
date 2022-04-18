@@ -5,8 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace AssistWPFTest.MVVM.ViewModel
+namespace Assist.MVVM.ViewModel
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Modules.Popup;
-using AssistWPFTest.MVVM.ViewModel;
+using Assist.MVVM.ViewModel;
 
 namespace Assist.Controls.Extra.ViewModels
 {

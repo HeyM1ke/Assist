@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using Assist.MVVM.ViewModel;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Store.ViewModels

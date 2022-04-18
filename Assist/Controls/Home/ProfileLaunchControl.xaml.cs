@@ -16,10 +16,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Assist.Controls.Extra;
+using Assist.Controls.Home.ViewModels;
 using Assist.Modules.Popup;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet;
 using ValNet.Objects;
 

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet.Objects;
 
 namespace Assist.Controls.Profile.ViewModel
