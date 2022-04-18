@@ -102,19 +102,21 @@
                     <StackPanel x:Name="Buttonpanel">
                             <RadioButton  Name="DashboardBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="300" Content="/Resources/Icons/Dashboard_Icon.png" Click="DashboardBTN_Click">
                                 <RadioButton.ToolTip>
-                                    <ToolTip
-                                         Background="Transparent"
-                                         BorderThickness="0"  >
-                                        <Grid>
-                                            <Grid.Effect>
-                                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
-                                            </Grid.Effect>
-                                            <StackPanel Orientation="Horizontal">
-                                                
-                                                <Border Margin="0,0,33,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="75" Height="28">
-                                                    <Label Padding="5" Content="{x:Static lang:Lang.Navigation_DashboardHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                                                </Border>
-                                            </StackPanel>
+                                    <ToolTip Placement="Right"
+                                             Background="Transparent"
+                                             BorderThickness="0">
+                                        <Grid Margin="0,5,0,0">
+                                            <Grid>
+                                                <Grid.Effect>
+                                                    <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
+                                                </Grid.Effect>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Path Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="28" Height="28" Stretch="Fill" StrokeThickness="0" Fill="{StaticResource AssistBackground}" Data="F1 M 287.328,237.333L 319.344,255.818L 319.344,218.849L 287.328,237.333 Z "  />
+                                                    <Border Margin="0,0,33,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="75" Height="28">
+                                                        <Label Padding="5" Content="{x:Static lang:Lang.Navigation_DashboardHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
                                         </Grid>
                                     </ToolTip>
                                 </RadioButton.ToolTip>

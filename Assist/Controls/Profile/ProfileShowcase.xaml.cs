@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -72,7 +73,13 @@ namespace Assist.Controls.Profile
         private async void RemoveBTN_Click(object sender, RoutedEventArgs e)
         {
             await _viewModel.RemoveProfile();
-            this.Visibility = Visibility.Hidden;
+            var t = VisualTreeHelper.GetParent(this);
+            if (t != null)
+            {
+                var g = t as WrapPanel;
+                g.Children.Remove(this);
+            }
+
         }
     }
 }
