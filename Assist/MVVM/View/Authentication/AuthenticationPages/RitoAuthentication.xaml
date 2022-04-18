@@ -61,8 +61,6 @@
         <Button Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Click="BackBTN_Click"></Button>
         <Grid Height="500" Width="700" Background="{StaticResource AssistBackgroundLight}">
             <Wpf:WebView2 Name="WebView" Height="500" Width="700" />
-            
-            
         </Grid>
 
     </Grid>

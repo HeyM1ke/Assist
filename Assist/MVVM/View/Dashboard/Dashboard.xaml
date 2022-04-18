@@ -17,11 +17,51 @@
       Background="{StaticResource AssistBackground}">
 
     <Grid>
-        <DockPanel HorizontalAlignment="Left" Margin="18">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Dock="Left" Width="731" HorizontalAlignment="Left" Margin="18">
             <StackPanel Width="731">
                 <home:ProfileLaunchControl/>
                 <home:DashboardStoreControl Margin="0,10"/>
             </StackPanel>
+
+        </DockPanel>
+        <DockPanel Grid.Column="1"  HorizontalAlignment="Left" Width="185" Margin="0,18,18,18">
+            <UniformGrid Height="30" VerticalAlignment="Top" Rows="1" Columns="2">
+                <UniformGrid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{StaticResource AssistNavigationButton_NotSelectedFill}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                        <Setter Property="BorderThickness" Value="1"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid>
+                                            <Rectangle Fill="{StaticResource ShopBorderColorAccent}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
+                                            <Label Content="{TemplateBinding Content}" Foreground="White"
+                                                   FontFamily="{StaticResource WorkSans}" FontWeight="Regular"
+                                                   Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_HoverHighlightOutline}"/>
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </UniformGrid.Resources>
+                <Button x:Name="Support_Btn" Content="Support" Margin="0,0,2,0" Click="Support_Btn_Click"></Button>
+                <Button x:Name="Discord_Btn" Content="Discord" Margin="2,0,0,0" Click="Discord_Btn_Click"></Button>
+            </UniformGrid>
         </DockPanel>
     </Grid>
 </Page>
