@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Assist.MVVM.View.Extra.ViewModels;
 using AutoUpdaterDotNET;
 
 namespace Assist.MVVM.View.Extra
@@ -21,17 +23,21 @@ namespace Assist.MVVM.View.Extra
     public partial class UpdateWindow : Window
     {
         UpdateInfoEventArgs args { get; set; }
+        private readonly UpdateWindowViewModel _viewModel;
         public UpdateWindow(UpdateInfoEventArgs _args)
         {
+            DataContext = _viewModel = new UpdateWindowViewModel();
             args = _args;
+            
             InitializeComponent();
             SetupPage();
         }
 
         private void SetupPage()
         {
-            updateLabel.Content = $"{args.CurrentVersion} UPDATE AVAILABLE";
-            changeLog.Text = args.ChangelogURL;
+            _viewModel.ChangeLog = args.ChangelogURL;
+            _viewModel.Version = "v" + args.CurrentVersion;
+            
         }
 
         #region basic

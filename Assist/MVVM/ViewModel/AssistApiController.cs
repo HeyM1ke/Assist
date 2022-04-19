@@ -17,8 +17,8 @@ namespace Assist.MVVM.ViewModel
     {
         private const string baseUrl = "https://api.assistapp.dev";
         private const string valUrl = $"{baseUrl}/valorant/";
-        private const string dataUrl = $"{baseUrl}/data";
-        private const string updateUrl = "https://assist.rumblemike.com/Update";
+        private const string dataUrl = $"{baseUrl}/data/";
+        private const string updateUrl = $"{dataUrl}update";
         private const string statusUrl = "https://assist.rumblemike.com/Status";
         private const string newsUrl = $"{valUrl}news";
         private const string bundleUrl = "https://api.assistapp.dev/valorant/bundles/";
@@ -71,9 +71,9 @@ namespace Assist.MVVM.ViewModel
             {
                 args.UpdateInfo = new UpdateInfoEventArgs
                 {
-                    CurrentVersion = updateData.version,
-                    ChangelogURL = updateData.changelog,
-                    DownloadURL = updateData.url,
+                    CurrentVersion = updateData.updateVersion,
+                    ChangelogURL = updateData.updateChangelog,
+                    DownloadURL = updateData.updateUrl,
                     Mandatory =
                     {
                         Value = updateData.mandatory.value,

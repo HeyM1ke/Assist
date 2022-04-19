@@ -14,7 +14,7 @@
 
         <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
             <Grid>
-                <Label Content="Assist Error" Foreground="White" FontFamily="Bahnschrift SemiBold" Opacity=".5"/>
+                <Label Content="Assist Error" Foreground="White" FontFamily="{StaticResource WorkSans}" Opacity=".5"/>
                 <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click" ></Button>
                 <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0" ></Button>
             </Grid>

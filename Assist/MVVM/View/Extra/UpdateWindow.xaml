@@ -45,7 +45,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border CornerRadius="20" Background="{StaticResource BackingBlack1}" BorderThickness="0">
+    <Border CornerRadius="20" Background="{StaticResource AssistBackground}" BorderThickness="0">
         <Grid Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -54,6 +54,7 @@
 
             <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
                 <Grid>
+                    <Label Content="Assist Update" Foreground="White" FontFamily="{StaticResource WorkSans}" Opacity=".5"/>
                     <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click" ></Button>
                     <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0" ></Button>
                 </Grid>
@@ -61,34 +62,55 @@
 
             <Grid Grid.Row="1" Background="Transparent">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250" Source="https://cdn.rumblemike.com/Maps/E2AD5C54-4114-A870-9641-8EA21279579A_splash.png" Stretch="UniformToFill" StretchDirection="Both">
-                    <Image.Effect>
-                        <BlurEffect Radius="20" RenderingBias="Performance"/>
-                    </Image.Effect>
-                </Image>
-                <Image Height="200" Source="/Resources/Assist_Logo_White.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <StackPanel VerticalAlignment="Center">
+                    <Image Source="../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="150" Margin="10"></Image>
+                    <Label Grid.Row="0" Content="{Binding Version}" FontSize="24" Foreground="White" FontWeight="Regular" FontFamily="{StaticResource WorkSans}" HorizontalContentAlignment="Center"></Label>
+                    <Label Grid.Row="0" Content="UPDATE AVAILABLE" FontSize="14" Foreground="White" FontWeight="SemiBold" FontFamily="{StaticResource WorkSans}" HorizontalContentAlignment="Center" Padding="0"></Label>
+                </StackPanel>
+                
 
                 <Grid Grid.Column="1" Background="Transparent">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="70"/>
                         <RowDefinition/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                            <Setter Property="BorderThickness" Value="1"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                            <Grid>
+                                                <Rectangle Fill="{StaticResource AssistNavigationButton_SelectedHighlightOutline}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
+                                                <Label Content="{TemplateBinding Content}" Foreground="White"
+                                                           FontFamily="{StaticResource WorkSans}" FontWeight="Normal"
+                                                           Padding="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="10"></Label>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
 
-                    <StackPanel Grid.Row="0" Margin="10,10,10,0" VerticalAlignment="Top">
-                        <Label x:Name="updateLabel" Grid.Row="0" Content="UPDATE AVAILIBLE" FontSize="30" Foreground="White" FontWeight="SemiBold" FontFamily="Bahnschrift SemiBold"></Label>
-                        <Rectangle Grid.Row="0" Fill="White" Height="5" StrokeThickness="0" ></Rectangle>
-                    </StackPanel>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"/>
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Resources>
+                    <TextBlock  x:Name="changeLog" Grid.Row="0" Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" FontSize="16" FontFamily="{StaticResource WorkSans}" Text="{Binding ChangeLog}" Padding="10" TextAlignment="Center">
+                    </TextBlock>
 
-                    <TextBlock x:Name="changeLog" Grid.Row="1" Foreground="White" Background="#FF2F2F2F" Margin="10" FontSize="16" FontFamily="Bahnschrift SemiLight" TextWrapping="Wrap"/>
 
-
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                        <Button x:Name="updateBtn" Style="{StaticResource updateBtnStyle}" Content="UPDATE" Click="updateBtn_Click"></Button>
-                    </StackPanel>
+                    <Button x:Name="updateBtn" Content="UPDATE" Click="updateBtn_Click" Grid.Row="1" Width="100" Margin="5" Padding="0"></Button>
                 </Grid>
             </Grid>
 
