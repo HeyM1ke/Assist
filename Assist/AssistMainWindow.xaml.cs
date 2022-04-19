@@ -34,7 +34,7 @@ namespace Assist
     /// </summary>
     public partial class AssistMainWindow : Window
     {
-        private const string clickSoundHost = "https://cdn.rumblemike.com/Static/Click.mp3";
+        private const string clickSoundHost = "https://cdn.assistapp.dev/Static/Click.mp3";
         public static AssistMainWindow Current;
         public static Grid PopupContainer;
         private MediaPlayer _mPlayer;
@@ -46,6 +46,7 @@ namespace Assist
             Current = this;
             _mPlayer = new MediaPlayer();
             PopupContainer = PopupHolder;
+            Current._mPlayer.Open(new Uri(clickSoundHost));
         }
 
         private void DetermineResolution()

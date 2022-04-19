@@ -20,39 +20,32 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1" Background="{StaticResource BackingBlack1}">
+        <Grid Grid.Row="1" Background="{StaticResource AssistBackground}">
             <Grid.Resources>
-                <Style x:Key="BtnStyle" TargetType="{x:Type Button}">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Background" Value="#444444"/>
-                    <Setter Property="Height" Value="30"/>
-                    <Setter Property="Width" Value="80"/>
-                    <Setter Property="Margin" Value="0,0,20,5"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="FontFamily" Value="Bahnschrift Light"/>
-                    <Setter Property="Content" Value="UPDATE"/>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate>
-                                <Grid>
-                                    <Border CornerRadius="5" Background="{TemplateBinding Background}">
-
-                                    </Border>
-                                    <TextBlock Text="OK" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Bahnschrift SemiBold"/>
-                                </Grid>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Rectangle Fill="{StaticResource AssistNavigationButton_SelectedHighlightOutline}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
+                                        <Label Content="{TemplateBinding Content}" Foreground="White"
+                                                           FontFamily="{StaticResource WorkSans}" FontWeight="Normal"
+                                                           Padding="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="12"></Label>
+                                    </Grid>
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
 
-
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource BackingBlack15}">
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="False">
-                            <Setter Property="Background" Value="{StaticResource BackingBlack12}">
-                            </Setter>
+                            <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -61,8 +54,8 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Foreground="White" Background="{StaticResource BackingBlack12}" Margin="10" BorderThickness="0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
-            <Button Grid.Row="1" x:Name="errorOkBTn" Style="{StaticResource BtnStyle}" Click="errorOkBTn_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0"></Button>
+            <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" BorderThickness="0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+            <Button Grid.Row="1" Content="Ok" x:Name="errorOkBTn" Click="errorOkBTn_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="80" Height="35"></Button>
         </Grid>
     </Grid>
 </Window>

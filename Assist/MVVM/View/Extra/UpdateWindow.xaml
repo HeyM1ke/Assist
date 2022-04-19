@@ -22,7 +22,7 @@
                 <Setter.Value>
                     <ControlTemplate>
                         <Grid>
-                            <Border CornerRadius="5" Background="{TemplateBinding Background}"/>
+                            <Border CornerRadius="0" Background="{TemplateBinding Background}"/>
                             <TextBlock Text="UPDATE" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Bahnschrift SemiBold"/>
                         </Grid>
                     </ControlTemplate>
@@ -45,7 +45,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border CornerRadius="20" Background="{StaticResource AssistBackground}" BorderThickness="0">
+    <Border CornerRadius="0" Background="{StaticResource AssistBackground}" BorderThickness="0">
         <Grid Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>

@@ -21,37 +21,30 @@
 
         <Grid Grid.Row="1" Background="{StaticResource BackingBlack1}">
             <Grid.Resources>
-                <Style x:Key="BtnStyle" TargetType="{x:Type Button}">
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Background" Value="#444444"/>
-                    <Setter Property="Height" Value="30"/>
-                    <Setter Property="Width" Value="80"/>
-                    <Setter Property="Margin" Value="0,0,20,5"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="FontFamily" Value="Bahnschrift Light"/>
-                    <Setter Property="Content" Value="UPDATE"/>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate>
-                                <Grid>
-                                    <Border CornerRadius="5" Background="{TemplateBinding Background}">
-
-                                    </Border>
-                                    <TextBlock Text="CLOSE" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Bahnschrift SemiBold"/>
-                                </Grid>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Rectangle Fill="{StaticResource AssistNavigationButton_SelectedHighlightOutline}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
+                                        <Label Content="{TemplateBinding Content}" Foreground="White"
+                                                           FontFamily="{StaticResource WorkSans}" FontWeight="Normal"
+                                                           Padding="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="10"></Label>
+                                    </Grid>
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
 
-
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource BackingBlack15}">
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="False">
-                            <Setter Property="Background" Value="{StaticResource BackingBlack12}">
-                            </Setter>
+                            <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -60,8 +53,15 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Text="Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance." Foreground="White" Background="{StaticResource BackingBlack12}" Margin="10" BorderThickness="0" FontSize="36" TextWrapping="Wrap" TextAlignment="Center" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" FontFamily="Bahnschrift Light"/>
-            <Button Grid.Row="1" x:Name="closeOkBTn" Style="{StaticResource BtnStyle}" Click="closeOkBTn_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0"></Button>
+            <StackPanel Height="375">
+                <Image Source="../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="100"></Image>
+                <Label Grid.Row="0" Content="MAINTENANCE" FontSize="14" Foreground="White" FontWeight="SemiBold" FontFamily="{StaticResource WorkSans}" HorizontalContentAlignment="Center" Padding="0"></Label>
+                <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Text="Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."
+                         Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" BorderThickness="0"
+                         FontSize="16" TextWrapping="Wrap" TextAlignment="Center" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" FontFamily="{StaticResource WorkSans}" Height="240" Padding="10"/>
+            </StackPanel>
+            
+            <Button Grid.Row="1" x:Name="closeOkBTn" Content="Close" Click="closeOkBTn_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="80" Height="30"></Button>
         </Grid>
     </Grid>
 </Window>
