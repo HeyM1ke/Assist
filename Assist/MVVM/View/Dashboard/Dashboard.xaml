@@ -139,11 +139,8 @@
                 <Button x:Name="Support_Btn" Content="Support" Margin="0,0,2,0" Click="Support_Btn_Click"></Button>
                 <Button x:Name="Discord_Btn" Content="Discord" Margin="2,0,0,0" Click="Discord_Btn_Click"></Button>
             </UniformGrid>
-            <StackPanel VerticalAlignment="Top" Margin="0,10,0,0">
-                    <home:NewsControl Margin="0,5" />
-                    <home:NewsControl Margin="0,5" />
-                    <home:NewsControl Margin="0,5" />
-
+            <StackPanel x:Name="NewsPanel" VerticalAlignment="Top" Margin="0,10,0,0" Initialized="NewsPanel_Initialized">
+                    
                 </StackPanel>
         </DockPanel>
     </Grid>

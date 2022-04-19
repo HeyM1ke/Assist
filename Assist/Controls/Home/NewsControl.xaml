@@ -22,13 +22,13 @@
                             </Grid.RowDefinitions>
 
                             <Border Grid.RowSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
-                            <Image Margin="0" Source="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt99a63fb9b15fc02b/6257357d0609f351d0309332/network_banner.jpg" Stretch="UniformToFill"></Image>
+                            <Image Margin="0" Source="{Binding NewsImage}" Stretch="UniformToFill"></Image>
                             <Border Background="{TemplateBinding Foreground}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Grid.Row="0" Margin="0"></Border>
                             <Border Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                 <Grid>
                                     <StackPanel>
-                                        <Label FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" Content="Network Optimizations" Foreground="White" Padding="0" Margin="2"></Label>
-                                        <TextBlock Margin="2" Text="This post is about the recent network optimzations we have made to valorant and what we are planning." Foreground="White" TextWrapping="WrapWithOverflow"
+                                        <Label FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" Content="{Binding NewsTitle}" Foreground="White" Padding="0" Margin="2"></Label>
+                                        <TextBlock Margin="2" Text="{Binding NewsDescription}" Foreground="White" TextWrapping="WrapWithOverflow"
                                                    FontFamily="{StaticResource WorkSans}" FontSize="8" ></TextBlock>
                                     </StackPanel>
                                 </Grid>
@@ -47,5 +47,5 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Button></Button>
+    <Button Click="NewsControl_Click"></Button>
 </UserControl>

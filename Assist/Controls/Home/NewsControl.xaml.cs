@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Assist.Controls.Home.ViewModels;
+using Assist.MVVM.Model;
 
 namespace Assist.Controls.Home
 {
@@ -22,23 +23,29 @@ namespace Assist.Controls.Home
     public partial class NewsControl : UserControl
     {
         private readonly NewsControlViewModel _viewModel;
-        private readonly object _newsData;
+        private readonly AssistNewsObj _newsData;
         public NewsControl()
         {
             DataContext = _viewModel = new NewsControlViewModel();
             InitializeComponent();
+            
         }
 
-        public NewsControl(object newsData)
+        public NewsControl(AssistNewsObj newsData)
         {
+            _newsData = newsData;
             DataContext = _viewModel = new NewsControlViewModel();
             InitializeComponent();
         }
 
         private async void NewsControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_newsData != null)
-                _viewModel.LoadNews();
+            if (_newsData != null) await _viewModel.LoadNews(_newsData);
+        }
+
+        private async void NewsControl_Click(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.OpenNewsUrl();
         }
     }
 }

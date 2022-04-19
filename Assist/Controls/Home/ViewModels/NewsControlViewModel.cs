@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Assist.MVVM.Model;
 using Assist.MVVM.ViewModel;
 
 namespace Assist.Controls.Home.ViewModels
@@ -55,9 +56,12 @@ namespace Assist.Controls.Home.ViewModels
             });
         }
 
-        public async Task LoadNews()
+        public async Task LoadNews(AssistNewsObj data)
         {
-            throw new NotImplementedException();
+            NewsTitle = data.NewsTitle;
+            NewsDescription = data.NewsDescription;
+            NewsImage = await App.LoadImageUrl(data.NewsImage, 185, 95);
+            NewsUrl = data.NewsUrl;
         }
     }
 }

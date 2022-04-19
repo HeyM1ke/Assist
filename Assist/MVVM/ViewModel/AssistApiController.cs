@@ -20,7 +20,7 @@ namespace Assist.MVVM.ViewModel
         private const string dataUrl = $"{baseUrl}/data";
         private const string updateUrl = "https://assist.rumblemike.com/Update";
         private const string statusUrl = "https://assist.rumblemike.com/Status";
-        private const string newsUrl = "https://assist.rumblemike.com/News/FeaturedNews";
+        private const string newsUrl = $"{valUrl}news";
         private const string bundleUrl = "https://api.assistapp.dev/valorant/bundles/";
         private const string skinUrl = "https://assist.rumblemike.com/Skins/";
         private const string offerUrl = "https://assist.rumblemike.com/Offers/";
@@ -93,25 +93,25 @@ namespace Assist.MVVM.ViewModel
             Trace.WriteLine("ran?");
         }
 
-        public async Task<List<News>> GetAssistNews()
+        public async Task<List<AssistNewsObj>> GetAssistNews()
         {
             var resp = await client.ExecuteAsync(new RestRequest(newsUrl), Method.Get);
 
             if (resp.IsSuccessful)
             {
-                return JsonSerializer.Deserialize<List<News>>(resp.Content);
+                return JsonSerializer.Deserialize<List<AssistNewsObj>>(resp.Content);
             }
             else
             {
-                var defaultError = new News
+                var defaultError = new AssistNewsObj()
                 {
-                    title = "Assist: Error Getting Articles",
-                    description = "Yea.. so articles werent found.",
-                    featureimage = "https://i.kym-cdn.com/entries/icons/original/000/037/349/Screenshot_14.jpg",
-                    newslink = "google.com"
+                    NewsTitle = "Assist: Error Getting Articles",
+                    NewsDescription = "Yea.. so articles werent found.",
+                    NewsImage = "https://i.kym-cdn.com/entries/icons/original/000/037/349/Screenshot_14.jpg",
+                    NewsUrl = "assistapp.dev"
                 };
 
-                return new List<News>()
+                return new List<AssistNewsObj>()
                 {
                     defaultError
                 };

@@ -296,4 +296,8 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Services\Modules\" />
+	</ItemGroup>
+
 </Project>
