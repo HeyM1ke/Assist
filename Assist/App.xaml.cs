@@ -38,8 +38,7 @@ namespace Assist
             //Startup Code here.
             base.OnStartup(e);
             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist"));
-
-
+            
             try
             {
                 AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(File.ReadAllText(AssistSettings.SettingsFilePath));
@@ -51,8 +50,7 @@ namespace Assist
             }
 
             ChangeLanguage();
-
-
+            
             AssistLog.Normal("Starting InitPage");
 
             AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
@@ -81,7 +79,7 @@ namespace Assist
             AssistLog.Error("Unhandled Ex Source: " + e.Exception.Source);
             AssistLog.Error("Unhandled Ex StackTrace: " + e.Exception.StackTrace);
             AssistLog.Error("Unhandled Ex Message: " + e.Exception.Message);
-            MessageBox.Show(e.Exception.Message, "Assist Hit an Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(e.Exception.Message, "Assist Hit an Error : Logfile Created", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
         public static async Task<BitmapImage> LoadImageUrl(string url)
@@ -91,11 +89,10 @@ namespace Assist
 
             var image = new BitmapImage();
             image.BeginInit();
-            //image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = BitmapCacheOption.OnDemand;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             
-
             return image;
         }
         public static async Task<BitmapImage> LoadImageUrl(string url, int imageWidth, int imageHeight)
@@ -107,7 +104,7 @@ namespace Assist
             image.BeginInit();
             image.DecodePixelHeight = (int)(imageHeight * AssistApplication.GlobalScaleRate);
             image.DecodePixelWidth = (int)(imageWidth * AssistApplication.GlobalScaleRate);
-            //image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = BitmapCacheOption.OnDemand;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             

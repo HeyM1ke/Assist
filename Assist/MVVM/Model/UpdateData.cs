@@ -8,16 +8,16 @@ namespace Assist.MVVM.Model
 {
     internal class UpdateData
     {
-        public string version { get; init; }
-        public string url { get; init; }
-        public string changelog { get; init; }
-        public MandatoryData mandatory { get; init; }
+        public string updateUrl { get; set; }
+        public string updateVersion { get; set; }
+        public string updateChangelog { get; set; }
+        public Mandatory mandatory { get; set; }
 
-        public class MandatoryData
+        public class Mandatory
         {
-            public bool value { get; init; }
-            public string minVersion { get; init; }
-            public int mode { get; init; }
+            public bool value { get; set; }
+            public string minVersion { get; set; }
+            public int mode { get; set; }
         }
     }
 }

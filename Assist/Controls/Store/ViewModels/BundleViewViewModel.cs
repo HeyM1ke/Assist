@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using Assist.MVVM.ViewModel;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Store.ViewModels
@@ -57,8 +56,8 @@ namespace Assist.Controls.Store.ViewModels
             Bundle.DurationRemainingInSeconds += 10;
             var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(Bundle.DataAssetID);
             await StartCountdown();
-            this.BundleImage = await App.LoadImageUrl(temp.bundleDisplayIcon, 673, 328);
-            this.BundleName = temp.bundleDisplayName.ToUpper();
+            this.BundleImage = await App.LoadImageUrl(temp.DisplayIcon, 673, 328);
+            this.BundleName = temp.BundleName.ToUpper();
             this.BundlePrice = await GetBundlePrice(Bundle);
         }
 

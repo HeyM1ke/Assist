@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.MVVM.Model;
 using Assist.MVVM.ViewModel;
-using AssistWPFTest.MVVM.ViewModel;
 
 namespace Assist.Settings
 {

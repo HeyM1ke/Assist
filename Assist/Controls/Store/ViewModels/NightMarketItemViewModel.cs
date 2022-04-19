@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Assist.MVVM.ViewModel;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Store.ViewModels
@@ -71,11 +70,11 @@ namespace Assist.Controls.Store.ViewModels
 
             var skinData = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(Offer.Offer.OfferID);
 
-            SkinName = skinData.displayName.ToUpper();
+            SkinName = skinData.DisplayName.ToUpper();
             await DetermineFontSize();
             SkinDiscount = $"-{Offer.DiscountPercent}%";
             SkinPrice = $"{string.Format("{0:n0}", Offer.DiscountCosts.ValorantPointCost)}";
-            SkinImage = await App.LoadImageUrl(skinData.levels[0].displayIcon);
+            SkinImage = await App.LoadImageUrl(skinData.Levels[0].DisplayIcon);
         }
 
         private async Task DetermineFontSize()

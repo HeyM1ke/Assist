@@ -13,7 +13,6 @@ using Assist.Controls.Progression;
 using Assist.MVVM.Model;
 using Assist.MVVM.View.Progression.Sectors;
 using Assist.MVVM.ViewModel;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet;
 using ValNet.Objects.Contacts;
 

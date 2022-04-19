@@ -102,6 +102,6 @@
         </Grid.Resources>
 
         <Button Style="{StaticResource BattlepassBtn}" x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="BATTLEPASS" Click="BattlepassButton_Click"/>
-        <Button Visibility="Visible"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
+        <Button Visibility="Collapsed"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
     </Grid>
 </Page>

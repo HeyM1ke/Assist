@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Assist.MVVM.ViewModel;
 using Assist.Settings;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet.Objects;
 
 namespace Assist.Controls.Profile.ViewModel
@@ -59,5 +59,28 @@ namespace Assist.Controls.Profile.ViewModel
             this.Profile.profileNote = message;
         }
 
+
+        public async Task RemoveProfile()
+        {
+            var r = AssistSettings.Current.Profiles.Remove(this.Profile);
+
+            if (r)
+            {
+                if (AssistSettings.Current.Profiles.Count == 0)
+                {
+                    AssistApplication.AppInstance.OpenAccountLoginWindow(false);
+                    return;
+                    
+                }
+                    
+
+
+                // Check if the current Profile Logged in is the removed profile.
+                if (AssistApplication.AppInstance.CurrentProfile.ProfileUuid == this.Profile.ProfileUuid)
+                {
+                    AssistApplication.AppInstance.AuthenticateWithProfileSetting(AssistSettings.Current.Profiles[0]);
+                }
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@
     <Product>Assist</Product>
     <Description>Valorant Program made by Mike</Description>
     <PackageIcon>assistlogoIcon.png</PackageIcon>
-    <ApplicationIcon>assistLogo.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\assistLogo.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <PackageProjectUrl>https://github.com/HeyM1ke/Assist/</PackageProjectUrl>
@@ -31,6 +31,7 @@
     <None Remove="Controls\Home\smallart %281%29.png" />
     <None Remove="Controls\Home\splash.png" />
     <None Remove="Fonts\Montserrat-Black.ttf" />
+    <None Remove="Resources\assistLogo.ico" />
     <None Remove="Resources\Assist_Progression_Template.png" />
     <None Remove="Resources\backImage.png" />
     <None Remove="Resources\BattlepassBacking.jpg" />
@@ -110,10 +111,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="assistLogo.ico" />
     <Resource Include="Assist_Logo_White.png" />
     <Resource Include="Controls\Home\smallart (1).png" />
     <Resource Include="Controls\Home\splash.png" />
+    <Resource Include="Resources\assistLogo.ico" />
     <Resource Include="Resources\Icons\backImage.png" />
     <Resource Include="Resources\ContentTiers\DeluxeTier_Icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -233,7 +234,7 @@
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1150.38" />
     <PackageReference Include="RestSharp" Version="107.1.3-alpha.0.2" />
-    <PackageReference Include="ValNet" Version="0.0.0.7" />
+    <PackageReference Include="ValNet" Version="0.0.0.8" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
@@ -243,9 +244,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Resources\Assist_Progression_Template.png" />
+	  <Content Include="Resources\assistLogo.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Resource Include="Resources\BattlepassBacking.jpg" />
-	  <Resource Include="Resources\Earned.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_0.png" />
@@ -278,21 +281,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MVVM\View\LoginPage\Pages\LoginPagev2.xaml.cs">
-	    <SubType>Code</SubType>
-	  </Compile>
 	  <Compile Update="Properties\Languages\Lang.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Lang.resx</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Page Update="MVVM\View\LoginPage\Pages\LoginPagev2.xaml">
-	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-	    <SubType>Designer</SubType>
-	  </Page>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -306,6 +299,10 @@
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Lang.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Services\Modules\" />
 	</ItemGroup>
 
 </Project>

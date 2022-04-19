@@ -45,6 +45,10 @@ namespace Assist.Controls.Profile
             }
 
             AccountComboBox.SelectionChanged += AccountComboBoxOnSelectionChanged;
+            if (string.IsNullOrEmpty(AssistSettings.Current.DefaultAccount))
+            {
+                AccountComboBox.SelectedIndex = AccountComboBox.Items.Count - 1;
+            }
         }
 
         private void AccountComboBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)

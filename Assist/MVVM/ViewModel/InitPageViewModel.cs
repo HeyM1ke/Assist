@@ -13,7 +13,7 @@ using ValNet;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
-using AssistWPFTest.MVVM.ViewModel;
+using Assist.MVVM.ViewModel;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -56,11 +56,21 @@ namespace Assist.MVVM.ViewModel
                 return;
 
             AssistLog.Normal("Calling Default Startup");
+
             //Check if RiotClient is Valid
             var clientPath = await AssistSettings.Current.FindRiotClient();
-            if (clientPath is not null)
+            if (clientPath != null)
                 AssistSettings.Current.RiotClientInstallPath = clientPath; // Set the Client path to settings.
-            
+            else
+            {
+                var ex = new Exception(
+                    "Riot Client was not found on PC, Please install the riot client. If you have the riot client installed. Please Look for Support on Discord.");
+                AssistApplication.AppInstance.OpenAssistErrorWindow(ex, "");
+                Environment.Exit(1);
+
+            }
+
+
             //Check if There are accounts within settings.
             if(AssistSettings.Current.Profiles.Count == 0)
             {
@@ -73,27 +83,19 @@ namespace Assist.MVVM.ViewModel
                 {
                     var profile = AssistSettings.Current.FindProfileById(AssistSettings.Current.DefaultAccount);
 
-                    if (profile is not null)
+                    if (profile != null)
                     {
                         RiotUser user = new RiotUser();
 
-                        foreach (Cookie cookie in profile.Convert64ToCookies().GetAllCookies())
-                        {
-                            user.UserClient.CookieContainer.Add(cookie);
-                        }
-
-                        var gamename = profile.Gamename;
-                        var tagLine = profile.Tagline;
-
-                        AssistLog.Normal($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+                        
                         try
                         {
-                            await user.Authentication.AuthenticateWithCookies();
+                            user = await AssistAuthenticationController.ProfileLogin(profile);
                         }
                         catch (Exception ex)
                         {
-                            AssistLog.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine} | Removing Account");
-                            AssistApplication.AppInstance.OpenAssistErrorWindow(ex, $"Login for account: {gamename}#{tagLine} is expired. Please re-add the account.");
+                            AssistLog.Error($"Account is no longer valid - {profile.RiotId} | Removing Account");
+                            AssistApplication.AppInstance.OpenAssistErrorWindow(ex, $"Login for account: {profile.RiotId} is expired. Please re-add the account.");
                             AssistSettings.Current.Profiles.Remove(profile);
 
                             // Creates fallback to default account if the default account is invalid
@@ -111,7 +113,7 @@ namespace Assist.MVVM.ViewModel
                         if (user.AuthType == AuthType.Cookie)
                         {
                             profile.ConvertCookiesTo64(user.UserClient.CookieContainer); // Resaves cookies after each login to prevent invalid cookies.
-                            profile.SetupProfile(user);
+                            await profile.SetupProfile(user);
                             if (!string.IsNullOrEmpty(user.tokenData.entitle) && !string.IsNullOrEmpty(user.tokenData.access))
                             {
                                 AssistApplication.AppInstance.CurrentProfile = profile;
@@ -153,31 +155,21 @@ namespace Assist.MVVM.ViewModel
             {
                 var profile = AssistSettings.Current.Profiles[i];
 
-                RiotUser user = new RiotUser();
+                RiotUser user = new RiotUser(); ;
 
-                foreach (Cookie cookie in profile.Convert64ToCookies().GetAllCookies())
-                {
-                    user.UserClient.CookieContainer.Add(cookie);
-                }
-
-                var gamename = profile.Gamename;
-                var tagLine = profile.Tagline;
-
-                AssistLog.Normal($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
                 try
                 {
-                    AssistLog.Normal($"Authentcating with Cookies for User {AssistSettings.Current.Profiles[i].ProfileUuid} / {gamename}#{tagLine}");
-                    await user.Authentication.AuthenticateWithCookies();
+                    user = await AssistAuthenticationController.ProfileLogin(profile);
+
                 }
                 catch (Exception ex)
                 {
-                    AssistLog.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine} || Removing Account");
-                    AssistApplication.AppInstance.OpenAssistErrorWindow(ex, $"Could not login to account: {gamename}#{tagLine}, it has been removed from your account list. Please re-add the account.");
+                    AssistLog.Error($"ACCOUNT NO LONGER VALID - {profile.RiotId} || Removing Account");
+                    AssistApplication.AppInstance.OpenAssistErrorWindow(ex, $"Could not login to account: {profile.RiotId}, it has been removed from your account list. Please re-add the account.");
                     AssistSettings.Current.Profiles.Remove(profile);
-                    i--;
                     AssistSettings.Save();
+                    i--;
                 }
-
 
                 if (user.AuthType == AuthType.Cookie)
                 {

@@ -20,17 +20,7 @@ namespace Assist.MVVM.ViewModel
         public static AssistApplication AppInstance { get; } = new();
 
         public AssistApiController AssistApiController { get; set; }
-        //Page Models
-        public LoginPageViewModel LoginPageViewModel {  get; set; }
-        public AssistFeaturedViewModel assistFeaturedViewModel { get; set; }
-        public AssistStoreViewModel StorePageViewModel { get; set; }
-        public AssistAccountSwitchViewModel AccountSwitchControlViewModel { get; set; }
         // Control Models
-
-        public AssistRankGraphMicroViewModel RankMicroGraphViewModel { get; set; }
-        public AssistStoreBundleViewModel StoreBundleViewModel { get; set; }
-        public AssistStoreItemViewModel StoreItemViewModel { get; set;}
-        public ProgressionBattlepassViewmodel BattlepassViewModel { get; set; }
 
         // Backbone
         public RiotUser CurrentUser { get; set; }
@@ -40,22 +30,8 @@ namespace Assist.MVVM.ViewModel
 
         public AssistApplication()
         {
-            // Application Models
             AssistApiController = new();
 
-            // General Viewmodels
-            AccountSwitchControlViewModel = new();
-
-            //Page Viewmodels
-            StorePageViewModel = new();
-
-            // Store Models
-            StoreItemViewModel = new();
-            StoreBundleViewModel = new();
-            LoginPageViewModel = new();
-
-            //Control Models
-            RankMicroGraphViewModel = new();
         }
 
 

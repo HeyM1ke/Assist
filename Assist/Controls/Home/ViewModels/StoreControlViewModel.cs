@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Assist.MVVM.ViewModel;
-using AssistWPFTest.MVVM.ViewModel;
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Home.ViewModels
@@ -53,8 +52,8 @@ namespace Assist.Controls.Home.ViewModels
         private async Task SetupBundle(Bundle bundle)
         {
             var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(bundle.DataAssetID);
-            BundleImage = await App.LoadImageUrl(temp.bundleDisplayIcon,705 , 344);
-            BundleName = temp.bundleDisplayName.ToUpper();
+            BundleImage = await App.LoadImageUrl(temp.DisplayIcon,705 , 344);
+            BundleName = temp.BundleName.ToUpper();
             BundlePrice = await GetBundlePrice(bundle);
         }
 

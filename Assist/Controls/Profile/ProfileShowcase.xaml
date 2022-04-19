@@ -88,7 +88,7 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button x:Name="SwitchBTN" Height="25" Width="25" Margin="2" Content="../../Resources/Icons/Switch.png" Click="SwitchBTN_Click"></Button>
-                    <Button x:Name="RemoveBTN" Height="25" Width="25"  Margin="2" Content="../../Resources/Icons/Remove_Icon.png"></Button>
+                    <Button x:Name="RemoveBTN" Height="25" Width="25"  Margin="2" Content="../../Resources/Icons/Remove_Icon.png" Click="RemoveBTN_Click"></Button>
                 </StackPanel>
             </Grid>
 

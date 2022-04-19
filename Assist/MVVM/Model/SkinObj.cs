@@ -2,37 +2,59 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Assist.MVVM.Model
 {
-    public class SkinObj
+    public class AssistSkin
     {
+        public class Chroma
+        {
+            [JsonPropertyName("chromaUuid")]
+            public string ChromaUuid { get; set; }
 
-        public string uuid { get; set; }
-        public string displayName { get; set; }
-        public string themeUuid { get; set; }
-        public string displayIcon { get; set; }
+            [JsonPropertyName("displayName")]
+            public string DisplayName { get; set; }
 
-        public List<Chroma> chromas { get; set; }
+            [JsonPropertyName("displayIcon")]
+            public string DisplayIcon { get; set; }
 
-        public List<Level> levels { get; set; }
+            [JsonPropertyName("streamedVideoUrl")]
+            public string StreamedVideoUrl { get; set; }
+        }
 
         public class Level
         {
+            [JsonPropertyName("levelUuid")]
             public string LevelUuid { get; set; }
-            public string displayName { get; set; }
-            public string displayIcon { get; set; }
-            public string streamedVideoUrl { get; set; }
-        }
 
-        public class Chroma
-        {
-            public string ChromaUuid { get; set; }
-            public string displayName { get; set; }
-            public string displayIcon { get; set; }
-            public string streamedVideoUrl { get; set; }
+            [JsonPropertyName("displayName")]
+            public string DisplayName { get; set; }
 
+            [JsonPropertyName("displayIcon")]
+            public string DisplayIcon { get; set; }
+
+            [JsonPropertyName("streamedVideoUrl")]
+            public string StreamedVideoUrl { get; set; }
         }
+        [JsonPropertyName("uuid")]
+        public string Uuid { get; set; }
+
+        [JsonPropertyName("displayName")]
+        public string DisplayName { get; set; }
+
+        [JsonPropertyName("themeUuid")]
+        public string ThemeUuid { get; set; }
+
+        [JsonPropertyName("displayIcon")]
+        public string DisplayIcon { get; set; }
+
+        [JsonPropertyName("chromas")]
+        public List<Chroma> Chromas { get; set; }
+
+        [JsonPropertyName("levels")]
+        public List<Level> Levels { get; set; }
+
     }
 }

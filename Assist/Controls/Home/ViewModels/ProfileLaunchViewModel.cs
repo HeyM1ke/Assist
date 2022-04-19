@@ -17,7 +17,7 @@ using Assist.Settings;
 using ValNet.Objects;
 
 
-namespace AssistWPFTest.MVVM.ViewModel
+namespace Assist.Controls.Home.ViewModels
 {
     internal class ProfileLaunchViewModel : ViewModelBase
     {

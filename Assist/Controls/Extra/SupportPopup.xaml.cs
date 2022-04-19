@@ -12,17 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assist.Modules.Popup;
 
-namespace Assist.Controls
+namespace Assist.Controls.Extra
 {
     /// <summary>
-    /// Interaction logic for AssistStoreAccount.xaml
+    /// Interaction logic for SupportPopup.xaml
     /// </summary>
-    public partial class AssistStoreAccount : UserControl
+    public partial class SupportPopup : UserControl
     {
-        public AssistStoreAccount()
+        public SupportPopup()
         {
             InitializeComponent();
+        }
+
+        private void Back_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            PopupSystem.KillPopups();
+        }
+
+        private void Support_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Open to Support Page
         }
     }
 }

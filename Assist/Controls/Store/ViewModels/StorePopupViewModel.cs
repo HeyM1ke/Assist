@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Assist.MVVM.Model;
-using AssistWPFTest.MVVM.ViewModel;
+using Assist.MVVM.ViewModel;
 
 namespace Assist.Controls.Store.ViewModels
 {
     internal class StorePopupViewModel : ViewModelBase
     {
-        private SkinObj _skin;
-        public SkinObj Skin
+        private AssistSkin _skin;
+        public AssistSkin Skin
         {
             get => _skin;
             set => SetProperty(ref _skin, value);
@@ -45,19 +45,19 @@ namespace Assist.Controls.Store.ViewModels
 
         public void ChangeLevelVideo(int skinIndex)
         {
-            if(Skin.levels[skinIndex].streamedVideoUrl is null) return;
-            CurrentSkinName = Skin.levels[skinIndex].displayName;
-            SkinPreviewImage = App.LoadImageUrl(Skin.levels[skinIndex].displayIcon).Result;
-            CurrentVideo = new Uri(Skin.levels[skinIndex].streamedVideoUrl);
+            if(Skin.Levels[skinIndex].StreamedVideoUrl is null) return;
+            CurrentSkinName = Skin.Levels[skinIndex].DisplayName;
+            SkinPreviewImage = App.LoadImageUrl(Skin.Levels[skinIndex].DisplayName).Result;
+            CurrentVideo = new Uri(Skin.Levels[skinIndex].StreamedVideoUrl);
         }
 
         public void ChangeChromaVideo(int skinIndex)
         {
-            if (Skin.chromas[skinIndex].streamedVideoUrl is null) return;
+            if (Skin.Chromas[skinIndex].StreamedVideoUrl is null) return;
 
-            CurrentSkinName = Skin.chromas[skinIndex].displayName;
-            SkinPreviewImage = App.LoadImageUrl(Skin.chromas[skinIndex].displayIcon).Result;
-            CurrentVideo = new Uri(Skin.chromas[skinIndex].streamedVideoUrl);
+            CurrentSkinName = Skin.Chromas[skinIndex].DisplayName;
+            SkinPreviewImage = App.LoadImageUrl(Skin.Chromas[skinIndex].DisplayIcon).Result;
+            CurrentVideo = new Uri(Skin.Chromas[skinIndex].StreamedVideoUrl);
         }
 
 
