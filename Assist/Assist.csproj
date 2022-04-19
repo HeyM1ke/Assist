@@ -11,7 +11,7 @@
     <Product>Assist</Product>
     <Description>Valorant Program made by Mike</Description>
     <PackageIcon>assistlogoIcon.png</PackageIcon>
-    <ApplicationIcon>assistLogo.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\assistLogo.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <PackageProjectUrl>https://github.com/HeyM1ke/Assist/</PackageProjectUrl>
@@ -31,6 +31,7 @@
     <None Remove="Controls\Home\smallart %281%29.png" />
     <None Remove="Controls\Home\splash.png" />
     <None Remove="Fonts\Montserrat-Black.ttf" />
+    <None Remove="Resources\assistLogo.ico" />
     <None Remove="Resources\Assist_Progression_Template.png" />
     <None Remove="Resources\backImage.png" />
     <None Remove="Resources\BattlepassBacking.jpg" />
@@ -110,10 +111,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="assistLogo.ico" />
     <Resource Include="Assist_Logo_White.png" />
     <Resource Include="Controls\Home\smallart (1).png" />
     <Resource Include="Controls\Home\splash.png" />
+    <Resource Include="Resources\assistLogo.ico" />
     <Resource Include="Resources\Icons\backImage.png" />
     <Resource Include="Resources\ContentTiers\DeluxeTier_Icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -240,6 +241,10 @@
 
 	<ItemGroup>
 		<Resource Include="Fonts\*.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\assistLogo.ico" />
 	</ItemGroup>
 
 	<ItemGroup>

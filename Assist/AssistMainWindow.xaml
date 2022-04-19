@@ -32,7 +32,7 @@
 
         <Border x:Name="windowBorder" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" Grid.Row="0" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
             <Grid>
-                <Label Content="Assist v1.0.0.0 DEV" FontFamily="{StaticResource WorkSans}" Foreground="{StaticResource ValorantOffWhite}" FontWeight="Medium" Opacity=".5"></Label>
+                <Label Content="Assist v1.0.0.0 BETA" FontFamily="{StaticResource WorkSans}" Foreground="{StaticResource ValorantOffWhite}" FontWeight="Medium" Opacity=".5"></Label>
                 <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click"/>
                 <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0"/>
             </Grid>
