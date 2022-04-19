@@ -17,9 +17,24 @@ namespace Assist.MVVM.ViewModel
         // Username Pass Login
 
         // Cookie Login
-        public async Task CookieLogin()
+        public static async Task<RiotUser> CookieLogin(CookieContainer cc)
         {
-            
+            RiotUser user = new RiotUser();
+
+            await AddCookiesToUser(cc, user);
+            AssistLog.Normal($"Authenticating with New User");
+            try
+            {
+                AssistLog.Normal($"Authenticating with Cookies for New User");
+                await user.Authentication.AuthenticateWithCookies();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Acc not Valid");
+            }
+
+            return user;
+
         }
 
         // Profile Login
@@ -32,10 +47,10 @@ namespace Assist.MVVM.ViewModel
             var gamename = profile.Gamename;
             var tagLine = profile.Tagline;
 
-            AssistLog.Normal($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+            AssistLog.Normal($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
             try
             {
-                AssistLog.Normal($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+                AssistLog.Normal($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
                 await user.Authentication.AuthenticateWithCookies();
             }
             catch (Exception ex)
@@ -53,6 +68,32 @@ namespace Assist.MVVM.ViewModel
             {
                 u.UserClient.CookieContainer.Add(cookie);
             }
+        }
+
+        private static async Task AddCookiesToUser(CookieContainer cc, RiotUser u)
+        {
+            foreach (Cookie cookie in cc.GetAllCookies())
+            {
+                u.UserClient.CookieContainer.Add(cookie);
+            }
+        }
+
+
+        public static async Task<ProfileSetting> CreateProfile(RiotUser user)
+        {
+            // Save Cookies
+            ProfileSetting userSettings = new ProfileSetting()
+            {
+                Gamename = user.UserData.acct.game_name,
+                Tagline = user.UserData.acct.tag_line,
+                ProfileUuid = user.UserData.sub,
+                Region = user.UserRegion,
+            };
+
+            userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
+            await userSettings.SetupProfile(user);
+
+            return userSettings;
         }
     }
 }

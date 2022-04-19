@@ -12,7 +12,8 @@ namespace Assist.MVVM.View.Authentication.ViewModels
 {
     internal class RitoAuthViewModel : ViewModelBase
     {
-        public async void GetCookies(WebView2 webView)
+        public Cookie AuthCookie;
+        public async Task GetCookies(WebView2 webView)
         {
             var result = await webView.CoreWebView2.CookieManager.GetCookiesAsync(null);
             var c = result.Find(_c => _c.Name == "ssid");
@@ -34,11 +35,12 @@ namespace Assist.MVVM.View.Authentication.ViewModels
                 else
                     cook.Expires = c.Expires;
 
-                MessageBox.Show(c.Value);
                 webView.CoreWebView2.CookieManager.DeleteAllCookies();
-                
+                AuthCookie = cook;
 
             }
+
+
         }
 
 

@@ -60,6 +60,10 @@
         </Grid.Resources>
         <Button Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Click="BackBTN_Click"></Button>
         <Grid Height="500" Width="700" Background="{StaticResource AssistBackgroundLight}">
+            <StackPanel VerticalAlignment="Center">
+                <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="100" Height="100"></Image>
+                <Label Content="Logging in..." FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalContentAlignment="Center"></Label>
+            </StackPanel>
             <Wpf:WebView2 Name="WebView" Height="500" Width="700" />
         </Grid>
 
