@@ -65,18 +65,12 @@ namespace Assist.Controls.Home.ViewModels
 
         public async Task LaunchGame()
         {
-            var ASSBGCLIENTPATH = Path.Combine(Environment.CurrentDirectory, "Modules", "AssistBackground.exe");
-
+            Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules"));
+            var ASSBGCLIENTPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "AssistBackground.exe");
+             
             if (!File.Exists(ASSBGCLIENTPATH))
-            { 
-                Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "Modules"));
-                // Download BG Client
-                using (WebClient wc = new WebClient())
-                {
-                    wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-                    wc.DownloadFile(new Uri("https://cdn.rumblemike.com/Static/Development/AssistBackground.exe"), ASSBGCLIENTPATH);
-                    wc.Dispose();
-                }
+            {
+                await DownloadBgClient();
             }
 
             if (File.Exists(ASSBGCLIENTPATH))
@@ -88,6 +82,25 @@ namespace Assist.Controls.Home.ViewModels
 
                 Thread.Sleep(1000);
             }
+            else
+            {
+                while (!File.Exists(ASSBGCLIENTPATH))
+                {
+                    await DownloadBgClient();
+                }
+            }
+        }
+
+        public async Task DownloadBgClient()
+        {
+            Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules"));
+            var ASSBGCLIENTPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "AssistBackground.exe");
+            // Download BG Client
+            using (WebClient wc = new WebClient())
+            {
+                wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+                 wc.DownloadFile(new Uri("https://cdn.assistapp.dev/Static/Development/AssistBackground.exe"), ASSBGCLIENTPATH);
+            }   
         }
         void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
