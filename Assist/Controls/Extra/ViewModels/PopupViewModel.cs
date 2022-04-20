@@ -41,5 +41,11 @@ namespace Assist.Controls.Extra.ViewModels
                 Title = _popupSettings.PopupTitle;
             }
         }
+
+        public async void UpdateSettings(PopupSettings s)
+        {
+            Title = s.PopupTitle;
+            Description = s.PopupDescription;
+        }
     }
 }

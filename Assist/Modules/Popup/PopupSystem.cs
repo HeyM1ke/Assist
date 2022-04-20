@@ -25,7 +25,7 @@ namespace Assist.Modules.Popup
 
         public static void ModifyCurrentPopup(PopupSettings settings)
         {
-            popup._viewModel.PopupSettings = settings;
+            popup._viewModel.UpdateSettings(settings);
         }
 
         public static void SpawnCustomPopup(UserControl control)
