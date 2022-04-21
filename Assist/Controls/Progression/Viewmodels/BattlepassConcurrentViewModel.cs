@@ -90,11 +90,23 @@ namespace Assist.Controls.Progression.Viewmodels
 
             //Get Reward Information
             var bpData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
-            var contactLevel = ContractTierNumber / 5;
-            var contactLevelTier = ContractTierNumber - (contactLevel * 5);
-            var itemData = bpData[contactLevel].itemsInChapter[contactLevelTier];
-            ContractRewardImage = await App.LoadImageUrl(itemData.imageUrl);
-            ContractRewardName = itemData.rewardName;
+
+            if (ContractTierNumber == 55)
+            {
+                var itemData = bpData[bpData.Count-1].itemsInChapter[bpData[bpData.Count - 1].itemsInChapter.Count-1];
+                ContractRewardImage = await App.LoadImageUrl(itemData.imageUrl);
+                ContractRewardName = itemData.rewardName;
+            }
+            else
+            {
+                var contactLevel = ContractTierNumber / 5;
+                var contactLevelTier = ContractTierNumber - (contactLevel * 5);
+                var itemData = bpData[contactLevel].itemsInChapter[contactLevelTier];
+                ContractRewardImage = await App.LoadImageUrl(itemData.imageUrl);
+                ContractRewardName = itemData.rewardName;
+            }
+
+            
             
         }
     }

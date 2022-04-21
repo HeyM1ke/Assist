@@ -76,7 +76,6 @@ namespace Assist.MVVM.View.Progression.ViewModels
 
                     control.PreviewMouseLeftButtonUp += Control_PreviewMouseLeftButtonUp;
 
-                    
                     ItemContainer.Children.Add(control);
 
                     if(tier == BattlepassContractData.ProgressionLevelReached+1)

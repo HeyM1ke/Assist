@@ -68,6 +68,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
                 AssistSettings.Current.DefaultAccount = userSettings.ProfileUuid;
 
             AssistSettings.Current.Profiles.Add(userSettings);
+            AssistSettings.Save();
             AssistApplication.AppInstance.CurrentUser = user;
             AssistApplication.AppInstance.CurrentProfile = userSettings;
             AssistApplication.AppInstance.OpenAssistMainWindow();
@@ -97,6 +98,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
                 await userSettings.SetupProfile(user);
 
                 AssistSettings.Current.Profiles.Add(userSettings);
+                AssistSettings.Save();
                 AssistApplication.AppInstance.CurrentUser = user;
                 AssistApplication.AppInstance.CurrentProfile = userSettings;
                 AssistApplication.AppInstance.OpenAssistMainWindow();
