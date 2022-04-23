@@ -21,6 +21,7 @@ using Assist.Modules.XMPP;
 using Assist.MVVM.Model;
 using Assist.MVVM.View.Dashboard;
 using Assist.MVVM.ViewModel;
+using Assist.Services;
 using Assist.Settings;
 using ValNet;
 using ValNet.Objects.Authentication;
@@ -40,6 +41,7 @@ namespace Assist
         private MediaPlayer _mPlayer;
         public AssistMainWindow()
         {
+            AssistApplication.AppInstance.TokenService = new TokenServiceBackgroundService();
             AssistSettings.Current.bNewUser = false;
             InitializeComponent();
             DetermineResolution();

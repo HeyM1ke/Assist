@@ -11,6 +11,7 @@ using System.Net;
 using System.Threading;
 using Assist.MVVM.View.Authentication;
 using Assist.MVVM.View.Extra;
+using Assist.Services;
 using RestSharp;
 
 namespace Assist.MVVM.ViewModel
@@ -18,7 +19,7 @@ namespace Assist.MVVM.ViewModel
     internal class AssistApplication
     {
         public static AssistApplication AppInstance { get; } = new();
-
+        public TokenServiceBackgroundService TokenService { get; set; }
         public AssistApiController AssistApiController { get; set; }
         // Control Models
 
