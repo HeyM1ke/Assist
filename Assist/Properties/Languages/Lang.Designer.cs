@@ -106,6 +106,15 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Note: Google Authentication does not function with Assist. To use a google login please login with a Riot Username and Password combo. If you do not have a Riot Username and Password combo with a social account, check your account details on the Riot Account Website to create a combo..
+        /// </summary>
+        public static string Authentication_RitoLogin_Notice {
+            get {
+                return ResourceManager.GetString("Authentication_RitoLogin_Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SUBMIT.
         /// </summary>
         public static string Authentication_SubmitBtn {
@@ -124,6 +133,17 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login with your Riot Games Username and Password. All of the login information is sent to Riot Servers and Riot Servers only.
+        ///
+        ///If you get Error 403, this is a Riot Login Error that we cannot fix, we recommend updating your Windows to have a possiblity fixing the error and logging in with Assist..
+        /// </summary>
+        public static string Authentication_UsernameLogin_Notice {
+            get {
+                return ResourceManager.GetString("Authentication_UsernameLogin_Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string Authentication_UsernamePlaceholder {
@@ -133,7 +153,7 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Assist, please select a way to login below. You can read more about them on the right hand side..
+        ///   Looks up a localized string similar to Welcome to Assist, please select a way to login below..
         /// </summary>
         public static string Authentication_WelcomeInfoLabel {
             get {

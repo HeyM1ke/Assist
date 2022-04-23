@@ -142,7 +142,7 @@
     <value>Username</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
-    <value>Welcome to Assist, please select a way to login below. You can read more about them on the right hand side.</value>
+    <value>Welcome to Assist, please select a way to login below.</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
     <value>WELCOME</value>
