@@ -104,7 +104,7 @@
                     </StackPanel.Resources>
                     <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="60" Height="60" Margin="2"></Image>
                     <Controls:TextBoxPlaceholder x:Name="usernameBox"  PlaceHolder="{x:Static lang:Lang.Authentication_UsernamePlaceholder}" Width="300" IsPassword="False" Margin="5"/>
-                    <Controls:TextBoxPlaceholder x:Name="passwordBox" PlaceHolder="{x:Static lang:Lang.Authentication_PasswordPlaceholder}" Width="300" IsPassword="True" Margin="5"/>
+                    <Controls:TextBoxPlaceholder x:Name="passwordBox" PlaceHolder="{x:Static lang:Lang.Authentication_PasswordPlaceholder}" Width="300" IsPassword="True" Margin="5" KeyDown="passwordBox_KeyDown"/>
                     <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Foreground="{StaticResource ValorantLightRed}" FontFamily="{StaticResource WorkSans}"></Label>
                     <Button x:Name="LoginBtn" Height="45" Width="150" Margin="10" Content="{x:Static lang:Lang.Authentication_LoginBtn}" Click="Login_Click"></Button>
                 </StackPanel>

@@ -52,26 +52,30 @@ namespace Assist.MVVM.View.Authentication.ViewModels
                 return;
             }
 
-            // Save Cookies
-            ProfileSetting userSettings = new ProfileSetting()
+            if (user.UserData != null)
             {
-                Gamename = user.UserData.acct.game_name,
-                Tagline = user.UserData.acct.tag_line,
-                ProfileUuid = user.UserData.sub,
-                Region = user.UserRegion,
-            };
+                // Save Cookies
+                ProfileSetting userSettings = new ProfileSetting()
+                {
+                    Gamename = user.UserData.acct.game_name,
+                    Tagline = user.UserData.acct.tag_line,
+                    ProfileUuid = user.UserData.sub,
+                    Region = user.UserRegion,
+                };
 
-            userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
-            await userSettings.SetupProfile(user);
+                userSettings.ConvertCookiesTo64(user.UserClient.CookieContainer);
+                await userSettings.SetupProfile(user);
 
-            if (AssistSettings.Current.DefaultAccount == null)
-                AssistSettings.Current.DefaultAccount = userSettings.ProfileUuid;
+                if (AssistSettings.Current.DefaultAccount == null)
+                    AssistSettings.Current.DefaultAccount = userSettings.ProfileUuid;
 
-            AssistSettings.Current.Profiles.Add(userSettings);
-            AssistSettings.Save();
-            AssistApplication.AppInstance.CurrentUser = user;
-            AssistApplication.AppInstance.CurrentProfile = userSettings;
-            AssistApplication.AppInstance.OpenAssistMainWindow();
+                AssistSettings.Current.Profiles.Add(userSettings);
+                AssistSettings.Save();
+                AssistApplication.AppInstance.CurrentUser = user;
+                AssistApplication.AppInstance.CurrentProfile = userSettings;
+                AssistApplication.AppInstance.OpenAssistMainWindow();
+            }
+            
         }
         public async Task SubmitFactorCode(string code)
         {
