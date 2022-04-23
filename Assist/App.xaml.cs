@@ -85,20 +85,20 @@ namespace Assist
             MessageBox.Show(e.Exception.Message, "Assist Hit an Error : Logfile Created", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
-        public static async Task<BitmapImage> LoadImageUrl(string url)
+        public static async Task<BitmapImage> LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnDemand)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
 
             var image = new BitmapImage();
             image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = op;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             
             return image;
         }
-        public static async Task<BitmapImage> LoadImageUrl(string url, int imageWidth, int imageHeight)
+        public static async Task<BitmapImage> LoadImageUrl(string url, int imageWidth, int imageHeight, BitmapCacheOption op = BitmapCacheOption.OnDemand)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
@@ -107,7 +107,7 @@ namespace Assist
             image.BeginInit();
             image.DecodePixelHeight = (int)(imageHeight * AssistApplication.GlobalScaleRate);
             image.DecodePixelWidth = (int)(imageWidth * AssistApplication.GlobalScaleRate);
-            image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = op;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             
