@@ -28,7 +28,7 @@ namespace Assist.MVVM.View.InitPage
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
             var resp = await AssistApplication.AppInstance.AssistApiController.GetMaintenanceStatus();
 
             if (resp.bDownForMaintenance)

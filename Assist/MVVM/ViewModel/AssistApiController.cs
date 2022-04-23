@@ -32,6 +32,7 @@ namespace Assist.MVVM.ViewModel
 
         public void CheckForAssistUpdates()
         {
+            AssistLog.Normal("Checking for Assist Updates");
             AutoUpdater.ParseUpdateInfoEvent += ParseUpdateData;
             AutoUpdater.CheckForUpdateEvent += CheckForUpdate;
             try
@@ -49,6 +50,7 @@ namespace Assist.MVVM.ViewModel
         {
             if (args.Error is WebException)
             {
+                AssistLog.Normal("Error on WebException");
                 return;
             }
 
@@ -181,6 +183,7 @@ namespace Assist.MVVM.ViewModel
         }
         public async Task<AssistMaintenanceObj> GetMaintenanceStatus()
         {
+            AssistLog.Normal("Checking for Maintenance");
             var resp = await client.ExecuteAsync(new RestRequest(maintUrl), Method.Get);
 
             if (resp.IsSuccessful)

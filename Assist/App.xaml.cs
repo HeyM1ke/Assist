@@ -38,10 +38,12 @@ namespace Assist
             //Startup Code here.
             base.OnStartup(e);
             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist"));
-            
+            AssistLog.Normal("Created assist dir" + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist"));
             try
             {
+                AssistLog.Normal("Trying to read settings");
                 AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(File.ReadAllText(AssistSettings.SettingsFilePath));
+                AssistLog.Normal("Read Settings");
             }
             catch
             {
@@ -55,6 +57,7 @@ namespace Assist
 
             AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
 
+            AssistLog.Normal("Starting Init Page");
             Current.MainWindow = new InitPage();
 
             Screen targetScreen = Screen.PrimaryScreen;
@@ -114,6 +117,7 @@ namespace Assist
 
         public static void ChangeLanguage()
         {
+            AssistLog.Normal("Changing Language");
             var curr = AssistSettings.Current.Language;
 
             switch (curr)
@@ -121,10 +125,12 @@ namespace Assist
                 case Enums.ELanguage.en_us:
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", true);
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", true);
+                    AssistLog.Normal("Changed language to english");
                     break;
                 case Enums.ELanguage.ja_jp:
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
+                    AssistLog.Normal("Changed language to japanese");
                     break;
             }
         }
