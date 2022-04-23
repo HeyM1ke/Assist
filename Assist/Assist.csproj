@@ -29,8 +29,6 @@
 
   <ItemGroup>
     <None Remove="Assist_Logo_White.png" />
-    <None Remove="Controls\Home\smallart %281%29.png" />
-    <None Remove="Controls\Home\splash.png" />
     <None Remove="Fonts\Montserrat-Black.ttf" />
     <None Remove="Resources\assistLogo.ico" />
     <None Remove="Resources\Assist_Progression_Template.png" />
@@ -82,6 +80,7 @@
     <None Remove="Resources\Other\Assist_Agents.png" />
     <None Remove="Resources\Other\Assist_Battlepass.png" />
     <None Remove="Resources\Other\InitBacking.png" />
+    <None Remove="Resources\Other\supportBacking.png" />
     <None Remove="Resources\person_icon.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
@@ -113,8 +112,6 @@
 
   <ItemGroup>
     <Resource Include="Assist_Logo_White.png" />
-    <Resource Include="Controls\Home\smallart (1).png" />
-    <Resource Include="Controls\Home\splash.png" />
     <Resource Include="Resources\assistLogo.ico" />
     <Resource Include="Resources\Icons\backImage.png" />
     <Resource Include="Resources\ContentTiers\DeluxeTier_Icon.png">
@@ -227,6 +224,7 @@
     <Resource Include="Resources\Other\Assist_Agents.png" />
     <Resource Include="Resources\Other\Assist_Battlepass.png" />
     <Resource Include="Resources\Other\InitBacking.png" />
+    <Resource Include="Resources\Other\supportBacking.png" />
     <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />
   </ItemGroup>
 
