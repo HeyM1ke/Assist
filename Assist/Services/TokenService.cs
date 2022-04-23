@@ -20,16 +20,7 @@ namespace Assist.Services
         {
             var u = AssistApplication.AppInstance.CurrentUser;
 
-            var tempUser = new RiotUser();
-            foreach (Cookie cook in u.UserClient.CookieContainer.GetAllCookies())
-            {
-                tempUser.UserClient.CookieContainer.Add(cook);
-            }
-
-            await tempUser.Authentication.AuthenticateWithCookies();
-
-            AssistApplication.AppInstance.CurrentUser = tempUser;
-            AssistApplication.AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
+            await RefreshUser(u);
 
         }
 
