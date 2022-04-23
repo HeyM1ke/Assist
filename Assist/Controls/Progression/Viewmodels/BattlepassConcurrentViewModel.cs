@@ -96,6 +96,9 @@ namespace Assist.Controls.Progression.Viewmodels
                 var itemData = bpData[bpData.Count-1].itemsInChapter[bpData[bpData.Count - 1].itemsInChapter.Count-1];
                 ContractRewardImage = await App.LoadImageUrl(itemData.imageUrl);
                 ContractRewardName = itemData.rewardName;
+                ContractTierXp = "";
+                ContractTier = Properties.Languages.Lang.Progression_Battlepass_Completed;
+                Progression = 100;
             }
             else
             {

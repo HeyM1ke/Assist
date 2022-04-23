@@ -250,6 +250,15 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to COMPLETED!.
+        /// </summary>
+        public static string Progression_Battlepass_Completed {
+            get {
+                return ResourceManager.GetString("Progression_Battlepass_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Tier: .
         /// </summary>
         public static string Progression_Battlepass_CurrTier {

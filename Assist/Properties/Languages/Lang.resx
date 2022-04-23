@@ -187,6 +187,9 @@
   <data name="Progression_Battlepass" xml:space="preserve">
     <value>BATTLEPASS</value>
   </data>
+  <data name="Progression_Battlepass_Completed" xml:space="preserve">
+    <value>COMPLETED!</value>
+  </data>
   <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
     <value>Current Tier: </value>
   </data>
