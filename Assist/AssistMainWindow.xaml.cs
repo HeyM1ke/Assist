@@ -38,15 +38,18 @@ namespace Assist
         private const string clickSoundHost = "https://cdn.assistapp.dev/Static/Click.mp3";
         public static AssistMainWindow Current;
         public static Grid PopupContainer;
-        private MediaPlayer _mPlayer;
+        private MediaPlayer _mPlayer = new MediaPlayer();
         public AssistMainWindow()
         {
+            if(AssistApplication.AppInstance.AssistApiController.bIsUpdate) // Fixes a bug with the auto updator taking too long and showing the main window.
+                return;
+
+
             AssistApplication.AppInstance.TokenService = new TokenServiceBackgroundService();
             AssistSettings.Current.bNewUser = false;
             InitializeComponent();
             DetermineResolution();
             Current = this;
-            _mPlayer = new MediaPlayer();
             PopupContainer = PopupHolder;
             Current._mPlayer.Open(new Uri(clickSoundHost));
         }

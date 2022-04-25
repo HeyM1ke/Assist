@@ -55,7 +55,7 @@ namespace Assist
             
             AssistLog.Normal("Starting InitPage");
 
-            AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
+            AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates().GetAwaiter().GetResult();
 
             AssistLog.Normal("Starting Init Page");
             Current.MainWindow = new InitPage();

@@ -30,7 +30,7 @@ namespace Assist.MVVM.ViewModel
         public RestClient client = new RestClient();
 
 
-        public void CheckForAssistUpdates()
+        public async Task CheckForAssistUpdates()
         {
             AssistLog.Normal("Checking for Assist Updates");
             AutoUpdater.ParseUpdateInfoEvent += ParseUpdateData;
