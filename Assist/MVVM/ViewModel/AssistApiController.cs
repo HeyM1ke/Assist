@@ -92,7 +92,6 @@ namespace Assist.MVVM.ViewModel
             temp.Visibility = Visibility.Hidden;
             new View.Extra.UpdateWindow(args).ShowDialog();
             temp.Close();
-            Trace.WriteLine("ran?");
         }
 
         public async Task<List<AssistNewsObj>> GetAssistNews()

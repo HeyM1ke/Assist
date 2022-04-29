@@ -41,7 +41,7 @@ namespace Assist
         private MediaPlayer _mPlayer = new MediaPlayer();
         public AssistMainWindow()
         {
-            if(AssistApplication.AppInstance.AssistApiController.bIsUpdate) // Fixes a bug with the auto updator taking too long and showing the main window.
+            if(AssistApplication.AppInstance.AssistApiController.bIsUpdate) // Fixes a bug with the auto updater taking too long and showing the main window.
                 return;
 
 

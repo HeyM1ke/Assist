@@ -63,28 +63,28 @@ namespace Assist.Controls.Home.ViewModels
             set => SetProperty(ref _backingImage, value);
         }
 
+        private string _modulesFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");
+
+        private string _bgcPath =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "AssistBackground.exe");
         public async Task LaunchGame()
         {
-            Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules"));
-            var ASSBGCLIENTPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "AssistBackground.exe");
-             
-            if (!File.Exists(ASSBGCLIENTPATH))
-            {
-                await DownloadBgClient();
-            }
+            Directory.CreateDirectory(_modulesFolder);
 
-            if (File.Exists(ASSBGCLIENTPATH))
+            if (File.Exists(_bgcPath))
             {
                 // Launch BG Client
                 ProcessStartInfo ASSBGINFO =
-                    new ProcessStartInfo(ASSBGCLIENTPATH, $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
+                    new ProcessStartInfo(_bgcPath, $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
+
+                ASSBGINFO.UseShellExecute = true;
                 Process.Start(ASSBGINFO);
 
                 Thread.Sleep(1000);
             }
             else
             {
-                while (!File.Exists(ASSBGCLIENTPATH))
+                while (!File.Exists(_bgcPath))
                 {
                     await DownloadBgClient();
                 }
@@ -93,13 +93,12 @@ namespace Assist.Controls.Home.ViewModels
 
         public async Task DownloadBgClient()
         {
-            Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules"));
-            var ASSBGCLIENTPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "AssistBackground.exe");
+            
             // Download BG Client
             using (WebClient wc = new WebClient())
             {
-                wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-                 wc.DownloadFile(new Uri("https://cdn.assistapp.dev/Static/Development/AssistBackground.exe"), ASSBGCLIENTPATH);
+                //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+                wc.DownloadFile(new Uri("https://cdn.assistapp.dev/Static/Development/AssistBackground.exe"), _bgcPath);
             }   
         }
         void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
