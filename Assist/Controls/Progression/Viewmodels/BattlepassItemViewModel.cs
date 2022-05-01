@@ -38,7 +38,7 @@ namespace Assist.Controls.Progression.Viewmodels
         {
             if (Level.rewardDisplayIcon != null)
             {
-                RewardImage = await App.LoadImageUrl(Level.rewardDisplayIcon);
+                RewardImage = await App.LoadImageUrl(Level.rewardDisplayIcon, BitmapCacheOption.None);
             }
             
         }
