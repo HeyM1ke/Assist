@@ -21,7 +21,7 @@ namespace Assist.MVVM.View.Progression.ViewModels
     internal class BattlepassSectorViewModel : ViewModelBase
     {
         private ContactsFetchObj.Contract BattlepassContractData;
-        private List<BattlePassObj> BattlePassData = null;
+        private BattlePassObj BattlePassData = null;
 
         private string _showcaseName;
 
@@ -60,28 +60,27 @@ namespace Assist.MVVM.View.Progression.ViewModels
 
             int tier = 1;
             // Convert obj param to Uniform as 
-            for (int i = 0; i < BattlePassData.Count; i++)
+            for (int i = 0; i < BattlePassData.chapters.Count; i++)
             {
-                var listOfItems = BattlePassData[i].itemsInChapter;
+                var listOfItems = BattlePassData.chapters[i].levels;
                 foreach (var Item in listOfItems)
                 {
-                    Item.tierNumber = tier;
-                    var control = new BattlepassItem(Item)
-                    {
-                        Margin = new Thickness(8, 6, 8, 6),
-                        bIsEarned = BattlepassContractData.ProgressionLevelReached >= tier,
-                        bCurrentItem = tier == BattlepassContractData.ProgressionLevelReached + 1,
+                    var control = new BattlepassItem(Item, tier)
+                        {
+                            Margin = new Thickness(8, 6, 8, 6),
+                            bIsEarned = BattlepassContractData.ProgressionLevelReached >= tier,
+                            bCurrentItem = tier == BattlepassContractData.ProgressionLevelReached + 1,
 
-                    };
+                        };
 
-                    control.PreviewMouseLeftButtonUp += Control_PreviewMouseLeftButtonUp;
+                        control.PreviewMouseLeftButtonUp += Control_PreviewMouseLeftButtonUp;
 
-                    ItemContainer.Children.Add(control);
+                        ItemContainer.Children.Add(control);
 
-                    if(tier == BattlepassContractData.ProgressionLevelReached+1)
-                        ChangeShowcase(control);
+                        if (tier == BattlepassContractData.ProgressionLevelReached + 1)
+                            ChangeShowcase(control);
 
-                    tier++;
+                        tier++;
                 }
                 
 
@@ -103,28 +102,31 @@ namespace Assist.MVVM.View.Progression.ViewModels
             {
                 var item = await control.GetItem();
                 ShowcaseName = item.rewardName;
-                ShowcaseTier = $"Tier: {item.tierNumber}";
+                ShowcaseTier = $"Tier: {await control.GetTier()}";
                 await GetShowcaseImage(item);
             }
 
             control.bIsSelected = true;
         }
 
-        private async Task GetShowcaseImage(BattlePassObj.RewardItem item)
+        private async Task GetShowcaseImage(BattlePassObj.Level item)
         {
-            if (item.extraData.rewardType == "Spray")
+            if (item.reward.type == "Spray")
             {
-                ShowcaseImage = await App.LoadImageUrl(item.extraData.spray_FullImage);
+                if(item.reward.sprayFullImage != null)
+                    ShowcaseImage = await App.LoadImageUrl(item.reward.sprayFullImage);
                 return;
             }
 
-            if (item.extraData.rewardType == "PlayerCard")
+            if (item.reward.type == "PlayerCard")
             {
-                ShowcaseImage = await App.LoadImageUrl(item.extraData.playercard_LargeArt);
+                if (item.reward.playercardLargeArt != null)
+                    ShowcaseImage = await App.LoadImageUrl(item.reward.playercardLargeArt);
                 return;
             }
 
-            ShowcaseImage = await App.LoadImageUrl(item.imageUrl);
+            if (item.rewardDisplayIcon != null)
+                ShowcaseImage = await App.LoadImageUrl(item.rewardDisplayIcon);
         }
     }
 }

@@ -25,7 +25,9 @@ namespace Assist.MVVM.ViewModel
         private const string skinUrl = "https://assist.rumblemike.com/Skins/";
         private const string offerUrl = "https://assist.rumblemike.com/Offers/";
         private const string maintUrl = "https://assist.rumblemike.com/prod/maintenance/status";
-        private const string battlepassUrl = "https://assist.rumblemike.com/battlepass";
+        private const string battlepassUrl = $"{valUrl}battlepass/";
+
+        private const string currentBattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
         internal bool bIsUpdate = false;
         public RestClient client = new RestClient();
 
@@ -190,12 +192,12 @@ namespace Assist.MVVM.ViewModel
             else
                 return new() { bDownForMaintenance = false };
         }
-        public async Task<List<BattlePassObj>> GetBattlepassData()
+        public async Task<BattlePassObj> GetBattlepassData()
         {
-            var resp = await new RestClient().ExecuteAsync(new RestRequest(battlepassUrl, Method.Get));
+            var resp = await new RestClient().ExecuteAsync(new RestRequest(battlepassUrl + currentBattlepassId, Method.Get));
 
             if (resp.IsSuccessful)
-                return JsonSerializer.Deserialize<List<BattlePassObj>>(resp.Content);
+                return JsonSerializer.Deserialize<BattlePassObj>(resp.Content);
             else
                 return null;
         }
