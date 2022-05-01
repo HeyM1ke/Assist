@@ -72,9 +72,9 @@
                             <Border CornerRadius="0" BorderThickness="3" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
                                 <Grid>
                                     <Grid>
-                                        
 
-                                        <Image Stretch="UniformToFill" Source="../../../Resources/Other/Assist_Agents.png"/>
+
+                                        <Image Stretch="UniformToFill" Source="../../../Resources/Other/Assist_Agents.png" RenderOptions.BitmapScalingMode="HighQuality"/>
 
                                     </Grid>
                                     <DockPanel>

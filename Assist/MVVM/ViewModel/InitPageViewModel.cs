@@ -141,6 +141,7 @@ namespace Assist.MVVM.ViewModel
                 }
                 else
                 {
+                    AssistSettings.Save();
                     AssistLog.Normal("Login was successful, opening main window.");
                     AssistApplication.AppInstance.OpenAssistMainWindow();
                 }
