@@ -78,7 +78,7 @@ namespace Assist.Controls.Progression.Viewmodels
         public async void SetupControl()
         {
             
-            var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetCurrentBattlepass();
+            var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiController.currentBattlepassId);
             ContractTierNumber = bpContract.ProgressionLevelReached;
             var xpTier = bpContract.ProgressionLevelReached - 1;
             NeededXp = (xpTier * 750) + 2000;

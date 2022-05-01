@@ -52,7 +52,7 @@ namespace Assist.MVVM.View.Progression.ViewModels
         public async Task LoadBattlepass(object container)
         {
             UniformGrid ItemContainer = (UniformGrid) container;
-            BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetCurrentBattlepass();
+            BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiController.currentBattlepassId);
             BattlePassData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
 
             if(BattlePassData is null || BattlepassContractData is null || ItemContainer is null)

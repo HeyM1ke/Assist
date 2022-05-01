@@ -27,7 +27,7 @@ namespace Assist.MVVM.ViewModel
         private const string maintUrl = "https://assist.rumblemike.com/prod/maintenance/status";
         private const string battlepassUrl = $"{valUrl}battlepass/";
 
-        private const string currentBattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
+        public const string currentBattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
         internal bool bIsUpdate = false;
         public RestClient client = new RestClient();
 
