@@ -19,8 +19,8 @@
         <DockPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed.png" Width="200"/>
-                <Label Content="Assist BETA v2" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" FontWeight="Regular"/>
-                <Label Content="Created by M1ke (4/23/21) 57ef86d" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" Opacity=".5"/>
+                <Label Content="Assist BETA v3" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" FontWeight="Regular"/>
+                <Label Content="Created by M1ke (5/1/21) f69ab14" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" Opacity=".5"/>
                 
             </StackPanel>
             
