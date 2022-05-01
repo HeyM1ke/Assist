@@ -71,12 +71,14 @@ namespace Assist.Controls.Home.ViewModels
         {
             Directory.CreateDirectory(_modulesFolder);
 
+            AssistLog.Normal("Finding Assist Background Client");
+
             if (File.Exists(_bgcPath))
             {
+                AssistLog.Normal("Found Assist Background Client");
                 // Launch BG Client
                 ProcessStartInfo ASSBGINFO =
                     new ProcessStartInfo(_bgcPath, $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
-
                 ASSBGINFO.UseShellExecute = true;
                 Process.Start(ASSBGINFO);
 
@@ -84,10 +86,21 @@ namespace Assist.Controls.Home.ViewModels
             }
             else
             {
+                AssistLog.Normal("Did not find Assist Background Client");
                 while (!File.Exists(_bgcPath))
                 {
+                    PopupSystem.ModifyCurrentPopup(new PopupSettings()
+                    {
+                        PopupTitle = "Downloading Assist BGC",
+                        PopupDescription = $"Please Wait..",
+                        PopupType = PopupType.LOADING
+                    });
+                    AssistLog.Normal("Starting Download of Assist Client");
                     await DownloadBgClient();
+                    AssistLog.Normal("Completed Download of Assist Client");
                 }
+
+                await LaunchGame();
             }
         }
 
@@ -98,6 +111,7 @@ namespace Assist.Controls.Home.ViewModels
             using (WebClient wc = new WebClient())
             {
                 //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+                AssistLog.Normal("Downloading Assist Background Client");
                 wc.DownloadFile(new Uri("https://cdn.assistapp.dev/Static/Development/AssistBackground.exe"), _bgcPath);
             }   
         }
