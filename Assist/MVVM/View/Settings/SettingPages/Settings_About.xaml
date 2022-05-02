@@ -20,7 +20,7 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed.png" Width="200"/>
                 <Label Content="Assist BETA v5F" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" FontWeight="Regular"/>
-                <Label Content="Created by M1ke (5/2/22) 39e6478" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" Opacity=".5"/>
+                <Label Content="Created by M1ke (5/2/22) 2029105" FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalAlignment="Center" Opacity=".5"/>
                 
             </StackPanel>
             
