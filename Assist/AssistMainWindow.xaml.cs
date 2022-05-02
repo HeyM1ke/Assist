@@ -23,8 +23,6 @@ using Assist.MVVM.View.Dashboard;
 using Assist.MVVM.ViewModel;
 using Assist.Services;
 using Assist.Settings;
-using ValNet;
-using ValNet.Objects.Authentication;
 using Application = System.Windows.Application;
 using Rectangle = System.Drawing.Rectangle;
 

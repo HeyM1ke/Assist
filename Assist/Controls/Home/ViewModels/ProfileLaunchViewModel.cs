@@ -65,8 +65,7 @@ namespace Assist.Controls.Home.ViewModels
 
         private string _modulesFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");
 
-        private string _bgcPath =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "AssistBackground.exe");
+        private string _bgcPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules", "AssistBackgroundClient.exe");
         public async Task LaunchGame()
         {
             Directory.CreateDirectory(_modulesFolder);
@@ -112,7 +111,7 @@ namespace Assist.Controls.Home.ViewModels
             {
                 //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
                 AssistLog.Normal("Downloading Assist Background Client");
-                wc.DownloadFile(new Uri("https://cdn.assistapp.dev/Static/Development/AssistBackground.exe"), _bgcPath);
+                wc.DownloadFile(new Uri("https://cdn.assistapp.dev/Static/Development/AssistBackgroundClient.exe"), _bgcPath);
             }   
         }
         void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
