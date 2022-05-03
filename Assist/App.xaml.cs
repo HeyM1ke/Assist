@@ -82,7 +82,7 @@ namespace Assist
             AssistLog.Error("Unhandled Ex Source: " + e.Exception.Source);
             AssistLog.Error("Unhandled Ex StackTrace: " + e.Exception.StackTrace);
             AssistLog.Error("Unhandled Ex Message: " + e.Exception.Message);
-            MessageBox.Show(e.Exception.Message, "Assist Hit an Error : Logfile Created", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(e.Exception.Message, "Assist Hit an Error : Logfile Created : If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
         public static async Task<BitmapImage> LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnDemand)
