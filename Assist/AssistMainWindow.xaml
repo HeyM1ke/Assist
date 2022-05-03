@@ -114,7 +114,7 @@
                                                     <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                                 </Grid.Effect>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="75" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
                                                         <Label Padding="5" Content="{x:Static lang:Lang.Navigation_DashboardHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                     </Border>
                                                 </StackPanel>
@@ -137,8 +137,8 @@
                                                 <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                             </Grid.Effect>
                                             <StackPanel Orientation="Horizontal">
-                                                
-                                                <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="75" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+
+                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
                                                         <Label Padding="5" Content="{x:Static lang:Lang.Navigation_StoreHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                 </Border>
                                             </StackPanel>
@@ -162,7 +162,7 @@
                                             </Grid.Effect>
                                             <StackPanel Orientation="Horizontal">
 
-                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="85" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
                                                     <Label Padding="5" Content="{x:Static lang:Lang.Navigation_ProgressionHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                 </Border>
                                             </StackPanel>
@@ -185,7 +185,7 @@
                                             </Grid.Effect>
                                             <StackPanel Orientation="Horizontal">
 
-                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="75" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
                                                         <Label Padding="5" Content="{x:Static lang:Lang.Navigation_SettingsHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                 </Border>
                                             </StackPanel>
