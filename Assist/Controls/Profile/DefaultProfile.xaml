@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Profile"
+             xmlns:lang="clr-namespace:Assist.Properties.Languages"
              mc:Ignorable="d" 
              d:DesignHeight="65" d:DesignWidth="300" Loaded="DefaultAcc_Loaded">
     <Border Width="300" Height="65" Background="{StaticResource AssistNavigationBar}" CornerRadius="5">
@@ -148,7 +149,7 @@
                     </Setter>
                 </Style>
             </Grid.Resources>
-            <Label Content="Default Account:" FontFamily="{StaticResource WorkSans}" Padding="5" Foreground="White"/>
+            <Label Content="{x:Static lang:Lang.DefaultAcc_Label}" FontFamily="{StaticResource WorkSans}" Padding="5" Foreground="White"/>
             <ComboBox x:Name="AccountComboBox" Height="30" Margin="5" VerticalAlignment="Bottom"/>
         </Grid>
     </Border>

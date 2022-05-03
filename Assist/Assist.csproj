@@ -277,7 +277,8 @@
 	<ItemGroup>
 	  <Resource Include="Resources\Icons\Assist_Logo_SweetRed.png" />
 	</ItemGroup>
-
+	
+	
 	<ItemGroup>
 	  <Compile Update="Properties\Languages\Lang.Designer.cs">
 	    <DesignTime>True</DesignTime>

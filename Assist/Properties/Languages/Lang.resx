@@ -155,6 +155,15 @@ If you get Error 403, this is a Riot Login Error that we cannot fix, we recommen
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
     <value>WELCOME</value>
   </data>
+  <data name="Dashboard_Discord" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="Dashboard_Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="DefaultAcc_Label" xml:space="preserve">
+    <value>Default Account:</value>
+  </data>
   <data name="InitPage_Loading" xml:space="preserve">
     <value>Loading...</value>
     <comment>Text on InitPage</comment>
@@ -208,7 +217,7 @@ If you get Error 403, this is a Riot Login Error that we cannot fix, we recommen
     <value>Select Language:</value>
   </data>
   <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
-    <value>Sound Volume</value>
+    <value>Sound Volume:</value>
   </data>
   <data name="SettingsGeneral_WindowSize" xml:space="preserve">
     <value>Window Size:</value>
@@ -236,5 +245,14 @@ If you get Error 403, this is a Riot Login Error that we cannot fix, we recommen
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
     <value>DAILY OFFERS</value>
+  </data>
+  <data name="Support_ButtonText" xml:space="preserve">
+    <value>Support the project!</value>
+  </data>
+  <data name="Support_Description" xml:space="preserve">
+    <value>Assist is always going to be free and open-sourced. Choosing to support the project will allow us to continue with development and create some more unique features. Thank you &lt;3</value>
+  </data>
+  <data name="Support_Title" xml:space="preserve">
+    <value>Support Assist!</value>
   </data>
 </root>

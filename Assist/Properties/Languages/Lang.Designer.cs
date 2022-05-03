@@ -171,6 +171,33 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discord.
+        /// </summary>
+        public static string Dashboard_Discord {
+            get {
+                return ResourceManager.GetString("Dashboard_Discord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        public static string Dashboard_Support {
+            get {
+                return ResourceManager.GetString("Dashboard_Support", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Account:.
+        /// </summary>
+        public static string DefaultAcc_Label {
+            get {
+                return ResourceManager.GetString("DefaultAcc_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
         public static string InitPage_Loading {
@@ -306,7 +333,7 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sound Volume.
+        ///   Looks up a localized string similar to Sound Volume:.
         /// </summary>
         public static string SettingsGeneral_SoundSetting {
             get {
@@ -392,6 +419,33 @@ namespace Assist.Properties.Languages {
         public static string StorePopup_LevelsLabel {
             get {
                 return ResourceManager.GetString("StorePopup_LevelsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support the project!.
+        /// </summary>
+        public static string Support_ButtonText {
+            get {
+                return ResourceManager.GetString("Support_ButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist is always going to be free and open-sourced. Choosing to support the project will allow us to continue with development and create some more unique features. Thank you &lt;3.
+        /// </summary>
+        public static string Support_Description {
+            get {
+                return ResourceManager.GetString("Support_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support Assist!.
+        /// </summary>
+        public static string Support_Title {
+            get {
+                return ResourceManager.GetString("Support_Title", resourceCulture);
             }
         }
     }

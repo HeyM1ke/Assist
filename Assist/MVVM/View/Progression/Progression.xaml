@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Assist.MVVM.View.Progression"
+      xmlns:lang="clr-namespace:Assist.Properties.Languages"
       Style="{StaticResource PageFadeIn}"
       mc:Ignorable="d" 
       MinWidth="970"
@@ -101,7 +102,7 @@
             </Style>
         </Grid.Resources>
 
-        <Button Style="{StaticResource BattlepassBtn}" x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="BATTLEPASS" Click="BattlepassButton_Click"/>
+        <Button Style="{StaticResource BattlepassBtn}" x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassButton_Click"/>
         <Button Visibility="Collapsed"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
     </Grid>
 </Page>

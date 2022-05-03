@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Assist.MVVM.View.Dashboard"
       xmlns:home="clr-namespace:Assist.Controls.Home"
+      xmlns:lang="clr-namespace:Assist.Properties.Languages"
       Style="{StaticResource PageFadeIn}"
       mc:Ignorable="d" 
       MinWidth="970"
@@ -136,8 +137,8 @@
                         </Style.Triggers>
                     </Style>
                 </UniformGrid.Resources>
-                <Button x:Name="Support_Btn" Content="Support" Margin="0,0,2,0" Click="Support_Btn_Click"></Button>
-                <Button x:Name="Discord_Btn" Content="Discord" Margin="2,0,0,0" Click="Discord_Btn_Click"></Button>
+                <Button x:Name="Support_Btn" Content="{x:Static  lang:Lang.Dashboard_Support}" Margin="0,0,2,0" Click="Support_Btn_Click"></Button>
+                <Button x:Name="Discord_Btn" Content="{x:Static  lang:Lang.Dashboard_Discord}" Margin="2,0,0,0" Click="Discord_Btn_Click"></Button>
             </UniformGrid>
             <StackPanel x:Name="NewsPanel" VerticalAlignment="Top" Margin="0,10,0,0" Initialized="NewsPanel_Initialized">
                     
