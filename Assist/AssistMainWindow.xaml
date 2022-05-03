@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Assist"
         xmlns:lang="clr-namespace:Assist.Properties.Languages"
         mc:Ignorable="d"
+        Name="Assist"
         d:DesignWidth="1024"
         d:DesignHeight="601"
         Width="1280"
@@ -18,7 +19,7 @@
         ResizeMode="CanMinimize"
         Background="{StaticResource AssistBackground}"
         AllowsTransparency="True"
-        SizeChanged="MainWindow_SizeChanged" Loaded="MainWindow_Loaded" Name="Assist" >
+        SizeChanged="MainWindow_SizeChanged" Loaded="MainWindow_Loaded">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
