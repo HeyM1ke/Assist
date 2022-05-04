@@ -19,12 +19,10 @@ namespace Assist.MVVM.ViewModel
         private const string valUrl = $"{baseUrl}/valorant/";
         private const string dataUrl = $"{baseUrl}/data/";
         private const string updateUrl = $"{dataUrl}update";
-        private const string statusUrl = "https://assist.rumblemike.com/Status";
         private const string newsUrl = $"{valUrl}news";
-        private const string bundleUrl = "https://api.assistapp.dev/valorant/bundles/";
-        private const string skinUrl = "https://assist.rumblemike.com/Skins/";
+        private const string bundleUrl = $"{valUrl}bundles/";
         private const string offerUrl = "https://assist.rumblemike.com/Offers/";
-        private const string maintUrl = "https://assist.rumblemike.com/prod/maintenance/status";
+        private const string maintUrl = $"{dataUrl}status/maintenance";
         private const string battlepassUrl = $"{valUrl}battlepass/";
 
         public const string currentBattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
@@ -120,28 +118,6 @@ namespace Assist.MVVM.ViewModel
                 };
             }
         }
-        public async Task<List<StatusMsg>> GetStatusMessages()
-        {
-            var resp = await client.ExecuteAsync(new RestRequest(statusUrl), Method.Get);
-
-            if (resp.IsSuccessful)
-            {
-                return JsonSerializer.Deserialize<List<StatusMsg>>(resp.Content);
-            }
-            else
-            {
-                return new List<StatusMsg>
-                {
-                    new StatusMsg
-                    {
-                        statusMessage = "Could Not Reach Status API"
-                    }
-                };
-            }
-            
-
-
-        }
         public async Task<AssistBundleObj> GetBundleObj(string dataAssetId)
         {
             var resp = await client.ExecuteAsync<AssistBundleObj>(new RestRequest(bundleUrl + dataAssetId), Method.Get);
@@ -190,7 +166,7 @@ namespace Assist.MVVM.ViewModel
             if (resp.IsSuccessful)
                 return JsonSerializer.Deserialize<AssistMaintenanceObj>(resp.Content);
             else
-                return new() { bDownForMaintenance = false };
+                return new() { DownForMaintenance = false, DownForMaintenanceMessage = "Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."};
         }
         public async Task<BattlePassObj> GetBattlepassData()
         {

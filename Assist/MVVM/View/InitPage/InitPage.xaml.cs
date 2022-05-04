@@ -31,8 +31,8 @@ namespace Assist.MVVM.View.InitPage
             
             var resp = await AssistApplication.AppInstance.AssistApiController.GetMaintenanceStatus();
 
-            if (resp.bDownForMaintenance)
-                new MaintenanceWindow().ShowDialog();
+            if (resp.DownForMaintenance)
+                new MaintenanceWindow(resp).ShowDialog();
 
             
             AssistLog.Normal("InitWindow_Loaded Called");
