@@ -45,7 +45,7 @@ namespace Assist.Controls.Profile
 
             NoteBox.Text = _viewModel.Profile.profileNote;
             _viewModel.ProfileImage = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + _viewModel.Profile.PCID + "/smallart.png", 64, 64);
-            _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 176, 72);
+            _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 264, 108);
         }
 
         private void SwitchBTN_Click(object sender, RoutedEventArgs e)

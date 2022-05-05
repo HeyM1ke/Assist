@@ -9,7 +9,7 @@
              MinHeight="265" MinWidth="175" 
              Background="Transparent" Loaded="ProfileShowcase_Loaded">
     <Grid>
-        <Border x:Name="Border" CornerRadius="12" Background="{StaticResource AssistBackgroundLight}"></Border>
+        <Border x:Name="Border" CornerRadius="0" Background="{StaticResource AssistBackgroundLight}"></Border>
 
         <Grid>
             
@@ -20,7 +20,7 @@
                         <VisualBrush Visual="{Binding ElementName=Border}"/>
                     </Grid.OpacityMask>
 
-                    <Image Name="BackgroundImage" Source="{Binding BackingImage}" VerticalAlignment="Top" Width="176" Height="72" Stretch="UniformToFill"></Image>
+                    <Image Name="BackgroundImage" Source="{Binding BackingImage}" VerticalAlignment="Top" Width="210" Height="72" Stretch="UniformToFill"></Image>
                     <Image Name="ProfileIcon" Source="{Binding ProfileImage}" VerticalAlignment="Top" Width="64" Margin="56,40,55,0"></Image>
 
                 </Grid>
