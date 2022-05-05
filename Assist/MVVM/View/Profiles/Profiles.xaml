@@ -1,0 +1,27 @@
+﻿<Page xmlns:Profile="clr-namespace:Assist.Controls.Profile"  x:Class="Assist.MVVM.View.Profiles.Profiles"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Assist.MVVM.View.Profiles"
+      Style="{StaticResource PageFadeIn}"
+      mc:Ignorable="d" 
+      MinWidth="970"
+      MinHeight="576"
+      Width="970"
+      Height="576"
+      d:DesignWidth="970"
+      d:DesignHeight="576"  
+      Title="Profiles"
+      Background="{StaticResource AssistBackground}" Loaded="Profiles_Loaded">
+
+    <Grid>
+        <Profile:DefaultProfile VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10" />
+        <DockPanel>
+            <WrapPanel x:Name="ProfilePanel" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            </WrapPanel>
+
+        </DockPanel>
+    </Grid>
+</Page>

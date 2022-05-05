@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Assist.Controls.Progression.BattlepassConcurrentItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Assist.Controls.Progression"
+             mc:Ignorable="d" 
+             d:DesignHeight="125" d:DesignWidth="465"
+             >
+    <Border Background="{StaticResource AssistBackgroundLight}" CornerRadius="10">
+        <Grid>
+            <DockPanel>
+                <Canvas DockPanel.Dock="Left" HorizontalAlignment="Left" Height="105" Width="105" >
+                    <Ellipse Height="105" Width="105" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0" Fill="{StaticResource ValorantOffWhite}"/>
+                    <Ellipse Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="7.5,2.5" Fill="{StaticResource AssistBackgroundSuperLight}"/>
+                    <Ellipse Height="100" Width="100" Margin="7.5,2.5">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding ContractRewardImage}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    
+                </Canvas>
+                <Grid Margin="10,5">
+                    <Label DockPanel.Dock="Left" Content="{Binding ContractRewardName}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Bold" FontSize="19" Padding="0"></Label>
+                    <StackPanel VerticalAlignment="Bottom" Margin="0,10">
+                        <Grid>
+                            <Label Padding="0" Content="{Binding ContractTier}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Normal" FontSize="14"/>
+                            <Label Padding="0" Content="{Binding ContractTierXp}" FontFamily="{StaticResource WorkSans}" Foreground="White" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                        </Grid>
+                        <ProgressBar x:Name="ProgressionBar" Height="20" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" BorderThickness="2" BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}" Foreground="{StaticResource AssistNavigationButton_SelectedFill}" Value="{Binding Progression}"></ProgressBar>
+                    </StackPanel>
+                    
+                </Grid>
+                
+                
+            </DockPanel>
+            
+        </Grid>
+    </Border>
+</UserControl>

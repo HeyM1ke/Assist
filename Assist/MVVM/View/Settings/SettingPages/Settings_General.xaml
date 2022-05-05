@@ -1,0 +1,187 @@
+﻿<Page x:Class="Assist.MVVM.View.Settings.SettingPages.Settings_General"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Assist.MVVM.View.Settings.SettingPages"
+      xmlns:lang="clr-namespace:Assist.Properties.Languages"
+      mc:Ignorable="d" 
+      Style="{StaticResource PageFadeIn}"
+      MinWidth="400"
+      MinHeight="470"
+      Width="400"
+      Height="470"
+      d:DesignWidth="400"
+      d:DesignHeight="470" 
+      Title="Settings_General" Loaded="Settings_General_Loaded">
+
+    <Grid>
+        <DockPanel>
+            <DockPanel.Resources>
+                <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="Border" 
+                            Grid.ColumnSpan="2"
+                            CornerRadius="1"
+                            Background="{StaticResource AssistNavigationButton_NotSelectedFill}" />
+                        <Border 
+                            Grid.Column="0"
+                            CornerRadius="1"
+                            Margin="1" 
+                            Background="{StaticResource AssistNavigationButton_NotSelectedFill}"  />
+                        <Path 
+                            x:Name="Arrow"
+                            Grid.Column="1"     
+                            Fill="White"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+                        />
+                    </Grid>
+                </ControlTemplate>
+
+                <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+                    <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+
+                <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+                    <Setter Property="SnapsToDevicePixels" Value="true"/>
+                    <Setter Property="OverridesDefaultStyle" Value="true"/>
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                    <Setter Property="MinWidth" Value="120"/>
+                    <Setter Property="MinHeight" Value="20"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="12"></Setter>
+                    <Setter Property="FontFamily" Value="{StaticResource WorkSans}"/>
+                    <Setter Property="FontWeight" Value="Normal"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ComboBox}">
+                                <Border CornerRadius="20">
+                                    <Grid>
+                                        <ToggleButton 
+                                                Name="ToggleButton" 
+                                                Template="{StaticResource ComboBoxToggleButton}" 
+                                                Grid.Column="2" 
+                                                Focusable="false"
+                                                IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                                ClickMode="Press">
+                                        </ToggleButton>
+                                        <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                Margin="3,3,23,3"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Left"/>
+                                        <Popup 
+                                                Name="Popup"
+                                                Placement="Bottom"
+                                                IsOpen="{TemplateBinding IsDropDownOpen}"
+                                                AllowsTransparency="True" 
+                                                Focusable="False"
+                                                PopupAnimation="Slide">
+
+                                            <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                                <Border 
+                                                        x:Name="DropDownBorder"
+                                                        Background="#334149"
+                                                        BorderThickness="1"
+                                                        BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}"
+                                                        CornerRadius="0"/>
+                                                <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                                </ScrollViewer>
+                                            </Grid>
+                                        </Popup>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="HasItems" Value="false">
+                                        <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Foreground" Value="#888888"/>
+                                    </Trigger>
+                                    <Trigger Property="IsGrouping" Value="true">
+                                        <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                    </Trigger>
+                                    <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                        <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                        <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEditable"  Value="true">
+                                        <Setter Property="IsTabStop" Value="false"/>
+                                        <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                    </Style.Triggers>
+                </Style>
+
+                <Style TargetType="{x:Type ComboBoxItem}">
+                    <Setter Property="SnapsToDevicePixels" Value="true"/>
+                    <Setter Property="FontSize" Value="12"></Setter>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="OverridesDefaultStyle" Value="true"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                <Border Name="Border"
+                                            Padding="2"
+                                            SnapsToDevicePixels="true">
+                                    <ContentPresenter />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsHighlighted" Value="true">
+                                        <Setter TargetName="Border" Property="Background" Value="{StaticResource AssistNavigationButton_SelectedHighlightFill}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Foreground" Value="#888888"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DockPanel.Resources>
+            <Grid x:Name="LanguageSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
+                <Label Content="{x:Static lang:Lang.SettingsGeneral_LanguageChange}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
+                <ComboBox x:Name="LanguageChangeComboBox" HorizontalAlignment="Right" Height="30" Width="130" SelectionChanged="LanguageChangeComboBox_SelectionChanged">
+                    <ComboBoxItem Content="English"/>
+                    <ComboBoxItem Content="Japanese"/>
+                    <ComboBoxItem Content="Spanish"/>
+                    <ComboBoxItem Content="Portuguese"/>
+                    <ComboBoxItem Content="French"/>
+                </ComboBox>
+            </Grid>
+            <Grid x:Name="WindowSizeSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
+                <Label Content="{x:Static lang:Lang.SettingsGeneral_WindowSize}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
+                <ComboBox x:Name="WindowSizeComboBox" HorizontalAlignment="Right" Height="30" Width="130" SelectionChanged="WindowSizeComboBox_SelectionChanged">
+                    <ComboBoxItem Content="576p"/>
+                    <ComboBoxItem Content="720p"/>
+                </ComboBox>
+            </Grid>
+            <Grid x:Name="SoundSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
+                <Label Content="{x:Static lang:Lang.SettingsGeneral_SoundSetting}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Slider Name="SoundVol_Slider" Maximum="1" Width="100" VerticalAlignment="Center" ValueChanged="SoundVolume_ValueChanged"></Slider>
+                    <Label Name="SoundVol_Label" Content="100%" Foreground="White" FontFamily="{StaticResource WorkSans}" Width="40" HorizontalContentAlignment="Center"></Label>
+                </StackPanel>
+            </Grid>
+
+        </DockPanel>
+    </Grid>
+</Page>
