@@ -21,7 +21,7 @@
   </p>
 
 ## Why?
-Well, why not? Assist was created from the collimation of different ideas from many different individuals over a few months. Assist was made to replace the Valorant icon on your desktop. Assist brings a plethora of features that make your life easier and better with everything at a few click strokes away. Assist does not release the riot client, The riot client continues to Download, Patch, Authenticate and Launch you into the game. Assist is made to be an extension launcher that is separate but together to create a better launcher for players.
+Well, why not? Assist was created from the collimation of different ideas from many different individuals over a few months. Assist was made to replace the Valorant icon on your desktop. Assist brings a plethora of features that make your life easier and better with everything at a few click strokes away. Assist does not release the Riot Client, The Riot Client continues to Download, Patch, Authenticate and Launch you into the game. Assist is made to be an extension launcher that is separate but together to create a better launcher for players.
 
 ## Features
   * Dashboard
