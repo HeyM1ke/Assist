@@ -86,7 +86,7 @@ namespace Assist.Controls.Home.ViewModels
                     await CheckForBgClientUpdate();
                     ProcessStartInfo ASSBGINFO = new ProcessStartInfo(_bgcPath, $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
                     ASSBGINFO.UseShellExecute = true;
-                    //Process.Start(ASSBGINFO);
+                    Process.Start(ASSBGINFO);
 
                     PopupSystem.ModifyCurrentPopup(new PopupSettings()
                     {
