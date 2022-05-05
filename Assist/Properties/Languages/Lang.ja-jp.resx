@@ -130,10 +130,10 @@
     <value>パスワード</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Rito Loginを選択すると、riot Webサイトにログインして、Assistを使用できます。注：Googleログインは機能しません。</value>
+    <value>Rito Loginを選択すると、riot Webサイトにログインして、Assistを使用できます。注：Socialログインは機能しません。</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>注：Google認証はアシストでは機能しません。グーグルログインを使用するには、Riotのユーザー名とパスワードの組み合わせでログインしてください。ソーシャルアカウントでRiotのユーザー名とパスワードの組み合わせをお持ちでない場合は、RiotアカウントのWebサイトでアカウントの詳細を確認して、組み合わせを作成してください。</value>
+    <value>注：Social認証はアシストでは機能しません。グーグルログインを使用するには、Riotのユーザー名とパスワードの組み合わせでログインしてください。ソーシャルアカウントでRiotのユーザー名とパスワードの組み合わせをお持ちでない場合は、RiotアカウントのWebサイトでアカウントの詳細を確認して、組み合わせを作成してください。</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
     <value>参加する</value>

@@ -130,10 +130,10 @@
     <value>Mot de passe</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Choisir l'option de se connecter avec Riot vous authentifies sur le site de Riot et vous rend accès à Assist. Note: L'authentification par Google ne fonctionne pas.</value>
+    <value>Choisir l'option de se connecter avec Riot vous authentifies sur le site de Riot et vous rend accès à Assist. Note: L'authentification par Social ne fonctionne pas.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>À Noter: L'authentification par Google ne fonctionne pas avec Assist. Pour utiliser des accès via Google, utilisez un combo de nom d'utilisateur/mot de passe Riot. Si vous n'avez pas de combo nom d'utilisateur/mot de passe Riot, allez sur le site d'authentification de Riot et créez un combo.</value>
+    <value>À Noter: L'authentification par Social ne fonctionne pas avec Assist. Pour utiliser des accès via Social, utilisez un combo de nom d'utilisateur/mot de passe Riot. Si vous n'avez pas de combo nom d'utilisateur/mot de passe Riot, allez sur le site d'authentification de Riot et créez un combo.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
     <value>ENVOYER</value>

@@ -208,7 +208,7 @@ namespace Assist
         }
         private async void SetPicture()
         {
-            ProfilePC.Content = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + AssistApplication.AppInstance.CurrentProfile.PCID + "/smallart.png",35,35);
+            ProfilePC.Content = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + AssistApplication.AppInstance.CurrentProfile.PCID + "_DisplayIcon.png", 60, 60);
         }
 
         public static void Play()

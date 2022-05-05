@@ -14,7 +14,7 @@
 
         <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource AssistBackground}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
             <Grid>
-                <Label Content="Assist Maintenance" Foreground="White" FontFamily="Bahnschrift SemiBold" Opacity=".5"/>
+                <Label Content="Assist Maintenance" Foreground="White" FontFamily="{StaticResource WorkSans}" Opacity=".5"/>
                 
             </Grid>
         </Border>

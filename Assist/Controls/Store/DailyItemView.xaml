@@ -31,6 +31,10 @@
                                         <VisualBrush Visual="{Binding ElementName=Background}"></VisualBrush>
                                     </Grid.OpacityMask>
 
+                                    <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="100" Width="150" Stretch="Uniform">
+
+                                    </Image>
+
                                     <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="2,2">
                                         <Image Source="../../Resources/Icons/VP_Icon.png" Width="18"></Image>
                                         <Label Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Medium" Content="{Binding SkinPrice}">
@@ -45,9 +49,7 @@
                                         </Image>
                                     </StackPanel>
 
-                                    <Image x:Name="SkinImageContainer" Source="{Binding SkinImage}" RenderTransformOrigin="0.5,0.5" Height="100" Width="150" Stretch="Uniform">
-                                        
-                                    </Image>
+                                    
 
                                     <StackPanel VerticalAlignment="Bottom">
 

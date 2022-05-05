@@ -42,7 +42,7 @@ namespace Assist.Controls.Home
         }
         private async void SetupControl()
         {
-            _viewModel.ProfilePlayercard = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + _viewModel.Profile.PCID + "/smallart.png", 80, 80);
+            _viewModel.ProfilePlayercard = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + _viewModel.Profile.PCID + "_DisplayIcon.png", 80, 80);
             _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 720, 480);
         }
         private async void PlayBTN_Click(object sender, RoutedEventArgs e)

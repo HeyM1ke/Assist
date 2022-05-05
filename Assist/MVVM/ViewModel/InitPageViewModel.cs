@@ -13,6 +13,7 @@ using ValNet;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
+using Assist.MVVM.View.Extra;
 using Assist.MVVM.ViewModel;
 
 namespace Assist.MVVM.ViewModel
@@ -46,8 +47,17 @@ namespace Assist.MVVM.ViewModel
             AssistLog.Normal("Setting Settings RiotClient Path to Settings, Path Found: " + clientPath);
             AssistSettings.Current.RiotClientInstallPath = clientPath; // Set the Client path to settings.
 
+            if (!AssistSettings.Current.SetupLangSelected)
+            {
+                Application.Current.MainWindow.Visibility = Visibility.Hidden;
+                LanguageSelectWindow sW = new LanguageSelectWindow();
+                Application.Current.MainWindow.Close();
+                sW.Show();
+                Application.Current.MainWindow = sW;
+                return;
+            }
 
-            // Next Step, Add account.
+                // Next Step, Add account.
             AssistApplication.AppInstance.OpenAccountLoginWindow(false);
         }
         public async Task DefaultStartup()

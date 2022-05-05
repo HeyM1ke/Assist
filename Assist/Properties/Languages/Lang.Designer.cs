@@ -106,7 +106,7 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Note: Google Authentication does not function with Assist. To use a google login please login with a Riot Username and Password combo. If you do not have a Riot Username and Password combo with a social account, check your account details on the Riot Account Website to create a combo..
+        ///   Looks up a localized string similar to Please Note: Social Authentication does not function with Assist. To use a social login please login with a Riot Username and Password combo. If you do not have a Riot Username and Password combo with a social account, check your account details on the Riot Account Website to create a combo..
         /// </summary>
         public static string Authentication_RitoLogin_Notice {
             get {

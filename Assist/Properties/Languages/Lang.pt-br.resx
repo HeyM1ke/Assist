@@ -133,7 +133,7 @@
     <value>Selecionar Rito Login permite que você faça login no site da riot e use o Assist. Observação: o Login do Google não funciona.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Observação: a autenticação do Google não funciona com o Assist. Para usar um login do Google, faça login com um combo de nome de usuário e senha da Riot. Se você não tiver uma combinação de nome de usuário e senha da Riot com uma conta social, verifique os detalhes da sua conta no site da conta da Riot para criar uma combinação.</value>
+    <value>Observação: a autenticação do social não funciona com o Assist. Para usar um login do social, faça login com um combo de nome de usuário e senha da Riot. Se você não tiver uma combinação de nome de usuário e senha da Riot com uma conta social, verifique os detalhes da sua conta no site da conta da Riot para criar uma combinação.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
     <value>ENVIAR</value>
