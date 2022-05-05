@@ -21,7 +21,7 @@ namespace Assist.MVVM.ViewModel
         private const string updateUrl = $"{dataUrl}update";
         private const string newsUrl = $"{valUrl}news";
         private const string bundleUrl = $"{valUrl}bundles/";
-        private const string offerUrl = "https://assist.rumblemike.com/Offers/";
+        private const string offerUrl = $"{valUrl}offers/";
         private const string maintUrl = $"{dataUrl}status/maintenance";
         private const string battlepassUrl = $"{valUrl}battlepass/";
 
@@ -156,7 +156,7 @@ namespace Assist.MVVM.ViewModel
             var resp = await client.ExecuteAsync(new RestRequest(offerUrl + dataAssetId), Method.Get);
 
             if (resp.IsSuccessful)
-                return string.Format("{0:n0}", JsonSerializer.Deserialize<OfferObj>(resp.Content).cost.valorantPointCost);
+                return string.Format("{0:n0}", JsonSerializer.Deserialize<OfferObj>(resp.Content).Cost.VpCost);
             else
                 return string.Format("{0:n0}", 99999);
         }
