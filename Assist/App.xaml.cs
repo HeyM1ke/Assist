@@ -147,11 +147,6 @@ namespace Assist
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("pt-BR", true);
                     AssistLog.Normal("Changed language to portuguese");
                     break;
-                case Enums.ELanguage.zh_cn:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("zh-CN", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN", true);
-                    AssistLog.Normal("Changed language to Chinese");
-                    break;
             }
         }
 
