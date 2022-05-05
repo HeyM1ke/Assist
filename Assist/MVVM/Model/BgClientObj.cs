@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Assist.MVVM.Model
 {
-    public class AssistMaintenanceObj
+    internal class BgClientObj
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonPropertyName("downForMaintenance")]
-        public bool DownForMaintenance { get; set; }
+        [JsonPropertyName("versionNumber")]
+        public string VersionNumber { get; set; }
 
-        [JsonPropertyName("downForMaintenanceMessage")]
-        public string DownForMaintenanceMessage { get; set; }
+        [JsonPropertyName("downloadUrl")]
+        public string DownloadUrl { get; set; }
     }
 }

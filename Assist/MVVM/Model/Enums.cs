@@ -17,7 +17,11 @@ namespace Assist.MVVM.Model
         public enum ELanguage
         {
             en_us = 0,
-            ja_jp = 1
+            ja_jp = 1,
+            es_es = 2,
+            pt_br = 3,
+            fr_fr = 4,
+            zh_cn = 5,
         }
     }
 }

@@ -106,6 +106,15 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Note: Social Authentication does not function with Assist. To use a social login please login with a Riot Username and Password combo. If you do not have a Riot Username and Password combo with a social account, check your account details on the Riot Account Website to create a combo..
+        /// </summary>
+        public static string Authentication_RitoLogin_Notice {
+            get {
+                return ResourceManager.GetString("Authentication_RitoLogin_Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SUBMIT.
         /// </summary>
         public static string Authentication_SubmitBtn {
@@ -124,6 +133,17 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login with your Riot Games Username and Password. All of the login information is sent to Riot Servers and Riot Servers only.
+        ///
+        ///If you get Error 403, this is a Riot Login Error that we cannot fix, we recommend updating your Windows to have a possiblity fixing the error and logging in with Assist..
+        /// </summary>
+        public static string Authentication_UsernameLogin_Notice {
+            get {
+                return ResourceManager.GetString("Authentication_UsernameLogin_Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string Authentication_UsernamePlaceholder {
@@ -133,7 +153,7 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Assist, please select a way to login below. You can read more about them on the right hand side..
+        ///   Looks up a localized string similar to Welcome to Assist, please select a way to login below..
         /// </summary>
         public static string Authentication_WelcomeInfoLabel {
             get {
@@ -147,6 +167,33 @@ namespace Assist.Properties.Languages {
         public static string Authentication_WelcomeLabel {
             get {
                 return ResourceManager.GetString("Authentication_WelcomeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discord.
+        /// </summary>
+        public static string Dashboard_Discord {
+            get {
+                return ResourceManager.GetString("Dashboard_Discord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        public static string Dashboard_Support {
+            get {
+                return ResourceManager.GetString("Dashboard_Support", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Account:.
+        /// </summary>
+        public static string DefaultAcc_Label {
+            get {
+                return ResourceManager.GetString("DefaultAcc_Label", resourceCulture);
             }
         }
         
@@ -250,6 +297,15 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to COMPLETED!.
+        /// </summary>
+        public static string Progression_Battlepass_Completed {
+            get {
+                return ResourceManager.GetString("Progression_Battlepass_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Tier: .
         /// </summary>
         public static string Progression_Battlepass_CurrTier {
@@ -277,7 +333,7 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sound Volume.
+        ///   Looks up a localized string similar to Sound Volume:.
         /// </summary>
         public static string SettingsGeneral_SoundSetting {
             get {
@@ -363,6 +419,33 @@ namespace Assist.Properties.Languages {
         public static string StorePopup_LevelsLabel {
             get {
                 return ResourceManager.GetString("StorePopup_LevelsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support the project!.
+        /// </summary>
+        public static string Support_ButtonText {
+            get {
+                return ResourceManager.GetString("Support_ButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist is always going to be free and open-sourced. Choosing to support the project will allow us to continue with development and create some more unique features. Thank you &lt;3.
+        /// </summary>
+        public static string Support_Description {
+            get {
+                return ResourceManager.GetString("Support_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support Assist!.
+        /// </summary>
+        public static string Support_Title {
+            get {
+                return ResourceManager.GetString("Support_Title", resourceCulture);
             }
         }
     }
