@@ -16,7 +16,7 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid>
-                                <Border x:Name="Border" CornerRadius="0" Background="{TemplateBinding Background}"></Border>
+                                <Border x:Name="Border" CornerRadius="12" Background="{TemplateBinding Background}"></Border>
                                 <Grid>
                                     <Grid.OpacityMask>
                                         <VisualBrush Visual="{Binding ElementName=Border}"/>

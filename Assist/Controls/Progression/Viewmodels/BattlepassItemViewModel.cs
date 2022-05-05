@@ -27,20 +27,17 @@ namespace Assist.Controls.Progression.Viewmodels
             set => SetProperty(ref _rewardImage, value);
         }
 
-        private BattlePassObj.Level _level;
-        public BattlePassObj.Level Level
+        private BattlePassObj.RewardItem _reward;
+        public BattlePassObj.RewardItem Reward
         {
-            get => _level;
-            set => SetProperty(ref _level, value);
+            get => _reward;
+            set => SetProperty(ref _reward, value);
         }
 
         public async void LoadItem()
         {
-            if (Level.rewardDisplayIcon != null)
-            {
-                RewardImage = await App.LoadImageUrl(Level.rewardDisplayIcon, BitmapCacheOption.None);
-            }
-            
+            RewardImage = await App.LoadImageUrl(Reward.imageUrl);
+            TierNumber = Reward.tierNumber;
         }
 
     }

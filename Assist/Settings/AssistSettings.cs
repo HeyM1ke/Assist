@@ -64,13 +64,6 @@ namespace Assist.Settings
             set => SetProperty(ref _language, value);
         }
 
-        private bool _setupLangSelected = false;
-
-        public bool SetupLangSelected
-        {
-            get => _setupLangSelected;
-            set => SetProperty(ref _setupLangSelected, value);
-        }
 
         private double _soundVolume = 0.5;
         public double SoundVolume { get => _soundVolume; set => SetProperty(ref _soundVolume, value); }
