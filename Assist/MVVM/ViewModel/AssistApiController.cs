@@ -25,6 +25,8 @@ namespace Assist.MVVM.ViewModel
         private const string maintUrl = $"{dataUrl}status/maintenance";
         private const string battlepassUrl = $"{valUrl}battlepass/";
 
+        private const string bgclientData = $"{dataUrl}bgclient/data";
+
         public const string currentBattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
         internal bool bIsUpdate = false;
         public RestClient client = new RestClient();
@@ -174,6 +176,16 @@ namespace Assist.MVVM.ViewModel
 
             if (resp.IsSuccessful)
                 return JsonSerializer.Deserialize<BattlePassObj>(resp.Content);
+            else
+                return null;
+        }
+
+        public async Task<BgClientObj> GetBgClientData()
+        {
+            var resp = await new RestClient().ExecuteAsync(new RestRequest(bgclientData, Method.Get));
+
+            if (resp.IsSuccessful)
+                return JsonSerializer.Deserialize<BgClientObj>(resp.Content);
             else
                 return null;
         }

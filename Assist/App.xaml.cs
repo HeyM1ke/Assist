@@ -154,5 +154,7 @@ namespace Assist
                     break;
             }
         }
+
+        public static void ShutdownAssist() => Application.Current.Shutdown();
     }
 }
