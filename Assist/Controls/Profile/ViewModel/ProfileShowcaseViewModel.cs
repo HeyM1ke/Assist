@@ -40,7 +40,7 @@ namespace Assist.Controls.Profile.ViewModel
             set => SetProperty(ref _profileRegion, value);
         }
 
-        private BitmapImage _profileImage = App.LoadImageUrl("https://cdn.rumblemike.com/PlayerCards/9ee85a55-4b94-e382-b8a8-f985a33c1cc2_DisplayIcon.png", 64, 64).Result;
+        private BitmapImage _profileImage = App.LoadImageUrl("https://media.valorant-api.com/playercards/612cd02d-4294-ee2a-644c-a3ba3ddf8805/smallart.png", 64, 64).Result;
         public BitmapImage ProfileImage
         {
             get => _profileImage;

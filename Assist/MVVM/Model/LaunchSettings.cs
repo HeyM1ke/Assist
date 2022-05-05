@@ -8,7 +8,7 @@ namespace Assist.MVVM.Model
 {
     internal class LaunchSettings
     {
-        public bool ValDscRpcEnabled { get; set; } = true;  
+        public bool ValDscRpcEnabled { get; set; }
         public bool EnableCustomParams { get; set; }
         public string CustomValParams { get; set; }
     }

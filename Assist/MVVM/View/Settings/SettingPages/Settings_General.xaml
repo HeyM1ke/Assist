@@ -158,14 +158,10 @@
                 </Style>
             </DockPanel.Resources>
             <Grid x:Name="LanguageSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">
-                <Label Content="{x:Static lang:Lang.SettingsGeneral_LanguageChange}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
+                <Label Content="{x:Static lang:Lang.SettingsGeneral_SelLang}" Foreground="White" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}"></Label>
                 <ComboBox x:Name="LanguageChangeComboBox" HorizontalAlignment="Right" Height="30" Width="130" SelectionChanged="LanguageChangeComboBox_SelectionChanged">
                     <ComboBoxItem Content="English"/>
                     <ComboBoxItem Content="Japanese"/>
-                    <ComboBoxItem Content="Spanish"/>
-                    <ComboBoxItem Content="Portuguese"/>
-                    <ComboBoxItem Content="French"/>
-                    <ComboBoxItem Content="Chinese"/>
                 </ComboBox>
             </Grid>
             <Grid x:Name="WindowSizeSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">

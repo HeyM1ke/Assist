@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Assist"
         xmlns:lang="clr-namespace:Assist.Properties.Languages"
         mc:Ignorable="d"
-        Name="Assist"
         d:DesignWidth="1024"
         d:DesignHeight="601"
         Width="1280"
@@ -19,7 +18,7 @@
         ResizeMode="CanMinimize"
         Background="{StaticResource AssistBackground}"
         AllowsTransparency="True"
-        SizeChanged="MainWindow_SizeChanged" Loaded="MainWindow_Loaded">
+        SizeChanged="MainWindow_SizeChanged" Loaded="MainWindow_Loaded" Name="Assist" >
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -33,7 +32,7 @@
 
         <Border x:Name="windowBorder" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" Grid.Row="0" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
             <Grid>
-                <Label Content="Assist v1.0.0.0" FontFamily="{StaticResource WorkSans}" Foreground="{StaticResource ValorantOffWhite}" FontWeight="Medium" Opacity=".5"></Label>
+                <Label Content="Assist v1.0.0.0 BETA" FontFamily="{StaticResource WorkSans}" Foreground="{StaticResource ValorantOffWhite}" FontWeight="Medium" Opacity=".5"></Label>
                 <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click"/>
                 <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0"/>
             </Grid>
@@ -103,9 +102,7 @@
                     <StackPanel x:Name="Buttonpanel">
                             <RadioButton  Name="DashboardBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="300" Content="/Resources/Icons/Dashboard_Icon.png" Click="DashboardBTN_Click">
                                 <RadioButton.ToolTip>
-                                    <ToolTip
-                                        PlacementRectangle="50,0,0,0"
-                                        Placement="RelativePoint"
+                                    <ToolTip Placement="Right"
                                              Background="Transparent"
                                              BorderThickness="0">
                                         <Grid Margin="0,5,0,0">
@@ -114,7 +111,8 @@
                                                     <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                                 </Grid.Effect>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+                                                    <Path Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="28" Height="28" Stretch="Fill" StrokeThickness="0" Fill="{StaticResource AssistBackground}" Data="F1 M 287.328,237.333L 319.344,255.818L 319.344,218.849L 287.328,237.333 Z "  />
+                                                    <Border Margin="0,0,33,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="75" Height="28">
                                                         <Label Padding="5" Content="{x:Static lang:Lang.Navigation_DashboardHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                     </Border>
                                                 </StackPanel>
@@ -126,9 +124,7 @@
 
                             <RadioButton  Name="StoreBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="10" Content="/Resources/Icons/Store_Icon.png" Click="StoreBTN_Click">
                                 <RadioButton.ToolTip>
-                                    <ToolTip
-                                        PlacementRectangle="50,0,0,0"
-                                        Placement="RelativePoint"
+                                    <ToolTip Placement="Right"
                                          Background="Transparent"
                                          BorderThickness="0">
                                     <Grid Margin="0,5,0,0">
@@ -137,8 +133,8 @@
                                                 <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                             </Grid.Effect>
                                             <StackPanel Orientation="Horizontal">
-
-                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+                                                <Path Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="28" Height="28" Stretch="Fill" StrokeThickness="0" Fill="{StaticResource AssistBackground}" Data="F1 M 287.328,237.333L 319.344,255.818L 319.344,218.849L 287.328,237.333 Z "  />
+                                                <Border Margin="0,0,33,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="75" Height="28">
                                                         <Label Padding="5" Content="{x:Static lang:Lang.Navigation_StoreHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                 </Border>
                                             </StackPanel>
@@ -150,9 +146,7 @@
 
                             <RadioButton Visibility="Visible" Name="ProgressionBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="10" Content="/Resources/Icons/Progression_Icon.png" Click="ProgressionBTN_Click">
                             <RadioButton.ToolTip>
-                                <ToolTip
-                                    PlacementRectangle="50,0,0,0"
-                                    Placement="RelativePoint"
+                                <ToolTip Placement="Right"
                                          Background="Transparent"
                                          BorderThickness="0">
                                     <Grid Margin="0,5,0,0">
@@ -161,8 +155,8 @@
                                                 <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                             </Grid.Effect>
                                             <StackPanel Orientation="Horizontal">
-
-                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+                                                <Path Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="28" Height="28" Stretch="Fill" StrokeThickness="0" Fill="{StaticResource AssistBackground}" Data="F1 M 287.328,237.333L 319.344,255.818L 319.344,218.849L 287.328,237.333 Z "  />
+                                                <Border Margin="0,0,33,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="85" Height="28">
                                                     <Label Padding="5" Content="{x:Static lang:Lang.Navigation_ProgressionHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                 </Border>
                                             </StackPanel>
@@ -174,18 +168,17 @@
 
                             <RadioButton  Name="SettingsBTN" Height="36" Width="36" Margin="0,5" ToolTipService.InitialShowDelay="10" Content="/Resources/Icons/Settings_Icon.png" Click="SettingsBTN_Click">
                                 <RadioButton.ToolTip>
-                                    <ToolTip  PlacementRectangle="50,0,0,0"
-                                              Placement="RelativePoint"
-                                              Background="Transparent"
-                                              BorderThickness="0">
+                                    <ToolTip Placement="Right"
+                                         Background="Transparent"
+                                         BorderThickness="0">
                                     <Grid Margin="0,5,0,0">
                                         <Grid>
                                             <Grid.Effect>
                                                 <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                             </Grid.Effect>
                                             <StackPanel Orientation="Horizontal">
-
-                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
+                                                <Path Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="28" Height="28" Stretch="Fill" StrokeThickness="0" Fill="{StaticResource AssistBackground}" Data="F1 M 287.328,237.333L 319.344,255.818L 319.344,218.849L 287.328,237.333 Z "  />
+                                                <Border Margin="0,0,33,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="75" Height="28">
                                                         <Label Padding="5" Content="{x:Static lang:Lang.Navigation_SettingsHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                 </Border>
                                             </StackPanel>

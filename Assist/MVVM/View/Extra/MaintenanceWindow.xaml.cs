@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Assist.MVVM.Model;
 
 namespace Assist.MVVM.View.Extra
 {
@@ -23,13 +22,6 @@ namespace Assist.MVVM.View.Extra
         public MaintenanceWindow()
         {
             InitializeComponent();
-
-        }
-
-        public MaintenanceWindow(AssistMaintenanceObj obj)
-        {
-            InitializeComponent();
-            errorText.Text = obj.DownForMaintenanceMessage;
         }
 
         private void closeOkBTn_Click(object sender, RoutedEventArgs e)

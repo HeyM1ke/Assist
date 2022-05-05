@@ -73,7 +73,6 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
                 AssistSettings.Current.DefaultAccount = p.ProfileUuid;
 
             AssistSettings.Current.Profiles.Add(p);
-            AssistSettings.Save();
             AssistApplication.AppInstance.CurrentUser = u;
             AssistApplication.AppInstance.CurrentProfile = p;
             AssistApplication.AppInstance.OpenAssistMainWindow();
