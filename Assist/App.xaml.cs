@@ -38,10 +38,12 @@ namespace Assist
             //Startup Code here.
             base.OnStartup(e);
             Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist"));
-            
+            AssistLog.Normal("Created assist dir" + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist"));
             try
             {
+                AssistLog.Normal("Trying to read settings");
                 AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(File.ReadAllText(AssistSettings.SettingsFilePath));
+                AssistLog.Normal("Read Settings");
             }
             catch
             {
@@ -53,8 +55,9 @@ namespace Assist
             
             AssistLog.Normal("Starting InitPage");
 
-            AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
+            AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates().GetAwaiter().GetResult();
 
+            AssistLog.Normal("Starting Init Page");
             Current.MainWindow = new InitPage();
 
             Screen targetScreen = Screen.PrimaryScreen;
@@ -79,23 +82,23 @@ namespace Assist
             AssistLog.Error("Unhandled Ex Source: " + e.Exception.Source);
             AssistLog.Error("Unhandled Ex StackTrace: " + e.Exception.StackTrace);
             AssistLog.Error("Unhandled Ex Message: " + e.Exception.Message);
-            MessageBox.Show(e.Exception.Message, "Assist Hit an Error : Logfile Created", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(e.Exception.Message, "Assist Hit an Error : Logfile Created : If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
-        public static async Task<BitmapImage> LoadImageUrl(string url)
+        public static async Task<BitmapImage> LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnDemand)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
 
             var image = new BitmapImage();
             image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = op;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             
             return image;
         }
-        public static async Task<BitmapImage> LoadImageUrl(string url, int imageWidth, int imageHeight)
+        public static async Task<BitmapImage> LoadImageUrl(string url, int imageWidth, int imageHeight, BitmapCacheOption op = BitmapCacheOption.OnDemand)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
@@ -104,7 +107,7 @@ namespace Assist
             image.BeginInit();
             image.DecodePixelHeight = (int)(imageHeight * AssistApplication.GlobalScaleRate);
             image.DecodePixelWidth = (int)(imageWidth * AssistApplication.GlobalScaleRate);
-            image.CacheOption = BitmapCacheOption.OnDemand;
+            image.CacheOption = op;
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             
@@ -114,6 +117,7 @@ namespace Assist
 
         public static void ChangeLanguage()
         {
+            AssistLog.Normal("Changing Language");
             var curr = AssistSettings.Current.Language;
 
             switch (curr)
@@ -121,12 +125,36 @@ namespace Assist
                 case Enums.ELanguage.en_us:
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", true);
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", true);
+                    AssistLog.Normal("Changed language to english");
                     break;
                 case Enums.ELanguage.ja_jp:
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
+                    AssistLog.Normal("Changed language to japanese");
+                    break;
+                case Enums.ELanguage.es_es:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("es-ES", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES", true);
+                    AssistLog.Normal("Changed language to spanish");
+                    break;
+                case Enums.ELanguage.fr_fr:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR", true);
+                    AssistLog.Normal("Changed language to french");
+                    break;
+                case Enums.ELanguage.pt_br:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("pt-BR", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("pt-BR", true);
+                    AssistLog.Normal("Changed language to portuguese");
+                    break;
+                case Enums.ELanguage.zh_cn:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("zh-CN", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN", true);
+                    AssistLog.Normal("Changed language to Chinese");
                     break;
             }
         }
+
+        public static void ShutdownAssist() => Application.Current.Shutdown();
     }
 }

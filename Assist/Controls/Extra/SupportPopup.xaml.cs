@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Assist.Controls.Extra
     /// </summary>
     public partial class SupportPopup : UserControl
     {
+        private const string SUPPORTURL = "https://ko-fi.com/assist";
         public SupportPopup()
         {
             InitializeComponent();
@@ -34,6 +36,11 @@ namespace Assist.Controls.Extra
         private void Support_Btn_Click(object sender, RoutedEventArgs e)
         {
             // Open to Support Page
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = SUPPORTURL,
+                UseShellExecute = true
+            });
         }
     }
 }

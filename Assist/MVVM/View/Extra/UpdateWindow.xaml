@@ -106,7 +106,7 @@
                             </Style.Triggers>
                         </Style>
                     </Grid.Resources>
-                    <TextBlock  x:Name="changeLog" Grid.Row="0" Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" FontSize="16" FontFamily="{StaticResource WorkSans}" Text="{Binding ChangeLog}" Padding="10" TextAlignment="Center">
+                    <TextBlock TextWrapping="Wrap" x:Name="changeLog" Grid.Row="0" Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" FontSize="16" FontFamily="{StaticResource WorkSans}" Text="{Binding ChangeLog}" Padding="10" TextAlignment="Center">
                     </TextBlock>
 
 

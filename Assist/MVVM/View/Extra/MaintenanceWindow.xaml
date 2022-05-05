@@ -12,14 +12,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
+        <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource AssistBackground}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
             <Grid>
-                <Label Content="Assist Maintenance" Foreground="White" FontFamily="Bahnschrift SemiBold" Opacity=".5"/>
+                <Label Content="Assist Maintenance" Foreground="White" FontFamily="{StaticResource WorkSans}" Opacity=".5"/>
                 
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1" Background="{StaticResource BackingBlack1}">
+        <Grid Grid.Row="1" Background="{StaticResource AssistBackground}">
             <Grid.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
@@ -56,7 +56,7 @@
             <StackPanel Height="375">
                 <Image Source="../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="100"></Image>
                 <Label Grid.Row="0" Content="MAINTENANCE" FontSize="14" Foreground="White" FontWeight="SemiBold" FontFamily="{StaticResource WorkSans}" HorizontalContentAlignment="Center" Padding="0"></Label>
-                <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Text="Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."
+                <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Text=""
                          Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" BorderThickness="0"
                          FontSize="16" TextWrapping="Wrap" TextAlignment="Center" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" FontFamily="{StaticResource WorkSans}" Height="240" Padding="10"/>
             </StackPanel>

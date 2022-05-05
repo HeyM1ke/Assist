@@ -44,7 +44,7 @@
                             <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
                         </Label.Effect>
                     </Label>
-                    <Label Padding="2" Content="V1.0.0.0" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" FontSize="18" Foreground="White" Opacity=".9" Width="auto">
+                    <Label Padding="2" Content="v1.0.0.0" HorizontalAlignment="Left" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" FontSize="18" Foreground="White" Opacity=".9" Width="auto">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
                         </Label.Effect>

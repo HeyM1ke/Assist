@@ -118,141 +118,141 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Authentication_2FactorPlaceholder" xml:space="preserve">
-    <value>コード</value>
+    <value>Código</value>
   </data>
   <data name="Authentication_LoginBtn" xml:space="preserve">
-    <value>ログイン</value>
+    <value>ACCESO</value>
   </data>
   <data name="Authentication_MultifactorFail" xml:space="preserve">
-    <value>マルチファクターコードが正しくありません。</value>
+    <value>El código multifactor no es correcto.</value>
   </data>
   <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
-    <value>パスワード</value>
+    <value>contraseña</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Rito Loginを選択すると、riot Webサイトにログインして、Assistを使用できます。注：Socialログインは機能しません。</value>
+    <value>Seleccionar Rito Login le permite iniciar sesión en el sitio web de Riot y luego usar Assist. Nota: Social Login no funciona.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>注：Social認証はアシストでは機能しません。グーグルログインを使用するには、Riotのユーザー名とパスワードの組み合わせでログインしてください。ソーシャルアカウントでRiotのユーザー名とパスワードの組み合わせをお持ちでない場合は、RiotアカウントのWebサイトでアカウントの詳細を確認して、組み合わせを作成してください。</value>
+    <value>Tenga en cuenta: la autenticación de Social no funciona con Assist. Para utilizar un inicio de sesión de Social, inicie sesión con una combinación de nombre de usuario y contraseña de Riot. Si no tiene un combo de nombre de usuario y contraseña de Riot con una cuenta social, verifique los detalles de su cuenta en el sitio web de la cuenta de Riot para crear un combo.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
-    <value>参加する</value>
+    <value>ENTREGAR</value>
   </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
-    <value>ユーザー名とパスワードを選択すると、RiotGamesのユーザー名とパスワードで直接ログインできます。</value>
+    <value>Seleccionar Nombre de usuario y Contraseña le permite iniciar sesión directamente con su Nombre de usuario y Contraseña de Riot Games.</value>
   </data>
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
-    <value>ライアットゲームズのユーザー名とパスワードでログインします。すべてのログイン情報は、RiotサーバーとRiotサーバーにのみ送信されます。
+    <value>Inicie sesión con su nombre de usuario y contraseña de Riot Games. Toda la información de inicio de sesión se envía a Riot Servers y solo a Riot Servers.
 
-エラー403が発生した場合、これは修正できないRiot Login Errorです。エラーを修正し、AssistでログインできるようにWindowsを更新することをお勧めします。</value>
+Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que no podemos solucionar, le recomendamos que actualice su Windows para tener la posibilidad de corregir el error e iniciar sesión con Asistencia.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
-    <value>ユーザー名</value>
+    <value>Nombre de usuario</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
-    <value>アシストへようこそ。以下からログイン方法を選択してください。あなたは右側でそれらについてもっと読むことができます。</value>
+    <value>Bienvenido a Assist, seleccione una forma de iniciar sesión a continuación.</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
-    <value>ようこそ</value>
+    <value>BIENVENIDO</value>
   </data>
   <data name="Dashboard_Discord" xml:space="preserve">
-    <value>不和</value>
+    <value>Discord</value>
   </data>
   <data name="Dashboard_Support" xml:space="preserve">
-    <value>サポート</value>
+    <value>Apoyo</value>
   </data>
   <data name="DefaultAcc_Label" xml:space="preserve">
-    <value>デフォルトのアカウント：</value>
+    <value>Cuenta predeterminada:</value>
   </data>
   <data name="InitPage_Loading" xml:space="preserve">
-    <value>読み込み中...</value>
+    <value>Cargando...</value>
     <comment>Text on InitPage</comment>
   </data>
   <data name="Navigation_DashboardHover" xml:space="preserve">
-    <value>ダッシュボード</value>
+    <value>Panel</value>
     <comment>Text on Dashboard Button Hover</comment>
   </data>
   <data name="Navigation_ProgressionHover" xml:space="preserve">
-    <value>プログレッション</value>
+    <value>Progresión</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
-    <value>設定</value>
+    <value>Ajustes</value>
     <comment>Text on Settings Button Hover</comment>
   </data>
   <data name="Navigation_StoreHover" xml:space="preserve">
-    <value>店</value>
+    <value>Tienda</value>
     <comment>Text on Store Button Hover</comment>
   </data>
   <data name="NightMarket_EndsIn" xml:space="preserve">
-    <value>で終わる</value>
+    <value>TERMINA EN</value>
   </data>
   <data name="NightMarket_Name" xml:space="preserve">
-    <value>夜市</value>
+    <value>MERCADO DE LA NOCHE</value>
   </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
-    <value>起動設定</value>
+    <value>Configuración de lanzamiento</value>
     <comment>Text on Launch Settings Button Hover</comment>
   </data>
   <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
-    <value>遊ぶ</value>
+    <value>JUGAR</value>
     <comment>Text on Play Label</comment>
   </data>
   <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
-    <value>プロファイルの切り替え</value>
+    <value>Cambiar perfil</value>
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
   <data name="Progression_Battlepass" xml:space="preserve">
-    <value>バトルパス</value>
+    <value>PASE DE BATALLA</value>
   </data>
   <data name="Progression_Battlepass_Completed" xml:space="preserve">
-    <value>完了しました！</value>
+    <value>¡TERMINADO!</value>
   </data>
   <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
-    <value>現在のティア：</value>
+    <value>Nivel actual:</value>
   </data>
   <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
-    <value>言語：</value>
+    <value>Idioma:</value>
   </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
-    <value>言語を選択する:</value>
+    <value>Seleccione el idioma:</value>
   </data>
   <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
-    <value>音量：</value>
+    <value>Volumen de sonido:</value>
   </data>
   <data name="SettingsGeneral_WindowSize" xml:space="preserve">
-    <value>ウィンドウサイズ：</value>
+    <value>Tamaño de ventana:</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
-    <value>だいたい</value>
+    <value>Acerca de</value>
   </data>
   <data name="SettingsTab_General" xml:space="preserve">
-    <value>全般的</value>
+    <value>General</value>
   </data>
   <data name="SettingsTab_VALSet" xml:space="preserve">
-    <value>VALORANT 設定</value>
+    <value>Ajustes de VALORANTE</value>
   </data>
   <data name="StorePopup_BackLabel" xml:space="preserve">
-    <value>戻る</value>
+    <value>ESPALDA</value>
   </data>
   <data name="StorePopup_ChromaLabel" xml:space="preserve">
-    <value>クロマス</value>
+    <value>CROMAS</value>
   </data>
   <data name="StorePopup_LevelsLabel" xml:space="preserve">
-    <value>レベル</value>
+    <value>NIVELES</value>
   </data>
   <data name="Store_FeaturedBundleLabel" xml:space="preserve">
-    <value>注目のバンドル</value>
+    <value>PAQUETE DESTACADO</value>
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
-    <value>毎日のオファー</value>
+    <value>OFERTAS DIARIAS</value>
   </data>
   <data name="Support_ButtonText" xml:space="preserve">
-    <value>プロジェクトをサポートしてください！</value>
+    <value>¡Apoya el proyecto!</value>
   </data>
   <data name="Support_Description" xml:space="preserve">
-    <value>アシストは常に無料でオープンソースになります。プロジェクトをサポートすることを選択すると、開発を継続し、いくつかのよりユニークな機能を作成することができます。ありがとうございました&lt;3</value>
+    <value>Assist siempre será gratuito y de código abierto. Elegir apoyar el proyecto nos permitirá continuar con el desarrollo y crear algunas características únicas más. Gracias &lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
-    <value>サポートアシスト！</value>
+    <value>¡Ayuda de apoyo!</value>
   </data>
 </root>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Assist.Controls.Extra"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:lang="clr-namespace:Assist.Properties.Languages"
              mc:Ignorable="d" 
              d:DesignHeight="576" 
              d:DesignWidth="1024"
@@ -14,13 +15,40 @@
         <Border VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Background="{StaticResource AssistBackground}"
-                Width="500" Height="550">
+                Width="500" Height="325">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
-                
+                <Grid>
+                    <StackPanel Name="PanelContainer">
+                        <Canvas Height="250">
+                            <Image Source="../../Resources/Other/supportBacking.png" Stretch="UniformToFill" Width="500" Height="250" Opacity=".2"></Image>
+                            <Grid Height="250">
+                                <Rectangle Fill="{StaticResource AssistBackgroundLight}" Height="100" Width="500" VerticalAlignment="Bottom"></Rectangle>
+                                <Ellipse Height="200" Width="200" Fill="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.Left="300" Canvas.Top="50" Margin="0,0,5,19">
+
+                                </Ellipse>
+                                <Ellipse Height="190" Width="190" Fill="{StaticResource AssistBackgroundLight}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Canvas.Left="300" Canvas.Top="50" Margin="0,0,10,24">
+
+                                </Ellipse>
+                                <Image Source="../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Height="124" Width="124" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,43,61"></Image>
+                                <Grid VerticalAlignment="Bottom">
+                                    <StackPanel>
+                                        <Label Content="{x:Static lang:Lang.Support_Title}" 
+                                               FontFamily="{StaticResource WorkSans}" FontWeight="SemiBold" Foreground="White" FontSize="28"></Label>
+                                        <TextBox Width="300" HorizontalAlignment="Left" Background="Transparent" Text="{x:Static lang:Lang.Support_Description}"
+                                                 FontFamily="{StaticResource WorkSans}" FontWeight="Light" Foreground="White" TextWrapping="Wrap" Opacity=".5" BorderThickness="0" Padding="2"
+                                                 
+                                                 IsReadOnly="True" ></TextBox>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Canvas>
+                    </StackPanel>
+                </Grid>
+
                 <Grid Height="50" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="500">
                     <Grid.Resources>
                         <Style TargetType="Button">
@@ -52,8 +80,8 @@
                         </Style>
                     </Grid.Resources>
                     <Button x:Name="Back_Btn" Content="&lt; &lt;" Width="50" Margin="10,5" HorizontalAlignment="Left" Click="Back_Btn_Click"></Button>
-                    <Button x:Name="Support_Btn" Content="Support the project!" Width="175" Margin="10,5" HorizontalAlignment="Center" Click="Support_Btn_Click"></Button>
-                    
+                    <Button x:Name="Support_Btn" Content="{x:Static lang:Lang.Support_ButtonText}" Width="175" Margin="10,5" HorizontalAlignment="Center" Click="Support_Btn_Click"></Button>
+
                 </Grid>
             </Grid>
 

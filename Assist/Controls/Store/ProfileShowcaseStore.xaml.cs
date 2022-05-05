@@ -33,7 +33,7 @@ namespace Assist.Controls.Store
 
         private async void SetupControl()
         {
-            _viewModel.ProfileImage = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + _viewModel.Profile.PCID + "/smallart.png", 79, 79);
+            _viewModel.ProfileImage = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + _viewModel.Profile.PCID + "_DisplayIcon.png", 79, 79);
             _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 217, 89);
 
             if(_viewModel.Profile is not null)

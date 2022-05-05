@@ -26,7 +26,7 @@ namespace Assist.MVVM.View.Authentication
     public partial class Authentication : Window
     {
         public static Frame ContentFrame;
-
+        public static bool bAddMode;
         public Authentication()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace Assist.MVVM.View.Authentication
             InitializeComponent();
             DetermineResolution();
             ContentFrame = LoginFrame;
-
+            bAddMode = addMode;
         }
 
 

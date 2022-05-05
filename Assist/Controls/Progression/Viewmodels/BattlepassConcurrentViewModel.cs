@@ -78,8 +78,7 @@ namespace Assist.Controls.Progression.Viewmodels
         public async void SetupControl()
         {
             
-            var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetCurrentBattlepass();
-            bpContract.ContractProgression.HighestRewardedLevel.TryGetValue("38715fd3-4575-c78e-bc13-d8b3cf1c7546", out var highestTier);
+            var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiController.currentBattlepassId);
             ContractTierNumber = bpContract.ProgressionLevelReached;
             var xpTier = bpContract.ProgressionLevelReached - 1;
             NeededXp = (xpTier * 750) + 2000;
@@ -90,11 +89,27 @@ namespace Assist.Controls.Progression.Viewmodels
 
             //Get Reward Information
             var bpData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
-            var contactLevel = ContractTierNumber / 5;
-            var contactLevelTier = ContractTierNumber - (contactLevel * 5);
-            var itemData = bpData[contactLevel].itemsInChapter[contactLevelTier];
-            ContractRewardImage = await App.LoadImageUrl(itemData.imageUrl);
-            ContractRewardName = itemData.rewardName;
+
+            if (ContractTierNumber == 55)
+            {
+                var levels = bpData.chapters[bpData.chapters.Count - 1].levels;
+                var itemData = levels[levels.Count - 1];
+                ContractRewardImage = await App.LoadImageUrl(itemData.rewardDisplayIcon);
+                ContractRewardName = itemData.rewardName;
+                ContractTierXp = "";
+                ContractTier = Properties.Languages.Lang.Progression_Battlepass_Completed;
+                Progression = 100;
+            }
+            else
+            {
+                var contactLevel = ContractTierNumber / 5;
+                var contactLevelTier = ContractTierNumber - (contactLevel * 5);
+                var itemData = bpData.chapters[contactLevel].levels[contactLevelTier];
+                ContractRewardImage = await App.LoadImageUrl(itemData.rewardDisplayIcon);
+                ContractRewardName = itemData.rewardName;
+            }
+
+            
             
         }
     }

@@ -8,48 +8,36 @@ namespace Assist.MVVM.Model
 {
     public class BattlePassObj
     {
+        public string id { get; set; }
+        public object displayIcon { get; set; }
+        public string battlepassName { get; set; }
+        public List<Chapter> chapters { get; set; }
 
 
 
+        public class Reward
+        {
+            public string type { get; set; }
+            public object titleText { get; set; }
+            public string playercardLargeArt { get; set; }
+            public string sprayFullImage { get; set; }
+        }
 
-        public List<RewardItem> itemsInChapter { get; set; }
-        public bool isEpilogue { get; set; }
-
-        public List<FreeRewardItem> freeItemsInChapter { get; set; }
-
-        public class RewardItem
+        public class Level
         {
             public string rewardName { get; set; }
-            public int xP_Required { get; set; }
-            public bool isPurchasableWithVP { get; set; }
-            public int vpCost { get; set; }
-
-            public int tierNumber { get; set; }
             public string rewardId { get; set; }
-            public string imageUrl { get; set; }
-
-            public ExtraData extraData { get; set; }
+            public string rewardDisplayIcon { get; set; }
+            public int requiredXp { get; set; }
+            public int vpCost { get; set; }
+            public bool purchasableWithVp { get; set; }
+            public Reward reward { get; set; }
         }
 
-        public class FreeRewardItem
+        public class Chapter
         {
-            public string RewardName { get; set; }
-            public string RewardId { get; set; }
-            public string ImageUrl { get; set; }
+            public bool isEpilogue { get; set; }
+            public List<Level> levels { get; set; }
         }
-
-        public class ExtraData
-        {
-            public string rewardType { get; set; }
-            public string title_Text { get; set; }
-            public string playercard_LargeArt { get; set; }
-            public string spray_FullImage { get; set; }
-        }
-    }
-
-
-    public class BattlepassComplete
-    {
-        public List<BattlePassObj> Chapters;
     }
 }

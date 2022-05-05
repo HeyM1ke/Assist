@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using System.Globalization;
 using Assist.MVVM.View.Authentication.ViewModels;
+using Assist.MVVM.ViewModel;
 using ValNet;
 using ValNet.Objects.Authentication;
 
@@ -48,6 +49,12 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
 
             await _viewModel.Login(loginData);
             LoginBtn.IsEnabled = true;
+        }
+
+        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+                Login_Click(null, null);
         }
     }
 }

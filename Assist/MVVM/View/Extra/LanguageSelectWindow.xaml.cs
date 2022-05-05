@@ -12,29 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Assist.MVVM.Model;
+using Assist.Settings;
 
 namespace Assist.MVVM.View.Extra
 {
     /// <summary>
-    /// Interaction logic for MaintenanceWindow.xaml
+    /// Interaction logic for LanguageSelectWindow.xaml
     /// </summary>
-    public partial class MaintenanceWindow : Window
+    public partial class LanguageSelectWindow : Window
     {
-        public MaintenanceWindow()
+        public LanguageSelectWindow()
         {
             InitializeComponent();
-
+            LanguageChangeComboBox.SelectedIndex = 0;
         }
 
-        public MaintenanceWindow(AssistMaintenanceObj obj)
+        private void SelectBtn_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            errorText.Text = obj.DownForMaintenanceMessage;
-        }
-
-        private void closeOkBTn_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
+            AssistSettings.Current.Language = (Enums.ELanguage)LanguageChangeComboBox.SelectedIndex;
+            App.ChangeLanguage();
+            AssistSettings.Current.SetupLangSelected = true;
+            System.Windows.Forms.Application.Restart();
+            System.Windows.Application.Current.Shutdown();
         }
 
         #region basic

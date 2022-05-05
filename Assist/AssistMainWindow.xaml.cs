@@ -21,9 +21,8 @@ using Assist.Modules.XMPP;
 using Assist.MVVM.Model;
 using Assist.MVVM.View.Dashboard;
 using Assist.MVVM.ViewModel;
+using Assist.Services;
 using Assist.Settings;
-using ValNet;
-using ValNet.Objects.Authentication;
 using Application = System.Windows.Application;
 using Rectangle = System.Drawing.Rectangle;
 
@@ -37,14 +36,18 @@ namespace Assist
         private const string clickSoundHost = "https://cdn.assistapp.dev/Static/Click.mp3";
         public static AssistMainWindow Current;
         public static Grid PopupContainer;
-        private MediaPlayer _mPlayer;
+        private MediaPlayer _mPlayer = new MediaPlayer();
         public AssistMainWindow()
         {
+            if(AssistApplication.AppInstance.AssistApiController.bIsUpdate) // Fixes a bug with the auto updater taking too long and showing the main window.
+                return;
+
+
+            AssistApplication.AppInstance.TokenService = new TokenServiceBackgroundService();
             AssistSettings.Current.bNewUser = false;
             InitializeComponent();
             DetermineResolution();
             Current = this;
-            _mPlayer = new MediaPlayer();
             PopupContainer = PopupHolder;
             Current._mPlayer.Open(new Uri(clickSoundHost));
         }
@@ -205,7 +208,7 @@ namespace Assist
         }
         private async void SetPicture()
         {
-            ProfilePC.Content = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + AssistApplication.AppInstance.CurrentProfile.PCID + "/smallart.png",35,35);
+            ProfilePC.Content = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + AssistApplication.AppInstance.CurrentProfile.PCID + "_DisplayIcon.png", 60, 60);
         }
 
         public static void Play()

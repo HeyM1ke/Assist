@@ -19,19 +19,22 @@ namespace Assist.MVVM.ViewModel
         private const string valUrl = $"{baseUrl}/valorant/";
         private const string dataUrl = $"{baseUrl}/data/";
         private const string updateUrl = $"{dataUrl}update";
-        private const string statusUrl = "https://assist.rumblemike.com/Status";
         private const string newsUrl = $"{valUrl}news";
-        private const string bundleUrl = "https://api.assistapp.dev/valorant/bundles/";
-        private const string skinUrl = "https://assist.rumblemike.com/Skins/";
+        private const string bundleUrl = $"{valUrl}bundles/";
         private const string offerUrl = "https://assist.rumblemike.com/Offers/";
-        private const string maintUrl = "https://assist.rumblemike.com/prod/maintenance/status";
-        private const string battlepassUrl = "https://assist.rumblemike.com/battlepass";
+        private const string maintUrl = $"{dataUrl}status/maintenance";
+        private const string battlepassUrl = $"{valUrl}battlepass/";
+
+        private const string bgclientData = $"{dataUrl}bgclient/data";
+
+        public const string currentBattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
         internal bool bIsUpdate = false;
         public RestClient client = new RestClient();
 
 
-        public void CheckForAssistUpdates()
+        public async Task CheckForAssistUpdates()
         {
+            AssistLog.Normal("Checking for Assist Updates");
             AutoUpdater.ParseUpdateInfoEvent += ParseUpdateData;
             AutoUpdater.CheckForUpdateEvent += CheckForUpdate;
             try
@@ -49,6 +52,7 @@ namespace Assist.MVVM.ViewModel
         {
             if (args.Error is WebException)
             {
+                AssistLog.Normal("Error on WebException");
                 return;
             }
 
@@ -90,7 +94,6 @@ namespace Assist.MVVM.ViewModel
             temp.Visibility = Visibility.Hidden;
             new View.Extra.UpdateWindow(args).ShowDialog();
             temp.Close();
-            Trace.WriteLine("ran?");
         }
 
         public async Task<List<AssistNewsObj>> GetAssistNews()
@@ -116,28 +119,6 @@ namespace Assist.MVVM.ViewModel
                     defaultError
                 };
             }
-        }
-        public async Task<List<StatusMsg>> GetStatusMessages()
-        {
-            var resp = await client.ExecuteAsync(new RestRequest(statusUrl), Method.Get);
-
-            if (resp.IsSuccessful)
-            {
-                return JsonSerializer.Deserialize<List<StatusMsg>>(resp.Content);
-            }
-            else
-            {
-                return new List<StatusMsg>
-                {
-                    new StatusMsg
-                    {
-                        statusMessage = "Could Not Reach Status API"
-                    }
-                };
-            }
-            
-
-
         }
         public async Task<AssistBundleObj> GetBundleObj(string dataAssetId)
         {
@@ -181,19 +162,30 @@ namespace Assist.MVVM.ViewModel
         }
         public async Task<AssistMaintenanceObj> GetMaintenanceStatus()
         {
+            AssistLog.Normal("Checking for Maintenance");
             var resp = await client.ExecuteAsync(new RestRequest(maintUrl), Method.Get);
 
             if (resp.IsSuccessful)
                 return JsonSerializer.Deserialize<AssistMaintenanceObj>(resp.Content);
             else
-                return new() { bDownForMaintenance = false };
+                return new() { DownForMaintenance = false, DownForMaintenanceMessage = "Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."};
         }
-        public async Task<List<BattlePassObj>> GetBattlepassData()
+        public async Task<BattlePassObj> GetBattlepassData()
         {
-            var resp = await new RestClient().ExecuteAsync(new RestRequest(battlepassUrl, Method.Get));
+            var resp = await new RestClient().ExecuteAsync(new RestRequest(battlepassUrl + currentBattlepassId, Method.Get));
 
             if (resp.IsSuccessful)
-                return JsonSerializer.Deserialize<List<BattlePassObj>>(resp.Content);
+                return JsonSerializer.Deserialize<BattlePassObj>(resp.Content);
+            else
+                return null;
+        }
+
+        public async Task<BgClientObj> GetBgClientData()
+        {
+            var resp = await new RestClient().ExecuteAsync(new RestRequest(bgclientData, Method.Get));
+
+            if (resp.IsSuccessful)
+                return JsonSerializer.Deserialize<BgClientObj>(resp.Content);
             else
                 return null;
         }
