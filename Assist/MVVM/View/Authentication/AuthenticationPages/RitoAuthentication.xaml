@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:Assist.MVVM.View.Authentication.AuthenticationPages"
       xmlns:lang="clr-namespace:Assist.Properties.Languages"
       xmlns:controls="clr-namespace:Assist.Controls"
-
       mc:Ignorable="d"
       MinWidth="1024"
       MinHeight="576"
@@ -66,9 +65,7 @@
                 <Label Content="Logging in..." FontFamily="{StaticResource WorkSans}" Foreground="White" HorizontalContentAlignment="Center"></Label>
             </StackPanel>
             <Wpf:WebView2 Name="WebView" Height="500" Width="700" />
-            
         </Grid>
-        <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Width="150" VerticalAlignment="Center" Text="{x:Static lang:Lang.Authentication_RitoLogin_Notice}"
-                   FontFamily="{StaticResource WorkSans}" FontStretch="Normal" FontWeight="Light" Foreground="White" TextWrapping="Wrap" Opacity=".3" FontSize="10"></TextBlock>
+
     </Grid>
 </Page>

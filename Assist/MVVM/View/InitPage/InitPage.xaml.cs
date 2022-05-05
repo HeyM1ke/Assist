@@ -28,11 +28,11 @@ namespace Assist.MVVM.View.InitPage
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
             var resp = await AssistApplication.AppInstance.AssistApiController.GetMaintenanceStatus();
 
-            if (resp.DownForMaintenance)
-                new MaintenanceWindow(resp).ShowDialog();
+            if (resp.bDownForMaintenance)
+                new MaintenanceWindow().ShowDialog();
 
             
             AssistLog.Normal("InitWindow_Loaded Called");

@@ -124,13 +124,10 @@
                 </Image.Effect>
             </Image>
             <Image Source="{Binding ShowcaseImage}" VerticalAlignment="Center"></Image>
-            <Grid Grid.Row="1" Background="{StaticResource AssistBackground}">
-               <StackPanel HorizontalAlignment="Left">
-                   
-                   <Label HorizontalAlignment="Center" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding ShowcaseName}" FontSize="28" Padding="2"/>
-                   <Label HorizontalAlignment="Left" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" Content="{Binding ShowcaseTier}" FontSize="22" Padding="0" Margin="2,0"/>
-                </StackPanel>
-            </Grid>
+            <DockPanel Grid.Row="1" HorizontalAlignment="Center">
+                <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Normal" Content="{Binding ShowcaseTier}" FontSize="22" Padding="0" Margin="6,0"/>
+                <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding ShowcaseName}" FontSize="28"/>
+            </DockPanel>
         </Grid>
     </Grid>
 </Page>

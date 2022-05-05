@@ -30,7 +30,7 @@ namespace Assist.MVVM.ViewModel
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Acc not Valid");
             }
 
             return user;

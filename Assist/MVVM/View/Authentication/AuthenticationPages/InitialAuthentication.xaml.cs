@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Assist.MVVM.ViewModel;
 
 namespace Assist.MVVM.View.Authentication.AuthenticationPages
 {
@@ -24,8 +23,6 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
         public InitialAuthentication()
         {
             InitializeComponent();
-            if(!Authentication.bAddMode)
-                HomeBtn.Visibility = Visibility.Collapsed;
         }
         private void UsernameBTN_Click(object sender, RoutedEventArgs e)
         {
@@ -39,11 +36,6 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
             Authentication.ContentFrame.Navigate(new Uri(
                 "MVVM/View/Authentication/AuthenticationPages/RitoAuthentication.xaml",
                 UriKind.RelativeOrAbsolute));
-        }
-
-        private void HomeBTN_Click(object sender, RoutedEventArgs e)
-        {
-            AssistApplication.AppInstance.OpenAssistMainWindow();
         }
     }
 }

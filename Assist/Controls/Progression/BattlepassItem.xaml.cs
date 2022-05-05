@@ -60,27 +60,19 @@ namespace Assist.Controls.Progression
             InitializeComponent();
         }
 
-        public BattlepassItem(BattlePassObj.Level item, int tier)
+        public BattlepassItem(BattlePassObj.RewardItem item)
         {
             DataContext = _viewModel = new BattlepassItemViewModel();
-            _viewModel.TierNumber = tier;
-            _viewModel.Level = item;
+            _viewModel.Reward = item;
             InitializeComponent();
 
+            _viewModel.LoadItem();
         }
 
 
-        public async Task<BattlePassObj.Level> GetItem()
+        public async Task<BattlePassObj.RewardItem> GetItem()
         {
-            return _viewModel.Level;
-        }
-
-        public async Task<int> GetTier() => _viewModel.TierNumber;
-
-        private void BattlepassItem_Loaded(object sender, RoutedEventArgs e)
-        {
-            if(_viewModel.Level != null)
-                _viewModel.LoadItem();
+            return _viewModel.Reward;
         }
     }
 }

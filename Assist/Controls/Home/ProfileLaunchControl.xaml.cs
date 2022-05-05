@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -33,7 +32,6 @@ namespace Assist.Controls.Home
     {
         private ProfileLaunchViewModel _viewModel { get; set; }
         private ProfileSetting _associatedProfile { get; set; }
-        private bool readyToLaunch { get; set; }
         public ProfileLaunchControl()
         {
             DataContext = _viewModel = new ProfileLaunchViewModel();
@@ -44,7 +42,7 @@ namespace Assist.Controls.Home
         }
         private async void SetupControl()
         {
-            _viewModel.ProfilePlayercard = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + _viewModel.Profile.PCID + "_DisplayIcon.png", 80, 80);
+            _viewModel.ProfilePlayercard = await App.LoadImageUrl("https://media.valorant-api.com/playercards/" + _viewModel.Profile.PCID + "/smallart.png", 80, 80);
             _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 720, 480);
         }
         private async void PlayBTN_Click(object sender, RoutedEventArgs e)
@@ -59,21 +57,17 @@ namespace Assist.Controls.Home
             await AssistApplication.AppInstance.CreateAuthenticationFile();
             var worker = new BackgroundWorker();
             worker.DoWork += WorkerOnDoWork;
+            worker.RunWorkerCompleted += WorkerOnRunWorkerCompleted;
             worker.RunWorkerAsync();
-            // 5/5/22 - Download function randomly broke, the fix below is super bad/weird but it works somehow.
-            // I need to look into a better downloading solution. The downloaded file would not be the complete file and would
-            // Only download a few bytes instead of the entire file.
-
-            while (!readyToLaunch)
-            {
-                await Task.Delay(500); //Stupid Stall
-            }
-            App.ShutdownAssist();
         }
-        
+        private void WorkerOnRunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
         private async void WorkerOnDoWork(object? sender, DoWorkEventArgs e)
         {
-            readyToLaunch = await _viewModel.LaunchGame();
+            Thread.Sleep(1000);
+            await _viewModel.LaunchGame();
         }
 
         private void Switch_Click(object sender, RoutedEventArgs e)
