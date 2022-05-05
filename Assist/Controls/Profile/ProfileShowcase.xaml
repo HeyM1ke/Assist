@@ -20,7 +20,7 @@
                         <VisualBrush Visual="{Binding ElementName=Border}"/>
                     </Grid.OpacityMask>
 
-                    <Image Name="BackgroundImage" Source="{Binding BackingImage}" VerticalAlignment="Top" Width="210" Height="72" Stretch="UniformToFill"></Image>
+                    <Rectangle Name="BackgroundImage" VerticalAlignment="Top" Height="72" Fill="{StaticResource AssistScreenBackingColor}"></Rectangle>
                     <Image Name="ProfileIcon" Source="{Binding ProfileImage}" VerticalAlignment="Top" Width="64" Margin="56,40,55,0"></Image>
 
                 </Grid>
