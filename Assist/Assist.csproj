@@ -22,9 +22,13 @@
 
   <ItemGroup>
     <Compile Remove="Extensions\**" />
+    <Compile Remove="Services\Modules\**" />
     <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Services\Modules\**" />
     <None Remove="Extensions\**" />
+    <None Remove="Services\Modules\**" />
     <Page Remove="Extensions\**" />
+    <Page Remove="Services\Modules\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -298,10 +302,6 @@
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Lang.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Services\Modules\" />
 	</ItemGroup>
 
 </Project>
