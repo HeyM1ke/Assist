@@ -1,0 +1,61 @@
+﻿<Window x:Class="Assist.MVVM.View.Extra.ErrorScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assist.MVVM.View.Extra"
+        mc:Ignorable="d"
+        Title="Assist Error" Height="250" Width="400" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource BackingBlack12}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
+            <Grid>
+                <Label Content="Assist Error" Foreground="White" FontFamily="{StaticResource WorkSans}" Opacity=".5"/>
+                <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click" ></Button>
+                <Button x:Name="miniButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="-" Click="minimizeBTN_Click" Margin="0,0,25,0" ></Button>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Background="{StaticResource AssistBackground}">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Rectangle Fill="{StaticResource AssistNavigationButton_SelectedHighlightOutline}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
+                                        <Label Content="{TemplateBinding Content}" Foreground="White"
+                                                           FontFamily="{StaticResource WorkSans}" FontWeight="Normal"
+                                                           Padding="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="12"></Label>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" BorderThickness="0" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+            <Button Grid.Row="1" Content="Ok" x:Name="errorOkBTn" Click="errorOkBTn_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="80" Height="35"></Button>
+        </Grid>
+    </Grid>
+</Window>

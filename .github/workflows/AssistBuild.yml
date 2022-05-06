@@ -1,0 +1,44 @@
+name: Assist Github Builder
+
+on:
+  workflow_dispatch:
+    inputs:
+        appVersion:
+          description: 'Assist Version'
+          required: true
+          default: '1.0.X.X'
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: GIT Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+
+      - name: .NET 6 Setup
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+          
+      - name: .NET Restore
+        run: dotnet restore Assist
+
+      - name: .NET Publish
+        run: dotnet publish Assist -c Release --no-self-contained -r win-x64 -f net6.0-windows -o "./Assist/bin/Publish/" -p:PublishReadyToRun=false -p:PublishSingleFile=true -p:DebugType=None -p:GenerateDocumentationFile=false -p:DebugSymbols=false -p:AssemblyVersion=${{ github.event.inputs.appVersion }} -p:FileVersion=${{ github.event.inputs.appVersion }}
+        
+      - name: ZIP File
+        uses: papeloto/action-zip@v1
+        with:
+          files: ./Assist/bin/Publish/
+          dest: Assist.zip # will end up in working directory not the Publish folder
+
+      - name: GIT Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          title: "Assist v${{ github.event.inputs.appVersion }}"
+          automatic_release_tag: ${{ github.event.inputs.appVersion }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          files: Assist.zip
