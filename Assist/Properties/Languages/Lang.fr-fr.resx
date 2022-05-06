@@ -144,7 +144,7 @@
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
     <value>Connectez vous avec votre combo nom d'utilisateur/mot de passe Riot. Toutes les information de connexion sont envoyées aux serveurs de Riot et seulement les serveurs de Riot.
 
-Si vous avez l'erreur 403, c'est une erreur de connexion de a Riot que nous ne pouvons pas corriger, nous vous recommandons de mettre à jour Windows pour avoir la possibilité de corriger l'erreur et vous connecter avec Assist.</value>
+Si vous avez l'erreur 403, c'est une erreur de connexion de Riot que nous ne pouvons pas corriger, nous vous recommandons de mettre à jour Windows pour avoir la possibilité de corriger l'erreur et vous connecter avec Assist.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
     <value>Nom d'utilisateur</value>
