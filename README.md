@@ -50,5 +50,5 @@ Some External Packages were used to create this project with ease and implement 
   - [YamlDotNet](https://www.nuget.org/packages/YamlDotNet/)
   
 ## Disclaimer
-Assist is not a part of Riot Games nor is it Endorsed or affiliated in any way. Assist was made to be safe for everyone to use, and to our knowledge, no one ever got into trouble for using Assist. Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games.
+Assist is not a part of Riot Games nor is it Endorsed or affiliated in any way. Assist was made to be safe for everyone to use, and to our knowledge, no one ever got into trouble for using Assist. Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games. If you need to contact me, DM on twitter @Hey_M1ke, or other places if you know where to look.
 
