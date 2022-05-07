@@ -13,6 +13,7 @@
 <p align="center">
   <a href="https://discord.gg/C3AbvyM3dj"><img src="https://discordapp.com/api/guilds/939378402283118643/widget.png"></a>
   <a href="https://twitter.com/Hey_M1ke"><img src="https://img.shields.io/badge/Twitter-@Hey_M1ke-1da1f2.svg?logo=twitter?style=for-the-badge&color=f71d51"></a>
+  <a href="https://twitter.com/AssistTeam_"><img src="https://img.shields.io/badge/Twitter-@AssistTeam_-1da1f2.svg?logo=twitter?style=for-the-badge&color=f71d51"></a>
 </p>
 <p align="center">
   </a>
