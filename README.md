@@ -37,6 +37,11 @@ Well, why not? Assist was created from the collimation of different ideas from m
     - You can now check your store without having to load up the game now, simply click on the store tab and look at your store!
   * More to come in the future!
 
+## Assist Modules
+Assist has different programs it contains that makes it all tick together.
+  - [Assist Background Client](https://github.com/AssistTeam/AssistBackgroundClient)
+  - [Assist Installer](https://github.com/AssistTeam/AssistInstaller)
+  
 ## External Packages Used
 Some External Packages were used to create this project with ease and implement cool features:
   - [ValNet](https://www.nuget.org/packages/ValNet/)
