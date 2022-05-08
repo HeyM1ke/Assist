@@ -157,8 +157,10 @@ namespace Assist.MVVM.ViewModel
 
             if (!string.IsNullOrEmpty(user.tokenData.entitle) && !string.IsNullOrEmpty(user.tokenData.access))
             {
+                
                 AppInstance.CurrentProfile = profile;
                 AppInstance.CurrentUser = user;
+                await profile.SetupProfile(user);
             }
 
             OpenAssistMainWindow();
