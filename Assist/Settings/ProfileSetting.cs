@@ -18,6 +18,7 @@ namespace Assist.Settings
         public string AssCAuth64 { get; set; }
         public int playerLevel { get; set; }
         public DateTime TimeOfLogin { get; set; }
+        public int Tier { get; set; } = 0;
         public string profileNote { get; set; }
 
         /// <summary>
@@ -58,11 +59,16 @@ namespace Assist.Settings
         public async Task SetupProfile(RiotUser pUser)
         {
             await pUser.Inventory.GetPlayerInventory();
-
             PCID = pUser.Inventory.CurrentInventory.PlayerData.PlayerCardID;
 
             var r = await pUser.Player.GetPlayerProgression();
             playerLevel = r.Progress.Level;
+
+            var rnkD = await pUser.Player.GetCompetitiveUpdates();
+
+            if(rnkD.Matches.Count != 0)
+                Tier = rnkD.Matches[0].TierAfterUpdate;
+
         }
     }
 

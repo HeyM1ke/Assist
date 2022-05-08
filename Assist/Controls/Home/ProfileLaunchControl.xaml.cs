@@ -46,6 +46,7 @@ namespace Assist.Controls.Home
         {
             _viewModel.ProfilePlayercard = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + _viewModel.Profile.PCID + "_DisplayIcon.png", 80, 80);
             _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 720, 480);
+            _viewModel.PlayerRankIcon = await App.LoadImageUrl($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTier_Large_{_viewModel.Profile.Tier}.png");
         }
         private async void PlayBTN_Click(object sender, RoutedEventArgs e)
         {
