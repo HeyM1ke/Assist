@@ -165,6 +165,8 @@
                     <ComboBoxItem Content="Spanish"/>
                     <ComboBoxItem Content="Portuguese"/>
                     <ComboBoxItem Content="French"/>
+                    <ComboBoxItem Content="Chinese"/>
+                    <ComboBoxItem Content="German"/>
                 </ComboBox>
             </Grid>
             <Grid x:Name="WindowSizeSetting" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10">

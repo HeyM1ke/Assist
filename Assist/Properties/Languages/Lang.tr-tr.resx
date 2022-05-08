@@ -59,141 +59,141 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Authentication_2FactorPlaceholder" xml:space="preserve">
-    <value>Code</value>
+    <value>Kod</value>
   </data>
   <data name="Authentication_LoginBtn" xml:space="preserve">
-    <value>LOGIN</value>
+    <value>GİRİŞ YAP</value>
   </data>
   <data name="Authentication_MultifactorFail" xml:space="preserve">
-    <value>Multifactor Code is not correct.</value>
+    <value>Çift faktörlü doğrulama kodu yanlış.</value>
   </data>
   <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
-    <value>Password</value>
+    <value>Şifre</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Selecting Rito Login allows you to login to the riot website and then use Assist. Note: Google Login does not work.</value>
+    <value>Riot Games'i seçererek Riot Games websitesinde giriş yaparsan Assist'i kullanabilecesin. Not: Google ile giriş çalışmıyor.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Please Note: Social Authentication does not function with Assist. To use a social login please login with a Riot Username and Password combo. If you do not have a Riot Username and Password combo with a social account, check your account details on the Riot Account Website to create a combo.</value>
+    <value>Not: Sosyal medya hesapları ile giriş Assist'de çalışmıyor. Eğer bir sosyal medya hesabın varsa, o zaman lütfen Riot Games kullanıcı adı ve şifresi ile giriş yap. Eğer Riot Games kullanıcı adı ve şifren yoksa, Riot Games websitesine giriş yaparak kendine kullanıcı adı ve şifresi oluşturabilirin.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
-    <value>SUBMIT</value>
+    <value>GÖNDER</value>
   </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
-    <value>Selecting Username and Password allows you to directly login with your Riot Games Username and Password.</value>
+    <value>Riot Hesabı Girişini seçerek sadece Riot Games kullanıcı adı ve şifresi ile giriş yapabileceksin.</value>
   </data>
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
-    <value>Login with your Riot Games Username and Password. All of the login information is sent to Riot Servers and Riot Servers only.
+    <value>Lütfen Riot Games kullanıcı adı ve şifresi ile giriş yap. Giriş bilgileri sadece ve sadece Riot Games'e gönderiliyor.
 
-If you get Error 403, this is a Riot Login Error that we cannot fix, we recommend updating your Windows to have a possiblity fixing the error and logging in with Assist.</value>
+Eğer Error 403 gösteriliyorsa, bu ne yazıkki Riot Games'in hatası ve biz düzeltemiyoruz. Windows'u güncelleyip tekrar giriş yapmayı deneyebilirsin. Bu çözüm sorunu belki giderecektir.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
-    <value>Username</value>
+    <value>Kullanıcı Adı</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
-    <value>Welcome to Assist, please select a way to login below.</value>
+    <value>Assist'e hoşgeldin, lütfen aşağıdaki giriş yapma seçeneklerinden birisini seç.</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
-    <value>WELCOME</value>
+    <value>HOŞGELDİN</value>
   </data>
   <data name="Dashboard_Discord" xml:space="preserve">
     <value>Discord</value>
   </data>
   <data name="Dashboard_Support" xml:space="preserve">
-    <value>Support</value>
+    <value>Destek</value>
   </data>
   <data name="DefaultAcc_Label" xml:space="preserve">
-    <value>Default Account:</value>
+    <value>Varsayılan Hesap:</value>
   </data>
   <data name="InitPage_Loading" xml:space="preserve">
-    <value>Loading...</value>
+    <value>Yükleniyor...</value>
     <comment>Text on InitPage</comment>
   </data>
   <data name="Navigation_DashboardHover" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>Ana Sayfa</value>
     <comment>Text on Dashboard Button Hover</comment>
   </data>
   <data name="Navigation_ProgressionHover" xml:space="preserve">
-    <value>Progression</value>
+    <value>İlerleme</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ayarlar</value>
     <comment>Text on Settings Button Hover</comment>
   </data>
   <data name="Navigation_StoreHover" xml:space="preserve">
-    <value>Store</value>
+    <value>Mağaza</value>
     <comment>Text on Store Button Hover</comment>
   </data>
   <data name="NightMarket_EndsIn" xml:space="preserve">
-    <value>ENDS IN</value>
+    <value>GECE PAZARINA KALAN SÜRE</value>
   </data>
   <data name="NightMarket_Name" xml:space="preserve">
-    <value>NIGHT MARKET</value>
+    <value>GECE PAZARI</value>
   </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
-    <value>Launch Settings</value>
+    <value>Başlangıç Ayarları</value>
     <comment>Text on Launch Settings Button Hover</comment>
   </data>
   <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
-    <value>PLAY</value>
+    <value>OYNA</value>
     <comment>Text on Play Label</comment>
   </data>
   <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
-    <value>Switch Profile</value>
+    <value>Hesap Değiştir</value>
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
   <data name="Progression_Battlepass" xml:space="preserve">
-    <value>BATTLEPASS</value>
+    <value>SAVAŞ BİLETİ</value>
   </data>
   <data name="Progression_Battlepass_Completed" xml:space="preserve">
-    <value>COMPLETED!</value>
+    <value>TAMAMLANDI!</value>
   </data>
   <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
-    <value>Current Tier: </value>
+    <value>Şuanki Kademe: </value>
   </data>
   <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
-    <value>Language: </value>
+    <value>Dil: </value>
   </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
-    <value>Select Language:</value>
+    <value>Dil Seç:</value>
   </data>
   <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
-    <value>Sound Volume:</value>
+    <value>Ses Yüksekliği:</value>
   </data>
   <data name="SettingsGeneral_WindowSize" xml:space="preserve">
-    <value>Window Size:</value>
+    <value>Pencere Boyutu:</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
-    <value>About</value>
+    <value>Hakkında</value>
   </data>
   <data name="SettingsTab_General" xml:space="preserve">
-    <value>General</value>
+    <value>Genel</value>
   </data>
   <data name="SettingsTab_VALSet" xml:space="preserve">
-    <value>VALORANT Settings</value>
+    <value>VALORANT Ayarları</value>
   </data>
   <data name="StorePopup_BackLabel" xml:space="preserve">
-    <value>BACK</value>
+    <value>GERİ</value>
   </data>
   <data name="StorePopup_ChromaLabel" xml:space="preserve">
-    <value>CHROMAS</value>
+    <value>STİLLER</value>
   </data>
   <data name="StorePopup_LevelsLabel" xml:space="preserve">
-    <value>LEVELS</value>
+    <value>SEVİYELER</value>
   </data>
   <data name="Store_FeaturedBundleLabel" xml:space="preserve">
-    <value>FEATURED BUNDLE</value>
+    <value>VİTRİN</value>
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
-    <value>DAILY OFFERS</value>
+    <value>Günlük Teklifler</value>
   </data>
   <data name="Support_ButtonText" xml:space="preserve">
-    <value>Support the project!</value>
+    <value>Projeyi destekle!</value>
   </data>
   <data name="Support_Description" xml:space="preserve">
-    <value>Assist is always going to be free and open-sourced. Choosing to support the project will allow us to continue with development and create some more unique features. Thank you &lt;3</value>
+    <value>Assist her zaman bedava ve açık kaynaklı bir yazılım olarak kalacaktır. Projeyi desteklemen, bizim geliştirmeye devam etmemize ve daha benzersiz özellikler yapmamızı sağlayacaktır. Teşekkürler &lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
-    <value>Support Assist!</value>
+    <value>Assist'i Desktekle!</value>
   </data>
 </root>

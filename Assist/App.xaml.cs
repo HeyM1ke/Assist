@@ -147,6 +147,22 @@ namespace Assist
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("pt-BR", true);
                     AssistLog.Normal("Changed language to portuguese");
                     break;
+                case Enums.ELanguage.de_de:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE", true);
+                    AssistLog.Normal("Changed language to german");
+                    break;
+                case Enums.ELanguage.tr_tr:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("tr-TR", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR", true);
+                    AssistLog.Normal("Changed language to turkish");
+                    break;
+                case Enums.ELanguage.zh_cn:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("zh-CN", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN", true);
+                    AssistLog.Normal("Changed language to turkish");
+                    break;
+
             }
         }
 

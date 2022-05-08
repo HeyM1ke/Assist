@@ -121,51 +121,51 @@
     <value>Code</value>
   </data>
   <data name="Authentication_LoginBtn" xml:space="preserve">
-    <value>LOGIN</value>
+    <value>EINLOGGEN</value>
   </data>
   <data name="Authentication_MultifactorFail" xml:space="preserve">
-    <value>Multifactor Code is not correct.</value>
+    <value>2-FA Code ist nicht korrekt, bitte überprüfe deine Eingabe.</value>
   </data>
   <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
-    <value>Password</value>
+    <value>Passwort</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Selecting Rito Login allows you to login to the riot website and then use Assist. Note: Google Login does not work.</value>
+    <value>Das Auswählen des Riot Logins erlaubt dir das Einloggen auf der Riot Seite wodurch du Assist nutzen kannst. Hinweis: Der Login über Soziale Netzwerke funktioniert nicht.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Please Note: Social Authentication does not function with Assist. To use a social login please login with a Riot Username and Password combo. If you do not have a Riot Username and Password combo with a social account, check your account details on the Riot Account Website to create a combo.</value>
+    <value>Bitte beachte: Das Einloggen über Soziale Netzwerke funktioniert für Assist leider nicht, bitte nutze stattdessen deine normalen Riot Games Login Daten. Solltest du keine Login Daten haben da du dich bisher immer über soziale Netzwerke angemeldet hast, kannst du auf die Riot Games Account Website gehen um dir einen normalen Login zu erstellen.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
-    <value>SUBMIT</value>
+    <value>ABSENDEN</value>
   </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
-    <value>Selecting Username and Password allows you to directly login with your Riot Games Username and Password.</value>
+    <value>Das Auswählen von Benutzername und Passwort erlaubt dir das direkte einloggen in deinen Riot Games Account.</value>
   </data>
-  <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
-    <value>Login with your Riot Games Username and Password. All of the login information is sent to Riot Servers and Riot Servers only.
+  <data name="Authentication_BenutzernameLogin_Notice" xml:space="preserve">
+    <value>Logge dich mit deinem Riot Games Benutzername und Passwort ein. Deine Login Informationen werden ausschließlich an die Riot Games Server gesendet.
 
-If you get Error 403, this is a Riot Login Error that we cannot fix, we recommend updating your Windows to have a possiblity fixing the error and logging in with Assist.</value>
+Solltest du einen 403 Fehler erhalten, ist das ein Riot Games Login Fehler, den wir nicht behebn können. Wir empfehlen dir dein Windows zu aktualisieren, da dies eventuell das Problem beheben könnte.</value>
   </data>
-  <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
-    <value>Username</value>
+  <data name="Authentication_BenutzernamePlaceholder" xml:space="preserve">
+    <value>Benutzername</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
-    <value>Welcome to Assist, please select a way to login below.</value>
+    <value>Willkommen bei Assist. Bitte wähle unten aus wie du dich einloggen möchtest.</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
-    <value>WELCOME</value>
+    <value>WILLKOMMEN</value>
   </data>
   <data name="Dashboard_Discord" xml:space="preserve">
     <value>Discord</value>
   </data>
   <data name="Dashboard_Support" xml:space="preserve">
-    <value>Support</value>
+    <value>Hilfe/Support</value>
   </data>
   <data name="DefaultAcc_Label" xml:space="preserve">
-    <value>Default Account:</value>
+    <value>Standart Konto:</value>
   </data>
   <data name="InitPage_Loading" xml:space="preserve">
-    <value>Loading...</value>
+    <value>Laden...</value>
     <comment>Text on InitPage</comment>
   </data>
   <data name="Navigation_DashboardHover" xml:space="preserve">
@@ -173,86 +173,86 @@ If you get Error 403, this is a Riot Login Error that we cannot fix, we recommen
     <comment>Text on Dashboard Button Hover</comment>
   </data>
   <data name="Navigation_ProgressionHover" xml:space="preserve">
-    <value>Progression</value>
+    <value>Fortschritt</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
     <comment>Text on Settings Button Hover</comment>
   </data>
   <data name="Navigation_StoreHover" xml:space="preserve">
-    <value>Store</value>
+    <value>Shop</value>
     <comment>Text on Store Button Hover</comment>
   </data>
   <data name="NightMarket_EndsIn" xml:space="preserve">
-    <value>ENDS IN</value>
+    <value>ENDET IN</value>
   </data>
   <data name="NightMarket_Name" xml:space="preserve">
-    <value>NIGHT MARKET</value>
+    <value>NACHTMARKT</value>
   </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
-    <value>Launch Settings</value>
+    <value>Einstellungen öffnen</value>
     <comment>Text on Launch Settings Button Hover</comment>
   </data>
   <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
-    <value>PLAY</value>
+    <value>SPIELEN</value>
     <comment>Text on Play Label</comment>
   </data>
   <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
-    <value>Switch Profile</value>
+    <value>Profil wechseln</value>
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
   <data name="Progression_Battlepass" xml:space="preserve">
-    <value>BATTLEPASS</value>
+    <value>KAMPFPASS</value>
   </data>
   <data name="Progression_Battlepass_Completed" xml:space="preserve">
-    <value>COMPLETED!</value>
+    <value>ABGESCHLOSSEN!</value>
   </data>
   <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
-    <value>Current Tier: </value>
+    <value>Aktuelle Stufe: </value>
   </data>
   <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
-    <value>Language: </value>
+    <value>Sprache: </value>
   </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
-    <value>Select Language:</value>
+    <value>Sprache auswählen:</value>
   </data>
   <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
-    <value>Sound Volume:</value>
+    <value>Lautstärke:</value>
   </data>
   <data name="SettingsGeneral_WindowSize" xml:space="preserve">
-    <value>Window Size:</value>
+    <value>Fenster Größe:</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
-    <value>About</value>
+    <value>Über</value>
   </data>
   <data name="SettingsTab_General" xml:space="preserve">
-    <value>General</value>
+    <value>Allgemein</value>
   </data>
   <data name="SettingsTab_VALSet" xml:space="preserve">
-    <value>VALORANT Settings</value>
+    <value>VALORANT Einstellungen</value>
   </data>
   <data name="StorePopup_BackLabel" xml:space="preserve">
-    <value>BACK</value>
+    <value>ZURÜCK</value>
   </data>
   <data name="StorePopup_ChromaLabel" xml:space="preserve">
     <value>CHROMAS</value>
   </data>
   <data name="StorePopup_LevelsLabel" xml:space="preserve">
-    <value>LEVELS</value>
+    <value>LEVEL</value>
   </data>
   <data name="Store_FeaturedBundleLabel" xml:space="preserve">
-    <value>FEATURED BUNDLE</value>
+    <value>VORGESTELLTES PACKET</value>
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
-    <value>DAILY OFFERS</value>
+    <value>TÄGLICHE ANGEBOTE</value>
   </data>
   <data name="Support_ButtonText" xml:space="preserve">
-    <value>Support the project!</value>
+    <value>Unterstütze das Projekt!</value>
   </data>
   <data name="Support_Description" xml:space="preserve">
-    <value>Assist is always going to be free and open-sourced. Choosing to support the project will allow us to continue with development and create some more unique features. Thank you &lt;3</value>
+    <value>Assist wird für immer kostenlos und Open Source bleiben. Wenn du das Projekt unterstützt, können wir die Entwicklung fortsetzen und weitere einzigartige Funktionen erstellen. Danke dir &lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
-    <value>Support Assist!</value>
+    <value>Unterstütze das Assist!</value>
   </data>
 </root>
