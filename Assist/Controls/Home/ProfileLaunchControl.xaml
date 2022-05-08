@@ -67,7 +67,7 @@
                                FontSize="18" Padding="5"
                                />
 
-                        
+
                         <Button
                             Padding="5"
                             Width="28"
@@ -93,10 +93,10 @@
                             </Button.ToolTip>
                         </Button>
                     </StackPanel>
-                    
+
                 </Grid>
 
-                
+
             </DockPanel>
             <Image Source="{Binding Path=ProfilePlayercard}" Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,37"/>
             <Border Width="44"
@@ -112,7 +112,7 @@
                 <Label x:Name="AccountLevelLabel" Content="{Binding Path=ProfileAccountLevel}" Foreground="White" FontFamily="{StaticResource WorkSans}" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"></Label>
 
             </Border>
-
+            <Image Source="{Binding Path=PlayerRankIcon}" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,86,0,0"></Image>
 
             <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
 
@@ -146,7 +146,7 @@
                                 <Setter Property="BorderBrush" Value="{StaticResource ProfileLaunchPlayButton_HoverHighlightOutline}"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
-                            
+
 
                         </Style.Triggers>
                     </Style>
@@ -176,7 +176,7 @@
                                 <Setter Property="BorderBrush" Value="{StaticResource ProfileLaunchButton_SelectedOutline}"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
-                            
+
                         </Style.Triggers>
                     </Style>
                 </Grid.Resources>
@@ -201,7 +201,7 @@
                                         <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                     </Grid.Effect>
                                     <StackPanel Orientation="Horizontal">
-                                        
+
                                         <Border Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="120" Height="28">
                                             <Label Padding="5" Content="{x:Static lang:Lang.ProfileLaunchControl_LaunchSettingsHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                         </Border>
@@ -215,7 +215,7 @@
             </Grid>
         </Grid>
 
-        
+
 
     </Border>
 </UserControl>

@@ -28,7 +28,8 @@ namespace Assist.Controls.Home.ViewModels
             Gamename = "Username",
             Tagline = "00000",
             PCID = "612cd02d-4294-ee2a-644c-a3ba3ddf8805",
-            Region = 0
+            Region = 0,
+            Tier = 0
         };
         public ProfileSetting Profile
         {
@@ -63,6 +64,14 @@ namespace Assist.Controls.Home.ViewModels
         {
             get => _backingImage;
             set => SetProperty(ref _backingImage, value);
+        }
+
+        private BitmapImage _playerRankIcon;
+
+        public BitmapImage PlayerRankIcon
+        {
+            get => _playerRankIcon;
+            set => SetProperty(ref _playerRankIcon, value);
         }
 
         private string _modulesFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");

@@ -156,7 +156,7 @@
     <value>ようこそ</value>
   </data>
   <data name="Dashboard_Discord" xml:space="preserve">
-    <value>不和</value>
+    <value>Discord</value>
   </data>
   <data name="Dashboard_Support" xml:space="preserve">
     <value>サポート</value>
@@ -180,7 +180,7 @@
     <comment>Text on Settings Button Hover</comment>
   </data>
   <data name="Navigation_StoreHover" xml:space="preserve">
-    <value>店</value>
+    <value>ストア</value>
     <comment>Text on Store Button Hover</comment>
   </data>
   <data name="NightMarket_EndsIn" xml:space="preserve">
@@ -194,7 +194,7 @@
     <comment>Text on Launch Settings Button Hover</comment>
   </data>
   <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
-    <value>遊ぶ</value>
+    <value>プレイ</value>
     <comment>Text on Play Label</comment>
   </data>
   <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
@@ -223,10 +223,10 @@
     <value>ウィンドウサイズ：</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
-    <value>だいたい</value>
+    <value>About</value>
   </data>
   <data name="SettingsTab_General" xml:space="preserve">
-    <value>全般的</value>
+    <value>一般</value>
   </data>
   <data name="SettingsTab_VALSet" xml:space="preserve">
     <value>VALORANT 設定</value>
