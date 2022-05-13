@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assist.MVVM.ViewModel;
 
 namespace Assist.MVVM.View.Settings.SettingPages
 {
@@ -22,6 +23,7 @@ namespace Assist.MVVM.View.Settings.SettingPages
     {
         public Settings_About()
         {
+            DataContext = new MainViewModel();
             InitializeComponent();
         }
     }
