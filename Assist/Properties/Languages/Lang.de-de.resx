@@ -202,7 +202,7 @@ Solltest du einen 403 Fehler erhalten, ist das ein Riot Games Login Fehler, den 
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
   <data name="Progression_Battlepass" xml:space="preserve">
-    <value>KAMPFPASS</value>
+    <value>BATTLEPASS</value>
   </data>
   <data name="Progression_Battlepass_Completed" xml:space="preserve">
     <value>ABGESCHLOSSEN!</value>

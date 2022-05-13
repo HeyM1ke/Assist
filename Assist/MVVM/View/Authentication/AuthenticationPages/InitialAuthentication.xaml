@@ -75,7 +75,7 @@
                                  Text="{x:Static lang:Lang.Authentication_WelcomeInfoLabel}" TextWrapping="WrapWithOverflow"
                                  Width="258" TextAlignment="Center"
                                  FontFamily="{StaticResource WorkSans}" FontWeight="Regular" FontSize="12" Padding="5"></TextBox>
-                            <UniformGrid Columns="2">
+                            <UniformGrid Columns="1">
                                 <UniformGrid.Resources>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Template">
@@ -119,7 +119,7 @@
                                 </UniformGrid.Resources>
 
                                 <Button x:Name="UsernameBTN" Width="50" Height="50" Content="../../../../Resources/Icons/Profile_Icon.png" Click="UsernameBTN_Click"/>
-                                <Button x:Name="RitoBTN" Width="50" Height="50" Content="../../../../Resources/Icons/Fist_Icon.png" Click="RitoBTN_Click"/>
+                                <Button Visibility="Collapsed" x:Name="RitoBTN" Width="50" Height="50" Content="../../../../Resources/Icons/Fist_Icon.png" Click="RitoBTN_Click"/>
                             </UniformGrid>
                         </StackPanel>
                     </StackPanel>

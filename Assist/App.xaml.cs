@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,6 +31,8 @@ namespace Assist
     /// </summary>
     public partial class App : Application
     {
+        
+
         protected override void OnStartup(StartupEventArgs e)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -54,6 +57,10 @@ namespace Assist
             ChangeLanguage();
             
             AssistLog.Normal("Starting InitPage");
+
+            if(new Ping().Send("www.google.com").Status != IPStatus.Success)
+                AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
+
 
             AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates().GetAwaiter().GetResult();
 

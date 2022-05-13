@@ -42,7 +42,7 @@ namespace Assist
             if(AssistApplication.AppInstance.AssistApiController.bIsUpdate) // Fixes a bug with the auto updater taking too long and showing the main window.
                 return;
 
-
+            DataContext = new MainViewModel();
             AssistApplication.AppInstance.TokenService = new TokenServiceBackgroundService();
             AssistSettings.Current.bNewUser = false;
             InitializeComponent();

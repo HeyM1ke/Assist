@@ -29,6 +29,7 @@ namespace Assist.MVVM.View.Authentication
         public static bool bAddMode;
         public Authentication()
         {
+            DataContext = new MainViewModel();
             InitializeComponent();
             DetermineResolution();
             ContentFrame = LoginFrame;
@@ -37,6 +38,7 @@ namespace Assist.MVVM.View.Authentication
 
         public Authentication(bool addMode)
         {
+            DataContext = new MainViewModel();
             InitializeComponent();
             DetermineResolution();
             ContentFrame = LoginFrame;
