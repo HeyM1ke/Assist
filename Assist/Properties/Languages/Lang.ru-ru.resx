@@ -173,7 +173,7 @@
     <comment>Text on Dashboard Button Hover</comment>
   </data>
   <data name="Navigation_ProgressionHover" xml:space="preserve">
-    <value>Прогрессия</value>
+    <value>Прогресс</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
     <value>Настройки</value>
