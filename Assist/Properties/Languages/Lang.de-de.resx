@@ -241,7 +241,7 @@ Solltest du einen 403 Fehler erhalten, ist das ein Riot Games Login Fehler, den 
     <value>LEVEL</value>
   </data>
   <data name="Store_FeaturedBundleLabel" xml:space="preserve">
-    <value>VORGESTELLTES PACKET</value>
+    <value>VORGESTELLTES PAKET</value>
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
     <value>TÄGLICHE ANGEBOTE</value>

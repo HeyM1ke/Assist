@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -29,6 +30,7 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
         private readonly RitoAuthViewModel _viewModel;
         private const string authUrl = "https://auth.riotgames.com/authorize?redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&client_id=play-valorant-web-prod&response_type=token%20id_token&nonce=1";
         private string cacheLoc = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Cache");
+        private const string socialGuide = "https://github.com/HeyM1ke/Assist/wiki/Social-Login-Guide";
         public RitoAuthentication()
         {
             DataContext = _viewModel = new RitoAuthViewModel();
@@ -97,6 +99,15 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
             WebView.NavigationStarting += EnsureHttps;
             WebView.Source = new Uri(authUrl);
             WebView.SourceChanged += SourceChanged;
+        }
+
+        private void Guide_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = socialGuide,
+                UseShellExecute = true
+            });
         }
     }
 }
