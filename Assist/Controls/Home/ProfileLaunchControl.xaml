@@ -73,17 +73,18 @@
                             Width="28"
                             Height="28" ToolTipService.InitialShowDelay="10" Click="Switch_Click">
                             <Button.ToolTip>
-                                <ToolTip Placement="Right"
-                                         Background="Transparent"
-                                         BorderThickness="0">
+                                <ToolTip
+                                    PlacementRectangle="30,0,0,0"
+                                    Placement="RelativePoint"
+                                    Background="Transparent"
+                                    BorderThickness="0">
                                     <Grid Margin="0,0,0,0">
                                         <Grid>
                                             <Grid.Effect>
                                                 <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                             </Grid.Effect>
                                             <StackPanel Orientation="Horizontal">
-                                                <Path Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="28" Height="28" Stretch="Fill" StrokeThickness="0" Fill="{StaticResource AssistBackground}" Data="F1 M 287.328,237.333L 319.344,255.818L 319.344,218.849L 287.328,237.333 Z "  />
-                                                <Border Margin="0,0,33,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="120" Height="28">
+                                                <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="100" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
                                                     <Label Padding="5" Content="{x:Static lang:Lang.ProfileLaunchControl_SwitchProfileHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                                 </Border>
                                             </StackPanel>
@@ -192,20 +193,20 @@
                     Width="28"
                     Height="28" ToolTipService.InitialShowDelay="10" Click="LS_Click">
                     <Button.ToolTip>
-                        <ToolTip Placement="Left"
-                                 Background="Transparent"
-                                 BorderThickness="0">
-                            <Grid>
+                        <ToolTip
+                            PlacementRectangle="-110,0,0,0"
+                            Placement="RelativePoint"
+                            Background="Transparent"
+                            BorderThickness="0">
+                            <Grid Margin="0,0,0,0">
                                 <Grid>
                                     <Grid.Effect>
                                         <DropShadowEffect BlurRadius="7" ShadowDepth="1" Opacity="0.5" />
                                     </Grid.Effect>
                                     <StackPanel Orientation="Horizontal">
-
-                                        <Border Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" CornerRadius="0,5,5,0" Width="120" Height="28">
+                                        <Border HorizontalAlignment="Left" VerticalAlignment="Center" Background="{StaticResource AssistBackground}" Width="120" Height="28" BorderBrush="{StaticResource AssistNavigationButton_SelectedOutline}" BorderThickness="1">
                                             <Label Padding="5" Content="{x:Static lang:Lang.ProfileLaunchControl_LaunchSettingsHover}" Foreground="White" FontFamily="{StaticResource WorkSans}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                                         </Border>
-                                        <Path Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="28" Height="28" Stretch="Fill" StrokeThickness="0" Fill="{StaticResource AssistBackground}" Data="F1 M 319.344,237.333L 287.328,218.849L 287.328,255.818L 319.344,237.333 Z"  />
                                     </StackPanel>
                                 </Grid>
                             </Grid>

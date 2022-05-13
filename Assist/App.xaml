@@ -173,7 +173,7 @@
         <SolidColorBrush x:Key="AssistNavigationButton_SelectedFill" Color="#54F61E51"/>
         <SolidColorBrush x:Key="AssistNavigationButton_SelectedOutline" Color="#F61E51"/>
 
-        <SolidColorBrush x:Key="AssistNavigationButton_HoverHighlightFill" Color="#17181D"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistNavigationButton_HoverHighlightFill" Color="#54F61E51"></SolidColorBrush>
         <SolidColorBrush x:Key="AssistNavigationButton_HoverHighlightOutline" Color="#F61E51"/>
 
 
