@@ -58,8 +58,8 @@ namespace Assist
             
             AssistLog.Normal("Starting InitPage");
 
-            if(new Ping().Send("www.google.com").Status != IPStatus.Success)
-                AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
+            /*if(new Ping().Send("www.google.com").Status != IPStatus.Success)
+                AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));*/
 
 
             AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates().GetAwaiter().GetResult();
