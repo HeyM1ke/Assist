@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Authentication_2FactorPlaceholder" xml:space="preserve">
+    <value>Kód</value>
+  </data>
+  <data name="Authentication_LoginBtn" xml:space="preserve">
+    <value>PŘIHLÁSIT</value>
+  </data>
+  <data name="Authentication_MultifactorFail" xml:space="preserve">
+    <value>Kód dvoufázového ověření není správný.</value>
+  </data>
+  <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="Authentication_RitoInfo" xml:space="preserve">
+    <value>Výběr Rito Login vám umožní přihlásit se na webovou stránku Riot a poté použít Assist. Poznámka: Přihlášení Google nefunguje.</value>
+  </data>
+  <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
+    <value>Poznámka: Přihlášení přes sociální sítě Assist nepodporuje. Chcete-li použít přihlášení přes sociální sítě, přihlaste se pomocí kombinace uživatelského jména a hesla. Pokud nemáte kombinaci uživatelského jména a hesla Riot se sociálním účtem, zkontrolujte podrobnosti o svém účtu na webu účtu Riot a vytvořte si kombinaci.</value>
+  </data>
+  <data name="Authentication_SubmitBtn" xml:space="preserve">
+    <value>ODESLAT</value>
+  </data>
+  <data name="Authentication_UserInfo" xml:space="preserve">
+    <value>Výběr uživatelského jména a hesla vám umožní přímé přihlášení pomocí uživatelského jména a hesla Riot Games.</value>
+  </data>
+  <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
+    <value>Přihlaste se svým uživatelským jménem a heslem Riot Games. Všechny přihlašovací údaje jsou odesílány pouze na servery Riot Games.
+
+Pokud se zobrazí chyba 403, jedná se o chybu přihlášení k Riot, kterou nemůžeme opravit, doporučujeme aktualizovat systém Windows, abyste měli možnost chybu opravit a přihlásit se pomocí Assist.</value>
+  </data>
+  <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
+    <value>Uživatelské jméno</value>
+  </data>
+  <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
+    <value>Vítejte v Assist, níže vyberte způsob přihlášení.</value>
+  </data>
+  <data name="Authentication_WelcomeLabel" xml:space="preserve">
+    <value>VÍTEJTE</value>
+  </data>
+  <data name="Dashboard_Discord" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="Dashboard_Support" xml:space="preserve">
+    <value>Podpora</value>
+  </data>
+  <data name="DefaultAcc_Label" xml:space="preserve">
+    <value>Výchozí Účet:</value>
+  </data>
+  <data name="InitPage_Loading" xml:space="preserve">
+    <value>Načítání...</value>
+    <comment>Text on InitPage</comment>
+  </data>
+  <data name="Navigation_DashboardHover" xml:space="preserve">
+    <value>Úvodní Stránka</value>
+    <comment>Text on Dashboard Button Hover</comment>
+  </data>
+  <data name="Navigation_ProgressionHover" xml:space="preserve">
+    <value>Postup</value>
+  </data>
+  <data name="Navigation_SettingsHover" xml:space="preserve">
+    <value>Nastavení</value>
+    <comment>Text on Settings Button Hover</comment>
+  </data>
+  <data name="Navigation_StoreHover" xml:space="preserve">
+    <value>Obchod</value>
+    <comment>Text on Store Button Hover</comment>
+  </data>
+  <data name="NightMarket_EndsIn" xml:space="preserve">
+    <value>KONČÍ ZA</value>
+  </data>
+  <data name="NightMarket_Name" xml:space="preserve">
+    <value>NIGHT MARKET</value>
+  </data>
+  <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
+    <value>Nastavení Spuštění</value>
+    <comment>Text on Launch Settings Button Hover</comment>
+  </data>
+  <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
+    <value>HRÁT</value>
+    <comment>Text on Play Label</comment>
+  </data>
+  <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
+    <value>Přepnout Profil</value>
+    <comment>Text on Switch Profile Button Hover</comment>
+  </data>
+  <data name="Progression_Battlepass" xml:space="preserve">
+    <value>BATTLEPASS</value>
+  </data>
+  <data name="Progression_Battlepass_Completed" xml:space="preserve">
+    <value>SPLNĚNO!</value>
+  </data>
+  <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
+    <value>Aktuální Úroveň: </value>
+  </data>
+  <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
+    <value>Jazyk: </value>
+  </data>
+  <data name="SettingsGeneral_SelLang" xml:space="preserve">
+    <value>Vybrat jazyk:</value>
+  </data>
+  <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
+    <value>Hlasitost:</value>
+  </data>
+  <data name="SettingsGeneral_WindowSize" xml:space="preserve">
+    <value>Velikost Okna:</value>
+  </data>
+  <data name="SettingsTab_About" xml:space="preserve">
+    <value>O Assist</value>
+  </data>
+  <data name="SettingsTab_General" xml:space="preserve">
+    <value>Všeobecné</value>
+  </data>
+  <data name="SettingsTab_VALSet" xml:space="preserve">
+    <value>VALORANT Nastavení</value>
+  </data>
+  <data name="StorePopup_BackLabel" xml:space="preserve">
+    <value>ZPĚT</value>
+  </data>
+  <data name="StorePopup_ChromaLabel" xml:space="preserve">
+    <value>CHROMY</value>
+  </data>
+  <data name="StorePopup_LevelsLabel" xml:space="preserve">
+    <value>LEVELY</value>
+  </data>
+  <data name="Store_FeaturedBundleLabel" xml:space="preserve">
+    <value>VYSTAVENÝ BALÍČEK</value>
+  </data>
+  <data name="Store_FeaturedDailyLabel" xml:space="preserve">
+    <value>DENNÍ NABÍDKY</value>
+  </data>
+  <data name="Support_ButtonText" xml:space="preserve">
+    <value>Podpoř projekt!</value>
+  </data>
+  <data name="Support_Description" xml:space="preserve">
+    <value>
+Assist bude vždy zdarma a open-source. Podpořením projektu nám umožníte pokračovat ve vývoji a vytvářet další jedinečné funkce. Děkujeme &lt;3</value>
+  </data>
+  <data name="Support_Title" xml:space="preserve">
+    <value>Podpořte Assist!</value>
+  </data>
+</root>
