@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Authentication_2FactorPlaceholder" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="Authentication_LoginBtn" xml:space="preserve">
+    <value>ВОЙТИ</value>
+  </data>
+  <data name="Authentication_MultifactorFail" xml:space="preserve">
+    <value>Код двухфакторной аунтификации неверен.</value>
+  </data>
+  <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Authentication_RitoInfo" xml:space="preserve">
+    <value>Вход по Riot позволяет вам войти в аккаунт на сайте Riot Games для использования Assist. Учтите: Вход через Google не работает.</value>
+  </data>
+  <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
+    <value>Учтите: Социальная аутентификация не работает в Assist. Чтобы использовать социальный способ входа, пожалуйста войдите с помощью логина и пароля Riot. Если у вас их нет, создайте их на сайте управления аккаунтом Riot. </value>
+  </data>
+  <data name="Authentication_SubmitBtn" xml:space="preserve">
+    <value>ПОДТВЕРДИТЬ</value>
+  </data>
+  <data name="Authentication_UserInfo" xml:space="preserve">
+    <value>Выбрав имя пользователя и пароль вы сможете напрямую войти с вашими данными Riot Games. </value>
+  </data>
+  <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
+    <value>Войдите с вашим логином и паролем Riot Games. Вся информация отправляется только на сервера Riot.
+
+Если вы получите ошибку 403, то мы, к сожалению, не сможем её исправить, так как она на стороне Riot. Мы рекомендуем обновить Windows чтобы исправить ошибку.</value>
+  </data>
+  <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
+    <value>Добро пожаловать в Assist, пожалуйста выберите способ входа.</value>
+  </data>
+  <data name="Authentication_WelcomeLabel" xml:space="preserve">
+    <value>ДОБРО ПОЖАЛОВАТЬ</value>
+  </data>
+  <data name="Dashboard_Discord" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="Dashboard_Support" xml:space="preserve">
+    <value>Поддержать</value>
+  </data>
+  <data name="DefaultAcc_Label" xml:space="preserve">
+    <value>Аккаунт по умолчанию:</value>
+  </data>
+  <data name="InitPage_Loading" xml:space="preserve">
+    <value>Загрузка...</value>
+    <comment>Text on InitPage</comment>
+  </data>
+  <data name="Navigation_DashboardHover" xml:space="preserve">
+    <value>Главная</value>
+    <comment>Text on Dashboard Button Hover</comment>
+  </data>
+  <data name="Navigation_ProgressionHover" xml:space="preserve">
+    <value>Прогрессия</value>
+  </data>
+  <data name="Navigation_SettingsHover" xml:space="preserve">
+    <value>Настройки</value>
+    <comment>Text on Settings Button Hover</comment>
+  </data>
+  <data name="Navigation_StoreHover" xml:space="preserve">
+    <value>Магазин</value>
+    <comment>Text on Store Button Hover</comment>
+  </data>
+  <data name="NightMarket_EndsIn" xml:space="preserve">
+    <value>ЗАКОНЧИТСЯ ЧЕРЕЗ</value>
+  </data>
+  <data name="NightMarket_Name" xml:space="preserve">
+    <value>НОЧНОЙ РЫНОК</value>
+  </data>
+  <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
+    <value>Настройки запуска</value>
+    <comment>Text on Launch Settings Button Hover</comment>
+  </data>
+  <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
+    <value>ИГРАТЬ</value>
+    <comment>Text on Play Label</comment>
+  </data>
+  <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
+    <value>Сменить профиль</value>
+    <comment>Text on Switch Profile Button Hover</comment>
+  </data>
+  <data name="Progression_Battlepass" xml:space="preserve">
+    <value>БОЕВОЙ ПРОПУСК</value>
+  </data>
+  <data name="Progression_Battlepass_Completed" xml:space="preserve">
+    <value>ЗАВЕРШЕНО!</value>
+  </data>
+  <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
+    <value>Текущий уровень: </value>
+  </data>
+  <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
+    <value>Язык: </value>
+  </data>
+  <data name="SettingsGeneral_SelLang" xml:space="preserve">
+    <value>Выберите язык:</value>
+  </data>
+  <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
+    <value>Громкость звука:</value>
+  </data>
+  <data name="SettingsGeneral_WindowSize" xml:space="preserve">
+    <value>Размер окна:</value>
+  </data>
+  <data name="SettingsTab_About" xml:space="preserve">
+    <value>О проекте</value>
+  </data>
+  <data name="SettingsTab_General" xml:space="preserve">
+    <value>Основные</value>
+  </data>
+  <data name="SettingsTab_VALSet" xml:space="preserve">
+    <value>Настройки VALORANT</value>
+  </data>
+  <data name="StorePopup_BackLabel" xml:space="preserve">
+    <value>НАЗАД</value>
+  </data>
+  <data name="StorePopup_ChromaLabel" xml:space="preserve">
+    <value>CHROMAS</value>
+  </data>
+  <data name="StorePopup_LevelsLabel" xml:space="preserve">
+    <value>УРОВНИ</value>
+  </data>
+  <data name="Store_FeaturedBundleLabel" xml:space="preserve">
+    <value>ПОПУЛЯРНОЕ</value>
+  </data>
+  <data name="Store_FeaturedDailyLabel" xml:space="preserve">
+    <value>ПРЕДЛОЖЕНИЯ</value>
+  </data>
+  <data name="Support_ButtonText" xml:space="preserve">
+    <value>Поддержите проект!</value>
+  </data>
+  <data name="Support_Description" xml:space="preserve">
+    <value>Assist всегда будет бесплатным и иметь открытый исходный код. Поддерживая проект вы помогаете нам продолжать разработку и создавать новые уникальные функции. Спасибо &lt;3</value>
+  </data>
+  <data name="Support_Title" xml:space="preserve">
+    <value>Поддержите Assist!</value>
+  </data>
+</root>

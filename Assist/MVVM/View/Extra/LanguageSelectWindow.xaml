@@ -200,6 +200,7 @@
                     <ComboBoxItem Content="German"/>
                     <ComboBoxItem Content="Turkish"/>
                     <ComboBoxItem Content="Dutch"/>
+                    <ComboBoxItem Content="Russian"/>
                 </ComboBox>
                 <Button x:Name="SelectBtn" Width="100" Height="30" Content="Select" Margin="0,5" Click="SelectBtn_Click"></Button>
             </StackPanel>

@@ -169,10 +169,16 @@ namespace Assist
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("nl-NL", true);
                     AssistLog.Normal("Changed language to dutch");
                     break;
+                case Enums.ELanguage.ru_ru:
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU", true);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU", true);
+                    AssistLog.Normal("Changed language to Russian");
+                    break;
+
                 case Enums.ELanguage.zh_cn:
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("zh-CN", true);
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN", true);
-                    AssistLog.Normal("Changed language to turkish");
+                    AssistLog.Normal("Changed language to chinese");
                     break;
 
             }

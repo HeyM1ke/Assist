@@ -24,7 +24,8 @@ namespace Assist.MVVM.Model
             de_de = 5,
             tr_tr = 6,
             nl_nl = 7,
-            zh_cn = 8,
+            ru_ru = 8,
+            zh_cn = 9,
             
 
         }
