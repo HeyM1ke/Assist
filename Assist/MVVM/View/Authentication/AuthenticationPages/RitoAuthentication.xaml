@@ -68,7 +68,42 @@
             <Wpf:WebView2 Name="WebView" Height="500" Width="700" />
             
         </Grid>
-        <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Width="150" VerticalAlignment="Center" Text="{x:Static lang:Lang.Authentication_RitoLogin_Notice}"
-                   FontFamily="{StaticResource WorkSans}" FontStretch="Normal" FontWeight="Light" Foreground="White" TextWrapping="Wrap" Opacity=".3" FontSize="10"></TextBlock>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Rectangle Fill="{StaticResource AssistNavigationButton_SelectedHighlightOutline}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
+                                        <Label Content="{TemplateBinding Content}" Foreground="White"
+                                                           FontFamily="{StaticResource WorkSans}" FontWeight="Normal"
+                                                           Padding="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="10"></Label>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Width="150" VerticalAlignment="Center" Text="{x:Static lang:Lang.Authentication_RitoLogin_Notice}"
+                       FontFamily="{StaticResource WorkSans}" FontStretch="Normal" FontWeight="Light" Foreground="White" TextWrapping="Wrap" Opacity=".3" FontSize="10"></TextBlock>
+            <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Width="150" VerticalAlignment="Center" Text="Google, and Facebook do not work. Please Click below for a guide."
+                       FontFamily="{StaticResource WorkSans}" FontStretch="Normal" FontWeight="Light" Foreground="White" TextWrapping="Wrap" Opacity=".3" FontSize="10"></TextBlock>
+            <Button Width="70" Height="30" Content="Guide" Click="Guide_Click"></Button>
+        </StackPanel>
+       
     </Grid>
 </Page>

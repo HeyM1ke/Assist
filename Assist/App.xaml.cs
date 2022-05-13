@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Net;
+using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace Assist
             
             AssistLog.Normal("Starting InitPage");
 
-            if(new Ping().Send("www.google.com").Status != IPStatus.Success)
+            if(!InternetCheck())
                 AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
 
 
@@ -121,7 +122,6 @@ namespace Assist
 
             return image;
         }
-
         public static void ChangeLanguage()
         {
             AssistLog.Normal("Changing Language");
@@ -183,7 +183,11 @@ namespace Assist
 
             }
         }
-
         public static void ShutdownAssist() => Application.Current.Shutdown();
+
+        public bool InternetCheck()
+        {
+            return true;
+        }
     }
 }
