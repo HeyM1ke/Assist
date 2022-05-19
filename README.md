@@ -14,10 +14,11 @@
   <a href="https://discord.gg/C3AbvyM3dj"><img src="https://discordapp.com/api/guilds/939378402283118643/widget.png"></a>
   <a href="https://twitter.com/Hey_M1ke"><img src="https://img.shields.io/badge/Twitter-@Hey_M1ke-1da1f2.svg?logo=twitter?style=for-the-badge&color=f71d51"></a> 
 </p>
+
 <p align="center">
   </a>
   <a href="https://github.com/AssistTeam/AssistInstaller/releases/latest/download/AssistInstaller.exe"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
-  
+  <h6 align="center">Download for Setup is currently down.</h6>
   </p>
 
 ## Install and Download Guide 
