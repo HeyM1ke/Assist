@@ -18,7 +18,6 @@
 <p align="center">
   </a>
   <a href="https://github.com/AssistTeam/AssistInstaller/releases/latest/download/AssistInstaller.exe"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
-  <h6 align="center">Download for Setup is currently down.</h6>
   </p>
 
 ## Install and Download Guide 
