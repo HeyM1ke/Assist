@@ -65,33 +65,33 @@
     <value>GİRİŞ YAP</value>
   </data>
   <data name="Authentication_MultifactorFail" xml:space="preserve">
-    <value>Çift faktörlü doğrulama kodu yanlış.</value>
+    <value>Çift faktörlü doğrulama kodu hatalı.</value>
   </data>
   <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
     <value>Şifre</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Riot Games'i seçererek Riot Games websitesinde giriş yaparsan Assist'i kullanabilecesin. Not: Google ile giriş çalışmıyor.</value>
+    <value>Riot Games'i seçerek website üzerinden Riot ID'ni kullanarak (Google ile giriş şu anda çalışmıyor) giriş yapabilirsin.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Not: Sosyal medya hesapları ile giriş Assist'de çalışmıyor. Eğer bir sosyal medya hesabın varsa, o zaman lütfen Riot Games kullanıcı adı ve şifresi ile giriş yap. Eğer Riot Games kullanıcı adı ve şifren yoksa, Riot Games websitesine giriş yaparak kendine kullanıcı adı ve şifresi oluşturabilirin.</value>
+    <value>Sosyal medya hesaplarını kullanarak giriş yapamazsın. Giriş yapmak istediğin hesabın kullanıcı adını ve şifresini kullanmak zorundasın. Eğer Riot Games kullanıcı adı ve şifren yoksa, Riot Games websitesine giriş yaparak kendine kullanıcı adı ve şifresi oluşturabilirin.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
     <value>GÖNDER</value>
   </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
-    <value>Riot Hesabı Girişini seçerek sadece Riot Games kullanıcı adı ve şifresi ile giriş yapabileceksin.</value>
+    <value>Riot Hesabı ile giriş yapacaksan sadece kullanıcı adı ve şifre kullanabilirsin.</value>
   </data>
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
-    <value>Lütfen Riot Games kullanıcı adı ve şifresi ile giriş yap. Giriş bilgileri sadece ve sadece Riot Games'e gönderiliyor.
+    <value>Riot ID'ni kullanarak giriş yapabilirsin. Kullanıcı adın ve şifren sadece Riot sunucularına gönderiliyor.
 
-Eğer Error 403 gösteriliyorsa, bu ne yazıkki Riot Games'in hatası ve biz düzeltemiyoruz. Windows'u güncelleyip tekrar giriş yapmayı deneyebilirsin. Bu çözüm sorunu belki giderecektir.</value>
+Eğer 403 numaralı hatayla karşılaşıyorsan bu bizimle alakalı olan bir problem değil. Bir süre bekledikten sonra bilgisayarını yeniden başlatmayı, Windows'u güncellemeyi veya modemini yeniden başlatmayı deneyebilirsin. Bu adımlar sorununu çözebilir.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
     <value>Kullanıcı Adı</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
-    <value>Assist'e hoşgeldin, lütfen aşağıdaki giriş yapma seçeneklerinden birisini seç.</value>
+    <value>Assist'e hoşgeldin! Aşağıdan bir giriş seçeneği seç</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
     <value>HOŞGELDİN</value>
@@ -191,7 +191,7 @@ Eğer Error 403 gösteriliyorsa, bu ne yazıkki Riot Games'in hatası ve biz dü
     <value>Projeyi destekle!</value>
   </data>
   <data name="Support_Description" xml:space="preserve">
-    <value>Assist her zaman bedava ve açık kaynaklı bir yazılım olarak kalacaktır. Projeyi desteklemen, bizim geliştirmeye devam etmemize ve daha benzersiz özellikler yapmamızı sağlayacaktır. Teşekkürler &lt;3</value>
+    <value>Assist her zaman bedava ve açık kaynaklı bir yazılım olarak kalacaktır, bununla beraber projeyi desteklemen, bizim geliştirmeye devam etmemiz ve daha benzersiz özellikler yapmamız için bizi teşvik edecektir. Teşekkürler &lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
     <value>Assist'i Desktekle!</value>
