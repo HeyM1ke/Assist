@@ -171,7 +171,7 @@ namespace Assist.MVVM.ViewModel
             var tempUser = new RiotUser();
             foreach (Cookie cook in user.UserClient.CookieContainer.GetAllCookies())
             {
-                tempUser.UserClient.CookieContainer.Add(cook);
+                tempUser.UserClient.CookieContainer.Add(new Cookie(cook.Name, cook.Value, "/", cook.Domain));
             }
 
             await tempUser.Authentication.AuthenticateWithCookies();

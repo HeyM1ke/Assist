@@ -69,6 +69,9 @@ namespace Assist.Settings
             if(rnkD.Matches.Count != 0)
                 Tier = rnkD.Matches[0].TierAfterUpdate;
 
+            Gamename = pUser.UserData.acct.game_name;
+            Tagline = pUser.UserData.acct.tag_line;
+
         }
     }
 
