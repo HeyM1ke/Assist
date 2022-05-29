@@ -174,27 +174,21 @@ namespace Assist.MVVM.ViewModel
                 tempUser.UserClient.CookieContainer.Add(new Cookie(cook.Name, cook.Value, "/", cook.Domain));
             }
 
-            await tempUser.Authentication.AuthenticateWithCookies();
+            try
+            {
+                AssistLog.Normal("Creating Second Account for Riot Client");
+                await tempUser.Authentication.AuthenticateWithCookies();
+            }
+            catch (Exception e)
+            {
+                AssistLog.Normal("Failed to create Second Account for Riot Client, Trying Again.");
+                await RedoCookies(user);
+                return;
+            }
+            
 
             AssistApplication.AppInstance.CurrentUser = tempUser;
             AssistApplication.AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
-        }
-
-        public void ChangeLanguage()
-        {
-            var curr = AssistSettings.Current.Language;
-
-            switch (curr)
-            {
-                case Enums.ELanguage.en_us:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en_us", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en_us", true);
-                    break;
-                case Enums.ELanguage.ja_jp:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
-                    break;
-            }
         }
     }
 }

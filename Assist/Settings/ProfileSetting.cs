@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.MVVM.ViewModel;
 using ValNet;
 using ValNet.Objects;
 
@@ -58,19 +59,47 @@ namespace Assist.Settings
 
         public async Task SetupProfile(RiotUser pUser)
         {
-            await pUser.Inventory.GetPlayerInventory();
-            PCID = pUser.Inventory.CurrentInventory.PlayerData.PlayerCardID;
+            try
+            {
+               var inv =  await pUser.Inventory.GetPlayerInventory();
+               PCID = inv.PlayerData.PlayerCardID;
+            }
+            catch (Exception e)
+            {
+                PCID = "9ee85a55-4b94-e382-b8a8-f985a33c1cc2";
+            }
 
-            var r = await pUser.Player.GetPlayerProgression();
-            playerLevel = r.Progress.Level;
+            try
+            {
+                var r = await pUser.Player.GetPlayerProgression();
+                playerLevel = r.Progress.Level;
+            }
+            catch (Exception e)
+            {
+                playerLevel = 1;
+            }
 
-            var rnkD = await pUser.Player.GetCompetitiveUpdates();
+            try
+            {
+                var rnkD = await pUser.Player.GetCompetitiveUpdates();
 
-            if(rnkD.Matches.Count != 0)
-                Tier = rnkD.Matches[0].TierAfterUpdate;
+                if (rnkD != null && rnkD.Matches != null)
+                {
+                    if (rnkD.Matches.Count != 0)
+                        Tier = rnkD.Matches[0].TierAfterUpdate;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Tier = 0;
+            }
 
+            
             Gamename = pUser.UserData.acct.game_name;
+            AssistLog.Debug("Name being Read" + Gamename);
             Tagline = pUser.UserData.acct.tag_line;
+            AssistLog.Debug("Tag being Read" + Tagline);
 
         }
     }
