@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Windows;
+﻿using Assist.MVVM.Model;
 using Assist.MVVM.View.InitPage;
-using Assist.MVVM.View.Extra;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
-using System.Text.Json;
-using System.Diagnostics;
-using System.Drawing;
+
+using System;
 using System.Globalization;
+using System.IO;
 using System.Net;
-using System.Net.Http;
-using System.Net.NetworkInformation;
+using System.Text.Json;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
-using Assist.Modules.XMPP;
-using Assist.MVVM.Model;
-using ValNet;
-using ValNet.Objects.Authentication;
+
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
@@ -32,7 +23,6 @@ namespace Assist
     /// </summary>
     public partial class App : Application
     {
-        
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -68,23 +58,20 @@ namespace Assist
             AssistLog.Normal("Starting Init Page");
             Current.MainWindow = new InitPage();
 
-            Screen targetScreen = Screen.PrimaryScreen;
+            var targetScreen = Screen.PrimaryScreen;
+            var viewport = targetScreen.WorkingArea;
 
-            Rectangle viewport = targetScreen.WorkingArea;
-            Current.MainWindow.Top = (viewport.Height - Current.MainWindow.Height) / 2
-                                     + viewport.Top;
-            Current.MainWindow.Left = (viewport.Width - Current.MainWindow.Width) / 2
-                                      + viewport.Left; ;
+            Current.MainWindow.Top = (viewport.Height - Current.MainWindow.Height) / 2 + viewport.Top;
+            Current.MainWindow.Left = (viewport.Width - Current.MainWindow.Width) / 2 + viewport.Left;
             Current.MainWindow.Show();
         }
-
-
 
         private void AppExit(object sender, ExitEventArgs e)
         {
             AssistSettings.Save();
             Environment.Exit(0);
         }
+
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             AssistLog.Error("Unhandled Ex Source: " + e.Exception.Source);
@@ -93,7 +80,8 @@ namespace Assist
             MessageBox.Show(e.Exception.Message, "Assist Hit an Error : Logfile Created : If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
-        public static async Task<BitmapImage> LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnDemand)
+
+        public static BitmapImage LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnLoad)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
@@ -106,7 +94,8 @@ namespace Assist
             
             return image;
         }
-        public static async Task<BitmapImage> LoadImageUrl(string url, int imageWidth, int imageHeight, BitmapCacheOption op = BitmapCacheOption.OnDemand)
+
+        public static BitmapImage LoadImageUrl(string url, int imageWidth, int imageHeight, BitmapCacheOption op = BitmapCacheOption.OnDemand)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
@@ -119,15 +108,15 @@ namespace Assist
             image.UriSource = new Uri(url, UriKind.Absolute);
             image.EndInit();
             
-
             return image;
         }
+
         public static void ChangeLanguage()
         {
             AssistLog.Normal("Changing Language");
-            var curr = AssistSettings.Current.Language;
+            var language = AssistSettings.Current.Language;
 
-            switch (curr)
+            switch (language)
             {
                 case Enums.ELanguage.en_us:
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", true);
@@ -180,14 +169,19 @@ namespace Assist
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN", true);
                     AssistLog.Normal("Changed language to chinese");
                     break;
-
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
-        public static void ShutdownAssist() => Application.Current.Shutdown();
+
+        public static void ShutdownAssist() 
+            => Current.Shutdown();
 
         public bool InternetCheck()
         {
+            // todo
             return true;
         }
+
     }
 }

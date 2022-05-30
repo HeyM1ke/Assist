@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assist.MVVM.Model;
+using Assist.MVVM.ViewModel;
+
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
 
 
 namespace Assist.Controls.Store.ViewModels
 {
     internal class DailyItemViewModel : ViewModelBase
     {
-        private AssistSkin _itemObj = new AssistSkin()
-        {
 
-        };
+        private AssistSkin _itemObj = new();
         public AssistSkin ItemObj
         {
             get => _itemObj;
@@ -37,7 +32,6 @@ namespace Assist.Controls.Store.ViewModels
         }
 
         private string _skinPrice;
-
         public string SkinPrice
         {
             get => _skinPrice;
@@ -51,13 +45,13 @@ namespace Assist.Controls.Store.ViewModels
             set => SetProperty(ref _tierIcon, value);
         }
 
-
         public async Task SetupSkin(string skinId)
         {
-            this.ItemObj = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
-            this.SkinPrice = await AssistApplication.AppInstance.AssistApiController.GetSkinPricing(skinId);
-            this.SkinImage = await App.LoadImageUrl(ItemObj.Levels[0].DisplayIcon);
-            this.SkinName = ItemObj.DisplayName;
+            ItemObj = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
+            SkinPrice = await AssistApplication.AppInstance.AssistApiController.GetSkinPricing(skinId);
+            SkinImage = App.LoadImageUrl(ItemObj.Levels[0].DisplayIcon);
+            SkinName = ItemObj.DisplayName;
         }
+
     }
 }

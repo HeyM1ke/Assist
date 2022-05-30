@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assist.MVVM.ViewModel;
+
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
+
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Store.ViewModels
 {
     internal class NightMarketItemViewModel : ViewModelBase
     {
-        private string _skinName;
 
+        private string _skinName;
         public string SkinName
         {
             get => _skinName;
@@ -20,7 +18,6 @@ namespace Assist.Controls.Store.ViewModels
         }
 
         private BitmapImage _skinImage;
-
         public BitmapImage SkinImage
         {
             get => _skinImage;
@@ -30,7 +27,6 @@ namespace Assist.Controls.Store.ViewModels
         }
 
         private string _skinPrice;
-
         public string SkinPrice
         {
             get => _skinPrice;
@@ -38,7 +34,6 @@ namespace Assist.Controls.Store.ViewModels
         }
 
         private string _skinDiscount;
-
         public string SkinDiscount
         {
             get => _skinDiscount;
@@ -46,19 +41,19 @@ namespace Assist.Controls.Store.ViewModels
         }
 
         private NightMarket.NightMarketOffer _offer;
-
         public NightMarket.NightMarketOffer Offer
         {
             get => _offer;
             set
             {
                 SetProperty(ref _offer, value);
+
+                // todo: not awaited
                 UpdateItem();
             }
         }
 
         private int _fontSize;
-
         public int FontSize
         {
             get => _fontSize;
@@ -67,17 +62,17 @@ namespace Assist.Controls.Store.ViewModels
 
         private async Task UpdateItem()
         {
-
             var skinData = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(Offer.Offer.OfferID);
 
             SkinName = skinData.DisplayName.ToUpper();
-            await DetermineFontSize();
+            DetermineFontSize();
+
             SkinDiscount = $"-{Offer.DiscountPercent}%";
-            SkinPrice = $"{string.Format("{0:n0}", Offer.DiscountCosts.ValorantPointCost)}";
-            SkinImage = await App.LoadImageUrl(skinData.Levels[0].DisplayIcon);
+            SkinPrice = $"{Offer.DiscountCosts.ValorantPointCost:n0}";
+            SkinImage = App.LoadImageUrl(skinData.Levels[0].DisplayIcon);
         }
 
-        private async Task DetermineFontSize()
+        private void DetermineFontSize()
         {
             var l = SkinName.Length;
             FontSize = 12;

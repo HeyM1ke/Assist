@@ -56,11 +56,11 @@ namespace Assist.Controls.Home.ViewModels
             });
         }
 
-        public async Task LoadNews(AssistNewsObj data)
+        public void LoadNews(AssistNewsObj data)
         {
             NewsTitle = data.NewsTitle;
             NewsDescription = data.NewsDescription;
-            NewsImage = await App.LoadImageUrl(data.NewsImage, 185, 95);
+            NewsImage = App.LoadImageUrl(data.NewsImage, 185, 95);
             NewsUrl = data.NewsUrl;
         }
     }

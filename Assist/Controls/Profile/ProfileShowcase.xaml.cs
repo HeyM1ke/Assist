@@ -40,11 +40,11 @@ namespace Assist.Controls.Profile
             InitializeComponent();
         }
 
-        private async void ProfileShowcase_Loaded(object sender, RoutedEventArgs e)
+        private void ProfileShowcase_Loaded(object sender, RoutedEventArgs e)
         {
 
             NoteBox.Text = _viewModel.Profile.profileNote;
-            _viewModel.ProfileImage = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + _viewModel.Profile.PCID + "_DisplayIcon.png", 80, 80);
+            _viewModel.ProfileImage = App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/{_viewModel.Profile.PCID}_DisplayIcon.png", 80, 80);
         }
 
         private void SwitchBTN_Click(object sender, RoutedEventArgs e)
@@ -78,7 +78,7 @@ namespace Assist.Controls.Profile
                 var g = t as WrapPanel;
                 g.Children.Remove(this);
             }
-
         }
+
     }
 }
