@@ -119,7 +119,7 @@ namespace Assist
 
         private static string GetApplicationDataFolder()
         {
-            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var directory = Path.Combine(appdata, "Assist");
 
             return directory;
