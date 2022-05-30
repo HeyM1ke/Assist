@@ -10,6 +10,7 @@ using Assist.MVVM.Model;
 using System.IO;
 using System.Net;
 using System.Diagnostics;
+using Serilog;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -34,7 +35,7 @@ namespace Assist.MVVM.ViewModel
 
         public async Task CheckForAssistUpdates()
         {
-            AssistLog.Normal("Checking for Assist Updates");
+            Log.Information("Checking for Assist Updates");
             AutoUpdater.ParseUpdateInfoEvent += ParseUpdateData;
             AutoUpdater.CheckForUpdateEvent += CheckForUpdate;
             try
@@ -52,7 +53,7 @@ namespace Assist.MVVM.ViewModel
         {
             if (args.Error is WebException)
             {
-                AssistLog.Normal("Error on WebException");
+                Log.Information("Error on WebException");
                 return;
             }
 
@@ -162,7 +163,7 @@ namespace Assist.MVVM.ViewModel
         }
         public async Task<AssistMaintenanceObj> GetMaintenanceStatus()
         {
-            AssistLog.Normal("Checking for Maintenance");
+            Log.Information("Checking for Maintenance");
             var resp = await client.ExecuteAsync(new RestRequest(maintUrl), Method.Get);
 
             if (resp.IsSuccessful)

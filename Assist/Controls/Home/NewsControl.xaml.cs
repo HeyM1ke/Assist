@@ -38,14 +38,16 @@ namespace Assist.Controls.Home
             InitializeComponent();
         }
 
-        private async void NewsControl_Loaded(object sender, RoutedEventArgs e)
+        private void NewsControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_newsData != null) await _viewModel.LoadNews(_newsData);
+            if (_newsData != null) 
+                _viewModel.LoadNews(_newsData);
         }
 
         private async void NewsControl_Click(object sender, RoutedEventArgs e)
         {
             await _viewModel.OpenNewsUrl();
         }
+
     }
 }

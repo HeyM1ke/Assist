@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Assist.MVVM.ViewModel;
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
+
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Home.ViewModels
 {
     internal class StoreControlViewModel : ViewModelBase
     {
-        private string _bundleName;
 
+        private string _bundleName;
         public string BundleName
         {
             get => _bundleName;
@@ -20,7 +20,6 @@ namespace Assist.Controls.Home.ViewModels
         }
 
         private string _bundlePrice;
-
         public string BundlePrice
         {
             get => _bundlePrice;
@@ -28,7 +27,6 @@ namespace Assist.Controls.Home.ViewModels
         }
 
         private BitmapImage _bundleImage;
-
         public BitmapImage BundleImage
         {
             get => _bundleImage;
@@ -37,43 +35,31 @@ namespace Assist.Controls.Home.ViewModels
 
         public List<string> StoreItemOffers;
 
-        private ValNet.Objects.Store.PlayerStore StoreResp;
+        private PlayerStore _store;
 
         public async Task GetShop()
         {
-            StoreResp = await AssistApplication.AppInstance.CurrentUser.Store.GetPlayerStore();
-            StoreItemOffers = StoreResp.SkinsPanelLayout.SingleItemOffers;
+            _store = await AssistApplication.AppInstance.CurrentUser.Store.GetPlayerStore();
+            StoreItemOffers = _store.SkinsPanelLayout.SingleItemOffers;
         }
         public async Task SetupControl()
         {
-            SetupBundle(StoreResp.FeaturedBundle.Bundle);
+            await SetupBundle(_store.FeaturedBundle.Bundle);
         }
 
         private async Task SetupBundle(Bundle bundle)
         {
             var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(bundle.DataAssetID);
-            BundleImage = await App.LoadImageUrl(temp.DisplayIcon,705 , 344);
+            BundleImage = App.LoadImageUrl(temp.DisplayIcon,705 , 344);
             BundleName = temp.BundleName.ToUpper();
-            BundlePrice = await GetBundlePrice(bundle);
+            BundlePrice = GetBundlePrice(bundle);
         }
 
-
-
-        public async Task<string> GetBundlePrice(Bundle bundle)
+        public string GetBundlePrice(Bundle bundle)
         {
-            int price = 0;
-
-            foreach (var item in bundle.Items)
-            {
-                price += item.DiscountedPrice;
-            }
-
-            return string.Format("{0:n0}", price);
+            var price = bundle.Items.Sum(x => x.DiscountPercent);
+            return $"{price:n0}";
         }
 
-        private async Task SetupItems()
-        {
-
-        }
     }
 }

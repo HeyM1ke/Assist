@@ -35,8 +35,7 @@ namespace Assist.Controls.Store.ViewModels
         }
 
 
-        private BitmapImage _skinPreviewImage = App.LoadImageUrl("https://cdn.rumblemike.com/Skin/97af88e4-4176-9fa3-4a26-57919443dab7_DisplayIcon.png").Result;
-
+        private BitmapImage _skinPreviewImage = App.LoadImageUrl("https://cdn.rumblemike.com/Skin/97af88e4-4176-9fa3-4a26-57919443dab7_DisplayIcon.png");
         public BitmapImage SkinPreviewImage
         {
             get => _skinPreviewImage;
@@ -47,19 +46,19 @@ namespace Assist.Controls.Store.ViewModels
         {
             if(Skin.Levels[skinIndex].StreamedVideoUrl is null) return;
             CurrentSkinName = Skin.Levels[skinIndex].DisplayName;
-            SkinPreviewImage = App.LoadImageUrl(Skin.Levels[skinIndex].DisplayName).Result;
+            SkinPreviewImage = App.LoadImageUrl(Skin.Levels[skinIndex].DisplayName);
             CurrentVideo = new Uri(Skin.Levels[skinIndex].StreamedVideoUrl);
         }
 
         public void ChangeChromaVideo(int skinIndex)
         {
-            if (Skin.Chromas[skinIndex].StreamedVideoUrl is null) return;
+            if (Skin.Chromas[skinIndex].StreamedVideoUrl == null) 
+                return;
 
             CurrentSkinName = Skin.Chromas[skinIndex].DisplayName;
-            SkinPreviewImage = App.LoadImageUrl(Skin.Chromas[skinIndex].DisplayIcon).Result;
+            SkinPreviewImage = App.LoadImageUrl(Skin.Chromas[skinIndex].DisplayIcon);
             CurrentVideo = new Uri(Skin.Chromas[skinIndex].StreamedVideoUrl);
         }
-
 
     }
 }

@@ -51,44 +51,40 @@ namespace Assist.MVVM.View.Progression.ViewModels
 
         public async Task LoadBattlepass(object container)
         {
-            UniformGrid ItemContainer = (UniformGrid) container;
+            var itemContainer = (UniformGrid) container;
             BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiController.currentBattlepassId);
             BattlePassData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
 
-            if(BattlePassData is null || BattlepassContractData is null || ItemContainer is null)
+            if(BattlePassData == null || BattlepassContractData == null || itemContainer is null)
                 return;
 
-            int tier = 1;
+            var tier = 1;
             // Convert obj param to Uniform as 
-            for (int i = 0; i < BattlePassData.chapters.Count; i++)
+            foreach (var chapter in BattlePassData.chapters)
             {
-                var listOfItems = BattlePassData.chapters[i].levels;
-                foreach (var Item in listOfItems)
+                var listOfItems = chapter.levels;
+                foreach (var item in listOfItems)
                 {
-                    var control = new BattlepassItem(Item, tier)
-                        {
-                            Margin = new Thickness(8, 6, 8, 6),
-                            bIsEarned = BattlepassContractData.ProgressionLevelReached >= tier,
-                            bCurrentItem = tier == BattlepassContractData.ProgressionLevelReached + 1,
+                    var control = new BattlepassItem(item, tier)
+                    {
+                        Margin = new Thickness(8, 6, 8, 6),
+                        bIsEarned = BattlepassContractData.ProgressionLevelReached >= tier,
+                        bCurrentItem = tier == BattlepassContractData.ProgressionLevelReached + 1,
 
-                        };
+                    };
 
-                        control.PreviewMouseLeftButtonUp += Control_PreviewMouseLeftButtonUp;
+                    control.PreviewMouseLeftButtonUp += Control_PreviewMouseLeftButtonUp;
+                    itemContainer.Children.Add(control);
 
-                        ItemContainer.Children.Add(control);
+                    if (tier == BattlepassContractData.ProgressionLevelReached + 1)
+                        ChangeShowcase(control);
 
-                        if (tier == BattlepassContractData.ProgressionLevelReached + 1)
-                            ChangeShowcase(control);
-
-                        tier++;
+                    tier++;
                 }
-                
-
-                
             }
         }
 
-        private async void Control_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Control_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ProgressionBattlepass.ClearSelected();
             var control  = sender as BattlepassItem;
@@ -103,30 +99,30 @@ namespace Assist.MVVM.View.Progression.ViewModels
                 var item = await control.GetItem();
                 ShowcaseName = item.rewardName;
                 ShowcaseTier = $"Tier: {await control.GetTier()}";
-                await GetShowcaseImage(item);
-            }
 
-            control.bIsSelected = true;
+                GetShowcaseImage(item);
+                control.bIsSelected = true;
+            }
         }
 
-        private async Task GetShowcaseImage(BattlePassObj.Level item)
+        private void GetShowcaseImage(BattlePassObj.Level item)
         {
             if (item.reward.type == "Spray")
             {
                 if(item.reward.sprayFullImage != null)
-                    ShowcaseImage = await App.LoadImageUrl(item.reward.sprayFullImage);
+                    ShowcaseImage = App.LoadImageUrl(item.reward.sprayFullImage);
                 return;
             }
 
             if (item.reward.type == "PlayerCard")
             {
                 if (item.reward.playercardLargeArt != null)
-                    ShowcaseImage = await App.LoadImageUrl(item.reward.playercardLargeArt);
+                    ShowcaseImage = App.LoadImageUrl(item.reward.playercardLargeArt);
                 return;
             }
 
             if (item.rewardDisplayIcon != null)
-                ShowcaseImage = await App.LoadImageUrl(item.rewardDisplayIcon);
+                ShowcaseImage = App.LoadImageUrl(item.rewardDisplayIcon);
         }
     }
 }

@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assist.MVVM.ViewModel;
+using Assist.Settings;
+
+using System;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
-using Assist.Settings;
+
 using ValNet.Objects;
 
 namespace Assist.Controls.Store.ViewModels
 {
     internal class ProfileShowcaseStoreViewModel : ViewModelBase
     {
-        private ProfileSetting _profile = new ProfileSetting()
+
+        private ProfileSetting _profile = new()
         {
             Gamename = "Username",
             Tagline = "00000",
@@ -40,14 +40,14 @@ namespace Assist.Controls.Store.ViewModels
             set => SetProperty(ref _profileRegion, value);
         }
 
-        private BitmapImage _profileImage = App.LoadImageUrl("https://cdn.rumblemike.com/PlayerCards/9ee85a55-4b94-e382-b8a8-f985a33c1cc2_DisplayIcon.png", 79, 79).Result;
+        private BitmapImage _profileImage = App.LoadImageUrl("https://cdn.rumblemike.com/PlayerCards/9ee85a55-4b94-e382-b8a8-f985a33c1cc2_DisplayIcon.png", 79, 79);
         public BitmapImage ProfileImage
         {
             get => _profileImage;
             set => SetProperty(ref _profileImage, value);
         }
 
-        private BitmapImage _backingImage = App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 217, 89).Result;
+        private BitmapImage _backingImage = App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 217, 89);
         public BitmapImage BackingImage
         {
             get => _backingImage;
@@ -71,12 +71,12 @@ namespace Assist.Controls.Store.ViewModels
         public async Task GetPlayerBalance()
         {
             var wallet = await AssistApplication.AppInstance.CurrentUser.Store.GetPlayerBalance();
-
             if (wallet == null)
                 return;
 
-            AccountVpBalance = string.Format("{0:n0}", wallet.Balances.VP);
-            AccountRpBalance = string.Format("{0:n0}", wallet.Balances.RP);
+            AccountVpBalance = $"{wallet.Balances.VP:n0}";
+            AccountRpBalance = $"{wallet.Balances.RP:n0}";
         }
+
     }
 }

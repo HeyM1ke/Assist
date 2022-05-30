@@ -16,6 +16,7 @@ using Assist.Modules.Popup;
 using Assist.MVVM.Model;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Serilog;
 using ValNet.Objects;
 
 
@@ -83,15 +84,15 @@ namespace Assist.Controls.Home.ViewModels
         {
             Directory.CreateDirectory(_modulesFolder);
 
-            AssistLog.Normal("Finding Assist Background Client");
+            Log.Information("Finding Assist Background Client");
             _bgClientObj = await AssistApplication.AppInstance.AssistApiController.GetBgClientData();
 
                 if (File.Exists(_bgcPath))
                 {
-                    AssistLog.Normal("Found Assist Background Client");
+                    Log.Information("Found Assist Background Client");
                     // Launch BG Client
 
-                    AssistLog.Normal("Checking for BG Client Updates");
+                    Log.Information("Checking for BG Client Updates");
                     await CheckForBgClientUpdate();
                     ProcessStartInfo ASSBGINFO = new ProcessStartInfo(_bgcPath, $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
                     ASSBGINFO.UseShellExecute = true;
@@ -108,12 +109,12 @@ namespace Assist.Controls.Home.ViewModels
                 }
                 else
                 {
-                    AssistLog.Normal("Did not find Assist Background Client");
+                    Log.Information("Did not find Assist Background Client");
                     while (!File.Exists(_bgcPath))
                     {
-                        AssistLog.Normal("Starting Download of Assist Client");
+                        Log.Information("Starting Download of Assist Client");
                         await DownloadBgClient();
-                        AssistLog.Normal("Completed Download of Assist Client");
+                        Log.Information("Completed Download of Assist Client");
                     }
 
                     await LaunchGame();
@@ -126,7 +127,7 @@ namespace Assist.Controls.Home.ViewModels
 
         public async Task DownloadBgClient()
         {
-            AssistLog.Normal("Downloading Assist Background Client");
+            Log.Information("Downloading Assist Background Client");
             var wBClient = new WebClient();
             // Download BG Client
             wBClient.DownloadProgressChanged += wc_DownloadProgressChanged;
@@ -136,7 +137,7 @@ namespace Assist.Controls.Home.ViewModels
 
         private void WBClientOnDownloadFileCompleted(object? sender, AsyncCompletedEventArgs e)
         {
-            AssistLog.Normal("Completed Download of Assist Client");
+            Log.Information("Completed Download of Assist Client");
         }
 
         void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -156,20 +157,20 @@ namespace Assist.Controls.Home.ViewModels
             
             var fileInfo = FileVersionInfo.GetVersionInfo(_bgcPath);
 
-            AssistLog.Normal("Version of BgClient Detected: " + fileInfo.FileVersion);
+            Log.Information("Version of BgClient Detected: " + fileInfo.FileVersion);
             var newV = new Version(_bgClientObj.VersionNumber);
             var currV = new Version(fileInfo.FileVersion);
 
             if (newV > currV)
             {
-                AssistLog.Normal("Newer Version of BgClient Detected, Downloading now. " + newV); 
+                Log.Information("Newer Version of BgClient Detected, Downloading now. " + newV); 
                 File.Delete(_bgcPath); // Delete the old file.
 
                 while (!File.Exists(_bgcPath))
                 {
-                    AssistLog.Normal("Starting Update Download of Assist Client");
+                    Log.Information("Starting Update Download of Assist Client");
                     await DownloadBgClient();
-                    AssistLog.Normal("Completed Update Download of Assist Client");
+                    Log.Information("Completed Update Download of Assist Client");
                 }
             }
         }

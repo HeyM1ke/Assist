@@ -1,18 +1,19 @@
-﻿using ValNet;
-using Assist.Settings;
-using System.Windows;
-using System.Threading.Tasks;
-using System.IO;
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using Assist.MVVM.Model;
-using System.Net;
-using System.Threading;
+﻿using Assist.MVVM.Model;
 using Assist.MVVM.View.Authentication;
 using Assist.MVVM.View.Extra;
 using Assist.Services;
-using RestSharp;
+using Assist.Settings;
+
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using Serilog;
+using ValNet;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -31,26 +32,29 @@ namespace Assist.MVVM.ViewModel
 
         public AssistApplication()
         {
-            AssistApiController = new();
+            AssistApiController = new AssistApiController();
 
         }
-
-
         public void OpenAssistMainWindow()
         {
-            var temp = Application.Current.MainWindow;
-            temp.Visibility = Visibility.Hidden;
-            Application.Current.MainWindow = new AssistMainWindow();
-            Application.Current.MainWindow.Show();
-            temp.Close();
+            var window = Application.Current.MainWindow!;
+            window.Visibility = Visibility.Hidden;
+
+            var mainWindow = new AssistMainWindow();
+            mainWindow.Show();
+
+            Application.Current.MainWindow = mainWindow;
+            window.Close();
         }
         public void OpenAssistMainWindowToSettings()
         {
             var temp = Application.Current.MainWindow;
             temp.Visibility = Visibility.Hidden;
+
             Application.Current.MainWindow = new AssistMainWindow();
             Application.Current.MainWindow.Show();
             AssistMainWindow.Current.SettingsBTN_Click(null, null);
+
             temp.Close();
         }
         public void OpenAccountLoginWindow(bool bAddProfile)
@@ -63,11 +67,11 @@ namespace Assist.MVVM.ViewModel
         }
         public void OpenAssistErrorWindow(Exception ex, string extraParam = null)
         {
-            AssistLog.Error($"Opened Error Window Method Called ; MESSAGE: {ex.Message} | CUSTOM MESSAGE: {extraParam} ");
+            Log.Error($"Opened Error Window Method Called ; MESSAGE: {ex.Message} | CUSTOM MESSAGE: {extraParam} ");
             var errorS = new ErrorScreen(ex, extraParam);
-            AssistLog.Error("Opened Error Window");
+            Log.Error("Opened Error Window");
             errorS.ShowDialog();
-            AssistLog.Error("Closed Error Window");
+            Log.Error("Closed Error Window");
         }
         public async Task CreateAuthenticationFile()
         {
@@ -77,7 +81,7 @@ namespace Assist.MVVM.ViewModel
 
             var fileInfo = FileVersionInfo.GetVersionInfo(AssistSettings.Current.RiotClientInstallPath);
 
-            AssistLog.Normal("Version of Client: " + fileInfo.FileVersion);
+            Log.Information("Version of Client: " + fileInfo.FileVersion);
 
             // Create File
             var settings = new ClientGameModel(CurrentUser);
@@ -135,18 +139,18 @@ namespace Assist.MVVM.ViewModel
             var tagLine = profile.Tagline;
             try
             {
-                AssistLog.Normal($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+                Log.Information($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
                 await user.Authentication.AuthenticateWithCookies();
             }
             catch (Exception ex)
             {
-                AssistLog.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine}");
+                Log.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine}");
 
                 string errorMess = $"Login to account: {gamename}#{tagLine}, has expired. Please re-add the account.";
                 AssistApplication.AppInstance.OpenAssistErrorWindow(ex, errorMess);
 
 
-                AssistLog.Normal("Removing Account");
+                Log.Information("Removing Account");
                 AssistSettings.Current.Profiles.Remove(profile);
                 AssistSettings.Save();
                 

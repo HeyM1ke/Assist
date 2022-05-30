@@ -34,13 +34,10 @@ namespace Assist.Controls.Progression.Viewmodels
             set => SetProperty(ref _level, value);
         }
 
-        public async void LoadItem()
+        public void LoadItem()
         {
             if (Level.rewardDisplayIcon != null)
-            {
-                RewardImage = await App.LoadImageUrl(Level.rewardDisplayIcon, BitmapCacheOption.None);
-            }
-            
+                RewardImage = App.LoadImageUrl(Level.rewardDisplayIcon, BitmapCacheOption.None);
         }
 
     }

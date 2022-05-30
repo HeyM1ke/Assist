@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Settings;
+using Serilog;
 using ValNet;
 
 namespace Assist.MVVM.ViewModel
@@ -22,10 +23,10 @@ namespace Assist.MVVM.ViewModel
             RiotUser user = new RiotUser();
 
             await AddCookiesToUser(cc, user);
-            AssistLog.Normal($"Authenticating with New User");
+            Log.Information($"Authenticating with New User");
             try
             {
-                AssistLog.Normal($"Authenticating with Cookies for New User");
+                Log.Information($"Authenticating with Cookies for New User");
                 await user.Authentication.AuthenticateWithCookies();
             }
             catch (Exception ex)
@@ -47,10 +48,10 @@ namespace Assist.MVVM.ViewModel
             var gamename = profile.Gamename;
             var tagLine = profile.Tagline;
 
-            AssistLog.Normal($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+            Log.Information($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
             try
             {
-                AssistLog.Normal($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+                Log.Information($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
                 await user.Authentication.AuthenticateWithCookies();
             }
             catch (Exception ex)
