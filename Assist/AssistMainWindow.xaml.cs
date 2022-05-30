@@ -1,5 +1,4 @@
-﻿using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
+﻿using Assist.MVVM.ViewModel;
 using Assist.Services;
 using Assist.Settings;
 

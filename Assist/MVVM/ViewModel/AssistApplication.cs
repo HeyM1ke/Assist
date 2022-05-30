@@ -180,25 +180,9 @@ namespace Assist.MVVM.ViewModel
 
             await tempUser.Authentication.AuthenticateWithCookies();
 
-            AssistApplication.AppInstance.CurrentUser = tempUser;
-            AssistApplication.AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
+            AppInstance.CurrentUser = tempUser;
+            AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
         }
 
-        public void ChangeLanguage()
-        {
-            var curr = AssistSettings.Current.Language;
-
-            switch (curr)
-            {
-                case Enums.ELanguage.en_us:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en_us", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en_us", true);
-                    break;
-                case Enums.ELanguage.ja_jp:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
-                    break;
-            }
-        }
     }
 }

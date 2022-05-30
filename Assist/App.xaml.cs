@@ -1,7 +1,8 @@
-﻿using Assist.MVVM.Model;
+﻿using Assist.Attributes;
 using Assist.MVVM.View.InitPage;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Assist.Utils;
 
 using Serilog;
 using Serilog.Events;
@@ -95,6 +96,8 @@ namespace Assist
 
             var directory = GetApplicationDataFolder();
             var logsDirectory = Path.Combine(directory, "logs");
+            Directory.CreateDirectory(logsDirectory);
+
             var fileCount = Directory.GetFiles(logsDirectory, "*", SearchOption.TopDirectoryOnly).Length;
 
             Log.Logger = new LoggerConfiguration()
@@ -156,62 +159,11 @@ namespace Assist
         {
             Log.Information("Changing Language");
             var language = AssistSettings.Current.Language;
+            var attribute = language.GetAttribute<LanguageAttribute>();
 
-            switch (language)
-            {
-                case Enums.ELanguage.en_us:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", true);
-                    Log.Information("Changed language to english");
-                    break;
-                case Enums.ELanguage.ja_jp:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
-                    Log.Information("Changed language to japanese");
-                    break;
-                case Enums.ELanguage.es_es:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("es-ES", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES", true);
-                    Log.Information("Changed language to spanish");
-                    break;
-                case Enums.ELanguage.fr_fr:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR", true);
-                    Log.Information("Changed language to french");
-                    break;
-                case Enums.ELanguage.pt_br:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("pt-BR", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("pt-BR", true);
-                    Log.Information("Changed language to portuguese");
-                    break;
-                case Enums.ELanguage.de_de:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE", true);
-                    Log.Information("Changed language to german");
-                    break;
-                case Enums.ELanguage.tr_tr:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("tr-TR", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR", true);
-                    Log.Information("Changed language to turkish");
-                    break;
-                case Enums.ELanguage.nl_nl:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("nl-NL", true);
-                    Log.Information("Changed language to dutch");
-                    break;
-                case Enums.ELanguage.ru_ru:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU", true);
-                    Log.Information("Changed language to Russian");
-                    break;
-                case Enums.ELanguage.zh_cn:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("zh-CN", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN", true);
-                    Log.Information("Changed language to chinese");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            var culture = new CultureInfo(attribute.Code, true);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
 
         public static void ShutdownAssist() 
