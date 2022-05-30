@@ -18,11 +18,11 @@ namespace Assist.Controls.Home.ViewModels
             set => SetProperty(ref _skinImage, value);
         }
 
-
         public async Task SetupSkin(string skinId)
         {
             var data = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
-            this.SkinImage = await App.LoadImageUrl(data.Levels[0].DisplayIcon, BitmapCacheOption.None);
+            SkinImage = App.LoadImageUrl(data.Levels[0].DisplayIcon, BitmapCacheOption.None);
         }
+
     }
 }

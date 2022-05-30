@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Assist.MVVM.View.Extra;
+using Serilog;
 
 namespace Assist.MVVM.View.InitPage
 {
@@ -21,7 +22,7 @@ namespace Assist.MVVM.View.InitPage
 
         public InitPage()
         {
-            AssistLog.Normal("InitPage Constructor Called");
+            Log.Information("InitPage Constructor Called");
             DataContext = _viewModel = new InitPageViewModel();
             InitializeComponent();
         }
@@ -40,16 +41,16 @@ namespace Assist.MVVM.View.InitPage
 
 
 
-            AssistLog.Normal("InitWindow_Loaded Called");
+            Log.Information("InitWindow_Loaded Called");
 
             if (AssistSettings.Current.bNewUser)
             {
-                AssistLog.Normal("New User Flag is True, Running First Time Setup.");
+                Log.Information("New User Flag is True, Running First Time Setup.");
                 await _viewModel.FirstTimeSetup();
             }
             else
             {
-                AssistLog.Normal("Returning User, Running Default Startup");
+                Log.Information("Returning User, Running Default Startup");
                 await _viewModel.DefaultStartup();
             }
         }
