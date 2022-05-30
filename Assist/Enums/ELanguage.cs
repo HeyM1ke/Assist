@@ -5,10 +5,10 @@ namespace Assist.Enums;
 public enum ELanguage
 {
 
-    [Language("en-US")]
+    [Language("en-us")]
     English = 0,
 
-    [Language("ja-JP")]
+    [Language("ja-jp")]
     Japanese = 1,
 
     [Language("es-es")]
