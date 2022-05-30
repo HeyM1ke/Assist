@@ -178,11 +178,21 @@ namespace Assist.MVVM.ViewModel
                 tempUser.UserClient.CookieContainer.Add(new Cookie(cook.Name, cook.Value, "/", cook.Domain));
             }
 
-            await tempUser.Authentication.AuthenticateWithCookies();
+            try
+            {
+                Log.Information("Creating Second Account for Riot Client");
+                await tempUser.Authentication.AuthenticateWithCookies();
+            }
+            catch (Exception e)
+            {
+                Log.Information("Failed to create Second Account for Riot Client, Trying Again.");
+                await RedoCookies(user);
+                return;
+            }
+            
 
             AppInstance.CurrentUser = tempUser;
             AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
         }
-
     }
 }
