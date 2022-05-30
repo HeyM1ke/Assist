@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.MVVM.Model;
 using Assist.MVVM.ViewModel;
+using Serilog;
 
 namespace Assist.Settings
 {
@@ -105,7 +106,7 @@ namespace Assist.Settings
             }
             catch (Exception e)
             {
-                AssistLog.Error("Riot Client Check: Could not properly parse json file");
+                Log.Error("Riot Client Check: Could not properly parse json file");
                 return null;
             }
 

@@ -80,9 +80,9 @@ namespace Assist
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            AssistLog.Error("Unhandled Exception Source: " + e.Exception.Source);
-            AssistLog.Error("Unhandled Exception StackTrace: " + e.Exception.StackTrace);
-            AssistLog.Error("Unhandled Exception Message: " + e.Exception.Message);
+            Log.Error("Unhandled Exception Source: " + e.Exception.Source);
+            Log.Error("Unhandled Exception StackTrace: " + e.Exception.StackTrace);
+            Log.Error("Unhandled Exception Message: " + e.Exception.Message);
 
             MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -93,9 +93,9 @@ namespace Assist
             AllocConsole();
 #endif
 
-            var appDirectory = GetApplicationDataFolder();
+            var appDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist");
             Directory.CreateDirectory(appDirectory);
-
+            int fileCount = Directory.GetFiles(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs"), "*.*", SearchOption.TopDirectoryOnly).Length;
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .MinimumLevel.Override("System", LogEventLevel.Warning)
@@ -106,7 +106,7 @@ namespace Assist
                     outputTemplate: "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine}")
 #endif
                 .WriteTo.File(
-                    path: Path.Combine(appDirectory, "logs", "log_.txt"),
+                    path: Path.Combine(appDirectory, "logs", $"Log_{++fileCount}.txt"),
                     rollingInterval: RollingInterval.Day,
                     outputTemplate:
                     "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine:1}{Properties:1j}{NewLine:1}{Exception:1}")
