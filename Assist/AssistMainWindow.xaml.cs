@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
-
+using Serilog;
 using Application = System.Windows.Application;
 
 namespace Assist
@@ -193,7 +193,12 @@ namespace Assist
                 return;
 
             var uri = e.Uri.ToString();
-            var button = _navigationButtons[uri];
+            var button = _navigationButtons.GetValueOrDefault(uri);
+            if (button == null)
+            {
+                Log.Warning("Couldn't find navigation button for URI: {Uri}", uri);
+                return;
+            }
 
             UncheckNavigationButtons();
             button.IsChecked = true;
