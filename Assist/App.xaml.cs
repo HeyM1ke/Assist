@@ -17,6 +17,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
@@ -78,12 +79,11 @@ namespace Assist
             Environment.Exit(0);
         }
 
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            Log.Error("Unhandled Exception Source: " + e.Exception.Source);
-            Log.Error("Unhandled Exception StackTrace: " + e.Exception.StackTrace);
-            Log.Error("Unhandled Exception Message: " + e.Exception.Message);
+            var exception = e.Exception;
 
+            Log.Fatal(exception, "Unhandled exception.");
             MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
@@ -93,9 +93,10 @@ namespace Assist
             AllocConsole();
 #endif
 
-            var appDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist");
-            Directory.CreateDirectory(appDirectory);
-            int fileCount = Directory.GetFiles(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs"), "*.*", SearchOption.TopDirectoryOnly).Length;
+            var directory = GetApplicationDataFolder();
+            var logsDirectory = Path.Combine(directory, "logs");
+            var fileCount = Directory.GetFiles(logsDirectory, "*", SearchOption.TopDirectoryOnly).Length;
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .MinimumLevel.Override("System", LogEventLevel.Warning)
@@ -106,7 +107,7 @@ namespace Assist
                     outputTemplate: "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine}")
 #endif
                 .WriteTo.File(
-                    path: Path.Combine(appDirectory, "logs", $"Log_{++fileCount}.txt"),
+                    path: Path.Combine(logsDirectory, $"Log_{++fileCount}.txt"),
                     rollingInterval: RollingInterval.Day,
                     outputTemplate:
                     "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine:1}{Properties:1j}{NewLine:1}{Exception:1}")
@@ -121,7 +122,7 @@ namespace Assist
             return directory;
         }
 
-        public static BitmapImage LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnLoad)
+        public static BitmapImage LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnDemand)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
