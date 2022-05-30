@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assist.Settings;
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Assist.MVVM.Model;
-using Assist.Settings;
 
 namespace Assist.MVVM.View.Extra
 {
@@ -23,6 +12,8 @@ namespace Assist.MVVM.View.Extra
     {
         public LanguageSelectWindow()
         {
+            DataContext = AssistSettings.Current;
+
             InitializeComponent();
             LanguageChangeComboBox.SelectedIndex = 0;
         }

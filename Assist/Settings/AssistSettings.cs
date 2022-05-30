@@ -1,50 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using Assist.Enums;
 using Assist.MVVM.Model;
 using Assist.MVVM.ViewModel;
+
 using Serilog;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Assist.Settings
 {
     internal class AssistSettings : ViewModelBase
     {
-        public const int MAX_ACCOUNT_COUNT = 5;
-        public static AssistSettings Current { get; set; }
-        public string RiotClientInstallPath { get; set; }
+
+        public const int maxAccountCount = 5;
+
 #if DEBUG
         public static string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "AssistSettings_DEBUG.json");
 #else
         public static string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "AssistSettings.json");
 #endif
 
+        public static AssistSettings Current { get; set; }
+        public string RiotClientInstallPath { get; set; }
 
         static AssistSettings()
         {
-            Current = new();
+            Current = new AssistSettings();
         }
+
         private LaunchSettings _launchSettings = new();
         public LaunchSettings LaunchSettings
         {
             get => _launchSettings;
             set => SetProperty(ref _launchSettings, value);
         }
+
         private List<ProfileSetting> _profiles = new();
         public List<ProfileSetting> Profiles
         {
             get => _profiles;
             set => SetProperty(ref _profiles, value);
         }
+
         private string _defaultAccount;
         public string DefaultAccount
         {
             get => _defaultAccount;
             set => SetProperty(ref _defaultAccount, value);
         }
+
         private bool _bNewUser = true;
         public bool bNewUser
         {
@@ -52,21 +59,20 @@ namespace Assist.Settings
             set => SetProperty(ref _bNewUser, value);
         }
 
-        private Enums.EWindowSize _resolution = Enums.EWindowSize.R576;
-        public Enums.EWindowSize Resolution {
+        private EWindowSize _resolution = EWindowSize.R576;
+        public EWindowSize Resolution {
             get => _resolution;
             set => SetProperty(ref _resolution, value);
         }
 
-        private Enums.ELanguage _language = 0;
-        public Enums.ELanguage Language
+        private ELanguage _language = 0;
+        public ELanguage Language
         {
             get => _language;
             set => SetProperty(ref _language, value);
         }
 
         private bool _setupLangSelected = false;
-
         public bool SetupLangSelected
         {
             get => _setupLangSelected;
@@ -74,7 +80,11 @@ namespace Assist.Settings
         }
 
         private double _soundVolume = 0.5;
-        public double SoundVolume { get => _soundVolume; set => SetProperty(ref _soundVolume, value); }
+        public double SoundVolume
+        {
+            get => _soundVolume; 
+            set => SetProperty(ref _soundVolume, value);
+        }
 
         #region Settings Methods
 

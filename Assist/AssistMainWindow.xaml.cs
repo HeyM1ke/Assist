@@ -1,9 +1,9 @@
-﻿using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
+﻿using Assist.MVVM.ViewModel;
 using Assist.Services;
 using Assist.Settings;
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +11,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.Windows.Navigation;
+using Serilog;
 using Application = System.Windows.Application;
 
 namespace Assist
@@ -27,7 +28,7 @@ namespace Assist
         public static AssistMainWindow Current;
         public static Grid PopupContainer;
 
-        private readonly MediaPlayer _mPlayer = new();
+        private readonly MediaPlayer _mediaPlayer = new();
 
         public AssistMainWindow()
         {
@@ -37,11 +38,18 @@ namespace Assist
             DataContext = new MainViewModel();
             AssistApplication.AppInstance.TokenService = new TokenServiceBackgroundService();
             AssistSettings.Current.bNewUser = false;
+
             InitializeComponent();
             DetermineResolution();
+
             Current = this;
             PopupContainer = PopupHolder;
-            Current._mPlayer.Open(new Uri(ClickSoundHost));
+            Current._mediaPlayer.Open(new Uri(ClickSoundHost));
+
+            _navigationButtons["MVVM/View/Dashboard/Dashboard.xaml"] = DashboardBTN;
+            _navigationButtons["MVVM/View/Progression/Progression.xaml"] = ProgressionBTN;
+            _navigationButtons["MVVM/View/Settings/Settings.xaml"] = SettingsBTN;
+            _navigationButtons["MVVM/View/Store/Store.xaml"] = StoreBTN;
         }
 
         private void DetermineResolution()
@@ -120,42 +128,40 @@ namespace Assist
 
         #region Navigation Handling
 
+        private readonly Dictionary<string, ToggleButton> _navigationButtons = new();
+
         private void DashboardBTN_Click(object sender, RoutedEventArgs e)
         {
-            NavigateTo("/MVVM/View/Dashboard/Dashboard.xaml", DashboardBTN);
+            NavigateTo("MVVM/View/Dashboard/Dashboard.xaml");
         }
 
         private void StoreBTN_Click(object sender, RoutedEventArgs e)
         {
-            NavigateTo("/MVVM/View/Store/Store.xaml", StoreBTN);
+            NavigateTo("MVVM/View/Store/Store.xaml");
         }
 
         private void ProgressionBTN_Click(object sender, RoutedEventArgs e)
         {
-            NavigateTo("/MVVM/View/Progression/Progression.xaml", ProgressionBTN);
+            NavigateTo("MVVM/View/Progression/Progression.xaml");
         }
 
         public void SettingsBTN_Click(object sender, RoutedEventArgs e)
         {
-            NavigateTo("/MVVM/View/Settings/Settings.xaml", SettingsBTN);
+            NavigateTo("MVVM/View/Settings/Settings.xaml");
         }
 
         private void ProfilePC_Click(object sender, RoutedEventArgs e)
         {
-            NavigateTo("/MVVM/View/Profiles/Profiles.xaml");
+            NavigateTo("MVVM/View/Profiles/Profiles.xaml");
         }
 
         public void GoToStore()
         {
-            NavigateTo("/MVVM/View/Store/Store.xaml", StoreBTN);
+            NavigateTo("MVVM/View/Store/Store.xaml");
         }
 
-        private void NavigateTo(string uri, ToggleButton button = null)
+        private void NavigateTo(string uri)
         {
-            UncheckNavigationButtons();
-            if(button != null)
-                button.IsChecked = true;
-
             Current.ContentFrame.Navigate(new Uri(uri, UriKind.RelativeOrAbsolute));
         }
 
@@ -176,10 +182,27 @@ namespace Assist
 
         public static void PlayClickSound()
         {
-            Current._mPlayer.Volume = AssistSettings.Current.SoundVolume;
-            Current._mPlayer.Open(new Uri(ClickSoundHost));
-            Current._mPlayer.Play();
+            Current._mediaPlayer.Volume = AssistSettings.Current.SoundVolume;
+            Current._mediaPlayer.Open(new Uri(ClickSoundHost));
+            Current._mediaPlayer.Play();
         }
-       
+
+        private void ContentFrame_OnNavigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if (e.Uri == null)
+                return;
+
+            var uri = e.Uri.ToString();
+            var button = _navigationButtons.GetValueOrDefault(uri);
+            if (button == null)
+            {
+                Log.Warning("Couldn't find navigation button for URI: {Uri}", uri);
+                return;
+            }
+
+            UncheckNavigationButtons();
+            button.IsChecked = true;
+        }
+
     }
 }

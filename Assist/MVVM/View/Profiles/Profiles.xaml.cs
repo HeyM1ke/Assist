@@ -40,7 +40,7 @@ namespace Assist.MVVM.View.Profiles
                 ProfilePanel.Children.Add(ProfileShowcaseControl);
             }
 
-            if (AssistSettings.Current.Profiles.Count < AssistSettings.MAX_ACCOUNT_COUNT)
+            if (AssistSettings.Current.Profiles.Count < AssistSettings.maxAccountCount)
                 ProfilePanel.Children.Add(new ProfileAdd()
                 {
                     Margin = new Thickness(5,0,0,0)

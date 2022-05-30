@@ -191,8 +191,8 @@ namespace Assist.MVVM.ViewModel
             }
             
 
-            AssistApplication.AppInstance.CurrentUser = tempUser;
-            AssistApplication.AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
+            AppInstance.CurrentUser = tempUser;
+            AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
         }
     }
 }

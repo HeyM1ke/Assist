@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Assist.MVVM.ViewModel;
+using Assist.Settings;
+
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
-using Assist.Settings;
 
 namespace Assist.MVVM.View.Settings.SettingPages
 {
@@ -24,13 +13,14 @@ namespace Assist.MVVM.View.Settings.SettingPages
     /// </summary>
     public partial class Settings_General : Page
     {
+
         public Settings_General()
         {
+            DataContext = AssistSettings.Current;
             InitializeComponent();
-
         }
 
-        private async void Settings_General_Loaded(object sender, RoutedEventArgs e)
+        private void Settings_General_Loaded(object sender, RoutedEventArgs e)
         {
             WindowSizeComboBox.SelectedIndex = (int)AssistSettings.Current.Resolution;
             LanguageChangeComboBox.SelectedIndex = (int)AssistSettings.Current.Language;
@@ -39,10 +29,15 @@ namespace Assist.MVVM.View.Settings.SettingPages
 
         #region Language Selection Settings
 
-        private async void LanguageChangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private bool _initialLanguageSelectionChange = true;
+
+        private void LanguageChangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (LanguageChangeComboBox.SelectedIndex == (int)AssistSettings.Current.Language)
+            if (_initialLanguageSelectionChange)
+            {
+                _initialLanguageSelectionChange = false;
                 return;
+            }
 
             AssistSettings.Current.Language = (Enums.ELanguage)LanguageChangeComboBox.SelectedIndex;
             App.ChangeLanguage();
@@ -74,5 +69,6 @@ namespace Assist.MVVM.View.Settings.SettingPages
             AssistSettings.Current.SoundVolume = SoundVol_Slider.Value;
             SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
         }
+
     }
 }

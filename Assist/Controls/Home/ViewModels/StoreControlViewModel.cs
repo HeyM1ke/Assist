@@ -57,7 +57,7 @@ namespace Assist.Controls.Home.ViewModels
 
         public string GetBundlePrice(Bundle bundle)
         {
-            var price = bundle.Items.Sum(x => x.DiscountPercent);
+            var price = bundle.Items.Sum(x => x.DiscountedPrice);
             return $"{price:n0}";
         }
 

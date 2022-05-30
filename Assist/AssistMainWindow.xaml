@@ -229,7 +229,7 @@
                     <Button x:Name="ProfilePC" Width="36" Height="36" Click="ProfilePC_Click"/>
                 </Grid>
             </DockPanel>
-                <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top"></Frame>
+                <Frame x:Name="ContentFrame" Navigating="ContentFrame_OnNavigating" NavigationUIVisibility="Hidden" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top"></Frame>
             </DockPanel>
             <Grid x:Name="PopupHolder" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <!-- Popup Spawns here -->

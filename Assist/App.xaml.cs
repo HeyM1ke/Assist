@@ -1,7 +1,8 @@
-﻿using Assist.MVVM.Model;
+﻿using Assist.Attributes;
 using Assist.MVVM.View.InitPage;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Assist.Utils;
 
 using Serilog;
 using Serilog.Events;
@@ -17,6 +18,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
@@ -78,12 +80,11 @@ namespace Assist
             Environment.Exit(0);
         }
 
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            Log.Error("Unhandled Exception Source: " + e.Exception.Source);
-            Log.Error("Unhandled Exception StackTrace: " + e.Exception.StackTrace);
-            Log.Error("Unhandled Exception Message: " + e.Exception.Message);
+            var exception = e.Exception;
 
+            Log.Fatal(exception, "Unhandled exception.");
             MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
@@ -93,9 +94,12 @@ namespace Assist
             AllocConsole();
 #endif
 
-            var appDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist");
-            Directory.CreateDirectory(appDirectory);
-            int fileCount = Directory.GetFiles(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "Logs"), "*.*", SearchOption.TopDirectoryOnly).Length;
+            var directory = GetApplicationDataFolder();
+            var logsDirectory = Path.Combine(directory, "logs");
+            Directory.CreateDirectory(logsDirectory);
+
+            var fileCount = Directory.GetFiles(logsDirectory, "*", SearchOption.TopDirectoryOnly).Length;
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .MinimumLevel.Override("System", LogEventLevel.Warning)
@@ -106,7 +110,7 @@ namespace Assist
                     outputTemplate: "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine}")
 #endif
                 .WriteTo.File(
-                    path: Path.Combine(appDirectory, "logs", $"Log_{++fileCount}.txt"),
+                    path: Path.Combine(logsDirectory, $"Log_{++fileCount}.txt"),
                     rollingInterval: RollingInterval.Day,
                     outputTemplate:
                     "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine:1}{Properties:1j}{NewLine:1}{Exception:1}")
@@ -115,13 +119,13 @@ namespace Assist
 
         private static string GetApplicationDataFolder()
         {
-            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var directory = Path.Combine(appdata, "Assist");
 
             return directory;
         }
 
-        public static BitmapImage LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnLoad)
+        public static BitmapImage LoadImageUrl(string url, BitmapCacheOption op = BitmapCacheOption.OnDemand)
         {
             // Allows the image to be loaded with the resolution it is intended to be used for.
             // Because the program is a solo resolution that doesnt change res, this is fine.
@@ -155,62 +159,11 @@ namespace Assist
         {
             Log.Information("Changing Language");
             var language = AssistSettings.Current.Language;
+            var attribute = language.GetAttribute<LanguageAttribute>();
 
-            switch (language)
-            {
-                case Enums.ELanguage.en_us:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", true);
-                    Log.Information("Changed language to english");
-                    break;
-                case Enums.ELanguage.ja_jp:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
-                    Log.Information("Changed language to japanese");
-                    break;
-                case Enums.ELanguage.es_es:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("es-ES", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES", true);
-                    Log.Information("Changed language to spanish");
-                    break;
-                case Enums.ELanguage.fr_fr:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR", true);
-                    Log.Information("Changed language to french");
-                    break;
-                case Enums.ELanguage.pt_br:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("pt-BR", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("pt-BR", true);
-                    Log.Information("Changed language to portuguese");
-                    break;
-                case Enums.ELanguage.de_de:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE", true);
-                    Log.Information("Changed language to german");
-                    break;
-                case Enums.ELanguage.tr_tr:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("tr-TR", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR", true);
-                    Log.Information("Changed language to turkish");
-                    break;
-                case Enums.ELanguage.nl_nl:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("nl-NL", true);
-                    Log.Information("Changed language to dutch");
-                    break;
-                case Enums.ELanguage.ru_ru:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU", true);
-                    Log.Information("Changed language to Russian");
-                    break;
-                case Enums.ELanguage.zh_cn:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("zh-CN", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-CN", true);
-                    Log.Information("Changed language to chinese");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            var culture = new CultureInfo(attribute.Code, true);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
 
         public static void ShutdownAssist() 
