@@ -18,6 +18,7 @@
     <UseWindowsForms>True</UseWindowsForms>
     <RepositoryUrl>https://github.com/HeyM1ke/Assist/</RepositoryUrl>
     <Company>AssistTeam</Company>
+	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Assist_Logo_White.png" />
     <None Remove="Fonts\Montserrat-Black.ttf" />
     <None Remove="Resources\assistLogo.ico" />
     <None Remove="Resources\Assist_Progression_Template.png" />
@@ -115,7 +115,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assist_Logo_White.png" />
     <Resource Include="Resources\assistLogo.ico" />
     <Resource Include="Resources\Icons\backImage.png" />
     <Resource Include="Resources\ContentTiers\DeluxeTier_Icon.png">
