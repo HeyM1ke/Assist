@@ -1,6 +1,7 @@
 ﻿using Assist.MVVM.ViewModel;
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
@@ -64,14 +65,8 @@ namespace Assist.Controls.Store.ViewModels
 
         public async Task<string> GetBundlePrice(Bundle bundle)
         {
-            int price = 0;
-
-            foreach (var item in bundle.Items)
-            {
-                price += item.DiscountedPrice;
-            }
-
-            return string.Format("{0:n0}", price);
+            var price = bundle.Items.Sum(x => x.DiscountedPrice);
+            return $"{price:n0}";
         }
 
         private Timer bundleTimer;
