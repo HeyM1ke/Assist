@@ -180,12 +180,12 @@ namespace Assist.MVVM.ViewModel
 
             try
             {
-                AssistLog.Normal("Creating Second Account for Riot Client");
+                Log.Information("Creating Second Account for Riot Client");
                 await tempUser.Authentication.AuthenticateWithCookies();
             }
             catch (Exception e)
             {
-                AssistLog.Normal("Failed to create Second Account for Riot Client, Trying Again.");
+                Log.Information("Failed to create Second Account for Riot Client, Trying Again.");
                 await RedoCookies(user);
                 return;
             }

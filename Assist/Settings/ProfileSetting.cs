@@ -3,6 +3,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.MVVM.ViewModel;
+using Serilog;
 using ValNet;
 using ValNet.Objects;
 
@@ -97,9 +98,9 @@ namespace Assist.Settings
 
             
             Gamename = pUser.UserData.acct.game_name;
-            AssistLog.Debug("Name being Read" + Gamename);
+            Log.Debug("Name being Read" + Gamename);
             Tagline = pUser.UserData.acct.tag_line;
-            AssistLog.Debug("Tag being Read" + Tagline);
+            Log.Debug("Tag being Read" + Tagline);
 
         }
     }
