@@ -45,6 +45,7 @@ namespace Assist.Controls.Profile
 
             NoteBox.Text = _viewModel.Profile.profileNote;
             _viewModel.ProfileImage = App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/{_viewModel.Profile.PCID}_DisplayIcon.png", 80, 80);
+            _viewModel.PlayerRankIcon = App.LoadImageUrl($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTier_Large_{_viewModel.Profile.Tier}.png");
         }
 
         private void SwitchBTN_Click(object sender, RoutedEventArgs e)

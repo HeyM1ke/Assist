@@ -13,7 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Assist.Modules.Popup;
+using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Serilog;
+using ValNet.Objects.Authentication;
 
 namespace Assist.Controls.Extra
 {
@@ -22,6 +25,7 @@ namespace Assist.Controls.Extra
     /// </summary>
     public partial class LaunchSettingsPopup : UserControl
     {
+        List<PatchlineObj> patchlines = new List<PatchlineObj>();
         public LaunchSettingsPopup()
         {
             InitializeComponent();
@@ -37,5 +41,7 @@ namespace Assist.Controls.Extra
 
             PopupSystem.KillPopups();
         }
+
+
     }
 }

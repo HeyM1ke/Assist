@@ -54,6 +54,13 @@ namespace Assist.Controls.Profile.ViewModel
             set => SetProperty(ref _backingImage, value);
         }
 
+        private BitmapImage _playerRankIcon;
+
+        public BitmapImage PlayerRankIcon
+        {
+            get => _playerRankIcon;
+            set => SetProperty(ref _playerRankIcon, value);
+        }
         public void UpdateProfileNote(string message)
         {
             this.Profile.profileNote = message;
