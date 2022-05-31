@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assist.MVVM.ViewModel;
+using Assist.Properties.Languages;
+
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
 
 namespace Assist.Controls.Progression.Viewmodels
 {
     internal class BattlepassConcurrentViewModel : ViewModelBase
     {
-        private BitmapImage _contractRewardImage;
 
+        private BitmapImage _contractRewardImage;
         public BitmapImage ContractRewardImage
         {
             get => _contractRewardImage;
@@ -26,8 +22,7 @@ namespace Assist.Controls.Progression.Viewmodels
             set => SetProperty(ref _contractRewardName, value);
         }
 
-        public string _contractTier;
-
+        private string _contractTier;
         public string ContractTier
         {
             get => _contractTier;
@@ -36,23 +31,20 @@ namespace Assist.Controls.Progression.Viewmodels
 
 
         private int _contractTierNumber;
-
         public int ContractTierNumber
         {
             get => _contractTierNumber;
             set => SetProperty(ref _contractTierNumber, value);
         }
 
-        public string _ContractTierXp;
-
+        private string _contractTierXp;
         public string ContractTierXp
         {
-            get => _ContractTierXp;
-            set => SetProperty(ref _ContractTierXp, value);
+            get => _contractTierXp;
+            set => SetProperty(ref _contractTierXp, value);
         }
 
         private int _currentXp;
-
         public int CurrentXp
         {
             get => _currentXp;
@@ -60,15 +52,13 @@ namespace Assist.Controls.Progression.Viewmodels
         }
 
         private int _neededXp;
-
         public int NeededXp
         {
             get => _neededXp;
             set => SetProperty(ref _neededXp, value);
         }
 
-        public double _progression;
-
+        private double _progression;
         public double Progression
         {
             get => _progression;
@@ -84,33 +74,32 @@ namespace Assist.Controls.Progression.Viewmodels
             NeededXp = (xpTier * 750) + 2000;
             CurrentXp = bpContract.ProgressionTowardsNextLevel;
             ContractTierXp = $"{CurrentXp}XP / {NeededXp}XP";
-            ContractTier = $"{Properties.Languages.Lang.Progression_Battlepass_CurrTier} {ContractTierNumber+1}";
-            Progression = (((double)CurrentXp / NeededXp) * 100);
+            ContractTier = $"{Lang.Progression_Battlepass_CurrTier} {ContractTierNumber+1}";
+            Progression = (double)CurrentXp / NeededXp * 100;
 
             //Get Reward Information
-            var bpData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
+            var battlepass = await AssistApplication.ApiService.GetBattlepassAsync();
 
             if (ContractTierNumber == 55)
             {
-                var levels = bpData.chapters[bpData.chapters.Count - 1].levels;
-                var itemData = levels[levels.Count - 1];
-                ContractRewardImage = await App.LoadImageUrl(itemData.rewardDisplayIcon);
-                ContractRewardName = itemData.rewardName;
-                ContractTierXp = "";
-                ContractTier = Properties.Languages.Lang.Progression_Battlepass_Completed;
+                var levels = battlepass.Chapters[^1].Levels;
+                var level = levels[^1];
+
+                ContractRewardImage = App.LoadImageUrl(level.RewardDisplayIcon);
+                ContractRewardName = level.RewardName;
+                ContractTierXp = string.Empty;
+                ContractTier = Lang.Progression_Battlepass_Completed;
                 Progression = 100;
-            }
-            else
-            {
-                var contactLevel = ContractTierNumber / 5;
-                var contactLevelTier = ContractTierNumber - (contactLevel * 5);
-                var itemData = bpData.chapters[contactLevel].levels[contactLevelTier];
-                ContractRewardImage = await App.LoadImageUrl(itemData.rewardDisplayIcon);
-                ContractRewardName = itemData.rewardName;
+
+                return;
             }
 
-            
-            
+            var contactLevel = ContractTierNumber / 5;
+            var contactLevelTier = ContractTierNumber - (contactLevel * 5);
+            var itemData = battlepass.Chapters[contactLevel].Levels[contactLevelTier];
+            ContractRewardImage = App.LoadImageUrl(itemData.RewardDisplayIcon);
+            ContractRewardName = itemData.RewardName;
         }
+
     }
 }

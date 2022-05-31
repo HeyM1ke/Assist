@@ -1,24 +1,29 @@
-﻿using ValNet;
-using Assist.Settings;
-using System.Windows;
-using System.Threading.Tasks;
-using System.IO;
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using Assist.MVVM.Model;
-using System.Net;
-using System.Threading;
+﻿using Assist.MVVM.Model;
 using Assist.MVVM.View.Authentication;
 using Assist.MVVM.View.Extra;
 using Assist.Services;
-using RestSharp;
+using Assist.Settings;
+
+using Serilog;
+
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
+using System.Windows;
+
+using ValNet;
 
 namespace Assist.MVVM.ViewModel
 {
+    // todo: cleanup
     internal class AssistApplication
     {
+
+        public static AssistApiService ApiService { get; } = new();
         public static AssistApplication AppInstance { get; } = new();
+
         public TokenServiceBackgroundService TokenService { get; set; }
         public AssistApiController AssistApiController { get; set; }
         // Control Models
@@ -31,28 +36,34 @@ namespace Assist.MVVM.ViewModel
 
         public AssistApplication()
         {
-            AssistApiController = new();
+            AssistApiController = new AssistApiController();
 
         }
-
 
         public void OpenAssistMainWindow()
         {
-            var temp = Application.Current.MainWindow;
-            temp.Visibility = Visibility.Hidden;
-            Application.Current.MainWindow = new AssistMainWindow();
-            Application.Current.MainWindow.Show();
-            temp.Close();
+            var window = Application.Current.MainWindow!;
+            window.Visibility = Visibility.Hidden;
+
+            var mainWindow = new AssistMainWindow();
+            mainWindow.Show();
+
+            Application.Current.MainWindow = mainWindow;
+            window.Close();
         }
+
         public void OpenAssistMainWindowToSettings()
         {
             var temp = Application.Current.MainWindow;
             temp.Visibility = Visibility.Hidden;
+
             Application.Current.MainWindow = new AssistMainWindow();
             Application.Current.MainWindow.Show();
             AssistMainWindow.Current.SettingsBTN_Click(null, null);
+
             temp.Close();
         }
+
         public void OpenAccountLoginWindow(bool bAddProfile)
         {
             Application.Current.MainWindow.Visibility = Visibility.Hidden;
@@ -61,14 +72,16 @@ namespace Assist.MVVM.ViewModel
             accLogin.Show();
             Application.Current.MainWindow = accLogin;
         }
+
         public void OpenAssistErrorWindow(Exception ex, string extraParam = null)
         {
-            AssistLog.Error($"Opened Error Window Method Called ; MESSAGE: {ex.Message} | CUSTOM MESSAGE: {extraParam} ");
+            Log.Error($"Opened Error Window Method Called ; MESSAGE: {ex.Message} | CUSTOM MESSAGE: {extraParam} ");
             var errorS = new ErrorScreen(ex, extraParam);
-            AssistLog.Error("Opened Error Window");
+            Log.Error("Opened Error Window");
             errorS.ShowDialog();
-            AssistLog.Error("Closed Error Window");
+            Log.Error("Closed Error Window");
         }
+
         public async Task CreateAuthenticationFile()
         {
             string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
@@ -77,7 +90,7 @@ namespace Assist.MVVM.ViewModel
 
             var fileInfo = FileVersionInfo.GetVersionInfo(AssistSettings.Current.RiotClientInstallPath);
 
-            AssistLog.Normal("Version of Client: " + fileInfo.FileVersion);
+            Log.Information("Version of Client: " + fileInfo.FileVersion);
 
             // Create File
             var settings = new ClientGameModel(CurrentUser);
@@ -135,18 +148,18 @@ namespace Assist.MVVM.ViewModel
             var tagLine = profile.Tagline;
             try
             {
-                AssistLog.Normal($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+                Log.Information($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
                 await user.Authentication.AuthenticateWithCookies();
             }
             catch (Exception ex)
             {
-                AssistLog.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine}");
+                Log.Error($"ACCOUNT NO LONGER VALID - {gamename}#{tagLine}");
 
                 string errorMess = $"Login to account: {gamename}#{tagLine}, has expired. Please re-add the account.";
                 AssistApplication.AppInstance.OpenAssistErrorWindow(ex, errorMess);
 
 
-                AssistLog.Normal("Removing Account");
+                Log.Information("Removing Account");
                 AssistSettings.Current.Profiles.Remove(profile);
                 AssistSettings.Save();
                 
@@ -174,27 +187,22 @@ namespace Assist.MVVM.ViewModel
                 tempUser.UserClient.CookieContainer.Add(new Cookie(cook.Name, cook.Value, "/", cook.Domain));
             }
 
-            await tempUser.Authentication.AuthenticateWithCookies();
-
-            AssistApplication.AppInstance.CurrentUser = tempUser;
-            AssistApplication.AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
-        }
-
-        public void ChangeLanguage()
-        {
-            var curr = AssistSettings.Current.Language;
-
-            switch (curr)
+            try
             {
-                case Enums.ELanguage.en_us:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en_us", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en_us", true);
-                    break;
-                case Enums.ELanguage.ja_jp:
-                    Thread.CurrentThread.CurrentCulture = new CultureInfo("ja-JP", true);
-                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP", true);
-                    break;
+                Log.Information("Creating Second Account for Riot Client");
+                await tempUser.Authentication.AuthenticateWithCookies();
             }
+            catch (Exception e)
+            {
+                Log.Information("Failed to create Second Account for Riot Client, Trying Again.");
+                await RedoCookies(user);
+                return;
+            }
+            
+
+            AppInstance.CurrentUser = tempUser;
+            AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
         }
+
     }
 }

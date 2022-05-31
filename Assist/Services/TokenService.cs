@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Assist.MVVM.ViewModel;
+using Serilog;
 using ValNet;
 
 namespace Assist.Services
@@ -58,12 +59,12 @@ namespace Assist.Services
 
         public async void RunRefresh()
         {
-            AssistLog.Debug("Backgorund Refresh Start");
+            Log.Debug("Backgorund Refresh Start");
             Thread.Sleep(REFRESHINMINUTES * 60000);
             await _tokenService.RefreshCurrentUser();
 
-            AssistLog.Debug("Refreshed");
-            AssistLog.Debug(AssistApplication.AppInstance.CurrentUser.tokenData.access);
+            Log.Debug("Refreshed");
+            Log.Debug(AssistApplication.AppInstance.CurrentUser.tokenData.access);
         }
     }
 }

@@ -40,20 +40,27 @@ namespace Assist.Controls.Profile.ViewModel
             set => SetProperty(ref _profileRegion, value);
         }
 
-        private BitmapImage _profileImage = App.LoadImageUrl("https://cdn.rumblemike.com/PlayerCards/9ee85a55-4b94-e382-b8a8-f985a33c1cc2_DisplayIcon.png", 64, 64).Result;
+        private BitmapImage _profileImage = App.LoadImageUrl("https://cdn.rumblemike.com/PlayerCards/9ee85a55-4b94-e382-b8a8-f985a33c1cc2_DisplayIcon.png", 64, 64);
         public BitmapImage ProfileImage
         {
             get => _profileImage;
             set => SetProperty(ref _profileImage, value);
         }
 
-        private BitmapImage _backingImage = App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 176, 72).Result;
+        private BitmapImage _backingImage = App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 176, 72);
         public BitmapImage BackingImage
         {
             get => _backingImage;
             set => SetProperty(ref _backingImage, value);
         }
 
+        private BitmapImage _playerRankIcon;
+
+        public BitmapImage PlayerRankIcon
+        {
+            get => _playerRankIcon;
+            set => SetProperty(ref _playerRankIcon, value);
+        }
         public void UpdateProfileNote(string message)
         {
             this.Profile.profileNote = message;

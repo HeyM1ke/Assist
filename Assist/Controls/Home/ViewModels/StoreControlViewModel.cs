@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Assist.MVVM.ViewModel;
+using Assist.Utils;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
+
 using ValNet.Objects.Store;
+
+using ValNetBundle = ValNet.Objects.Store.Bundle;
 
 namespace Assist.Controls.Home.ViewModels
 {
     internal class StoreControlViewModel : ViewModelBase
     {
-        private string _bundleName;
 
+        private string _bundleName;
         public string BundleName
         {
             get => _bundleName;
@@ -20,7 +22,6 @@ namespace Assist.Controls.Home.ViewModels
         }
 
         private string _bundlePrice;
-
         public string BundlePrice
         {
             get => _bundlePrice;
@@ -28,52 +29,34 @@ namespace Assist.Controls.Home.ViewModels
         }
 
         private BitmapImage _bundleImage;
-
         public BitmapImage BundleImage
         {
             get => _bundleImage;
             set => SetProperty(ref _bundleImage, value);
         }
 
-        public List<string> StoreItemOffers;
+        public List<string> StoreItemOffers { get; set; }
 
-        private ValNet.Objects.Store.PlayerStore StoreResp;
+        private PlayerStore _store;
 
         public async Task GetShop()
         {
-            StoreResp = await AssistApplication.AppInstance.CurrentUser.Store.GetPlayerStore();
-            StoreItemOffers = StoreResp.SkinsPanelLayout.SingleItemOffers;
+            _store = await AssistApplication.AppInstance.CurrentUser.Store.GetPlayerStore();
+            StoreItemOffers = _store.SkinsPanelLayout.SingleItemOffers;
         }
         public async Task SetupControl()
         {
-            SetupBundle(StoreResp.FeaturedBundle.Bundle);
+            await SetupBundle(_store.FeaturedBundle.Bundle);
         }
 
-        private async Task SetupBundle(Bundle bundle)
+        private async Task SetupBundle(ValNetBundle valNetBundle)
         {
-            var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(bundle.DataAssetID);
-            BundleImage = await App.LoadImageUrl(temp.DisplayIcon,705 , 344);
-            BundleName = temp.BundleName.ToUpper();
-            BundlePrice = await GetBundlePrice(bundle);
+            var bundle = await AssistApplication.ApiService.GetBundleAsync(valNetBundle.DataAssetID);
+
+            BundleImage = App.LoadImageUrl(bundle.DisplayIcon,705 , 344);
+            BundleName = bundle.Name.ToUpper();
+            BundlePrice = valNetBundle.GetFormattedPrice();
         }
 
-
-
-        public async Task<string> GetBundlePrice(Bundle bundle)
-        {
-            int price = 0;
-
-            foreach (var item in bundle.Items)
-            {
-                price += item.DiscountedPrice;
-            }
-
-            return string.Format("{0:n0}", price);
-        }
-
-        private async Task SetupItems()
-        {
-
-        }
     }
 }

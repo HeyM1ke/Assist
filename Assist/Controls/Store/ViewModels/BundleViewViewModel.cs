@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assist.MVVM.ViewModel;
+using Assist.Utils;
+
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
+
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Store.ViewModels
 {
     internal class BundleViewViewModel : ViewModelBase
     {
-        private BitmapImage _bundleImage = App.LoadImageUrl("https://cdn.rumblemike.com/AssistHome.png", 673, 328).Result;
+
+        private BitmapImage _bundleImage = App.LoadImageUrl("https://cdn.rumblemike.com/AssistHome.png", 673, 328);
         public BitmapImage BundleImage
         {
             get => _bundleImage;
@@ -54,23 +55,13 @@ namespace Assist.Controls.Store.ViewModels
         public async Task SetupBundle()
         {
             Bundle.DurationRemainingInSeconds += 10;
-            var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(Bundle.DataAssetID);
+
+            var bundle = await AssistApplication.ApiService.GetBundleAsync(Bundle.DataAssetID);
             await StartCountdown();
-            this.BundleImage = await App.LoadImageUrl(temp.DisplayIcon, 673, 328);
-            this.BundleName = temp.BundleName.ToUpper();
-            this.BundlePrice = await GetBundlePrice(Bundle);
-        }
 
-        public async Task<string> GetBundlePrice(Bundle bundle)
-        {
-            int price = 0;
-
-            foreach (var item in bundle.Items)
-            {
-                price += item.DiscountedPrice;
-            }
-
-            return string.Format("{0:n0}", price);
+            BundleImage = App.LoadImageUrl(bundle.DisplayIcon, 673, 328);
+            BundleName = bundle.Name.ToUpper();
+            BundlePrice = Bundle.GetFormattedPrice();
         }
 
         private Timer bundleTimer;

@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Threading;
 using Assist.MVVM.View.Extra;
 using Assist.MVVM.ViewModel;
+using Serilog;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -31,20 +32,20 @@ namespace Assist.MVVM.ViewModel
             if (AssistApplication.AppInstance.AssistApiController.bIsUpdate)
                 return;
 
-            AssistLog.Normal("Running First Time Setup");
+            Log.Information("Running First Time Setup");
             var clientPath = await AssistSettings.Current.FindRiotClient();
 
             if (clientPath is null)
             {
                 // Do Something if the client path is invalid and the client does not excist.
-                AssistLog.Error("NO RIOT CLIENT FOUND ON COMPUTER / IN SETTINGS FILE");
+                Log.Error("NO RIOT CLIENT FOUND ON COMPUTER / IN SETTINGS FILE");
                 CurrentStatusMessage = "No Riot Client Found, Please install Riot Client.";
                 Thread.Sleep(5000);
                 Environment.Exit(0);
             }
 
             CurrentStatusMessage = "Riot Client Found";
-            AssistLog.Normal("Setting Settings RiotClient Path to Settings, Path Found: " + clientPath);
+            Log.Information("Setting Settings RiotClient Path to Settings, Path Found: " + clientPath);
             AssistSettings.Current.RiotClientInstallPath = clientPath; // Set the Client path to settings.
 
             if (!AssistSettings.Current.SetupLangSelected)
@@ -65,7 +66,7 @@ namespace Assist.MVVM.ViewModel
             if (AssistApplication.AppInstance.AssistApiController.bIsUpdate)
                 return;
 
-            AssistLog.Normal("Calling Default Startup");
+            Log.Information("Calling Default Startup");
 
             //Check if RiotClient is Valid
             var clientPath = await AssistSettings.Current.FindRiotClient();
@@ -84,7 +85,7 @@ namespace Assist.MVVM.ViewModel
             //Check if There are accounts within settings.
             if(AssistSettings.Current.Profiles.Count == 0)
             {
-                AssistLog.Normal("No Accounts Found in User's Settings, Opening Account Login.");
+                Log.Information("No Accounts Found in User's Settings, Opening Account Login.");
                 AssistApplication.AppInstance.OpenAccountLoginWindow(false);
             }
             else
@@ -104,7 +105,7 @@ namespace Assist.MVVM.ViewModel
                         }
                         catch (Exception ex)
                         {
-                            AssistLog.Error($"Account is no longer valid - {profile.RiotId} | Removing Account");
+                            Log.Error($"Account is no longer valid - {profile.RiotId} | Removing Account");
                             AssistApplication.AppInstance.OpenAssistErrorWindow(ex, $"Login for account: {profile.RiotId} is expired. Please re-add the account.");
                             AssistSettings.Current.Profiles.Remove(profile);
 
@@ -144,7 +145,7 @@ namespace Assist.MVVM.ViewModel
 
                 if (AssistApplication.AppInstance.CurrentProfile == null || AssistApplication.AppInstance.CurrentUser == null)
                 {
-                    AssistLog.Normal("No Accounts were successfully logged into, opening account login.");
+                    Log.Information("No Accounts were successfully logged into, opening account login.");
                     AssistSettings.Current.Profiles.Clear();
                     AssistSettings.Save();
                     AssistApplication.AppInstance.OpenAccountLoginWindow(false);
@@ -152,7 +153,7 @@ namespace Assist.MVVM.ViewModel
                 else
                 {
                     AssistSettings.Save();
-                    AssistLog.Normal("Login was successful, opening main window.");
+                    Log.Information("Login was successful, opening main window.");
                     AssistApplication.AppInstance.OpenAssistMainWindow();
                 }
 
@@ -175,7 +176,7 @@ namespace Assist.MVVM.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    AssistLog.Error($"ACCOUNT NO LONGER VALID - {profile.RiotId} || Removing Account");
+                    Log.Error($"ACCOUNT NO LONGER VALID - {profile.RiotId} || Removing Account");
                     AssistApplication.AppInstance.OpenAssistErrorWindow(ex, $"Could not login to account: {profile.RiotId}, it has been removed from your account list. Please re-add the account.");
                     AssistSettings.Current.Profiles.Remove(profile);
                     AssistSettings.Save();

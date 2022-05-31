@@ -1,64 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assist.MVVM.ViewModel;
+
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
+
 using ValNet.Objects.Store;
 
 namespace Assist.Controls.Store.ViewModels
 {
     internal class NightMarketItemViewModel : ViewModelBase
     {
-        private string _skinName;
 
-        public string SkinName
+        private string _name;
+        public string Name
         {
-            get => _skinName;
-            set => SetProperty(ref _skinName, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
-        private BitmapImage _skinImage;
-
-        public BitmapImage SkinImage
+        private BitmapImage _image;
+        public BitmapImage Image
         {
-            get => _skinImage;
-            set => SetProperty(ref _skinImage, value);
-
-            
+            get => _image;
+            set => SetProperty(ref _image, value);
         }
 
-        private string _skinPrice;
-
-        public string SkinPrice
+        private string _price;
+        public string Price
         {
-            get => _skinPrice;
-            set => SetProperty(ref _skinPrice, value);
+            get => _price;
+            set => SetProperty(ref _price, value);
         }
 
-        private string _skinDiscount;
-
-        public string SkinDiscount
+        private string _discount;
+        public string Discount
         {
-            get => _skinDiscount;
-            set => SetProperty(ref _skinDiscount, value);
+            get => _discount;
+            set => SetProperty(ref _discount, value);
         }
 
+        // todo: UpdateItem
         private NightMarket.NightMarketOffer _offer;
-
         public NightMarket.NightMarketOffer Offer
         {
             get => _offer;
             set
             {
                 SetProperty(ref _offer, value);
+
                 UpdateItem();
             }
         }
 
-        private int _fontSize;
-
+        private int _fontSize = 12;
         public int FontSize
         {
             get => _fontSize;
@@ -67,19 +60,19 @@ namespace Assist.Controls.Store.ViewModels
 
         private async Task UpdateItem()
         {
+            var skin = await AssistApplication.ApiService.GetWeaponSkinAsync(Offer.Offer.OfferID);
 
-            var skinData = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(Offer.Offer.OfferID);
+            Name = skin.DisplayName.ToUpper();
+            DetermineFontSize();
 
-            SkinName = skinData.DisplayName.ToUpper();
-            await DetermineFontSize();
-            SkinDiscount = $"-{Offer.DiscountPercent}%";
-            SkinPrice = $"{string.Format("{0:n0}", Offer.DiscountCosts.ValorantPointCost)}";
-            SkinImage = await App.LoadImageUrl(skinData.Levels[0].DisplayIcon);
+            Discount = $"-{Offer.DiscountPercent}%";
+            Price = $"{Offer.DiscountCosts.ValorantPointCost:n0}";
+            Image = App.LoadImageUrl(skin.Levels[0].DisplayIcon);
         }
 
-        private async Task DetermineFontSize()
+        private void DetermineFontSize()
         {
-            var l = SkinName.Length;
+            var l = Name.Length;
             FontSize = 12;
 
             if (l >= 20)

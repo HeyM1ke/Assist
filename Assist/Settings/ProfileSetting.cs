@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using Assist.MVVM.ViewModel;
+using Serilog;
 using ValNet;
 using ValNet.Objects;
+using ValNet.Objects.Authentication;
 
 namespace Assist.Settings
 {
@@ -20,6 +25,8 @@ namespace Assist.Settings
         public DateTime TimeOfLogin { get; set; }
         public int Tier { get; set; } = 0;
         public string profileNote { get; set; }
+
+        internal List<PatchlineObj> entitlements = new List<PatchlineObj>();
 
         /// <summary>
         /// Converts Cookies within container to AssCAuth64 Format.
@@ -58,19 +65,72 @@ namespace Assist.Settings
 
         public async Task SetupProfile(RiotUser pUser)
         {
-            await pUser.Inventory.GetPlayerInventory();
-            PCID = pUser.Inventory.CurrentInventory.PlayerData.PlayerCardID;
+            try
+            {
+               var inv =  await pUser.Inventory.GetPlayerInventory();
+               PCID = inv.PlayerData.PlayerCardID;
+            }
+            catch (Exception e)
+            {
+                PCID = "9ee85a55-4b94-e382-b8a8-f985a33c1cc2";
+            }
 
-            var r = await pUser.Player.GetPlayerProgression();
-            playerLevel = r.Progress.Level;
+            try
+            {
+                var r = await pUser.Player.GetPlayerProgression();
+                playerLevel = r.Progress.Level;
+            }
+            catch (Exception e)
+            {
+                playerLevel = 1;
+            }
 
-            var rnkD = await pUser.Player.GetCompetitiveUpdates();
+            try
+            {
+                var rnkD = await pUser.Player.GetCompetitiveUpdates();
 
-            if(rnkD.Matches.Count != 0)
-                Tier = rnkD.Matches[0].TierAfterUpdate;
+                if (rnkD != null && rnkD.Matches != null)
+                {
+                    if (rnkD.Matches.Count != 0)
+                        Tier = rnkD.Matches[0].TierAfterUpdate;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Tier = 0;
+            }
 
+            try
+            {
+                this.entitlements.Clear();
+
+                // Every Account has Access to Live.
+                entitlements.Add(new()
+                {
+                    PatchlineName = "Live",
+                    PatchlinePath = "live"
+                });
+
+                var entitles = await pUser.Authentication.GetPlayerGameEntitlements();
+
+                entitles.ForEach(x => this.entitlements.Add(x));
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            
             Gamename = pUser.UserData.acct.game_name;
+            Log.Debug("Name being Read" + Gamename);
             Tagline = pUser.UserData.acct.tag_line;
+            Log.Debug("Tag being Read" + Tagline);
 
         }
     }

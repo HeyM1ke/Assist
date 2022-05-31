@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assist.MVVM.ViewModel;
+using Assist.Objects.Valorant.Bp;
+
 using System.Windows.Media.Imaging;
-using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
 
 namespace Assist.Controls.Progression.Viewmodels
 {
     public class BattlepassItemViewModel : ViewModelBase
     {
-        private int _tierNumber = 00;
 
+        private int _tierNumber;
         public int TierNumber
         {
             get => _tierNumber;
@@ -27,20 +22,17 @@ namespace Assist.Controls.Progression.Viewmodels
             set => SetProperty(ref _rewardImage, value);
         }
 
-        private BattlePassObj.Level _level;
-        public BattlePassObj.Level Level
+        private BattlepassLevel _level;
+        public BattlepassLevel Level
         {
             get => _level;
             set => SetProperty(ref _level, value);
         }
 
-        public async void LoadItem()
+        public void LoadItem()
         {
-            if (Level.rewardDisplayIcon != null)
-            {
-                RewardImage = await App.LoadImageUrl(Level.rewardDisplayIcon, BitmapCacheOption.None);
-            }
-            
+            if (_level.RewardDisplayIcon != null)
+                RewardImage = App.LoadImageUrl(Level.RewardDisplayIcon, BitmapCacheOption.None);
         }
 
     }

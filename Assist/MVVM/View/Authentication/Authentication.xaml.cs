@@ -11,10 +11,11 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
-using Assist.MVVM.Model;
+
 using Assist.MVVM.View.Authentication.AuthenticationPages;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
+
 using Application = System.Windows.Application;
 
 

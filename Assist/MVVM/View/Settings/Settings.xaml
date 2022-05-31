@@ -23,7 +23,7 @@
                 Width="620"
                 Height="470"
                 Background="{StaticResource AssistBackgroundLight}"
-                CornerRadius="10">
+                CornerRadius="0">
                 <Grid>
                     <DockPanel>
                         <ScrollViewer VerticalScrollBarVisibility="Auto">

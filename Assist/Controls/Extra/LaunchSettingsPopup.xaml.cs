@@ -13,7 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Assist.Modules.Popup;
+using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Serilog;
+using ValNet.Objects.Authentication;
 
 namespace Assist.Controls.Extra
 {
@@ -22,6 +25,7 @@ namespace Assist.Controls.Extra
     /// </summary>
     public partial class LaunchSettingsPopup : UserControl
     {
+        List<PatchlineObj> patchlines = new List<PatchlineObj>();
         public LaunchSettingsPopup()
         {
             InitializeComponent();
@@ -36,6 +40,24 @@ namespace Assist.Controls.Extra
                 AssistSettings.Current.LaunchSettings.ValDscRpcEnabled = true;
 
             PopupSystem.KillPopups();
+        }
+
+        private void PatchlineComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach (var patchline in AssistApplication.AppInstance.CurrentProfile.entitlements)
+            {
+                PatchlineComboBox.Items.Add(new ComboBoxItem()
+                {
+                    Content = patchline.PatchlineName
+                });
+            }
+            PatchlineComboBox.SelectedIndex = 0;
+        }
+
+        private void PatchlineComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AssistSettings.Current.LaunchSettings.ValPatchline = AssistApplication.AppInstance.CurrentProfile
+                .entitlements[PatchlineComboBox.SelectedIndex].PatchlinePath;
         }
     }
 }

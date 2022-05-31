@@ -42,12 +42,14 @@ namespace Assist.Controls.Home
             InitializeComponent();
             SetupControl();
         }
-        private async void SetupControl()
+
+        private void SetupControl()
         {
-            _viewModel.ProfilePlayercard = await App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + _viewModel.Profile.PCID + "_DisplayIcon.png", 80, 80);
-            _viewModel.BackingImage = await App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 720, 480);
-            _viewModel.PlayerRankIcon = await App.LoadImageUrl($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTier_Large_{_viewModel.Profile.Tier}.png");
+            _viewModel.ProfilePlayercard = App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/" + _viewModel.Profile.PCID + "_DisplayIcon.png", 80, 80);
+            _viewModel.BackingImage = App.LoadImageUrl("https://cdn.rumblemike.com/Maps/2FB9A4FD-47B8-4E7D-A969-74B4046EBD53_splash.png", 720, 480);
+            _viewModel.PlayerRankIcon = App.LoadImageUrl($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTier_Large_{_viewModel.Profile.Tier}.png");
         }
+
         private async void PlayBTN_Click(object sender, RoutedEventArgs e)
         {
             PopupSystem.SpawnPopup(new PopupSettings()
@@ -79,7 +81,7 @@ namespace Assist.Controls.Home
 
         private void Switch_Click(object sender, RoutedEventArgs e)
         {
-            AssistMainWindow.Current.UncheckBtns();
+            AssistMainWindow.Current.UncheckNavigationButtons();
             AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Profiles/Profiles.xaml", UriKind.RelativeOrAbsolute));
         }
 

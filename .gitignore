@@ -351,3 +351,4 @@ MigrationBackup/
 .ionide/
 
 src/AssistBackgroundClient/*
+*.bak

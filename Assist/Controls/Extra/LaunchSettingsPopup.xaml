@@ -145,11 +145,168 @@
                                 <Label FontFamily="{StaticResource WorkSans}" FontSize="10" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontWeight="Regular" Content="Launch Invisible Mode" Foreground="White"></Label>
                                 <Controls:AssistToggle IsCheck="False" HorizontalAlignment="Right"/>
                             </Grid>
+                            <Grid x:Name="PatchlineSettings" 
+                                  Background="{StaticResource AssistNavigationButton_NotSelectedFill}" 
+                                  Margin="0,10" 
+                                  Visibility="Visible" >
+                                <Grid.Resources>
+                                    <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="50" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border
+                                            x:Name="Border" 
+                                            Grid.ColumnSpan="2"
+                                            CornerRadius="1"
+                                            Background="{StaticResource AssistNavigationButton_NotSelectedFill}" />
+                                            <Border 
+                                            Grid.Column="0"
+                                            CornerRadius="1"
+                                            Margin="1" 
+                                            Background="{StaticResource AssistNavigationButton_NotSelectedFill}"  />
+                                            <Path 
+                                            x:Name="Arrow"
+                                            Grid.Column="1"     
+                                            Fill="White"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z" Margin="38,0,0,0"
+                                            />
+                                        </Grid>
+                                    </ControlTemplate>
+
+                                    <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+                                        <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+                                    </ControlTemplate>
+
+                                    <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+                                        <Setter Property="SnapsToDevicePixels" Value="true"/>
+                                        <Setter Property="OverridesDefaultStyle" Value="true"/>
+                                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                                        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                                        <Setter Property="MinWidth" Value="120"/>
+                                        <Setter Property="MinHeight" Value="20"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontSize" Value="10"/>
+                                        <Setter Property="FontFamily" Value="{StaticResource WorkSans}"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ComboBox}">
+                                                    <Border CornerRadius="20">
+                                                        <Grid>
+                                                            <ToggleButton 
+                                                Name="ToggleButton" 
+                                                Template="{StaticResource ComboBoxToggleButton}" 
+                                                Grid.Column="2" 
+                                                Focusable="false"
+                                                IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                                ClickMode="Press">
+                                                            </ToggleButton>
+                                                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                Margin="3,3,23,3"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right"/>
+                                                            <Popup 
+                                                Name="Popup"
+                                                Placement="Bottom"
+                                                IsOpen="{TemplateBinding IsDropDownOpen}"
+                                                AllowsTransparency="True" 
+                                                Focusable="False"
+                                                PopupAnimation="Slide">
+
+                                                                <Grid Name="DropDown"
+                                                                  SnapsToDevicePixels="True"                
+                                                                  MinWidth="{TemplateBinding ActualWidth}"
+                                                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                                                    <Border 
+                                                                        x:Name="DropDownBorder"
+                                                                        Background="{StaticResource AssistNavigationButton_NotSelectedFill}"
+                                                                        BorderThickness="1"
+                                                                        BorderBrush="{StaticResource AssistNavigationButton_NotSelectedOutline}"
+                                                                        CornerRadius="0"/>
+                                                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                                                    </ScrollViewer>
+                                                                </Grid>
+                                                            </Popup>
+                                                        </Grid>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="HasItems" Value="false">
+                                                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Foreground" Value="#888888"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsGrouping" Value="true">
+                                                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                                                        </Trigger>
+                                                        <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                                            <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                                            <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsEditable"  Value="true">
+                                                            <Setter Property="IsTabStop" Value="false"/>
+                                                            <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <Setter Property="SnapsToDevicePixels" Value="true"/>
+                                        <Setter Property="FontSize" Value="10"></Setter>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="OverridesDefaultStyle" Value="true"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                                                    <Border Name="Border"
+                                                            Padding="2"
+                                                            SnapsToDevicePixels="true">
+                                                        <ContentPresenter />
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsHighlighted" Value="true">
+                                                            <Setter TargetName="Border" Property="Background" Value="{StaticResource AssistNavigationButton_SelectedHighlightFill}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsEnabled" Value="false">
+                                                            <Setter Property="Foreground" Value="#888888"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Grid.Resources>
+                                <Label FontFamily="{StaticResource WorkSans}"
+                                       FontSize="10" 
+                                       VerticalContentAlignment="Center"
+                                       HorizontalAlignment="Left" 
+                                       FontWeight="Regular" 
+                                       Content="Patchline" 
+                                       Foreground="White"/>
+
+                                <ComboBox x:Name="PatchlineComboBox" 
+                                          HorizontalAlignment="Right" 
+                                          Width="100" 
+                                          Loaded="PatchlineComboBox_Loaded"
+                                          SelectionChanged="PatchlineComboBox_OnSelectionChanged">
+                                </ComboBox>
+                            </Grid>
                             <Button Width="80" Height="25" Margin="10" Click="SaveBtn_Click"></Button>
                         </StackPanel>
                     </Grid>
                 </DockPanel>
-                
+
             </Grid>
 
 

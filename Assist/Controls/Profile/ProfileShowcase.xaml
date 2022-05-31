@@ -12,7 +12,7 @@
         <Border x:Name="Border" CornerRadius="0" Background="{StaticResource AssistBackgroundLight}"></Border>
 
         <Grid>
-            
+
 
             <Grid>
                 <Grid>
@@ -21,10 +21,10 @@
                     </Grid.OpacityMask>
 
                     <Rectangle Name="BackgroundImage" VerticalAlignment="Top" Height="72" Fill="{StaticResource AssistScreenBackingColor}"></Rectangle>
-                    <Image Name="ProfileIcon" Source="{Binding ProfileImage}" VerticalAlignment="Top" Width="64" Margin="56,40,55,0"></Image>
-
+                    <Image Name="ProfileIcon" Source="{Binding ProfileImage}" VerticalAlignment="Top" Width="64" Height="64" Margin="56,40,55,0"></Image>
+                    <Image Source="{Binding Path=PlayerRankIcon}" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="77,25,0,0" />
                 </Grid>
-                
+
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,105,0,0">
                     <Label
                        Content="{Binding ProfileName}" 
@@ -53,8 +53,8 @@
                     </Grid>
                 </StackPanel>
 
-                
-                
+
+
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <StackPanel.Resources>

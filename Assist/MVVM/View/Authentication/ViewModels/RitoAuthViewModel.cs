@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Assist.MVVM.ViewModel;
 using Microsoft.Web.WebView2.Wpf;
+using Serilog;
 
 namespace Assist.MVVM.View.Authentication.ViewModels
 {
@@ -20,7 +21,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
 
             if (c != null)
             {
-                AssistLog.Debug("Found SSID Cookie from Authentication");
+                Log.Debug("Found SSID Cookie from Authentication");
                 var cook = new Cookie
                 {
                     Name = c.Name,
