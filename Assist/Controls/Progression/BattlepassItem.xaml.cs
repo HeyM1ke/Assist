@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assist.Controls.Progression.Viewmodels;
+using Assist.MVVM.Model;
+using Assist.Objects.Valorant.Bp;
+
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Assist.Controls.Progression.Viewmodels;
-using Assist.MVVM.Model;
 
 namespace Assist.Controls.Progression
 {
@@ -26,11 +17,10 @@ namespace Assist.Controls.Progression
 
         public bool bIsEarned
         {
-            get { return (bool)GetValue(bIsEarnedProperty); }
-            set { SetValue(bIsEarnedProperty, value); }
+            get => (bool)GetValue(bIsEarnedProperty);
+            set => SetValue(bIsEarnedProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for isEarned.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty bIsEarnedProperty =
             DependencyProperty.Register("bIsEarned", typeof(bool), typeof(BattlepassItem));
 
@@ -40,8 +30,7 @@ namespace Assist.Controls.Progression
             get { return (bool)GetValue(bIsSelectedProperty); }
             set { SetValue(bIsSelectedProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for bIsSelected.  This enables animation, styling, binding, etc...
+        
         public static readonly DependencyProperty bIsSelectedProperty =
             DependencyProperty.Register("bIsSelected", typeof(bool), typeof(BattlepassItem));
 
@@ -60,7 +49,7 @@ namespace Assist.Controls.Progression
             InitializeComponent();
         }
 
-        public BattlepassItem(BattlePassObj.Level item, int tier)
+        public BattlepassItem(BattlepassLevel item, int tier)
         {
             DataContext = _viewModel = new BattlepassItemViewModel();
             _viewModel.TierNumber = tier;
@@ -70,7 +59,7 @@ namespace Assist.Controls.Progression
         }
 
 
-        public async Task<BattlePassObj.Level> GetItem()
+        public async Task<BattlepassLevel> GetItem()
         {
             return _viewModel.Level;
         }

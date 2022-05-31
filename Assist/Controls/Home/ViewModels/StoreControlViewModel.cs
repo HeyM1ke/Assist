@@ -1,11 +1,13 @@
 ﻿using Assist.MVVM.ViewModel;
+using Assist.Utils;
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 using ValNet.Objects.Store;
+
+using ValNetBundle = ValNet.Objects.Store.Bundle;
 
 namespace Assist.Controls.Home.ViewModels
 {
@@ -33,7 +35,7 @@ namespace Assist.Controls.Home.ViewModels
             set => SetProperty(ref _bundleImage, value);
         }
 
-        public List<string> StoreItemOffers;
+        public List<string> StoreItemOffers { get; set; }
 
         private PlayerStore _store;
 
@@ -47,18 +49,13 @@ namespace Assist.Controls.Home.ViewModels
             await SetupBundle(_store.FeaturedBundle.Bundle);
         }
 
-        private async Task SetupBundle(Bundle bundle)
+        private async Task SetupBundle(ValNetBundle valNetBundle)
         {
-            var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(bundle.DataAssetID);
-            BundleImage = App.LoadImageUrl(temp.DisplayIcon,705 , 344);
-            BundleName = temp.BundleName.ToUpper();
-            BundlePrice = GetBundlePrice(bundle);
-        }
+            var bundle = await AssistApplication.ApiService.GetBundleAsync(valNetBundle.DataAssetID);
 
-        public string GetBundlePrice(Bundle bundle)
-        {
-            var price = bundle.Items.Sum(x => x.DiscountedPrice);
-            return $"{price:n0}";
+            BundleImage = App.LoadImageUrl(bundle.DisplayIcon,705 , 344);
+            BundleName = bundle.Name.ToUpper();
+            BundlePrice = valNetBundle.GetFormattedPrice();
         }
 
     }

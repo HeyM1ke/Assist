@@ -39,7 +39,7 @@ namespace Assist.Controls.Home
 
         private async void SetupControl(string skinId)
         {
-            await _viewModel.SetupSkin(skinId);
+            await _viewModel.SetupSkinAsync(skinId);
             
         }
 

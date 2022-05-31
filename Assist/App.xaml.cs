@@ -12,7 +12,6 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading;
 using System.Windows;
@@ -32,8 +31,11 @@ namespace Assist
     public partial class App : Application
     {
 
-        [DllImport("kernel32")]
-        private static extern bool AllocConsole();
+        public static readonly JsonSerializerOptions JsonSerializerOptions = new()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
+        };
 
         protected override async void OnStartup(StartupEventArgs e)
         {
@@ -91,7 +93,7 @@ namespace Assist
         private static void SetupLogger()
         {
 #if DEBUG
-            AllocConsole();
+            Win32.AllocConsole();
 #endif
 
             var directory = GetApplicationDataFolder();

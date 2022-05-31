@@ -1,7 +1,7 @@
 ﻿using Assist.MVVM.ViewModel;
+using Assist.Utils;
 
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
@@ -55,18 +55,13 @@ namespace Assist.Controls.Store.ViewModels
         public async Task SetupBundle()
         {
             Bundle.DurationRemainingInSeconds += 10;
-            var temp = await AssistApplication.AppInstance.AssistApiController.GetBundleObj(Bundle.DataAssetID);
+
+            var bundle = await AssistApplication.ApiService.GetBundleAsync(Bundle.DataAssetID);
             await StartCountdown();
 
-            BundleImage = App.LoadImageUrl(temp.DisplayIcon, 673, 328);
-            BundleName = temp.BundleName.ToUpper();
-            BundlePrice = await GetBundlePrice(Bundle);
-        }
-
-        public async Task<string> GetBundlePrice(Bundle bundle)
-        {
-            var price = bundle.Items.Sum(x => x.DiscountedPrice);
-            return $"{price:n0}";
+            BundleImage = App.LoadImageUrl(bundle.DisplayIcon, 673, 328);
+            BundleName = bundle.Name.ToUpper();
+            BundlePrice = Bundle.GetFormattedPrice();
         }
 
         private Timer bundleTimer;

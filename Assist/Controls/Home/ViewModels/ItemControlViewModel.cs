@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assist.MVVM.ViewModel;
+
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.ViewModel;
 
 namespace Assist.Controls.Home.ViewModels
 {
@@ -18,9 +15,9 @@ namespace Assist.Controls.Home.ViewModels
             set => SetProperty(ref _skinImage, value);
         }
 
-        public async Task SetupSkin(string skinId)
+        public async Task SetupSkinAsync(string id)
         {
-            var data = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
+            var data = await AssistApplication.ApiService.GetWeaponSkinAsync(id);
             SkinImage = App.LoadImageUrl(data.Levels[0].DisplayIcon, BitmapCacheOption.None);
         }
 
