@@ -33,7 +33,7 @@ namespace Assist.MVVM.View.InitPage
 #if DEBUG
 
 #else
-        var resp = await AssistApplication.AppInstance.AssistApiController.GetMaintenanceStatus();
+        var resp = await AssistApplication.ApiService.GetMaintenanceStatus();
 
             if (resp.DownForMaintenance)
                 new MaintenanceWindow(resp).ShowDialog(); 
