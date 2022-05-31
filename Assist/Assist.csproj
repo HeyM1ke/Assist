@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\Montserrat-Black.ttf" />
     <None Remove="Resources\assistLogo.ico" />
     <None Remove="Resources\Assist_Progression_Template.png" />
     <None Remove="Resources\backImage.png" />
@@ -243,10 +242,6 @@
     <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
-
-	<ItemGroup>
-		<Resource Include="Fonts\*.ttf" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <Content Include="Resources\assistLogo.ico" />
