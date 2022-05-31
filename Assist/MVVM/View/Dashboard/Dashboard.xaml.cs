@@ -46,18 +46,18 @@ namespace Assist.MVVM.View.Dashboard
             });
         }
 
+        // todo: bind this?
         private async void NewsPanel_Initialized(object sender, EventArgs e)
         {
-            var n = await AssistApplication.AppInstance.AssistApiController.GetAssistNews();
-            foreach (var news in n)
+            var news = await AssistApplication.ApiService.GetNewsAsync();
+            foreach (var article in news)
             {
-                
-                    NewsPanel.Children.Add(new NewsControl(news)
-                    {
-                        Margin = new Thickness(0,5,0,5)
-                    });
-                
+                NewsPanel.Children.Add(new NewsControl(article)
+                {
+                    Margin = new Thickness(0, 5, 0, 5)
+                });
             }
         }
+
     }
 }

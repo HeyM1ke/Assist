@@ -1,47 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assist.Controls.Home.ViewModels;
+using Assist.Objects.Valorant;
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Assist.Controls.Home.ViewModels;
-using Assist.MVVM.Model;
 
 namespace Assist.Controls.Home
 {
     /// <summary>
     /// Interaction logic for NewsControl.xaml
     /// </summary>
-    public partial class NewsControl : UserControl
+    public partial class NewsControl
     {
-        private readonly NewsControlViewModel _viewModel;
-        private readonly AssistNewsObj _newsData;
+
+        private readonly NewsArticle _article;
+        private NewsControlViewModel _viewModel;
+
         public NewsControl()
-        {
-            DataContext = _viewModel = new NewsControlViewModel();
-            InitializeComponent();
-            
+        { 
+            Initialize();
         }
 
-        public NewsControl(AssistNewsObj newsData)
+        public NewsControl(NewsArticle article)
         {
-            _newsData = newsData;
-            DataContext = _viewModel = new NewsControlViewModel();
+            _article = article;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            _viewModel = new NewsControlViewModel();
+            DataContext = _viewModel;
             InitializeComponent();
         }
 
         private void NewsControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_newsData != null) 
-                _viewModel.LoadNews(_newsData);
+            if (_article != null) 
+                _viewModel.LoadNews(_article);
         }
 
         private async void NewsControl_Click(object sender, RoutedEventArgs e)

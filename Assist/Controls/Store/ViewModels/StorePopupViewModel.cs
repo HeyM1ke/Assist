@@ -11,6 +11,7 @@ namespace Assist.Controls.Store.ViewModels
 {
     internal class StorePopupViewModel : ViewModelBase
     {
+
         private AssistSkin _skin;
         public AssistSkin Skin
         {

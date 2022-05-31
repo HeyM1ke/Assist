@@ -4,22 +4,26 @@ using Assist.MVVM.View.Extra;
 using Assist.Services;
 using Assist.Settings;
 
+using Serilog;
+
 using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Serilog;
+
 using ValNet;
 
 namespace Assist.MVVM.ViewModel
 {
+    // todo: cleanup
     internal class AssistApplication
     {
+
+        public static AssistApiService ApiService { get; } = new();
         public static AssistApplication AppInstance { get; } = new();
+
         public TokenServiceBackgroundService TokenService { get; set; }
         public AssistApiController AssistApiController { get; set; }
         // Control Models
@@ -35,6 +39,7 @@ namespace Assist.MVVM.ViewModel
             AssistApiController = new AssistApiController();
 
         }
+
         public void OpenAssistMainWindow()
         {
             var window = Application.Current.MainWindow!;
@@ -46,6 +51,7 @@ namespace Assist.MVVM.ViewModel
             Application.Current.MainWindow = mainWindow;
             window.Close();
         }
+
         public void OpenAssistMainWindowToSettings()
         {
             var temp = Application.Current.MainWindow;
@@ -57,6 +63,7 @@ namespace Assist.MVVM.ViewModel
 
             temp.Close();
         }
+
         public void OpenAccountLoginWindow(bool bAddProfile)
         {
             Application.Current.MainWindow.Visibility = Visibility.Hidden;
@@ -65,6 +72,7 @@ namespace Assist.MVVM.ViewModel
             accLogin.Show();
             Application.Current.MainWindow = accLogin;
         }
+
         public void OpenAssistErrorWindow(Exception ex, string extraParam = null)
         {
             Log.Error($"Opened Error Window Method Called ; MESSAGE: {ex.Message} | CUSTOM MESSAGE: {extraParam} ");
@@ -73,6 +81,7 @@ namespace Assist.MVVM.ViewModel
             errorS.ShowDialog();
             Log.Error("Closed Error Window");
         }
+
         public async Task CreateAuthenticationFile()
         {
             string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
@@ -194,5 +203,6 @@ namespace Assist.MVVM.ViewModel
             AppInstance.CurrentUser = tempUser;
             AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Assist.MVVM.ViewModel;
+using Assist.Properties.Languages;
 
 using System.Windows.Media.Imaging;
 
@@ -73,31 +74,32 @@ namespace Assist.Controls.Progression.Viewmodels
             NeededXp = (xpTier * 750) + 2000;
             CurrentXp = bpContract.ProgressionTowardsNextLevel;
             ContractTierXp = $"{CurrentXp}XP / {NeededXp}XP";
-            ContractTier = $"{Properties.Languages.Lang.Progression_Battlepass_CurrTier} {ContractTierNumber+1}";
-            Progression = (((double)CurrentXp / NeededXp) * 100);
+            ContractTier = $"{Lang.Progression_Battlepass_CurrTier} {ContractTierNumber+1}";
+            Progression = (double)CurrentXp / NeededXp * 100;
 
             //Get Reward Information
-            var bpData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
+            var battlepass = await AssistApplication.ApiService.GetBattlepassAsync();
 
             if (ContractTierNumber == 55)
             {
-                var levels = bpData.chapters[^1].levels;
-                var itemData = levels[^1];
-                ContractRewardImage = App.LoadImageUrl(itemData.rewardDisplayIcon);
-                ContractRewardName = itemData.rewardName;
-                ContractTierXp = "";
-                ContractTier = Properties.Languages.Lang.Progression_Battlepass_Completed;
+                var levels = battlepass.Chapters[^1].Levels;
+                var level = levels[^1];
+
+                ContractRewardImage = App.LoadImageUrl(level.RewardDisplayIcon);
+                ContractRewardName = level.RewardName;
+                ContractTierXp = string.Empty;
+                ContractTier = Lang.Progression_Battlepass_Completed;
                 Progression = 100;
-            }
-            else
-            {
-                var contactLevel = ContractTierNumber / 5;
-                var contactLevelTier = ContractTierNumber - (contactLevel * 5);
-                var itemData = bpData.chapters[contactLevel].levels[contactLevelTier];
-                ContractRewardImage = App.LoadImageUrl(itemData.rewardDisplayIcon);
-                ContractRewardName = itemData.rewardName;
+
+                return;
             }
 
+            var contactLevel = ContractTierNumber / 5;
+            var contactLevelTier = ContractTierNumber - (contactLevel * 5);
+            var itemData = battlepass.Chapters[contactLevel].Levels[contactLevelTier];
+            ContractRewardImage = App.LoadImageUrl(itemData.RewardDisplayIcon);
+            ContractRewardName = itemData.RewardName;
         }
+
     }
 }

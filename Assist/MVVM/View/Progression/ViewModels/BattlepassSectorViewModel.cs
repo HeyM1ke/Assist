@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media.Imaging;
-using Assist.Controls;
-using Assist.Controls.Progression;
-using Assist.MVVM.Model;
+﻿using Assist.Controls.Progression;
 using Assist.MVVM.View.Progression.Sectors;
 using Assist.MVVM.ViewModel;
-using ValNet;
+using Assist.Objects.Valorant.Bp;
+
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media.Imaging;
+
 using ValNet.Objects.Contacts;
 
 namespace Assist.MVVM.View.Progression.ViewModels
 {
     internal class BattlepassSectorViewModel : ViewModelBase
     {
+
         private ContactsFetchObj.Contract BattlepassContractData;
-        private BattlePassObj BattlePassData = null;
+
+        private Battlepass _battlePass;
 
         private string _showcaseName;
-
         public string ShowcaseName
         {
             get => _showcaseName;
@@ -32,7 +27,6 @@ namespace Assist.MVVM.View.Progression.ViewModels
         }
 
         private string _showcaseTier;
-
         public string ShowcaseTier
         {
             get => _showcaseTier;
@@ -40,30 +34,27 @@ namespace Assist.MVVM.View.Progression.ViewModels
         }
 
         private BitmapImage _showcaseImage;
-
         public BitmapImage ShowcaseImage
         {
             get => _showcaseImage;
             set => SetProperty(ref _showcaseImage, value);
         }
 
-
-
         public async Task LoadBattlepass(object container)
         {
             var itemContainer = (UniformGrid) container;
             BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiController.currentBattlepassId);
-            BattlePassData = await AssistApplication.AppInstance.AssistApiController.GetBattlepassData();
+            _battlePass = await AssistApplication.ApiService.GetBattlepassAsync();
 
-            if(BattlePassData == null || BattlepassContractData == null || itemContainer is null)
+            if(_battlePass == null || BattlepassContractData == null || itemContainer is null)
                 return;
 
             var tier = 1;
             // Convert obj param to Uniform as 
-            foreach (var chapter in BattlePassData.chapters)
+            foreach (var chapter in _battlePass.Chapters)
             {
-                var listOfItems = chapter.levels;
-                foreach (var item in listOfItems)
+                var levels = chapter.Levels;
+                foreach (var item in levels)
                 {
                     var control = new BattlepassItem(item, tier)
                     {
@@ -97,7 +88,7 @@ namespace Assist.MVVM.View.Progression.ViewModels
             if (control != null)
             {
                 var item = await control.GetItem();
-                ShowcaseName = item.rewardName;
+                ShowcaseName = item.RewardName;
                 ShowcaseTier = $"Tier: {await control.GetTier()}";
 
                 GetShowcaseImage(item);
@@ -105,24 +96,25 @@ namespace Assist.MVVM.View.Progression.ViewModels
             }
         }
 
-        private void GetShowcaseImage(BattlePassObj.Level item)
+        private void GetShowcaseImage(BattlepassLevel item)
         {
-            if (item.reward.type == "Spray")
+            if (item.Reward.Type == "Spray")
             {
-                if(item.reward.sprayFullImage != null)
-                    ShowcaseImage = App.LoadImageUrl(item.reward.sprayFullImage);
+                if(item.Reward.SprayFullImage != null)
+                    ShowcaseImage = App.LoadImageUrl(item.Reward.SprayFullImage);
                 return;
             }
 
-            if (item.reward.type == "PlayerCard")
+            if (item.Reward.Type == "PlayerCard")
             {
-                if (item.reward.playercardLargeArt != null)
-                    ShowcaseImage = App.LoadImageUrl(item.reward.playercardLargeArt);
+                if (item.Reward.PlayercardLargeArt != null)
+                    ShowcaseImage = App.LoadImageUrl(item.Reward.PlayercardLargeArt);
                 return;
             }
 
-            if (item.rewardDisplayIcon != null)
-                ShowcaseImage = App.LoadImageUrl(item.rewardDisplayIcon);
+            if (item.RewardDisplayIcon != null)
+                ShowcaseImage = App.LoadImageUrl(item.RewardDisplayIcon);
         }
+
     }
 }

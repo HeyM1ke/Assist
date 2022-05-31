@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Assist.MVVM.ViewModel;
+
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
+
+using NewsArticle = Assist.Objects.Valorant.NewsArticle;
 
 namespace Assist.Controls.Home.ViewModels
 {
     internal class NewsControlViewModel : ViewModelBase
     {
-        private string _newsTitle;
 
+        private string _newsTitle;
         public string NewsTitle
         {
             get => _newsTitle;
             set => SetProperty(ref _newsTitle, value);
         }
-        private string _newsDescription;
 
+        private string _newsDescription;
         public string NewsDescription
         {
             get => _newsDescription;
@@ -36,16 +33,11 @@ namespace Assist.Controls.Home.ViewModels
         }
 
         private string _newsUrl;
-
         public string NewsUrl
         {
             get => _newsUrl;
             set => SetProperty(ref _newsUrl, value);
         }
-
-
-
-
 
         public async Task OpenNewsUrl()
         {
@@ -56,12 +48,13 @@ namespace Assist.Controls.Home.ViewModels
             });
         }
 
-        public void LoadNews(AssistNewsObj data)
+        public void LoadNews(NewsArticle data)
         {
-            NewsTitle = data.NewsTitle;
-            NewsDescription = data.NewsDescription;
-            NewsImage = App.LoadImageUrl(data.NewsImage, 185, 95);
-            NewsUrl = data.NewsUrl;
+            NewsTitle = data.Title;
+            NewsDescription = data.Description;
+            NewsImage = App.LoadImageUrl(data.Image, 185, 95);
+            NewsUrl = data.Url;
         }
+
     }
 }

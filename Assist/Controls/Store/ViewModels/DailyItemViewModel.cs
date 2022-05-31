@@ -1,5 +1,5 @@
-﻿using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
+﻿using Assist.MVVM.ViewModel;
+using Assist.Objects.Valorant.Skin;
 
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -10,32 +10,32 @@ namespace Assist.Controls.Store.ViewModels
     internal class DailyItemViewModel : ViewModelBase
     {
 
-        private AssistSkin _itemObj = new();
-        public AssistSkin ItemObj
+        private WeaponSkin _skin = new();
+        public WeaponSkin Skin
         {
-            get => _itemObj;
-            set => SetProperty(ref _itemObj, value);
+            get => _skin;
+            set => SetProperty(ref _skin, value);
         }
 
         private string _skinName = "Loading..";
-        public string SkinName
+        public string Name
         {
             get => _skinName.ToUpper();
             set => SetProperty(ref _skinName, value);
         }
 
-        private BitmapImage _skinImage;
-        public BitmapImage SkinImage
+        private BitmapImage _image;
+        public BitmapImage Image
         {
-            get => _skinImage;
-            set => SetProperty(ref _skinImage, value);
+            get => _image;
+            set => SetProperty(ref _image, value);
         }
 
-        private string _skinPrice;
-        public string SkinPrice
+        private string _price;
+        public string Price
         {
-            get => _skinPrice;
-            set => SetProperty(ref _skinPrice, value);
+            get => _price;
+            set => SetProperty(ref _price, value);
         }
 
         private BitmapImage _tierIcon;
@@ -45,12 +45,13 @@ namespace Assist.Controls.Store.ViewModels
             set => SetProperty(ref _tierIcon, value);
         }
 
-        public async Task SetupSkin(string skinId)
+        public async Task SetupSkinAsync(string id)
         {
-            ItemObj = await AssistApplication.AppInstance.AssistApiController.GetSkinObj(skinId);
-            SkinPrice = await AssistApplication.AppInstance.AssistApiController.GetSkinPricing(skinId);
-            SkinImage = App.LoadImageUrl(ItemObj.Levels[0].DisplayIcon);
-            SkinName = ItemObj.DisplayName;
+            Skin = await AssistApplication.ApiService.GetWeaponSkinAsync(id);
+            Price = await AssistApplication.ApiService.GetWeaponSkinPriceAsync(id);
+
+            Image = App.LoadImageUrl(Skin.Levels[0].DisplayIcon);
+            Name = Skin.DisplayName;
         }
 
     }
