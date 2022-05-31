@@ -29,7 +29,7 @@ namespace Assist.Controls.Home
         private void Initialize()
         {
             _viewModel = new NewsControlViewModel();
-            DataContext = _viewModel = new NewsControlViewModel();
+            DataContext = _viewModel;
             InitializeComponent();
         }
 
