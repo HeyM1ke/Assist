@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using Assist.MVVM.ViewModel;
 using Serilog;
 using ValNet;
 using ValNet.Objects;
+using ValNet.Objects.Authentication;
 
 namespace Assist.Settings
 {
@@ -22,6 +25,8 @@ namespace Assist.Settings
         public DateTime TimeOfLogin { get; set; }
         public int Tier { get; set; } = 0;
         public string profileNote { get; set; }
+
+        internal List<PatchlineObj> entitlements = new List<PatchlineObj>();
 
         /// <summary>
         /// Converts Cookies within container to AssCAuth64 Format.
@@ -94,6 +99,31 @@ namespace Assist.Settings
             catch (Exception e)
             {
                 Tier = 0;
+            }
+
+            try
+            {
+                this.entitlements.Clear();
+
+                // Every Account has Access to Live.
+                entitlements.Add(new()
+                {
+                    PatchlineName = "Live",
+                    PatchlinePath = "live"
+                });
+
+                var entitles = await pUser.Authentication.GetPlayerGameEntitlements();
+
+                entitles.ForEach(x => this.entitlements.Add(x));
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
 
             

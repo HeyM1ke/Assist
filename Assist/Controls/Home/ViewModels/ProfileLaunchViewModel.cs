@@ -97,7 +97,7 @@ namespace Assist.Controls.Home.ViewModels
                 Log.Information("Checking for BG Client Updates");
                 await CheckForBgClientUpdate();
                 ProcessStartInfo ASSBGINFO = new ProcessStartInfo(_backgroundClientPath,
-                    $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
+                    $"--patchline:{AssistSettings.Current.LaunchSettings.ValPatchline} --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
                 ASSBGINFO.UseShellExecute = true;
                 Process.Start(ASSBGINFO);
 

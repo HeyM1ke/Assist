@@ -42,6 +42,22 @@ namespace Assist.Controls.Extra
             PopupSystem.KillPopups();
         }
 
+        private void PatchlineComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach (var patchline in AssistApplication.AppInstance.CurrentProfile.entitlements)
+            {
+                PatchlineComboBox.Items.Add(new ComboBoxItem()
+                {
+                    Content = patchline.PatchlineName
+                });
+            }
+            PatchlineComboBox.SelectedIndex = 0;
+        }
 
+        private void PatchlineComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AssistSettings.Current.LaunchSettings.ValPatchline = AssistApplication.AppInstance.CurrentProfile
+                .entitlements[PatchlineComboBox.SelectedIndex].PatchlinePath;
+        }
     }
 }
