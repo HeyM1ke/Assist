@@ -28,7 +28,7 @@ namespace Assist.MVVM.ViewModel
             try
             {
                 Log.Information("Authenticating with Cookies for New User");
-                await user.Authentication.AuthenticateWithCookies();
+                await user.Authentication.AuthenticateWithCookiesCurl();
             }
             catch (ValNetException ex)
             {
@@ -53,7 +53,7 @@ namespace Assist.MVVM.ViewModel
             try
             {
                 Log.Information("Authenticating with Cookies for New User");
-                await user.Authentication.AuthenticateWithCookies();
+                await user.Authentication.AuthenticateWithCookiesCurl();
             }
             catch (Exception ex)
             {

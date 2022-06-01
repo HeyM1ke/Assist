@@ -142,7 +142,7 @@ namespace Assist.MVVM.ViewModel
             try
             {
                 Log.Information($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
-                await user.Authentication.AuthenticateWithCookies();
+                await user.Authentication.AuthenticateWithCookiesCurl();
             }
             catch (Exception ex)
             {
@@ -183,7 +183,7 @@ namespace Assist.MVVM.ViewModel
             try
             {
                 Log.Information("Creating Second Account for Riot Client");
-                await tempUser.Authentication.AuthenticateWithCookies();
+                await tempUser.Authentication.AuthenticateWithCookiesCurl();
             }
             catch (Exception e)
             {

@@ -34,7 +34,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
             user.ChangeCredentials(data);
             try
             {
-                var resp = await user.Authentication.AuthenticateWithCloud();
+                var resp = await user.Authentication.AuthenticateWithCloudCurl();
 
                 if (resp.bIsAuthComplete == false)
                 {
@@ -79,7 +79,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
         }
         public async Task SubmitFactorCode(string code)
         {
-            var resp = await user.Authentication.AuthenticateTwoFactorCode(code);
+            var resp = await user.Authentication.AuthenticateTwoFactorCodeCurl(code);
 
             if (resp.error is not null && resp.error == "multifactor_attempt_failed")
             {
