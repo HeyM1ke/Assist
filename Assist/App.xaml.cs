@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
@@ -39,12 +40,13 @@ namespace Assist
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+            CheckForUpdates();
+
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             SetupLogger();
 
             Log.Information("Starting application");
-            base.OnStartup(e);
-
             Log.Information("Reading the settings file");
             try
             {
@@ -65,7 +67,6 @@ namespace Assist
             if(!InternetCheck())
                 AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
 
-            await AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
             Current.MainWindow = new InitPage();
 
             var targetScreen = Screen.PrimaryScreen;
@@ -88,6 +89,15 @@ namespace Assist
 
             Log.Fatal(exception, "Unhandled exception.");
             MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private static void CheckForUpdates()
+        {
+#if RELEASE
+            AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
+#else
+            Log.Debug("Application is in debug mode, skipping update check.");
+#endif
         }
 
         private static void SetupLogger()

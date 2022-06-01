@@ -8,7 +8,6 @@ using System;
 using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Assist.MVVM.ViewModel
@@ -24,7 +23,7 @@ namespace Assist.MVVM.ViewModel
         public const string currentBattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
         internal bool bIsUpdate = false;
 
-        public async Task CheckForAssistUpdates()
+        public void CheckForAssistUpdates()
         {
             Log.Information("Checking for Assist Updates");
 
@@ -43,43 +42,49 @@ namespace Assist.MVVM.ViewModel
 
         private void CheckForUpdate(UpdateInfoEventArgs args)
         {
-            if (args.Error is WebException)
+            var exception = args.Error;
+            if (exception is WebException) // todo: can other exceptions occur?
             {
-                Log.Information("Error on WebException");
+                Log.Error(exception, "Exception while checking for application updates.");
                 return;
             }
 
+            var installedVersion = args.InstalledVersion;
             var currentVersion = new Version(args.CurrentVersion);
+            Log.Information("Current version: {CurrentVersion}", currentVersion.ToString());
+            Log.Information("Installed: {InstalledVersion}", installedVersion.ToString());
 
-            if (currentVersion == args.InstalledVersion)
-                //Update isnt needed as Versions of both the latest from update api and local version are the same.
-                return;
-
-
-            if (args.InstalledVersion > currentVersion)
+            var hasLatestVersion = installedVersion == currentVersion;
+            var hasHigherVersion = installedVersion > currentVersion;
+            if (hasLatestVersion || hasHigherVersion)
                 return;
 
             OpenUpdateScreen(args);
         }
 
-        private void ParseUpdateData(ParseUpdateInfoEventArgs args)
+        private static void ParseUpdateData(ParseUpdateInfoEventArgs args)
         {
-            var updateData = JsonSerializer.Deserialize<UpdateData>(args.RemoteData);
-            if(updateData != null)
+            var content = args.RemoteData;
+            var data = JsonSerializer.Deserialize<UpdateData>(content);
+            if (data == null)
             {
-                args.UpdateInfo = new UpdateInfoEventArgs
-                {
-                    CurrentVersion = updateData.updateVersion,
-                    ChangelogURL = updateData.updateChangelog,
-                    DownloadURL = updateData.updateUrl,
-                    Mandatory =
-                    {
-                        Value = updateData.mandatory.value,
-                        MinimumVersion = updateData.mandatory.minVersion,
-                        UpdateMode = Mode.Forced
-                    }
-                };
+                Log.Error("Failed to deserialize the update data while checking for application updates. Content: {Content}", 
+                    content);
+                return;
             }
+
+            args.UpdateInfo = new UpdateInfoEventArgs
+            {
+                CurrentVersion = data.updateVersion,
+                ChangelogURL = data.updateChangelog,
+                DownloadURL = data.updateUrl,
+                Mandatory =
+                {
+                    Value = data.mandatory.value,
+                    MinimumVersion = data.mandatory.minVersion,
+                    UpdateMode = Mode.Forced
+                }
+            };
         }
 
         private void OpenUpdateScreen(UpdateInfoEventArgs args)
