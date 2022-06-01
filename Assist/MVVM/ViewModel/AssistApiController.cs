@@ -87,6 +87,23 @@ namespace Assist.MVVM.ViewModel
             };
         }
 
+        /*
+         * internal class UpdateData
+    {
+        public string updateUrl { get; set; }
+        public string updateVersion { get; set; }
+        public string updateChangelog { get; set; }
+        public Mandatory mandatory { get; set; }
+
+        public class Mandatory
+        {
+            public bool value { get; set; }
+            public string minVersion { get; set; }
+            public int mode { get; set; }
+        }
+    }
+         */
+
         private void OpenUpdateScreen(UpdateInfoEventArgs args)
         {
             bIsUpdate = true;

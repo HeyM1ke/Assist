@@ -1,7 +1,9 @@
 ﻿using Assist.Attributes;
+using Assist.MVVM.View.Extra;
 using Assist.MVVM.View.InitPage;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Assist.Update;
 using Assist.Utils;
 
 using Serilog;
@@ -41,11 +43,14 @@ namespace Assist
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            CheckForUpdates();
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             SetupLogger();
 
+            var shouldUpdate = await CheckForUpdatesAsync();
+            if (shouldUpdate)
+                return;
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             Log.Information("Starting application");
             Log.Information("Reading the settings file");
             try
@@ -91,13 +96,23 @@ namespace Assist
             MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private static void CheckForUpdates()
+        private static async Task<bool> CheckForUpdatesAsync()
         {
-#if RELEASE
-            AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
-#else
-            Log.Debug("Application is in debug mode, skipping update check.");
-#endif
+            var timeout = TimeSpan.FromSeconds(10);
+            var updater = new ApplicationUpdateChecker(timeout);
+            var result = await updater.ShouldUpdateAsync();
+
+            var shouldUpdate = !result.IsUpdated && result is { EventArgs: { } };
+            if (shouldUpdate)
+                OpenUpdateWindow(result);
+
+            return shouldUpdate;
+        }
+
+        private static void OpenUpdateWindow(UpdateCheckResult result)
+        {
+            var updateWindow = new UpdateWindow(result.EventArgs);
+            updateWindow.Show();
         }
 
         private static void SetupLogger()
