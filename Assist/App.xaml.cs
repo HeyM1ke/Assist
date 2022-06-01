@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Serilog.Sinks.SystemConsole.Themes;
+using ValNet.Objects;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
@@ -103,9 +104,14 @@ namespace Assist
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             var exception = e.Exception;
-
             Log.Fatal(exception, "Unhandled exception.");
             MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            if (e.Exception is ValNetException valnetException)
+            {
+                Log.Error("Catched a ValNet exception. ({Message}) StatusCode: {StatusCode}", valnetException.Message, valnetException.RequestStatusCode);
+                Log.Error("Content: {Content}", valnetException.RequestContent);
+            }
         }
 
         private static async Task<bool> CheckForUpdatesAsync()
