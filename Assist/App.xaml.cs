@@ -43,8 +43,13 @@ namespace Assist
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
             SetupLogger();
+
+            if (!HasInternet())
+            {
+                AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
+                return;
+            }
 
             var shouldUpdate = await CheckForUpdatesAsync();
             if (shouldUpdate)
@@ -68,9 +73,6 @@ namespace Assist
 
             ChangeLanguage();
             Log.Information("Starting InitPage");
-
-            if(!InternetCheck())
-                AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
 
             Current.MainWindow = new InitPage();
 
@@ -196,7 +198,7 @@ namespace Assist
         public static void ShutdownAssist() 
             => Current.Shutdown();
 
-        public bool InternetCheck()
+        public bool HasInternet()
         {
             // todo
             return true;
