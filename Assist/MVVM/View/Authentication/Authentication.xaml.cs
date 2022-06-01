@@ -34,7 +34,6 @@ namespace Assist.MVVM.View.Authentication
             InitializeComponent();
             DetermineResolution();
             ContentFrame = LoginFrame;
-
         }
 
         public Authentication(bool addMode)
@@ -79,6 +78,12 @@ namespace Assist.MVVM.View.Authentication
                     Width = 1024;
                     Height = 601;
                     AssistApplication.GlobalScaleRate = 1;
+                    myCanvas.LayoutTransform = new ScaleTransform(AssistApplication.GlobalScaleRate, AssistApplication.GlobalScaleRate);
+                    break;
+                case Enums.EWindowSize.R900:
+                    Width = 1600;
+                    Height = 900;
+                    AssistApplication.GlobalScaleRate = 1.56;
                     myCanvas.LayoutTransform = new ScaleTransform(AssistApplication.GlobalScaleRate, AssistApplication.GlobalScaleRate);
                     break;
                 default:

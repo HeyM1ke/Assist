@@ -2,6 +2,8 @@
 using Assist.Services;
 using Assist.Settings;
 
+using Serilog;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +14,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using Serilog;
+
 using Application = System.Windows.Application;
 
 namespace Assist
@@ -32,9 +34,6 @@ namespace Assist
 
         public AssistMainWindow()
         {
-            if(AssistApplication.AppInstance.AssistApiController.bIsUpdate) // Fixes a bug with the auto updater taking too long and showing the main window.
-                return;
-
             DataContext = new MainViewModel();
             AssistApplication.AppInstance.TokenService = new TokenServiceBackgroundService();
             AssistSettings.Current.bNewUser = false;
@@ -66,6 +65,12 @@ namespace Assist
                     Width = 1024;
                     Height = 601;
                     AssistApplication.GlobalScaleRate = 1;
+                    myCanvas.LayoutTransform = new ScaleTransform(AssistApplication.GlobalScaleRate, AssistApplication.GlobalScaleRate);
+                    break;
+                case Enums.EWindowSize.R900:
+                    Width = 1600;
+                    Height = 900;
+                    AssistApplication.GlobalScaleRate = 1.56;
                     myCanvas.LayoutTransform = new ScaleTransform(AssistApplication.GlobalScaleRate, AssistApplication.GlobalScaleRate);
                     break;
                 default:

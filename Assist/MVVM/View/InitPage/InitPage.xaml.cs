@@ -1,15 +1,9 @@
 ﻿using Assist.MVVM.ViewModel;
 using Assist.Settings;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using Assist.MVVM.View.Extra;
+
 using Serilog;
+
+using System.Windows;
 
 namespace Assist.MVVM.View.InitPage
 {
@@ -29,7 +23,6 @@ namespace Assist.MVVM.View.InitPage
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
 #if DEBUG
 
 #else
@@ -38,7 +31,6 @@ namespace Assist.MVVM.View.InitPage
             if (resp.DownForMaintenance)
                 new MaintenanceWindow(resp).ShowDialog(); 
 #endif
-
 
 
             Log.Information("InitWindow_Loaded Called");

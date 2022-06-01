@@ -1,35 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assist.Objects;
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Assist.MVVM.Model;
 
 namespace Assist.MVVM.View.Extra
 {
     /// <summary>
     /// Interaction logic for MaintenanceWindow.xaml
     /// </summary>
-    public partial class MaintenanceWindow : Window
+    public partial class MaintenanceWindow
     {
+
         public MaintenanceWindow()
         {
             InitializeComponent();
-
         }
 
-        public MaintenanceWindow(AssistMaintenanceObj obj)
+        public MaintenanceWindow(AssistMaintenance maintenance)
         {
             InitializeComponent();
-            errorText.Text = obj.DownForMaintenanceMessage;
+            errorText.Text = maintenance.DownForMaintenanceMessage;
         }
 
         private void closeOkBTn_Click(object sender, RoutedEventArgs e)
@@ -48,11 +38,12 @@ namespace Assist.MVVM.View.Extra
             Application.Current.Shutdown();
         }
 
-        private void windowBorder_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void windowBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
         #endregion
+
     }
 }

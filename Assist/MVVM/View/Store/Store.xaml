@@ -66,7 +66,7 @@
                         <Grid x:Name="BundleView"  Height="344" Width="688" VerticalAlignment="Top" Margin="10,0,0,0"></Grid>
                         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="17,0">
                             <Store:ProfileShowcaseStore Grid.Column="1" Width="217" Height="278" Margin="0,0,0,11"/>
-                            <Button x:Name="NightMarketBtn" Style="{StaticResource NmBtn_Style}" Height="55" Click="NightMarketBtn_Click"></Button>
+                            <Button Visibility="Collapsed" x:Name="NightMarketBtn" Style="{StaticResource NmBtn_Style}" Height="55" Click="NightMarketBtn_Click"></Button>
                         </StackPanel>
                         
                     </DockPanel>
