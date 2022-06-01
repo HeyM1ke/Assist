@@ -20,7 +20,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-
+using Serilog.Sinks.SystemConsole.Themes;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 

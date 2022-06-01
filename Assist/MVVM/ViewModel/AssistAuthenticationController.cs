@@ -38,6 +38,7 @@ namespace Assist.MVVM.ViewModel
 
         }
 
+        // todo: handle exception properly
         public static async Task<RiotUser> ProfileLogin(ProfileSetting profile)
         {
             var user = new RiotUser();
@@ -50,13 +51,14 @@ namespace Assist.MVVM.ViewModel
 
             try
             {
-                Log.Information("Authenticating with Cookies for Profiled User");
+                Log.Information("Authenticating with Cookies for New User");
                 await user.Authentication.AuthenticateWithCookies();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+
 
             return user;
         }
