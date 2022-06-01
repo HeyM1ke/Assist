@@ -18,7 +18,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-
+using ValNet.Objects;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
@@ -86,8 +86,21 @@ namespace Assist
         {
             var exception = e.Exception;
 
-            Log.Fatal(exception, "Unhandled exception.");
-            MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (e.Exception is ValNetException)
+            {
+                var ex = e.Exception as ValNetException;
+                Log.Error(ex.RequestContent);
+                Log.Error(ex.RequestStatusCode.ToString());
+                Log.Error(ex.Message);
+                MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                Log.Fatal(exception, "Unhandled exception.");
+                MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+           
         }
 
         private static void SetupLogger()
