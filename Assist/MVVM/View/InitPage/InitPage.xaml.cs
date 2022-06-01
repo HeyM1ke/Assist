@@ -11,6 +11,7 @@ using System.Windows;
 using Assist.MVVM.View.Extra;
 using Serilog;
 
+
 namespace Assist.MVVM.View.InitPage
 {
     /// <summary>
@@ -29,18 +30,6 @@ namespace Assist.MVVM.View.InitPage
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
-#if DEBUG
-
-#else
-        var resp = await AssistApplication.ApiService.GetMaintenanceStatus();
-
-            if (resp.DownForMaintenance)
-                new MaintenanceWindow(resp).ShowDialog(); 
-#endif
-
-
-
             Log.Information("InitWindow_Loaded Called");
 
             if (AssistSettings.Current.bNewUser)
