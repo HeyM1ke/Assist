@@ -106,8 +106,10 @@
                             </Style.Triggers>
                         </Style>
                     </Grid.Resources>
-                    <TextBlock TextWrapping="Wrap" x:Name="changeLog" Grid.Row="0" Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" FontSize="16" FontFamily="{StaticResource WorkSans}" Text="{Binding ChangeLog}" Padding="10">
-                    </TextBlock>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBlock TextWrapping="Wrap" x:Name="changeLog" Grid.Row="0" Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" FontSize="16" FontFamily="{StaticResource WorkSans}" Text="{Binding ChangeLog}" Padding="10">
+                        </TextBlock>
+                    </ScrollViewer>
 
 
                     <Button x:Name="updateBtn" Content="UPDATE" Click="updateBtn_Click" Grid.Row="1" Width="100" Margin="5" Padding="0"></Button>

@@ -34,7 +34,6 @@ namespace Assist.MVVM.View.Authentication
             InitializeComponent();
             DetermineResolution();
             ContentFrame = LoginFrame;
-
         }
 
         public Authentication(bool addMode)
