@@ -33,7 +33,7 @@ namespace Assist.Services
                 tempUser.UserClient.CookieContainer.Add(cook);
             }
 
-            await tempUser.Authentication.AuthenticateWithCookies();
+            await tempUser.Authentication.AuthenticateWithCookiesCurl();
 
             AssistApplication.AppInstance.CurrentUser = tempUser;
             AssistApplication.AppInstance.CurrentProfile.ConvertCookiesTo64(tempUser.UserClient.CookieContainer);

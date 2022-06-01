@@ -116,14 +116,12 @@ namespace Assist.Settings
 
                 entitles.ForEach(x => this.entitlements.Add(x));
 
-
-
-
             }
-            catch (Exception e)
+            catch (ValNetException e)
             {
-                Console.WriteLine(e);
-                throw;
+                Log.Error(e.RequestContent);
+                Log.Error(e.RequestStatusCode.ToString());
+                Log.Error(e.Message);
             }
 
             

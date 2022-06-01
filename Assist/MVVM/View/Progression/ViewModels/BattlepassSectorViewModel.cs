@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
-
+using Assist.Services;
 using ValNet.Objects.Contacts;
 
 namespace Assist.MVVM.View.Progression.ViewModels
@@ -43,7 +43,7 @@ namespace Assist.MVVM.View.Progression.ViewModels
         public async Task LoadBattlepass(object container)
         {
             var itemContainer = (UniformGrid) container;
-            BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiController.currentBattlepassId);
+            BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiService.BattlepassId);
             _battlePass = await AssistApplication.ApiService.GetBattlepassAsync();
 
             if(_battlePass == null || BattlepassContractData == null || itemContainer is null)

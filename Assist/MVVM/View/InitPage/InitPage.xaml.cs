@@ -1,15 +1,7 @@
 ﻿using Assist.MVVM.ViewModel;
 using Assist.Settings;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using Assist.MVVM.View.Extra;
 using Serilog;
+using System.Windows;
 
 
 namespace Assist.MVVM.View.InitPage

@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using Assist.MVVM.View.Extra;
 using Assist.Settings;
-using System.IO;
-using System.Windows;
-using System.Windows.Data;
-using ValNet;
-using System.Net;
-using System.Diagnostics;
-using System.Threading;
-using Assist.MVVM.View.Extra;
-using Assist.MVVM.ViewModel;
+
 using Serilog;
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+
+using ValNet;
 
 namespace Assist.MVVM.ViewModel
 {
     class InitPageViewModel : ViewModelBase
     {
+
         private string _currentStatusMessage = "Loading..";
         public string CurrentStatusMessage
         {
@@ -29,9 +23,6 @@ namespace Assist.MVVM.ViewModel
         }
         public async Task FirstTimeSetup()
         {
-            if (AssistApplication.AppInstance.AssistApiController.bIsUpdate)
-                return;
-
             Log.Information("Running First Time Setup");
             var clientPath = await AssistSettings.Current.FindRiotClient();
 
@@ -63,9 +54,6 @@ namespace Assist.MVVM.ViewModel
         }
         public async Task DefaultStartup()
         {
-            if (AssistApplication.AppInstance.AssistApiController.bIsUpdate)
-                return;
-
             Log.Information("Calling Default Startup");
 
             //Check if RiotClient is Valid

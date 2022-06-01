@@ -7,6 +7,9 @@ using Assist.Objects.Valorant.Skin;
 
 using RestSharp;
 
+using Serilog;
+
+using System;
 using System.Threading.Tasks;
 using Assist.MVVM.Model;
 using Serilog;
@@ -16,10 +19,12 @@ namespace Assist.Services;
 public class AssistApiService
 {
 
+    public const string BaseUrl = "https://api.assistapp.dev";
+    public const string BattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
+
     private const string FailedNewsArticleImageUrl =
         "https://i.kym-cdn.com/entries/icons/original/000/037/349/Screenshot_14.jpg";
-    private const string BaseUrl = "https://api.assistapp.dev";
-    private const string BattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
+    private const int MaintenanceTimeoutInSeconds = 5;
 
     //private readonly ILogger _logger;
     private readonly RestClient _client;
@@ -34,7 +39,7 @@ public class AssistApiService
     {
         var request = new RestRequest("/data/bgclient/data/");
         var response = await _client.ExecuteAsync<BackgroundClientInfo>(request);
-        if (response.IsSuccessful)
+        if (!response.IsSuccessful)
             return null;
 
         return response.Data;
@@ -97,12 +102,12 @@ public class AssistApiService
         var request = new RestRequest($"/valorant/bundles/{id}");
         var response = await _client.ExecuteAsync<Bundle>(request);
         if (!response.IsSuccessful)
-            return CreatedFailedBundle();
+            return CreateFailedBundle();
 
         return response.Data;
     }
 
-    private static Bundle CreatedFailedBundle()
+    private static Bundle CreateFailedBundle()
     {
         return new Bundle
         {
@@ -112,15 +117,37 @@ public class AssistApiService
         };
     }
 
-      public async Task<AssistMaintenanceObj> GetMaintenanceStatus()
+    public async Task<AssistMaintenance> GetMaintenanceStatus()
+    {
+        Log.Information("Checking for Maintenance");
+
+        var client = new RestClient(new RestClientOptions
         {
-            Log.Information("Checking for Maintenance");
-            var response = await _client.ExecuteAsync<AssistMaintenanceObj>(new RestRequest("/data/status/maintenance"), Method.Get);
+            BaseUrl = new Uri(BaseUrl),
+            ThrowOnAnyError = false,
+            ThrowOnDeserializationError = false,
+            Timeout = MaintenanceTimeoutInSeconds * 1000
+        });
 
-            if (!response.IsSuccessful)
-                return new() { DownForMaintenance = false, DownForMaintenanceMessage = "Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance." };
+        var request = new RestRequest("/data/status/maintenance");
+        var response = await client.ExecuteAsync<AssistMaintenance>(request);
 
-            return response.Data;
+        if (!response.IsSuccessful)
+        {
+            Log.Information("Failed to request the maintenance status.");
+            return CreateDefaultMaintenanceMessage();
         }
 
+        return response.Data;
+    }
+
+    private static AssistMaintenance CreateDefaultMaintenanceMessage()
+    {
+        return new AssistMaintenance
+        {
+            DownForMaintenance = false,
+            DownForMaintenanceMessage =
+                "Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."
+        };
+    }
 }

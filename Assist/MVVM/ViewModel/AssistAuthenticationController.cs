@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Assist.Settings;
+﻿using Assist.Settings;
+
 using Serilog;
+
+using System;
+using System.Net;
+using System.Threading.Tasks;
+
 using ValNet;
+using ValNet.Objects;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -20,65 +21,71 @@ namespace Assist.MVVM.ViewModel
         // Cookie Login
         public static async Task<RiotUser> CookieLogin(CookieContainer cc)
         {
-            RiotUser user = new RiotUser();
+            var user = new RiotUser();
+            AddCookiesToUser(cc, user);
 
-            await AddCookiesToUser(cc, user);
-            Log.Information($"Authenticating with New User");
+            Log.Information("Authenticating with New User");
             try
             {
-                Log.Information($"Authenticating with Cookies for New User");
-                await user.Authentication.AuthenticateWithCookies();
+                Log.Information("Authenticating with Cookies for New User");
+                await user.Authentication.AuthenticateWithCookiesCurl();
+            }
+            catch (ValNetException ex)
+            {
+                throw ex;
+            }
+
+            return user;
+
+        }
+
+        // todo: handle exception properly
+        public static async Task<RiotUser> ProfileLogin(ProfileSetting profile)
+        {
+            var user = new RiotUser();
+            AddCookiesToUser(profile, user);
+
+            var gamename = profile.Gamename;
+            var tagLine = profile.Tagline;
+
+            Log.Information($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
+
+            try
+            {
+                Log.Information("Authenticating with Cookies for New User");
+                await user.Authentication.AuthenticateWithCookiesCurl();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return user;
-
-        }
-
-        // Profile Login
-        public static async Task<RiotUser> ProfileLogin(ProfileSetting profile)
-        {
-            RiotUser user = new RiotUser();
-
-            await AddCookiesToUser(profile, user);
-
-            var gamename = profile.Gamename;
-            var tagLine = profile.Tagline;
-
-            Log.Information($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
-            try
-            {
-                Log.Information($"Authenticating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
-                await user.Authentication.AuthenticateWithCookies();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Acc not Valid");
-            }
 
             return user;
         }
 
-
-        private static async Task AddCookiesToUser(ProfileSetting p, RiotUser u)
+        private static void AddCookiesToUser(ProfileSetting profile, RiotUser user)
         {
-            foreach (Cookie cookie in p.Convert64ToCookies().GetAllCookies())
+            var cookies = profile.Convert64ToCookies().GetAllCookies();
+            foreach (Cookie cookie in cookies)
             {
-                u.UserClient.CookieContainer.Add(cookie);
+                AddCookie(cookie, user);
             }
         }
 
-        private static async Task AddCookiesToUser(CookieContainer cc, RiotUser u)
+        private static void AddCookiesToUser(CookieContainer container, RiotUser user)
         {
-            foreach (Cookie cookie in cc.GetAllCookies())
+            var cookies = container.GetAllCookies();
+            foreach (Cookie cookie in cookies)
             {
-                u.UserClient.CookieContainer.Add(cookie);
+                AddCookie(cookie, user);
             }
         }
 
+        private static void AddCookie(Cookie cookie, RiotUser user)
+        {
+            user.UserClient.CookieContainer.Add(cookie);
+        }
 
         public static async Task<ProfileSetting> CreateProfile(RiotUser user)
         {

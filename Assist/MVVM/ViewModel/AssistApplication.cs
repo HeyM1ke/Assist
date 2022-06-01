@@ -25,7 +25,6 @@ namespace Assist.MVVM.ViewModel
         public static AssistApplication AppInstance { get; } = new();
 
         public TokenServiceBackgroundService TokenService { get; set; }
-        public AssistApiController AssistApiController { get; set; }
         // Control Models
 
         // Backbone
@@ -33,12 +32,6 @@ namespace Assist.MVVM.ViewModel
         public ProfileSetting CurrentProfile { get; set; }
 
         public static double GlobalScaleRate { get; set; } = 1.00;
-
-        public AssistApplication()
-        {
-            AssistApiController = new AssistApiController();
-
-        }
 
         public void OpenAssistMainWindow()
         {
@@ -149,7 +142,7 @@ namespace Assist.MVVM.ViewModel
             try
             {
                 Log.Information($"Authentcating with Cookies for User {profile.ProfileUuid} / {gamename}#{tagLine}");
-                await user.Authentication.AuthenticateWithCookies();
+                await user.Authentication.AuthenticateWithCookiesCurl();
             }
             catch (Exception ex)
             {
@@ -190,7 +183,7 @@ namespace Assist.MVVM.ViewModel
             try
             {
                 Log.Information("Creating Second Account for Riot Client");
-                await tempUser.Authentication.AuthenticateWithCookies();
+                await tempUser.Authentication.AuthenticateWithCookiesCurl();
             }
             catch (Exception e)
             {
