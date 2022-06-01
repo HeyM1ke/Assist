@@ -96,8 +96,7 @@ namespace Assist.Controls.Home.ViewModels
 
                 Log.Information("Checking for BG Client Updates");
                 await CheckForBgClientUpdate();
-                ProcessStartInfo ASSBGINFO = new ProcessStartInfo(_backgroundClientPath,
-                    $"--patchline:{AssistSettings.Current.LaunchSettings.ValPatchline} --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
+                ProcessStartInfo ASSBGINFO = new ProcessStartInfo(_backgroundClientPath, $"--patchline:live --discord:{AssistSettings.Current.LaunchSettings.ValDscRpcEnabled}");
                 ASSBGINFO.UseShellExecute = true;
                 Process.Start(ASSBGINFO);
 
@@ -124,6 +123,8 @@ namespace Assist.Controls.Home.ViewModels
             }
 
             return true;
+
+
         }
 
         public async Task DownloadBgClient()
@@ -141,7 +142,7 @@ namespace Assist.Controls.Home.ViewModels
             Log.Information("Completed Download of Assist Client");
         }
 
-        public void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             PopupSystem.ModifyCurrentPopup(new PopupSettings()
             {
@@ -153,9 +154,9 @@ namespace Assist.Controls.Home.ViewModels
 
         public async Task CheckForBgClientUpdate()
         {
-            if(_backgroundClientInfo == null)
+            if (_backgroundClientInfo == null)
                 return;
-            
+
             var fileInfo = FileVersionInfo.GetVersionInfo(_backgroundClientPath);
 
             Log.Information("Version of BgClient Detected: " + fileInfo.FileVersion);
@@ -164,7 +165,7 @@ namespace Assist.Controls.Home.ViewModels
 
             if (newV > currV)
             {
-                Log.Information("Newer Version of BgClient Detected, Downloading now. " + newV); 
+                Log.Information("Newer Version of BgClient Detected, Downloading now. " + newV);
                 File.Delete(_backgroundClientPath); // Delete the old file.
 
                 while (!File.Exists(_backgroundClientPath))
