@@ -1,4 +1,5 @@
-﻿using Assist.Objects;
+﻿using System.Text.Json;
+using Assist.Objects;
 using Assist.Objects.Valorant;
 using Assist.Objects.Valorant.Bp;
 using Assist.Objects.Valorant.Offer;
@@ -10,6 +11,8 @@ using Serilog;
 
 using System;
 using System.Threading.Tasks;
+using Assist.MVVM.Model;
+using Serilog;
 
 namespace Assist.Services;
 
@@ -147,5 +150,4 @@ public class AssistApiService
                 "Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."
         };
     }
-
 }
