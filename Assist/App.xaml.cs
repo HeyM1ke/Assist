@@ -8,7 +8,6 @@ using Assist.Utils;
 
 using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
 
 using System;
 using System.Globalization;
@@ -50,8 +49,17 @@ namespace Assist
                 AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
                 return;
             }
-
 #if RELEASE
+
+            var maintenanceStatus = await AssistApplication.ApiService.GetMaintenanceStatus();
+            if (maintenanceStatus.DownForMaintenance)
+            {
+                var window = new MaintenanceWindow(maintenanceStatus);
+                window.Show();
+                
+                return;
+            }
+
             var shouldUpdate = await CheckForUpdatesAsync();
             if (shouldUpdate)
                 return;
