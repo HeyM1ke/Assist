@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 using ValNet;
+using ValNet.Objects;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -29,9 +30,9 @@ namespace Assist.MVVM.ViewModel
                 Log.Information("Authenticating with Cookies for New User");
                 await user.Authentication.AuthenticateWithCookies();
             }
-            catch (Exception ex)
+            catch (ValNetException ex)
             {
-                throw new Exception(ex.Message);
+                throw ex;
             }
 
             return user;
