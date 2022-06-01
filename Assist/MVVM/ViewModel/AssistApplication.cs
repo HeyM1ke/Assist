@@ -25,7 +25,6 @@ namespace Assist.MVVM.ViewModel
         public static AssistApplication AppInstance { get; } = new();
 
         public TokenServiceBackgroundService TokenService { get; set; }
-        public AssistApiController AssistApiController { get; set; }
         // Control Models
 
         // Backbone
@@ -33,12 +32,6 @@ namespace Assist.MVVM.ViewModel
         public ProfileSetting CurrentProfile { get; set; }
 
         public static double GlobalScaleRate { get; set; } = 1.00;
-
-        public AssistApplication()
-        {
-            AssistApiController = new AssistApiController();
-
-        }
 
         public void OpenAssistMainWindow()
         {

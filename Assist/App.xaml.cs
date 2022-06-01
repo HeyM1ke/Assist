@@ -51,9 +51,11 @@ namespace Assist
                 return;
             }
 
+#if RELEASE
             var shouldUpdate = await CheckForUpdatesAsync();
             if (shouldUpdate)
                 return;
+#endif
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             Log.Information("Starting application");
