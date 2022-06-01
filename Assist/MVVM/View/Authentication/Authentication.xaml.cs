@@ -81,6 +81,12 @@ namespace Assist.MVVM.View.Authentication
                     AssistApplication.GlobalScaleRate = 1;
                     myCanvas.LayoutTransform = new ScaleTransform(AssistApplication.GlobalScaleRate, AssistApplication.GlobalScaleRate);
                     break;
+                case Enums.EWindowSize.R900:
+                    Width = 1600;
+                    Height = 900;
+                    AssistApplication.GlobalScaleRate = 1.5;
+                    myCanvas.LayoutTransform = new ScaleTransform(AssistApplication.GlobalScaleRate, AssistApplication.GlobalScaleRate);
+                    break;
                 default:
                     Width = 1024;
                     Height = 601;

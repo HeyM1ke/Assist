@@ -214,6 +214,7 @@
                     SelectionChanged="WindowSizeComboBox_SelectionChanged">
                     <ComboBoxItem Content="576p" />
                     <ComboBoxItem Content="720p" />
+                    <ComboBoxItem Content="900p (BETA)" />
                 </ComboBox>
             </Grid>
             <Grid
