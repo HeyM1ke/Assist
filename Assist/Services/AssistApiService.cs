@@ -129,10 +129,9 @@ public class AssistApiService
         var request = new RestRequest("/data/status/maintenance");
         var response = await client.ExecuteAsync<AssistMaintenance>(request);
 
-        // todo: !!!
-        if (response.IsSuccessful)
+        if (!response.IsSuccessful)
         {
-            Log.Information("Failed to request ");
+            Log.Information("Failed to request the maintenance status.");
             return CreateDefaultMaintenanceMessage();
         }
 
