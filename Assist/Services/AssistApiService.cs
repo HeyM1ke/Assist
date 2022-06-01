@@ -31,7 +31,7 @@ public class AssistApiService
     {
         var request = new RestRequest("/data/bgclient/data/");
         var response = await _client.ExecuteAsync<BackgroundClientInfo>(request);
-        if (response.IsSuccessful)
+        if (!response.IsSuccessful)
             return null;
 
         return response.Data;
