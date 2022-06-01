@@ -85,22 +85,14 @@ namespace Assist
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             var exception = e.Exception;
+            Log.Fatal(exception, "Unhandled exception.");
+            MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            if (e.Exception is ValNetException)
+            if (e.Exception is ValNetException valnetException)
             {
-                var ex = e.Exception as ValNetException;
-                Log.Error(ex.RequestContent);
-                Log.Error(ex.RequestStatusCode.ToString());
-                Log.Error(ex.Message);
-                MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
+                Log.Error("Catched a ValNet exception. ({Message}) StatusCode: {StatusCode}", valnetException.Message, valnetException.RequestStatusCode);
+                Log.Error("Content: {Content}", valnetException.RequestContent);
             }
-            else
-            {
-                Log.Fatal(exception, "Unhandled exception.");
-                MessageBox.Show(e.Exception.Message, "Assist hit a fatal exception. If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-           
         }
 
         private static void SetupLogger()
