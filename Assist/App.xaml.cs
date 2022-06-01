@@ -1,12 +1,13 @@
 ﻿using Assist.Attributes;
+using Assist.MVVM.View.Extra;
 using Assist.MVVM.View.InitPage;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Assist.Update;
 using Assist.Utils;
 
 using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
 
 using System;
 using System.Globalization;
@@ -14,10 +15,12 @@ using System.IO;
 using System.Net;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Serilog.Sinks.SystemConsole.Themes;
 using ValNet.Objects;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
@@ -39,12 +42,32 @@ namespace Assist
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            base.OnStartup(e);
             SetupLogger();
 
-            Log.Information("Starting application");
-            base.OnStartup(e);
+            if (!HasInternet())
+            {
+                AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
+                return;
+            }
+#if RELEASE
 
+            var maintenanceStatus = await AssistApplication.ApiService.GetMaintenanceStatus();
+            if (maintenanceStatus.DownForMaintenance)
+            {
+                var window = new MaintenanceWindow(maintenanceStatus);
+                window.Show();
+                
+                return;
+            }
+
+            var shouldUpdate = await CheckForUpdatesAsync();
+            if (shouldUpdate)
+                return;
+#endif
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            Log.Information("Starting application");
             Log.Information("Reading the settings file");
             try
             {
@@ -62,10 +85,6 @@ namespace Assist
             ChangeLanguage();
             Log.Information("Starting InitPage");
 
-            if(!InternetCheck())
-                AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
-
-            await AssistApplication.AppInstance.AssistApiController.CheckForAssistUpdates();
             Current.MainWindow = new InitPage();
 
             var targetScreen = Screen.PrimaryScreen;
@@ -93,6 +112,25 @@ namespace Assist
                 Log.Error("Catched a ValNet exception. ({Message}) StatusCode: {StatusCode}", valnetException.Message, valnetException.RequestStatusCode);
                 Log.Error("Content: {Content}", valnetException.RequestContent);
             }
+        }
+
+        private static async Task<bool> CheckForUpdatesAsync()
+        {
+            var timeout = TimeSpan.FromSeconds(10);
+            var updater = new ApplicationUpdateChecker(timeout);
+            var result = await updater.ShouldUpdateAsync();
+
+            var shouldUpdate = !result.IsUpdated && result is { EventArgs: { } };
+            if (shouldUpdate)
+                OpenUpdateWindow(result);
+
+            return shouldUpdate;
+        }
+
+        private static void OpenUpdateWindow(UpdateCheckResult result)
+        {
+            var updateWindow = new UpdateWindow(result.EventArgs);
+            updateWindow.Show();
         }
 
         private static void SetupLogger()
@@ -176,7 +214,7 @@ namespace Assist
         public static void ShutdownAssist() 
             => Current.Shutdown();
 
-        public bool InternetCheck()
+        public bool HasInternet()
         {
             // todo
             return true;
