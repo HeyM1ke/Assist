@@ -121,33 +121,33 @@
     <value>Código</value>
   </data>
   <data name="Authentication_LoginBtn" xml:space="preserve">
-    <value>ACCESO</value>
+    <value>INICIAR SESIÓN</value>
   </data>
   <data name="Authentication_MultifactorFail" xml:space="preserve">
-    <value>El código multifactor no es correcto.</value>
+    <value>El código de doble protección no es correcto.</value>
   </data>
   <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
-    <value>contraseña</value>
+    <value>Contraseña</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Seleccionar Rito Login le permite iniciar sesión en el sitio web de Riot y luego usar Assist. Nota: Social Login no funciona.</value>
+    <value>Seleccionar Riot Login te permitirá iniciar sesión con Assist en el sitio web oficial de Riot. NOTA: Inicio de pesión por redes sociales no funciona.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Tenga en cuenta: la autenticación de Social no funciona con Assist. Para utilizar un inicio de sesión de Social, inicie sesión con una combinación de nombre de usuario y contraseña de Riot. Si no tiene un combo de nombre de usuario y contraseña de Riot con una cuenta social, verifique los detalles de su cuenta en el sitio web de la cuenta de Riot para crear un combo.</value>
+    <value>NOTA: Iniciar sesión con redes sociales no funciona en Assist. Para utilizar un inicio de sesión en una cuenta con Red Social, deberá crear su nombre de usuario y contraseña desde la página de configuración de Riot Games.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
-    <value>ENTREGAR</value>
+    <value>VERIFICAR</value>
   </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
-    <value>Seleccionar Nombre de usuario y Contraseña le permite iniciar sesión directamente con su Nombre de usuario y Contraseña de Riot Games.</value>
+    <value>Usuario y Contraseña: Iniciar sesión directamente con un usuario y contraseña de Riot Games.</value>
   </data>
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
-    <value>Inicie sesión con su nombre de usuario y contraseña de Riot Games. Toda la información de inicio de sesión se envía a Riot Servers y solo a Riot Servers.
+    <value>Iniciar sesión con su nombre de usuario y contraseña de Riot Games. Toda la información es envíada a los Servidores de Riot y solo a los Servidores de Riot.
 
-Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que no podemos solucionar, le recomendamos que actualice su Windows para tener la posibilidad de corregir el error e iniciar sesión con Asistencia.</value>
+Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que no podemos solucionar, le recomendamos que actualice la ventana para tener la posibilidad de corregir el error e iniciar sesión con Assist.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
-    <value>Nombre de usuario</value>
+    <value>Nombre de Usuario</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
     <value>Bienvenido a Assist, seleccione una forma de iniciar sesión a continuación.</value>
@@ -173,7 +173,7 @@ Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que n
     <comment>Text on Dashboard Button Hover</comment>
   </data>
   <data name="Navigation_ProgressionHover" xml:space="preserve">
-    <value>Progresión</value>
+    <value>Progreso</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
     <value>Ajustes</value>
@@ -187,10 +187,10 @@ Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que n
     <value>TERMINA EN</value>
   </data>
   <data name="NightMarket_Name" xml:space="preserve">
-    <value>MERCADO DE LA NOCHE</value>
+    <value>MERCADO DE NOCHE</value>
   </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
-    <value>Configuración de lanzamiento</value>
+    <value>Parámetros</value>
     <comment>Text on Launch Settings Button Hover</comment>
   </data>
   <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
@@ -217,10 +217,10 @@ Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que n
     <value>Seleccione el idioma:</value>
   </data>
   <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
-    <value>Volumen de sonido:</value>
+    <value>Volumen del sonido:</value>
   </data>
   <data name="SettingsGeneral_WindowSize" xml:space="preserve">
-    <value>Tamaño de ventana:</value>
+    <value>Tamaño de la ventana:</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
     <value>Acerca de</value>
@@ -229,10 +229,10 @@ Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que n
     <value>General</value>
   </data>
   <data name="SettingsTab_VALSet" xml:space="preserve">
-    <value>Ajustes de VALORANTE</value>
+    <value>Ajustes de VALORANT</value>
   </data>
   <data name="StorePopup_BackLabel" xml:space="preserve">
-    <value>ESPALDA</value>
+    <value>ATRAS</value>
   </data>
   <data name="StorePopup_ChromaLabel" xml:space="preserve">
     <value>CROMAS</value>
@@ -250,9 +250,9 @@ Si obtiene el error 403, se trata de un error de inicio de sesión de Riot que n
     <value>¡Apoya el proyecto!</value>
   </data>
   <data name="Support_Description" xml:space="preserve">
-    <value>Assist siempre será gratuito y de código abierto. Elegir apoyar el proyecto nos permitirá continuar con el desarrollo y crear algunas características únicas más. Gracias &lt;3</value>
+    <value>Assist siempre será gratuito y de código abierto. Donar y apoyar al proyecto nos permitirá continuar con el desarrollo y crear algunas características únicas más. Gracias &lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
-    <value>¡Ayuda de apoyo!</value>
+    <value>¡Donación de apoyo!</value>
   </data>
 </root>
