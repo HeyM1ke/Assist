@@ -125,7 +125,7 @@ namespace Assist.MVVM.ViewModel
             }
 
 
-            //await RedoCookies(CurrentUser);
+            await RedoCookies(CurrentUser);
 
         }
         public async Task AuthenticateWithProfileSetting(ProfileSetting profile)
