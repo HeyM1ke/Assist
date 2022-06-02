@@ -10,7 +10,7 @@ namespace Assist.MVVM.View.Startup.ViewModels
 {
     internal class StartupViewModel : ViewModelBase
     {
-        private string _timerText = "TimerText";
+        private string _timerText;
 
         public string TimerText
         {

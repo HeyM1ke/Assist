@@ -64,7 +64,7 @@ namespace Assist.MVVM.View.Startup
         }
 
         private string defaultName = AssistSettings.Current.FindProfileById(AssistSettings.Current.DefaultAccount).Gamename;
-        private System.Windows.Forms.Timer countdownTimer;
+        public static System.Windows.Forms.Timer countdownTimer;
         private int counter = 20;
         private void StartCountdownTimer()
         {
@@ -83,9 +83,6 @@ namespace Assist.MVVM.View.Startup
             {
                 _viewModel.DefaultAccountLogin();
             }
-
-
-
         }
 
         private void Startup_Loaded(object sender, RoutedEventArgs e)

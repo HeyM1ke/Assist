@@ -231,6 +231,7 @@
                     <Slider
                         Name="SoundVol_Slider"
                         Width="100"
+                        Interval="100"
                         VerticalAlignment="Center"
                         Maximum="1"
                         ValueChanged="SoundVolume_ValueChanged" />
@@ -241,6 +242,61 @@
                         Content="100%"
                         FontFamily="{StaticResource WorkSans}"
                         Foreground="White" />
+                </StackPanel>
+            </Grid>
+
+            <Grid
+                x:Name="AccSelector"
+                Margin="10"
+                VerticalAlignment="Top"
+                DockPanel.Dock="Top">
+                <Label
+                    HorizontalAlignment="Left"
+                    Content="Enable Account Selector"
+                    FontFamily="{StaticResource WorkSans}"
+                    Foreground="White" />
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style TargetType="CheckBox">
+                            <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"></Setter>
+                            <Setter Property="BorderBrush" Value="{StaticResource AssistBackground}"></Setter>
+                            <Setter Property="BorderThickness" Value="1"></Setter>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                            <Setter Property="Content" Value=""></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                                        <Grid>
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1"></Border>
+                                            <Image Name="checkMark" Source="../../../../Resources/Icons/Check_Icon.png" Margin="4"></Image>
+                                            <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                                                <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"/>
+                                                <Setter TargetName="checkMark" Property="Opacity" Value="1.0" >
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="False">
+                                                <Setter TargetName="checkMark" Property="Opacity" Value="0" >
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                                <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_HoverHighlightOutline}"/>
+                                                <Setter TargetName="checkMark" Property="Opacity" Value=".5" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <CheckBox 
+                        VerticalAlignment="Center"
+                        Height="20" />
+
                 </StackPanel>
             </Grid>
 

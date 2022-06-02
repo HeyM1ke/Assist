@@ -54,6 +54,7 @@ namespace Assist.Controls.Startup
                 if (_viewModel.Profile is null)
                     return;
 
+                MVVM.View.Startup.Startup.countdownTimer.Stop();
                 await AssistApplication.AppInstance.AuthenticateWithProfileSetting(_viewModel.Profile);
             }
         }
