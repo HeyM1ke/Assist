@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
 using Assist.MVVM.ViewModel;
 using Serilog;
 using ValNet;
@@ -23,6 +24,7 @@ namespace Assist.Settings
         public string AssCAuth64 { get; set; }
         public int playerLevel { get; set; }
         public DateTime TimeOfLogin { get; set; }
+
         public int Tier { get; set; } = 0;
         public string profileNote { get; set; }
 
@@ -62,6 +64,8 @@ namespace Assist.Settings
             return cookiecontainer;
 
         }
+
+
 
         public async Task SetupProfile(RiotUser pUser)
         {
