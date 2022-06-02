@@ -35,6 +35,8 @@ namespace Assist.MVVM.View.InitPage
 
             Log.Information("InitWindow_Loaded Called");
 
+            AssistApplication.AppInstance.OpenStartupWindow();
+            return;
             if (AssistSettings.Current.bNewUser)
             {
                 Log.Information("New User Flag is True, Running First Time Setup.");

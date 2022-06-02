@@ -42,7 +42,6 @@ namespace Assist.Controls.Profile
 
         private void ProfileShowcase_Loaded(object sender, RoutedEventArgs e)
         {
-
             NoteBox.Text = _viewModel.Profile.profileNote;
             _viewModel.ProfileImage = App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/{_viewModel.Profile.PCID}_DisplayIcon.png", 80, 80);
             _viewModel.PlayerRankIcon = App.LoadImageUrl($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTier_Large_{_viewModel.Profile.Tier}.png");

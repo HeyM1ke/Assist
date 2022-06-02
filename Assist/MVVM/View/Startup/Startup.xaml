@@ -11,7 +11,9 @@
         Height="650"
         Width="700"
         WindowStyle="None"
-        Background="{DynamicResource AssistBackground}">
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        Background="{DynamicResource AssistBackground}" Loaded="Startup_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -21,7 +23,7 @@
         <Border x:Name="windowBorder" Background="{StaticResource AssistNavigationButton_NotSelectedFill}" Grid.Row="0" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
             <Grid>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Assist" FontFamily="{StaticResource WorkSans}" Foreground="{StaticResource ValorantOffWhite}" FontWeight="Medium" Opacity=".5"></Label>
+                    <Label Content="Assist DEV" FontFamily="{StaticResource WorkSans}" Foreground="{StaticResource ValorantOffWhite}" FontWeight="Medium" Opacity=".5"></Label>
                     <Label Content="{Binding ApplicationVersion}" FontFamily="{StaticResource WorkSans}" Foreground="{StaticResource ValorantOffWhite}" FontWeight="Medium" Opacity=".5" Padding="0,5"></Label>
                 </StackPanel>
                 <Button x:Name="ExitButton" Width="25" HorizontalAlignment="Right" Background="Transparent" Foreground="White" BorderThickness="0" Content="X" Click="ExitButton_Click"/>
@@ -39,7 +41,9 @@
                 <Image 
                     Source="../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png"
                     Height="150"
-                    Width="150"/>
+                    Width="150"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
 
                 <Label
                     Foreground="White"
@@ -47,27 +51,40 @@
                     FontFamily="{DynamicResource WorkSans}"
                     FontWeight="SemiBold"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Center"
                     FontSize="18"
                     Opacity=".9"
-                    Margin="0,388,0,0"/>
+                    Margin="0,160,0,0"/>
+
+                <TextBox
+                    Foreground="White"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Text="{Binding TimerText}"
+                    FontFamily="{DynamicResource WorkSans}"
+                    FontWeight="Normal"
+                    TextWrapping="WrapWithOverflow"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    FontSize="12"
+                    Opacity=".9"
+                    Margin="0,415,0,0"/>
             </Grid>
 
             <Grid Grid.Column="1">
                 <Border
-                    Background="{DynamicResource AssistBackground}"
+                    Background="{DynamicResource AssistNavigationBar}"
                     BorderThickness="1"
                     Height="600"
                     Margin="10">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                                  HorizontalScrollBarVisibility="Disabled">
+                    <ScrollViewer
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Disabled">
                         <StackPanel
-                            VerticalAlignment="Center">
-                           <startup:ProfileCard Margin="2,10"/>
-                            <startup:ProfileCard Margin="2,10"/>
-                            <startup:ProfileCard Margin="2,10"/>
-                            <startup:ProfileCard Margin="2,10"/>
-                           <startup:ProfileCard Margin="2,10"/>
+                            Name="CardPanel"
+                            VerticalAlignment="Center" Initialized="CardPanel_Initialized">
+
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
