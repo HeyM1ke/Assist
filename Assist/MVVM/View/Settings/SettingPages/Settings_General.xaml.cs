@@ -26,6 +26,7 @@ namespace Assist.MVVM.View.Settings.SettingPages
             LanguageChangeComboBox.SelectedIndex = (int)AssistSettings.Current.Language;
             SoundVol_Slider.Value = AssistSettings.Current.SoundVolume;
             SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
+            AccountSelectToggle.IsChecked = AssistSettings.Current.UseAccountLaunchSelection;
 
         }
 
@@ -72,5 +73,12 @@ namespace Assist.MVVM.View.Settings.SettingPages
             SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
         }
 
+        private void AccountSelectToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            if (AccountSelectToggle.IsChecked is null || AccountSelectToggle.IsChecked is false)
+                AssistSettings.Current.UseAccountLaunchSelection = false;
+            else
+                AssistSettings.Current.UseAccountLaunchSelection = true;
+        }
     }
 }

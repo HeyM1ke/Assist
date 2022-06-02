@@ -294,8 +294,9 @@
                         </Style>
                     </StackPanel.Resources>
                     <CheckBox 
+                        Name="AccountSelectToggle"
                         VerticalAlignment="Center"
-                        Height="20" />
+                        Height="20" Checked="AccountSelectToggle_Checked" />
 
                 </StackPanel>
             </Grid>
