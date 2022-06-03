@@ -69,7 +69,6 @@ namespace Assist.MVVM.ViewModel
 
             }
 
-
             //Check if There are accounts within settings.
             if(AssistSettings.Current.Profiles.Count == 0)
             {
@@ -78,6 +77,19 @@ namespace Assist.MVVM.ViewModel
             }
             else
             {
+                if (AssistSettings.Current.UseAccountLaunchSelection)
+                {
+                    var profile = AssistSettings.Current.FindProfileById(AssistSettings.Current.DefaultAccount);
+                    if (profile == null)
+                    {
+                        if (AssistSettings.Current.Profiles.Count != 0)
+                            AssistSettings.Current.DefaultAccount = AssistSettings.Current.Profiles[0].ProfileUuid;
+                    }
+                    
+                    AssistApplication.AppInstance.OpenStartupWindow();
+                    return;
+                }
+
                 if (!string.IsNullOrEmpty(AssistSettings.Current.DefaultAccount))
                 {
                     var profile = AssistSettings.Current.FindProfileById(AssistSettings.Current.DefaultAccount);

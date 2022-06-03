@@ -12,7 +12,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
-
+using Assist.MVVM.View.Selector;
 using ValNet;
 
 namespace Assist.MVVM.ViewModel
@@ -32,7 +32,10 @@ namespace Assist.MVVM.ViewModel
         public ProfileSetting CurrentProfile { get; set; }
 
         public static double GlobalScaleRate { get; set; } = 1.00;
-
+        public static int SelectorSeconds
+        {
+            get => 10;
+        }
         public void OpenAssistMainWindow()
         {
             var window = Application.Current.MainWindow!;
@@ -73,6 +76,15 @@ namespace Assist.MVVM.ViewModel
             Log.Error("Opened Error Window");
             errorS.ShowDialog();
             Log.Error("Closed Error Window");
+        }
+
+        public void OpenStartupWindow()
+        {
+            Application.Current.MainWindow.Visibility = Visibility.Hidden;
+            Startup startupPage = new Startup();
+            Application.Current.MainWindow.Close();
+            startupPage.Show();
+            Application.Current.MainWindow = startupPage;
         }
 
         public async Task CreateAuthenticationFile()

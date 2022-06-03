@@ -28,6 +28,8 @@ namespace Assist.Settings
 
         internal List<PatchlineObj> entitlements = new List<PatchlineObj>();
 
+        public bool isExpired { get; set; } = false;
+
         /// <summary>
         /// Converts Cookies within container to AssCAuth64 Format.
         /// </summary>
