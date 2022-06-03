@@ -8,8 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="576" 
              d:DesignWidth="1024"
-             Height="576"
-             Width="1024" Loaded="Popup_Loaded"
+              Loaded="Popup_Loaded"
              >
     <Grid Background="#4C000000">
         <Border VerticalAlignment="Center"
@@ -18,7 +17,7 @@
                 Width="500" Height="200">
             <Grid>
                 <StackPanel>
-                    <Image Source="../../Resources/Icons/Assist_Logo_White.png" Width="70" Margin="10"></Image>
+                    <Image Source="../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="70" Margin="10"></Image>
                     <Label FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding Title}" Foreground="White" HorizontalAlignment="Center"></Label>
                     <Label FontFamily="{StaticResource WorkSans}" FontWeight="Regular" Content="{Binding Description}" Foreground="White" HorizontalAlignment="Center" Padding="0"></Label>
                 </StackPanel>

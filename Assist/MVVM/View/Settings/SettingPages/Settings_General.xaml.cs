@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using Serilog;
 
 namespace Assist.MVVM.View.Settings.SettingPages
 {
@@ -25,6 +26,9 @@ namespace Assist.MVVM.View.Settings.SettingPages
             WindowSizeComboBox.SelectedIndex = (int)AssistSettings.Current.Resolution;
             LanguageChangeComboBox.SelectedIndex = (int)AssistSettings.Current.Language;
             SoundVol_Slider.Value = AssistSettings.Current.SoundVolume;
+            SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
+            AccountSelectToggle.IsChecked = AssistSettings.Current.UseAccountLaunchSelection;
+
         }
 
         #region Language Selection Settings
@@ -70,5 +74,14 @@ namespace Assist.MVVM.View.Settings.SettingPages
             SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
         }
 
+        private void AccountSelectToggle_Changed(object sender, RoutedEventArgs e)
+        {
+            if (AccountSelectToggle.IsChecked is null || AccountSelectToggle.IsChecked is false)
+                AssistSettings.Current.UseAccountLaunchSelection = false;
+            else
+                AssistSettings.Current.UseAccountLaunchSelection = true;
+
+            Log.Information("Value of AccountSelectToggle {sad}", AssistSettings.Current.UseAccountLaunchSelection);
+        }
     }
 }

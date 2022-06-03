@@ -7,7 +7,7 @@
     <UseWPF>true</UseWPF>
     <StartupObject>Assist.App</StartupObject>
     <Authors>AssistTeam</Authors>
-    <Version>1.0.0.8</Version>
+    <Version>1.0.0.9</Version>
     <Product>Assist</Product>
     <Description>Valorant Program made by Mike</Description>
     <PackageIcon>assistlogoIcon.png</PackageIcon>
@@ -238,7 +238,7 @@
     <PackageReference Include="Serilog" Version="2.11.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="ValNet" Version="0.0.0.15-alpha" />
+    <PackageReference Include="ValNet" Version="0.0.0.18" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
