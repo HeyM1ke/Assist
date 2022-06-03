@@ -8,7 +8,7 @@ using Assist.MVVM.ViewModel;
 using Assist.Settings;
 using ValNet.Objects;
 
-namespace Assist.Controls.Startup.ViewModel
+namespace Assist.Controls.Selector.ViewModel
 {
     class ProfileCardViewModel : ViewModelBase
     {

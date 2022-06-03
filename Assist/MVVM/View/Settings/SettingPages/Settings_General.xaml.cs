@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using Serilog;
 
 namespace Assist.MVVM.View.Settings.SettingPages
 {
@@ -73,12 +74,14 @@ namespace Assist.MVVM.View.Settings.SettingPages
             SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
         }
 
-        private void AccountSelectToggle_Checked(object sender, RoutedEventArgs e)
+        private void AccountSelectToggle_Changed(object sender, RoutedEventArgs e)
         {
             if (AccountSelectToggle.IsChecked is null || AccountSelectToggle.IsChecked is false)
                 AssistSettings.Current.UseAccountLaunchSelection = false;
             else
                 AssistSettings.Current.UseAccountLaunchSelection = true;
+
+            Log.Information("Value of AccountSelectToggle {sad}", AssistSettings.Current.UseAccountLaunchSelection);
         }
     }
 }

@@ -12,13 +12,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Assist.Controls.Startup;
-using Assist.MVVM.View.Startup.ViewModels;
+using Assist.Controls.Selector;
+using Assist.MVVM.View.Selector.ViewModels;
+using Assist.MVVM.ViewModel;
 using Assist.Settings;
 using Serilog;
 using Application = System.Windows.Application;
 
-namespace Assist.MVVM.View.Startup
+namespace Assist.MVVM.View.Selector
 {
     /// <summary>
     /// Interaction logic for Startup.xaml
@@ -26,10 +27,12 @@ namespace Assist.MVVM.View.Startup
     public partial class Startup : Window
     {
         private readonly StartupViewModel _viewModel;
+        public static Grid Container;
         public Startup()
         {
             DataContext = _viewModel = new StartupViewModel();
             InitializeComponent();
+            Container = PopupContainer;
         }
 
         #region Window Bar
@@ -58,14 +61,14 @@ namespace Assist.MVVM.View.Startup
                 {
                     Margin = new Thickness(5, 10, 5, 10)
                 });
-            }
 
-            
+                Log.Information("Loaded ProfileCard for User {gamename}", profile.Gamename);
+            }
         }
 
-        private string defaultName = AssistSettings.Current.FindProfileById(AssistSettings.Current.DefaultAccount).Gamename;
+        private string defaultName = string.Empty;
         public static System.Windows.Forms.Timer countdownTimer;
-        private int counter = 20;
+        private int counter = 0 + AssistApplication.SelectorSeconds;
         private void StartCountdownTimer()
         {
             countdownTimer = new Timer();
@@ -76,17 +79,23 @@ namespace Assist.MVVM.View.Startup
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Log.Debug("Default Account Login Counter: {timeRemaining}", counter);
+            Log.Information("Default Account Login Counter: {timeRemaining}", counter);
             _viewModel.TimerText = $"Logging into default account {defaultName} in {counter} seconds.";
             counter--;
             if (counter == 0)
             {
+                Log.Information("Timer hit 0, Logging into Default Account");
+                countdownTimer.Stop();
                 _viewModel.DefaultAccountLogin();
+                
             }
         }
 
         private void Startup_Loaded(object sender, RoutedEventArgs e)
         {
+            var d  = AssistSettings.Current.FindProfileById(AssistSettings.Current.DefaultAccount);
+            if (d != null)
+                defaultName = d.Gamename;
             StartCountdownTimer();
         }
     }

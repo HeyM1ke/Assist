@@ -12,14 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Assist.Controls.Startup.ViewModel;
+using Assist.Controls.Selector.ViewModel;
 using Assist.Controls.Store.ViewModels;
 using Assist.Modules.Popup;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
+using Serilog;
 using UserControl = System.Windows.Controls.UserControl;
 
-namespace Assist.Controls.Startup
+namespace Assist.Controls.Selector
 {
     /// <summary>
     /// Interaction logic for ProfileCard.xaml
@@ -54,9 +55,23 @@ namespace Assist.Controls.Startup
                 if (_viewModel.Profile is null)
                     return;
 
-                MVVM.View.Startup.Startup.countdownTimer.Stop();
+                MVVM.View.Selector.Startup.countdownTimer.Stop();
+
+                PopupSystem.SpawnPopup(new PopupSettings()
+                {
+                    PopupTitle = "Logging in...",
+                    PopupDescription = $"Logging into {_viewModel.Profile.Gamename}",
+                    PopupType = PopupType.LOADING
+                });
+
                 await AssistApplication.AppInstance.AuthenticateWithProfileSetting(_viewModel.Profile);
             }
+        }
+
+        private void StopStartupTimer()
+        {
+            Log.Information("Stopped Startup Timer");
+            MVVM.View.Selector.Startup.countdownTimer.Stop();
         }
     }
 }

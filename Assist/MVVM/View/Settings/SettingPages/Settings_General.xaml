@@ -13,7 +13,6 @@
     Height="470"
     MinWidth="400"
     MinHeight="470"
-    d:DataContext="{d:DesignInstance settings:AssistSettings}"
     d:DesignHeight="470"
     d:DesignWidth="400"
     Loaded="Settings_General_Loaded"
@@ -296,7 +295,9 @@
                     <CheckBox 
                         Name="AccountSelectToggle"
                         VerticalAlignment="Center"
-                        Height="20" Checked="AccountSelectToggle_Checked" />
+                        Height="20"
+                        Checked="AccountSelectToggle_Changed"
+                        Unchecked="AccountSelectToggle_Changed"/>
 
                 </StackPanel>
             </Grid>

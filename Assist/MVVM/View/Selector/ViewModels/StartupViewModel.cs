@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Controls.Extra;
+using Assist.Modules.Popup;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
 
-namespace Assist.MVVM.View.Startup.ViewModels
+namespace Assist.MVVM.View.Selector.ViewModels
 {
     internal class StartupViewModel : ViewModelBase
     {
@@ -28,6 +30,12 @@ namespace Assist.MVVM.View.Startup.ViewModels
             if (profile == null)
                 return;
 
+            PopupSystem.SpawnPopup(new PopupSettings()
+            {
+                PopupTitle = "Logging in...",
+                PopupDescription = $"Logging into {profile.Gamename}",
+                PopupType = PopupType.LOADING
+            });
             await AssistApplication.AppInstance.AuthenticateWithProfileSetting(profile);
         }
     }

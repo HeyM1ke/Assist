@@ -1,11 +1,11 @@
-﻿<Window x:Class="Assist.MVVM.View.Startup.Startup"
+﻿<Window x:Class="Assist.MVVM.View.Selector.Startup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Assist.MVVM.View.Startup"
+        xmlns:local="clr-namespace:Assist.MVVM.View.Selector"
         xmlns:lang="clr-namespace:Assist.Properties.Languages"
-        xmlns:startup="clr-namespace:Assist.Controls.Startup"
+        xmlns:startup="clr-namespace:Assist.Controls.Selector"
         mc:Ignorable="d"
         Title="Startup" 
         Height="650"
@@ -72,6 +72,7 @@
                     Margin="0,415,0,0"/>
             </Grid>
 
+            
             <Grid Grid.Column="1">
                 <Border
                     Background="{DynamicResource AssistNavigationBar}"
@@ -89,6 +90,7 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
+            <Grid Name="PopupContainer" Grid.Column="0" Grid.ColumnSpan="2"></Grid>
         </Grid>
     </Grid>
 </Window>
