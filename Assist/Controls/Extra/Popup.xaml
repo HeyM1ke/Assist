@@ -17,7 +17,7 @@
                 Width="500" Height="200">
             <Grid>
                 <StackPanel>
-                    <Image Source="../../Resources/Icons/Assist_Logo_White.png" Width="70" Margin="10"></Image>
+                    <Image Source="../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="70" Margin="10"></Image>
                     <Label FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding Title}" Foreground="White" HorizontalAlignment="Center"></Label>
                     <Label FontFamily="{StaticResource WorkSans}" FontWeight="Regular" Content="{Binding Description}" Foreground="White" HorizontalAlignment="Center" Padding="0"></Label>
                 </StackPanel>
