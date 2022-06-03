@@ -27,51 +27,42 @@ namespace Assist.Controls.Selector
     /// </summary>
     public partial class ProfileCard : UserControl
     {
-        private ProfileCardViewModel _viewModel;
+        public ProfileCardViewModel ViewModel;
         public ProfileCard()
         {
-            DataContext = _viewModel = new ProfileCardViewModel();
+            DataContext = ViewModel = new ProfileCardViewModel();
             InitializeComponent();
         }
 
         public ProfileCard(ProfileSetting setting)
         {
-            DataContext = _viewModel = new ProfileCardViewModel();
-            _viewModel.Profile = setting;
+            DataContext = ViewModel = new ProfileCardViewModel();
+            ViewModel.Profile = setting;
             InitializeComponent();
         }
 
         private void ProfileCard_Loaded(object sender, RoutedEventArgs e)
         {
-            _viewModel.ProfileImage = App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/{_viewModel.Profile.PCID}_DisplayIcon.png", 80, 80);
-            _viewModel.PlayerRankIcon = App.LoadImageUrl($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTier_Large_{_viewModel.Profile.Tier}.png");
-            
+            ViewModel.ProfileImage = App.LoadImageUrl($"https://cdn.assistapp.dev/PlayerCards/{ViewModel.Profile.PCID}_DisplayIcon.png", 80, 80);
+            ViewModel.PlayerRankIcon = App.LoadImageUrl($"pack://application:,,,/Resources/RankLogos/TX_CompetitiveTier_Large_{ViewModel.Profile.Tier}.png");
         }
 
-        private async void ProfileCard_Click(object sender, RoutedEventArgs e)
-        {
-            if (!_viewModel.Profile.Equals(AssistApplication.AppInstance.CurrentProfile))
-            {
-                if (_viewModel.Profile is null)
-                    return;
-
-                MVVM.View.Selector.Startup.countdownTimer.Stop();
-
-                PopupSystem.SpawnPopup(new PopupSettings()
-                {
-                    PopupTitle = "Logging in...",
-                    PopupDescription = $"Logging into {_viewModel.Profile.Gamename}",
-                    PopupType = PopupType.LOADING
-                });
-
-                await AssistApplication.AppInstance.AuthenticateWithProfileSetting(_viewModel.Profile);
-            }
-        }
 
         private void StopStartupTimer()
         {
             Log.Information("Stopped Startup Timer");
             MVVM.View.Selector.Startup.countdownTimer.Stop();
         }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            if (this.Click != null)
+            {
+                this.Click(this, e);
+            }
+        }
+
+        public event RoutedEventHandler Click;
+
     }
 }

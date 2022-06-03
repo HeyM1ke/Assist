@@ -14,7 +14,7 @@
             <Setter Property="BorderBrush" Value="{DynamicResource AssistNavigationButton_SelectedHighlightFill}"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate>
+                    <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="1">
@@ -72,5 +72,5 @@
         </Style>
 
     </UserControl.Resources>
-    <Button Click="ProfileCard_Click"></Button>
+    <Button Click="OnClick"></Button>
 </UserControl>

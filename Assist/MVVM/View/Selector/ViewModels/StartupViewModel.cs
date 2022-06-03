@@ -36,7 +36,17 @@ namespace Assist.MVVM.View.Selector.ViewModels
                 PopupDescription = $"Logging into {profile.Gamename}",
                 PopupType = PopupType.LOADING
             });
-            await AssistApplication.AppInstance.AuthenticateWithProfileSetting(profile);
+
+            try
+            {
+                await AssistApplication.AppInstance.AuthenticateWithProfileSetting(profile);
+            }
+            catch (Exception exception)
+            {
+                PopupSystem.KillPopups();
+                AssistApplication.AppInstance.OpenStartupWindow();
+
+            }
         }
     }
 }

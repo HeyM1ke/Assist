@@ -248,7 +248,8 @@
                 x:Name="AccSelector"
                 Margin="10"
                 VerticalAlignment="Top"
-                DockPanel.Dock="Top">
+                DockPanel.Dock="Top"
+                Visibility="Hidden">
                 <Label
                     HorizontalAlignment="Left"
                     Content="Enable Account Selector"

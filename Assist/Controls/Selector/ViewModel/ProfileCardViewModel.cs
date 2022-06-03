@@ -10,7 +10,7 @@ using ValNet.Objects;
 
 namespace Assist.Controls.Selector.ViewModel
 {
-    class ProfileCardViewModel : ViewModelBase
+    public class ProfileCardViewModel : ViewModelBase
     {
         private ProfileSetting _profile = new ProfileSetting()
         {

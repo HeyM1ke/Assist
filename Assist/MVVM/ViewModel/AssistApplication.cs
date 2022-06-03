@@ -167,7 +167,7 @@ namespace Assist.MVVM.ViewModel
                 Log.Information("Removing Account");
                 AssistSettings.Current.Profiles.Remove(profile);
                 AssistSettings.Save();
-                
+                throw new Exception("Acc Invalid");
             }
 
 

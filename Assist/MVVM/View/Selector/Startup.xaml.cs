@@ -13,11 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Assist.Controls.Selector;
+using Assist.Modules.Popup;
 using Assist.MVVM.View.Selector.ViewModels;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
 using Serilog;
 using Application = System.Windows.Application;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace Assist.MVVM.View.Selector
 {
@@ -55,15 +57,15 @@ namespace Assist.MVVM.View.Selector
 
         private void CardPanel_Initialized(object sender, EventArgs e)
         {
-            foreach (var profile in AssistSettings.Current.Profiles)
-            {
-                CardPanel.Children.Add(new ProfileCard(profile)
-                {
-                    Margin = new Thickness(5, 10, 5, 10)
-                });
+            Screen targetScreen = Screen.PrimaryScreen;
 
-                Log.Information("Loaded ProfileCard for User {gamename}", profile.Gamename);
-            }
+            Rectangle viewport = targetScreen.WorkingArea;
+            Top = (viewport.Height - this.Height) / 2
+                  + viewport.Top;
+            Left = (viewport.Width - this.Width) / 2
+                   + viewport.Left;
+
+            AddProfileCards();
         }
 
         private string defaultName = string.Empty;
@@ -97,6 +99,72 @@ namespace Assist.MVVM.View.Selector
             if (d != null)
                 defaultName = d.Gamename;
             StartCountdownTimer();
+        }
+
+
+
+        private async void ProfileCard_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is ProfileCard card)
+            {
+                if (!card.ViewModel.Profile.Equals(AssistApplication.AppInstance.CurrentProfile))
+                {
+                    if (card.ViewModel.Profile is null)
+                        return;
+
+                    MVVM.View.Selector.Startup.countdownTimer.Stop();
+
+                    PopupSystem.SpawnPopup(new PopupSettings()
+                    {
+                        PopupTitle = "Logging in...",
+                        PopupDescription = $"Logging into {card.ViewModel.Profile.Gamename}",
+                        PopupType = PopupType.LOADING
+                    });
+
+                    try
+                    {
+                        await AssistApplication.AppInstance.AuthenticateWithProfileSetting(card.ViewModel.Profile);
+                    }
+                    catch (Exception exception)
+                    {
+                        CardPanel.Children.Clear();
+                        AddProfileCards();
+                        PopupSystem.KillPopups();
+
+                        AssistApplication.AppInstance.OpenStartupWindow();
+                        
+                    }
+                    
+                }
+            }
+
+
+            
+        }
+
+
+        private void RestartTimer()
+        {
+            countdownTimer.Stop();
+            counter = 0 + AssistApplication.SelectorSeconds;
+            StartCountdownTimer();
+        }
+
+        private void AddProfileCards()
+        {
+            foreach (var profile in AssistSettings.Current.Profiles)
+            {
+                var card = (new ProfileCard(profile)
+                {
+                    Margin = new Thickness(5, 10, 5, 10),
+
+                });
+
+                card.Click += ProfileCard_Click;
+                CardPanel.Children.Add(card);
+
+                Log.Information("Loaded ProfileCard for User {gamename}", profile.Gamename);
+            }
         }
     }
 }

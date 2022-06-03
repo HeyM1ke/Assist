@@ -86,7 +86,7 @@ namespace Assist.Settings
             set => SetProperty(ref _soundVolume, value);
         }
 
-        private bool _useAccountLaunchSelection;
+        private bool _useAccountLaunchSelection = false;
         public bool UseAccountLaunchSelection
         {
             get => _useAccountLaunchSelection;
