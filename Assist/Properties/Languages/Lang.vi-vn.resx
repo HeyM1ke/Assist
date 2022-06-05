@@ -68,30 +68,29 @@
     <value>Mã xác minh hai bước không chính xác.</value>
   </data>
   <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
-    <value>mật khẩu</value>
+    <value>Mật khẩu</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Chọn Login riot cho phép bạn sử dụng Assist. Chú ý: Đăng nhập bằng google không khả dụng.</value>
+    <value>Lựa chọn đăng nhập bằng tài khoản Riot sẽ cho phép bạn đăng nhập thông qua trang của Riot. Sau đó sẽ có thể tiếp tục dùng Assist. Lưu ý: Đăng nhập bằng tài khoản Google không khả dụng bây giờ.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Chú ý:  Cần sử dụng tài khoản Riot để đăng nhập.</value>
+    <value>Chú ý: Đăng nhập thông qua các nền tảng mạng xã hội hiện không khả dụng với Assist. Bạn cần phải đăng nhập bằng combo tài khoản và mật khẩu Riot. Nếu bạn chưa tạo tên tài khoản và mật khẩu mà chỉ mới đăng nhập qua các mạng xã hội, bạn có thể vào trang quản lý tài khoản của Riot để tạo tên tài khoản và mật khẩu.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
-    <value>Nộp</value>
+    <value>Nhập</value>
   </data>
   <data name="Authentication_UserInfo" xml:space="preserve">
-    <value>Đăng nhập trực tiếp bằng tk riot games</value>
+    <value>Đăng nhập trực tiếp bằng tài khoản Riot games</value>
   </data>
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
     <value>Tất cả thông tin tài khoản được chuyển trực tiếp đến trang của Riot games.
-
-nếu bạn gặp lỗi Error 403, đây không phải là lỗi của app. khuyến cáo bạn nên update windows, nếu vẫn không đăng nhập được thì chịu.</value>
+Nếu bạn gặp lỗi Error 403 thì bạn nên update Windows, nếu vấn đề vẫn không được khắc phục hãy báo lỗi cho người quản trị hệ thống của bạn.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
     <value>Tài khoản</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
-    <value>Chào mừng tới Assist, Chọn một cách để đăng nhập</value>
+    <value>Chào mừng tới Assist, chọn một cách để đăng nhập</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
     <value>Chào mừng</value>
@@ -146,10 +145,10 @@ nếu bạn gặp lỗi Error 403, đây không phải là lỗi của app. khuy
     <value>BATTLEPASS</value>
   </data>
   <data name="Progression_Battlepass_Completed" xml:space="preserve">
-    <value>Hoàn thành!</value>
+    <value>ĐÃ HOÀN THÀNH!</value>
   </data>
   <data name="Progression_Battlepass_CurrTier" xml:space="preserve">
-    <value>Hiện tại: </value>
+    <value>Cấp hiện tại: </value>
   </data>
   <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
     <value>Ngôn ngữ: </value>
@@ -182,7 +181,7 @@ nếu bạn gặp lỗi Error 403, đây không phải là lỗi của app. khuy
     <value>Cấp độ</value>
   </data>
   <data name="Store_FeaturedBundleLabel" xml:space="preserve">
-    <value>Bundle hiện tại</value>
+    <value>Bộ sưu tập hiện tại</value>
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
     <value>Shop hàng ngày</value>
@@ -191,7 +190,7 @@ nếu bạn gặp lỗi Error 403, đây không phải là lỗi của app. khuy
     <value>Ủng hộ tác giả!</value>
   </data>
   <data name="Support_Description" xml:space="preserve">
-    <value>Assits sẽ luôn miễn phí và mã nguồn mở. cảm ơn các bạn đã sử dụng &lt;3</value>
+    <value>Assist sẽ luôn miễn phí và mã nguồn mở. Với sự ủng hộ của các bạn, bọn mình sẽ có thể tiếp tục phát triển và thêm vào những chức năng độc đáo mới. Cảm ơn các bạn đã sử dụng &lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
     <value>Ủng hộ Assist!</value>
