@@ -74,7 +74,7 @@
     <value>Lựa chọn đăng nhập bằng tài khoản Riot sẽ cho phép bạn đăng nhập thông qua trang của Riot. Sau đó sẽ có thể tiếp tục dùng Assist. Lưu ý: Đăng nhập bằng tài khoản Google không khả dụng bây giờ.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Chú ý: Đăng nhập thông qua các nền tảng mạng xã hội hiện không khả dụng với Assist. Bạn cần phải đăng nhập bằng combo tài khoản và mật khẩu Riot. Nếu bạn chưa tạo tên tài khoản và mật khẩu mà chỉ mới đăng nhập qua các mạng xã hội, bạn có thể vào trang quản lý tài khoản của Riot để tạo tên tài khoản và mật khẩu.</value>
+    <value>Chú ý: Đăng nhập thông qua các nền tảng mạng xã hội hiện không khả dụng với Assist. Bạn cần phải đăng nhập bằng tên đăng nhập và mật khẩu của tài khoản Riot games của bạn. Nếu bạn chưa tạo tên tài khoản và mật khẩu mà chỉ mới đăng nhập qua các mạng xã hội, bạn có thể vào trang quản lý tài khoản của Riot để tạo tên tài khoản và mật khẩu.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
     <value>Nhập</value>
@@ -84,7 +84,7 @@
   </data>
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
     <value>Tất cả thông tin tài khoản được chuyển trực tiếp đến trang của Riot games.
-Nếu bạn gặp lỗi Error 403 thì bạn nên update Windows, nếu vấn đề vẫn không được khắc phục hãy báo lỗi cho người quản trị hệ thống của bạn.</value>
+Nếu bạn gặp lỗi "Error 403" thì bạn hãy thử update Windows, nếu vấn đề vẫn không được khắc phục hãy báo lỗi cho người quản trị hệ thống của bạn.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
     <value>Tài khoản</value>
