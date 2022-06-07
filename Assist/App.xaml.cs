@@ -18,6 +18,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -40,7 +41,7 @@ namespace Assist
             WriteIndented = true
         };
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             SetupLogger();
@@ -71,7 +72,7 @@ namespace Assist
             Log.Information("Reading the settings file");
             try
             {
-                var settingsContent = await File.ReadAllTextAsync(AssistSettings.SettingsFilePath);
+                var settingsContent = File.ReadAllText(AssistSettings.SettingsFilePath);
                 AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(settingsContent);
                 
                 Log.Information("Successfully read the settings file");
@@ -205,7 +206,7 @@ namespace Assist
             Log.Information("Changing Language");
             var language = AssistSettings.Current.Language;
             var attribute = language.GetAttribute<LanguageAttribute>();
-
+            Log.Information(attribute.Code);
             var culture = new CultureInfo(attribute.Code, true);
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;

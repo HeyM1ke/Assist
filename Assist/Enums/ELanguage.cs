@@ -5,35 +5,31 @@ namespace Assist.Enums;
 public enum ELanguage
 {
 
-    [Language("en-us")]
+    [Language("en-US")]
     English = 0,
 
-    [Language("ja-jp")]
+    [Language("ja-JP")]
     Japanese = 1,
 
-    [Language("es-es")]
+    [Language("es-ES")]
     Spanish = 2,
 
-    [Language("pt-br")]
+    [Language("pt-BR")]
     Portuguese = 3,
 
-    [Language("fr-fr")]
+    [Language("fr-FR")]
     French = 4,
 
     [Language("de-DE")]
     German = 5,
 
-    [Language("tr-tr")]
+    [Language("tr-TR")]
     Turkish = 6,
 
-    [Language("nl-nl")]
+    [Language("nl-NL")]
     Dutch = 7,
 
-    [Language("ru-ru")]
+    [Language("ru-RU")]
     Russian = 8,
-
-    [Language("zh-cn")]
-    Chinese = 9,
-
 
 }
