@@ -18,6 +18,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -40,7 +41,7 @@ namespace Assist
             WriteIndented = true
         };
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             SetupLogger();
@@ -50,28 +51,13 @@ namespace Assist
                 AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
                 return;
             }
-#if RELEASE
-
-            var maintenanceStatus = await AssistApplication.ApiService.GetMaintenanceStatus();
-            if (maintenanceStatus.DownForMaintenance)
-            {
-                var window = new MaintenanceWindow(maintenanceStatus);
-                window.Show();
-                
-                return;
-            }
-
-            var shouldUpdate = await CheckForUpdatesAsync();
-            if (shouldUpdate)
-                return;
-#endif
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             Log.Information("Starting application");
             Log.Information("Reading the settings file");
             try
             {
-                var settingsContent = await File.ReadAllTextAsync(AssistSettings.SettingsFilePath);
+                var settingsContent = File.ReadAllText(AssistSettings.SettingsFilePath);
                 AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(settingsContent);
                 
                 Log.Information("Successfully read the settings file");
@@ -114,7 +100,7 @@ namespace Assist
             }
         }
 
-        private static async Task<bool> CheckForUpdatesAsync()
+        public static async Task<bool> CheckForUpdatesAsync()
         {
             var timeout = TimeSpan.FromSeconds(10);
             var updater = new ApplicationUpdateChecker(timeout);
@@ -205,7 +191,7 @@ namespace Assist
             Log.Information("Changing Language");
             var language = AssistSettings.Current.Language;
             var attribute = language.GetAttribute<LanguageAttribute>();
-
+            Log.Information(attribute.Code);
             var culture = new CultureInfo(attribute.Code, true);
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;

@@ -30,7 +30,7 @@ namespace Assist.MVVM.View.Authentication.ViewModels
         internal RiotUser user;
         public async Task Login(RiotLoginData data)
         {
-            user = new RiotUser();
+            user = new RiotUser(AssistApplication.AgentFormat);
             user.ChangeCredentials(data);
             try
             {

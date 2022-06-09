@@ -96,7 +96,7 @@ namespace Assist.MVVM.ViewModel
 
                     if (profile != null)
                     {
-                        RiotUser user = new RiotUser();
+                        RiotUser user = new RiotUser(AssistApplication.AgentFormat);
 
                         
                         try
@@ -167,7 +167,7 @@ namespace Assist.MVVM.ViewModel
             {
                 var profile = AssistSettings.Current.Profiles[i];
 
-                RiotUser user = new RiotUser(); ;
+                RiotUser user = new RiotUser(AssistApplication.AgentFormat);
 
                 try
                 {
