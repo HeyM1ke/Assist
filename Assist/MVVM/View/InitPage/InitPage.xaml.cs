@@ -4,6 +4,7 @@ using Assist.Settings;
 using Serilog;
 
 using System.Windows;
+using Assist.MVVM.View.Extra;
 
 namespace Assist.MVVM.View.InitPage
 {
@@ -23,13 +24,22 @@ namespace Assist.MVVM.View.InitPage
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
-#if DEBUG
+            var a = await AssistApplication.ApiService.GetAgent();
+            AssistApplication.AgentFormat = a.Agent;
+#if RELEASE
 
-#else
-        var resp = await AssistApplication.ApiService.GetMaintenanceStatus();
+            var maintenanceStatus = await AssistApplication.ApiService.GetMaintenanceStatus();
+            if (maintenanceStatus.DownForMaintenance)
+            {
+                var window = new MaintenanceWindow(maintenanceStatus);
+                window.Show();
+                
+                return;
+            }
 
-            if (resp.DownForMaintenance)
-                new MaintenanceWindow(resp).ShowDialog(); 
+            var shouldUpdate = await App.CheckForUpdatesAsync();
+            if (shouldUpdate)
+                return;
 #endif
 
 

@@ -51,21 +51,6 @@ namespace Assist
                 AssistApplication.AppInstance.OpenAssistErrorWindow(new Exception("You are not connected to the Internet, Please Connect to the internet before using Assist."));
                 return;
             }
-#if RELEASE
-
-            var maintenanceStatus = await AssistApplication.ApiService.GetMaintenanceStatus();
-            if (maintenanceStatus.DownForMaintenance)
-            {
-                var window = new MaintenanceWindow(maintenanceStatus);
-                window.Show();
-                
-                return;
-            }
-
-            var shouldUpdate = await CheckForUpdatesAsync();
-            if (shouldUpdate)
-                return;
-#endif
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             Log.Information("Starting application");
@@ -115,7 +100,7 @@ namespace Assist
             }
         }
 
-        private static async Task<bool> CheckForUpdatesAsync()
+        public static async Task<bool> CheckForUpdatesAsync()
         {
             var timeout = TimeSpan.FromSeconds(10);
             var updater = new ApplicationUpdateChecker(timeout);
