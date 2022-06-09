@@ -27,7 +27,7 @@ namespace Assist.Services
 
         public async Task RefreshUser(RiotUser u)
         {
-            var tempUser = new RiotUser();
+            var tempUser = new RiotUser(AssistApplication.AgentFormat);
             foreach (Cookie cook in u.UserClient.CookieContainer.GetAllCookies())
             {
                 tempUser.UserClient.CookieContainer.Add(cook);

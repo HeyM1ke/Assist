@@ -141,6 +141,33 @@ public class AssistApiService
         return response.Data;
     }
 
+    public async Task<AssistAgent> GetAgent()
+    {
+        Log.Information("Getting Agent");
+
+        var client = new RestClient(new RestClientOptions
+        {
+            BaseUrl = new Uri(BaseUrl),
+            ThrowOnAnyError = false,
+            ThrowOnDeserializationError = false,
+            Timeout = 5000
+        });
+
+        var request = new RestRequest("/data/agent");
+        var response = await client.ExecuteAsync<AssistAgent>(request);
+
+        if (!response.IsSuccessful)
+        {
+            Log.Information("Failed to request agent.");
+            return new AssistAgent()
+            {
+                Agent = string.Empty
+            };
+        }
+
+        return response.Data;
+    }
+
     private static AssistMaintenance CreateDefaultMaintenanceMessage()
     {
         return new AssistMaintenance
@@ -150,4 +177,5 @@ public class AssistApiService
                 "Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."
         };
     }
+
 }

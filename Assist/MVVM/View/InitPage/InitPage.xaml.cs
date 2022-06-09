@@ -25,7 +25,8 @@ namespace Assist.MVVM.View.InitPage
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var a = await AssistApplication.ApiService.GetAgent();
-            AssistApplication.AgentFormat = a.Agent;
+            if(!string.IsNullOrEmpty(a.Agent))
+                AssistApplication.AgentFormat = a.Agent;
 #if RELEASE
 
             var maintenanceStatus = await AssistApplication.ApiService.GetMaintenanceStatus();

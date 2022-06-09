@@ -21,7 +21,7 @@ namespace Assist.MVVM.ViewModel
         // Cookie Login
         public static async Task<RiotUser> CookieLogin(CookieContainer cc)
         {
-            var user = new RiotUser();
+            var user = new RiotUser(AssistApplication.AgentFormat);
             AddCookiesToUser(cc, user);
 
             Log.Information("Authenticating with New User");
@@ -42,7 +42,7 @@ namespace Assist.MVVM.ViewModel
         // todo: handle exception properly
         public static async Task<RiotUser> ProfileLogin(ProfileSetting profile)
         {
-            var user = new RiotUser();
+            var user = new RiotUser(AssistApplication.AgentFormat);
             AddCookiesToUser(profile, user);
 
             var gamename = profile.Gamename;

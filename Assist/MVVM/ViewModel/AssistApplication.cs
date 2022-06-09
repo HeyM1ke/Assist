@@ -24,6 +24,8 @@ namespace Assist.MVVM.ViewModel
         public static AssistApiService ApiService { get; } = new();
         public static AssistApplication AppInstance { get; } = new();
 
+        public static string AgentFormat { get; set; } =
+            "RiotClient/51.0.0.4429735.4381201 {0} (Windows;10;;Professional, x64)";
         public TokenServiceBackgroundService TokenService { get; set; }
         // Control Models
 
@@ -142,7 +144,7 @@ namespace Assist.MVVM.ViewModel
         }
         public async Task AuthenticateWithProfileSetting(ProfileSetting profile)
         {
-            RiotUser user = new RiotUser();
+            RiotUser user = new RiotUser(AssistApplication.AgentFormat);
 
             foreach (Cookie cookie in profile.Convert64ToCookies().GetAllCookies())
             {
@@ -186,7 +188,7 @@ namespace Assist.MVVM.ViewModel
 
         private async Task RedoCookies(RiotUser user)
         {
-            var tempUser = new RiotUser();
+            var tempUser = new RiotUser(AssistApplication.AgentFormat);
             foreach (Cookie cook in user.UserClient.CookieContainer.GetAllCookies())
             {
                 tempUser.UserClient.CookieContainer.Add(new Cookie(cook.Name, cook.Value, "/", cook.Domain));
