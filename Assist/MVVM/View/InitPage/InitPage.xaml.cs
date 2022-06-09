@@ -1,10 +1,9 @@
 ﻿using Assist.MVVM.ViewModel;
 using Assist.Settings;
-
 using Serilog;
-
 using System.Windows;
 using Assist.MVVM.View.Extra;
+
 
 namespace Assist.MVVM.View.InitPage
 {
@@ -24,6 +23,7 @@ namespace Assist.MVVM.View.InitPage
 
         private async void InitWindow_Loaded(object sender, RoutedEventArgs e)
         {
+
             var a = await AssistApplication.ApiService.GetAgent();
             if(!string.IsNullOrEmpty(a.Agent))
                 AssistApplication.AgentFormat = a.Agent;
@@ -42,7 +42,6 @@ namespace Assist.MVVM.View.InitPage
             if (shouldUpdate)
                 return;
 #endif
-
 
             Log.Information("InitWindow_Loaded Called");
 
