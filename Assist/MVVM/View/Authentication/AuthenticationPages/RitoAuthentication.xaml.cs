@@ -19,6 +19,9 @@ using Assist.MVVM.View.Authentication.ViewModels;
 using Assist.MVVM.ViewModel;
 using Assist.Settings;
 using Microsoft.Web.WebView2.Core;
+using Serilog;
+using ValNet;
+using ValNet.Objects;
 
 namespace Assist.MVVM.View.Authentication.AuthenticationPages
 {
@@ -66,8 +69,21 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
 
             var cc = new CookieContainer();
             cc.Add(_viewModel.AuthCookie);
+            RiotUser u;
 
-            var u = await AssistAuthenticationController.CookieLogin(cc);
+            try
+            {
+                u = await AssistAuthenticationController.CookieLogin(cc);
+            }
+            catch (Exception e)
+            {
+                if (e is ValNetException valnetException)
+                {
+                    Log.Error("Catched a ValNet exception. ({Message}) StatusCode: {StatusCode}", valnetException.Message, valnetException.RequestStatusCode);
+                    Log.Error("Content: {Content}", valnetException.RequestContent);
+                }
+                return;
+            }
 
             var p = await AssistAuthenticationController.CreateProfile(u);
 
