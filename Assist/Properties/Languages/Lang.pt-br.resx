@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -130,10 +130,10 @@
     <value>Senha</value>
   </data>
   <data name="Authentication_RitoInfo" xml:space="preserve">
-    <value>Selecionar Rito Login permite que você faça login no site da riot e use o Assist. Observação: o Login do Google não funciona.</value>
+    <value>Selecionar o login Riot permite que você faça login no site da riot e use o Assist. Observação: O login do Google não funciona.</value>
   </data>
   <data name="Authentication_RitoLogin_Notice" xml:space="preserve">
-    <value>Observação: a autenticação do social não funciona com o Assist. Para usar um login do social, faça login com um combo de nome de usuário e senha da Riot. Se você não tiver uma combinação de nome de usuário e senha da Riot com uma conta social, verifique os detalhes da sua conta no site da conta da Riot para criar uma combinação.</value>
+    <value>Observação: A autenticação do social não funciona com o Assist. Para usar um login social, faça login com o nome de usuário e senha da Riot. Se você não tiver um nome de usuário e senha da Riot, verifique os detalhes da sua conta no site da conta da Riot para cria-los.</value>
   </data>
   <data name="Authentication_SubmitBtn" xml:space="preserve">
     <value>ENVIAR</value>
@@ -142,18 +142,18 @@
     <value>Selecionar nome de usuário e senha permite que você faça login diretamente com seu nome de usuário e senha da Riot Games.</value>
   </data>
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
-    <value>Faça login com seu nome de usuário e senha da Riot Games. Todas as informações de login são enviadas apenas para Riot Servers e Riot Servers.
+    <value>Faça login com seu nome de usuário e senha da Riot Games. Todas as informações de login são enviadas apenas para os servidores da Riot.
 
-Se você receber o erro 403, este é um erro de login da Riot que não podemos corrigir, recomendamos atualizar seu Windows para ter a possibilidade de corrigir o erro e fazer login com o Assist.</value>
+Se você receber o erro 403, este é um erro de login da Riot que não podemos corrigir, recomendamos atualizar seu Windows para tentar corrigi-lo e e tentar novamente o login com o Assist.</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
-    <value>Nome do usuário</value>
+    <value>Usuário</value>
   </data>
   <data name="Authentication_WelcomeInfoLabel" xml:space="preserve">
     <value>Bem-vindo ao Assist, selecione uma maneira de fazer login abaixo.</value>
   </data>
   <data name="Authentication_WelcomeLabel" xml:space="preserve">
-    <value>RECEBER</value>
+    <value>BEM-VINDO</value>
   </data>
   <data name="Dashboard_Discord" xml:space="preserve">
     <value>Discord</value>
@@ -162,25 +162,25 @@ Se você receber o erro 403, este é um erro de login da Riot que não podemos c
     <value>Apoio</value>
   </data>
   <data name="DefaultAcc_Label" xml:space="preserve">
-    <value>Conta padrão:</value>
+    <value>Conta principal:</value>
   </data>
   <data name="InitPage_Loading" xml:space="preserve">
     <value>Carregando...</value>
     <comment>Text on InitPage</comment>
   </data>
   <data name="Navigation_DashboardHover" xml:space="preserve">
-    <value>Painel</value>
+    <value>Início</value>
     <comment>Text on Dashboard Button Hover</comment>
   </data>
   <data name="Navigation_ProgressionHover" xml:space="preserve">
     <value>Progressão</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
-    <value>Definições</value>
+    <value>Configurações</value>
     <comment>Text on Settings Button Hover</comment>
   </data>
   <data name="Navigation_StoreHover" xml:space="preserve">
-    <value>Armazenar</value>
+    <value>Loja</value>
     <comment>Text on Store Button Hover</comment>
   </data>
   <data name="NightMarket_EndsIn" xml:space="preserve">
@@ -190,15 +190,15 @@ Se você receber o erro 403, este é um erro de login da Riot que não podemos c
     <value>MERCADO NOTURNO</value>
   </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
-    <value>Iniciar configurações</value>
+    <value>Configurações</value>
     <comment>Text on Launch Settings Button Hover</comment>
   </data>
   <data name="ProfileLaunchControl_PlayLabel" xml:space="preserve">
-    <value>TOQUE</value>
+    <value>Jogar</value>
     <comment>Text on Play Label</comment>
   </data>
   <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
-    <value>Mudar perfil</value>
+    <value>Alterar perfil</value>
     <comment>Text on Switch Profile Button Hover</comment>
   </data>
   <data name="Progression_Battlepass" xml:space="preserve">
@@ -211,13 +211,13 @@ Se você receber o erro 403, este é um erro de login da Riot que não podemos c
     <value>Nível atual:</value>
   </data>
   <data name="SettingsGeneral_LanguageChange" xml:space="preserve">
-    <value>Linguagem:</value>
+    <value>Idioma:</value>
   </data>
   <data name="SettingsGeneral_SelLang" xml:space="preserve">
     <value>Selecione o idioma:</value>
   </data>
   <data name="SettingsGeneral_SoundSetting" xml:space="preserve">
-    <value>Sound Volume:</value>
+    <value>Volume do som:</value>
   </data>
   <data name="SettingsGeneral_WindowSize" xml:space="preserve">
     <value>Tamanho da janela:</value>
@@ -226,16 +226,16 @@ Se você receber o erro 403, este é um erro de login da Riot que não podemos c
     <value>Sobre</value>
   </data>
   <data name="SettingsTab_General" xml:space="preserve">
-    <value>Em geral</value>
+    <value>Geral</value>
   </data>
   <data name="SettingsTab_VALSet" xml:space="preserve">
-    <value>Configurações de VALORANT</value>
+    <value>Configurações do VALORANT</value>
   </data>
   <data name="StorePopup_BackLabel" xml:space="preserve">
-    <value>COSTAS</value>
+    <value>RETORNAR</value>
   </data>
   <data name="StorePopup_ChromaLabel" xml:space="preserve">
-    <value>CHROMAS</value>
+    <value>CORES</value>
   </data>
   <data name="StorePopup_LevelsLabel" xml:space="preserve">
     <value>NÍVEIS</value>
@@ -244,7 +244,7 @@ Se você receber o erro 403, este é um erro de login da Riot que não podemos c
     <value>PACOTE EM DESTAQUE</value>
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
-    <value>OFERTAS DIÁRIAS</value>
+    <value>OFERTAS</value>
   </data>
   <data name="Support_ButtonText" xml:space="preserve">
     <value>Apoie o projeto!</value>
@@ -253,6 +253,6 @@ Se você receber o erro 403, este é um erro de login da Riot que não podemos c
     <value>O Assist sempre será gratuito e de código aberto. Escolher apoiar o projeto nos permitirá continuar com o desenvolvimento e criar mais alguns recursos exclusivos. Obrigada &lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
-    <value>Apoiar Assistir!</value>
+    <value>Apoiar o Assist!</value>
   </data>
 </root>
