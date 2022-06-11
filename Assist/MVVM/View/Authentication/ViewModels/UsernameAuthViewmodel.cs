@@ -8,6 +8,8 @@ using Assist.Settings;
 using ValNet;
 using ValNet.Objects.Authentication;
 using System.Globalization;
+using Serilog;
+using ValNet.Objects;
 
 namespace Assist.MVVM.View.Authentication.ViewModels
 {
@@ -48,6 +50,13 @@ namespace Assist.MVVM.View.Authentication.ViewModels
             }
             catch (Exception ex)
             {
+
+                if (ex is ValNetException valnetException)
+                {
+                    Log.Error("Catched a ValNet exception. ({Message}) StatusCode: {StatusCode}", valnetException.Message, valnetException.RequestStatusCode);
+                    Log.Error("Content: {Content}", valnetException.RequestContent);
+                }
+
                 ErrorMessage = ex.Message;
                 return;
             }

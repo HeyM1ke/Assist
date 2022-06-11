@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 
 using ValNet;
+using ValNet.Objects;
 
 namespace Assist.MVVM.ViewModel
 {
@@ -176,6 +177,12 @@ namespace Assist.MVVM.ViewModel
                 }
                 catch (Exception ex)
                 {
+                    if (ex is ValNetException valnetException)
+                    {
+                        Log.Error("Catched a ValNet exception. ({Message}) StatusCode: {StatusCode}", valnetException.Message, valnetException.RequestStatusCode);
+                        Log.Error("Content: {Content}", valnetException.RequestContent);
+                    }
+
                     Log.Error($"ACCOUNT NO LONGER VALID - {profile.RiotId} || Removing Account");
                     AssistApplication.AppInstance.OpenAssistErrorWindow(ex, $"Could not login to account: {profile.RiotId}, it has been removed from your account list. Please re-add the account.");
                     AssistSettings.Current.Profiles.Remove(profile);
