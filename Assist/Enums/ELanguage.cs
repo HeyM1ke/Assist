@@ -32,4 +32,7 @@ public enum ELanguage
     [Language("ru-RU")]
     Russian = 8,
 
+    [Language("th-TH")]
+    Thai = 9,
+
 }
