@@ -288,6 +288,15 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AGENTS.
+        /// </summary>
+        public static string Progression_Agents {
+            get {
+                return ResourceManager.GetString("Progression_Agents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BATTLEPASS.
         /// </summary>
         public static string Progression_Battlepass {

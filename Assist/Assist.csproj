@@ -104,6 +104,9 @@
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_22.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_23.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_24.png" />
+    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_25.png" />
+    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_26.png" />
+    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_27.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_3.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_4.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_5.png" />
@@ -240,7 +243,6 @@
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="ValNet" Version="0.0.0.20" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
-    <PackageReference Include="XamlFlair.WPF" Version="1.2.13" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 
@@ -268,6 +270,9 @@
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_22.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_23.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_24.png" />
+	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_25.png" />
+	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_26.png" />
+	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_27.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_3.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_4.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_5.png" />
