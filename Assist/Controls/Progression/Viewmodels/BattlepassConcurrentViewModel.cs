@@ -3,6 +3,7 @@ using Assist.Properties.Languages;
 using Assist.Services;
 
 using System.Windows.Media.Imaging;
+using Assist.MVVM.View.Progression.Sectors;
 
 namespace Assist.Controls.Progression.Viewmodels
 {
@@ -69,7 +70,7 @@ namespace Assist.Controls.Progression.Viewmodels
         public async void SetupControl()
         {
             // todo: clean this
-            var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiService.BattlepassId);
+            var bpContract = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(ProgressionBattlepass.Instance.CurrentBattlepassId);
             ContractTierNumber = bpContract.ProgressionLevelReached;
             var xpTier = bpContract.ProgressionLevelReached - 1;
             NeededXp = (xpTier * 750) + 2000;
@@ -79,7 +80,7 @@ namespace Assist.Controls.Progression.Viewmodels
             Progression = (double)CurrentXp / NeededXp * 100;
 
             //Get Reward Information
-            var battlepass = await AssistApplication.ApiService.GetBattlepassAsync();
+            var battlepass = await AssistApplication.ApiService.GetBattlepassAsync(ProgressionBattlepass.Instance.CurrentBattlepassId);
 
             if (ContractTierNumber == 55)
             {

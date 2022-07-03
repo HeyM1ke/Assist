@@ -81,7 +81,9 @@
     <None Remove="Resources\Icons\Timer_Icon.png" />
     <None Remove="Resources\Icons\VP_Icon.png" />
     <None Remove="Resources\Other\Assist_Agents.png" />
-    <None Remove="Resources\Other\Assist_Battlepass.png" />
+    <None Remove="Resources\Other\Assist_BattlepassEP4ACT3.png" />
+    <None Remove="Resources\Other\Assist_BattlepassEP4ACT3_Micro.png" />
+    <None Remove="Resources\Other\Assist_Battlepass_Current.png" />
     <None Remove="Resources\Other\InitBacking.png" />
     <None Remove="Resources\Other\supportBacking.png" />
     <None Remove="Resources\person_icon.png" />
@@ -227,7 +229,9 @@
     </Resource>
     <Resource Include="Resources\Icons\VP_Icon.png" />
     <Resource Include="Resources\Other\Assist_Agents.png" />
-    <Resource Include="Resources\Other\Assist_Battlepass.png" />
+    <Resource Include="Resources\Other\Assist_BattlepassEP4ACT3.png" />
+    <Resource Include="Resources\Other\Assist_BattlepassEP4ACT3_Micro.png" />
+    <Resource Include="Resources\Other\Assist_Battlepass_Current.png" />
     <Resource Include="Resources\Other\InitBacking.png" />
     <Resource Include="Resources\Other\supportBacking.png" />
     <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />

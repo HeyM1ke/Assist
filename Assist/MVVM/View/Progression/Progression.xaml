@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Resources>
-            <Style x:Key="BattlepassBtn" TargetType="{x:Type Button}">
+            <Style x:Key="BattlepassCurrentBtn" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
                 <Setter Property="BorderThickness" Value="1"/>
@@ -33,16 +33,97 @@
                                 <Grid>
 
                                     <Grid>
-                                       
+                                        <Image Source="../../../Resources/Other/Assist_Battlepass_Current.png" Stretch="UniformToFill"/>
+                                    </Grid>
+                                    <DockPanel>
+                                        <StackPanel VerticalAlignment="Bottom">
+                                            <Label  VerticalAlignment="Bottom"
+                                                    Content="EP5 : ACT1"
+                                                    Foreground="White"
+                                                    Padding="0" 
+                                                    FontFamily="{StaticResource WorkSans}"
+                                                    FontSize="12" 
+                                                    FontStyle="Normal" 
+                                                    FontWeight="Medium" 
+                                                    HorizontalAlignment="Center">
+                                                <Label.Effect>
+                                                    <DropShadowEffect/>
+                                                </Label.Effect>
+                                            </Label>
 
-                                        <Image Source="../../../Resources/Other/Assist_Battlepass.png" Stretch="UniformToFill">
-                                            
+                                            <Label DockPanel.Dock="Bottom" 
+                                                   VerticalAlignment="Bottom"
+                                                   Content="{TemplateBinding Tag}"
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource WorkSans}"
+                                                   FontSize="36"
+                                                   Padding="0"
+                                                   FontStyle="Normal"
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center">
+                                                <Label.Effect>
+                                                    <DropShadowEffect/>
+                                                </Label.Effect>
+                                            </Label>
+                                        </StackPanel>
+                                        
+                                    </DockPanel>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"></Setter>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect></DropShadowEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="BattlepassEP4ACT3Btn" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="0" BorderThickness="3" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                <Grid>
+
+                                    <Grid>
+
+
+                                        <Image Source="../../../Resources/Other/Assist_BattlepassEP4ACT3_Micro.png" Stretch="UniformToFill">
+
                                         </Image>
 
                                     </Grid>
                                     <DockPanel>
-                                        <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="{TemplateBinding Tag}" Foreground="White" Padding="4" FontFamily="{StaticResource WorkSans}" Margin="2,2"
-                                           FontSize="36" FontStyle="Normal" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                                        <StackPanel VerticalAlignment="Bottom">
+                                            <Label  VerticalAlignment="Bottom"
+                                                    Content="EP4 : ACT3"
+                                                    Foreground="White"
+                                                    Padding="0" FontFamily="{StaticResource WorkSans}"
+                                                    FontSize="12" FontStyle="Normal" FontWeight="Medium" HorizontalAlignment="Right">
+                                                <Label.Effect>
+                                                    <DropShadowEffect/>
+                                                </Label.Effect>
+                                            </Label>
+                                            <Label  VerticalAlignment="Bottom" Content="{TemplateBinding Tag}" Foreground="White" Padding="0" FontFamily="{StaticResource WorkSans}"
+                                                    FontSize="36" FontStyle="Normal" FontWeight="Bold" HorizontalAlignment="Right">
+                                                <Label.Effect>
+                                                    <DropShadowEffect/>
+                                                </Label.Effect>
+                                            </Label>
+                                        </StackPanel>
+                                        
                                     </DockPanel>
                                 </Grid>
                             </Border>
@@ -102,7 +183,24 @@
             </Style>
         </Grid.Resources>
 
-        <Button Style="{StaticResource BattlepassBtn}" x:Name="BattlepassButton" Width="290" Height="495" Margin="14,0" HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassButton_Click"/>
-        <Button Visibility="Collapsed"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="14,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource BattlepassCurrentBtn}" x:Name="BattlepassButton" Width="290" Height="395" HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassCurrentButton_Click"/>
+                <Button Grid.Row="1" Style="{StaticResource BattlepassEP4ACT3Btn}" x:Name="BattlepassEP4ACT3Button" Width="290" Height="100"  HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassEP4ACT3Button_OnClickButton_Click"/>
+            </Grid>
+
+            <Button Grid.Column="1" Visibility="Collapsed"  Style="{StaticResource AgentBtn}" Width="290" Height="495" HorizontalAlignment="Right" Tag="AGENTS"/>
+
+        </Grid>
+        
     </Grid>
 </Page>

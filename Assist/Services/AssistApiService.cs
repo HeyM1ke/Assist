@@ -75,6 +75,15 @@ public class AssistApiService
 
         return response.Data;
     }
+    public async Task<Battlepass> GetBattlepassAsync(string bpId)
+    {
+        var request = new RestRequest($"/valorant/battlepass/{bpId}");
+        var response = await _client.ExecuteAsync<Battlepass>(request);
+        if (!response.IsSuccessful)
+            return null;
+
+        return response.Data;
+    }
 
     public async Task<NewsArticle[]> GetNewsAsync()
     {

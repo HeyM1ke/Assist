@@ -19,6 +19,7 @@ namespace Assist.MVVM.View.Progression.ViewModels
 
         private Battlepass _battlePass;
 
+
         private string _showcaseName;
         public string ShowcaseName
         {
@@ -40,11 +41,13 @@ namespace Assist.MVVM.View.Progression.ViewModels
             set => SetProperty(ref _showcaseImage, value);
         }
 
+        public string BpActId { get; set; } = AssistApiService.BattlepassId;
+
         public async Task LoadBattlepass(object container)
         {
             var itemContainer = (UniformGrid) container;
-            BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(AssistApiService.BattlepassId);
-            _battlePass = await AssistApplication.ApiService.GetBattlepassAsync();
+            BattlepassContractData = await AssistApplication.AppInstance.CurrentUser.Contracts.GetContract(BpActId);
+            _battlePass = await AssistApplication.ApiService.GetBattlepassAsync(BpActId);
 
             if(_battlePass == null || BattlepassContractData == null || itemContainer is null)
                 return;

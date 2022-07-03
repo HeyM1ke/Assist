@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Assist.MVVM.View.Progression.Sectors;
 
 namespace Assist.MVVM.View.Progression
 {
@@ -25,9 +26,14 @@ namespace Assist.MVVM.View.Progression
             InitializeComponent();
         }
 
-        private void BattlepassButton_Click(object sender, RoutedEventArgs e)
+        private void BattlepassCurrentButton_Click(object sender, RoutedEventArgs e)
         {
-            AssistMainWindow.Current.ContentFrame.Navigate(new Uri("/MVVM/View/Progression/Sectors/ProgressionBattlepass.xaml", UriKind.RelativeOrAbsolute));
+            AssistMainWindow.Current.ContentFrame.Navigate(new ProgressionBattlepass());
+        }
+
+        private void BattlepassEP4ACT3Button_OnClickButton_Click(object sender, RoutedEventArgs e)
+        {
+            AssistMainWindow.Current.ContentFrame.Navigate(new ProgressionBattlepass("d80f3ef5-44f5-8d70-6935-f2840b2d3882"));
         }
     }
 }
