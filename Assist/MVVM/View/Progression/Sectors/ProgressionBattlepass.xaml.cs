@@ -2,6 +2,8 @@
 using Assist.MVVM.View.Progression.ViewModels;
 
 using System.Windows;
+using Assist.Services;
+using System.Web;
 
 namespace Assist.MVVM.View.Progression.Sectors
 {
@@ -14,6 +16,7 @@ namespace Assist.MVVM.View.Progression.Sectors
         public static ProgressionBattlepass Instance;
 
         private readonly BattlepassSectorViewModel _viewModel;
+        public string CurrentBattlepassId { get; set; } = AssistApiService.BattlepassId;
 
         public ProgressionBattlepass()
         {
@@ -21,6 +24,17 @@ namespace Assist.MVVM.View.Progression.Sectors
             DataContext = _viewModel = new BattlepassSectorViewModel();
             InitializeComponent();
         }
+
+        public ProgressionBattlepass(string bpActId)
+        {
+            Instance = this;
+            CurrentBattlepassId = bpActId;
+            DataContext = _viewModel = new BattlepassSectorViewModel();
+            _viewModel.BpActId = CurrentBattlepassId;
+            InitializeComponent();
+        }
+
+        
 
         private async void Battlepass_Loaded(object sender, RoutedEventArgs e)
         {

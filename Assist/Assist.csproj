@@ -7,7 +7,7 @@
     <UseWPF>true</UseWPF>
     <StartupObject>Assist.App</StartupObject>
     <Authors>AssistTeam</Authors>
-    <Version>1.0.0.11</Version>
+    <Version>1.0.0.12</Version>
     <Product>Assist</Product>
     <Description>Valorant Program made by Mike</Description>
     <PackageIcon>assistlogoIcon.png</PackageIcon>
@@ -81,7 +81,9 @@
     <None Remove="Resources\Icons\Timer_Icon.png" />
     <None Remove="Resources\Icons\VP_Icon.png" />
     <None Remove="Resources\Other\Assist_Agents.png" />
-    <None Remove="Resources\Other\Assist_Battlepass.png" />
+    <None Remove="Resources\Other\Assist_BattlepassEP4ACT3.png" />
+    <None Remove="Resources\Other\Assist_BattlepassEP4ACT3_Micro.png" />
+    <None Remove="Resources\Other\Assist_Battlepass_Current.png" />
     <None Remove="Resources\Other\InitBacking.png" />
     <None Remove="Resources\Other\supportBacking.png" />
     <None Remove="Resources\person_icon.png" />
@@ -104,6 +106,9 @@
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_22.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_23.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_24.png" />
+    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_25.png" />
+    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_26.png" />
+    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_27.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_3.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_4.png" />
     <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_5.png" />
@@ -224,7 +229,9 @@
     </Resource>
     <Resource Include="Resources\Icons\VP_Icon.png" />
     <Resource Include="Resources\Other\Assist_Agents.png" />
-    <Resource Include="Resources\Other\Assist_Battlepass.png" />
+    <Resource Include="Resources\Other\Assist_BattlepassEP4ACT3.png" />
+    <Resource Include="Resources\Other\Assist_BattlepassEP4ACT3_Micro.png" />
+    <Resource Include="Resources\Other\Assist_Battlepass_Current.png" />
     <Resource Include="Resources\Other\InitBacking.png" />
     <Resource Include="Resources\Other\supportBacking.png" />
     <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />
@@ -267,6 +274,9 @@
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_22.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_23.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_24.png" />
+	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_25.png" />
+	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_26.png" />
+	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_27.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_3.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_4.png" />
 	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_5.png" />

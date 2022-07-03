@@ -39,6 +39,11 @@ namespace Assist.Controls.Extra
             else
                 AssistSettings.Current.LaunchSettings.ValDscRpcEnabled = true;
 
+            AssistSettings.Current.LaunchSettings.ValPatchline = AssistApplication.AppInstance.CurrentProfile
+                .entitlements[PatchlineComboBox.SelectedIndex].PatchlinePath;
+
+            
+
             PopupSystem.KillPopups();
         }
 
@@ -51,13 +56,28 @@ namespace Assist.Controls.Extra
                     Content = patchline.PatchlineName
                 });
             }
-            PatchlineComboBox.SelectedIndex = 0;
+
+            var x= AssistApplication.AppInstance.CurrentProfile.entitlements.Find(_x => _x.PatchlinePath == AssistSettings.Current.LaunchSettings.ValPatchline);
+
+            if (x != null)
+            {
+                PatchlineComboBox.SelectedIndex = AssistApplication.AppInstance.CurrentProfile.entitlements.IndexOf(x);
+            }
+            else
+            {
+                PatchlineComboBox.SelectedIndex = 0;
+            }
+
+            
+
         }
 
         private void PatchlineComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AssistSettings.Current.LaunchSettings.ValPatchline = AssistApplication.AppInstance.CurrentProfile
                 .entitlements[PatchlineComboBox.SelectedIndex].PatchlinePath;
+
+            Log.Information($"Selected Patchline: {AssistApplication.AppInstance.CurrentProfile.entitlements[PatchlineComboBox.SelectedIndex].PatchlineName} : Patchline path: {AssistApplication.AppInstance.CurrentProfile.entitlements[PatchlineComboBox.SelectedIndex].PatchlinePath}");
         }
     }
 }

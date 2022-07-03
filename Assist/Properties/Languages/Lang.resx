@@ -164,6 +164,15 @@ If you get Error 403, this is a Riot Login Error that we cannot fix, we recommen
   <data name="DefaultAcc_Label" xml:space="preserve">
     <value>Default Account:</value>
   </data>
+  <data name="Forbidden_Message" xml:space="preserve">
+    <value>Hello, If you are seeing this you have received a Forbidden Error while logging in. This is not something we can fix. This is a block by Riot. We are very sorry for this problem and we wish that one day there will be a fix. For now, there are only a few fixes that the community has thought of. 
+
+First: Update your Windows, this fixes the problem majority of the time.
+
+Second: Reset your Router.
+
+Otherwise, we are sorry and hope that one day you can use Assist.</value>
+  </data>
   <data name="InitPage_Loading" xml:space="preserve">
     <value>Loading...</value>
     <comment>Text on InitPage</comment>
@@ -200,6 +209,9 @@ If you get Error 403, this is a Riot Login Error that we cannot fix, we recommen
   <data name="ProfileLaunchControl_SwitchProfileHover" xml:space="preserve">
     <value>Switch Profile</value>
     <comment>Text on Switch Profile Button Hover</comment>
+  </data>
+  <data name="Progression_Agents" xml:space="preserve">
+    <value>AGENTS</value>
   </data>
   <data name="Progression_Battlepass" xml:space="preserve">
     <value>BATTLEPASS</value>

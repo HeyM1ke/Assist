@@ -20,7 +20,7 @@ public class AssistApiService
 {
 
     public const string BaseUrl = "https://api.assistapp.dev";
-    public const string BattlepassId = "d80f3ef5-44f5-8d70-6935-f2840b2d3882";
+    public const string BattlepassId = "99ac9283-4dd3-5248-2e01-8baf778affb4";
 
     private const string FailedNewsArticleImageUrl =
         "https://i.kym-cdn.com/entries/icons/original/000/037/349/Screenshot_14.jpg";
@@ -69,6 +69,15 @@ public class AssistApiService
     public async Task<Battlepass> GetBattlepassAsync()
     {
         var request = new RestRequest($"/valorant/battlepass/{BattlepassId}");
+        var response = await _client.ExecuteAsync<Battlepass>(request);
+        if (!response.IsSuccessful)
+            return null;
+
+        return response.Data;
+    }
+    public async Task<Battlepass> GetBattlepassAsync(string bpId)
+    {
+        var request = new RestRequest($"/valorant/battlepass/{bpId}");
         var response = await _client.ExecuteAsync<Battlepass>(request);
         if (!response.IsSuccessful)
             return null;

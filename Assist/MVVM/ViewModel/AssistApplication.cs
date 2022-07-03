@@ -80,6 +80,17 @@ namespace Assist.MVVM.ViewModel
             Log.Error("Closed Error Window");
         }
 
+        public void OpenAssistForbidWindow()
+        {
+
+            Log.Error($"Opened Forbidden Window Method Called");
+            var errorS = new RiotForbidWindow();
+            Log.Error("Opened Forbidden Window");
+            Application.Current.MainWindow.Close();
+            errorS.Show();
+            Log.Error("Closed Forbidden Window");
+        }
+
         public void OpenStartupWindow()
         {
             Application.Current.MainWindow.Visibility = Visibility.Hidden;
