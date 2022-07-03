@@ -198,6 +198,21 @@ namespace Assist.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello, If you are seeing this you have received a Forbidden Error while logging in. This is not something we can fix. This is a block by Riot. We are very sorry for this problem and we wish that one day there will be a fix. For now, there are only a few fixes that the community has thought of. 
+        ///
+        ///First: Update your Windows, this fixes the problem majority of the time.
+        ///
+        ///Second: Reset your Router.
+        ///
+        ///Otherwise, we are sorry and hope that one day you can use Assist..
+        /// </summary>
+        public static string Forbidden_Message {
+            get {
+                return ResourceManager.GetString("Forbidden_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
         public static string InitPage_Loading {

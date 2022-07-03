@@ -81,6 +81,11 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
                 {
                     Log.Error("Catched a ValNet exception. ({Message}) StatusCode: {StatusCode}", valnetException.Message, valnetException.RequestStatusCode);
                     Log.Error("Content: {Content}", valnetException.RequestContent);
+
+                    if (valnetException.RequestStatusCode == HttpStatusCode.Forbidden)
+                    {
+                        AssistApplication.AppInstance.OpenAssistForbidWindow();
+                    }
                 }
                 return;
             }

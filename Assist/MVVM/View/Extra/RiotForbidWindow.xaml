@@ -1,15 +1,17 @@
-﻿<Window x:Class="Assist.MVVM.View.Extra.MaintenanceWindow"
+﻿<Window x:Class="Assist.MVVM.View.Extra.RiotForbidWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lang="clr-namespace:Assist.Properties.Languages"
         xmlns:local="clr-namespace:Assist.MVVM.View.Extra"
         mc:Ignorable="d"
-        Title="MaintenanceWindow" 
-        Height="450" 
-        Width="800" 
+        Title="RiotForbidWindow"
+        Height="550" 
+        Width="400" 
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" 
+        
         Background="Transparent" 
         AllowsTransparency="True">
     <Grid Background="Transparent">
@@ -20,8 +22,8 @@
 
         <Border x:Name="windowBorder" Grid.Row="0" Background="{StaticResource AssistBackground}" CornerRadius="3,3,0,0" BorderThickness="0" BorderBrush="Transparent" MouseDown="windowBorder_MouseDown">
             <Grid>
-                <Label Content="Assist Maintenance" Foreground="White" FontFamily="{StaticResource WorkSans}" Opacity=".5"/>
-                
+                <Label Content="Assist: Riot Forbidden" Foreground="White" FontFamily="{StaticResource WorkSans}" Opacity=".5"/>
+
             </Grid>
         </Border>
 
@@ -37,9 +39,14 @@
                                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                     <Grid>
                                         <Rectangle Fill="{StaticResource AssistNavigationButton_SelectedHighlightOutline}" Height="1" Width="50" VerticalAlignment="Bottom" Margin="0,-1"></Rectangle>
-                                        <Label Content="{TemplateBinding Content}" Foreground="White"
-                                                           FontFamily="{StaticResource WorkSans}" FontWeight="Normal"
-                                                           Padding="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="10"></Label>
+                                        <Label Content="{TemplateBinding Content}"
+                                               Foreground="White"
+                                               FontFamily="{StaticResource WorkSans}"
+                                               FontWeight="Normal"
+                                               Padding="0" 
+                                               VerticalAlignment="Center"
+                                               HorizontalContentAlignment="Center" 
+                                               FontSize="10"/>
                                     </Grid>
                                 </Border>
                             </ControlTemplate>
@@ -59,15 +66,28 @@
                 <RowDefinition/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <StackPanel Height="375">
+            <StackPanel Margin="10">
                 <Image Source="../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="100"></Image>
-                <Label Grid.Row="0" Content="MAINTENANCE" FontSize="14" Foreground="White" FontWeight="SemiBold" FontFamily="{StaticResource WorkSans}" HorizontalContentAlignment="Center" Padding="0"></Label>
-                <TextBox Grid.Row="0" x:Name="errorText" IsReadOnly="True" Text=""
-                         Foreground="White" Background="{StaticResource AssistBackgroundLight}" Margin="10" BorderThickness="0"
-                         FontSize="16" TextWrapping="Wrap" TextAlignment="Center" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" FontFamily="{StaticResource WorkSans}" Height="240" Padding="10"/>
+                <Label Grid.Row="0" Content="ALERT" FontSize="14" Foreground="White" FontWeight="SemiBold" FontFamily="{StaticResource WorkSans}" HorizontalContentAlignment="Center" Padding="0"></Label>
+                <TextBox Grid.Row="0" 
+                         x:Name="errorText"
+                         IsReadOnly="True"
+                         Text="{x:Static lang:Lang.Forbidden_Message}"
+                         Foreground="White" 
+                         Background="{StaticResource AssistBackgroundLight}" 
+                         Margin="10" 
+                         BorderThickness="0"
+                         FontSize="16" 
+                         TextWrapping="Wrap" 
+                         TextAlignment="Center" 
+                         SelectionTextBrush="{x:Null}" 
+                         BorderBrush="{x:Null}" 
+                         FontFamily="{StaticResource WorkSans}" 
+                         Height="330" 
+                         Padding="10"/>
             </StackPanel>
-            
-            <Button Grid.Row="1" x:Name="closeOkBTn" Content="Close" Click="closeOkBTn_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="80" Height="30"></Button>
+
+            <Button Grid.Row="1" x:Name="quitBtn" Content="Quit" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="80" Height="30" Click="quitBtn_Click"></Button>
         </Grid>
     </Grid>
 </Window>
