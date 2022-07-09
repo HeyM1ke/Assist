@@ -124,7 +124,7 @@
     <value>ログイン</value>
   </data>
   <data name="Authentication_MultifactorFail" xml:space="preserve">
-    <value>マルチファクターコードが正しくありません。</value>
+    <value>二要素認証コードが正しくありません。</value>
   </data>
   <data name="Authentication_PasswordPlaceholder" xml:space="preserve">
     <value>パスワード</value>
@@ -144,7 +144,7 @@
   <data name="Authentication_UsernameLogin_Notice" xml:space="preserve">
     <value>ライアットゲームズのユーザー名とパスワードでログインします。すべてのログイン情報は、RiotサーバーとRiotサーバーにのみ送信されます。
 
-エラー403が発生した場合、これは修正できないRiot Login Errorです。エラーを修正し、AssistでログインできるようにWindowsを更新することをお勧めします。</value>
+エラー403が発生した場合、修正できないRiot ログインエラーです。エラーを修正してAssistでログインできるように、Windowsを更新することをお勧めします。</value>
   </data>
   <data name="Authentication_UsernamePlaceholder" xml:space="preserve">
     <value>ユーザー名</value>
@@ -173,7 +173,7 @@
     <comment>Text on Dashboard Button Hover</comment>
   </data>
   <data name="Navigation_ProgressionHover" xml:space="preserve">
-    <value>プログレッション</value>
+    <value>進捗状況</value>
   </data>
   <data name="Navigation_SettingsHover" xml:space="preserve">
     <value>設定</value>
@@ -187,7 +187,7 @@
     <value>で終わる</value>
   </data>
   <data name="NightMarket_Name" xml:space="preserve">
-    <value>夜市</value>
+    <value>ナイトマーケット</value>
   </data>
   <data name="ProfileLaunchControl_LaunchSettingsHover" xml:space="preserve">
     <value>起動設定</value>
@@ -223,7 +223,7 @@
     <value>ウィンドウサイズ：</value>
   </data>
   <data name="SettingsTab_About" xml:space="preserve">
-    <value>About</value>
+    <value>Assistについて</value>
   </data>
   <data name="SettingsTab_General" xml:space="preserve">
     <value>一般</value>
@@ -235,7 +235,7 @@
     <value>戻る</value>
   </data>
   <data name="StorePopup_ChromaLabel" xml:space="preserve">
-    <value>クロマス</value>
+    <value>クロマ</value>
   </data>
   <data name="StorePopup_LevelsLabel" xml:space="preserve">
     <value>レベル</value>
@@ -244,15 +244,15 @@
     <value>注目のバンドル</value>
   </data>
   <data name="Store_FeaturedDailyLabel" xml:space="preserve">
-    <value>毎日のオファー</value>
+    <value>今日のオファー</value>
   </data>
   <data name="Support_ButtonText" xml:space="preserve">
     <value>プロジェクトをサポートしてください！</value>
   </data>
   <data name="Support_Description" xml:space="preserve">
-    <value>アシストは常に無料でオープンソースになります。プロジェクトをサポートすることを選択すると、開発を継続し、いくつかのよりユニークな機能を作成することができます。ありがとうございました&lt;3</value>
+    <value>アシストは常に無料でオープンソースです。プロジェクトをサポートすることを選択すると、開発を継続し、いくつかのよりユニークな機能を作成することができます。あなたの寄付に感謝します！&lt;3</value>
   </data>
   <data name="Support_Title" xml:space="preserve">
-    <value>サポートアシスト！</value>
+    <value>アシストをサポート！</value>
   </data>
 </root>
