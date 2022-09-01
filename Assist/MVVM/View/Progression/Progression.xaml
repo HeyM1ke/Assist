@@ -38,7 +38,7 @@
                                     <DockPanel>
                                         <StackPanel VerticalAlignment="Bottom">
                                             <Label  VerticalAlignment="Bottom"
-                                                    Content="EP5 : ACT1"
+                                                    Content="EP5 : ACT2"
                                                     Foreground="White"
                                                     Padding="0" 
                                                     FontFamily="{StaticResource WorkSans}"
@@ -67,6 +67,71 @@
                                             </Label>
                                         </StackPanel>
                                         
+                                    </DockPanel>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Background" Value="{StaticResource AssistNavigationButton_SelectedFill}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_SelectedOutline}"></Setter>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect></DropShadowEffect>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="BattlepassEP5ACT1" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{StaticResource AssistBackgroundLight}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AssistNavigationButton_NotSelectedOutline}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="0" BorderThickness="3" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                <Grid>
+
+                                    <Grid>
+                                        <Image Source="../../../Resources/Other/Assist_BattlepassEP5ACT1.png" Stretch="UniformToFill"/>
+                                    </Grid>
+                                    <DockPanel>
+                                        <StackPanel VerticalAlignment="Bottom">
+                                            <Label  VerticalAlignment="Bottom"
+                                                    Content="EP5 : ACT1"
+                                                    Foreground="White"
+                                                    Padding="0" 
+                                                    FontFamily="{StaticResource WorkSans}"
+                                                    FontSize="12" 
+                                                    FontStyle="Normal" 
+                                                    FontWeight="Medium" 
+                                                    HorizontalAlignment="Center">
+                                                <Label.Effect>
+                                                    <DropShadowEffect/>
+                                                </Label.Effect>
+                                            </Label>
+
+                                            <Label DockPanel.Dock="Bottom" 
+                                                   VerticalAlignment="Bottom"
+                                                   Content="{TemplateBinding Tag}"
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource WorkSans}"
+                                                   FontSize="36"
+                                                   Padding="0"
+                                                   FontStyle="Normal"
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center">
+                                                <Label.Effect>
+                                                    <DropShadowEffect/>
+                                                </Label.Effect>
+                                            </Label>
+                                        </StackPanel>
+
                                     </DockPanel>
                                 </Grid>
                             </Border>
@@ -194,7 +259,10 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Style="{StaticResource BattlepassCurrentBtn}" x:Name="BattlepassButton" Width="290" Height="395" HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassCurrentButton_Click"/>
+               <StackPanel Orientation="Horizontal">
+                   <Button Style="{StaticResource BattlepassCurrentBtn}" x:Name="BattlepassButton" Width="290" Height="395" HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassCurrentButton_Click" Margin="5,0"/>
+                    <Button Style="{StaticResource BattlepassEP5ACT1}" x:Name="BattlepassEP5ACT1Button" Width="290" Height="395" HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassEP5ACT1Button_OnClickButton_Click" Margin="5,0"/>
+                </StackPanel>
                 <Button Grid.Row="1" Style="{StaticResource BattlepassEP4ACT3Btn}" x:Name="BattlepassEP4ACT3Button" Width="290" Height="100"  HorizontalAlignment="Left" Tag="{x:Static lang:Lang.Progression_Battlepass}" Click="BattlepassEP4ACT3Button_OnClickButton_Click"/>
             </Grid>
 

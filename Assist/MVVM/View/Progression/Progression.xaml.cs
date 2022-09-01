@@ -30,6 +30,10 @@ namespace Assist.MVVM.View.Progression
         {
             AssistMainWindow.Current.ContentFrame.Navigate(new ProgressionBattlepass());
         }
+        private void BattlepassEP5ACT1Button_OnClickButton_Click(object sender, RoutedEventArgs e)
+        {
+            AssistMainWindow.Current.ContentFrame.Navigate(new ProgressionBattlepass("99ac9283-4dd3-5248-2e01-8baf778affb4"));
+        }
 
         private void BattlepassEP4ACT3Button_OnClickButton_Click(object sender, RoutedEventArgs e)
         {
