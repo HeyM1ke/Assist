@@ -20,7 +20,7 @@ public class AssistApiService
 {
 
     public const string BaseUrl = "https://api.assistapp.dev";
-    public const string BattlepassId = "99ac9283-4dd3-5248-2e01-8baf778affb4";
+    public const string BattlepassId = "2b3a941d-4b85-a0df-5beb-8897224d290a";
 
     private const string FailedNewsArticleImageUrl =
         "https://i.kym-cdn.com/entries/icons/original/000/037/349/Screenshot_14.jpg";
