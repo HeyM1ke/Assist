@@ -25,7 +25,7 @@ namespace Assist.MVVM.ViewModel
         public static AssistApplication AppInstance { get; } = new();
 
         public static string AgentFormat { get; set; } =
-            "RiotClient/58.0.0.4640299.4552318 {0} (Windows;10;;Professional, x64)";
+            "RiotClient/60.0.6.4770705.4749685 {0} (Windows;10;;Professional, x64)";
         public TokenServiceBackgroundService TokenService { get; set; }
         // Control Models
 
