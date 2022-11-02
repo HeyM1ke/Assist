@@ -245,6 +245,52 @@
             </Grid>
 
             <Grid
+                x:Name="BetaMover"
+                Margin="10"
+                VerticalAlignment="Top"
+                DockPanel.Dock="Top"
+                Visibility="Visible">
+                <Grid.Resources>
+                    <Style x:Key="upgrade"
+                           TargetType="Button">
+                        <Setter Property="Background" Value="{StaticResource ProfileLaunchPlayButton_SelectedFill}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource ProfileLaunchPlayButton_SelectedOutline}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border
+                                        CornerRadius="0"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="1">
+                                        <Label
+                                            Content="UPGRADE"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Center"
+                                            FontFamily="{StaticResource WorkSans}"
+                                            FontWeight="Bold"
+                                            FontSize="24"
+                                            Foreground="White"></Label>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ProfileLaunchPlayButton_HoverHighlightFill}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource ProfileLaunchPlayButton_HoverHighlightOutline}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+
+
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <Button Name="UpgradeBTN" Style="{StaticResource upgrade}" Visibility="Hidden"></Button>
+
+                
+            </Grid>
+            <Grid
                 x:Name="AccSelector"
                 Margin="10"
                 VerticalAlignment="Top"

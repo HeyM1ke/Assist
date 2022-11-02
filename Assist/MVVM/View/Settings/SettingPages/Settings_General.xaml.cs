@@ -3,6 +3,8 @@ using Assist.Settings;
 
 using System;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Serilog;
@@ -21,19 +23,32 @@ namespace Assist.MVVM.View.Settings.SettingPages
             InitializeComponent();
         }
 
-        private void Settings_General_Loaded(object sender, RoutedEventArgs e)
+        private async void Settings_General_Loaded(object sender, RoutedEventArgs e)
         {
             WindowSizeComboBox.SelectedIndex = (int)AssistSettings.Current.Resolution;
             LanguageChangeComboBox.SelectedIndex = (int)AssistSettings.Current.Language;
             SoundVol_Slider.Value = AssistSettings.Current.SoundVolume;
             SoundVol_Label.Content = Convert.ToInt32(SoundVol_Slider.Value * 100) + "%";
             AccountSelectToggle.IsChecked = AssistSettings.Current.UseAccountLaunchSelection;
-
+            UpgradeBTN.Visibility = await CheckUpgrade();
         }
 
         #region Language Selection Settings
 
         private bool _initialLanguageSelectionChange = true;
+
+        private async Task<Visibility> CheckUpgrade()
+        {
+            string upgradeURL = "https://api.assistapp.dev/config/upgrade";
+            var c = new HttpClient();
+            var r = await c.GetAsync(upgradeURL);
+            if(!r.IsSuccessStatusCode)
+                return Visibility.Collapsed;
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
 
         private void LanguageChangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

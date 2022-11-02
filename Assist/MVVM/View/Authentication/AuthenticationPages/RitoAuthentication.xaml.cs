@@ -49,8 +49,8 @@ namespace Assist.MVVM.View.Authentication.AuthenticationPages
         private async void SourceChanged(object? sender, CoreWebView2SourceChangedEventArgs e)
         {
             var redirectUrl = WebView.Source.ToString();
-
-            if (redirectUrl.Contains("https://playvalorant.com/opt_in/#"))
+            Log.Information(redirectUrl);
+            if (redirectUrl.Contains("https://playvalorant.com/opt_in#"))
             {
                 await _viewModel.GetCookies(this.WebView);
 

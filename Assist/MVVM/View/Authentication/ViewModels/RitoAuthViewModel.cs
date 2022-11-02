@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Assist.MVVM.ViewModel;
+using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 using Serilog;
 
@@ -16,7 +17,10 @@ namespace Assist.MVVM.View.Authentication.ViewModels
         public Cookie AuthCookie;
         public async Task GetCookies(WebView2 webView)
         {
+            
             var result = await webView.CoreWebView2.CookieManager.GetCookiesAsync(null);
+
+            result.ForEach(x => Log.Information(x.Name));
             var c = result.Find(_c => _c.Name == "ssid");
 
             if (c != null)
