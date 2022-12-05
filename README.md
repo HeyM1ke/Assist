@@ -4,7 +4,7 @@
 </h1>
 
 <h1 align="center">Assist</h2>
-<h3 align="center">C# VALORANT Extension Launcher that adds contains different features regarding VALORANT.</h3>
+<h3 align="center">C# VALORANT Extension Launcher that adds different features regarding VALORANT.</h3>
 <h5 align="center">Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games.</h5>
 <h5 align="center">Riot Games does not endorse or sponsor this project.</h5>
 
@@ -28,7 +28,7 @@ Well, why not? Assist was created from the culmination of different ideas from m
 
 ## Features
   * Dashboard
-    - A Overview of your account and everything going on with Valorant.
+    - An Overview of your account and everything going on with Valorant.
   * Account Switcher
     - Allows you to add up to 5 accounts to assist, allowing you to hotswap between accounts and launch Valorant without having to login everytime.
   * Progression
