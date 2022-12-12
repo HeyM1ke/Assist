@@ -17,7 +17,7 @@
 
 <p align="center">
   </a>
-  <a href="https://github.com/AssistTeam/AssistInstaller/releases/latest/download/AssistInstaller.exe"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
+  <a href="https://github.com/HeyM1ke/Assist/releases/download/V1.0.0/AssistSetup.exe"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
   </p>
 
 
