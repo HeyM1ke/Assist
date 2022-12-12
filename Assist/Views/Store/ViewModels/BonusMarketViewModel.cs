@@ -42,7 +42,7 @@ namespace Assist.Views.Store.ViewModels
                 thisList.Add(new NightMarketOffer()
                 {
                     SkinName = skinInfo.DisplayName,
-                    SkinImage = skinInfo.Levels[0].DisplayIcon,
+                    SkinImage = skinInfo.DisplayIcon,
                     SkinDiscount = $"{offer.DiscountPercent}%",
                     OriginalPrice = $"{offer.Offer.Cost.ValorantPointCost}",
                     DiscountedPrice = $"{offer.DiscountCosts.ValorantPointCost}"

@@ -45,7 +45,7 @@
                                                        PointerPressed="InfoSettingsBtn_OnPointerPressed"/>
                 </StackPanel>
 
-				<TextBlock Text="Version 1.0.4"
+				<TextBlock Text="Version 1.0.2"
                            Margin="10"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Bottom"
