@@ -18,7 +18,7 @@
                   <TextBlock Text="NIGHT MARKET"
                              FontFamily="{StaticResource WorkSans}"
                              FontWeight="Black"
-                             FontSize="40"
+                             FontSize="32"
                              TextWrapping="Wrap"
                              Width="200"
                              Padding="0"
