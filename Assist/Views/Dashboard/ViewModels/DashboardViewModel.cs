@@ -263,36 +263,14 @@ namespace Assist.Views.Dashboard.ViewModels
                         // if not 
                         if (ourTeam.Won)
                         {
-                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
-                            if (mode.ToLower().Equals("deathmatch")) // if deathmatch --Shiick
-                            {
-                                control.MatchScore = $"{currentP.Stats.Kills} - {currentP.Stats.Kills}";
-                                control.ResultText = Properties.Resources.Profile_WonText;
-                                control.MatchWin = true;
-                            }
-                            else
-                            {
-                                control.MatchScore = $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}";
-                                control.ResultText = Properties.Resources.Profile_WonText;
-                                control.MatchWin = true;
-                            }
+                            control.MatchScore = $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}";
+                            control.ResultText = Properties.Resources.Profile_WonText;
+                            control.MatchWin = true;
                         }
-                        else
-                        {
-                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
-                            if (mode.ToLower().Equals("deathmatch"))  // if deathmatch --Shiick
-                            {
-                                var topPlayerKills = match.Players.Max(player => player.Stats.Kills); // get MVP kill count
-                                control.MatchScore = $"{currentP.Stats.Kills} - {topPlayerKills}";
-                                control.ResultText = Properties.Resources.Profile_LossText;
-                                control.MatchWin = false;
-                            }
-                            else
-                            {
-                                control.MatchScore = $"{currentP.Stats.Kills} - {currentP.Stats.Kills}";
-                                control.ResultText = Properties.Resources.Profile_LossText;
-                                control.MatchWin = false;
-                            }
+                        else{
+                            control.MatchScore = $"{notOurTeam.RoundsWon} - {ourTeam.RoundsWon}";
+                            control.ResultText = Properties.Resources.Profile_LossText;
+                            control.MatchWin = false;
                         }
                 }
 
