@@ -84,17 +84,16 @@ namespace Assist.Views.Dashboard.ViewModels
 
                 if (missionData == null) { continue; } // Sanity check, got annoyed at the warning. --Shiick
 
-                if (missionData.XpGrant > 2000) // Dirty fix but it does what it's supposed to do... --Shiick
+                if (missionData.XpGrant == 2000) { continue; }// Dirty fix but it does what it's supposed to do... --Shiick
+
+                controls.Add(new MissionControl()
                 {
-                    controls.Add(new MissionControl()
-                    {
-                        Title = missionData.Title,
-                        CurrentProgress = weeklyMissions[i].Objectives.First().Value,
-                        MaxProgress = missionData.ProgressToComplete,
-                        XpGrantAmount = $"{missionData.XpGrant}XP",
-                        PreviewText = $"{weeklyMissions[i].Objectives.First().Value}/{missionData.ProgressToComplete}"
-                    });
-                }
+                    Title = missionData.Title,
+                    CurrentProgress = weeklyMissions[i].Objectives.First().Value,
+                    MaxProgress = missionData.ProgressToComplete,
+                    XpGrantAmount = $"{missionData.XpGrant}XP",
+                    PreviewText = $"{weeklyMissions[i].Objectives.First().Value}/{missionData.ProgressToComplete}"
+                });
             }
 
             return controls;
