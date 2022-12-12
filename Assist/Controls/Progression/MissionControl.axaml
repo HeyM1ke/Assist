@@ -1,0 +1,60 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Progression">
+  <Design.PreviewWith>
+    <Grid Background="{DynamicResource AssistBlack}">
+        <controls:MissionControl Width="205"
+                                 Height="25"/>
+	</Grid>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|MissionControl">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Border>
+              <Grid RowDefinitions="*,*">
+
+                  <Grid>
+                      <TextBlock Text="{TemplateBinding Title}"
+                                 FontFamily="{StaticResource WorkSans}"
+                                 FontSize="{TemplateBinding TitleFontSize}"
+                                 FontWeight="Regular"
+                                 HorizontalAlignment="Left"
+                                 TextWrapping="WrapWithOverflow"
+                                 Foreground="{DynamicResource MissionsTextColor}"/>
+
+                      <TextBlock Text="{TemplateBinding XpGrantAmount}"
+                                 FontFamily="{StaticResource WorkSans}"
+                                 FontSize="12"
+                                 FontWeight="Light"
+                                 HorizontalAlignment="Right"
+                                 Foreground="{DynamicResource MissionsTextColor}"/>
+                  </Grid>
+
+                  <Grid Row="1">
+                      
+					  <ProgressBar Value="{TemplateBinding CurrentProgress}"
+                                   Foreground="{DynamicResource MissionsFillBarColor}"
+                                   Background="{DynamicResource MissionsBackgroundBarColor}"
+                                   Padding="0"
+                                   Height="8"
+                                   CornerRadius="4"
+                                   Maximum="{TemplateBinding MaxProgress}"
+                      >
+                      </ProgressBar>
+
+                      <TextBlock Text="{TemplateBinding PreviewText}"
+                                 FontFamily="{StaticResource WorkSans}"
+                                 FontSize="8"
+                                 FontWeight="Light"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Foreground="{DynamicResource MissionsTextColor}"/>
+                  </Grid>
+              </Grid>
+          </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

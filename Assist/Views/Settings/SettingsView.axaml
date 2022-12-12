@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:settings="clr-namespace:Assist.Controls.Settings"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="590"
+             x:Class="Assist.Views.Settings.SettingsView"
+             Initialized="SettingsView_OnInitialized">
+    <Grid Margin="10">
+        <Grid Background="{DynamicResource AssistGray}" 
+              Margin="65,40"
+              ColumnDefinitions="230, *">
+            
+            <Grid x:Name="SettingsButtonGrid"
+                  Background="{DynamicResource SettingsNavBackground}">
+                <StackPanel Margin="10" Spacing="7">
+                    <StackPanel.Styles>
+                        <Style Selector="settings|SettingsNavigationButton">
+                            <Setter Property="Height" Value="45"></Setter>
+                        </Style>
+                        
+                    </StackPanel.Styles>
+                    <settings:SettingsNavigationButton x:Name="GeneralSettingsBtn" 
+                                                       Source="../../Resources/Icons/Settings_Icon.png"
+                                                       Title="General"
+                                                       PointerPressed="GeneralSettingsBtn_OnPointerPressed"/>
+
+                    <settings:SettingsNavigationButton x:Name="AccountSettingsBtn"
+                                                       Source="../../Resources/Icons/User_Icon.png"
+                                                       Title="Accounts"
+                                                       PointerPressed="AccountSettingsBtn_OnPointerPressed"/>
+
+                    <settings:SettingsNavigationButton x:Name="AssistSettingsBtn"
+                                                       Source="../../Resources/Icons/Assist_Logo_White.png"
+                                                       Title="Assist Account"
+                                                       IsVisible="False"
+                                                       PointerPressed="AssistSettingsBtn_OnPointerPressed"/>
+
+                    <settings:SettingsNavigationButton x:Name="InfoSettingsBtn"
+                                                       Source="../../Resources/Icons/Fist_Icon.png"
+                                                       Title="Information"
+                                                       IsVisible="False"
+                                                       PointerPressed="InfoSettingsBtn_OnPointerPressed"/>
+                </StackPanel>
+
+				<TextBlock Text="Version 1.0.2"
+                           Margin="10"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontWeight="Medium"
+                           FontSize="12"
+                           Opacity=".5"
+                           Foreground="white"/>
+            </Grid>
+
+			<Grid Grid.Column="1">
+				<TransitioningContentControl x:Name="ContentControl"></TransitioningContentControl>
+            </Grid>
+            
+        </Grid>
+    </Grid>
+</UserControl>

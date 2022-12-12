@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Progression">
+  <Design.PreviewWith>
+    <controls:MissionsView Width="225" Height="150">
+        <controls:MissionsView.Content>
+            <StackPanel Spacing="16" >
+                <controls:MissionControl></controls:MissionControl>
+                <controls:MissionControl></controls:MissionControl>
+                <controls:MissionControl></controls:MissionControl>
+			</StackPanel>
+
+            
+        </controls:MissionsView.Content>
+    </controls:MissionsView>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|MissionsView">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource MissionsBackground}">
+            <Grid Margin="10">
+                <DockPanel Dock="Top">
+                    <StackPanel>
+                        <TextBlock Text="{TemplateBinding Title}"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource MissionsText}"
+                                   FontWeight="Bold"
+                                   DockPanel.Dock="Top"
+                                   Padding="0,0,0,3"></TextBlock>
+                        <Rectangle Fill="{DynamicResource MissionsLineColor}"
+                                   Height="1"
+                                   />
+                        
+                        
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              Margin="0,8"/>
+                        
+					</StackPanel>
+                </DockPanel>
+                <DockPanel>
+                    
+                </DockPanel>
+            </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

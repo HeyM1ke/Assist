@@ -1,115 +1,76 @@
-﻿using Assist.Enums;
-using Assist.MVVM.Model;
-using Assist.MVVM.ViewModel;
-
-using Serilog;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Objects.Enums;
+using Assist.ViewModels;
+using Avalonia.Platform;
+using DynamicData;
+using ReactiveUI;
+using Serilog;
+using Serilog.Core;
 
 namespace Assist.Settings
 {
-    internal class AssistSettings : ViewModelBase
+    internal class AssistSettings : INotifyPropertyChanged
     {
+        
+        public static string SettingsFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AssistX");
+        public static string ResourcesFolderPath = Path.Combine(SettingsFolderPath, "Resources");
+        public AssistSettings()
+        {
+            Directory.CreateDirectory(ResourcesFolderPath);
+        }
 
+        public string ApplicationVersion => $"V{Process.GetCurrentProcess().MainModule.FileVersionInfo.FileVersion}";
         public const int maxAccountCount = 5;
-
-#if DEBUG
-        public static string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "AssistSettings_DEBUG.json");
-#else
-        public static string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Assist", "AssistSettings.json");
-#endif
-
-        public static AssistSettings Current { get; set; }
+        public static AssistSettings Current { get; set; } = new AssistSettings();
         public string RiotClientInstallPath { get; set; }
 
-        static AssistSettings()
+        private bool _languageSelected = false;
+
+        public bool LanguageSelected
         {
-            Current = new AssistSettings();
+            get => _languageSelected;
+            set => this.SetProperty(ref _languageSelected, value);
         }
 
-        private LaunchSettings _launchSettings = new();
-        public LaunchSettings LaunchSettings
+        private ELanguage _language;
+        public ELanguage Language { get => _language; set => this.SetProperty(ref _language, value); }
+
+        private EResolution _resolution = EResolution.R720;
+        public EResolution SelectedResolution
         {
-            get => _launchSettings;
-            set => SetProperty(ref _launchSettings, value);
+            get => _resolution;
+            set => this.SetProperty(ref _resolution, value);
         }
 
-        private List<ProfileSetting> _profiles = new();
-        public List<ProfileSetting> Profiles
+        private List<ProfileSettings> _profiles = new List<ProfileSettings>();
+        public List<ProfileSettings> Profiles
         {
             get => _profiles;
-            set => SetProperty(ref _profiles, value);
+            set => this.SetProperty(ref _profiles, value);
         }
 
         private string _defaultAccount;
         public string DefaultAccount
         {
             get => _defaultAccount;
-            set => SetProperty(ref _defaultAccount, value);
+            set => this.SetProperty(ref _defaultAccount, value);
         }
 
-        private bool _bNewUser = true;
-        public bool bNewUser
-        {
-            get => _bNewUser;
-            set => SetProperty(ref _bNewUser, value);
-        }
-
-        private EWindowSize _resolution = EWindowSize.R576;
-        public EWindowSize Resolution {
-            get => _resolution;
-            set => SetProperty(ref _resolution, value);
-        }
-
-        private ELanguage _language = 0;
-        public ELanguage Language
-        {
-            get => _language;
-            set => SetProperty(ref _language, value);
-        }
-
-        private bool _setupLangSelected = false;
-        public bool SetupLangSelected
-        {
-            get => _setupLangSelected;
-            set => SetProperty(ref _setupLangSelected, value);
-        }
-
-        private double _soundVolume = 0.5;
-        public double SoundVolume
-        {
-            get => _soundVolume; 
-            set => SetProperty(ref _soundVolume, value);
-        }
-
-        private bool _useAccountLaunchSelection = false;
-        public bool UseAccountLaunchSelection
-        {
-            get => _useAccountLaunchSelection;
-            set => SetProperty(ref _useAccountLaunchSelection, value);
-        }
-
-        #region Settings Methods
-
-        /// <summary>
-        /// Saves Settings to PC.
-        /// </summary>
-        public static void Save()
-        {
-            File.WriteAllText(SettingsFilePath, JsonSerializer.Serialize(Current, new JsonSerializerOptions() { WriteIndented = true }));
-        }
-
-        /// <summary>
-        /// Finds Riot Client on Local Machine
-        /// </summary>
-        /// <returns>Path to Client</returns>
         internal async Task<string> FindRiotClient()
         {
-            List<string> clients = new();
+            if (AssistApplication.Current.Platform.OperatingSystem != OperatingSystemType.WinNT)
+                return null;
+
+            List<string> clients = new List<string>();
 
             string riotInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
                 "Riot Games/RiotClientInstalls.json"); ;
@@ -127,65 +88,62 @@ namespace Assist.Settings
                 return null;
             }
 
-                
+
 
             if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault)) { clients.Add(rcDefault.GetString()); }
             if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive)) { clients.Add(rcLive.GetString()); }
             if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta)) { clients.Add(rcBeta.GetString()); }
-            
+
 
             foreach (var clientPath in clients)
             {
                 if (File.Exists(clientPath))
                     return clientPath;
             }
-            
+
             return null;
         }
 
-        /// <summary>
-        /// Finds Profile Setting by ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>A ProfileSetting Instance if found.</returns>
-        internal ProfileSetting FindProfileById(string id)
+        internal async Task SaveProfile(ProfileSettings profile)
         {
-            var profile = Profiles.Find(p => p.ProfileUuid == id);
-            if (profile == null)
-                return null;
+            var possProfile = Profiles.Find(p => p.ProfileUuid == profile.ProfileUuid);
 
-            return profile;
+            if (possProfile == null)
+            {
+                Log.Information("New Profile Found, Adding profile to Profiles");
+                Profiles.Add(profile);
+                return;
+            }
+
+            Log.Information("Previous Profile Found, Refreshing Profile");
+            Profiles.Replace(possProfile, profile);
         }
 
-        /// <summary>
-        /// Finds Profile Setting by Gamename and Tagline Separated
-        /// </summary>
-        /// <param name="gamename"></param>
-        /// <param name="tagline"></param>
-        /// <returns>A ProfileSetting Instance if found.</returns>
-        internal ProfileSetting FindAccountByGameNameTagLine(string gamename, string tagline)
+        public static void Save()
         {
-            var profile = Profiles.Find(p => p.Gamename == gamename && p.Tagline == tagline);
-            if (profile == null)
-                return null;
-
-            return profile;
+            File.WriteAllText(SettingsFilePath, JsonSerializer.Serialize(Current, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
         }
 
-        /// <summary>
-        /// Finds Profile Setting by combined Gamename and Tagline
-        /// </summary>
-        /// <param name="gamenametag"></param>
-        /// <returns>A ProfileSetting Instance if found.</returns>
-        internal ProfileSetting FindAccountByGameNameTagLine(string gamenametag)
-        {
-            var profile = Profiles.Find(p => $"{p.Gamename}#{p.Tagline}" == gamenametag);
-            if (profile == null)
-                return null;
+#if DEBUG
+        public static string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AssistX", "Settings_DEBUG.json");
+#else
+        public static string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AssistX", "Settings.json");
+#endif
+        
 
-            return profile;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (!EqualityComparer<T>.Default.Equals(field, newValue))
+            {
+                field = newValue;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                return true;
+            }
+            return false;
         }
 
-        #endregion
+        public BackupsSettings Backups = new BackupsSettings();
     }
 }

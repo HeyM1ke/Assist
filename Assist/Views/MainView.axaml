@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:global="clr-namespace:Assist.Controls.Global"
+             xmlns:navigation="clr-namespace:Assist.Controls.Global.Navigation"
+             mc:Ignorable="d" 
+             d:DesignWidth="1125" 
+             d:DesignHeight="690"
+             x:Class="Assist.Views.MainView"
+             Background="{StaticResource AssistBlack}"
+             Initialized="MainView_Initializaed">
+
+    <Grid RowDefinitions="80, *">
+        
+        
+<Grid Grid.Row="0" Grid.RowSpan="2" x:Name="Background">
+	<Image Source="/Resources/background_dev.png" Stretch="UniformToFill"/>
+    <Rectangle Fill="black" Opacity=".8"></Rectangle>
+</Grid>
+	    <global:UserSelection Grid.RowSpan="2"  Width="240"
+	                          ZIndex="9999"
+	                          HorizontalAlignment="Right"
+	                          VerticalAlignment="Top"
+	                          Margin="0,8,20,0"></global:UserSelection>
+
+
+		<Grid x:Name="Navigation" Row="0"
+              Background="Transparent"
+              ColumnDefinitions="*,600"
+              >
+
+            <navigation:NavigationBar Grid.Column="0"
+                                      HorizontalAlignment="Left" 
+                                      Margin="20,0" 
+                                      VerticalAlignment="Center" 
+                                      Height="80"></navigation:NavigationBar>
+
+			
+			
+                <Grid Column="1" Margin="0,0,265,0">
+
+					<StackPanel Orientation="Horizontal" Spacing="5"
+                                HorizontalAlignment="Right">
+						<global:SocialButton Width="35"
+                                             Height="35"
+                                             HorizontalAlignment="Left"
+                                             Source="../Resources/Icons/Discord_Icon.png"
+                                             LinkTo="https://discord.gg/5gw2j7Swh6"
+                        />
+                        <global:SocialButton Width="35"
+                                             Height="35"
+                                             HorizontalAlignment="Left"
+                                             Source="../Resources/Icons/Twitter_Icon.png"
+                                             LinkTo="https://twitter.com/assistlauncher"
+                        />
+					</StackPanel>
+
+
+				
+                </Grid>
+
+
+		</Grid>
+
+		<TransitioningContentControl Grid.Row="1" x:Name="ContentView" >
+            <TransitioningContentControl.PageTransition>
+                <CrossFade Duration="0.15" />
+            </TransitioningContentControl.PageTransition>
+        </TransitioningContentControl>
+    </Grid>
+</UserControl>

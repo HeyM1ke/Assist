@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="790" d:DesignHeight="225"
+             x:Class="Assist.Controls.Dashboard.ArticleControl"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
+             Initialized="StyledElement_OnInitialized">
+	<Grid>
+        
+		<Border x:Name="Backing"
+                Background="{DynamicResource ArticleControlBacking}"
+                HorizontalAlignment="Left"
+                CornerRadius="10"
+                >
+
+			<Grid>
+				
+				
+					<ItemsControl >
+						
+						<StackPanel Orientation="Horizontal" Margin="0,11">
+							<UniformGrid x:Name="ContentGrid" Columns="3">
+								<UniformGrid.Styles>
+									<Style Selector="dashboard|ArticleItem">
+										<Setter Property="Margin" Value="6,0,6,0"/>
+									</Style>
+								</UniformGrid.Styles>
+							</UniformGrid>
+							
+						</StackPanel>
+					</ItemsControl>
+				<Carousel Width="790" x:Name="ArticleCarousel" HorizontalAlignment="Left">
+					<Carousel.PageTransition>
+						<CrossFade Duration=".1"></CrossFade>
+					</Carousel.PageTransition>
+                </Carousel>
+				<Button Name="GoBackBtn"
+				        Click="GoBackBtn_OnClick"
+				        Width="50"
+				        Height="85"
+				        VerticalAlignment="Center"
+				        HorizontalAlignment="Left"
+				        Background="#33ffffff"
+				        Opacity="1"
+				        CornerRadius="10,0,0,10"
+				        Margin="5"
+				        Content="&lt;"
+				        Foreground="#66ffffff"
+				        FontFamily="{StaticResource WorkSans}"
+				        FontSize="42"
+				        VerticalContentAlignment="Center"></Button>
+				
+				<Button Name="GoNextBtn"
+				        Click="GoNextBtn_OnClick"
+						Width="50"
+				        Height="85"
+				        VerticalAlignment="Center"
+				        HorizontalAlignment="Right"
+				        Background="#33ffffff"
+				        Opacity="1"
+				        CornerRadius="0,10,10,0"
+				        Margin="5"
+				        Content="&gt;"
+				        Foreground="#66ffffff"
+				        FontFamily="{StaticResource WorkSans}"
+				        FontSize="42"
+				        VerticalContentAlignment="Center"></Button>
+            </Grid>
+
+
+		</Border>
+	</Grid>
+</UserControl>

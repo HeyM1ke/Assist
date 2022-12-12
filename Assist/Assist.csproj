@@ -1,350 +1,84 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>disable</Nullable>
-    <UseWPF>true</UseWPF>
-    <StartupObject>Assist.App</StartupObject>
-    <Authors>AssistTeam</Authors>
-    <Version>1.0.0.13</Version>
-    <Product>Assist</Product>
-    <Description>Valorant Program made by Mike</Description>
-    <PackageIcon>assistlogoIcon.png</PackageIcon>
-    <ApplicationIcon>Resources\assistLogo.ico</ApplicationIcon>
-    <SignAssembly>False</SignAssembly>
-    <GenerateDocumentationFile>False</GenerateDocumentationFile>
-    <PackageProjectUrl>https://github.com/HeyM1ke/Assist/</PackageProjectUrl>
-    <UseWindowsForms>True</UseWindowsForms>
-    <RepositoryUrl>https://github.com/HeyM1ke/Assist/</RepositoryUrl>
-    <Company>AssistTeam</Company>
-	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <TargetFramework>net7.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
+    <TrimMode>copyused</TrimMode>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationIcon>Resources\Assist_Icon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <PackageIcon>Assist_Logo_SweetRed.png</PackageIcon>
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Remove="Extensions\**" />
-    <Compile Remove="Services\Modules\**" />
-    <EmbeddedResource Remove="Extensions\**" />
-    <EmbeddedResource Remove="Services\Modules\**" />
-    <None Remove="Extensions\**" />
-    <None Remove="Services\Modules\**" />
-    <Page Remove="Extensions\**" />
-    <Page Remove="Services\Modules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Resources\assistLogo.ico" />
-    <None Remove="Resources\Assist_Progression_Template.png" />
-    <None Remove="Resources\backImage.png" />
-    <None Remove="Resources\BattlepassBacking.jpg" />
-    <None Remove="Resources\ContentTiers\DeluxeTier_Icon.png" />
-    <None Remove="Resources\ContentTiers\ExclusiveTier_Icon.png" />
-    <None Remove="Resources\ContentTiers\PremiumTier_Icon.png" />
-    <None Remove="Resources\ContentTiers\SelectTier_Icon.png" />
-    <None Remove="Resources\ContentTiers\UltraTier_Icon.png" />
-    <None Remove="Resources\Earned.png" />
-    <None Remove="Resources\Fonts\WorkSans-Black.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-BlackItalic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-Bold.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-BoldItalic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-ExtraBold.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-ExtraBoldItalic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-ExtraLight.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-ExtraLightItalic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-Italic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-Light.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-LightItalic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-Medium.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-MediumItalic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-Regular.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-SemiBold.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-SemiBoldItalic.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-Thin.ttf" />
-    <None Remove="Resources\Fonts\WorkSans-ThinItalic.ttf" />
-    <None Remove="Resources\Icons\Add_Icon.png" />
-    <None Remove="Resources\Icons\Assist_Logo_SweetRed.png" />
+	  <AvaloniaResource Include="Resources\**" />
+    <None Remove=".gitignore" />
+    <None Remove="Resources\Dev\ProgressionDev.png" />
     <None Remove="Resources\Icons\Assist_Logo_SweetRed_LQ.png" />
     <None Remove="Resources\Icons\Assist_Logo_White.png" />
-    <None Remove="Resources\Icons\Check_Icon.png" />
     <None Remove="Resources\Icons\Dashboard_Icon.png" />
-    <None Remove="Resources\Icons\Fist_Icon.png" />
-    <None Remove="Resources\Icons\GeneralSlider_Icon.png" />
-    <None Remove="Resources\Icons\Info_Icon.png" />
-    <None Remove="Resources\Icons\Loading.gif" />
-    <None Remove="Resources\Icons\Profile_Icon.png" />
-    <None Remove="Resources\Icons\Progression_Icon.png" />
-    <None Remove="Resources\Icons\Remove_Icon.png" />
-    <None Remove="Resources\Icons\RP_Icon.png" />
     <None Remove="Resources\Icons\Settings_Icon.png" />
     <None Remove="Resources\Icons\Store_Icon.png" />
-    <None Remove="Resources\Icons\Switch.png" />
-    <None Remove="Resources\Icons\Timer_Icon.png" />
+    <None Remove="Resources\Icons\Twitter_Icon.png" />
     <None Remove="Resources\Icons\VP_Icon.png" />
-    <None Remove="Resources\Other\Assist_Agents.png" />
-    <None Remove="Resources\Other\Assist_BattlepassEP4ACT3.png" />
-    <None Remove="Resources\Other\Assist_BattlepassEP4ACT3_Micro.png" />
-    <None Remove="Resources\Other\Assist_BattlepassEP5ACT1.png" />
-    <None Remove="Resources\Other\Assist_Battlepass_Current.png" />
-    <None Remove="Resources\Other\InitBacking.png" />
-    <None Remove="Resources\Other\supportBacking.png" />
-    <None Remove="Resources\person_icon.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_0.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_10.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_11.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_12.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_13.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_14.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_15.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_16.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_17.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_18.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_19.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_20.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_21.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_22.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_23.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_24.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_25.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_26.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_27.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_3.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_4.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_5.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_6.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_7.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_8.png" />
-    <None Remove="Resources\RankLogos\TX_CompetitiveTier_Large_9.png" />
+    <None Remove="Resources\nightmarket.png" />
   </ItemGroup>
-
   <ItemGroup>
-    <Resource Include="Resources\assistLogo.ico" />
-    <Resource Include="Resources\Icons\backImage.png" />
-    <Resource Include="Resources\ContentTiers\DeluxeTier_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\ContentTiers\ExclusiveTier_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\ContentTiers\PremiumTier_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\ContentTiers\SelectTier_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\ContentTiers\UltraTier_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-Black.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-BlackItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-Bold.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-BoldItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-ExtraBold.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-ExtraBoldItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-ExtraLight.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-ExtraLightItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-Italic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-Light.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-LightItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-Medium.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-MediumItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-Regular.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-SemiBold.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-SemiBoldItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-Thin.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\WorkSans-ThinItalic.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Add_Icon.png" />
-    <Resource Include="Resources\Icons\Assist_Logo_SweetRed_LQ.png" />
-    <Resource Include="Resources\Icons\Assist_Logo_White.png" />
-    <Resource Include="Resources\Icons\Check_Icon.png" />
-    <Resource Include="Resources\Icons\Dashboard_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Fist_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\GeneralSlider_Icon.png" />
-    <Resource Include="Resources\Icons\Info_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Loading.gif" />
-    <Resource Include="Resources\Icons\Profile_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Progression_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Remove_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\RP_Icon.png" />
-    <Resource Include="Resources\Icons\Settings_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Store_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Switch.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\Timer_Icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\VP_Icon.png" />
-    <Resource Include="Resources\Other\Assist_Agents.png" />
-    <Resource Include="Resources\Other\Assist_BattlepassEP4ACT3.png" />
-    <Resource Include="Resources\Other\Assist_BattlepassEP4ACT3_Micro.png" />
-    <Resource Include="Resources\Other\Assist_BattlepassEP5ACT1.png" />
-    <Resource Include="Resources\Other\Assist_Battlepass_Current.png" />
-    <Resource Include="Resources\Other\InitBacking.png" />
-    <Resource Include="Resources\Other\supportBacking.png" />
-    <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Stable.png" />
+    <Content Include="Resources\Assist_Icon.ico" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Autoupdater.NET.Official" Version="1.7.0" />
+    <!--This helps with theme dll-s trimming.
+	If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme Default theme will be trimmed from the output and vice versa.
+	https://github.com/AvaloniaUI/Avalonia/issues/5593 -->
+    <TrimmableAssembly Include="Avalonia.Themes.Fluent" />
+    <TrimmableAssembly Include="Avalonia.Themes.Default" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.0.0-avalonia11" />
+    <PackageReference Include="Avalonia" Version="11.0.0-preview3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview3" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-preview3" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.0-preview3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview3" />
     <PackageReference Include="CliWrap" Version="3.4.4" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1210.39" />
-    <PackageReference Include="RestSharp" Version="107.3.0" />
+    <PackageReference Include="Clowd.Squirrel" Version="3.0.210-g5f9f594" />
+    <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
+    <PackageReference Include="RestSharp" Version="108.0.1" />
     <PackageReference Include="Serilog" Version="2.11.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
-    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+    <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
+    <PackageReference Include="YamlDotNet" Version="12.0.0" />
   </ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="Resources\assistLogo.ico" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="ValNet">
-	    <HintPath>Library\ValNet.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Resource Include="Resources\BattlepassBacking.jpg" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Decrease.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTierMovement_Increase.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_0.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_10.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_11.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_12.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_13.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_14.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_15.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_16.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_17.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_18.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_19.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_20.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_21.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_22.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_23.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_24.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_25.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_26.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_27.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_3.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_4.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_5.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_6.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_7.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_8.png" />
-	  <Resource Include="Resources\RankLogos\TX_CompetitiveTier_Large_9.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Resource Include="Resources\Icons\Assist_Logo_SweetRed.png" />
-	</ItemGroup>
-	
-	
-	<ItemGroup>
-	  <Compile Update="Properties\Languages\Lang.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Lang.resx</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Update="Properties\Languages\Lang.de-de.resx">
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.en-us.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.es-es.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.fr-fr.resx">
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.ja-jp.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.nl-nl.resx">
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.pt-br.resx">
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Lang.Designer.cs</LastGenOutput>
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.ru-ru.resx">
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.tr-tr.resx">
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Languages\Lang.zh-cn.resx">
-	    <CustomToolNamespace></CustomToolNamespace>
-	  </EmbeddedResource>
-	</ItemGroup>
-
+  <ItemGroup>
+    <Compile Update="Controls\TitleBars\TitleBar_Win.axaml.cs">
+      <DependentUpon>TitleBar_Win.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ValNet">
+      <HintPath>Library\ValNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\Controls\Navigation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\Icons\Assist_Logo_SweetRed.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 </Project>

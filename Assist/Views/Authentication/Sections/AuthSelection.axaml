@@ -1,0 +1,141 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.Authentication.Sections.AuthSelection">
+    <Grid>
+	    <Grid.Styles>
+					        <Style Selector="Button.UsernameBtn">
+						        <Setter Property="Padding" Value="42,0"></Setter>
+						        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+						        <Setter Property="Template">
+							        <ControlTemplate TargetType="{x:Type Button}">
+								        <Grid>
+									        <Border Background="{TemplateBinding Background}"
+									                CornerRadius="{TemplateBinding CornerRadius}"
+									                BorderThickness="{TemplateBinding BorderThickness}"
+									                BorderBrush="{TemplateBinding BorderBrush}"
+									                >
+										        <StackPanel Orientation="Horizontal">
+											        <Image Source="../../../Resources/Icons/User_Icon.png"
+											               Width="20"
+											               Height="20"
+											               VerticalAlignment="Center"
+											               Margin="10,0"/>
+											        <TextBlock Text="{TemplateBinding Tag}"
+											                   Foreground="{TemplateBinding Button.Foreground}"
+											                   FontFamily="{TemplateBinding FontFamily}"
+											                   FontWeight="{TemplateBinding FontWeight}"
+											                   FontSize="{TemplateBinding FontSize}"
+											                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											                   />
+										        </StackPanel>
+									        </Border>
+								        </Grid>
+							        </ControlTemplate>
+						        </Setter>
+					        </Style>
+					        
+					        <Style Selector="Button.Riot">
+						        <Setter Property="Padding" Value="42,0"></Setter>
+						        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+						        <Setter Property="Template">
+							        <ControlTemplate TargetType="{x:Type Button}">
+								        <Grid>
+									        <Border Background="{TemplateBinding Background}"
+									                CornerRadius="{TemplateBinding CornerRadius}"
+									                BorderThickness="{TemplateBinding BorderThickness}"
+									                BorderBrush="{TemplateBinding BorderBrush}"
+									        >
+										        <StackPanel Orientation="Horizontal">
+											        <Image Source="../../../Resources/Icons/Fist_Icon.png"
+											               Width="20"
+											               Height="20"
+											               VerticalAlignment="Center"
+											               Margin="10,0"/>
+											        <TextBlock Text="{TemplateBinding Tag}"
+											                   Foreground="{TemplateBinding Button.Foreground}"
+											                   FontFamily="{TemplateBinding FontFamily}"
+											                   FontWeight="{TemplateBinding FontWeight}"
+											                   FontSize="{TemplateBinding FontSize}"
+											                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											        />
+										        </StackPanel>
+									        </Border>
+								        </Grid>
+							        </ControlTemplate>
+						        </Setter>
+					        </Style>
+					        <Style Selector="Button:pointerover">
+						        <Setter Property="Background" Value="{DynamicResource ButtonHoverBackground}"/>
+						        <Setter Property="BorderThickness" Value="1"/>
+						        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+					        </Style>
+					        
+					        <Style Selector="Button:pressed">
+						        <Setter Property="Background" Value="{DynamicResource ButtonClickBackground}" />
+					        </Style>
+				        </Grid.Styles>
+	    <ItemsControl >
+					        <ItemsControl.Styles>
+						        <Style Selector="Button">
+							        <Setter Property="Margin" Value="0,0,0,13"/>
+						        </Style>
+					        </ItemsControl.Styles>
+					        <Button Name="UsernameBtn"
+					                Classes="UsernameBtn"
+					                Tag="{x:Static p:Resources.Authentication_UsernamePasswordTitle}"
+					                Width="275"
+					                Height="50"
+					                Foreground="{DynamicResource ButtonText}"
+					                FontFamily="{StaticResource WorkSans}"
+					                FontWeight="Medium"
+					                FontSize="12"
+					                VerticalContentAlignment="Center"
+					                PointerEntered="UsernameBtn_OnPointerEnter"
+					                PointerExited="AuthMethod_OnPointerLeave"
+					                Click="UsernameBtn_OnClick"
+					        >
+						        
+					        </Button>
+					        <Button Name="RiotCloud"
+					                Classes="Riot"
+					                Tag="Riot Games Login"
+					                Width="275"
+					                Height="50"
+					                Foreground="{DynamicResource ButtonText}"
+					                FontFamily="{StaticResource WorkSans}"
+					                FontWeight="Medium"
+					                FontSize="12"
+									IsVisible="False"
+                                    VerticalContentAlignment="Center"
+					                PointerEntered="RiotCloud_OnPointerEnter"
+					                PointerExited="AuthMethod_OnPointerLeave"
+					        />
+					        <Button Name="RiotClient"
+					                Classes="Riot"
+					                Tag="{x:Static p:Resources.Authentication_RiotClientTitle}"
+					                Width="275"
+					                Height="50"
+					                Foreground="{DynamicResource ButtonText}"
+					                FontFamily="{StaticResource WorkSans}"
+					                FontWeight="Medium"
+					                FontSize="12"
+					                VerticalContentAlignment="Center"
+					                PointerEntered="RiotClient_OnPointerEnter"
+					                PointerExited="AuthMethod_OnPointerLeave"
+									Click="RiotClient_OnClick"
+					        />
+					    
+					        <TextBlock TextWrapping="WrapWithOverflow"
+					                   Width="275"
+					                   FontFamily="{StaticResource WorkSans}"
+					                   Foreground="White"
+					                   FontSize="12"
+					                   FontWeight="Light"
+									   Text="{Binding AuthTypePopup}"/>
+				        </ItemsControl>
+    </Grid>
+</UserControl>

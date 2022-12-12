@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:store="clr-namespace:Assist.Controls.Store"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="610"
+             x:Class="Assist.Views.Store.StoreView">
+	<Grid RowDefinitions="*,180" Margin="10">
+
+        <Grid Row="0">
+
+            <store:BundleControl Width="810"
+                                 Height="395"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"/>
+
+            <store:NightMarketButtonControl HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Width="250"
+                                            Height="395"
+                                            IsVisible="False"/>
+        </Grid>
+
+
+        <store:OfferContainer Grid.Row="1"></store:OfferContainer>
+        
+    </Grid>
+</UserControl>

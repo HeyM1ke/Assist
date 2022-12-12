@@ -1,0 +1,65 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Assist.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ds="using:Assist.Views.Dashboard"
+        xmlns:as="using:Assist.Views.Authentication"
+        xmlns:winb="clr-namespace:Assist.Controls.TitleBars"
+        xmlns:popup="clr-namespace:Assist.Controls.Global.Popup"
+        mc:Ignorable="d"
+		d:DesignWidth="1125"
+		d:DesignHeight="720"
+		Height="{Binding Height}"
+		Width="{Binding Width}"
+        x:Class="Assist.MainWindow"
+        Title="Assist"
+		WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="30"
+        Icon="/Resources/Assist_DevIcon.ico"
+        Opened="MainWindow_Initialized"
+        Background="{StaticResource AssistBlack}">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	
+
+	<Grid RowDefinitions="30,*">
+
+		<!--Window Bar-->
+        <Grid Row="0" Background="{StaticResource AssistBlack}">
+            <winb:TitleBar_Win></winb:TitleBar_Win>
+        </Grid>
+
+		<LayoutTransformControl Grid.Row="1" x:Name="LayoutControl">
+            <LayoutTransformControl.LayoutTransform>
+                <ScaleTransform ScaleY="{Binding ScaleRate}"
+                                ScaleX="{Binding ScaleRate}"></ScaleTransform>
+            </LayoutTransformControl.LayoutTransform>
+            <!--Content View-->
+			<Grid>
+                <Grid x:Name="MainContentView"
+                      Width="1125"
+                      Height="690"
+                      VerticalAlignment="Center"
+                      Background="{StaticResource AssistGray}">
+                    <TransitioningContentControl x:Name="ContentView" >
+                        <TransitioningContentControl.PageTransition>
+                            <CrossFade Duration="0:00:00.250"/>
+                        </TransitioningContentControl.PageTransition>
+                    </TransitioningContentControl>
+                </Grid>
+<StackPanel></StackPanel>
+                <popup:PopupMaster x:Name="PopupMaster" 
+                                   Width="1125"
+                                   Height="690"/>
+			</Grid>
+		</LayoutTransformControl>
+        
+    </Grid>
+</Window>

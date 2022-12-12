@@ -1,0 +1,85 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" 
+             d:DesignWidth="245"
+             d:DesignHeight="586"
+             x:Class="Assist.Controls.Global.GameLaunchControl"
+             Initialized="GameLaunch_Init">
+
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="{DynamicResource LaunchButtonBacking}"/>
+            <Setter Property="Foreground" Value="{DynamicResource LaunchButtonForeground}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LaunchButtonBorder}"/>
+        </Style>
+
+        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource LaunchButtonHoverBackground}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LaunchButtonHoverForeground}"/>
+            
+        </Style>
+	</UserControl.Styles>
+
+    <Grid>
+        <Grid x:Name="RoundedImageTest">
+            <Image asyncImageLoader:ImageLoader.Source="{Binding ProfilePlayercard}"
+                   Stretch="UniformToFill"/>
+
+            <StackPanel VerticalAlignment="Bottom"
+                        Margin="0,0,0,27">
+                
+                <Label Content="{Binding ProfileUsername}"
+                       FontFamily="{StaticResource WorkSans}"
+                       FontWeight="Bold"
+                       Padding="0"
+                       Foreground="White"
+                       FontSize="20"
+                       HorizontalContentAlignment="Center"
+                ></Label>
+                
+                <Label  Content="{Binding ProfileTagline}"
+                        FontFamily="{StaticResource WorkSans}"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Padding="0"
+                        FontSize="15"
+                        Opacity=".5"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,0,0,10"
+                ></Label>
+                
+                <Button Width="225"
+                        Height="60"
+                        Content="PLAY"
+                        FontFamily="{StaticResource WorkSans}"
+                        FontWeight="Bold"
+                        FontSize="32"
+                        IsVisible="{Binding IsEnabled}"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,0"
+                        Click="LaunchBtn_Click"/>
+                
+                
+            </StackPanel>
+            <Label Content="Selected Patchline: LIVE"
+                   FontFamily="{StaticResource WorkSans}"
+                   FontWeight="Regular"
+                   Foreground="White"
+                   Padding="6"
+                   FontSize="12"
+                   Opacity=".2"
+                   HorizontalContentAlignment="Center"
+                   VerticalAlignment="Bottom"
+            ></Label>
+        </Grid>
+       
+        
+    </Grid>
+</UserControl>

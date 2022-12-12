@@ -1,0 +1,155 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Dashboard"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+        xmlns:profile="clr-namespace:Assist.Controls.Profile">
+  <Design.PreviewWith>
+    <controls:PlayerStatisticsView Width="545"
+                                   Height="347"
+                                   Content=""
+                                   RankName=""
+                                   PlayerRR=""
+                                   SeasonWins=""
+                                   isLoading=""/>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|PlayerStatisticsView">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{DynamicResource PlayerStatsPreviewBackground}">
+            <Grid ColumnDefinitions="230, *">
+                
+                <Grid x:Name="PlayerAgentGrid">
+
+                    <Image x:Name="PART_AgentImage"
+                           asyncImageLoader:ImageLoader.Source="{TemplateBinding FeaturedAgent}"
+                           Stretch="UniformToFill"
+                           Margin="0,0,0,0"
+                    >
+                        <Image.OpacityMask>
+							<LinearGradientBrush EndPoint="0%,100%" StartPoint="0%,0%">
+								<GradientStop Offset="0" Color="#C2E4F6" />
+                                <GradientStop Offset=".9" Color="#0095CDEC" />
+                            </LinearGradientBrush>
+                        </Image.OpacityMask>
+
+                    </Image>
+
+                        
+
+					<StackPanel VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center"
+                                Margin="5">
+						<Label Content=""
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalContentAlignment="Center"
+                               Padding="0"
+                               FontSize="16"
+                        />
+
+                        <Label Content="Most played agent"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Regular"
+                               Foreground="White"
+                               HorizontalContentAlignment="Center"
+                               Padding="0"
+                               FontSize="12"
+                               Opacity=".5"
+                        />
+					</StackPanel>
+
+
+                </Grid>
+
+                <Grid Column="1"
+                      x:Name="PlayerDataGrid"
+                      RowDefinitions="60,*">
+
+                        <Grid x:Name="PlayerRankShowcase"
+                              Margin="0,10,0,0"
+                              HorizontalAlignment="Center">
+                            <StackPanel VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                    <Image asyncImageLoader:ImageLoader.Source="{TemplateBinding PlayerRankIcon}"
+                                           Height="57"
+                                           Width="57"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{TemplateBinding RankName}"
+                                                   FontFamily="{DynamicResource WorkSans}"
+                                                   Foreground="White"
+                                                   FontWeight="Bold"
+                                                   FontSize="28"/>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="5">
+                                            <TextBlock Text="{TemplateBinding PlayerRR}"
+                                                       FontFamily="{DynamicResource WorkSans}"
+                                                       Foreground="White"
+                                                       FontWeight="Regular"
+                                                       FontSize="15"
+                                            />
+                                            <Border Width="2" Height="2" Background="White" CornerRadius="5"></Border>
+                                            <TextBlock Text="{TemplateBinding SeasonWins}"
+                                                       FontFamily="{DynamicResource WorkSans}"
+                                                       Foreground="White"
+                                                       FontWeight="Light"
+                                                       FontSize="15"
+                                            />
+                                        </StackPanel>
+									</StackPanel>
+                                </StackPanel>
+                        </Grid>
+
+					<Grid Row="1"
+                          x:Name="PlayerMatchShowcase"
+                          Margin="20">
+
+
+                        <StackPanel Spacing="9">
+                            <Rectangle Height="1"
+                                       Fill="{DynamicResource AssistRed}"
+                                       VerticalAlignment="Top"
+                            />
+
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              >
+
+								<ContentPresenter.Styles>
+                                    <Style Selector="profile|MatchPreviewControl">
+                                        <Setter Property="Height" Value="55"></Setter>
+                                    </Style>
+								</ContentPresenter.Styles>
+
+
+							</ContentPresenter>
+                            
+
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+
+                <Border x:Name="LoadingBorder" Grid.ColumnSpan="2" Background="{DynamicResource PlayerStatsPreviewBackground}">
+                    <Label Content="Loading.."
+                           Foreground="White"
+                           FontFamily="{StaticResource WorkSans}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"></Label>
+                </Border>
+            </Grid>
+
+            
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+    <Style Selector="controls|PlayerStatisticsView[isLoading=True] /template/ Border#LoadingBorder">
+        <Setter Property="IsVisible" Value="True"></Setter>
+    </Style>
+    <Style Selector="controls|PlayerStatisticsView[isLoading=False] /template/ Border#LoadingBorder">
+        <Setter Property="IsVisible" Value="False"></Setter>
+    </Style>
+</Styles>

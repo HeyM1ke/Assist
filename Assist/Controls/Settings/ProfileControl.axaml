@@ -1,0 +1,87 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Settings.ProfileControl">
+  <UserControl.Styles>
+	  
+
+      <Style Selector="Button.switchremove">
+		  <Setter Property="Background" Value="{DynamicResource LaunchButtonBacking}"/>
+		  <Setter Property="Foreground" Value="{DynamicResource LaunchButtonForeground}"/>
+		  <Setter Property="BorderThickness" Value="1"/>
+		  <Setter Property="Width" Value="75"></Setter>
+		  <Setter Property="Margin" Value="2,0"></Setter>
+		  <Setter Property="Height" Value="28"></Setter>
+		  <Setter Property="FontWeight" Value="SemiBold"></Setter>
+		  <Setter Property="FontSize" Value="12"></Setter>
+		  <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+		  <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+		  <Setter Property="BorderBrush" Value="{DynamicResource LaunchButtonBorder}"/>
+	  </Style>
+
+	  <Style Selector="Button.switchremove:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		  <Setter Property="Background" Value="{DynamicResource LaunchButtonHoverBackground}" />
+		  <Setter Property="TextBlock.Foreground" Value="{DynamicResource LaunchButtonHoverForeground}"/>
+		  <Setter Property="Cursor" Value="Hand"></Setter>
+	  </Style>
+  </UserControl.Styles>
+
+	<Border>
+		<Grid>
+			<Border Background="{DynamicResource AssistBlack}"
+					Opacity=".5"
+					Grid.RowSpan="2"/>
+
+
+			<Grid x:Name="ContentGrid"
+				  RowDefinitions="*,*"
+				  VerticalAlignment="Bottom"
+				  Height="70">
+				<Border Background="#212229"
+						Grid.RowSpan="2"/>
+				<StackPanel Grid.Row="0" HorizontalAlignment="Center">
+					<TextBlock Text="{Binding AccountName}"
+							   FontFamily="{StaticResource WorkSans}"
+							   FontWeight="Medium"
+							   Padding="0"
+							   HorizontalAlignment="Center"
+							   FontSize="15"/>
+					<TextBlock Text="{Binding AccountRegion}"
+							   FontFamily="{StaticResource WorkSans}"
+							   FontWeight="Medium"
+							   FontSize="10"
+							   Opacity=".5"
+							   Padding="0"
+							   HorizontalAlignment="Center"/>
+					<StackPanel Margin="0,5"
+								Orientation="Horizontal"
+								HorizontalAlignment="Center"
+                                 >
+						<Button Content="SWITCH"
+								IsEnabled="{Binding isSwitchEnabled}"
+								Classes="switchremove"
+								Click="SwitchBtn_OnClick"
+								x:Name="SwitchBtn"
+                                     ></Button>
+						<Button Content="REMOVE"
+								Classes="switchremove"
+                                Click="RemoveBtn_OnClick"></Button>
+					</StackPanel>
+				</StackPanel>
+
+
+			</Grid>
+			<asyncImageLoader:AdvancedImage
+				Source="{Binding AccountPlayercard}"
+				Width="65"
+				Height="65"
+				Grid.RowSpan="2"
+				Margin="7"
+				VerticalAlignment="Top"
+				HorizontalAlignment="Center"/>
+		</Grid>
+	</Border>
+</UserControl>

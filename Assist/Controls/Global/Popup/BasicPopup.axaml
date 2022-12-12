@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Width="1125"
+             Height="690"
+             x:Class="Assist.Controls.Global.Popup.BasicPopup">
+	<Grid Background="#3D000000">
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="{StaticResource AssistBlack}"
+                Width="500" Height="200">
+            <Grid>
+                <StackPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="70" Margin="10"></Image>
+                    <Label FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding Title}" Foreground="White" HorizontalAlignment="Center"></Label>
+                    <Label FontFamily="{StaticResource WorkSans}" FontWeight="Regular" Content="{Binding Description}" Foreground="White" HorizontalAlignment="Center" Padding="0"></Label>
+                    <Label Content="Loading..."
+                           FontFamily="{StaticResource WorkSans}"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center"></Label>
+                </StackPanel>
+
+                
+            </Grid>
+
+
+        </Border>
+    </Grid>
+</UserControl>

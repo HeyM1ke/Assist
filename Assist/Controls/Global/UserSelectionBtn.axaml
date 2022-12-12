@@ -1,0 +1,78 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" 
+             d:DesignWidth="240" 
+             d:DesignHeight="60"
+             x:Class="Assist.Controls.Global.UserSelectionBtn">
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            CornerRadius="5">
+                            <Grid>
+                                <Border Opacity="1"
+                                        Background="{StaticResource ButtonBackground}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        CornerRadius="5" />
+
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="8,0"
+                                            VerticalAlignment="Center">
+                                    <asyncImageLoader:AdvancedImage
+                                        Source="{Binding ProfilePicture}"
+                                        CornerRadius="5"
+                                        Height="40"
+                                        Width="40"
+                                        HorizontalAlignment="Left">
+                                    </asyncImageLoader:AdvancedImage>
+
+                                    <StackPanel Margin="8,0"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Username}"
+                                                   FontFamily="{StaticResource WorkSans}"
+                                                   FontWeight="Regular"
+                                                   FontSize="10"
+                                                   Foreground="White"
+                                                   Padding="0" />
+
+                                        <TextBlock Text="{Binding Region}"
+                                                   FontFamily="{StaticResource WorkSans}"
+                                                   FontWeight="Thin"
+                                                   FontSize="6"
+                                                   Foreground="White"
+                                                   Padding="0" />
+                                        
+                                        <TextBlock Text="EXPIRED"
+                                                   IsVisible="{Binding isExpired}"
+                                                   FontFamily="{StaticResource WorkSans}"
+                                                   FontWeight="Bold"
+                                                   FontSize="10"
+                                                   Foreground="#66ff0000"
+                                                   Padding="0"
+                                                   Margin="0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button:pointerover">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AssistRed}" />
+        </Style>
+    </UserControl.Styles>
+    <Button Click="Button_OnClick" Width="240" Height="60">
+
+    </Button>
+</UserControl>

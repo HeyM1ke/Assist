@@ -1,0 +1,89 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignWidth="250" 
+             d:DesignHeight="150"
+             x:Class="Assist.Controls.Store.OfferControl"
+             Initialized="OfferControl_OnInitialized"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+            >
+
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate></ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
+    <Grid>
+
+	  <!--Background Magic-->
+      <Border CornerRadius="5"
+              Background="Black"
+              Opacity=".5"/>
+      
+	  <Border CornerRadius="5"
+              BorderBrush="White"
+              BorderThickness="1"
+              Opacity=".5"
+      />
+
+      <Border CornerRadius="5"
+              BorderThickness="1"
+              Background="{Binding BackgroundBrush}"
+              Opacity=".2"
+      >
+
+      </Border>
+      
+
+      <Grid>
+
+          <asyncImageLoader:AdvancedImage Source="{Binding SkinImage}"
+                                          Stretch="Uniform"
+                                          Margin="15"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          Height="80">
+			  <asyncImageLoader:AdvancedImage.RenderTransform>
+                  <RotateTransform Angle="30" />
+              </asyncImageLoader:AdvancedImage.RenderTransform>
+          </asyncImageLoader:AdvancedImage>
+          <Grid>
+              <StackPanel Orientation="Horizontal"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Right"
+                          Margin="5">
+                  <Image Source="../../Resources/Icons/VP_Icon.png"
+                         Width="14"
+                         Height="14"
+                         VerticalAlignment="Center"></Image>
+                  <Label Padding="3"
+                         Content="{Binding OfferPrice}"
+                         Foreground="White"
+                         FontFamily="{StaticResource WorkSans}"
+                         FontWeight="Medium"
+                         FontSize="10"
+                         VerticalAlignment="Center"
+                         HorizontalContentAlignment="Center"></Label>
+			  </StackPanel>
+          </Grid>
+
+          <TextBlock Text="{Binding SkinName}"
+                     Foreground="White"
+                     FontFamily="{StaticResource WorkSans}"
+                     FontWeight="Regular"
+                     FontSize="13"
+                     TextWrapping="WrapWithOverflow"
+                     Width="85"
+                     VerticalAlignment="Bottom"
+                     HorizontalAlignment="Left"
+                     Margin="5"/>
+      </Grid>
+  </Grid>
+</UserControl>
+

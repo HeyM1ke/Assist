@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:global="clr-namespace:Assist.Controls.Global"
+             xmlns:rpp="clr-namespace:Assist.Controls.Global.RPP"
+             xmlns:progression="clr-namespace:Assist.Controls.Progression"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="590"
+             x:Class="Assist.Views.Dashboard.DashboardView">
+
+    <Grid>
+        <Grid Margin="23,0" ColumnDefinitions="790, *">
+
+            <Grid RowDefinitions="235,*">
+					<dashboard:ArticleControl
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </dashboard:ArticleControl>
+
+                <Grid Row="1" >
+                    <StackPanel Spacing="19"
+                                HorizontalAlignment="Left" 
+                                Orientation="Horizontal">
+						<StackPanel Spacing="12" >
+                            <progression:MissionsView 
+                                    Width="225"
+                                    Height="150"
+                                    Title="{x:Static p:Resources.Progression_WeeklyMissions}"
+                                    Initialized="WeeklyMissions_Init"/>
+                            <progression:MissionsView
+                                Width="225"
+                                Height="110"
+                                Title="{x:Static p:Resources.Progression_DailyMissions}"
+                                Initialized="DailyMissions_Init"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <dashboard:PlayerStatisticsView Width="545"
+                                                            Height="347"
+                                                            HorizontalAlignment="Left"
+                                                            Initialized="Stats_Init"
+                                                            ></dashboard:PlayerStatisticsView>
+                        </StackPanel>
+                        </StackPanel>
+                    
+                </Grid>
+            </Grid>
+
+			<Grid Column="1" VerticalAlignment="Top">
+				<global:GameLaunchControl
+                    Width="245"
+                    Height="582"
+                    HorizontalAlignment="Right"/>
+			</Grid>
+        </Grid>
+    </Grid>
+</UserControl>

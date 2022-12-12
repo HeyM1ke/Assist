@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.Authentication.Sections.RiotClientAuthenticationView">
+
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="{DynamicResource LaunchButtonBacking}"/>
+            <Setter Property="Foreground" Value="{DynamicResource LaunchButtonForeground}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource LaunchButtonBorder}"/>
+        </Style>
+
+        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource LaunchButtonHoverBackground}" />
+            <Setter Property="TextBlock.Foreground" Value="{DynamicResource LaunchButtonHoverForeground}"/>
+
+        </Style>
+    </UserControl.Styles>
+
+	<Grid>
+        <StackPanel Spacing="45">
+            <TextBlock TextWrapping="WrapWithOverflow"
+                     Width="275"
+                     FontSize="12"
+                     FontFamily="{StaticResource WorkSans}"
+                     HorizontalAlignment="Left"
+                     Foreground="White" 
+                     Text="{x:Static p:Resources.Authentication_RiotClientTitleInstructions}">
+            </TextBlock>
+
+            <Button x:Name="LoginStartBtn"
+                    Width="138"
+                    Height="40" 
+                    Content="{x:Static p:Resources.Authentication_LoginText}"
+                    FontFamily="{StaticResource WorkSans}"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Click="LoginStartBtn_OnClick">
+            </Button>
+		</StackPanel>
+    </Grid>
+</UserControl>

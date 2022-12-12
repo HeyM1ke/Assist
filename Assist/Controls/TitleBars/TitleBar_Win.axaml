@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignWidth="1000" 
+             d:DesignHeight="30"
+             x:Class="Assist.Controls.TitleBars.TitleBar_Win"
+             Background="{StaticResource AssistBlack}"
+             PointerPressed="InputElement_OnPointerPressed">
+
+	<UserControl.Styles>
+
+        <Style Selector="Button.ExitBtn">
+			<Setter Property="FontFamily" Value="{StaticResource WorkSans}"/>
+            
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            
+        </Style>
+
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="red"></Setter>
+        </Style>
+
+        <Style Selector="Button.MinBtn">
+            <Setter Property="FontFamily" Value="{StaticResource WorkSans}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+	</UserControl.Styles>
+
+	<Grid x:Name="titleGrid"
+          Background="{StaticResource AssistRed}"
+          
+          PointerPressed="InputElement_OnPointerPressed">
+
+        <Label Content="ASSIST BETA"
+               Foreground="White"
+               HorizontalAlignment="Left"
+               VerticalContentAlignment="Center"
+               FontFamily="{StaticResource WorkSans}"
+               FontWeight="Regular"
+               FontSize="12"
+               Margin="5,0"
+               Opacity=".8"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+            <Button Foreground="White"
+                    Background="Transparent"
+                    Click="MinimizeBtn_Click">-</Button>
+
+            <Button Classes="ExitBtn"
+                    Foreground="White"
+                    Background="Transparent"
+                    Click="ExitBtn_Click">X</Button>
+
+            
+        </StackPanel>
+    </Grid>
+</UserControl>
