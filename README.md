@@ -8,17 +8,17 @@
 <h5 align="center">Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games.</h5>
 <h5 align="center">Riot Games does not endorse or sponsor this project.</h5>
 
-[<p align="center"><img src="https://img.shields.io/github/downloads/heym1ke/Assist/total.svg?style=for-the-badge&color=f71d51" alt="Downloads">](https://github.com/Heym1ke/Assist/releases) [<img src="https://img.shields.io/github/v/release/heym1ke/Assist?style=for-the-badge&color=f71d51" alt="Latest Release">](https://github.com/Heym1ke/Assist/releases)</p>
-
-<p align="center">
-  <a href="https://discord.gg/C3AbvyM3dj"><img src="https://discordapp.com/api/guilds/939378402283118643/widget.png"></a>
-  <a href="https://twitter.com/AssistLauncher"><img src="https://img.shields.io/badge/Twitter-@Hey_M1ke-1da1f2.svg?logo=twitter?style=for-the-badge&color=f71d51"></a> 
-</p>
-
 <p align="center">
   </a>
   <a href="https://github.com/HeyM1ke/Assist/releases/download/V1.0.0/AssistSetup.exe"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
   </p>
+
+[<p align="center"><img src="https://img.shields.io/github/downloads/heym1ke/Assist/total.svg?style=for-the-badge&color=f71d51" alt="Downloads">](https://github.com/Heym1ke/Assist/releases) [<img src="https://img.shields.io/github/v/release/heym1ke/Assist?style=for-the-badge&color=f71d51" alt="Latest Release">](https://github.com/Heym1ke/Assist/releases)</p>
+
+<p align="center">
+  <a href="https://discord.gg/C3AbvyM3dj"><img src="https://discordapp.com/api/guilds/939378402283118643/widget.png"></a>
+  <a href="https://twitter.com/AssistLauncher"><img src="https://img.shields.io/badge/Twitter-@AssistLauncher-1da1f2.svg?logo=twitter?style=for-the-badge&color=f71d51"></a> 
+</p>
 
 
 ## Why?
