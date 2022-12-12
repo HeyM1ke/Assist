@@ -263,12 +263,21 @@ namespace Assist.Views.Dashboard.ViewModels
                         // if not 
                         if (ourTeam.Won)
                         {
-                            control.MatchScore = $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}";
+                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
+                            control.MatchScore =
+                                mode.ToLower().Equals("deathmatch")  // check for mode --Shiick
+                                ? $"{currentP.Stats.Kills} - {currentP.Stats.Kills}" // mode is deathmatch, show score --Shiick
+                                : $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}"; // regular game --Shiick
                             control.ResultText = Properties.Resources.Profile_WonText;
                             control.MatchWin = true;
                         }
-                        else{
-                            control.MatchScore = $"{notOurTeam.RoundsWon} - {ourTeam.RoundsWon}";
+                        else
+                        {
+                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
+                            control.MatchScore = 
+                                mode.ToLower().Equals("deathmatch") // check for mode --Shiick
+                                ? $"{currentP.Stats.Kills} - {match.Players.Max(player => player.Stats.Kills)}" // mode is deathmatch, show score. second one is MVP --Shiick
+                                : $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}"; // regular game --Shiick
                             control.ResultText = Properties.Resources.Profile_LossText;
                             control.MatchWin = false;
                         }
