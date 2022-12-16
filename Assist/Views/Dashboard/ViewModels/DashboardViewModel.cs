@@ -266,6 +266,11 @@ namespace Assist.Views.Dashboard.ViewModels
                         }
                 }
 
+                if (match.MatchInformation != null)
+                {
+                    control.MatchMap = MapNames.MapsByPath?[match.MatchInformation.MapId].ToUpper();
+                }
+
                 controls.Add(control);
             }
 

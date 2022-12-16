@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:store="clr-namespace:Assist.Controls.Store"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="610"
+             x:Class="Assist.Views.Store.BonusMarket">
+  <Grid>
+    <TextBlock Text="NIGHT MARKET"
+               FontFamily="{StaticResource WorkSans}"
+               FontWeight="Black"
+               Foreground="White"
+               FontSize="48"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Margin="50"></TextBlock>
+
+      <UniformGrid Rows="1" Columns="6"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Initialized="NightItems_Init">
+
+          <UniformGrid.Styles>
+              <Style Selector="store|NightMarketOffer">
+                  <Setter Property="Width" Value="176"/>
+                  <Setter Property="Height" Value="280"/>
+                  <Setter Property="Margin" Value="5"></Setter>
+              </Style>
+          </UniformGrid.Styles>
+
+      </UniformGrid>
+  </Grid>
+</UserControl>

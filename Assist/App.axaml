@@ -15,6 +15,7 @@
         <StyleInclude Source="avares://Assist/Controls/Global/AssistComboBox.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/PlayerStatisticsView.axaml"></StyleInclude>
 
+        <StyleInclude Source="avares://Assist/Controls/Store/NightMarketOffer.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>

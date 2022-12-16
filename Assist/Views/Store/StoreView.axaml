@@ -18,9 +18,10 @@
 
             <store:NightMarketButtonControl HorizontalAlignment="Right"
                                             VerticalAlignment="Top"
+                                            Margin="10,0"
                                             Width="250"
                                             Height="395"
-                                            IsVisible="False"/>
+                                            IsVisible="True"/>
         </Grid>
 
 
