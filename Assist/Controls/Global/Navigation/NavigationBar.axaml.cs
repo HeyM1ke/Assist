@@ -18,19 +18,19 @@ namespace Assist.Controls.Global.Navigation
 
         public NavigationBar()
         {
-            Instance = this;
             InitializeComponent();
+            NavigationButtons.Add(this.FindControl<NavigationButton>("DashboardBtn"));
+            NavigationButtons.Add(this.FindControl<NavigationButton>("ProgressionBtn"));
+            NavigationButtons.Add(this.FindControl<NavigationButton>("StoreBtn"));
+            NavigationButtons.Add(this.FindControl<NavigationButton>("SettingsBtn"));
+            Instance = this;
+            Instance.SetSelected(3); // TEMP FIX
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            NavigationButtons.Add(this.FindControl<NavigationButton>("DashboardBtn"));
-            NavigationButtons.Add(this.FindControl<NavigationButton>("ProgressionBtn"));
-            NavigationButtons.Add(this.FindControl<NavigationButton>("StoreBtn"));
-            NavigationButtons.Add(this.FindControl<NavigationButton>("SettingsBtn"));
-
-            NavigationButtons[0].IsSelected = true;
+            
         }
 
 
@@ -70,7 +70,8 @@ namespace Assist.Controls.Global.Navigation
 
         public void SetSelected(int indexOfBtn)
         {
-            
+            ClearSelected();
+            NavigationButtons[indexOfBtn].IsSelected = true;
         }
         private void SettingsBtn_OnPointerPressedBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
