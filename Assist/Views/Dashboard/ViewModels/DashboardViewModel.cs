@@ -286,6 +286,8 @@ namespace Assist.Views.Dashboard.ViewModels
                 if (match.MatchInformation != null)
                 {
                     control.MatchMap = MapNames.MapsByPath?[match.MatchInformation.MapId].ToUpper();
+                    control.MatchMapImage =
+                        $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[match.MatchInformation.MapId]}_BWlistview.png";
                 }
 
                 controls.Add(control);

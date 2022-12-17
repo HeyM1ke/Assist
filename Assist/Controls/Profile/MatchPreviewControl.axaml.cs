@@ -14,6 +14,7 @@ namespace Assist.Controls.Profile
         public static readonly StyledProperty<string?> PlayerAgentProperty = AvaloniaProperty.Register<MatchPreviewControl, string?>("PlayerAgent");
         public static readonly StyledProperty<string?> ExtraDataProperty = AvaloniaProperty.Register<MatchPreviewControl, string?>("ExtraData");
         public static readonly StyledProperty<bool?> MatchWinProperty = AvaloniaProperty.Register<MatchPreviewControl, bool?>("MatchWin", false);
+        public static readonly StyledProperty<string?> MatchMapImageProperty = AvaloniaProperty.Register<MatchPreviewControl, string?>("MatchMapImage");
 
         public IBrush? ResultColor
         {
@@ -55,6 +56,12 @@ namespace Assist.Controls.Profile
         {
             get { return (bool?)GetValue(MatchWinProperty); }
             set { SetValue(MatchWinProperty, value); }
+        }
+
+        public string? MatchMapImage
+        {
+            get { return (string?)GetValue(MatchMapImageProperty); }
+            set { SetValue(MatchMapImageProperty, value); }
         }
     }
 }
