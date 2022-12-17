@@ -6,7 +6,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Views.Development.Dev_Test">
   <Grid>
-	  <global:AssistImage ImageUrl="https://images7.alphacoders.com/108/1081933.jpg"/>
+	  <global:AssistImage CornerRadius="50"
+                          BackgroundColor="Blue"
+                          ImageUrl="https://wallpaperaccess.com/full/3037903.jpg"/>
                           
   </Grid>
 </UserControl>

@@ -6,6 +6,7 @@ using Assist.ViewModels;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 using System.Net.Http;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Image = System.Drawing.Image;
@@ -40,6 +41,12 @@ namespace Assist.Controls.Global.ViewModels
             set => this.RaiseAndSetIfChanged(ref _backgroundBrush, value);
         }
 
+        private CornerRadius _cornerRadius;
+        public CornerRadius CornerRadius    
+        {
+            get => _cornerRadius;
+            set => this.RaiseAndSetIfChanged(ref _cornerRadius, value);
+        }
         public async Task LoadImage(string url)
         {
             try

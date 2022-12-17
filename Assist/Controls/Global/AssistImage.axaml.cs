@@ -21,6 +21,19 @@ namespace Assist.Controls.Global
             }
         }
 
+        public static readonly StyledProperty<CornerRadius> CornerProperty =
+            AvaloniaProperty.Register<AssistImage, CornerRadius>(nameof(BackgroundColor));
+
+        public CornerRadius CornerRadius
+        {
+            get { return GetValue(CornerProperty); }
+            set
+            {
+                SetValue(CornerProperty, value);
+                _viewModel.CornerRadius = value;
+            }
+        }
+
         public static readonly StyledProperty<string?> ImageUrlProperty =
             AvaloniaProperty.Register<AssistImage, string?>(nameof(ImageUrl));
 

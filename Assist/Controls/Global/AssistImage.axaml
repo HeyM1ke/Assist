@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Controls.Global.AssistImage">
-  <Border Background="{Binding BackgroundBrush}">
+  <Border
+       Background="{Binding BackgroundBrush}"
+          CornerRadius="{Binding CornerRadius}" 
+          ClipToBounds="True">
     <Image Source="{Binding ImageBitmap}"></Image>
   </Border>
 </UserControl>
