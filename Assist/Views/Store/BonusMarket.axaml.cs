@@ -8,10 +8,10 @@ namespace Assist.Views.Store
 {
     public partial class BonusMarket : UserControl
     {
-        private BonusMarketViewModel _viewModel;
+        private StoreViewModel _viewModel;
         public BonusMarket()
         {
-            DataContext = _viewModel = new BonusMarketViewModel();
+            DataContext = _viewModel = new StoreViewModel();
             InitializeComponent();
         }
 
@@ -23,7 +23,7 @@ namespace Assist.Views.Store
             var obj = sender as UniformGrid;
             if (obj != null)
             {
-                var r = await _viewModel.GetNightMarket();
+                var r = await _viewModel.GetPlayerStore();
                 if (r is null)
                     return;
 

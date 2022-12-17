@@ -1,0 +1,41 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Store">
+  <Design.PreviewWith>
+    <controls:BundleContainer Width="800"
+                              Height="450"
+                              isLoading="True"/>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|BundleContainer">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Border>
+            <Grid>
+                <ItemsControl x:Name="BundleCarousel"
+                          Margin="0"
+                          Items="{TemplateBinding Bundles}">
+                    
+                </ItemsControl>
+
+                <Border x:Name="PART_LoadingBorder" Background="Red">
+                    <TextBlock Text="Loading.."
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                    />
+                </Border>
+			</Grid>
+          </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+    <Style Selector="controls|BundleContainer[isLoading=True] /template/ Border#PART_LoadingBorder">
+        <Setter Property="IsVisible" Value="True"></Setter>
+    </Style>
+
+    <Style Selector="controls|BundleContainer[isLoading=False] /template/ Border#PART_LoadingBorder">
+        <Setter Property="IsVisible" Value="False"></Setter>
+    </Style>
+</Styles>

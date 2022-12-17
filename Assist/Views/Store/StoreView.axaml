@@ -11,10 +11,12 @@
 
         <Grid Row="0">
 
-            <store:BundleControl Width="810"
-                                 Height="395"
-                                 HorizontalAlignment="Left"
-                                 VerticalAlignment="Top"/>
+            <store:BundleContainer Width="810"
+                                   Height="395"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   isLoading="True"
+                                   Initialized="BundleContainer_Init"></store:BundleContainer>
 
             <store:NightMarketButtonControl HorizontalAlignment="Right"
                                             VerticalAlignment="Top"

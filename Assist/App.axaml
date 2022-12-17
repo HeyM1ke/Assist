@@ -6,21 +6,7 @@
         <local:ViewLocator/>
     </Application.DataTemplates>
 
-    <Application.Styles>
-        <FluentTheme Mode="Dark"/>
-        <StyleInclude Source="avares://Assist/Controls/Global/Navigation/NavigationButton.axaml" />
-        <StyleInclude Source="avares://Assist/Controls/Progression/MissionControl.axaml" />
-        <StyleInclude Source="avares://Assist/Controls/Progression/MissionsView.axaml" />
-        <StyleInclude Source="avares://Assist/Controls/Settings/SettingsNavigationButton.axaml"></StyleInclude>
-        <StyleInclude Source="avares://Assist/Controls/Global/AssistComboBox.axaml"></StyleInclude>
-        <StyleInclude Source="avares://Assist/Controls/Dashboard/PlayerStatisticsView.axaml"></StyleInclude>
-
-        <StyleInclude Source="avares://Assist/Controls/Store/NightMarketOffer.axaml"></StyleInclude>
-        <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControl.axaml"></StyleInclude>
-        <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
-        <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
-        <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
-	</Application.Styles>
+    
 
 	<Application.Resources>
 		<!-- Color Resources -->
@@ -177,5 +163,21 @@
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverForeground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverBackground" Color="#F61E51"/>
 	</Application.Resources>
+    <Application.Styles>
+        <FluentTheme Mode="Dark"/>
+        <StyleInclude Source="avares://Assist/Controls/Global/Navigation/NavigationButton.axaml" />
+        <StyleInclude Source="avares://Assist/Controls/Progression/MissionControl.axaml" />
+        <StyleInclude Source="avares://Assist/Controls/Progression/MissionsView.axaml" />
+        <StyleInclude Source="avares://Assist/Controls/Settings/SettingsNavigationButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Global/AssistComboBox.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/PlayerStatisticsView.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Store/BundleContainer.axaml"></StyleInclude>
+
+        <StyleInclude Source="avares://Assist/Controls/Store/NightMarketOffer.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
+    </Application.Styles>
 </Application>
 
