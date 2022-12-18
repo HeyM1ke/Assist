@@ -6,7 +6,7 @@
              d:DesignWidth="1000" 
              d:DesignHeight="30"
              x:Class="Assist.Controls.TitleBars.TitleBar_Win"
-             Background="{StaticResource AssistBlack}"
+             Background="Transparent"
              PointerPressed="InputElement_OnPointerPressed">
 
 	<UserControl.Styles>
@@ -31,8 +31,6 @@
 	</UserControl.Styles>
 
 	<Grid x:Name="titleGrid"
-          Background="{StaticResource AssistRed}"
-          
           PointerPressed="InputElement_OnPointerPressed">
 
         <Label Content="ASSIST BETA"

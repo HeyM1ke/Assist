@@ -20,23 +20,17 @@
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="30"
         Icon="/Resources/Assist_DevIcon.ico"
-        Opened="MainWindow_Initialized"
-        Background="{StaticResource AssistBlack}">
+        Opened="MainWindow_Initialized">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	
+ 
 
 	<Grid RowDefinitions="30,*">
 
-		<!--Window Bar-->
-        <Grid Row="0" Background="{StaticResource AssistBlack}">
-            <winb:TitleBar_Win></winb:TitleBar_Win>
-        </Grid>
-
-		<LayoutTransformControl Grid.Row="1" x:Name="LayoutControl">
+		<LayoutTransformControl Grid.Row="0" Grid.RowSpan="2" x:Name="LayoutControl">
             <LayoutTransformControl.LayoutTransform>
                 <ScaleTransform ScaleY="{Binding ScaleRate}"
                                 ScaleX="{Binding ScaleRate}"></ScaleTransform>
@@ -45,9 +39,8 @@
 			<Grid>
                 <Grid x:Name="MainContentView"
                       Width="1125"
-                      Height="690"
-                      VerticalAlignment="Center"
-                      Background="{StaticResource AssistGray}">
+                      Height="720"
+                      VerticalAlignment="Center">
                     <TransitioningContentControl x:Name="ContentView" >
                         <TransitioningContentControl.PageTransition>
                             <CrossFade Duration="0:00:00.250"/>
@@ -57,9 +50,14 @@
 <StackPanel></StackPanel>
                 <popup:PopupMaster x:Name="PopupMaster" 
                                    Width="1125"
-                                   Height="690"/>
+                                   Height="720"/>
 			</Grid>
 		</LayoutTransformControl>
-        
+
+		<!--Window Bar-->
+        <Grid Row="0">
+            <winb:TitleBar_Win></winb:TitleBar_Win>
+        </Grid>
+
     </Grid>
 </Window>

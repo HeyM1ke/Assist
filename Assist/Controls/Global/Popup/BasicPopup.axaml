@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              Width="1125"
-             Height="690"
+             Height="720"
              x:Class="Assist.Controls.Global.Popup.BasicPopup">
 	<Grid Background="#3D000000">
         <Border VerticalAlignment="Center"

@@ -7,18 +7,24 @@
              xmlns:navigation="clr-namespace:Assist.Controls.Global.Navigation"
              mc:Ignorable="d" 
              d:DesignWidth="1125" 
-             d:DesignHeight="690"
+             d:DesignHeight="720"
              x:Class="Assist.Views.MainView"
-             Background="{StaticResource AssistBlack}"
-             Initialized="MainView_Initializaed">
+             Initialized="MainView_Initializaed"
+			 Padding="0,30,0,0">
+
+	<UserControl.Background>
+		<VisualBrush Stretch="UniformToFill">
+			<VisualBrush.Visual>
+				<Grid>
+					<Image Source="/Resources/background_dev.png" Stretch="UniformToFill"/>
+					<Rectangle Fill="black" Opacity=".8"></Rectangle>
+				</Grid>
+			</VisualBrush.Visual>
+		</VisualBrush>
+	</UserControl.Background>
 
     <Grid RowDefinitions="80, *">
-        
-        
-<Grid Grid.Row="0" Grid.RowSpan="2" x:Name="Background">
-	<Image Source="/Resources/background_dev.png" Stretch="UniformToFill"/>
-    <Rectangle Fill="black" Opacity=".8"></Rectangle>
-</Grid>
+
 	    <global:UserSelection Grid.RowSpan="2"  Width="240"
 	                          ZIndex="9999"
 	                          HorizontalAlignment="Right"
