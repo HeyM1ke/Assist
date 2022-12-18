@@ -35,8 +35,8 @@ namespace Assist.Controls.Dashboard
         {
             var randomNullArt = new ArticleItem(new NewsArticle()
             {
-                Title = "Dead",
-                ImageUrl =
+                title = "Dead",
+                imageUrl = 
                     "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg"
             });
             var articles = await AssistApplication.ApiService.GetNewsAsync();
@@ -48,8 +48,8 @@ namespace Assist.Controls.Dashboard
                     randomNullArt,
                     new ArticleItem(new NewsArticle()
                     {
-                        Title = "node1",
-                        ImageUrl =
+                        title = "node1",
+                        imageUrl = 
                             "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg"
                     })
                     {

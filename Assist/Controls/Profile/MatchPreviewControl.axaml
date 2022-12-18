@@ -11,6 +11,7 @@
                                         ResultColor="{DynamicResource ValorantGreenWin}"
                                         MatchScore="13 - 2"
                                         MatchMap="ASCENT"
+                                        MatchMapImage="https://content.assistapp.dev/maps/EE613EE9-28B7-4BEB-9666-08DB13BB2244_BWlistview.png"
                                         ExtraData="23 / 4 / 2"
                                         />
 	  </Grid>
@@ -23,7 +24,7 @@
 		  <Border>
               <Grid>
                   <Image x:Name="PART_MapImage"
-                         asyncImageLoader:ImageLoader.Source="https://content.assistapp.dev/maps/EE613EE9-28B7-4BEB-9666-08DB13BB2244_BWlistview.png"
+                         asyncImageLoader:ImageLoader.Source="{TemplateBinding MatchMapImage}"
                          Stretch="UniformToFill">
 					  <Image.OpacityMask>
                           <LinearGradientBrush StartPoint="0%,100%">

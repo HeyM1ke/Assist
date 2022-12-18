@@ -55,6 +55,13 @@ namespace Assist.ViewModels
             if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 Window mainRef = desktop.MainWindow;
+
+                if (mainRef.Screens.Primary.WorkingArea.Height <= 1080 && Res == EResolution.R1080)
+                {
+                    AssistSettings.Current.SelectedResolution = EResolution.R900;
+                    Res = AssistSettings.Current.SelectedResolution;
+                }
+
                 switch (Res)
                 {
                     case (EResolution.R900):

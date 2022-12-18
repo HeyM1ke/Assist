@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,8 @@ namespace Assist.Views.Dashboard.ViewModels
             {
                 var missionData = allMissions.Find(_m => dailyMissions[i].ID == _m.Uuid);
 
+                if (missionData == null) { continue; } // Sanity check, got annoyed at the warning. --Shiick
+
                 controls.Add(new MissionControl()
                 {
                     Title = missionData.Title,
@@ -69,22 +72,27 @@ namespace Assist.Views.Dashboard.ViewModels
 
             var date = DateTime.Now.AddDays(1);
 
-
-            var dailyMissions = _userContacts.Missions.FindAll(_mission => (_mission.ExpirationTime.Day != date.Day) || (_mission.ExpirationTime.Day != DateTime.Now.Day));
+            var weeklyMissions = _userContacts.Missions.FindAll(_mission => (_mission.ExpirationTime.Day != date.Day) || (_mission.ExpirationTime.Day != DateTime.Now.Day));
+            // Changed var name for clarity --Shiick
 
             List<MissionControl> controls = new List<MissionControl>();
 
-            for (int i = 0; i < dailyMissions.Count; i++)
+
+            for (int i = 0; i < weeklyMissions.Count; i++)
             {
-                var missionData = allMissions.Find(_m => dailyMissions[i].ID == _m.Uuid);
+                var missionData = allMissions.Find(_m => weeklyMissions[i].ID == _m.Uuid);
+
+                if (missionData == null) { continue; } // Sanity check, got annoyed at the warning. --Shiick
+
+                if (missionData.XpGrant == 2000) { continue; }// Dirty fix but it does what it's supposed to do... --Shiick
 
                 controls.Add(new MissionControl()
                 {
                     Title = missionData.Title,
-                    CurrentProgress = dailyMissions[i].Objectives.First().Value,
+                    CurrentProgress = weeklyMissions[i].Objectives.First().Value,
                     MaxProgress = missionData.ProgressToComplete,
                     XpGrantAmount = $"{missionData.XpGrant}XP",
-                    PreviewText = $"{dailyMissions[i].Objectives.First().Value}/{missionData.ProgressToComplete}"
+                    PreviewText = $"{weeklyMissions[i].Objectives.First().Value}/{missionData.ProgressToComplete}"
                 });
             }
 
@@ -255,12 +263,21 @@ namespace Assist.Views.Dashboard.ViewModels
                         // if not 
                         if (ourTeam.Won)
                         {
-                            control.MatchScore = $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}";
+                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
+                            control.MatchScore =
+                                mode.ToLower().Equals("deathmatch")  // check for mode --Shiick
+                                ? $"{currentP.Stats.Kills} - {currentP.Stats.Kills}" // mode is deathmatch, show score --Shiick
+                                : $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}"; // regular game --Shiick
                             control.ResultText = Properties.Resources.Profile_WonText;
                             control.MatchWin = true;
                         }
-                        else{
-                            control.MatchScore = $"{notOurTeam.RoundsWon} - {ourTeam.RoundsWon}";
+                        else
+                        {
+                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
+                            control.MatchScore = 
+                                mode.ToLower().Equals("deathmatch") // check for mode --Shiick
+                                ? $"{currentP.Stats.Kills} - {match.Players.Max(player => player.Stats.Kills)}" // mode is deathmatch, show score. second one is MVP --Shiick
+                                : $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}"; // regular game --Shiick
                             control.ResultText = Properties.Resources.Profile_LossText;
                             control.MatchWin = false;
                         }
@@ -269,6 +286,8 @@ namespace Assist.Views.Dashboard.ViewModels
                 if (match.MatchInformation != null)
                 {
                     control.MatchMap = MapNames.MapsByPath?[match.MatchInformation.MapId].ToUpper();
+                    control.MatchMapImage =
+                        $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[match.MatchInformation.MapId]}_BWlistview.png";
                 }
 
                 controls.Add(control);

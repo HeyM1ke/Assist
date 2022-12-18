@@ -1,17 +1,19 @@
 using System;
 using Assist.Controls.Dashboard;
+using Assist.Services;
 using Assist.Views.Store.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Interactivity;
 
 namespace Assist.Views.Store
 {
     public partial class BonusMarket : UserControl
     {
-        private BonusMarketViewModel _viewModel;
+        private StoreViewModel _viewModel;
         public BonusMarket()
         {
-            DataContext = _viewModel = new BonusMarketViewModel();
+            DataContext = _viewModel = new StoreViewModel();
             InitializeComponent();
         }
 
@@ -23,7 +25,7 @@ namespace Assist.Views.Store
             var obj = sender as UniformGrid;
             if (obj != null)
             {
-                var r = await _viewModel.GetNightMarket();
+                var r = await _viewModel.GetPlayerStore();
                 if (r is null)
                     return;
 
@@ -32,6 +34,11 @@ namespace Assist.Views.Store
                 obj.Children.AddRange(controls);
             }
 
+        }
+
+        private void BackBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            MainViewNavigationController.Change(new StoreView());
         }
     }
 }

@@ -4,15 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.ViewModels;
+using ValNet.Core.Store;
 using ValNet.Objects.Store;
-using NightMarketOffer = Assist.Controls.Store.NightMarketOffer;
 
 namespace Assist.Views.Store.ViewModels
 {
-    internal class BonusMarketViewModel
+    internal class StoreViewModel : ViewModelBase
     {
-        Dictionary<string,ValUserStore> _UserStores = new Dictionary<string,ValUserStore>();
-        public async Task<ValUserStore> GetNightMarket()
+        static Dictionary<string, ValUserStore> _UserStores = new Dictionary<string, ValUserStore>();
+        /// <summary>
+        /// Get's the current RiotUser's Store
+        /// </summary>
+        /// <returns>ValUserStore Obj</returns>
+        public async Task<ValUserStore> GetPlayerStore()
         {
             if (_UserStores.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
             {
@@ -29,9 +33,14 @@ namespace Assist.Views.Store.ViewModels
             return r;
         }
 
-        public async Task<List<NightMarketOffer>> CreateMarketControls(ValUserStore store)
+        /// <summary>
+        /// Creates NightMarket Controls
+        /// </summary>
+        /// <param name="store"></param>
+        /// <returns></returns>
+        public async Task<List<Controls.Store.NightMarketOffer>> CreateMarketControls(ValUserStore store)
         {
-            var thisList = new List<NightMarketOffer>();
+            var thisList = new List<Controls.Store.NightMarketOffer>();
 
             for (int i = 0; i < store.BonusStore.NightMarketOffers.Count; i++)
             {
@@ -39,13 +48,31 @@ namespace Assist.Views.Store.ViewModels
 
                 var skinInfo = await AssistApplication.ApiService.GetWeaponSkinAsync(offer.Offer.OfferID);
 
-                thisList.Add(new NightMarketOffer()
+                thisList.Add(new Controls.Store.NightMarketOffer()
                 {
                     SkinName = skinInfo.DisplayName,
                     SkinImage = skinInfo.Levels[0].DisplayIcon,
                     SkinDiscount = $"{offer.DiscountPercent}%",
                     OriginalPrice = $"{offer.Offer.Cost.ValorantPointCost}",
                     DiscountedPrice = $"{offer.DiscountCosts.ValorantPointCost}"
+                });
+            }
+
+            return thisList;
+        }
+
+        public async Task<List<Controls.Store.BundleItem>> CreateBundleControls(ValUserStore store)
+        {
+            var thisList = new List<Controls.Store.BundleItem>();
+
+            for (int i = 0; i < store.FeaturedBundle.Bundles.Count; i++)
+            {
+                var offer = store.FeaturedBundle.Bundles[i];
+
+                thisList.Add(new Controls.Store.BundleItem(offer)
+                {
+                    Width = 810,
+                    Height = 395,
                 });
             }
 

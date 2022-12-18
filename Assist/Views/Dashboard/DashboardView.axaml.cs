@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Assist.Controls.Dashboard;
+using Assist.Controls.Global.Navigation;
 using Assist.Controls.Progression;
 using Avalonia;
 using Avalonia.Controls;
@@ -21,6 +22,7 @@ namespace Assist.Views.Dashboard
             DataContext = _viewModel = new DashboardViewModel();
             InitializeComponent();
             MainViewNavigationController.CurrentPage = Page.DASHBOARD;
+            NavigationBar.Instance.SetSelected(0);
         }
 
         private void InitializeComponent()

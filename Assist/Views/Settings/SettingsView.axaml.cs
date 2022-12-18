@@ -22,7 +22,6 @@ namespace Assist.Views.Settings
             MainViewNavigationController.CurrentPage = Page.SETTINGS;
             InitializeComponent();
             SettingsViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentControl");
-            NavigationBar.Instance.SetSelected(2);
             SetupButtons();
         }
 
@@ -39,6 +38,7 @@ namespace Assist.Views.Settings
             navigationButtons.Add(this.FindControl<SettingsNavigationButton>("InfoSettingsBtn"));
 
             navigationButtons[0].IsSelected = true;
+            NavigationBar.Instance.SetSelected(3);
         }
 
         private void DeselectAllButtons(SettingsNavigationButton toSkip = null)
