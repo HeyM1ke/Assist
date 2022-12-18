@@ -1,8 +1,10 @@
 using System;
 using Assist.Controls.Dashboard;
+using Assist.Services;
 using Assist.Views.Store.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Interactivity;
 
 namespace Assist.Views.Store
 {
@@ -32,6 +34,11 @@ namespace Assist.Views.Store
                 obj.Children.AddRange(controls);
             }
 
+        }
+
+        private void BackBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            MainViewNavigationController.Change(new StoreView());
         }
     }
 }
