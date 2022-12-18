@@ -6,6 +6,9 @@ using Assist.Objects.AssistApi.Valorant;
 using Assist.Objects.AssistApi.Valorant.Battlepass;
 using Assist.Objects.AssistApi.Valorant.Offer;
 using Assist.Objects.AssistApi.Valorant.Skin;
+using Assist.Objects.Enums;
+using Assist.Services.Utils;
+using Assist.Settings;
 using RestSharp;
 using Serilog;
 
@@ -79,14 +82,24 @@ namespace Assist.Services
             return response.Data;
         }
 
+        public async Task<NewsArticle[]> GetNewsAsyncByRegion()
+        {
+            var request = new RestRequest($"/valorant/news/{AssistSettings.Current.Language.GetAttribute<LanguageAttribute>().Code.ToLower()}");
+            var response = await _client.ExecuteAsync<NewsArticle[]>(request);
+            if (!response.IsSuccessful)
+                return new[] { CreateFailedNewsTab() };
+
+            return response.Data;
+        }
+
         private static NewsArticle CreateFailedNewsTab()
         {
             return new NewsArticle
             {
-                Title = "VALORANT 2022 YEAR-END",
-                Description = "Celebrate the year with actual content! we know we havent given you any recently",
-                ImageUrl = FailedNewsArticleImageUrl,
-                Url = "https://playvalorant.com/en-us/news/game-updates/valorant-2022-year-end/"
+                title = "VALORANT 2022 YEAR-END",
+                description = "Celebrate the year with actual content! we know we havent given you any recently",
+                imageUrl = FailedNewsArticleImageUrl,
+                nodeUrl = "https://playvalorant.com/en-us/news/game-updates/valorant-2022-year-end/"
             };
         }
 

@@ -69,7 +69,11 @@ namespace Assist.Views.Store.ViewModels
             {
                 var offer = store.FeaturedBundle.Bundles[i];
 
-                thisList.Add(new Controls.Store.BundleItem(offer));
+                thisList.Add(new Controls.Store.BundleItem(offer)
+                {
+                    Width = 810,
+                    Height = 395,
+                });
             }
 
             return thisList;

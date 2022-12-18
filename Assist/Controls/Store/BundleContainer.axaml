@@ -19,7 +19,7 @@
                     
                 </ItemsControl>
 
-                <Border x:Name="PART_LoadingBorder" Background="Red">
+                <Border x:Name="PART_LoadingBorder" Background="#17181D">
                     <TextBlock Text="Loading.."
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"

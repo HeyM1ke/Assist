@@ -6,15 +6,11 @@ namespace Assist.Objects.AssistApi
     public class NewsArticle
     {
 
-        public string Guid { get; set; }
-
-        [JsonPropertyName("newsTitle")] public string Title { get; set; }
-
-        [JsonPropertyName("newsDescription")] public string Description { get; set; }
-
-        [JsonPropertyName("newsImage")] public string ImageUrl { get; set; }
-
-        [JsonPropertyName("newsUrl")] public string Url { get; set; }
+        public string id { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public string imageUrl { get; set; }
+        public string nodeUrl { get; set; }
 
     }
 }

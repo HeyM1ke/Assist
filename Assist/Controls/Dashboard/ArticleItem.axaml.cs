@@ -23,10 +23,10 @@ namespace Assist.Controls.Dashboard
         {
             DataContext = _viewModel = new ArticleItemViewModel();
 
-            _viewModel.ArticleTitle = node.Title;
-            _viewModel.ArticleDescription = node.Description;
-            _viewModel.ArticleUrl = node.Url;
-            _viewModel.ArticleImageUrl = node.ImageUrl;
+            _viewModel.ArticleTitle = node.title;
+            _viewModel.ArticleDescription = node.description;
+            _viewModel.ArticleUrl = node.nodeUrl;
+            _viewModel.ArticleImageUrl = node.imageUrl;
 
             InitializeComponent();
         }
