@@ -11,8 +11,10 @@ using Assist.ViewModels;
 using Assist.Views.Authentication;
 using Assist.Views.Authentication.Sections.ViewModels;
 using Avalonia;
+using Avalonia.Platform;
 using ReactiveUI;
 using Serilog;
+using Serilog.Core;
 using Squirrel;
 using ValNet;
 using ValNet.Enums;
@@ -249,14 +251,69 @@ namespace Assist.Views.Startup.ViewModels
         public async Task CheckForUpdates()
         {
 #if (!DEBUG)
-            using var mgr = new UpdateManager("https://cdn.assistapp.dev/Releases/live/windows/");
-            var newVersion = await mgr.UpdateApp();
 
-            // You must restart to complete the update. 
-            // This can be done later / at any time.
-            if (newVersion != null) 
-                UpdateManager.RestartApp();
+            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.WinNT)
+            {
+                try
+                {
+                    using var mgr = new UpdateManager("https://cdn.assistapp.dev/Releases/live/windows/");
+                    var newVersion = await mgr.UpdateApp();
+
+                    // You must restart to complete the update. 
+                    // This can be done later / at any time.
+                    if (newVersion != null)
+                        UpdateManager.RestartApp();
+
+                    return;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
+
+            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.OSX)
+            {
+                try
+                {
+                    using var mgr = new UpdateManager("https://cdn.assistapp.dev/Releases/live/mac/");
+                    var newVersion = await mgr.UpdateApp();
+
+                    // You must restart to complete the update. 
+                    // This can be done later / at any time.
+                    if (newVersion != null)
+                        UpdateManager.RestartApp();
+
+                    return;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
+
+            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.Linux)
+            {
+                try
+                {
+                    using var mgr = new UpdateManager("https://cdn.assistapp.dev/Releases/live/linux/");
+                    var newVersion = await mgr.UpdateApp();
+
+                    // You must restart to complete the update. 
+                    // This can be done later / at any time.
+                    if (newVersion != null)
+                        UpdateManager.RestartApp();
+
+                    return;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
 #endif
+
+
 
         }
     }
