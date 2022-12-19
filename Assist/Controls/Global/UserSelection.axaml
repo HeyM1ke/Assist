@@ -85,15 +85,18 @@
 					        Background="{StaticResource ButtonBackground}"
 					        CornerRadius="0,0,5,5"
 					        />
-					<ItemsControl x:Name="UserSelectionItems" 
-					              Items="{Binding ProfileControls}">
-						<ItemsControl.Styles>
-							<Style Selector="global|UserSelectionBtn">
-								<Setter Property="Margin" Value="0,5,0,0"/>
-								<Setter Property="Width" Value="240"></Setter>
-							</Style>
-						</ItemsControl.Styles>
-					</ItemsControl>
+					<ScrollViewer MaxHeight="400">
+                        <ItemsControl x:Name="UserSelectionItems"
+                                      Items="{Binding ProfileControls}"
+                                      >
+                            <ItemsControl.Styles>
+                                <Style Selector="global|UserSelectionBtn">
+                                    <Setter Property="Margin" Value="0,5,0,0"/>
+                                    <Setter Property="Width" Value="240"></Setter>
+                                </Style>
+                            </ItemsControl.Styles>
+                        </ItemsControl>
+					</ScrollViewer>
 				</Grid>
 			</Grid>
 		</ItemsControl>
