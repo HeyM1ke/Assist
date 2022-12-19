@@ -1,0 +1,41 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Navigation">
+  <Design.PreviewWith>
+    <controls:GameNavigationBar Width="1125"
+                                Height="63"/>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|GameNavigationBar">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Border>
+              <Grid ColumnDefinitions="155,*">
+                  <Image x:Name="PART_AssistLogo"
+                         Source="../../../Resources/Icons/AssistText_Temp.png"
+                         Height="30"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Left"
+                         Margin="12,0,0,0"></Image>
+
+                  <StackPanel Grid.Column="1"
+                              Margin="43,0,0,0"
+                              HorizontalAlignment="Left"
+                              Orientation="Horizontal">
+                      <controls:GameNavigationButton Height="63"
+                                                     Width="100"
+                                                     Title="LIVE"/>
+                      <controls:GameNavigationButton Height="63"
+                                                     Width="100"
+                                                     Title="Modules"/>
+                      <controls:GameNavigationButton Height="63"
+                                                     Width="100"
+                                                     Title="Profile"/>
+                  </StackPanel>
+              </Grid>
+          </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

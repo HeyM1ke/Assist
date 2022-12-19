@@ -178,6 +178,12 @@
         <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
+
+
+
+		<!--GameMode-->
+        <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationBar.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
 

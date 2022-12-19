@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Game.Views;
 using Assist.Objects.RiotClient;
 using Assist.Services;
 using Assist.Settings;
@@ -50,6 +51,14 @@ namespace Assist.Views.Startup.ViewModels
                 MainWindowContentController.Change(new SelectLanguage());
                 return;
             }
+
+            // Check Args
+            if (AssistApplication.CurrentApplication.Args.Contains("--forcegame"))
+            {
+                MainWindowContentController.Change(new GameView());
+                return;
+            }
+
 
             if (AssistSettings.Current.Profiles.Count == 0)
             {

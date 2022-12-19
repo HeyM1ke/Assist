@@ -44,6 +44,7 @@
     <PackageReference Include="CliWrap" Version="3.4.4" />
     <PackageReference Include="Clowd.Squirrel" Version="3.0.210-g5f9f594" />
     <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.1" />
     <PackageReference Include="RestSharp" Version="108.0.1" />
     <PackageReference Include="Serilog" Version="2.11.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
@@ -67,9 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game\Controls\Navigation\" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -80,5 +78,8 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\Services\" />
   </ItemGroup>
 </Project>
