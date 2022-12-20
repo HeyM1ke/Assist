@@ -1,5 +1,6 @@
 using System;
 using Assist.Services;
+using Assist.ViewModels;
 using Assist.Views.Dashboard;
 using Assist.Views.Progression;
 using Assist.Views.Store;
@@ -12,8 +13,11 @@ namespace Assist.Views
 {
     public partial class MainView : UserControl
     {
+        private MainViewViewModel _viewModel;
+
         public MainView()
         {
+            DataContext = _viewModel = new MainViewViewModel();
             InitializeComponent();
             MainViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
             MainViewNavigationController.Change(new DashboardView());
@@ -21,6 +25,7 @@ namespace Assist.Views
 
         public MainView(UserControl PageToOpenTo)
         {
+            DataContext = _viewModel = new MainViewViewModel();
             InitializeComponent();
             MainViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
             MainViewNavigationController.Change(PageToOpenTo);
@@ -31,9 +36,10 @@ namespace Assist.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void MainView_Initializaed(object? sender, EventArgs e)
+        private async void MainView_Initializaed(object? sender, EventArgs e)
         {
-            
+            AssistApplication.Current.ConnectToServerHub();
+            _viewModel.SetupUserCount();
         }
     }
 }

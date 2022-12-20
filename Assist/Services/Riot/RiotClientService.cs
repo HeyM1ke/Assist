@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Assist.Objects.RiotClient;
 using Assist.Settings;
 using Assist.ViewModels;
+using Avalonia.Threading;
 using Serilog;
 
 namespace Assist.Services.Riot
@@ -163,6 +164,14 @@ namespace Assist.Services.Riot
             if(t)
                 OnValorantGameLaunched();*/
             //await ReplaceValorantBackground();
+
+
+            // Automatically Closes Valorant After Launch
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                AssistApplication.CurrentApplication.Shutdown();
+            });
+            
         }
 
         static internal async Task<IEnumerable<Process>> GetCurrentRiotProcesses()

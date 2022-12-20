@@ -6,6 +6,7 @@ using Assist.Services.Popup;
 using Assist.ViewModels;
 using Assist.Views;
 using Assist.Views.Authentication;
+using Assist.Views.Dashboard;
 using Assist.Views.Startup;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
