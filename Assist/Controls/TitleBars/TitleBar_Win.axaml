@@ -31,19 +31,27 @@
 	</UserControl.Styles>
 
 	<Grid x:Name="titleGrid"
-          Background="{StaticResource AssistRed}"
+          Background="{StaticResource AssistBlack}"
           
           PointerPressed="InputElement_OnPointerPressed">
 
-        <Label Content="ASSIST BETA"
-               Foreground="White"
-               HorizontalAlignment="Left"
-               VerticalContentAlignment="Center"
-               FontFamily="{StaticResource WorkSans}"
-               FontWeight="Regular"
-               FontSize="12"
-               Margin="5,0"
-               Opacity=".8"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="5,0">
+
+            <Image Source="../../Resources/Icons/Assist_Logo_SweetRed_LQ.png"
+                   Width="15"></Image>
+
+            <Label Content="ASSIST BETA"
+                   Foreground="White"
+                   
+                   FontFamily="{StaticResource WorkSans}"
+                   FontWeight="SemiBold"
+                   FontSize="12"
+                   Margin="5,0"
+                   Opacity=".8"/>
+		</StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
