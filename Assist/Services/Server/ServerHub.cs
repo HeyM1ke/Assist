@@ -15,7 +15,7 @@ namespace Assist.Services.Server
 
         public async Task Connect()
         {
-            HubConnectionUrl = "https://localhost:7085/hub";
+            HubConnectionUrl = "https://api.assistapp.dev/hub";
 
             base.Init();
             
