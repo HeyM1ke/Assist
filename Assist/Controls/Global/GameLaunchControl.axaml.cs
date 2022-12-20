@@ -36,6 +36,9 @@ namespace Assist.Controls.Global
 
         private async void GameLaunch_Init(object? sender, EventArgs e)
         {
+            if(Design.IsDesignMode)
+                return;
+
             var inv = await _viewModel.SetPlayercard();
 
             if (inv != null)

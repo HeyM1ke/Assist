@@ -9,6 +9,7 @@
     <ApplicationIcon>Resources\Assist_Icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageIcon>Assist_Logo_SweetRed.png</PackageIcon>
+    <SignAssembly>False</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
 	  <AvaloniaResource Include="Resources\**" />
@@ -44,6 +45,7 @@
     <PackageReference Include="CliWrap" Version="3.4.4" />
     <PackageReference Include="Clowd.Squirrel" Version="3.0.210-g5f9f594" />
     <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.1" />
     <PackageReference Include="RestSharp" Version="108.0.1" />
     <PackageReference Include="Serilog" Version="2.11.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />

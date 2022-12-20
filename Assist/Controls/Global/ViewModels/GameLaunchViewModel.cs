@@ -60,6 +60,8 @@ namespace Assist.Controls.Global.ViewModels
 
         public async Task<PlayerInventory> SetPlayercard()
         {
+            if (Design.IsDesignMode) return null;
+
             if (_inventory.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
             {
                 return _inventory[AssistApplication.Current.CurrentUser.UserData.sub];
