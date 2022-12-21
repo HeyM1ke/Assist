@@ -7,6 +7,7 @@ using Assist.Objects.Enums;
 using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Services.Riot;
+using Assist.Services.Server;
 using Assist.Settings;
 using Assist.Views;
 using Assist.Views.Authentication;
@@ -174,5 +175,19 @@ namespace Assist.ViewModels
             AssistApplication.Current.CurrentProfile = pS;
             AssistApplication.Current.OpenMainView();
         }
+
+        #region Experimental
+
+        public ServerHub ServerHub;
+
+        public void ConnectToServerHub()
+        {
+            ServerHub = new ServerHub();
+
+            Log.Information("Attempting To Connect to Server");
+            ServerHub.Connect();
+        }
+
+        #endregion
     }
 }

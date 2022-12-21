@@ -43,7 +43,19 @@
 
 					<StackPanel Orientation="Horizontal" Spacing="5"
                                 HorizontalAlignment="Right">
-						<global:SocialButton Width="35"
+
+                        <StackPanel Orientation="Horizontal" Spacing="4"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="{Binding UserCount}"
+                                       FontWeight="Bold"
+                                       FontFamily="{StaticResource WorkSans}"></TextBlock>
+                            <TextBlock Text="Users Online"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontWeight="Medium"
+                                       IsVisible="{Binding IsConnected}"
+                                       Opacity=".5"></TextBlock>
+						</StackPanel>
+                        <global:SocialButton Width="35"
                                              Height="35"
                                              HorizontalAlignment="Left"
                                              Source="../Resources/Icons/Discord_Icon.png"

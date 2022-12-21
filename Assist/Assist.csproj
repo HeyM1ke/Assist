@@ -9,6 +9,7 @@
     <ApplicationIcon>Resources\Assist_Icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageIcon>Assist_Logo_SweetRed.png</PackageIcon>
+    <SignAssembly>False</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
 	  <AvaloniaResource Include="Resources\**" />
