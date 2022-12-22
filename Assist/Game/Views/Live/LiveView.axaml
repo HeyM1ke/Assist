@@ -12,5 +12,9 @@
                  Height="500"
                  Text="{Binding Output}"
                  IsReadOnly="True"></TextBox>
+
+        <TransitioningContentControl>
+
+        </TransitioningContentControl>
     </Grid>
 </UserControl>

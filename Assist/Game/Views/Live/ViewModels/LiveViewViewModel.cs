@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
 using ReactiveUI;
 
@@ -23,7 +24,23 @@ namespace Assist.Game.Views.Live.ViewModels
         {
             AssistApplication.Current.RiotWebsocketService.RecieveMessageEvent += delegate(object o)
             {
-                Output += $"\n{o.ToString()}";
+                Output += $"\nGot Basic Message to Socket";
+            };
+
+            AssistApplication.Current.RiotWebsocketService.PresenceMessageEvent += delegate(PresenceV4Message message)
+            {
+                {
+                    Output += $"\nGot Basic Pres Message to Socket";
+                }
+                ;
+            };
+
+            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += delegate (PresenceV4Message message)
+            {
+                {
+                    Output += $"\nGot Current User Pres Message to Socket";
+                }
+                ;
             };
         }
     }

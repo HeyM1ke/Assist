@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Authentication;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
 using Serilog;
 using WebSocketSharp;
@@ -16,6 +19,8 @@ namespace Assist.Game.Services
         private WebSocket _socket;
 
         public event Action<object>? RecieveMessageEvent;
+        public event Action<PresenceV4Message>? PresenceMessageEvent;
+        public event Action<PresenceV4Message>? UserPresenceMessageEvent;
         public event Action<object>? OnErrorEvent;
 
         public async Task Connect()
@@ -48,7 +53,34 @@ namespace Assist.Game.Services
 
         private void _socket_OnMessage(object? sender, MessageEventArgs e)
         {
-            if (e != null) RecieveMessageEvent.Invoke(e.Data);
+            var t = JsonSerializer.Deserialize<object[]>(e.Data);
+            if (e != null)
+                RecieveMessageEvent.Invoke(t[2]);
+
+            DetermineCustomEvent(t[2]);
+        }
+
+        private void OnPresenceMessageEvent(object data)
+        {
+            var presData = JsonSerializer.Deserialize<PresenceV4Message>(data.ToString());
+
+            PresenceMessageEvent?.Invoke(presData);
+
+            if(presData.data.presences[0].puuid == AssistApplication.Current.CurrentUser.UserData.sub)
+                UserPresenceMessageEvent?.Invoke(presData);
+
+        }
+
+        private void DetermineCustomEvent(object data)
+        {
+            var d = JsonSerializer.Deserialize<DefaultSocketDataMessage>(data.ToString());
+
+            switch (d.uri)
+            {
+                case "/chat/v4/presences":
+                    OnPresenceMessageEvent(data);
+                    break;
+            }
         }
 
         public async Task Disconnect()
