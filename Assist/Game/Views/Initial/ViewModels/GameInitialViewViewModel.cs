@@ -33,9 +33,18 @@ namespace Assist.Game.Views.Initial.ViewModels
             // Connect to Valorant Websocket Through Socket Service.
             Message = "Connecting to Game...";
             await ConnectToGame();
-
+            Message = "Connecting to Live Data Socket...";
+            await StartSocketConnection();
 
             AssistApplication.Current.OpenGameView();
+        }
+
+        private async Task StartSocketConnection()
+        {
+            AssistApplication.Current.RiotWebsocketService.RecieveMessageEvent += delegate (object o) { Log.Information(o.ToString()); };
+            await AssistApplication.Current.RiotWebsocketService.Connect();
+            Message = "Connected to Live Data Socket.";
+            
         }
 
         private async Task ConnectToGame()

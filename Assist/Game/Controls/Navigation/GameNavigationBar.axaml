@@ -1,41 +1,35 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:Assist.Game.Controls.Navigation">
-  <Design.PreviewWith>
-    <controls:GameNavigationBar Width="1125"
-                                Height="63"/>
-  </Design.PreviewWith>
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:Assist.Game.Controls.Navigation"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Game.Controls.Navigation.GameNavigationBar">
 
-  <Style Selector="controls|GameNavigationBar">
-    <!-- Set Defaults -->
-    <Setter Property="Template">
-      <ControlTemplate>
-		  <Border>
-              <Grid ColumnDefinitions="155,*">
-                  <Image x:Name="PART_AssistLogo"
-                         Source="../../../Resources/Icons/AssistText_Temp.png"
-                         Height="30"
-                         VerticalAlignment="Center"
-                         HorizontalAlignment="Left"
-                         Margin="12,0,0,0"></Image>
 
-                  <StackPanel Grid.Column="1"
-                              Margin="43,0,0,0"
-                              HorizontalAlignment="Left"
-                              Orientation="Horizontal">
-                      <controls:GameNavigationButton Height="63"
-                                                     Width="100"
-                                                     Title="LIVE"/>
-                      <controls:GameNavigationButton Height="63"
-                                                     Width="100"
-                                                     Title="Modules"/>
-                      <controls:GameNavigationButton Height="63"
-                                                     Width="100"
-                                                     Title="Profile"/>
-                  </StackPanel>
-              </Grid>
-          </Border>
-      </ControlTemplate>
-    </Setter>
-  </Style>
-</Styles>
+    <Grid ColumnDefinitions="155,*">
+        <Image x:Name="PART_AssistLogo"
+               Source="../../../Resources/Icons/AssistText_Temp.png"
+               Height="30"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Margin="12,0,0,0"></Image>
+
+        <StackPanel Grid.Column="1"
+                    Margin="43,0,0,0"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+            <navigation:GameNavigationButton x:Name="LiveBtn"
+                                           Height="63"
+                                           Width="100"
+                                           Title="LIVE"
+                                           PointerPressed="LiveBtn_OnPointerPressed"/>
+            <navigation:GameNavigationButton x:Name="ModulesBtn"
+                                             Height="63"
+                                             Width="100"
+                                             Title="Modules"
+                                             PointerPressed="ModulesBtn_OnPointerPressed"/>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

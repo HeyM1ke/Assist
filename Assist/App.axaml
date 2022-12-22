@@ -181,7 +181,6 @@
         <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
 
 		<!--GameMode-->
-        <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationBar.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>
     </Application.Styles>
 </Application>

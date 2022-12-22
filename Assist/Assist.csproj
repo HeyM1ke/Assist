@@ -82,7 +82,4 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Game\Views\Modules\" />
-  </ItemGroup>
 </Project>

@@ -9,9 +9,11 @@
              x:Class="Assist.Game.Views.GameView"
              Background="#151515">
   <Grid RowDefinitions="64,*">
-	  <navigation:GameNavigationBar></navigation:GameNavigationBar>
 
-	  <TransitioningContentControl Grid.Row="1" x:Name="ContentView">
+      <navigation:GameNavigationBar Grid.Row="0"/>
+
+
+      <TransitioningContentControl Grid.Row="1" x:Name="ContentView">
           <TransitioningContentControl.PageTransition>
               <CrossFade Duration="0.25" />
           </TransitioningContentControl.PageTransition>
