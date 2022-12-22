@@ -10,8 +10,11 @@
              Background="#151515">
   <Grid RowDefinitions="64,*">
 	  <navigation:GameNavigationBar></navigation:GameNavigationBar>
-        
-      <Grid Row="2"
-            Background="Red"></Grid>
+
+	  <TransitioningContentControl Grid.Row="1" x:Name="ContentView">
+          <TransitioningContentControl.PageTransition>
+              <CrossFade Duration="0.25" />
+          </TransitioningContentControl.PageTransition>
+      </TransitioningContentControl>
   </Grid>
 </UserControl>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Game.Views;
+using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
 using Assist.Services;
 using Assist.Settings;
@@ -55,7 +56,7 @@ namespace Assist.Views.Startup.ViewModels
             // Check Args
             if (AssistApplication.CurrentApplication.Args.Contains("--forcegame"))
             {
-                MainWindowContentController.Change(new GameView());
+                MainWindowContentController.Change(new GameInitialView());
                 return;
             }
 

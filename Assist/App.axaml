@@ -178,8 +178,7 @@
         <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
-
-
+        <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
 
 		<!--GameMode-->
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationBar.axaml"></StyleInclude>

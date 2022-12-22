@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Game.Services;
+using Assist.Game.Views;
 using Assist.Objects.Enums;
 using Assist.Services;
 using Assist.Services.Popup;
@@ -115,6 +117,18 @@ namespace Assist.ViewModels
             PopupSystem.KillPopups();
         }
 
+        public void OpenGameView()
+        {
+            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    MainWindowContentController.Change(new GameView());
+                });
+
+            }
+            PopupSystem.KillPopups();
+        }
 
         /// <summary>
         /// Swaps currently logged in profile using profile settings.
@@ -187,6 +201,13 @@ namespace Assist.ViewModels
             Log.Information("Attempting To Connect to Server");
             ServerHub.Connect();
         }
+
+        #endregion
+
+        #region Gamemode
+
+        public RiotWebsocketService RiotWebsocketService = new RiotWebsocketService();
+
 
         #endregion
     }
