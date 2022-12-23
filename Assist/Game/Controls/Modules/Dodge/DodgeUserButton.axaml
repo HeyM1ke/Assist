@@ -12,10 +12,12 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border BorderBrush="#2B2B2B"
+                Background="#17181D"
                 BorderThickness="1">
             <Grid ColumnDefinitions="*,*"
-                  Margin="12,0">
+                  >
                 <StackPanel Orientation="Horizontal"
+                            Margin="12,0"
                             Grid.Column="0"
                             Spacing="12">
                     <TextBlock Text="{TemplateBinding GameName}"
@@ -39,15 +41,37 @@
 				</StackPanel>
                 <TextBlock Text="{TemplateBinding DateAdded}"
                            Grid.Column="1"
+                           Margin="12,0"
                            FontFamily="{StaticResource WorkSans}"
                            FontWeight="Light"
                            FontSize="13"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                 ></TextBlock>
+
+                <Border Background="{DynamicResource AssistRed}"
+                        Grid.ColumnSpan="2"
+                        IsVisible="False"
+                        x:Name="PART_RemoveBorder">
+					<TextBlock Text="CLICK TO REMOVE"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Medium"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                    ></TextBlock>
+                </Border>
             </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
+
+    <Style Selector="controls|DodgeUserButton:pointerover">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+
+    <Style Selector="controls|DodgeUserButton:pointerover /template/ Border#PART_RemoveBorder">
+        <Setter Property="IsVisible" Value="True"></Setter>
+    </Style>
 </Styles>

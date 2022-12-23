@@ -4,7 +4,7 @@ using Avalonia.Controls.Primitives;
 
 namespace Assist.Game.Controls.Modules.Dodge
 {
-    public class DodgeUserButton : TemplatedControl
+    public class DodgeUserButton : Button
     {
         public static readonly StyledProperty<string?> GameNameProperty = AvaloniaProperty.Register<DodgeUserButton, string?>("GameName");
         public static readonly StyledProperty<string?> NoteProperty = AvaloniaProperty.Register<DodgeUserButton, string?>("Note");

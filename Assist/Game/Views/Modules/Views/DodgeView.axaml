@@ -25,11 +25,13 @@
                         Grid.Row="1"
                         Background="#17181D">
                     <ScrollViewer>
-                        <ItemsControl Items="{Binding UserButtons}">
+                        <ItemsControl Items="{Binding UserButtons}"
+                                    >
 							<ItemsControl.Styles>
 								<Style Selector="dodge|DodgeUserButton">
-                                    <Setter Property="Height" Value="39"></Setter>
-                                </Style>
+									<Setter Property="Height" Value="39"></Setter>
+                                    <Setter Property="Margin" Value="0,0,0,1"></Setter>
+								</Style>
 							</ItemsControl.Styles>
 
 						</ItemsControl>
