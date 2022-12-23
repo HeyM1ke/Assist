@@ -14,11 +14,12 @@ namespace Assist.Game.Views.Live
             GameViewNavigationController.CurrentPage = Page.LIVE;
             DataContext = _viewModel = new LiveViewViewModel();
             InitializeComponent();
+            LiveViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("content");
         }
 
         private void LiveView_Init(object? sender, EventArgs e)
         {
-            _viewModel.DisplayWebsocketData();
+            _viewModel.Setup();
         }
     }
 }

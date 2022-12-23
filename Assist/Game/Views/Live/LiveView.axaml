@@ -8,9 +8,8 @@
              x:Class="Assist.Game.Views.Live.LiveView"
              Initialized="LiveView_Init">
 	<Grid>
-        <TextBlock>LIVE NOT NULL</TextBlock>
-        <TransitioningContentControl x:Name="ContentControl">
-			<TransitioningContentControl.PageTransition>
+		<TransitioningContentControl x:Name="content">
+            <TransitioningContentControl.PageTransition>
                 <CrossFade Duration="0.20" />
             </TransitioningContentControl.PageTransition>
         </TransitioningContentControl>

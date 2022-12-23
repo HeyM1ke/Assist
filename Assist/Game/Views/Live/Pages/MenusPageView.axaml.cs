@@ -1,3 +1,4 @@
+using Assist.Game.Services;
 using Avalonia.Controls;
 
 namespace Assist.Game.Views.Live.Pages
@@ -6,6 +7,7 @@ namespace Assist.Game.Views.Live.Pages
     {
         public MenusPageView()
         {
+            LiveViewNavigationController.CurrentPage = LivePage.MENUS;
             InitializeComponent();
         }
     }

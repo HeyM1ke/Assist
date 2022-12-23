@@ -7,6 +7,6 @@
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.Live.Pages.IngamePageView">
   <Grid>
-
+        <TextBlock Text="INGAME"></TextBlock>
   </Grid>
 </UserControl>

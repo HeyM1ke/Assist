@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Assist.Objects.RiotSocket
@@ -30,7 +31,10 @@ namespace Assist.Objects.RiotSocket
             public string patchline { get; set; }
             public string pid { get; set; }
             public object platform { get; set; }
-            public string _private { get; set; }
+
+            [JsonPropertyName("private")]
+            public string Private { get; set; }
+
             public object privateJwt { get; set; }
             public string product { get; set; }
             public string puuid { get; set; }

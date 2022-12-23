@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assist.Game.Models
 {
-    internal class PlayerPresense
+    internal class PlayerPresence
     {
 
             public bool isValid { get; set; }

@@ -3,11 +3,11 @@ using Avalonia.Controls;
 
 namespace Assist.Game.Views.Live.Pages
 {
-    public partial class PregamePageView : UserControl
+    public partial class UnkownPageView : UserControl
     {
-        public PregamePageView()
+        public UnkownPageView()
         {
-            LiveViewNavigationController.CurrentPage = LivePage.PREGAME;
+            LiveViewNavigationController.CurrentPage = LivePage.UNKNOWN;
             InitializeComponent();
         }
     }
