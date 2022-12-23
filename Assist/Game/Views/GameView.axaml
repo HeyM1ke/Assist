@@ -9,7 +9,10 @@
              x:Class="Assist.Game.Views.GameView"
              Background="#151515">
   <Grid RowDefinitions="64,*">
-
+	  <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="Background">
+          <Image Source="../../Resources/EOY_Background.png" Stretch="UniformToFill"/>
+          <Rectangle Fill="black" Opacity=".9"></Rectangle>
+      </Grid>
       <navigation:GameNavigationBar Grid.Row="0"/>
 
 

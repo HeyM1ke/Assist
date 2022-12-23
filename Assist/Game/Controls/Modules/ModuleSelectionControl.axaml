@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Modules">
+  <Design.PreviewWith>
+    <controls:ModuleSelectionControl Width="238"
+                                     Height="180"
+                                     ModuleName="DODGE"
+                                     ModuleDescription="Assist Dodge Warning System. Gives you a heads up when a player you marked is on your team."
+                                     ModuleIcon="../../../Resources/Game/DodgeLogo_Icon.png"/>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|ModuleSelectionControl">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderThickness="1"
+                CornerRadius="5"
+                Background="#101115"
+                BorderBrush="{DynamicResource AssistRed}"
+                x:Name="PART_Border">
+            <Grid Margin="10">
+				<StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Spacing="3">
+					<Image Width="50"
+                           Height="50"
+                           Source="{TemplateBinding ModuleIcon}"
+                           HorizontalAlignment="Left"/>
+                    <TextBlock Text="{TemplateBinding ModuleName}"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Bold"
+                               Padding="0"
+                               FontSize="24"></TextBlock>
+                    <TextBlock Text="{TemplateBinding ModuleDescription}"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Light"
+                               FontSize="12"
+                               Margin="0,-5,0,0"
+                               TextWrapping="WrapWithOverflow"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+    <Style Selector="controls|ModuleSelectionControl:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AssistRed}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+</Styles>

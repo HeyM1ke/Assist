@@ -32,9 +32,12 @@ namespace Assist
             }
             finally
             {
+#if (!DEBUG)
                 Log.CloseAndFlush();
                 AssistSettings.Save();
                 AssistApplication.CurrentApplication.Shutdown();
+#endif
+
             }
         }
 

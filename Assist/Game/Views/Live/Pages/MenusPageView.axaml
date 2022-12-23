@@ -5,14 +5,8 @@
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
-             x:Class="Assist.Game.Views.Live.LiveView"
-             Initialized="LiveView_Init">
+             x:Class="Assist.Game.Views.Live.Pages.MenusPageView">
 	<Grid>
-        <TextBlock>LIVE NOT NULL</TextBlock>
-        <TransitioningContentControl x:Name="ContentControl">
-			<TransitioningContentControl.PageTransition>
-                <CrossFade Duration="0.20" />
-            </TransitioningContentControl.PageTransition>
-        </TransitioningContentControl>
+        
     </Grid>
 </UserControl>

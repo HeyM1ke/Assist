@@ -182,6 +182,10 @@
 
 		<!--GameMode-->
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>
+
+        <StyleInclude Source="avares://Assist/Game/Controls/Modules/Dodge/DodgeAddUserButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Modules/Dodge/DodgeUserButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Modules/ModuleSelectionControl.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
 

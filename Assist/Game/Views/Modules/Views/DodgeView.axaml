@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dodge="clr-namespace:Assist.Game.Controls.Modules.Dodge"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="590"
+             Initialized="DodgeViewLoaded_Init"
+             x:Class="Assist.Game.Views.Modules.Views.DodgeView">
+	<Grid>
+        <Border Width="878"
+                Height="427"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="#101115">
+            <Grid RowDefinitions="63,*"
+                  Margin="20">
+				<dodge:DodgeAddUserButton Height="40"
+                                          Click="DodgeAdd_Click"/>
+
+
+                <Border x:Name="UserHolder" 
+                        Grid.Row="1"
+                        Background="#17181D">
+                    <ScrollViewer>
+                        <ItemsControl Items="{Binding UserButtons}">
+							<ItemsControl.Styles>
+								<Style Selector="dodge|DodgeUserButton">
+                                    <Setter Property="Height" Value="39"></Setter>
+                                </Style>
+							</ItemsControl.Styles>
+
+						</ItemsControl>
+                    </ScrollViewer>
+                </Border>
+                <Border Grid.Row="1"
+                        Background="#17181D"
+                        IsVisible="{Binding IsLoading}">
+                    <avaloniaProgressRing:ProgressRing Width="50"
+                                                       Height="50"
+                                                       IsActive="{Binding IsLoading}"
+                                                       HorizontalAlignment="Center"
+                                                       Foreground="White"/>
+                </Border>
+                
+            </Grid>
+        </Border>
+		<StackPanel HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="50"
+                    Spacing="10">
+			<Button Width="40"
+                    Height="40"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"></Button>
+            <Button Width="40"
+                    Height="40"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"></Button>
+		</StackPanel>
+    </Grid>
+</UserControl>

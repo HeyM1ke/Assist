@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Assist.Game.Services
 {
-    internal class LiveViewNavigationController
+    internal class ModulesViewNavigationController
     {
-        public static LivePage CurrentPage;
+        public static ModulePage CurrentPage;
         public static TransitioningContentControl ContentControl = new TransitioningContentControl();
 
         public static void Change(UserControl c) => ContentControl.Content = c;
-    }
 
-    enum LivePage
+        
+    }
+    public enum ModulePage
     {
-        UNKNOWN,
-        MENUS,
-        PREGAME,
-        INGAME
+        SELECTION,
+        RPC,
+        DODGE,
     }
 }

@@ -5,6 +5,10 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Game.Views.Modules.ModulesView">
 	<Grid>
-
+		<TransitioningContentControl x:Name="ContentControl">
+            <TransitioningContentControl.PageTransition>
+                <CrossFade Duration="0.20" />
+            </TransitioningContentControl.PageTransition>
+        </TransitioningContentControl>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Assist.Game.Services;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using ReactiveUI;
@@ -35,6 +36,8 @@ namespace Assist.Game.Views.Initial.ViewModels
             await ConnectToGame();
             Message = "Connecting to Live Data Socket...";
             await StartSocketConnection();
+
+            new DodgeService();
 
             AssistApplication.Current.OpenGameView();
         }

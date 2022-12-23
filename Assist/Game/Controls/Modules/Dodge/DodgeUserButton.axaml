@@ -1,0 +1,53 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Modules.Dodge">
+  <Design.PreviewWith>
+    <controls:DodgeUserButton Width="838"
+                              Height="40"
+                              />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|DodgeUserButton">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderBrush="#2B2B2B"
+                BorderThickness="1">
+            <Grid ColumnDefinitions="*,*"
+                  Margin="12,0">
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="0"
+                            Spacing="12">
+                    <TextBlock Text="{TemplateBinding GameName}"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Medium"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                    ></TextBlock>
+
+                    <Rectangle Width="3"
+                               Fill="white"
+                               Opacity=".5"
+                               Margin="5"></Rectangle>
+
+                    <TextBlock Text="{TemplateBinding Note}"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Light"
+                               FontSize="13"
+                               VerticalAlignment="Center"
+                    ></TextBlock>
+				</StackPanel>
+                <TextBlock Text="{TemplateBinding DateAdded}"
+                           Grid.Column="1"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontWeight="Light"
+                           FontSize="13"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                ></TextBlock>
+            </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

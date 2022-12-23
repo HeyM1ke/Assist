@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
 using Assist.Game.Views.Modules;
+using Assist.Game.Views.Modules.Views;
 using Avalonia.Input;
 using Assist.Services;
 using Assist.Views.Dashboard;
