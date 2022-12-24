@@ -58,25 +58,34 @@ namespace Assist.Game.Views.Live.ViewModels
                 Log.Information("Received User Presence Data");
                 var pres = await GetPresenceData(message.data.presences[0]);
                 Log.Information(pres.ToString());
-                await DeterminePage(pres);
+                await DeterminePage(pres, message);
             };
 
         }
 
-        private async Task DeterminePage(PlayerPresence dataMessage)
+        private async Task DeterminePage(PlayerPresence dataMessage, PresenceV4Message fullMessage = null)
         {
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 switch (dataMessage!.sessionLoopState)
             {
                 case "MENUS":
-                    LiveViewNavigationController.Change(new MenusPageView());
+                    if (LiveViewNavigationController.CurrentPage != LivePage.MENUS)
+                    {
+                        LiveViewNavigationController.Change(new MenusPageView(fullMessage));
+                    }
                     break;
                 case "INGAME":
-                    LiveViewNavigationController.Change(new IngamePageView());
-                    break;
+                    if (LiveViewNavigationController.CurrentPage != LivePage.INGAME)
+                    {
+                        LiveViewNavigationController.Change(new IngamePageView());
+                    }
+                        break;
                 case "PREGAME":
-                    LiveViewNavigationController.Change(new PregamePageView());
+                    if (LiveViewNavigationController.CurrentPage != LivePage.PREGAME)
+                    {
+                        LiveViewNavigationController.Change(new PregamePageView());
+                    }
                     break;
                 default:
                     break;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assist.Objects.RiotSocket
 {
-    internal class PresenceV4Message
+    public class PresenceV4Message
     {
         public Data data { get; set; }
         public string eventType { get; set; }

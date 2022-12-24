@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Assist.Game.Services;
+using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using ReactiveUI;
@@ -31,6 +34,13 @@ namespace Assist.Game.Views.Initial.ViewModels
             if(Design.IsDesignMode)
                 return;
 
+
+            while (!IsValorantRunning())
+            {
+                Message = "Please Run Assist, When Valorant is Open. Checking in 5 seconds.";
+                await Task.Delay(5000);
+            }
+
             // Connect to Valorant Websocket Through Socket Service.
             Message = "Connecting to Game...";
             await ConnectToGame();
@@ -40,6 +50,14 @@ namespace Assist.Game.Views.Initial.ViewModels
             new DodgeService();
 
             AssistApplication.Current.OpenGameView();
+        }
+
+        private bool IsValorantRunning()
+        {
+            var processlist = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Where(process => process.Id != Process.GetCurrentProcess().Id).ToList();
+            processlist.AddRange(Process.GetProcessesByName("VALORANT-Win64-Shipping"));
+            
+            return processlist.Any();
         }
 
         private async Task StartSocketConnection()
@@ -70,6 +88,7 @@ namespace Assist.Game.Views.Initial.ViewModels
                     Log.Fatal("ERROR:" + ex.Message);
                 }
 
+                throw e;
             }
             Message = "Connection Successful";
 

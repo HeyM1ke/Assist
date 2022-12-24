@@ -23,6 +23,7 @@ namespace Assist.Game.Controls.Navigation
             NavigationButtons.Add(this.FindControl<GameNavigationButton>("ModulesBtn"));
             Instance = this;
 
+            NavigationButtons[0].IsSelected = true;
         }
 
         private void LiveBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)
