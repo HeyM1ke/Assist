@@ -53,7 +53,7 @@
                                   FontSize="36" IsVisible="False"></TextBlock>
 
                        <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png"
-                              Width="36"
+                              Width="38"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"></Image>
 				   </Panel>
@@ -64,18 +64,17 @@
                   <Border Background="#17181D"
                           Height="410"
                           >
-                      <ItemsControl VerticalAlignment="Center"
-                                    Margin="7,0">
+                      <ItemsControl VerticalAlignment="Top"
+                                    Margin="7,12"
+                                    Items="{Binding UserControls}"
+                                    >
 						  <ItemsControl.ItemsPanel>
                               <ItemsPanelTemplate>
-                                  <StackPanel Orientation="Vertical" Spacing="14"/>
+                                  <StackPanel Orientation="Vertical" Spacing="14"
+                                              />
                               </ItemsPanelTemplate>
                           </ItemsControl.ItemsPanel>
-                          <live:GameUserControl></live:GameUserControl>
-                          <live:GameUserControl></live:GameUserControl>
-                          <live:GameUserControl></live:GameUserControl>
-                          <live:GameUserControl></live:GameUserControl>
-                          <live:GameUserControl></live:GameUserControl>
+                          
                       </ItemsControl>
                   </Border>
               </Grid>

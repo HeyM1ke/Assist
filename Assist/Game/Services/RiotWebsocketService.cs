@@ -21,6 +21,7 @@ namespace Assist.Game.Services
         public event Action<object>? RecieveMessageEvent;
         public event Action<PresenceV4Message>? PresenceMessageEvent;
         public event Action<PresenceV4Message>? UserPresenceMessageEvent;
+        public event Action<object>? PregameMessageEvent;
         public event Action<object>? OnErrorEvent;
 
         public async Task Connect()
@@ -71,6 +72,11 @@ namespace Assist.Game.Services
 
         }
 
+        private void OnPregameMessageEvent(object data)
+        {
+            PregameMessageEvent?.Invoke(data);
+        }
+
         private void DetermineCustomEvent(object data)
         {
             var d = JsonSerializer.Deserialize<DefaultSocketDataMessage>(data.ToString());
@@ -79,6 +85,9 @@ namespace Assist.Game.Services
             {
                 case "/chat/v4/presences":
                     OnPresenceMessageEvent(data);
+                    break;
+                case { } uri when uri.Contains("ares-pregame/pregame/v1/"):
+                    OnPregameMessageEvent(data);
                     break;
             }
         }

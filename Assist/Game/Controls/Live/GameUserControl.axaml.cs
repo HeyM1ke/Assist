@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live.ViewModels;
 using Avalonia.Controls;
@@ -28,6 +29,11 @@ namespace Assist.Game.Controls.Live
         {
             _viewModel.Player = player;
 
+            await _viewModel.UpdatePlayerData();
+        }
+
+        private async void GameUser_Init(object? sender, EventArgs e)
+        {
             await _viewModel.UpdatePlayerData();
         }
     }

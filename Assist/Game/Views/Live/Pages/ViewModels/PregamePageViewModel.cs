@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
+using Assist.Game.Services;
 using Assist.Objects.Helpers;
 using Assist.ViewModels;
 using Avalonia.Controls;
@@ -19,7 +20,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
     internal class PregamePageViewModel : ViewModelBase
     {
         // Control Container for User Controls
-        List<GameUserControl> UserControls = new List<GameUserControl>();
+        private List<GameUserControl> _userControls = new List<GameUserControl>();
+
+        public List<GameUserControl> UserControls
+        {
+            get => _userControls;
+            set => this.RaiseAndSetIfChanged(ref _userControls, value);
+        }
+
         List<string> SelectedAgentIds = new List<string>();
         private string? MatchId;
 
@@ -75,7 +83,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
 
             // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
-            await UpdateData();
+            await UpdateData(); // Do inital Pregame Check
+
+            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += async o =>
+            {
+                // On message recieved Check if it is a PREGAME Message.
+                await UpdateData();
+            };
         }
 
         public async Task UpdateData()
@@ -99,6 +113,9 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("PREGAME ERROR: " + e.Content);
                 Log.Fatal("PREGAME ERROR: " + e.Message);
             }
+
+            if(MatchResp.AllyTeam == null)
+                return;
 
             // Now that we have the match data lets go through it. 
             // First check if this is our first time around.
@@ -142,6 +159,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 {
                     await control.UpdatePlayer(Player);
                 });
+
+                return;
             }
 
             Log.Fatal("Tried Updating Control for User that does not exist?");
