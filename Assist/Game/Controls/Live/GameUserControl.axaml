@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="267" d:DesignHeight="65"
+             x:Class="Assist.Game.Controls.Live.GameUserControl">
+  <Border Background="#101115"
+          BorderBrush=""
+          BorderThickness="1">
+      <Grid ColumnDefinitions="64,*"
+            Margin="3">
+            <Border Width="58"
+                    Height="58"
+                    Background="#20000000"
+                    HorizontalAlignment="Left"
+                    Grid.Column="0">
+				<Grid>
+                    <asyncImageLoader:AdvancedImage Source="https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/displayicon.png"></asyncImageLoader:AdvancedImage>
+                    <asyncImageLoader:AdvancedImage Source="https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_23.png"
+                                                    Width="30"
+                                                    Height="30"
+                                                    VerticalAlignment="Top"
+                                                    HorizontalAlignment="Left"></asyncImageLoader:AdvancedImage>
+				</Grid>
+            </Border>
+
+          <Grid Column="1">
+              <StackPanel VerticalAlignment="Center">
+                  <TextBlock Text="VALORANTPLAYER"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="Bold"
+                             FontSize="16"></TextBlock>
+                  <TextBlock Text="Fade"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="Light"
+                             FontSize="10"
+                             Foreground="#50FFFFFF"/>
+                  <TextBlock Text="33 RR"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="Regular"
+                             FontSize="12"
+                             Foreground="#FFFFFF"/>
+              </StackPanel>
+
+              <Image x:Name="DodgeIcon"
+                     Source="../../../Resources/Game/DodgeLogo_Icon.png"
+                     Width="16"
+                     Height="16"
+                     VerticalAlignment="Bottom"
+                     HorizontalAlignment="Right"/>
+          </Grid>
+      </Grid>
+  </Border>
+</UserControl>

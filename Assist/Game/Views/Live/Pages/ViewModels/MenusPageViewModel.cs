@@ -59,19 +59,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
         private async void RiotWebsocketServiceOnUserPresenceMessageEvent(PresenceV4Message obj)
         {
-            
-
             // On User Update 
             var data = await GetPresenceData(obj.data.presences[0]);
-
-
-
 
             if (data != null)
             {
                 if(data.sessionLoopState != "MENUS")
                     return;
-
 
                 if (CurrentUsers.Count == 0)
                 {
