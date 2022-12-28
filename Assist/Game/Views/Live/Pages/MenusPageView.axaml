@@ -53,8 +53,7 @@
                             <Setter Property="Width" Value="205"/>
                         </Style>
                     </StackPanel.Styles>
-                    <Button></Button>
-                    <Button></Button>
+                    
                 </StackPanel>
 
             </Grid>

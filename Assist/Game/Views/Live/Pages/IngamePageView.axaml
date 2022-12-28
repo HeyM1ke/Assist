@@ -7,6 +7,13 @@
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.Live.Pages.IngamePageView">
   <Grid>
-        <TextBlock Text="INGAME"></TextBlock>
+        <TextBlock Text="You Are Ingame. This is still under development. Check back in a few days, or Contact Mike."
+                   FontFamily="{StaticResource WorkSans}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Width="500"
+                   TextWrapping="WrapWithOverflow"
+                   FontSize="24"
+                   TextAlignment="Center"/>
   </Grid>
 </UserControl>

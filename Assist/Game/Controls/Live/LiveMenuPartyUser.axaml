@@ -21,6 +21,7 @@
                                                   Stretch="UniformToFill"/>
 				  <asyncImageLoader:AdvancedImage Source="{TemplateBinding AgentImage}"
                                                   Stretch="UniformToFill"
+                                                  IsVisible="False"
                                                   
                                                   Height="500">
                       <asyncImageLoader:AdvancedImage.OpacityMask>
