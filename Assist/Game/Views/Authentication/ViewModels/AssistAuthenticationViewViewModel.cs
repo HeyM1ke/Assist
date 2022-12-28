@@ -8,6 +8,7 @@ using Assist.Services;
 using Assist.Services.Server;
 using Assist.Settings;
 using Assist.ViewModels;
+using Avalonia.Threading;
 using ReactiveUI;
 using Serilog;
 using Tmds.DBus;
@@ -98,7 +99,10 @@ namespace Assist.Game.Views.Authentication.ViewModels
                     return;
                 }
 
-                AssistApplication.Current.OpenGameView();
+                Dispatcher.UIThread.InvokeAsync(async () =>
+                {
+                    AssistApplication.Current.OpenGameView();
+                });
             }
             catch (Exception ex)
             {

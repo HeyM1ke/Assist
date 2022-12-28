@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Objects.Helpers;
 using Assist.ViewModels;
+using Avalonia.Media;
+using Avalonia.Threading;
 using Avalonia.Utilities;
 using ReactiveUI;
 using Serilog;
@@ -66,6 +68,14 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isPlayerDodge, value);
         }
 
+        private IBrush? _dodgeBorder;
+
+        public IBrush? DodgeBorder
+        {
+            get => _dodgeBorder;
+            set => this.RaiseAndSetIfChanged(ref _dodgeBorder, value);
+        }
+
 
         public async Task Setup()
         {
@@ -114,6 +124,11 @@ namespace Assist.Game.Controls.Live.ViewModels
                 {
                     // This means the user was found on the dodge list.
                     IsPlayerDodge = true;
+                    Dispatcher.UIThread.InvokeAsync(async () =>
+                    {
+                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                    });
+
                 }
 
             }

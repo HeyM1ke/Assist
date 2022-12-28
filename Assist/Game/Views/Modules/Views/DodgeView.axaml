@@ -56,10 +56,12 @@
 			<Button Width="40"
                     Height="40"
                     Grid.Row="1"
+                    IsVisible="False"
                     HorizontalAlignment="Right"></Button>
             <Button Width="40"
                     Height="40"
                     Grid.Row="1"
+                    IsVisible="False"
                     HorizontalAlignment="Right"></Button>
 		</StackPanel>
     </Grid>

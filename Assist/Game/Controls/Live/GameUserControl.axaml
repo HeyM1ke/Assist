@@ -7,7 +7,7 @@
              x:Class="Assist.Game.Controls.Live.GameUserControl"
              Initialized="GameUser_Init">
   <Border Background="#101115"
-          BorderBrush=""
+          BorderBrush="{Binding DodgeBorder}"
           BorderThickness="1">
       <Grid ColumnDefinitions="64,*"
             Margin="3">
