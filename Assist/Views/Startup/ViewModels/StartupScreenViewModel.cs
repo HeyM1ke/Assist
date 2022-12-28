@@ -266,7 +266,7 @@ namespace Assist.Views.Startup.ViewModels
             {
                 try
                 {
-                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/live/windows/");
+                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/beta/windows/");
                     var newVersion = await mgr.UpdateApp();
 
                     // You must restart to complete the update. 
