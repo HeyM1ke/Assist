@@ -65,6 +65,13 @@ namespace Assist.Settings
             set => this.SetProperty(ref _defaultAccount, value);
         }
 
+        private string _assistUserCode;
+        public string AssistUserCode
+        {
+            get => _assistUserCode;
+            set => this.SetProperty(ref _assistUserCode, value);
+        }
+
         internal async Task<string> FindRiotClient()
         {
             if (AssistApplication.Current.Platform.OperatingSystem != OperatingSystemType.WinNT)

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Game.Views;
+using Assist.Game.Views.Authentication;
 using Assist.Objects.Enums;
 using Assist.Services;
 using Assist.Services.Popup;
@@ -130,6 +131,19 @@ namespace Assist.ViewModels
             PopupSystem.KillPopups();
         }
 
+        public void OpenAssistAuthenticationView()
+        {
+            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    MainWindowContentController.Change(new AssistAuthenticationView());
+                });
+
+            }
+            PopupSystem.KillPopups();
+        }
+
         /// <summary>
         /// Swaps currently logged in profile using profile settings.
         /// </summary>
@@ -206,6 +220,7 @@ namespace Assist.ViewModels
 
         #region Gamemode
 
+        public AssistApiUser AssistUser = new AssistApiUser();
         public RiotWebsocketService RiotWebsocketService = new RiotWebsocketService();
 
 

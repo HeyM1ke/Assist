@@ -11,7 +11,7 @@ namespace Assist.Services.Server
     {
         protected HubConnection _hubConnection;
         public string HubConnectionUrl { get; set; }
-
+        public string? ConnectionId => _hubConnection.ConnectionId;
         protected void Init()
         {
             _hubConnection = new HubConnectionBuilder().WithUrl(HubConnectionUrl).Build();
@@ -20,10 +20,9 @@ namespace Assist.Services.Server
             _hubConnection.Reconnecting += _hubConnection_Reconnecting;
             _hubConnection.Closed += _hubConnection_Closed;
         }
-        public void CloseHub()
+        public async void CloseHub()
         {
-            _hubConnection.StopAsync();
-            _hubConnection.DisposeAsync();
+            await _hubConnection.StopAsync();
         }
 
         protected async Task StartHubInternal()
@@ -41,7 +40,8 @@ namespace Assist.Services.Server
 
         private Task _hubConnection_Closed(Exception? arg)
         {
-            Log.Information("_hubConnection_Closed New State:" + _hubConnection.State + " " + _hubConnection.ConnectionId);
+            Log.Information("_hubConnection_Closed New State:" + _hubConnection.State);
+            return Task.CompletedTask;
             if (arg != null)
             {
                 Log.Error($"Connection closed due to an error: {arg}");

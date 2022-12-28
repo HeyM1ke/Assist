@@ -49,6 +49,28 @@ namespace Assist.Game.Views.Initial.ViewModels
 
             new DodgeService();
 
+            // Introduce Authentication
+            if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
+            {
+                AssistApplication.Current.OpenAssistAuthenticationView();
+                return;
+            }
+
+            // Authenticate User with Code
+            try
+            {
+                await AssistApplication.Current.AssistUser.AuthenticateWithRefreshToken(AssistSettings.Current
+                    .AssistUserCode);
+                await AssistApplication.Current.AssistUser.GetUserInfo();
+            }
+            catch (Exception e)
+            {
+                Log.Fatal("Account Token is not Valid");
+                Log.Fatal("Opening Auth View");
+                AssistApplication.Current.OpenAssistAuthenticationView();
+                return;
+            }
+
             AssistApplication.Current.OpenGameView();
         }
 
@@ -62,7 +84,7 @@ namespace Assist.Game.Views.Initial.ViewModels
 
         private async Task StartSocketConnection()
         {
-            AssistApplication.Current.RiotWebsocketService.RecieveMessageEvent += delegate (object o) { Log.Information(o.ToString()); };
+            AssistApplication.Current.RiotWebsocketService.RecieveMessageEvent += delegate (object o) {  };
             await AssistApplication.Current.RiotWebsocketService.Connect();
             Message = "Connected to Live Data Socket.";
             
@@ -100,3 +122,4 @@ namespace Assist.Game.Views.Initial.ViewModels
         }
     }
 }
+

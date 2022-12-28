@@ -57,7 +57,6 @@ namespace Assist.Game.Views.Live.ViewModels
             {
                 Log.Information("Received User Presence Data");
                 var pres = await GetPresenceData(message.data.presences[0]);
-                Log.Information(pres.ToString());
                 await DeterminePage(pres, message);
             };
 
