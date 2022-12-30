@@ -46,9 +46,9 @@ namespace Assist.Game.Views.Initial.ViewModels
             await ConnectToGame();
             Message = "Connecting to Live Data Socket...";
             await StartSocketConnection();
-
+            
             new DodgeService();
-
+            await DiscordPresenceController.ControllerInstance.Initalize();
             // Introduce Authentication
             if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
             {

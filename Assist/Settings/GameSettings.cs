@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Objects.Discord;
 using Assist.ViewModels;
 using ReactiveUI;
 
@@ -37,5 +38,9 @@ namespace Assist.Settings
             get => _discordPresenceEnabled;
             set => this.RaiseAndSetIfChanged(ref _discordPresenceEnabled, value);
         }
+
+
+        public RichPresenceModel RichPresenceSettings { get; set; } = new RichPresenceModel();
+
     }
 }

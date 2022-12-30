@@ -61,6 +61,7 @@ namespace Assist
         {
             Log.Information("Exiting");
             AssistSettings.Save();
+            GameSettings.Save();
         }
 
         private static void SetupLogger()

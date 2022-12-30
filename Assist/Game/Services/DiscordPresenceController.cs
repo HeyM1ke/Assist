@@ -11,6 +11,10 @@ using Assist.ViewModels;
 using CliWrap;
 using Serilog;
 using Assist.Game.Models;
+using Assist.Game.Views.Live.Pages;
+using Assist.Objects.Helpers;
+using Assist.Settings;
+using YamlDotNet.Core;
 
 namespace Assist.Game.Services
 {
@@ -88,6 +92,265 @@ namespace Assist.Game.Services
             // Decode Pres
             var pres = await GetPresenceData(obj.data.presences[0]);
 
+            RichPresence newPresence = new RichPresence()
+            {
+                Buttons = clientButtons
+            };
+
+            switch (pres.sessionLoopState)
+            {
+                case "MENUS":
+                    DetermineMenusPresence(newPresence, pres);
+                    break;
+                case "INGAME":
+                    DetermineIngamePresence(newPresence, pres);
+                    break;
+                case "PREGAME":
+                    DeterminePregamePresence(newPresence, pres);
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
+        private async void DetermineIngamePresence(RichPresence rpObj, PlayerPresence playerPres)
+        {
+            string details = string.Empty;
+            ulong timeStart = 0;
+
+            DiscordRPC.Party.PrivacySetting privacy;
+
+            if (playerPres.partyAccessibility.Equals("CLOSED"))
+            {
+                privacy = DiscordRPC.Party.PrivacySetting.Private;
+            }else
+            {
+                privacy = DiscordRPC.Party.PrivacySetting.Public;
+            }
+
+            if (GameSettings.Current.RichPresenceSettings.ShowRank && string.Equals(GameSettings.Current.RichPresenceSettings.DetailsTextData, "Rank")) // Show Rank as Details
+            {
+                details = $"{CompetitiveNames.RankNames[playerPres.competitiveTier]}";
+            }
+
+            if (!string.Equals(GameSettings.Current.RichPresenceSettings.DetailsTextData, "Rank") || !GameSettings.Current.RichPresenceSettings.ShowRank) // Fall back to anything as this is the only other option.
+            {
+                if (GameSettings.Current.RichPresenceSettings.ShowMode)
+                {
+                    if (playerPres.partyState.Contains("CUSTOM_GAME"))
+                        details += "Custom Game";
+                    else
+                    {
+                        var queue = await DetermineQueueKey(playerPres);
+                        details = $"{queue}";
+                    }
+                }
+
+                if (GameSettings.Current.RichPresenceSettings.ShowScore)
+                {
+                    if (details != string.Empty)
+                        details += " || ";
+
+                    details +=
+                        $"{playerPres.partyOwnerMatchScoreAllyTeam} - {playerPres.partyOwnerMatchScoreEnemyTeam}";
+                }
+            }
+
+            rpObj.Assets = new Assets
+            {
+                LargeImageText = "Powered By Assist"
+            };
+
+            switch (GameSettings.Current.RichPresenceSettings.LargeImageData)
+            {
+                case "Map":
+                    rpObj.Assets.LargeImageKey = MapNames.MapsByPath[playerPres.matchMap].ToLower();
+                    break;
+                case "Agent":
+                    if(GameSettings.Current.RichPresenceSettings.ShowAgent)
+                        rpObj.Assets.LargeImageKey = "default"; // Add in AGENT
+                    else
+                        rpObj.Assets.LargeImageKey = "default";
+                    break;
+                default:
+                    rpObj.Assets.LargeImageKey = "default";
+                    break;
+
+            }
+
+            if (GameSettings.Current.RichPresenceSettings.ShowRank && GameSettings.Current.RichPresenceSettings.SmallImageData.Equals("Rank"))
+            {
+                rpObj.Assets.SmallImageKey = $"rank_{playerPres.competitiveTier}";
+                rpObj.Assets.SmallImageText = CompetitiveNames.RankNames[playerPres.competitiveTier];
+            }
+
+            if (GameSettings.Current.RichPresenceSettings.ShowParty)
+            {
+                var Party = new DiscordRPC.Party()
+                {
+                    ID = playerPres.partyId,
+                    Max = playerPres.maxPartySize,
+                    Privacy = privacy,
+                    Size = playerPres.partySize
+                };
+
+                rpObj.State = "Party: ";
+
+                rpObj.Party = Party;
+            }
+
+            rpObj.Details = details;
+
+            this.UpdatePresence(rpObj);
+        }
+
+        private async void DeterminePregamePresence(RichPresence rpObj, PlayerPresence playerPres)
+        {
+
+            if (playerPres.partyState.Equals("MATCHMADE_GAME_STARTING"))
+                return;
+
+            string details = string.Empty;
+            ulong timeStart = 0;
+
+            DiscordRPC.Party.PrivacySetting privacy;
+
+            if (playerPres.partyAccessibility.Equals("CLOSED"))
+            {
+                privacy = DiscordRPC.Party.PrivacySetting.Private;
+            }
+            else
+            {
+                privacy = DiscordRPC.Party.PrivacySetting.Public;
+            }
+
+            string state = "Agent Select";
+
+            string mapName = MapNames.MapsByPath[playerPres.matchMap];
+
+            if (GameSettings.Current.RichPresenceSettings.ShowRank && string.Equals(GameSettings.Current.RichPresenceSettings.DetailsTextData, "Rank")) // Show Rank as Details
+            {
+                details = $"{CompetitiveNames.RankNames[playerPres.competitiveTier]}";
+            }
+
+            if (!string.Equals(GameSettings.Current.RichPresenceSettings.DetailsTextData, "Rank") || !GameSettings.Current.RichPresenceSettings.ShowRank) // Fall back to anything as this is the only other option.
+            {
+                if (playerPres.partyState.Contains("CUSTOM_GAME"))
+                    details = "Custom Game";
+                else
+                {
+                    if (GameSettings.Current.RichPresenceSettings.ShowMode)
+                        details = char.ToUpper(playerPres.queueId[0]) + playerPres.queueId.Substring(1);
+                }
+            }
+
+            rpObj.Assets = new Assets
+            {
+                LargeImageKey = mapName.ToLower(),
+                LargeImageText = "Powered By Assist"
+            };
+
+            if (GameSettings.Current.RichPresenceSettings.ShowRank && GameSettings.Current.RichPresenceSettings.SmallImageData.Equals("Rank"))
+            {
+                rpObj.Assets.SmallImageKey = $"rank_{playerPres.competitiveTier}";
+                rpObj.Assets.SmallImageText = CompetitiveNames.RankNames[playerPres.competitiveTier];
+            }
+
+            rpObj.Details = details;
+            rpObj.State = state;
+
+            if (GameSettings.Current.RichPresenceSettings.ShowParty)
+            {
+                var Party = new DiscordRPC.Party()
+                {
+                    ID = playerPres.partyId,
+                    Max = playerPres.maxPartySize,
+                    Privacy = privacy,
+                    Size = playerPres.partySize
+                };
+
+                state = "Party: ";
+
+                rpObj.Party = Party;
+            }
+
+            rpObj.Secrets = null;
+            rpObj.Timestamps = null;
+
+            this.UpdatePresence(rpObj);
+        }
+
+        private async void DetermineMenusPresence(RichPresence rpObj, PlayerPresence playerPres)
+        {
+            string details = string.Empty;
+            ulong timeStart = 0;
+
+            switch (playerPres.partyState)
+            {
+                case "DEFAULT":
+                    details = "In Lobby";
+                    break;
+                case "MATCHMAKING":
+                    if(GameSettings.Current.RichPresenceSettings.ShowMode)
+                        details = $"Queuing {char.ToUpper(playerPres.queueId[0]) + playerPres.queueId.Substring(1)}"; // magic woo, Capitalizes first letter.
+                    else
+                        details = $"In Queue";
+                    break;
+                default:
+                    details = "In Lobby";
+                    break;
+            }
+
+            // Set Details
+            rpObj.Details = details;
+
+            string state = string.Empty;
+
+            DiscordRPC.Party.PrivacySetting privacy;
+
+            if (playerPres.partyAccessibility.Equals("CLOSED"))
+            {
+                privacy = DiscordRPC.Party.PrivacySetting.Private;
+            }
+            else
+            {
+                privacy = DiscordRPC.Party.PrivacySetting.Public;
+            }
+
+            if (GameSettings.Current.RichPresenceSettings.ShowParty)
+            {
+                var Party = new DiscordRPC.Party()
+                {
+                    ID = playerPres.partyId,
+                    Max = playerPres.maxPartySize,
+                    Privacy = privacy,
+                    Size = playerPres.partySize
+                };
+
+                state = "Party: ";
+
+                rpObj.Party = Party;
+            }
+
+            rpObj.State = state;
+
+            rpObj.Assets = new Assets
+            {
+                LargeImageKey = "default",
+                LargeImageText = "Powered By Assist"
+            };
+
+            if (GameSettings.Current.RichPresenceSettings.ShowRank && GameSettings.Current.RichPresenceSettings.SmallImageData.Equals("Rank"))
+            {
+                rpObj.Assets.SmallImageKey = $"rank_{playerPres.competitiveTier}";
+                rpObj.Assets.SmallImageText = CompetitiveNames.RankNames[playerPres.competitiveTier];
+            }
+
+            rpObj.Secrets = null;
+
+            this.UpdatePresence(rpObj);
         }
 
         public async Task UpdatePresence(RichPresence data)
@@ -135,6 +398,26 @@ namespace Assist.Game.Services
             byte[] stringData = Convert.FromBase64String(data.Private);
             string decodedString = Encoding.UTF8.GetString(stringData);
             return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+        }
+
+        private async Task<string> DetermineQueueKey(PlayerPresence playerPres)
+        {
+            switch (playerPres.queueId)
+            {
+                case "ggteam":
+                    return "Escalation";
+                case "deathmatch":
+                    return "Deathmatch";
+                case "spikerush":
+                    return "SpikeRush";
+                case "competitive":
+                    return "Competitive";
+                case "unrated":
+                    return "Unrated";
+                default:
+                    return "VALORANT";
+            }
+
         }
     }
 }
