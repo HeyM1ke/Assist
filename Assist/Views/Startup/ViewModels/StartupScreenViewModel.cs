@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -60,7 +61,21 @@ namespace Assist.Views.Startup.ViewModels
                 return;
             }
 
+            // Check if Game the game is running, if so launch gamemode.
 
+            if (IsValorantRunning())
+            {
+                MainWindowContentController.Change(new GameInitialView());
+                return;
+            }
+
+
+
+            await StartStartupAuthentication();
+        }
+
+        private async Task StartStartupAuthentication()
+        {
             if (AssistSettings.Current.Profiles.Count == 0)
             {
                 Log.Information("No Profiles Found, Going to Auth View");
@@ -72,7 +87,7 @@ namespace Assist.Views.Startup.ViewModels
             if (!string.IsNullOrEmpty(AssistSettings.Current.DefaultAccount))
             {
                 Log.Information("Default Profile Found, using attempting Default.");
-                
+
                 var p = AssistSettings.Current.Profiles.Find(
                     x => x.ProfileUuid == AssistSettings.Current.DefaultAccount);
 
@@ -87,7 +102,6 @@ namespace Assist.Views.Startup.ViewModels
                     }
                     catch (ValNetException ex)
                     {
-
                         if (await BackupAuthentication(p))
                         {
                             try
@@ -105,24 +119,22 @@ namespace Assist.Views.Startup.ViewModels
                             }
                         }
                     }
-                    
                 }
-                    
             }
 
-            if(AssistApplication.Current.CurrentUser != null || AssistApplication.Current.CurrentProfile != null)
+            if (AssistApplication.Current.CurrentUser != null || AssistApplication.Current.CurrentProfile != null)
                 return;
-            
+
             for (int i = 0; i < AssistSettings.Current.Profiles.Count; i++)
             {
                 var profile = AssistSettings.Current.Profiles[i];
                 try
                 {
                     Message = $"Logging into: {profile.Gamename}";
-                    if(!profile.isExpired)
+                    if (!profile.isExpired)
                         await AuthProfile(profile);
-                    
-                    if(AssistApplication.Current.CurrentUser != null || AssistApplication.Current.CurrentProfile != null)
+
+                    if (AssistApplication.Current.CurrentUser != null || AssistApplication.Current.CurrentProfile != null)
                         return;
                 }
                 catch (ValNetException ex)
@@ -141,7 +153,6 @@ namespace Assist.Views.Startup.ViewModels
                         try
                         {
                             await AuthProfile(profile);
-
                         }
                         catch (ValNetException ex2)
                         {
@@ -256,6 +267,14 @@ namespace Assist.Views.Startup.ViewModels
             }
 
             return false;
+        }
+
+        private bool IsValorantRunning()
+        {
+            var processlist = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Where(process => process.Id != Process.GetCurrentProcess().Id).ToList();
+            processlist.AddRange(Process.GetProcessesByName("VALORANT-Win64-Shipping"));
+
+            return processlist.Any();
         }
 
         public async Task CheckForUpdates()

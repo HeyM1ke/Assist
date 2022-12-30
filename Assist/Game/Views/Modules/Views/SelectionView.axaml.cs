@@ -16,5 +16,10 @@ namespace Assist.Game.Views.Modules.Views
         {
             ModulesViewNavigationController.Change(new DodgeView());
         }
+
+        private void RichPresence_Press(object? sender, PointerPressedEventArgs e)
+        {
+            ModulesViewNavigationController.Change(new RichPresenceView());
+        }
     }
 }

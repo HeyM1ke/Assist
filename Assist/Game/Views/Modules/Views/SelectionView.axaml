@@ -24,7 +24,8 @@
             <modules:ModuleSelectionControl ModuleName="Rich Presence"
                                             ModuleDescription="Assist Rich Presence. Gives your Discord profile a live status of your current VALORANT Game."
                                             ModuleIcon="../../../../Resources/Game/DodgeLogo_Icon.png"
-                                            IsVisible="False"/>
+                                            IsVisible="True"
+                                            PointerPressed="RichPresence_Press"/>
         </StackPanel>
   </Grid>
 </UserControl>
