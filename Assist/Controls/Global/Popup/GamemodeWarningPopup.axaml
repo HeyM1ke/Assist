@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Width="1125"
+             Height="690"
+             x:Class="Assist.Controls.Global.Popup.GamemodeWarningPopup">
+    <Grid Background="#3D000000">
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="{StaticResource AssistBlack}"
+                Width="500" Height="200">
+            <Grid RowDefinitions="40,*,40"
+                  Margin="10">
+				<Image Source="/Resources/Icons/AssistText_Temp.png" Height="30"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"></Image>
+
+                <TextBlock Background="{DynamicResource AssistGray}"
+                           Grid.Row="1"
+                           TextWrapping="WrapWithOverflow"
+                           Text="VALORANT is currently open. Would you like to open Game Mode?"
+                           FontFamily="{StaticResource WorkSans}"
+                           TextAlignment="Center"></TextBlock>
+                
+                <StackPanel Orientation="Horizontal" Grid.Row="2"
+                            Spacing="10"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center">
+                    <StackPanel.Styles>
+                        <Style Selector="Button">
+                            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                            <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                        </Style>
+
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                            <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                        </Style>
+                    </StackPanel.Styles>
+
+                    <Button Content="No"
+                            Width="50"
+                            Click="NoBtn_Click"></Button>
+                    <Button Content="Yes"
+                            Width="50"
+                            Click="YesBtn_Click"></Button>
+                    
+                </StackPanel>
+
+            </Grid>
+
+
+        </Border>
+    </Grid>
+</UserControl>

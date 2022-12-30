@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Assist.Game.Services;
+using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Controls;
@@ -28,6 +29,7 @@ namespace Assist.Game.Views.Initial.ViewModels
 
         public async Task Setup()
         {
+            PopupSystem.KillPopups();
             // Start Setup
 
             // Check if you are in Design Mode

@@ -5,10 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Controls.Global.Popup;
 using Assist.Game.Views;
 using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
 using Assist.Services;
+using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
 using Assist.Views.Authentication;
@@ -65,12 +67,20 @@ namespace Assist.Views.Startup.ViewModels
 
             if (IsValorantRunning())
             {
-                MainWindowContentController.Change(new GameInitialView());
+                var menuPopup = new GamemodeWarningPopup();
+                menuPopup.WarningClosing += GamemodePopupClose;
+                PopupSystem.SpawnCustomPopup(menuPopup);
                 return;
             }
 
 
 
+            await StartStartupAuthentication();
+        }
+
+        private async void GamemodePopupClose()
+        {
+            PopupSystem.KillPopups();
             await StartStartupAuthentication();
         }
 
