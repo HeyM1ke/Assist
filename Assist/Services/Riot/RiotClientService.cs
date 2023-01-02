@@ -155,7 +155,8 @@ namespace Assist.Services.Riot
             BackupsSettings.SaveBackup(new BackupModel()
             {
                 PlayerUuid = AssistApplication.Current.CurrentUser.UserData.sub,
-                ConfigFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data")
+                DataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data"),
+                ConfigFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config"),
             });
 
 
