@@ -33,27 +33,26 @@ namespace Assist.Controls.Dashboard
         
         private async void StyledElement_OnInitialized(object? sender, EventArgs e)
         {
-            var randomNullArt = new ArticleItem(new NewsArticle()
+            var randomNullArt = new ArticleNodeItem()
             {
-                title = "Dead",
-                imageUrl = 
-                    "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg"
-            });
+                ArticleTitle = "Dead",
+                ImageUrl = "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg"
+            };
+
             var articles = await AssistApplication.ApiService.GetNewsAsync();
 
             if (articles == null || articles.Length == 0)
             {
-                var n = new List<ArticleItem>()
+                var n = new List<ArticleNodeItem>()
                 {
                     randomNullArt,
-                    new ArticleItem(new NewsArticle()
+                    new ArticleNodeItem()
                     {
-                        title = "node1",
-                        imageUrl = 
-                            "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg"
-                    })
-                    {
-                        Width=790, Height=225
+                        ArticleTitle = "node1",
+                        ImageUrl = 
+                            "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg",
+                        Width=790, 
+                        Height=225
                     }
                 };
 
@@ -62,8 +61,13 @@ namespace Assist.Controls.Dashboard
             }
             
             // what the hell is this FIX LMFAOOO
-            List<ArticleItem> AI = articles.Select(x => new ArticleItem(x){
-                Width=790, Height=225, CornerRadius = new CornerRadius(20),
+            List<ArticleNodeItem> AI = articles.Select(x => new ArticleNodeItem(){
+                Width=790,
+                Height=225,
+                ArticleTitle = x.title,
+                ArticleDescription = x.description,
+                ImageUrl = x.imageUrl,
+                Url = x.nodeUrl,
             }).ToList();
             AI.Insert(0, randomNullArt);
             _carousel.Items = (AI);
