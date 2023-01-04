@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Game.Models;
 using Assist.Game.Services;
 using Assist.Objects.Helpers;
 using Assist.ViewModels;
@@ -11,6 +13,7 @@ using Avalonia.Threading;
 using Avalonia.Utilities;
 using ReactiveUI;
 using Serilog;
+using ValNet.Objects.Local;
 using ValNet.Objects.Pregame;
 
 namespace Assist.Game.Controls.Live.ViewModels
@@ -29,7 +32,7 @@ namespace Assist.Game.Controls.Live.ViewModels
         private PregameMatch.Player? _player;
         public PregameMatch.Player? Player { get => _player; set => this.RaiseAndSetIfChanged(ref _player, value); }
 
-        private string? _playerRankIcon;
+        private string? _playerRankIcon = null;
 
         public string? PlayerRankIcon
         {
@@ -99,21 +102,27 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             if (Player != null)
             {
-                // Get player name from name service.
-                if (!Player.PlayerIdentity.Incognito && string.Equals(PlayerName, "Player")) // If Incognito is True, then streamer mode is enabled.
+
+                // Get player name from Presence.
+                if (string.Equals(PlayerName, "Player") || string.IsNullOrEmpty(PlayerRankIcon))
                 {
                     var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
-
                     var data = pres.presences.Find(user => user.puuid == Player.Subject);
+
+                    if (!Player.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
+                        if (data != null)
+                            PlayerName = data.game_name;
 
                     if (data != null)
                     {
-                        PlayerName = data.game_name;
+                        var t = await GetPresenceData(data);
+                        // Set rank icon
+                        PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                     }
                 }
+                
 
-                // Set rank icon
-                PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{Player.CompetitiveTier}.png";
+
                 if (!string.IsNullOrEmpty(Player.CharacterID))
                 {
                     try
@@ -147,6 +156,15 @@ namespace Assist.Game.Controls.Live.ViewModels
             }
         }
 
-        
+        private async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
+        {
+            if (string.IsNullOrEmpty(data.Private))
+                return new PlayerPresence();
+            byte[] stringData = Convert.FromBase64String(data.Private);
+            string decodedString = Encoding.UTF8.GetString(stringData);
+            return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+        }
+
+
     }
 }
