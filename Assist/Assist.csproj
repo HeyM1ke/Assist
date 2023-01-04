@@ -10,6 +10,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageIcon>Assist_Logo_SweetRed.png</PackageIcon>
     <SignAssembly>False</SignAssembly>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
 	  <AvaloniaResource Include="Resources\**" />

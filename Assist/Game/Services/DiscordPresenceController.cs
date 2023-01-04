@@ -212,6 +212,11 @@ namespace Assist.Game.Services
             if (playerPres.partyState.Equals("MATCHMADE_GAME_STARTING"))
                 return;
 
+            if (string.IsNullOrEmpty(playerPres.matchMap))
+            {
+                return;
+            }
+
             string details = string.Empty;
             ulong timeStart = 0;
 
@@ -228,6 +233,7 @@ namespace Assist.Game.Services
 
             string state = "Agent Select";
 
+            Log.Information("DISCORD PRC MAP: " + playerPres.matchMap);
             string mapName = MapNames.MapsByPath[playerPres.matchMap];
 
             if (GameSettings.Current.RichPresenceSettings.ShowRank && string.Equals(GameSettings.Current.RichPresenceSettings.DetailsTextData, "Rank")) // Show Rank as Details

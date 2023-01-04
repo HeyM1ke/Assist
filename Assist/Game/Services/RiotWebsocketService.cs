@@ -22,6 +22,7 @@ namespace Assist.Game.Services
         public event Action<PresenceV4Message>? PresenceMessageEvent;
         public event Action<PresenceV4Message>? UserPresenceMessageEvent;
         public event Action<object>? PregameMessageEvent;
+        public event Action<object>? CoregameMessageEvent;
         public event Action<object>? OnErrorEvent;
 
         public async Task Connect()
@@ -76,6 +77,11 @@ namespace Assist.Game.Services
         {
             PregameMessageEvent?.Invoke(data);
         }
+        private void OnCoregameMessageEvent(object data)
+        {
+            CoregameMessageEvent?.Invoke(data);
+        }
+
 
         private void DetermineCustomEvent(object data)
         {
@@ -88,6 +94,9 @@ namespace Assist.Game.Services
                     break;
                 case { } uri when uri.Contains("ares-pregame/pregame/v1/"):
                     OnPregameMessageEvent(data);
+                    break;
+                case { } uri when uri.Contains("ares-core-game/core-game/v1/"):
+                    OnCoregameMessageEvent(data);
                     break;
             }
         }

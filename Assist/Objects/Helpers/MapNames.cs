@@ -28,6 +28,7 @@ namespace Assist.Objects.Helpers
             {"/Game/Maps/Canyon/Canyon","Fracture"},
             {"/Game/Maps/Duality/Duality","Bind"},
             {"/Game/Maps/Foxtrot/Foxtrot","Breeze"},
+            {"/Game/Maps/Foxtrot_Copy/Foxtrot_Copy","Breeze"},
             {"/Game/Maps/Pitt/Pitt","Pearl"},
             {"/Game/Maps/Port/Port","Icebox"},
             {"/Game/Maps/Poveglia/Range","The Range"},

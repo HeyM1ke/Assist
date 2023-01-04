@@ -17,6 +17,15 @@ namespace Assist.Game.Controls.Live.ViewModels
 {
     internal class GameUserViewModel : ViewModelBase
     {
+        private IBrush? _brush = null;
+
+        public IBrush PlayerBrush
+        {
+            get => _brush;
+            set => this.RaiseAndSetIfChanged(ref _brush, value);
+        }
+
+
         private PregameMatch.Player? _player;
         public PregameMatch.Player? Player { get => _player; set => this.RaiseAndSetIfChanged(ref _player, value); }
 
@@ -82,6 +91,10 @@ namespace Assist.Game.Controls.Live.ViewModels
 
         }
 
+        /// <summary>
+        /// Updates the binded user control data with the PlayerData set in control's Player variable.
+        /// </summary>
+        /// <returns></returns>
         public async Task UpdatePlayerData()
         {
             if (Player != null)

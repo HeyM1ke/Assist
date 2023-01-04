@@ -42,8 +42,14 @@
                              FontWeight="Regular"
                              FontSize="12"
                              Foreground="#FFFFFF"/>
+				  
               </StackPanel>
 
+              <Rectangle Width="10"
+                         Height="10"
+                         Fill="{Binding PlayerBrush}"
+                         VerticalAlignment="Top"
+                         HorizontalAlignment="Right"></Rectangle>
               <Image x:Name="DodgeIcon"
                      Source="../../../Resources/Game/DodgeLogo_Icon.png"
                      Width="16"
