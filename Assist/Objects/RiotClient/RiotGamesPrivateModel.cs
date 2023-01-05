@@ -7,6 +7,9 @@ namespace Assist.Objects.RiotClient
     {
         [YamlMember(Alias = "riot-login", ApplyNamingConventions = false)]
         public RiotLoginSection RiotLogin = null;
+
+        [YamlMember(Alias = "rso-authenticator", ApplyNamingConventions = false)]
+        public object? rsoAuth = null;
     }
 
     public class RiotLoginSection
@@ -40,6 +43,5 @@ namespace Assist.Objects.RiotClient
         public bool persistent;
         public bool secureOnly;
         public string value;
-
     }
 }

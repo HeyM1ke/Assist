@@ -35,10 +35,25 @@ namespace Assist.Settings
 
             if (Directory.GetFiles(configBackupPath).ToList().Contains("lockfile"))
             {
-
+                var path = Directory.GetFiles(configBackupPath).ToList().Find(file => file.Contains("lockfile"));
+                File.Delete(path);
             }
             // Copy Content File as well
-            File.WriteAllText(Path.Combine(p, "Settings.json"), JsonSerializer.Serialize(new BackupSettingsContent(){BackupModelSettings = model}));
+            var settings = new BackupSettingsContent()
+            {
+                BackupModelSettings = new BackupModel()
+                {
+                    PlayerUuid = model.PlayerUuid,
+                    ConfigFolderPath = configBackupPath,
+                    DataFolderPath = dataBackupPath,
+                },
+                CreatedAt = DateTime.Now,
+                IsUsed = false
+            };
+
+
+            var content = JsonSerializer.Serialize(settings);
+            File.WriteAllText(Path.Combine(p, "Settings.json"), content);
         }
 
         private static void CopyFiles(string sDir, string nDir)
@@ -49,8 +64,8 @@ namespace Assist.Settings
 
         public static async Task<bool> CheckIfBackupExistsForId(string id)
         {
-            string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.AllDirectories);
-            var f = folders.ToList().Find(folder => folder == id);
+            string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.TopDirectoryOnly);
+            var f = folders.ToList().Find(folder => folder.Contains(id));
 
             if (string.IsNullOrEmpty(f))
                 return false;
@@ -60,8 +75,8 @@ namespace Assist.Settings
 
         public static async Task<ProfileSettings> ReadBackupFromId(string id)
         {
-            string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.AllDirectories);
-            var f = folders.ToList().Find(folder => folder == id);
+            string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.TopDirectoryOnly);
+            var f = folders.ToList().Find(folder => folder.Contains(id));
 
             if (f == null)
                 throw new Exception("Attempted to Load Backup Config from an ID that does not exist.");
@@ -70,7 +85,7 @@ namespace Assist.Settings
             
 
             // Check if the backup has been used before.
-            string? settingsFilePath = files.Single(file => file.Contains("Settings"));
+            string? settingsFilePath = files.Single(file => file.Contains("Settings.json"));
 
             if (string.IsNullOrEmpty(settingsFilePath))
             {
@@ -107,6 +122,8 @@ namespace Assist.Settings
 
 
             settingsFile.IsUsed = true;
+
+
 
             File.WriteAllText(Path.Combine(f, "Settings.json"), JsonSerializer.Serialize(settingsFile)); // Apply change to file.
 
@@ -155,8 +172,8 @@ namespace Assist.Settings
 
     public class BackupSettingsContent
     {
-        public bool IsUsed = false;
-        public DateTime CreatedAt = DateTime.Now;
-        public BackupModel BackupModelSettings;
+        public bool IsUsed { get; set; } = false;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public BackupModel BackupModelSettings { get; set; }
     }
 }

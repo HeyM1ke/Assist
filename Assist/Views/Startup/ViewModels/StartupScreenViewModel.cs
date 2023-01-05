@@ -285,8 +285,10 @@ namespace Assist.Views.Startup.ViewModels
                 {
                     Message = $"Logging into Default: {p.Gamename}";
 
+                    var backupExcists = await BackupsSettings.CheckIfBackupExistsForId(p.ProfileUuid);
+
                     // Backup Auth
-                    if (await BackupsSettings.CheckIfBackupExistsForId(p.ProfileUuid))
+                    if (backupExcists)
                     {
                         // This is ran if the folder is found.
                         ProfileSettings backupSettings = null;
