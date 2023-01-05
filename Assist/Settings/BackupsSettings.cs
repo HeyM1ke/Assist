@@ -35,7 +35,8 @@ namespace Assist.Settings
 
             if (Directory.GetFiles(configBackupPath).ToList().Contains("lockfile"))
             {
-
+                var path = Directory.GetFiles(configBackupPath).ToList().Find(file => file.Contains("lockfile"));
+                File.Delete(path);
             }
             // Copy Content File as well
             File.WriteAllText(Path.Combine(p, "Settings.json"), JsonSerializer.Serialize(new BackupSettingsContent(){BackupModelSettings = model}));
