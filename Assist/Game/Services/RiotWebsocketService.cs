@@ -6,8 +6,11 @@ using System.Security.Authentication;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Game.Views.Initial;
 using Assist.Objects.RiotSocket;
+using Assist.Services;
 using Assist.ViewModels;
+using Avalonia.Threading;
 using Serilog;
 using WebSocketSharp;
 using WebSocketSharp.Net;
@@ -42,11 +45,17 @@ namespace Assist.Game.Services
 
             _socket.OnMessage += _socket_OnMessage;
             _socket.OnError += _socket_OnError;
+            _socket.OnClose += SocketOnOnClose;
+        }
+
+        private void SocketOnOnClose(object? sender, CloseEventArgs e)
+        {
+            Dispatcher.UIThread.InvokeAsync(() => MainWindowContentController.Change(new GameInitialView()));
         }
 
         private void _socket_OnError(object? sender, ErrorEventArgs e)
         {
-            if (e != null) OnErrorEvent.Invoke(e.Message);
+            if (e != null) OnErrorEvent?.Invoke(e.Message);
 
             Log.Fatal("Websocket Error:");
             Log.Fatal(e.Exception.Message);
@@ -57,7 +66,7 @@ namespace Assist.Game.Services
         {
             var t = JsonSerializer.Deserialize<object[]>(e.Data);
             if (e != null)
-                RecieveMessageEvent.Invoke(t[2]);
+                RecieveMessageEvent?.Invoke(t[2]);
 
             DetermineCustomEvent(t[2]);
         }
