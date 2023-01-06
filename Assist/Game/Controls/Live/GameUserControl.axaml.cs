@@ -46,6 +46,9 @@ namespace Assist.Game.Controls.Live
 
         private async void GameUser_Init(object? sender, EventArgs e)
         {
+            if(Design.IsDesignMode)
+                return;
+
             await _viewModel.UpdatePlayerData();
         }
     }

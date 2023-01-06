@@ -12,7 +12,15 @@
             <TextBlock Text="Waiting for Update."
                        FontFamily="{StaticResource WorkSans}"
                        FontWeight="Regular"
-                       ></TextBlock>
+                       HorizontalAlignment="Center"
+            ></TextBlock>
+
+            <TextBlock Text="Content Added: &#x0a; -Party Indicators (You can view who is partied together now.) &#x0a; - Rank Icons now work on all gamemodes.  &#x0a;"
+                       TextAlignment="Center"
+                       Foreground="{DynamicResource AssistRed}"
+                       FontFamily="{StaticResource WorkSans}"
+                       FontWeight="Regular"
+            ></TextBlock>
 
             <avaloniaProgressRing:ProgressRing Width="25"
                                                Height="25"

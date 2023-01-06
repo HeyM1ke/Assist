@@ -48,6 +48,7 @@
                       <TextBlock Text="{TemplateBinding PlayerName}"
                                  FontFamily="{StaticResource WorkSans}"
                                  FontWeight="Medium"
+                                 HorizontalAlignment="Center"
                                  FontSize="16"
                                  ></TextBlock>
 

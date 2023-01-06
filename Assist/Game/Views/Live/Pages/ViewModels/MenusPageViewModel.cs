@@ -15,6 +15,7 @@ using Avalonia.Threading;
 using ReactiveUI;
 using Serilog;
 using ValNet.Objects.Exceptions;
+using ValNet.Objects.Local;
 
 namespace Assist.Game.Views.Live.Pages.ViewModels
 {
@@ -103,8 +104,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         public async void UpdateGeneralPartyInformation(PlayerPresence data, PresenceV4Message obj)
         {
             var currentUserBtn = CurrentUsers.ToList().Find(member => member.PlayerId == obj.data.presences[0].puuid);
-            QueueName = data.queueId.ToUpper();
+            QueueName = GetQueueId(data.queueId).ToUpper();
             PartySize = $"{data.partySize}/{data.maxPartySize}";
+
+            if (data.maxPartySize > 5)
+            {
+                QueueName = "CUSTOM GAME (Not currently supported within Assist)";
+            }
+
             if (currentUserBtn != null)
             {
                 await Dispatcher.UIThread.InvokeAsync(() =>
@@ -118,11 +125,37 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             
         }
 
+        private string GetQueueId(string dataQueueId)
+        {
+            switch (dataQueueId)
+            {
+                case "ggteam":
+                    return "Escalation";
+                case "deathmatch":
+                    return "Deathmatch";
+                case "spikerush":
+                    return "SpikeRush";
+                case "competitive":
+                    return "Competitive";
+                case "unrated":
+                    return "Unrated";
+                case "onefa":
+                    return "Replication";
+                case "swiftplay":
+                    return "Swiftplay";
+                case "snowball":
+                    return "Snowball";
+                default:
+                    return "VALORANT";
+            }
+        }
+
         public async void HandleMoreThanOneParty(PlayerPresence data, PresenceV4Message obj)
         {
             try
             {
                 var partyData = await AssistApplication.Current.CurrentUser.Party.FetchParty();
+                var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
                 if (partyData != null)
                 {
                     if(partyData.Members.Count <= 1)
@@ -135,16 +168,17 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
                         var member = partyData.Members[i];
                         var currentUserBtn = CurrentUsers.ToList().Find(member => member.PlayerId == partyData.Members[i].Subject);
-
+                        var gameName = pres.presences.Find(pres => pres.puuid == member.Subject);
+                        var p = await GetPresenceData(gameName);
                         if (currentUserBtn == null)
                         {
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
                                 AddUserToList(new LiveMenuPartyUser()
                                 {
-                                    PlayerName = member.Subject,
+                                    PlayerName = $"{gameName.game_name}#{gameName.game_tag}",
                                     PlayerId = member.Subject,
-                                    Playercard = $"https://content.assistapp.dev/playercards/{member.PlayerCardID}_LargeArt.png"
+                                    Playercard = $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png"
                                 });
                             });
                             // This means this is a new Party Member
@@ -211,6 +245,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         }
 
         public async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)
+        {
+            if (string.IsNullOrEmpty(data.Private))
+                return new PlayerPresence();
+            byte[] stringData = Convert.FromBase64String(data.Private);
+            string decodedString = Encoding.UTF8.GetString(stringData);
+            return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+        }
+
+        public async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
         {
             if (string.IsNullOrEmpty(data.Private))
                 return new PlayerPresence();

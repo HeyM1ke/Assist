@@ -2,18 +2,196 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:live="clr-namespace:Assist.Game.Controls.Live"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.Live.Pages.IngamePageView">
-  <Grid>
-        <TextBlock Text="You Are Ingame. This is still under development. Check back in a few days, or Contact Mike."
-                   FontFamily="{StaticResource WorkSans}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Width="500"
-                   TextWrapping="WrapWithOverflow"
-                   FontSize="24"
-                   TextAlignment="Center"/>
+  <Grid ColumnDefinitions="315,*,315"
+        Margin="10,20">
+      
+      <TextBlock Text="In Game look is currently in Mid-Development"
+                 Grid.ColumnSpan="3"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 FontFamily="{DynamicResource WorkSans}"/>
+      <Grid Column="0"
+            Margin="10,0"
+            IsVisible="False">
+          <StackPanel HorizontalAlignment="Center"
+                      Width="300"
+                      Spacing="10"
+                      VerticalAlignment="Center">
+              <StackPanel>
+                  <TextBlock Text="ALLY"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="Bold"
+                             FontSize="32"
+                             HorizontalAlignment="Center"
+                  />
+                  <Rectangle Fill="{DynamicResource AssistRed}"
+                             Height="2"
+                  ></Rectangle>
+			  </StackPanel>
+              <Border Background="#17181D"
+                      Height="400"
+                      VerticalAlignment="Center"
+                    
+              >
+                  <ItemsControl VerticalAlignment="Top"
+                                Margin="7,12"
+                                
+                  >
+                      <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                              <StackPanel Orientation="Vertical" Spacing="14"
+                              />
+                          </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                  </ItemsControl>
+              </Border>
+          </StackPanel>
+        </Grid>
+
+      <Grid Column="1"
+            Margin="10,0"
+            IsVisible="False">
+          <Grid >
+              <StackPanel VerticalAlignment="Center"
+                          Spacing="10">
+                  <StackPanel>
+                  <TextBlock Text="FRACTURE"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="ExtraBlack"
+                             FontSize="64"
+                             HorizontalAlignment="Center"
+                  />
+                  <TextBlock Text="COMPETITIVE"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="Regular"
+                             FontSize="20"
+                             HorizontalAlignment="Center"
+                  />
+                  </StackPanel>
+                  <Border Height="260"
+                          Background="{DynamicResource AssistBlack}">
+					  <Grid>
+						  <asyncImageLoader:AdvancedImage Source="https://content.assistapp.dev/maps/Icebox_Featured.png"
+                                                          Stretch="UniformToFill"
+                                                          Opacity=".5"/>
+
+                            <Rectangle>
+                                <Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0%,0%" StartPoint="0%,100%" Opacity=".5">
+                                        <GradientStop Color="#F61E51" Offset="0" />
+                                        <GradientStop Color="#00F61E51" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                          <StackPanel Orientation="Horizontal"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Spacing="40">
+                              <TextBlock Text="13"
+                                         FontFamily="{StaticResource WorkSans}"
+                                         FontWeight="Bold"
+                                         FontSize="132"
+                                         Width="165"
+                                         TextAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                              />
+
+                              <TextBlock Text="x"
+                                         FontFamily="{StaticResource WorkSans}"
+                                         FontWeight="Thin"
+                                         FontSize="42"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                              />
+
+                              <TextBlock Text="1"
+                                         FontFamily="{StaticResource WorkSans}"
+                                         FontWeight="Bold"
+                                         FontSize="132"
+                                         Width="165"
+                                         TextAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                              />
+						  </StackPanel>
+					  </Grid>
+                  </Border>
+
+					  <Grid>
+						  <Border Width="57"
+                                  Height="57"
+                                  HorizontalAlignment="Left"
+                                  Background="{DynamicResource AssistBlack}"
+                                  IsVisible="False"/>
+
+                          <Border Width="57"
+                                  Height="57"
+                                  HorizontalAlignment="Right"
+                                  Background="{DynamicResource AssistBlack}"
+                                  IsVisible="False"/>
+					  </Grid>
+                  </StackPanel>
+              
+          </Grid>
+      </Grid>
+
+      <Grid Column="2"
+            Margin="10,0"
+            IsVisible="False">
+		  <StackPanel HorizontalAlignment="Center"
+                      Width="300"
+                      Spacing="10"
+                      VerticalAlignment="Center">
+              <StackPanel>
+                  <TextBlock Text="ENEMY"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="Bold"
+                             FontSize="32"
+                             HorizontalAlignment="Center"
+                  />
+                  <Rectangle Fill="{DynamicResource AssistRed}"
+                             Height="2"
+                  ></Rectangle>
+              </StackPanel>
+              <Border Background="#17181D"
+                      Height="400"
+                      VerticalAlignment="Center"
+                    
+              >
+                  <ItemsControl VerticalAlignment="Top"
+                                Margin="7,12"
+                                
+                  >
+                      <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                              <StackPanel Orientation="Vertical" Spacing="14"
+                              />
+                          </ItemsPanelTemplate>
+
+
+					  </ItemsControl.ItemsPanel>
+
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                      <live:GameUserControl></live:GameUserControl>
+                  </ItemsControl>
+              </Border>
+          </StackPanel>
+      </Grid>
   </Grid>
 </UserControl>
