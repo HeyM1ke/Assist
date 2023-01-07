@@ -89,6 +89,15 @@ namespace Assist.Game.Controls.Live.ViewModels
         }
 
 
+        private IBrush? _globalDodgeBorder;
+
+        public IBrush? GlobalDodgeBorder
+        {
+            get => _globalDodgeBorder;
+            set => this.RaiseAndSetIfChanged(ref _globalDodgeBorder, value);
+        }
+
+
         public async Task Setup()
         {
 
@@ -141,7 +150,8 @@ namespace Assist.Game.Controls.Live.ViewModels
                 // Check if user is on dodge list
                 // if so enable red border and icon popup.
                 var user = DodgeService.Current.UserList.Find(player => player.UserId == Player.Subject);
-
+                var checkGlobal =
+                    AssistApplication.Current.AssistUser.GlobalDodgeUsers.Find(player => player.id == Player.Subject);
                 if (user != null)
                 {
                     // This means the user was found on the dodge list.
@@ -149,6 +159,19 @@ namespace Assist.Game.Controls.Live.ViewModels
                     Dispatcher.UIThread.InvokeAsync(async () =>
                     {
                         DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                    });
+
+                }
+
+                if (checkGlobal != null)
+                {
+                    // This means the user was found on the global dodge list.
+                    IsPlayerDodge = true;
+                    PlayerRankRating = checkGlobal.category.ToUpper();
+                    Dispatcher.UIThread.InvokeAsync(async () =>
+                    {
+                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                        GlobalDodgeBorder = new SolidColorBrush(new Color(255, 255, 255, 255));
                     });
 
                 }

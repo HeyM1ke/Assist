@@ -39,9 +39,9 @@
                              Foreground="#50FFFFFF"/>
                   <TextBlock Text="{Binding PlayerRankRating}"
                              FontFamily="{StaticResource WorkSans}"
-                             FontWeight="Regular"
+                             FontWeight="Black"
                              FontSize="12"
-                             Foreground="#FFFFFF"/>
+                             Foreground="{DynamicResource AssistRed}"/>
 				  
               </StackPanel>
 
@@ -49,14 +49,24 @@
                          Height="10"
                          Fill="{Binding PlayerBrush}"
                          VerticalAlignment="Top"
-                         HorizontalAlignment="Right"></Rectangle>
-              <Image x:Name="DodgeIcon"
-                     Source="../../../Resources/Game/DodgeLogo_Icon.png"
-                     Width="16"
-                     Height="16"
-                     IsVisible="{Binding IsPlayerDodge}"
-                     VerticalAlignment="Bottom"
-                     HorizontalAlignment="Right"/>
+                         HorizontalAlignment="Right"
+                         ></Rectangle>
+
+			  <Border 
+                  Width="20"
+                  Height="20"
+                  BorderBrush="{Binding GlobalDodgeBorder}"
+                  BorderThickness="1"
+                  VerticalAlignment="Bottom"
+                  HorizontalAlignment="Right">
+				  <Image x:Name="DodgeIcon"
+                         Source="../../../Resources/Game/DodgeLogo_Icon.png"
+                         Width="16"
+                         Height="16"
+                         IsVisible="{Binding IsPlayerDodge}"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+			  </Border>
           </Grid>
       </Grid>
   </Border>
