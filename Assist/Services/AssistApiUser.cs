@@ -20,11 +20,15 @@ namespace Assist.Services
         private string AuthenticationUrl => String.Format(BaseUrl, "/authentication/auth");
         private string UserInfoUrl => String.Format(BaseUrl, "/user/userinfo");
         private string ChangeUsernameUrl => String.Format(BaseUrl, "/user/changeusername");
+        private string GetDodgeList => String.Format(BaseUrl, "/dodge/global/list");
+        private string CheckDodgeStatus => String.Format(BaseUrl, "/dodge/check");
+        private string AddGlobalDodge => String.Format(BaseUrl, "/dodge/moderation/add");
 
 
         private HttpClient userClient = new HttpClient();
         public AssistToken Tokens;
         public AssistUserInfo UserInfo;
+        public List<DodgeUser> GlobalDodgeUsers = new List<DodgeUser>();
         public async Task<AssistToken> AuthenticateWithRedirectCode(string code)
         {
             var authClient = new HttpClient();
@@ -86,6 +90,42 @@ namespace Assist.Services
 
             throw new RequestException(resp.StatusCode, content, content);
         }
+
+        public async Task<List<DodgeUser>> GetGlobalDodgeList()
+        {
+            var data = await userClient.GetAsync(GetDodgeList);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode)
+            {
+                GlobalDodgeUsers = JsonSerializer.Deserialize<List<DodgeUser>>(content);
+                return GlobalDodgeUsers;
+            }
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+
+        public async Task<DodgeAddResp> AddGlobalDodgeList(DodgeUser userData)
+        {
+            var jsonContent = new StringContent(JsonSerializer.Serialize(userData), Encoding.UTF8, "application/json");
+            var resp = await userClient.PostAsync(AddGlobalDodge, jsonContent);
+            var content = await resp.Content.ReadAsStringAsync();
+            
+            return JsonSerializer.Deserialize<DodgeAddResp>(content);
+            
+        }
+
+        public async Task<bool> CheckGlobalDodgeList()
+        {
+            var data = await userClient.GetAsync(CheckDodgeStatus);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 
     internal class AssistToken
@@ -105,6 +145,18 @@ namespace Assist.Services
         public string email { get; set; }
         public bool verified { get; set; }
         public string discordId { get; set; }
+    }
+
+    internal class DodgeUser
+    {
+        public string id { get; set; }
+        public string category { get; set; }
+    }
+
+    internal class DodgeAddResp
+    {
+        public string isSuccessful { get; set; }
+        public string message { get; set; }
     }
 
     internal class AssistChangeUsernameModel

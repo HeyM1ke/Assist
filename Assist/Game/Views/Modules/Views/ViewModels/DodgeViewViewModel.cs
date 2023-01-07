@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Assist.Game.Controls.Modules.Dodge;
 using Assist.Game.Models.Dodge;
 using Assist.Game.Services;
+using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
@@ -30,7 +31,13 @@ namespace Assist.Game.Views.Modules.Views.ViewModels
             set => this.RaiseAndSetIfChanged(ref _userButtons, value);
         }
 
+        private bool _isGlobalEnabled;
 
+        public bool IsGlobalEnabled
+        {
+            get => _isGlobalEnabled;
+            set => this.RaiseAndSetIfChanged(ref _isGlobalEnabled, value);
+        }
         public async Task LoadUsers()
         {
             if(Design.IsDesignMode)
@@ -50,6 +57,8 @@ namespace Assist.Game.Views.Modules.Views.ViewModels
                 btn.Click += DodgeUserButton_Click;
                 UserButtons.Add(btn);
             }
+
+            IsGlobalEnabled = GameSettings.Current.GlobalListEnabled;
         }
 
         private void DodgeUserButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

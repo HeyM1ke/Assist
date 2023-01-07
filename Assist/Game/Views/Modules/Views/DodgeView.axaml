@@ -10,20 +10,25 @@
              Initialized="DodgeViewLoaded_Init"
              x:Class="Assist.Game.Views.Modules.Views.DodgeView">
 	<Grid>
+
+
         <Border Width="878"
-                Height="427"
+                Height="467"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Background="#101115">
             <Grid RowDefinitions="63,*"
                   Margin="20">
-				<dodge:DodgeAddUserButton Height="40"
+
+                <dodge:DodgeAddUserButton Height="40"
                                           Click="DodgeAdd_Click"/>
 
 
                 <Border x:Name="UserHolder" 
                         Grid.Row="1"
-                        Background="#17181D">
+                        Background="#17181D"
+                        Height="330"
+                        VerticalAlignment="Top">
                     <ScrollViewer>
                         <ItemsControl Items="{Binding UserButtons}"
                                     >
@@ -38,7 +43,9 @@
                     </ScrollViewer>
                 </Border>
                 <Border Grid.Row="1"
+                        Height="330"
                         Background="#17181D"
+                        VerticalAlignment="Top"
                         IsVisible="{Binding IsLoading}">
                     <avaloniaProgressRing:ProgressRing Width="50"
                                                        Height="50"
@@ -46,23 +53,86 @@
                                                        HorizontalAlignment="Center"
                                                        Foreground="White"/>
                 </Border>
-                
+				<Grid Grid.Row="1"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Center"
+                      Margin="0,-10">
+
+<Grid.Styles>
+    <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
+        
+        <Setter Property="BorderBrush" Value="White" />
+    </Style>
+
+    <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
+        <Setter Property="Background" Value="{DynamicResource AssistRed}" />
+        <Setter Property="BorderBrush" Value="White" />
+    </Style>
+
+</Grid.Styles>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Enable Global List"
+                                   Grid.ColumnSpan="2"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="14"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+
+                        <CheckBox HorizontalAlignment="Center"
+                                  x:Name="GlobalCheckbox"
+                                  IsChecked="{Binding IsGlobalEnabled}"
+                                  Margin="0,0,-8,0"
+                                  VerticalAlignment="Center"
+                                  Unchecked="GlobalCheckbox_OnUnchecked"
+                                  Checked="GlobalCheckbox_OnChecked"/>
+                        <TextBlock Text="A List of Verfied Players who are classifed as players who Throw Matches, Wintrade, Betting, and more."
+                                   Grid.ColumnSpan="2"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="12"
+                                   FontWeight="Medium"
+                                   Opacity=".5"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+					</StackPanel>
+                </Grid>    
+
             </Grid>
+
         </Border>
 		<StackPanel HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Margin="50"
+                    Margin="10"
                     Spacing="10">
-			<Button Width="40"
+            <StackPanel.Styles>
+                <Style Selector="Button">
+                    <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                    <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                </Style>
+
+                <Style Selector="Button:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                    <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Style>
+
+            </StackPanel.Styles>
+            <Button Width="100"
                     Height="40"
                     Grid.Row="1"
-                    IsVisible="False"
+                    IsVisible="True"
+                    Content="Clear"
                     HorizontalAlignment="Right"></Button>
-            <Button Width="40"
-                    Height="40"
-                    Grid.Row="1"
-                    IsVisible="False"
-                    HorizontalAlignment="Right"></Button>
-		</StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -9,6 +9,7 @@ using Assist.Game.Models;
 using Assist.Game.Services;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
+using Assist.Services;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -84,6 +85,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("PREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("PREGAME ERROR: " + e.Content);
                 Log.Fatal("PREGAME ERROR: " + e.Message);
+            }
+
+            try
+            {
+                await AssistApplication.Current.AssistUser.GetGlobalDodgeList();
+            }
+            catch (Exception e)
+            {
+                
             }
 
 

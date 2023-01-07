@@ -39,6 +39,13 @@ namespace Assist.Settings
             set => this.RaiseAndSetIfChanged(ref _discordPresenceEnabled, value);
         }
 
+        private bool _globalListEnabled = true;
+
+        public bool GlobalListEnabled
+        {
+            get => _globalListEnabled;
+            set { this.RaiseAndSetIfChanged(ref _globalListEnabled, value); }
+        }
 
         public RichPresenceModel RichPresenceSettings { get; set; } = new RichPresenceModel();
 
