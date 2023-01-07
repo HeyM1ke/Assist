@@ -43,5 +43,10 @@ namespace Assist.Game.Views.Modules.Views
             _viewModel.IsGlobalEnabled = GameSettings.Current.GlobalListEnabled = true;
             GameSettings.Save();
         }
+
+        private void ModButton_Click(object? sender, RoutedEventArgs e)
+        {
+            PopupSystem.SpawnCustomPopup(new GlobalDodgeAdd());
+        }
     }
 }

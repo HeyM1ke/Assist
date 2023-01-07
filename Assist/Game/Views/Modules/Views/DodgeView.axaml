@@ -133,6 +133,13 @@
                     IsVisible="True"
                     Content="Clear"
                     HorizontalAlignment="Right"></Button>
+            <Button Width="100"
+                    Height="40"
+                    Grid.Row="1"
+                    IsVisible="{Binding IsGlobalModEnabled}"
+                    Content="MODERATE"
+                    Click="ModButton_Click"
+                    HorizontalAlignment="Right"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

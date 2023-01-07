@@ -28,7 +28,7 @@ namespace Assist.Services
         private HttpClient userClient = new HttpClient();
         public AssistToken Tokens;
         public AssistUserInfo UserInfo;
-        public List<DodgeUser> GlobalDodgeUsers = new List<DodgeUser>();
+        public List<GlobalDodgeUser> GlobalDodgeUsers = new List<GlobalDodgeUser>();
         public async Task<AssistToken> AuthenticateWithRedirectCode(string code)
         {
             var authClient = new HttpClient();
@@ -91,20 +91,20 @@ namespace Assist.Services
             throw new RequestException(resp.StatusCode, content, content);
         }
 
-        public async Task<List<DodgeUser>> GetGlobalDodgeList()
+        public async Task<List<GlobalDodgeUser>> GetGlobalDodgeList()
         {
             var data = await userClient.GetAsync(GetDodgeList);
             var content = await data.Content.ReadAsStringAsync();
             if (data.IsSuccessStatusCode)
             {
-                GlobalDodgeUsers = JsonSerializer.Deserialize<List<DodgeUser>>(content);
+                GlobalDodgeUsers = JsonSerializer.Deserialize<List<GlobalDodgeUser>>(content);
                 return GlobalDodgeUsers;
             }
 
             throw new RequestException(data.StatusCode, content, content);
         }
 
-        public async Task<DodgeAddResp> AddGlobalDodgeList(DodgeUser userData)
+        public async Task<DodgeAddResp> AddGlobalDodgeList(GlobalDodgeUser userData)
         {
             var jsonContent = new StringContent(JsonSerializer.Serialize(userData), Encoding.UTF8, "application/json");
             var resp = await userClient.PostAsync(AddGlobalDodge, jsonContent);
@@ -114,6 +114,9 @@ namespace Assist.Services
             
         }
 
+
+        // please help, this doesnt work
+        // the balcony is getting closer
         public async Task<bool> CheckGlobalDodgeList()
         {
             var data = await userClient.GetAsync(CheckDodgeStatus);
@@ -147,15 +150,18 @@ namespace Assist.Services
         public string discordId { get; set; }
     }
 
-    internal class DodgeUser
+    public class GlobalDodgeUser
     {
         public string id { get; set; }
         public string category { get; set; }
     }
 
-    internal class DodgeAddResp
+    public class DodgeAddResp
     {
-        public string isSuccessful { get; set; }
+        [JsonPropertyName("isSuccessful")]
+        public bool isSuccessful { get; set; }
+
+        [JsonPropertyName("message")]
         public string message { get; set; }
     }
 

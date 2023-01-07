@@ -31,12 +31,20 @@ namespace Assist.Game.Views.Modules.Views.ViewModels
             set => this.RaiseAndSetIfChanged(ref _userButtons, value);
         }
 
-        private bool _isGlobalEnabled;
+        private bool _isGlobalEnabled = false;
 
         public bool IsGlobalEnabled
         {
             get => _isGlobalEnabled;
             set => this.RaiseAndSetIfChanged(ref _isGlobalEnabled, value);
+        }
+
+        private bool _isGlobalModEnabled = false;
+
+        public bool IsGlobalModEnabled
+        {
+            get => _isGlobalModEnabled;
+            set => this.RaiseAndSetIfChanged(ref _isGlobalModEnabled, value);
         }
         public async Task LoadUsers()
         {
@@ -59,6 +67,7 @@ namespace Assist.Game.Views.Modules.Views.ViewModels
             }
 
             IsGlobalEnabled = GameSettings.Current.GlobalListEnabled;
+            IsGlobalModEnabled = await AssistApplication.Current.AssistUser.CheckGlobalDodgeList();
         }
 
         private void DodgeUserButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
