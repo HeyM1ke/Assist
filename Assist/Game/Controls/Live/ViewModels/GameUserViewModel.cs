@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Assist.Game.Models;
 using Assist.Game.Services;
 using Assist.Objects.Helpers;
+using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Media;
 using Avalonia.Threading;
@@ -163,7 +164,7 @@ namespace Assist.Game.Controls.Live.ViewModels
 
                 }
 
-                if (checkGlobal != null)
+                if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
                 {
                     // This means the user was found on the global dodge list.
                     IsPlayerDodge = true;
