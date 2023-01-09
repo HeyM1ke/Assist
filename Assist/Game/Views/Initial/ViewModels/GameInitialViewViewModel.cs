@@ -50,7 +50,7 @@ namespace Assist.Game.Views.Initial.ViewModels
             await StartSocketConnection();
             
             new DodgeService();
-            //await DiscordPresenceController.ControllerInstance.Initalize();
+            
             // Introduce Authentication
             if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
             {
@@ -75,6 +75,10 @@ namespace Assist.Game.Views.Initial.ViewModels
                 return;
             }
 
+            if (GameSettings.Current.DiscordPresenceEnabled)
+            {
+                await DiscordPresenceController.ControllerInstance.Initalize();
+            }
             AssistApplication.Current.OpenGameView();
         }
 

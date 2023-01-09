@@ -300,7 +300,7 @@ namespace Assist.Game.Services
                     break;
                 case "MATCHMAKING":
                     if(GameSettings.Current.RichPresenceSettings.ShowMode)
-                        details = $"Queuing {char.ToUpper(playerPres.queueId[0]) + playerPres.queueId.Substring(1)}"; // magic woo, Capitalizes first letter.
+                        details = $"Queuing {await DetermineQueueKey(playerPres)}"; // magic woo, Capitalizes first letter.
                     else
                         details = $"In Queue";
                     break;

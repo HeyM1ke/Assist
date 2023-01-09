@@ -33,6 +33,8 @@ namespace Assist.Objects.Helpers
             {"/Game/Maps/Port/Port","Icebox"},
             {"/Game/Maps/Poveglia/Range","The Range"},
             {"/Game/Maps/Triad/Triad","Haven"},
+            {"/Game/Maps/Jam/Jam","Lotus"},
         };
     }
 }
+

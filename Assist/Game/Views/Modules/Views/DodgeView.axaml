@@ -30,16 +30,14 @@
                         Height="330"
                         VerticalAlignment="Top">
                     <ScrollViewer>
-                        <ItemsControl Items="{Binding UserButtons}"
-                                    >
+                        <ItemsControl Items="{Binding UserButtons}">
 							<ItemsControl.Styles>
 								<Style Selector="dodge|DodgeUserButton">
 									<Setter Property="Height" Value="39"></Setter>
                                     <Setter Property="Margin" Value="0,0,0,1"></Setter>
 								</Style>
 							</ItemsControl.Styles>
-
-						</ItemsControl>
+                        </ItemsControl>
                     </ScrollViewer>
                 </Border>
                 <Border Grid.Row="1"
@@ -89,7 +87,7 @@
                                   VerticalAlignment="Center"
                                   Unchecked="GlobalCheckbox_OnUnchecked"
                                   Checked="GlobalCheckbox_OnChecked"/>
-                        <TextBlock Text="A List of Verfied Players who are classifed as players who Throw Matches, Wintrade, Betting, and more."
+                        <TextBlock Text="A List of Verified Players who are classified as players who Throw Matches, Wintrade, Betting, and more."
                                    Grid.ColumnSpan="2"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="12"

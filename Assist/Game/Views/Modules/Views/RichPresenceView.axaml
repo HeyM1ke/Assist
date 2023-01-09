@@ -5,12 +5,25 @@
              mc:Ignorable="d"
 			 d:DesignWidth="1125"
              d:DesignHeight="590"
-             x:Class="Assist.Game.Views.Modules.Views.RichPresenceView">
+             x:Class="Assist.Game.Views.Modules.Views.RichPresenceView"
+             Initialized="RichPresView_Init">
   <Grid>
-    <StackPanel Orientation="Horizontal"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Spacing="25">
+      <Grid.Styles>
+          <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
+
+              <Setter Property="BorderBrush" Value="White" />
+          </Style>
+
+          <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
+              <Setter Property="Background" Value="{DynamicResource AssistRed}" />
+              <Setter Property="BorderBrush" Value="White" />
+          </Style>
+
+      </Grid.Styles>
+	  <StackPanel Orientation="Horizontal"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  Spacing="25">
         <Border x:Name="SettingsBorder"
                 CornerRadius="5"
                 Background="#101115"
@@ -18,7 +31,7 @@
                 Height="500">
 
             <Grid ColumnDefinitions="245,*"
-                  RowDefinitions="50,*,60"
+                  RowDefinitions="50,*,90"
                   Margin="13">
                 <TextBlock Text="SETTINGS"
                            Grid.ColumnSpan="2"
@@ -34,6 +47,8 @@
                             Grid.Row="1">
 					<Border x:Name="CustomizePanel"
 					 Background="#17181D"
+                     Height="245"
+                     VerticalAlignment="Top"
 					 >
 						<Grid>
 							<Border>
@@ -50,8 +65,10 @@
 													   HorizontalAlignment="Left"/>
 
 											<CheckBox HorizontalAlignment="Right"
+                                                      x:Name="EnableRPC"
 													  Margin="0,0,-8,0"
-													  VerticalAlignment="Center"></CheckBox>
+													  VerticalAlignment="Center"
+                                                      IsChecked="False"/>
 										</Grid>
 									</Border>
 
@@ -65,24 +82,16 @@
 												   VerticalAlignment="Center"
 												   HorizontalAlignment="Left"/>
 
-										<ComboBox Width="237"></ComboBox>
+										<ComboBox Width="237"
+                                                  x:Name="DetailsComboBox"
+                                                  SelectedIndex="0">
+                                            <ComboBoxItem Content="Default"></ComboBoxItem>
+                                            <ComboBoxItem Content="Rank"></ComboBoxItem>
+										</ComboBox>
 									</StackPanel>
 
-									<StackPanel Orientation="Vertical"
-												Spacing="5">
-										<TextBlock Text="State"
-												   Grid.ColumnSpan="2"
-												   FontFamily="{StaticResource WorkSans}"
-												   FontSize="14"
-												   FontWeight="Medium"
-												   VerticalAlignment="Center"
-												   HorizontalAlignment="Left"/>
-
-										<ComboBox Width="237"></ComboBox>
-									</StackPanel>
-
-									<StackPanel Orientation="Vertical"
-												Spacing="5">
+                                    <StackPanel Orientation="Vertical"
+                                                Spacing="5">
 										<TextBlock Text="Large Image"
 												   Grid.ColumnSpan="2"
 												   FontFamily="{StaticResource WorkSans}"
@@ -91,7 +100,12 @@
 												   VerticalAlignment="Center"
 												   HorizontalAlignment="Left"/>
 
-										<ComboBox Width="237"></ComboBox>
+										<ComboBox Width="237"
+                                                  x:Name="LargeImageComboBox"
+                                                  SelectedIndex="0">
+                                            <ComboBoxItem Content="Map"></ComboBoxItem>
+                                            <ComboBoxItem Content="Logo"></ComboBoxItem>
+										</ComboBox>
 									</StackPanel>
 
 									<StackPanel Orientation="Vertical"
@@ -104,24 +118,14 @@
 												   VerticalAlignment="Center"
 												   HorizontalAlignment="Left"/>
 
-										<ComboBox Width="237"></ComboBox>
+										<ComboBox Width="237"
+                                                  x:Name="SmallImageComboBox"
+                                                  SelectedIndex="0">
+
+                                            <ComboBoxItem Content="Rank"></ComboBoxItem>
+                                        </ComboBox>
 									</StackPanel>
-
-									<StackPanel Orientation="Vertical"
-												Spacing="5">
-										<TextBlock Text="Hover Text"
-												   Grid.ColumnSpan="2"
-												   FontFamily="{StaticResource WorkSans}"
-												   FontSize="14"
-												   FontWeight="Medium"
-												   VerticalAlignment="Center"
-												   HorizontalAlignment="Left"/>
-
-										<ComboBox Width="237"></ComboBox>
-									</StackPanel>
-
-
-								</StackPanel>
+                                </StackPanel>
 							</Border>
 						</Grid>
 					</Border>
@@ -153,23 +157,28 @@
 
 											<CheckBox HorizontalAlignment="Right"
 													  Margin="0,0,-8,0"
-													  VerticalAlignment="Center"></CheckBox>
+													  VerticalAlignment="Center"
+                                                      x:Name="ShowPartySizeCheck"
+                                                      IsChecked="False"></CheckBox>
 										</Grid>
 									</Border>
 
-                                    <Border>
+                                    <Border IsVisible="False">
                                         <Grid>
                                             <TextBlock Text="Show Agent"
                                                        Grid.ColumnSpan="2"
                                                        FontFamily="{StaticResource WorkSans}"
                                                        FontSize="14"
                                                        FontWeight="Medium"
+
                                                        VerticalAlignment="Center"
                                                        HorizontalAlignment="Left"/>
 
                                             <CheckBox HorizontalAlignment="Right"
                                                       Margin="0,0,-8,0"
-                                                      VerticalAlignment="Center"></CheckBox>
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowAgentCheck"
+                                                      IsChecked="False"></CheckBox>
                                         </Grid>
                                     </Border>
 
@@ -185,7 +194,9 @@
 
                                             <CheckBox HorizontalAlignment="Right"
                                                       Margin="0,0,-8,0"
-                                                      VerticalAlignment="Center"></CheckBox>
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowScoreCheck"
+                                                      IsChecked="False"></CheckBox>
                                         </Grid>
                                     </Border>
 
@@ -201,7 +212,27 @@
 
                                             <CheckBox HorizontalAlignment="Right"
                                                       Margin="0,0,-8,0"
-                                                      VerticalAlignment="Center"></CheckBox>
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowGamemodeCheck"
+                                                      IsChecked="False"></CheckBox>
+                                        </Grid>
+                                    </Border>
+
+                                    <Border>
+                                        <Grid>
+                                            <TextBlock Text="Show Rank"
+                                                       Grid.ColumnSpan="2"
+                                                       FontFamily="{StaticResource WorkSans}"
+                                                       FontSize="14"
+                                                       FontWeight="Medium"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"/>
+
+                                            <CheckBox HorizontalAlignment="Right"
+                                                      Margin="0,0,-8,0"
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowRankCheck"
+                                                      IsChecked="False"></CheckBox>
                                         </Grid>
                                     </Border>
 
@@ -241,11 +272,13 @@
                     <Button Content="Back"
                             Width="130"
                             Height="40"
+                            Click="BackBtn_Click"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"></Button>
                     <Button Content="Apply"
                             Width="130"
                             Height="40"
+                            Click="ApplyBtn_Click"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"></Button>
 				</StackPanel>
