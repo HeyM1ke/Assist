@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live.ViewModels;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using Serilog;
 using ValNet.Objects.Pregame;
@@ -50,6 +51,11 @@ namespace Assist.Game.Controls.Live
                 return;
 
             await _viewModel.UpdatePlayerData();
+        }
+
+        private async void AddUserToDodgeList_MenuClick(object? sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

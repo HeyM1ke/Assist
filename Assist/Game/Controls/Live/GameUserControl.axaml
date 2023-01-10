@@ -9,65 +9,115 @@
   <Border Background="#101115"
           BorderBrush="{Binding DodgeBorder}"
           BorderThickness="1">
-      <Grid ColumnDefinitions="64,*"
+	  <Grid>
+		  <Grid ColumnDefinitions="64,*"
+				
+            VerticalAlignment="Top"
             Margin="3">
-            <Border Width="58"
-                    Height="58"
-                    Background="#20000000"
-                    HorizontalAlignment="Left"
-                    Grid.Column="0">
-				<Grid>
-                    <asyncImageLoader:AdvancedImage Source="{Binding PlayerAgentIcon}"/>
-                    <asyncImageLoader:AdvancedImage Source="{Binding PlayerRankIcon}"
-                                                    Width="30"
-                                                    Height="30"
-                                                    VerticalAlignment="Top"
-                                                    HorizontalAlignment="Left"/>
-				</Grid>
-            </Border>
+			  <Border Width="58"
+					  Height="58"
+					  Background="#20000000"
+					  HorizontalAlignment="Left"
+					  Grid.Column="0">
+				  <Grid>
+					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerAgentIcon}"/>
+					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerRankIcon}"
+													  Width="30"
+													  Height="30"
+													  VerticalAlignment="Top"
+													  HorizontalAlignment="Left"/>
+				  </Grid>
+			  </Border>
 
-          <Grid Column="1">
-              <StackPanel VerticalAlignment="Center">
-                  <TextBlock Text="{Binding PlayerName}"
-                             FontFamily="{StaticResource WorkSans}"
-                             FontWeight="Bold"
-                             FontSize="16"></TextBlock>
-                  <TextBlock Text="{Binding PlayerAgentName}"
-                             FontFamily="{StaticResource WorkSans}"
-                             FontWeight="Light"
-                             FontSize="10"
-                             Foreground="#50FFFFFF"/>
-                  <TextBlock Text="{Binding PlayerRankRating}"
-                             FontFamily="{StaticResource WorkSans}"
-                             FontWeight="Black"
-                             FontSize="12"
-                             Foreground="{DynamicResource AssistRed}"/>
-				  
-              </StackPanel>
+			  <Grid Column="1">
+				  <StackPanel VerticalAlignment="Center">
+					  <TextBlock Text="{Binding PlayerName}"
+								 FontFamily="{StaticResource WorkSans}"
+								 FontWeight="Bold"
+								 FontSize="16"></TextBlock>
+					  <TextBlock Text="{Binding PlayerAgentName}"
+								 FontFamily="{StaticResource WorkSans}"
+								 FontWeight="Light"
+								 FontSize="10"
+								 Foreground="#50FFFFFF"/>
+					  <TextBlock Text="{Binding PlayerRankRating}"
+								 FontFamily="{StaticResource WorkSans}"
+								 FontWeight="Black"
+								 FontSize="12"
+								 Foreground="{DynamicResource AssistRed}"/>
 
-              <Rectangle Width="10"
-                         Height="10"
-                         Fill="{Binding PlayerBrush}"
-                         VerticalAlignment="Top"
-                         HorizontalAlignment="Right"
+				  </StackPanel>
+
+				  <Rectangle Width="10"
+							 Height="10"
+							 Fill="{Binding PlayerBrush}"
+							 VerticalAlignment="Top"
+							 HorizontalAlignment="Right"
                          ></Rectangle>
 
-			  <Border 
-                  Width="20"
-                  Height="20"
-                  BorderBrush="{Binding GlobalDodgeBorder}"
-                  BorderThickness="1"
-                  VerticalAlignment="Bottom"
-                  HorizontalAlignment="Right">
-				  <Image x:Name="DodgeIcon"
-                         Source="../../../Resources/Game/DodgeLogo_Icon.png"
-                         Width="16"
-                         Height="16"
-                         IsVisible="{Binding IsPlayerDodge}"
-                         VerticalAlignment="Center"
-                         HorizontalAlignment="Center"/>
-			  </Border>
-          </Grid>
-      </Grid>
+				  <Border
+					  Width="20"
+					  Height="20"
+					  BorderBrush="{Binding GlobalDodgeBorder}"
+					  BorderThickness="1"
+					  VerticalAlignment="Bottom"
+					  HorizontalAlignment="Right">
+					  <Image x:Name="DodgeIcon"
+							 Source="../../../Resources/Game/DodgeLogo_Icon.png"
+							 Width="16"
+							 Height="16"
+							 IsVisible="{Binding IsPlayerDodge}"
+							 VerticalAlignment="Center"
+							 HorizontalAlignment="Center"/>
+				  </Border>
+			  </Grid>
+		  </Grid>
+
+          
+	  </Grid>
+
+
   </Border>
+
+    <UserControl.ContextMenu>
+		<ContextMenu Background="{DynamicResource AssistBlack}"
+                               CornerRadius="0">
+			<ContextMenu.Styles>
+				<Style Selector="MenuItem /template/ ContentPresenter#PART_HeaderPresenter">
+
+					<Setter Property="VerticalAlignment" Value="Center"></Setter>
+					<Setter Property="Margin" Value="-3"></Setter>
+					<Setter Property="Height" Value="22"></Setter>
+					<Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+				</Style>
+
+				<Style Selector="MenuItem /template/ Viewbox#PART_IconPresenter">
+					<Setter Property="Width" Value="100"></Setter>
+					<Setter Property="Height" Value="100"></Setter>
+					<Setter Property="HorizontalAlignment" Value="Left"></Setter>
+				</Style>
+
+				<Style Selector="MenuItem:pointerover /template/ Border#PART_LayoutRoot">
+					<Setter Property="Background" Value="{DynamicResource AssistRed}"></Setter>
+					<Setter Property="Cursor" Value="Hand"></Setter>
+				</Style>
+
+			</ContextMenu.Styles>
+			<Separator />
+			<MenuItem Header="Add to Dodge List"
+					  FontFamily="{StaticResource WorkSans}"
+					  FontWeight="Medium"
+					  VerticalAlignment="Center"
+					  HorizontalAlignment="Center"
+                      >
+				<MenuItem.Icon>
+					<Image Source="/Resources/Game/DodgeLogoAdd_Icon.png"
+						  Height="100"
+						  Width="100"
+                              />
+				</MenuItem.Icon>
+			</MenuItem>
+			<Separator />
+		</ContextMenu>
+    </UserControl.ContextMenu>
 </UserControl>

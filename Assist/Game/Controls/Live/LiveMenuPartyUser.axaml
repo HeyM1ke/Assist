@@ -16,6 +16,14 @@
       <ControlTemplate>
 		  <Border BorderBrush="{DynamicResource AssistRed}"
                   BorderThickness="2">
+
+              <Border.Styles>
+                  <Style Selector="ContextMenu /template/ Border">
+                      <Setter Property="Background" Value="Yellow"></Setter>
+                  </Style>
+
+                  
+              </Border.Styles>
               <Grid>
 				  <asyncImageLoader:AdvancedImage Source="{TemplateBinding Playercard}"
                                                   Stretch="UniformToFill"/>
