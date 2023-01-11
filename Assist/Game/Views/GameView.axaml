@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:Assist.Game.Controls.Navigation"
+             mc:Ignorable="d" 
+             d:DesignWidth="1125"
+             d:DesignHeight="690"
+             x:Class="Assist.Game.Views.GameView"
+             Background="#151515">
+  <Grid RowDefinitions="64,*">
+	  <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="Background">
+          <Image Source="../../Resources/EOY_Background.png" Stretch="UniformToFill"/>
+          <Rectangle Fill="black" Opacity=".9"></Rectangle>
+      </Grid>
+      <navigation:GameNavigationBar Grid.Row="0"/>
+
+
+      <TransitioningContentControl Grid.Row="1" x:Name="ContentView">
+          <TransitioningContentControl.PageTransition>
+              <CrossFade Duration="0.25" />
+          </TransitioningContentControl.PageTransition>
+      </TransitioningContentControl>
+  </Grid>
+</UserControl>

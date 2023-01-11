@@ -172,12 +172,22 @@
         <StyleInclude Source="avares://Assist/Controls/Global/AssistComboBox.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/PlayerStatisticsView.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/BundleContainer.axaml"></StyleInclude>
-
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/ArticleNodeItem.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketOffer.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
+        <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
+
+		<!--GameMode-->
+        <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>
+
+        <StyleInclude Source="avares://Assist/Game/Controls/GameAuthenticationButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Modules/Dodge/DodgeAddUserButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Modules/Dodge/DodgeUserButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Modules/ModuleSelectionControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Live/LiveMenuPartyUser.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
 

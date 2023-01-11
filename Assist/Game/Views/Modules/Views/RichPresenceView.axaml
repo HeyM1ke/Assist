@@ -1,0 +1,398 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+			 d:DesignWidth="1125"
+             d:DesignHeight="590"
+             x:Class="Assist.Game.Views.Modules.Views.RichPresenceView"
+             Initialized="RichPresView_Init">
+  <Grid>
+      <Grid.Styles>
+          <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
+
+              <Setter Property="BorderBrush" Value="White" />
+          </Style>
+
+          <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
+              <Setter Property="Background" Value="{DynamicResource AssistRed}" />
+              <Setter Property="BorderBrush" Value="White" />
+          </Style>
+
+      </Grid.Styles>
+	  <StackPanel Orientation="Horizontal"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  Spacing="25">
+        <Border x:Name="SettingsBorder"
+                CornerRadius="5"
+                Background="#101115"
+                Width="480"
+                Height="500">
+
+            <Grid ColumnDefinitions="245,*"
+                  RowDefinitions="50,*,90"
+                  Margin="13">
+                <TextBlock Text="SETTINGS"
+                           Grid.ColumnSpan="2"
+                           VerticalAlignment="Top"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontSize="32"
+                           FontWeight="ExtraBold"
+                           HorizontalAlignment="Center"/>
+
+				<StackPanel Orientation="Horizontal"
+                            Spacing="10"
+                            Grid.Column="0"
+                            Grid.Row="1">
+					<Border x:Name="CustomizePanel"
+					 Background="#17181D"
+                     Height="245"
+                     VerticalAlignment="Top"
+					 >
+						<Grid>
+							<Border>
+								<StackPanel Spacing="10"
+											Margin="4">
+									<Border>
+										<Grid>
+											<TextBlock Text="Enable Discord Rich Presence"
+													   Grid.ColumnSpan="2"
+													   FontFamily="{StaticResource WorkSans}"
+													   FontSize="14"
+													   FontWeight="Medium"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Left"/>
+
+											<CheckBox HorizontalAlignment="Right"
+                                                      x:Name="EnableRPC"
+													  Margin="0,0,-8,0"
+													  VerticalAlignment="Center"
+                                                      IsChecked="False"/>
+										</Grid>
+									</Border>
+
+									<StackPanel Orientation="Vertical"
+												Spacing="5">
+										<TextBlock Text="Details"
+												   Grid.ColumnSpan="2"
+												   FontFamily="{StaticResource WorkSans}"
+												   FontSize="14"
+												   FontWeight="Medium"
+												   VerticalAlignment="Center"
+												   HorizontalAlignment="Left"/>
+
+										<ComboBox Width="237"
+                                                  x:Name="DetailsComboBox"
+                                                  SelectedIndex="0">
+                                            <ComboBoxItem Content="Default"></ComboBoxItem>
+                                            <ComboBoxItem Content="Rank"></ComboBoxItem>
+										</ComboBox>
+									</StackPanel>
+
+                                    <StackPanel Orientation="Vertical"
+                                                Spacing="5">
+										<TextBlock Text="Large Image"
+												   Grid.ColumnSpan="2"
+												   FontFamily="{StaticResource WorkSans}"
+												   FontSize="14"
+												   FontWeight="Medium"
+												   VerticalAlignment="Center"
+												   HorizontalAlignment="Left"/>
+
+										<ComboBox Width="237"
+                                                  x:Name="LargeImageComboBox"
+                                                  SelectedIndex="0">
+                                            <ComboBoxItem Content="Map"></ComboBoxItem>
+                                            <ComboBoxItem Content="Logo"></ComboBoxItem>
+										</ComboBox>
+									</StackPanel>
+
+									<StackPanel Orientation="Vertical"
+												Spacing="5">
+										<TextBlock Text="Small Image"
+												   Grid.ColumnSpan="2"
+												   FontFamily="{StaticResource WorkSans}"
+												   FontSize="14"
+												   FontWeight="Medium"
+												   VerticalAlignment="Center"
+												   HorizontalAlignment="Left"/>
+
+										<ComboBox Width="237"
+                                                  x:Name="SmallImageComboBox"
+                                                  SelectedIndex="0">
+
+                                            <ComboBoxItem Content="Rank"></ComboBoxItem>
+                                        </ComboBox>
+									</StackPanel>
+                                </StackPanel>
+							</Border>
+						</Grid>
+					</Border>
+
+					<Border x:Name="PrivacyPanel"
+							Background="#17181D"
+                            Width="166"
+                            Height="160"
+                            VerticalAlignment="Top">
+						<Grid Margin="4">
+							<Border>
+								<StackPanel 
+											Margin="4">
+                                    <TextBlock Text="PRIVACY SETTINGS"
+                                               FontFamily="{StaticResource WorkSans}"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"/>
+									<Border>
+										<Grid>
+											<TextBlock Text="Show Party Size"
+													   Grid.ColumnSpan="2"
+													   FontFamily="{StaticResource WorkSans}"
+													   FontSize="14"
+													   FontWeight="Medium"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Left"/>
+
+											<CheckBox HorizontalAlignment="Right"
+													  Margin="0,0,-8,0"
+													  VerticalAlignment="Center"
+                                                      x:Name="ShowPartySizeCheck"
+                                                      IsChecked="False"></CheckBox>
+										</Grid>
+									</Border>
+
+                                    <Border IsVisible="False">
+                                        <Grid>
+                                            <TextBlock Text="Show Agent"
+                                                       Grid.ColumnSpan="2"
+                                                       FontFamily="{StaticResource WorkSans}"
+                                                       FontSize="14"
+                                                       FontWeight="Medium"
+
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"/>
+
+                                            <CheckBox HorizontalAlignment="Right"
+                                                      Margin="0,0,-8,0"
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowAgentCheck"
+                                                      IsChecked="False"></CheckBox>
+                                        </Grid>
+                                    </Border>
+
+                                    <Border>
+                                        <Grid>
+                                            <TextBlock Text="Show Score"
+                                                       Grid.ColumnSpan="2"
+                                                       FontFamily="{StaticResource WorkSans}"
+                                                       FontSize="14"
+                                                       FontWeight="Medium"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"/>
+
+                                            <CheckBox HorizontalAlignment="Right"
+                                                      Margin="0,0,-8,0"
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowScoreCheck"
+                                                      IsChecked="False"></CheckBox>
+                                        </Grid>
+                                    </Border>
+
+                                    <Border>
+                                        <Grid>
+                                            <TextBlock Text="Show Gamemode"
+                                                       Grid.ColumnSpan="2"
+                                                       FontFamily="{StaticResource WorkSans}"
+                                                       FontSize="14"
+                                                       FontWeight="Medium"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"/>
+
+                                            <CheckBox HorizontalAlignment="Right"
+                                                      Margin="0,0,-8,0"
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowGamemodeCheck"
+                                                      IsChecked="False"></CheckBox>
+                                        </Grid>
+                                    </Border>
+
+                                    <Border>
+                                        <Grid>
+                                            <TextBlock Text="Show Rank"
+                                                       Grid.ColumnSpan="2"
+                                                       FontFamily="{StaticResource WorkSans}"
+                                                       FontSize="14"
+                                                       FontWeight="Medium"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"/>
+
+                                            <CheckBox HorizontalAlignment="Right"
+                                                      Margin="0,0,-8,0"
+                                                      VerticalAlignment="Center"
+                                                      x:Name="ShowRankCheck"
+                                                      IsChecked="False"></CheckBox>
+                                        </Grid>
+                                    </Border>
+
+                                </StackPanel>
+							</Border>
+						</Grid>
+					</Border>
+
+				</StackPanel>
+
+				<StackPanel Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="0,0"
+                            HorizontalAlignment="Center"
+                            Spacing="5">
+					<StackPanel.Styles>
+                        <Style Selector="Button">
+                            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                            <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                        </Style>
+
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                            <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                        </Style>
+                    </StackPanel.Styles>
+                    <Button Content="Back"
+                            Width="130"
+                            Height="40"
+                            Click="BackBtn_Click"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"></Button>
+                    <Button Content="Apply"
+                            Width="130"
+                            Height="40"
+                            Click="ApplyBtn_Click"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"></Button>
+				</StackPanel>
+            </Grid>
+        </Border>
+
+        <Border x:Name="PreviewBorder"
+                IsVisible="False"
+                CornerRadius="5"
+                Background="#101115"
+                Width="300"
+                Height="500">
+                <Grid VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <Border CornerRadius="5"
+                            
+                            Height="260"
+                            Background="#F61E51">
+                        <Grid>
+                            <Border Width="240"
+                                    Height="210"
+                                    Background="#353741"
+                                    VerticalAlignment="Bottom"
+                                    CornerRadius="0,0,4,4">
+                                <Grid Margin="14,50,0,0">
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="3">
+                                        <TextBlock FontFamily="{StaticResource WorkSans}"
+                                                   Text="AssistGamer"
+                                                   FontWeight="Medium"
+                                                   FontSize="16"></TextBlock>
+                                        <TextBlock FontFamily="{StaticResource WorkSans}"
+                                                   Text="#0330"
+                                                   FontWeight="Medium"
+                                                   FontSize="16"
+                                                   Opacity=".5"></TextBlock>
+                                    </StackPanel>
+
+                                    <Grid VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Spacing="10">
+                                            <Panel VerticalAlignment="Center">
+                                                <Border Width="64"
+                                                        Height="64"
+                                                        Background="#FFF"
+                                                        CornerRadius="5"
+                                                        VerticalAlignment="Bottom"/>
+
+                                                <Border Width="20"
+                                                        Height="20"
+                                                        Background="#EEE"
+                                                        CornerRadius="5"
+                                                        Margin="-5"
+                                                        VerticalAlignment="Bottom"
+                                                        HorizontalAlignment="Right"/>
+											</Panel>
+
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock FontFamily="{StaticResource WorkSans}"
+                                                           Text="VALORANT"
+                                                           FontWeight="Bold"
+                                                           FontSize="12"/>
+                                                <TextBlock FontFamily="{StaticResource WorkSans}"
+                                                           Text="Competitive"
+                                                           FontWeight="Medium"
+                                                           FontSize="12"
+                                                           Opacity=".5"/>
+
+                                                <TextBlock FontFamily="{StaticResource WorkSans}"
+                                                           Text="Party (1 of 5)"
+                                                           FontWeight="Medium"
+                                                           FontSize="12"
+                                                           Opacity=".5"/>
+                                                <TextBlock FontFamily="{StaticResource WorkSans}"
+                                                           Text="44:04 Elapsed"
+                                                           FontWeight="Medium"
+                                                           FontSize="12"
+                                                           Opacity=".5"/>
+                                                
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <Panel VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="13">
+                                <Ellipse Fill="#212229"
+                                         Width="79"
+                                         Height="79"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"></Ellipse>
+                                <Ellipse Fill="#17181D"
+                                         Width="75"
+                                         Height="75"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"></Ellipse>
+
+                                <Ellipse Fill="#5CFFB1"
+                                         Width="20"
+                                         Height="20"
+                                         VerticalAlignment="Bottom"
+                                         HorizontalAlignment="Right"
+                                         Margin="2"></Ellipse>
+
+                                <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png"
+                                       Width="38"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"></Image>
+                            </Panel>
+                        </Grid>
+                    </Border>
+                </Grid>
+        </Border>
+    </StackPanel>
+  </Grid>
+</UserControl>

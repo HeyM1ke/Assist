@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:live="clr-namespace:Assist.Game.Controls.Live"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="590"
+             x:Class="Assist.Game.Views.Live.Pages.PregamePageView"
+             Initialized="PreGamePage_Init">
+  <Grid Margin="15">
+      <Border Width="300"
+              Background="#101115"
+              HorizontalAlignment="Left">
+          <Grid RowDefinitions="130,*"
+                Margin="10">
+
+			  <!--Map Information-->
+               <Grid Row="0" VerticalAlignment="Top">
+				   <StackPanel>
+					   <Border x:Name="MapBorder"
+                               BorderBrush="{DynamicResource AssistRed}"
+                               BorderThickness="1">
+                           <asyncImageLoader:AdvancedImage Source="{Binding MapImage}"/>
+                       </Border>
+
+					   <TextBlock Text="{Binding MapName}"
+                                  FontFamily="{StaticResource WorkSans}"
+                                  FontWeight="ExtraBold"
+                                  FontSize="36"></TextBlock>
+				   </StackPanel>
+
+				   <!--Magical Circle for Design-->
+				   <Panel VerticalAlignment="Bottom"
+                          HorizontalAlignment="Right">
+					   <Ellipse Fill="{DynamicResource AssistRed}"
+                                Width="79"
+                                Height="79"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"></Ellipse>
+                       <Ellipse Fill="#101115"
+                                Width="75"
+                                Height="75"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"></Ellipse>
+
+                       <TextBlock Text="60"
+                                  FontFamily="{StaticResource WorkSans}"
+                                  FontWeight="ExtraBold"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"
+                                  FontSize="36" IsVisible="False"></TextBlock>
+
+                       <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png"
+                              Width="38"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"></Image>
+				   </Panel>
+
+			   </Grid>
+			  <!--Player Information-->
+              <Grid Row="1" VerticalAlignment="Top" >
+                  <Border Background="#17181D"
+                          Height="410"
+                          >
+                      <ItemsControl VerticalAlignment="Top"
+                                    Margin="7,12"
+                                    Items="{Binding UserControls}"
+                                    >
+						  <ItemsControl.ItemsPanel>
+                              <ItemsPanelTemplate>
+                                  <StackPanel Orientation="Vertical" Spacing="14"
+                                              />
+                              </ItemsPanelTemplate>
+                          </ItemsControl.ItemsPanel>
+                          
+                      </ItemsControl>
+                  </Border>
+              </Grid>
+          </Grid>
+      </Border>
+  </Grid>
+</UserControl>

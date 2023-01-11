@@ -1,5 +1,7 @@
 using System;
+using Assist.Controls.Global.Popup;
 using Assist.Controls.Global.ViewModels;
+using Assist.Services.Popup;
 using Assist.Services.Riot;
 using Assist.ViewModels;
 using AsyncImageLoader;
@@ -45,6 +47,11 @@ namespace Assist.Controls.Global
             {
                 _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_LargeArt.png";
             }
+        }
+
+        private async void OpenSettingsBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            PopupSystem.SpawnCustomPopup(new GameLaunchSettingsPopup());
         }
     }
 }

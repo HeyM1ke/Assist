@@ -4,5 +4,6 @@
     {
         public string PlayerUuid { get; set; }
         public string ConfigFolderPath { get; set; }
+        public string DataFolderPath { get; set; }
     }
 }

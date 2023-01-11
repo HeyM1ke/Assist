@@ -1,0 +1,96 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Live"
+        xmlns:global="clr-namespace:Assist.Controls.Global"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+  <Design.PreviewWith>
+    <controls:LiveMenuPartyUser Width="200"
+                                Height="435"
+                                PlayerReady="True"
+                                />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|LiveMenuPartyUser">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Border BorderBrush="{DynamicResource AssistRed}"
+                  BorderThickness="2">
+
+              <Border.Styles>
+                  <Style Selector="ContextMenu /template/ Border">
+                      <Setter Property="Background" Value="Yellow"></Setter>
+                  </Style>
+
+                  
+              </Border.Styles>
+              <Grid>
+				  <asyncImageLoader:AdvancedImage Source="{TemplateBinding Playercard}"
+                                                  Stretch="UniformToFill"/>
+				  <asyncImageLoader:AdvancedImage Source="{TemplateBinding AgentImage}"
+                                                  Stretch="UniformToFill"
+                                                  IsVisible="False"
+                                                  
+                                                  Height="500">
+                      <asyncImageLoader:AdvancedImage.OpacityMask>
+                          <LinearGradientBrush EndPoint="0%,100%" StartPoint="0%,0%">
+                                  <GradientStop Offset="0.7" Color="#C2E4F6" />
+                                  <GradientStop Offset="1" Color="#0095CDEC" />
+                              </LinearGradientBrush>
+                      </asyncImageLoader:AdvancedImage.OpacityMask>
+                  </asyncImageLoader:AdvancedImage>
+
+                  <Rectangle>
+					  <Rectangle.Fill>
+						  <LinearGradientBrush EndPoint="100%,0%" StartPoint="0%,100%" Opacity=".5">
+                              <GradientStop Offset="0" Color="#F61E51" />
+                              <GradientStop Offset="1" Color="#00F61E51" />
+                          </LinearGradientBrush>
+					  </Rectangle.Fill>
+                  </Rectangle>
+
+                  <StackPanel VerticalAlignment="Bottom"
+                              HorizontalAlignment="Center"
+                              
+                              Margin="0,50">
+                      <TextBlock Text="{TemplateBinding PlayerName}"
+                                 FontFamily="{StaticResource WorkSans}"
+                                 FontWeight="Medium"
+                                 HorizontalAlignment="Center"
+                                 FontSize="16"
+                                 ></TextBlock>
+
+                      <TextBlock x:Name="NotReadyText"
+                                 FontFamily="{StaticResource WorkSans}"
+                                 FontWeight="Medium"
+                                 Text="Not Ready"
+                                 FontSize="14"
+                                 Foreground="Red"
+                                 HorizontalAlignment="Center"
+                      ></TextBlock>
+
+					  <TextBlock x:Name="ReadyText"
+                                 FontFamily="{StaticResource WorkSans}"
+                                 FontWeight="Medium"
+                                 Text="Ready"
+                                 FontSize="14"
+                                 Foreground="LightGreen"
+                                 IsVisible="False"
+                                 HorizontalAlignment="Center"
+                      ></TextBlock>
+                  </StackPanel>
+              </Grid>
+          </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+
+    <Style Selector="controls|LiveMenuPartyUser[PlayerReady=True] /template/ TextBlock#ReadyText">
+        <Setter Property="IsVisible" Value="True"></Setter>
+    </Style>
+
+    <Style Selector="controls|LiveMenuPartyUser[PlayerReady=True] /template/ TextBlock#NotReadyText">
+        <Setter Property="IsVisible" Value="False"></Setter>
+    </Style>
+</Styles>

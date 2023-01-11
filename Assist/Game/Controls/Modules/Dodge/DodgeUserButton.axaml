@@ -1,0 +1,77 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Modules.Dodge">
+  <Design.PreviewWith>
+    <controls:DodgeUserButton Width="838"
+                              Height="40"
+                              />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|DodgeUserButton">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderBrush="#2B2B2B"
+                Background="#17181D"
+                BorderThickness="1">
+            <Grid ColumnDefinitions="*,*"
+                  >
+                <StackPanel Orientation="Horizontal"
+                            Margin="12,0"
+                            Grid.Column="0"
+                            Spacing="12">
+                    <TextBlock Text="{TemplateBinding GameName}"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Medium"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                    ></TextBlock>
+
+                    <Rectangle Width="3"
+                               Fill="white"
+                               Opacity=".5"
+                               Margin="5"></Rectangle>
+
+                    <TextBlock Text="{TemplateBinding Note}"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Light"
+                               FontSize="13"
+                               VerticalAlignment="Center"
+                    ></TextBlock>
+				</StackPanel>
+                <TextBlock Text="{TemplateBinding DateAdded}"
+                           Grid.Column="1"
+                           Margin="12,0"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontWeight="Light"
+                           FontSize="13"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                ></TextBlock>
+
+                <Border Background="{DynamicResource AssistRed}"
+                        Grid.ColumnSpan="2"
+                        IsVisible="False"
+                        x:Name="PART_RemoveBorder">
+					<TextBlock Text="CLICK TO REMOVE"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Medium"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                    ></TextBlock>
+                </Border>
+            </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+    <Style Selector="controls|DodgeUserButton:pointerover">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+
+    <Style Selector="controls|DodgeUserButton:pointerover /template/ Border#PART_RemoveBorder">
+        <Setter Property="IsVisible" Value="True"></Setter>
+    </Style>
+</Styles>
