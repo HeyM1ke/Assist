@@ -85,6 +85,7 @@ namespace Assist.Services
             var content = await resp.Content.ReadAsStringAsync();
             if (resp.IsSuccessStatusCode)
             {
+                await GetUserInfo();
                 return true;
             }
 

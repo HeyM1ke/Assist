@@ -10,17 +10,17 @@
         <Border VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Background="{StaticResource AssistBlack}"
-                Width="500" Height="200">
+                Width="500">
             <Grid RowDefinitions="40,*,40"
                   Margin="10">
 				<Image Source="/Resources/Icons/AssistText_Temp.png" Height="30"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"></Image>
 
-                <TextBlock Background="{DynamicResource AssistGray}"
+                <TextBlock Margin="20"
                            Grid.Row="1"
                            TextWrapping="WrapWithOverflow"
-                           Text="VALORANT is currently open. Would you like to open Game Mode?"
+                           Text="VALORANT is currently open. &#x0a; Would you like to open Game Mode?"
                            FontFamily="{StaticResource WorkSans}"
                            TextAlignment="Center"></TextBlock>
                 

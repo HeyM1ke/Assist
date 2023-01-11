@@ -11,13 +11,13 @@
                   VerticalAlignment="Center"
                   Margin="4,0">
 		  <Panel>
-			  <Ellipse Fill="#101115"
+			  <Rectangle Fill="#101115"
                        Width="48"
                        Height="48"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center">
 
-              </Ellipse>
+              </Rectangle>
               <Image Source="/Resources/Icons/Assist_Logo_White.png"
                      Width="22"></Image>
 		  </Panel>

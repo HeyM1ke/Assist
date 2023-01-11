@@ -1,0 +1,112 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Width="1125"
+             Height="690"
+             x:Class="Assist.Controls.Global.Popup.GameLaunchSettingsPopup"
+             Initialized="GameLaunch_Init">
+	<Grid Background="#3D000000">
+        <Grid.Styles>
+            <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
+
+                <Setter Property="BorderBrush" Value="White" />
+            </Style>
+
+            <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
+                <Setter Property="Background" Value="{DynamicResource AssistRed}" />
+                <Setter Property="BorderBrush" Value="White" />
+            </Style>
+
+        </Grid.Styles>
+		<Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="{StaticResource AssistBlack}"
+                Width="500">
+			<Grid RowDefinitions="40,*,40"
+                  VerticalAlignment="Top"
+                  Margin="10">
+               <StackPanel  Orientation="Horizontal"
+                            Spacing="5">
+				   <Image Source="/Resources/Icons/Settings_Icon.png"
+                          Width="18"
+                          Height="18"></Image>
+				   <TextBlock Text="Launch Settings"
+                              FontFamily="{StaticResource WorkSans}"
+                              VerticalAlignment="Center"
+                              FontWeight="Bold"
+                              FontSize="16"></TextBlock>
+               </StackPanel>
+
+                <Rectangle Height="1"
+                           Fill="White"
+                           VerticalAlignment="Bottom"></Rectangle>
+
+				<StackPanel Grid.Row="1"
+                            Margin="0,5">
+                    
+						<Grid>
+							<TextBlock Text="Enable Game Mode :"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Normal"
+                                       FontSize="16"
+                                       HorizontalAlignment="Left"></TextBlock>
+                            <CheckBox HorizontalAlignment="Right"
+                                      x:Name="GameModeEnable"></CheckBox>
+						</Grid>
+
+                    <Grid>
+                        <TextBlock Text="Patchline :"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   VerticalAlignment="Center"
+                                   FontWeight="Normal"
+                                   FontSize="16"
+                                   HorizontalAlignment="Left"></TextBlock>
+                        <ComboBox HorizontalAlignment="Right"
+                                  SelectedIndex="0"
+                                  Width="200"
+                                  x:Name="PatchLineCheckbox">
+                            <ComboBoxItem Content="Live"></ComboBoxItem>
+                            
+                        </ComboBox>
+                    </Grid>
+                    
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="2"
+                            Spacing="10"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center">
+                    <StackPanel.Styles>
+                        <Style Selector="Button">
+                            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                            <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                            <Setter Property="FontSize" Value="11"></Setter>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                        </Style>
+
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                            <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                        </Style>
+                    </StackPanel.Styles>
+
+                    <Button Content="Apply"
+                            Width="100"
+                            Click="Apply_Click"></Button>
+                </StackPanel>
+			</Grid>
+
+
+		</Border>
+	</Grid>
+</UserControl>

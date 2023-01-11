@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
 using Assist.Settings;
 using Assist.ViewModels;
@@ -48,7 +49,7 @@ namespace Assist.Services.Riot
             await CreateAuthenticationFile();
 
             Log.Information("Attempting to Launch Client");
-            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline} --insecure")
+            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline.ToLower()} --insecure")
             {
                 UseShellExecute = true
             };
@@ -167,11 +168,19 @@ namespace Assist.Services.Riot
             //await ReplaceValorantBackground();
 
 
+            
+
+            if (AssistSettings.Current.GameModeEnabled)
+            {
+                Dispatcher.UIThread.InvokeAsync(() => { MainWindowContentController.Change(new GameInitialView()); });
+                return;
+            }
+
             // Automatically Closes Valorant After Launch
             Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                AssistApplication.CurrentApplication.Shutdown();
-            });
+                {
+                    AssistApplication.CurrentApplication.Shutdown();
+                });
             
         }
 

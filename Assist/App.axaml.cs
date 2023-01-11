@@ -92,8 +92,10 @@ namespace Assist
                     path: Path.Combine(logsDirectory, $"Log_{++fileCount}.txt"),
                     rollingInterval: RollingInterval.Day,
                     outputTemplate:
-                    "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine:1}{Properties:1j}{NewLine:1}{Exception:1} {[CallerMemberName] string callingMethodName = default}")
+                    "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine:1}{Properties:1j}{NewLine:1}{Exception:1}")
                 .CreateLogger();
+
+            Log.Information("ASSIST LOG LIVE: " + AssistSettings.Current.ApplicationVersion);
         }
 
         private static string GetApplicationDataFolder()

@@ -41,6 +41,8 @@ namespace Assist.Settings
             set => this.SetProperty(ref _languageSelected, value);
         }
 
+
+
         private ELanguage _language;
         public ELanguage Language { get => _language; set => this.SetProperty(ref _language, value); }
 
@@ -151,6 +153,13 @@ namespace Assist.Settings
             return false;
         }
 
+        private bool _gameModeEnabled = true;
+
+        public bool GameModeEnabled
+        {
+            get => _gameModeEnabled;
+            set => this.SetProperty(ref _gameModeEnabled, value);
+        }
         public BackupsSettings Backups = new BackupsSettings();
     }
 }
