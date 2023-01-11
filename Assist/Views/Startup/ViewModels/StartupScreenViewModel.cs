@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Controls.Global.Popup;
+using Assist.Game.Views;
+using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
 using Assist.Services;
+using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
 using Assist.Views.Authentication;
@@ -51,13 +56,42 @@ namespace Assist.Views.Startup.ViewModels
                 return;
             }
 
+            // Check Args
+            if (AssistApplication.CurrentApplication.Args.Contains("--forcegame"))
+            {
+                MainWindowContentController.Change(new GameInitialView());
+                return;
+            }
+
+            // Check if Game the game is running, if so launch gamemode.
+
+            if (IsValorantRunning())
+            {
+                var menuPopup = new GamemodeWarningPopup();
+                menuPopup.WarningClosing += GamemodePopupClose;
+                PopupSystem.SpawnCustomPopup(menuPopup);
+                return;
+            }
+
+
+
+            await StartStartupAuthentication();
+        }
+
+        private async void GamemodePopupClose()
+        {
+            PopupSystem.KillPopups();
+            await StartStartupAuthentication();
+        }
+
+        private async Task StartStartupAuthentication()
+        {
             if (AssistSettings.Current.Profiles.Count == 0)
             {
                 Log.Information("No Profiles Found, Going to Auth View");
                 MainWindowContentController.Change(new AuthenticationView());
                 return;
             }
-
 
             await ExperimentalAuth();
         }
@@ -160,6 +194,14 @@ namespace Assist.Views.Startup.ViewModels
             return false;
         }
 
+        private bool IsValorantRunning()
+        {
+            var processlist = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Where(process => process.Id != Process.GetCurrentProcess().Id).ToList();
+            processlist.AddRange(Process.GetProcessesByName("VALORANT-Win64-Shipping"));
+
+            return processlist.Any();
+        }
+
         public async Task CheckForUpdates()
         {
 #if (!DEBUG)
@@ -168,7 +210,7 @@ namespace Assist.Views.Startup.ViewModels
             {
                 try
                 {
-                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/live/windows/");
+                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/beta/windows/");
                     var newVersion = await mgr.UpdateApp();
 
                     // You must restart to complete the update. 

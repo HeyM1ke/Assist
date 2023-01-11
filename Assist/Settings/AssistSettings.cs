@@ -41,6 +41,8 @@ namespace Assist.Settings
             set => this.SetProperty(ref _languageSelected, value);
         }
 
+
+
         private ELanguage _language;
         public ELanguage Language { get => _language; set => this.SetProperty(ref _language, value); }
 
@@ -63,6 +65,13 @@ namespace Assist.Settings
         {
             get => _defaultAccount;
             set => this.SetProperty(ref _defaultAccount, value);
+        }
+
+        private string _assistUserCode;
+        public string AssistUserCode
+        {
+            get => _assistUserCode;
+            set => this.SetProperty(ref _assistUserCode, value);
         }
 
         internal async Task<string> FindRiotClient()
@@ -144,6 +153,13 @@ namespace Assist.Settings
             return false;
         }
 
+        private bool _gameModeEnabled = true;
+
+        public bool GameModeEnabled
+        {
+            get => _gameModeEnabled;
+            set => this.SetProperty(ref _gameModeEnabled, value);
+        }
         public BackupsSettings Backups = new BackupsSettings();
     }
 }

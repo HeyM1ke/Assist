@@ -20,7 +20,7 @@
         <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource LaunchButtonHoverBackground}" />
             <Setter Property="TextBlock.Foreground" Value="{DynamicResource LaunchButtonHoverForeground}"/>
-            
+            <Setter Property="Cursor" Value="Hand"></Setter>
         </Style>
 	</UserControl.Styles>
 
@@ -51,20 +51,38 @@
                         HorizontalContentAlignment="Center"
                         Margin="0,0,0,10"
                 ></Label>
-                
-                <Button Width="225"
-                        Height="60"
-                        Content="PLAY"
-                        FontFamily="{StaticResource WorkSans}"
-                        FontWeight="Bold"
-                        FontSize="32"
-                        IsVisible="{Binding IsEnabled}"
-                        VerticalContentAlignment="Center"
-                        HorizontalContentAlignment="Center"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Margin="0,0,0,0"
-                        Click="LaunchBtn_Click"/>
+
+				<StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Spacing="2">
+                    
+                    <Button Width="185"
+                            Height="60"
+                            Content="PLAY"
+                            FontFamily="{StaticResource WorkSans}"
+                            FontWeight="Bold"
+                            FontSize="32"
+                            IsVisible="{Binding IsEnabled}"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            
+                            Margin="0,0,0,0"
+                            Click="LaunchBtn_Click"/>
+                    <Button Width="40"
+                            Height="60"
+                            FontFamily="{StaticResource WorkSans}"
+                            FontWeight="Bold"
+                            IsVisible="{Binding IsEnabled}"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,0,0"
+                            Click="OpenSettingsBtn_Click">
+                        <Image Source="/Resources/Icons/Settings_Icon.png"></Image>
+                    </Button>
+				</StackPanel>
                 
                 
             </StackPanel>

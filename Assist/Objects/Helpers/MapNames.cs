@@ -17,6 +17,7 @@ namespace Assist.Objects.Helpers
             {"2fb9a4fd-47b8-4e7d-a969-74b4046ebd53","Breeze"},
             {"fd267378-4d1d-484f-ff52-77821ed10dc2","Pearl"},
             {"e2ad5c54-4114-a870-9641-8ea21279579a","Icebox"},
+            {"9c91a445-4f78-1baa-a3ea-8f8aadf4914d","Lotus"},
             {"ee613ee9-28b7-4beb-9666-08db13bb2244","The Range"},
             {"2bee0dc9-4ffe-519b-1cbd-7fbe763a6047","Haven"},
         };
@@ -28,10 +29,13 @@ namespace Assist.Objects.Helpers
             {"/Game/Maps/Canyon/Canyon","Fracture"},
             {"/Game/Maps/Duality/Duality","Bind"},
             {"/Game/Maps/Foxtrot/Foxtrot","Breeze"},
+            {"/Game/Maps/Foxtrot_Copy/Foxtrot_Copy","Breeze"},
             {"/Game/Maps/Pitt/Pitt","Pearl"},
             {"/Game/Maps/Port/Port","Icebox"},
             {"/Game/Maps/Poveglia/Range","The Range"},
             {"/Game/Maps/Triad/Triad","Haven"},
+            {"/Game/Maps/Jam/Jam","Lotus"},
         };
     }
 }
+

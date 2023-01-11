@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="64"
+             x:Class="Assist.Controls.Assist.UserPreview"
+             Initialized="UserPreview_Initialized">
+  <Grid Background="#20101115">
+	  <StackPanel Orientation="Horizontal"
+                  Spacing="10"
+                  VerticalAlignment="Center"
+                  Margin="4,0">
+		  <Panel>
+			  <Rectangle Fill="#101115"
+                       Width="48"
+                       Height="48"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center">
+
+              </Rectangle>
+              <Image Source="/Resources/Icons/Assist_Logo_White.png"
+                     Width="22"></Image>
+		  </Panel>
+          <StackPanel
+              VerticalAlignment="Center">
+
+              <TextBlock FontFamily="{StaticResource WorkSans}"
+                         Text="{Binding AssistUserName}"
+                         FontWeight="Medium"
+                         FontSize="18"
+                         Opacity="1"/>
+			  <!-- For the Future -->
+              <TextBlock FontFamily="{StaticResource WorkSans}"
+                         Text="Playing VALORANT"
+                         FontWeight="Medium"
+                         FontSize="12"
+                         Opacity=".5"/>
+          </StackPanel>
+	  </StackPanel>
+  </Grid>
+</UserControl>

@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:modules="clr-namespace:Assist.Game.Controls.Modules"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Game.Views.Modules.Views.SelectionView">
+  <Grid>
+        <StackPanel VerticalAlignment="Center"
+                      HorizontalAlignment="Center"
+                      Spacing="30"
+                      Orientation="Horizontal"
+                      >
+			<StackPanel.Styles>
+				<Style Selector="modules|ModuleSelectionControl">
+					<Setter Property="Width" Value="238"/>
+					<Setter Property="Height" Value="180"/>
+				</Style>
+			</StackPanel.Styles>
+            <modules:ModuleSelectionControl ModuleName="DODGE"
+                                            ModuleDescription="Assist Dodge Warning System. Gives you a heads up when a player you marked is on your team."
+                                            ModuleIcon="../../../../Resources/Game/DodgeLogo_Icon.png"
+                                            PointerPressed="DodgeModule_Press"/>
+            <modules:ModuleSelectionControl ModuleName="Rich Presence"
+                                            ModuleDescription="Assist Rich Presence. Gives your Discord profile a live status of your current VALORANT Game."
+                                            ModuleIcon="../../../../Resources/Game/DiscordLogo_Icon.png"
+                                            PointerPressed="RichPresence_Press"/>
+        </StackPanel>
+  </Grid>
+</UserControl>

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Assist.Controls.Dashboard.ViewModels;
 using Assist.Objects.AssistApi;
 using AsyncImageLoader;
@@ -43,6 +44,7 @@ namespace Assist.Controls.Dashboard
 
         private void StyledElement_OnInitialized(object? sender, EventArgs e)
         {
+            
         }
     }
 }
