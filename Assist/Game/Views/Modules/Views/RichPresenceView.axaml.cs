@@ -55,41 +55,15 @@ namespace Assist.Game.Views.Modules.Views
 
 
             // TEMP SOLUTION
-            try
-            {
-                ((List<ComboBoxItem>)detailsComboBox.Items).FindIndex(item => item.Content.ToString() == GameSettings.Current.RichPresenceSettings.DetailsTextData);
 
-            }
-            catch (Exception e)
+            if (GameSettings.Current.RichPresenceSettings.DetailsTextData == "Rank")
             {
-                detailsComboBox.SelectedIndex = 0;
-                GameSettings.Current.RichPresenceSettings.DetailsTextData = detailsComboBox.SelectedItem.ToString();
+                detailsComboBox.SelectedIndex = 1;
             }
 
-
-            // TEMP SOLUTION
-            try
+            if (GameSettings.Current.RichPresenceSettings.LargeImageData == "Logo")
             {
-                ((List<ComboBoxItem>)largeImageComboBox.Items).FindIndex(item => item.Content.ToString() == GameSettings.Current.RichPresenceSettings.LargeImageData);
-
-            }
-            catch (Exception e)
-            {
-                largeImageComboBox.SelectedIndex = 0;
-                GameSettings.Current.RichPresenceSettings.LargeImageData = largeImageComboBox.SelectedItem.ToString();
-            }
-
-
-            // TEMP SOLUTION
-            try
-            {
-                ((List<ComboBoxItem>)smallImageComboBox.Items).FindIndex(item => item.Content.ToString() == GameSettings.Current.RichPresenceSettings.SmallImageData);
-
-            }
-            catch (Exception e)
-            {
-                smallImageComboBox.SelectedIndex = 0;
-                GameSettings.Current.RichPresenceSettings.DetailsTextData = smallImageComboBox.SelectedItem.ToString();
+                largeImageComboBox.SelectedIndex = 1;
             }
         }
 

@@ -286,6 +286,7 @@
         </Border>
 
         <Border x:Name="PreviewBorder"
+                IsVisible="False"
                 CornerRadius="5"
                 Background="#101115"
                 Width="300"
