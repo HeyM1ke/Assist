@@ -248,7 +248,7 @@ namespace Assist.Game.Services
                 else
                 {
                     if (GameSettings.Current.RichPresenceSettings.ShowMode)
-                        details = char.ToUpper(playerPres.queueId[0]) + playerPres.queueId.Substring(1);
+                        details = await DetermineQueueKey(playerPres);
                 }
             }
 
@@ -420,6 +420,14 @@ namespace Assist.Game.Services
                     return "Competitive";
                 case "unrated":
                     return "Unrated";
+                case "onefa":
+                    return "Replication";
+                case "swiftplay":
+                    return "Swiftplay";
+                case "snowball":
+                    return "Snowball";
+                case "lotus":
+                    return "Lotus";
                 default:
                     return "VALORANT";
             }

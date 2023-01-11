@@ -12,6 +12,7 @@ using Assist.ViewModels;
 using Avalonia.Threading;
 using ReactiveUI;
 using Serilog;
+using ValNet.Objects.Local;
 
 namespace Assist.Game.Views.Live.ViewModels
 {
@@ -53,6 +54,9 @@ namespace Assist.Game.Views.Live.ViewModels
         public async Task Setup()
         {
             LiveViewNavigationController.Change(new UnkownPageView());
+
+            //await AttemptCurrentPage();
+
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += async delegate (PresenceV4Message message)
             {
                 Log.Information("Received User Presence Data");
@@ -60,6 +64,15 @@ namespace Assist.Game.Views.Live.ViewModels
                 await DeterminePage(pres, message);
             };
 
+        }
+
+        private async Task AttemptCurrentPage()
+        {
+            var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+
+            var user = pres.presences.Find(p => p.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
+            var data = await GetPresenceData(user);
+            await DeterminePage(data, user);
         }
 
         private async Task DeterminePage(PlayerPresence dataMessage, PresenceV4Message fullMessage = null)
@@ -90,6 +103,45 @@ namespace Assist.Game.Views.Live.ViewModels
                     break;
             }
             });
+        }
+
+        public async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
+        {
+            if(string.IsNullOrEmpty(data.Private))
+                return new PlayerPresence();
+            byte[] stringData = Convert.FromBase64String(data.Private);
+            string decodedString = Encoding.UTF8.GetString(stringData);
+            return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+        }
+
+         private async Task DeterminePage(PlayerPresence dataMessage, ChatV4PresenceObj.Presence fullMessage = null)
+        {
+            /*Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                switch (dataMessage!.sessionLoopState)
+            {
+                case "MENUS":
+                    if (LiveViewNavigationController.CurrentPage != LivePage.MENUS)
+                    {
+                        LiveViewNavigationController.Change(new MenusPageView(fullMessage));
+                    }
+                    break;
+                case "INGAME":
+                    if (LiveViewNavigationController.CurrentPage != LivePage.INGAME)
+                    {
+                        LiveViewNavigationController.Change(new IngamePageView());
+                    }
+                        break;
+                case "PREGAME":
+                    if (LiveViewNavigationController.CurrentPage != LivePage.PREGAME)
+                    {
+                        LiveViewNavigationController.Change(new PregamePageView());
+                    }
+                    break;
+                default:
+                    break;
+            }
+            });*/
         }
 
         public async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)

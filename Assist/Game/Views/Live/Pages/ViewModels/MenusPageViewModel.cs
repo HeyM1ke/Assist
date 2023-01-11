@@ -145,6 +145,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     return "Swiftplay";
                 case "snowball":
                     return "Snowball";
+                case "lotus":
+                    return "Lotus";
                 default:
                     return "VALORANT";
             }

@@ -14,6 +14,7 @@ using Avalonia.Threading;
 using Avalonia.Utilities;
 using ReactiveUI;
 using Serilog;
+using ValNet.Objects.Coregame;
 using ValNet.Objects.Local;
 using ValNet.Objects.Pregame;
 
@@ -32,6 +33,9 @@ namespace Assist.Game.Controls.Live.ViewModels
 
         private PregameMatch.Player? _player;
         public PregameMatch.Player? Player { get => _player; set => this.RaiseAndSetIfChanged(ref _player, value); }
+
+        private CoregameMatch.Player? _corePlayer;
+        public CoregameMatch.Player? CorePlayer { get => _corePlayer; set => this.RaiseAndSetIfChanged(ref _corePlayer, value); }
 
         private string? _playerRankIcon = null;
 
@@ -153,6 +157,82 @@ namespace Assist.Game.Controls.Live.ViewModels
                 var user = DodgeService.Current.UserList.Find(player => player.UserId == Player.Subject);
                 var checkGlobal =
                     AssistApplication.Current.AssistUser.GlobalDodgeUsers.Find(player => player.id == Player.Subject);
+                if (user != null)
+                {
+                    // This means the user was found on the dodge list.
+                    IsPlayerDodge = true;
+                    Dispatcher.UIThread.InvokeAsync(async () =>
+                    {
+                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                    });
+
+                }
+
+                if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
+                {
+                    // This means the user was found on the global dodge list.
+                    IsPlayerDodge = true;
+                    PlayerRankRating = checkGlobal.category.ToUpper();
+                    Dispatcher.UIThread.InvokeAsync(async () =>
+                    {
+                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                        GlobalDodgeBorder = new SolidColorBrush(new Color(255, 255, 255, 255));
+                    });
+
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Updates the binded user control data with the PlayerData set in control's Player variable.
+        /// </summary>
+        /// <returns></returns>
+        public async Task UpdateCorePlayerData()
+        {
+            if (CorePlayer != null)
+            {
+
+                // Get player name from Presence.
+                if (string.Equals(PlayerName, "Player") || string.IsNullOrEmpty(PlayerRankIcon))
+                {
+                    var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+                    var data = pres.presences.Find(user => user.puuid == CorePlayer.Subject);
+
+                    if (!CorePlayer.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
+                        if (data != null)
+                            PlayerName = data.game_name;
+
+                    if (data != null)
+                    {
+                        var t = await GetPresenceData(data);
+                        // Set rank icon
+                        PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                    }
+                }
+
+
+
+                if (!string.IsNullOrEmpty(CorePlayer.CharacterID))
+                {
+                    try
+                    {
+                        // Set Agent Icon
+                        PlayerAgentIcon = $"https://content.assistapp.dev/agents/{CorePlayer.CharacterID}_displayicon.png";
+                        // Set Agent Name
+                        PlayerAgentName = AgentNames.AgentIdToNames?[CorePlayer.CharacterID];
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Fatal(ex.Message);
+                    }
+                }
+
+                // Check if user is on dodge list
+                // if so enable red border and icon popup.
+                var user = DodgeService.Current.UserList.Find(player => player.UserId == CorePlayer.Subject);
+                var checkGlobal =
+                    AssistApplication.Current.AssistUser.GlobalDodgeUsers.Find(player => player.id == CorePlayer.Subject);
                 if (user != null)
                 {
                     // This means the user was found on the dodge list.

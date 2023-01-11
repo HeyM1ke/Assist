@@ -4,6 +4,7 @@ using Assist.Game.Services;
 using Assist.Game.Views.Live.Pages.ViewModels;
 using Assist.Objects.RiotSocket;
 using Avalonia.Controls;
+using ValNet.Objects.Local;
 
 namespace Assist.Game.Views.Live.Pages
 {

@@ -8,6 +8,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Serilog;
+using ValNet.Core.CoreGame;
+using ValNet.Objects.Coregame;
 using ValNet.Objects.Pregame;
 
 namespace Assist.Game.Controls.Live
@@ -34,6 +36,18 @@ namespace Assist.Game.Controls.Live
             InitializeComponent();
         }
 
+        public GameUserControl(CoregameMatch.Player player, IBrush color)
+        {
+            DataContext = _viewModel = new GameUserViewModel();
+            _viewModel.CorePlayer = player;
+
+            if (_viewModel.PlayerBrush == null)
+                _viewModel.PlayerBrush = color;
+
+            PlayerId = player.Subject;
+            InitializeComponent();
+        }
+
 
         public async Task UpdatePlayer(PregameMatch.Player player, IBrush playerColor)
         {
@@ -47,12 +61,28 @@ namespace Assist.Game.Controls.Live
             await _viewModel.UpdatePlayerData();
         }
 
+        public async Task UpdatePlayer(CoregameMatch.Player player, IBrush playerColor)
+        {
+            _viewModel.CorePlayer = player;
+
+            if (_viewModel.PlayerBrush == null)
+                _viewModel.PlayerBrush = playerColor;
+
+
+
+            await _viewModel.UpdateCorePlayerData();
+        }
         private async void GameUser_Init(object? sender, EventArgs e)
         {
             if(Design.IsDesignMode)
                 return;
 
-            await _viewModel.UpdatePlayerData();
+            if (_viewModel.CorePlayer != null)
+                await _viewModel.UpdateCorePlayerData();
+            else
+                await _viewModel.UpdatePlayerData();
+
+
         }
 
         private async void AddUserToDodgeList_MenuClick(object? sender, RoutedEventArgs e)
