@@ -109,6 +109,7 @@
 					  FontWeight="Medium"
 					  VerticalAlignment="Center"
 					  HorizontalAlignment="Center"
+					  Click="AddToDodgeMenu_Click"
                       >
 				<MenuItem.Icon>
 					<Image Source="/Resources/Game/DodgeLogoAdd_Icon.png"

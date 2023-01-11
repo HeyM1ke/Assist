@@ -48,7 +48,7 @@ namespace Assist.Services.Riot
             await CreateAuthenticationFile();
 
             Log.Information("Attempting to Launch Client");
-            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline}")
+            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline} --insecure")
             {
                 UseShellExecute = true
             };

@@ -2,6 +2,8 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live.ViewModels;
+using Assist.Game.Models.Dodge;
+using Assist.Game.Services;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -56,6 +58,28 @@ namespace Assist.Game.Controls.Live
         private async void AddUserToDodgeList_MenuClick(object? sender, RoutedEventArgs e)
         {
             
+        }
+
+        private async void AddToDodgeMenu_Click(object? sender, RoutedEventArgs e)
+        {
+            var btn = sender as MenuItem;
+            btn.IsEnabled = false;
+            try
+            {
+                DodgeService.Current.AddUser(new DodgeUser()
+                {
+                    DateAdded = DateTime.Now,
+                    GameName = _viewModel.PlayerName,
+                    Note = "Player added from Game.",
+                    UserId = PlayerId
+                });
+                btn.IsEnabled = false;
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception.Message);
+                btn.IsEnabled = true;
+            }
         }
     }
 }
