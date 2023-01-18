@@ -218,9 +218,9 @@ namespace Assist.Game.Controls.Live.ViewModels
                     try
                     {
                         // Set Agent Icon
-                        PlayerAgentIcon = $"https://content.assistapp.dev/agents/{CorePlayer.CharacterID}_displayicon.png";
+                        PlayerAgentIcon = $"https://content.assistapp.dev/agents/{CorePlayer.CharacterID.ToLower()}_displayicon.png";
                         // Set Agent Name
-                        PlayerAgentName = AgentNames.AgentIdToNames?[CorePlayer.CharacterID];
+                        PlayerAgentName = AgentNames.AgentIdToNames?[CorePlayer.CharacterID.ToLower()];
                     }
                     catch (Exception ex)
                     {
