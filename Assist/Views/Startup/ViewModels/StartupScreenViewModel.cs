@@ -210,13 +210,16 @@ namespace Assist.Views.Startup.ViewModels
             {
                 try
                 {
-                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/beta/windows/");
-                    var newVersion = await mgr.UpdateApp();
-
-                    // You must restart to complete the update. 
-                    // This can be done later / at any time.
-                    if (newVersion != null)
-                        UpdateManager.RestartApp();
+                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/live/windows/");
+                    var updateInfo = await mgr.CheckForUpdate();
+                    if (updateInfo.ReleasesToApply.Any())
+                    {
+                        var newVersion = await mgr.UpdateApp();
+                        // You must restart to complete the update. 
+                        // This can be done later / at any time.
+                        if (newVersion != null)
+                            UpdateManager.RestartApp();
+                    }
 
                     return;
                 }

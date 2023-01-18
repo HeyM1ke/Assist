@@ -8,7 +8,7 @@ namespace Assist.Objects.Helpers
 {
     internal class AgentNames
     {
-        public static Dictionary<string, string> AgentIdToNames = new Dictionary<string, string>
+        public static Dictionary<string, string> AgentIdToNames = new Dictionary<string, string> 
         {
             {"eb93336a-449b-9c1b-0a54-a891f7921d69", "Phoenix"},
             {"6f2a04ca-43e0-be17-7f36-b3908627744d", "Skye"},
@@ -23,6 +23,7 @@ namespace Assist.Objects.Helpers
             {"707eab51-4836-f488-046a-cda6bf494859", "Viper"},
             {"7f94d92c-4234-0a36-9646-3a87eb8b5c89", "Yoru"},
             {"8e253930-4c05-31dd-1b6c-968525494517", "Omen"},
+            {"8E253930-4C05-31DD-1B6C-968525494517", "Omen"},
             {"95b78ed7-4637-86d9-7e41-71ba8c293152", "Harbor"},
             {"9f0d8ba9-4140-b941-57d3-a7ad57c6b417", "Brimstone"},
             {"add6443a-41bd-e414-f6ad-e58d267f4e95", "Jett"},
