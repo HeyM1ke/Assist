@@ -32,47 +32,103 @@ namespace Assist.Views.Dashboard
 
         private async void WeeklyMissions_Init(object? sender, EventArgs e)
         {
-            if(Design.IsDesignMode)
+            
+            if (Design.IsDesignMode)
                 return;
 
-
-            var obj = sender as MissionsView;
-
-            if (obj != null)
+            try
             {
-                var r = await _viewModel.GetWeeklyMissions();
-                var s = new StackPanel()
+
+                var obj = sender as MissionsView;
+
+                if (obj != null)
                 {
-                    Spacing = 16
-                };
+                    var r = await _viewModel.GetWeeklyMissions();
+                    var s = new StackPanel()
+                    {
+                        Spacing = 16
+                    };
 
-                s.Children.AddRange(r);
+                    s.Children.AddRange(r);
 
-                obj.Content = s;
+                    obj.Content = s;
 
 
+                }
+            }
+            catch (Exception exception)
+            {
+                var obj = sender as MissionsView;
+
+                if (obj != null)
+                {
+                    var s = new StackPanel()
+                    {
+                        Spacing = 16
+                    };
+
+                    s.Children.Add(new MissionControl()
+                    {
+                        Title = "Error Getting Missions...",
+                        XpGrantAmount = "",
+                        CurrentProgress = 1,
+                        MaxProgress = 1,
+                        PreviewText = ""
+                    });
+
+                    obj.Content = s;
+                }
             }
         }
 
         private async void DailyMissions_Init(object? sender, EventArgs e)
         {
+            
             if (Design.IsDesignMode)
                 return;
 
-            var obj = sender as MissionsView;
-
-            if (obj != null)
+            try
             {
-                var r = await _viewModel.GetDailyMissions();
-                var s = new StackPanel()
+
+                var obj = sender as MissionsView;
+
+                if (obj != null)
                 {
-                    Spacing = 16
-                };
+                    var r = await _viewModel.GetDailyMissions();
+                    var s = new StackPanel()
+                    {
+                        Spacing = 16
+                    };
 
-                s.Children.AddRange(r);
+                    s.Children.AddRange(r);
 
-                obj.Content = s;
+                    obj.Content = s;
 
+
+                }
+            }
+            catch (Exception exception)
+            {
+                var obj = sender as MissionsView;
+
+                if (obj != null)
+                {
+                    var s = new StackPanel()
+                    {
+                        Spacing = 16
+                    };
+
+                    s.Children.Add(new MissionControl()
+                    {
+                        Title = "Error Getting Missions...",
+                        XpGrantAmount = "",
+                        CurrentProgress = 1,
+                        MaxProgress = 1,
+                        PreviewText = ""
+                    });
+
+                    obj.Content = s;
+                }
             }
         }
 
@@ -81,29 +137,40 @@ namespace Assist.Views.Dashboard
             if (Design.IsDesignMode)
                 return;
 
-            var obj = sender as PlayerStatisticsView;
-            if (obj != null)
+            try
             {
-                obj.isLoading = true;
-                var r = await _viewModel.GetMatchHistory();
-                if(r is null)
-                    return;
-
-                var details = await _viewModel.GetMatchDetails(r);
-                var getMatchHistoryControls = await _viewModel.CreateMatchControls(details);
-                var MostPlayed = await _viewModel.GetMostCommonAgent(details);
-                obj.FeaturedAgent = $"https://content.assistapp.dev/agents/{MostPlayed}_fullportrait.png";
-                await _viewModel.SetupCompetitiveDetails(obj);
-                var s = new StackPanel()
+                var obj = sender as PlayerStatisticsView;
+                if (obj != null)
                 {
-                    Spacing = 9
-                };
+                    obj.isLoading = true;
+                    var r = await _viewModel.GetMatchHistory();
+                    if (r is null)
+                        return;
 
-                s.Children.AddRange(getMatchHistoryControls);
+                    var details = await _viewModel.GetMatchDetails(r);
+                    var getMatchHistoryControls = await _viewModel.CreateMatchControls(details);
+                    var MostPlayed = await _viewModel.GetMostCommonAgent(details);
+                    obj.FeaturedAgent = $"https://content.assistapp.dev/agents/{MostPlayed}_fullportrait.png";
+                    await _viewModel.SetupCompetitiveDetails(obj);
+                    var s = new StackPanel()
+                    {
+                        Spacing = 9
+                    };
 
-                obj.Content = s;
+                    s.Children.AddRange(getMatchHistoryControls);
 
-                obj.isLoading = false;
+                    obj.Content = s;
+
+                    obj.isLoading = false;
+                }
+            }
+            catch (Exception exception)
+            {
+                var obj = sender as PlayerStatisticsView;
+                if (obj != null)
+                {
+                    obj.isLoading = true;
+                }
             }
         }
     }

@@ -30,6 +30,7 @@ namespace Assist.Views.Dashboard.ViewModels
         private MatchHistoryObj _matchHistoryObj = null;
         public async Task<IEnumerable<MissionControl>> GetDailyMissions()
         {
+            
             if(_userContacts is null)
                 _userContacts = await AssistApplication.Current.CurrentUser.Contracts.GetAllContracts();
 
