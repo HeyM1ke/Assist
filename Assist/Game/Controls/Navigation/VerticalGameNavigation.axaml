@@ -1,0 +1,83 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:Assist.Game.Controls.Navigation"
+             mc:Ignorable="d" 
+             d:DesignWidth="225" 
+             d:DesignHeight="692"
+             x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
+	<Grid RowDefinitions="Auto,Auto,Auto,Auto"
+          Margin="10">
+
+        <Grid Row="0">
+            <StackPanel Orientation="Vertical">
+				<StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="DEV BETA"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Bold"
+                               Opacity=".7"
+                               Margin="0,0,0,0"></TextBlock>
+                    <Image x:Name="PART_AssistLogo"
+                           Source="../../../Resources/Icons/AssistText_Temp.png"
+                           
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="12,0,0,0"></Image>
+
+                </StackPanel>
+
+                <DockPanel Margin="0,5">
+                    <Ellipse Fill="Green"
+                             Width="8"
+                             Height="8"
+                             DockPanel.Dock="Left"></Ellipse>
+                    <TextBlock Text="234 Users Online"
+                               Margin="7,0"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Medium"
+                               FontSize="12"></TextBlock>
+                </DockPanel>
+                <Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
+            </StackPanel>
+        </Grid>
+
+        <Grid Row="1"
+              Margin="0,0">
+            <StackPanel VerticalAlignment="Top">
+				<navigation:NavButton CornerRadius="5"
+                                      Text="Dashboard"
+                                      IsSelected="True"
+                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+                <navigation:NavButton CornerRadius="5"
+                                      Text="Live"
+                                      
+                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+                <navigation:NavButton CornerRadius="5"
+                                      Text="Modules"
+                                      
+                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+				<Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
+            </StackPanel>
+        </Grid>
+        <Grid Row="2"
+              Margin="0,0">
+            <StackPanel VerticalAlignment="Top">
+                <navigation:NavButton CornerRadius="5"
+                                      Text="Support Assist"
+                                      BorderBrush="#5CFFB1"
+                                      BorderThickness="1"
+                                      HighlightColor="#477A62"
+                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+                
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

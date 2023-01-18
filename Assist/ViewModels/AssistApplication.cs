@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Game.Views;
 using Assist.Game.Views.Authentication;
+using Assist.Game.Views.Initial;
 using Assist.Objects.Enums;
 using Assist.Services;
 using Assist.Services.Popup;
@@ -44,7 +45,8 @@ namespace Assist.ViewModels
         public RiotUser CurrentUser;
         public ProfileSettings CurrentProfile;
         public ClientSettings ClientLaunchSettings = new ClientSettings();
-        public RuntimePlatformInfo Platform; 
+        public RuntimePlatformInfo Platform;
+        public bool GameModeEnabled = false;
 
         public static ClassicDesktopStyleApplicationLifetime CurrentApplication = Application.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
         public RuntimePlatformInfo GetCurrentPlatform()
@@ -64,6 +66,22 @@ namespace Assist.ViewModels
                     w.ChangeResolution(res);
                 }
             }
+        }
+
+        public void ChangeToGameModeResolution(EResolution res)
+        {
+            if (CurrentApplication.MainWindow is MainWindow)
+            {
+                var w = (MainWindow)CurrentApplication.MainWindow;
+
+                if (w != null)
+                {
+                    w.ChangeGameResolution(res);
+                }
+            }
+
+            GameModeEnabled = true;
+            Dispatcher.UIThread.InvokeAsync(() => MainWindowContentController.Change(new GameInitialView()));
         }
 
         public void OpenMainWindow()
@@ -101,6 +119,25 @@ namespace Assist.ViewModels
                 mainRef.Close();
                 desktop.MainWindow = main;
                 MainWindowContentController.Change(new MainView(new SettingsView()));
+            }
+        }
+
+        public void OpenMainWindowToGameMode()
+        {
+            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                Window mainRef = desktop.MainWindow;
+
+                mainRef.Hide();
+
+                // Initial Window Opened at launch.
+                var main = new MainWindow();
+
+                main.Show();
+
+                mainRef.Close();
+                desktop.MainWindow = main;
+                MainWindowContentController.Change(new GameView());
             }
         }
 
@@ -225,5 +262,7 @@ namespace Assist.ViewModels
 
 
         #endregion
+
+        
     }
 }

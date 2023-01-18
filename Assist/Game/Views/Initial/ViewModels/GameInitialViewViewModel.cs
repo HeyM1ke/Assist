@@ -29,13 +29,18 @@ namespace Assist.Game.Views.Initial.ViewModels
 
         public async Task Setup()
         {
-            PopupSystem.KillPopups();
-            // Start Setup
-
-            // Check if you are in Design Mode
-            if(Design.IsDesignMode)
+            if (Design.IsDesignMode)
                 return;
 
+            if (!AssistApplication.Current.GameModeEnabled)
+            {
+                AssistApplication.Current.ChangeToGameModeResolution(AssistSettings.Current.SelectedResolution);
+                return;
+            }
+                
+
+            PopupSystem.KillPopups();
+            // Start Setup
 
             while (!IsValorantRunning())
             {

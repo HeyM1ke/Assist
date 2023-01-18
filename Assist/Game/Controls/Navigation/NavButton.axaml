@@ -1,0 +1,52 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Navigation">
+  <Design.PreviewWith>
+    <controls:NavButton Width="179"
+                        Height="36"
+                        CornerRadius="5"
+                        Background="#191919"
+    />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|NavButton">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border CornerRadius="{TemplateBinding CornerRadius}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                x:Name="PART_Border">
+            <DockPanel HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="5,11,0,11">
+                <Image Source="{TemplateBinding Icon}"
+                       Width="14"
+                       Height="14"></Image>
+                <TextBlock Text="{TemplateBinding Text}"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontSize="12"
+                           FontWeight="Medium"
+                           Margin="8,0"></TextBlock>
+                <TextBlock Text="TEST"
+                           FontFamily="{StaticResource WorkSans}"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource AssistRed}"
+                           FontWeight="Bold"
+                           IsVisible="{TemplateBinding IsSpecial}"
+                           ></TextBlock>
+            </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+    <Style Selector="controls|NavButton:pointerover /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightColor}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+
+    <Style Selector="controls|NavButton[IsSelected=True] /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightColor}"></Setter>
+    </Style>
+</Styles>
