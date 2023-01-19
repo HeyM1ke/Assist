@@ -52,7 +52,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _mapImage, value);
         }
 
-        private string? _mapName = "FRACTURE";
+        private string? _mapName = "Loading...";
 
         public string? MapName
         {

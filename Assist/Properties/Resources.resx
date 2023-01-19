@@ -195,4 +195,124 @@
   <data name="Store_OffersText" xml:space="preserve">
     <value>Offers</value>
   </data>
+  <data name="GameMode_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="GameMode_Live" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
+  <data name="GameMode_Modules" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="GameMode_Lobbies" xml:space="preserve">
+    <value>Lobbies</value>
+  </data>
+  <data name="GameMode_Leagues" xml:space="preserve">
+    <value>Leagues</value>
+  </data>
+  <data name="GameMode_Dodge" xml:space="preserve">
+    <value>DODGE</value>
+  </data>
+  <data name="GameMode_RichPres" xml:space="preserve">
+    <value>Rich Presence</value>
+  </data>
+  <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
+    <value>Assist Dodge Warning System. Gives you a heads up when a player you marked is on your team.</value>
+  </data>
+  <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
+    <value>Assist Rich Presence. Gives your Discord profile a live status of your current VALORANT Game.</value>
+  </data>
+  <data name="GameMode_AllyTeam" xml:space="preserve">
+    <value>Ally</value>
+  </data>
+  <data name="GameMode_EnemyTeam" xml:space="preserve">
+    <value>Enemy</value>
+  </data>
+  <data name="GameMode_EnableGlobalText" xml:space="preserve">
+    <value>Enable Global List</value>
+  </data>
+  <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
+    <value>A List of Verified Players who are classified as players who Throw Matches, Wintrade, Betting, and more.</value>
+  </data>
+  <data name="Global_BackText" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Global_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Global_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Global_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Global_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Global_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Global_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Dodge_AddPlayer" xml:space="preserve">
+    <value>ADD PLAYER</value>
+  </data>
+  <data name="Dodge_AddPlayerDesc" xml:space="preserve">
+    <value>If a player changes their name after you add them. They will continue being on the list even after a name switch.</value>
+  </data>
+  <data name="Dodge_AddTextOption" xml:space="preserve">
+    <value>Game Name (USERNAME#TAG):</value>
+  </data>
+  <data name="Dodge_AddTextOptionExample" xml:space="preserve">
+    <value>Ex: AssistUser#GMEUE</value>
+  </data>
+  <data name="Dodge_NoteTextOption" xml:space="preserve">
+    <value>Note (Optional):</value>
+  </data>
+  <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
+    <value>Ex: User is Toxic</value>
+  </data>
+  <data name="RichPres_Settings" xml:space="preserve">
+    <value>SETTINGS</value>
+  </data>
+  <data name="RichPres_Privacy" xml:space="preserve">
+    <value>PRIVACY SETTINGS</value>
+  </data>
+  <data name="RichPres_Enable" xml:space="preserve">
+    <value>Enable Discord Rich Presence</value>
+  </data>
+  <data name="RichPres_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="RichPres_LargeImage" xml:space="preserve">
+    <value>Large Image</value>
+  </data>
+  <data name="RichPres_SmallImage" xml:space="preserve">
+    <value>Small Image</value>
+  </data>
+  <data name="RichPres_ShowParty" xml:space="preserve">
+    <value>Show Party Size</value>
+  </data>
+  <data name="RichPres_ShowScore" xml:space="preserve">
+    <value>Show Score</value>
+  </data>
+  <data name="RichPres_ShowRank" xml:space="preserve">
+    <value>Show Rank</value>
+  </data>
+  <data name="RichPres_ShowGamemode" xml:space="preserve">
+    <value>Show Gamemode</value>
+  </data>
+  <data name="GameMode_UpdateText" xml:space="preserve">
+    <value>Waiting for VALORANT Update...</value>
+  </data>
+  <data name="GameMode_PartyText" xml:space="preserve">
+    <value>PARTY</value>
+  </data>
+  <data name="Support_SupportAssistText" xml:space="preserve">
+    <value>Support Assist</value>
+  </data>
+  <data name="Support_SupportAssistDesc" xml:space="preserve">
+    <value>Help keep the project alive! There are many different ways to help assist. Listed below there are a few options.</value>
+  </data>
 </root>

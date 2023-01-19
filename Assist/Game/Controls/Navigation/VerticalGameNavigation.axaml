@@ -8,7 +8,8 @@
              d:DesignHeight="692"
 			 Background="{DynamicResource AssistLightBackground}"
 			 xmlns:assist="clr-namespace:Assist.Controls.Assist"
-             x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
+			 xmlns:p="clr-namespace:Assist.Properties"
+			 x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
 	<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
           Margin="23,19">
 
@@ -54,18 +55,24 @@
               Margin="0,0">
             <StackPanel VerticalAlignment="Top">
 				<navigation:NavButton CornerRadius="5"
-                                      Text="Dashboard"
+				                      x:Name="DashboardBtn"
+                                      Text="{x:Static p:Resources.GameMode_Dashboard}"
                                       IsSelected="True"
+				                      Click="DashboardBtn_OnClick"
 									  Background="#191919"
-                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+                                      Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
-                                      Text="Live"
+                                      x:Name="LiveBtn"
+                                      Text="{x:Static p:Resources.GameMode_Live}"
+                                      Click="LiveBtn_OnClick"
                                       Background="#191919"
-                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+                                      Icon="/Resources/Game/Live_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
-                                      Text="Modules"
+                                      Text="{x:Static p:Resources.GameMode_Modules}"
+                                      x:Name="ModulesBtn"
+                                      Click="ModulesBtn_OnClick"
                                       Background="#191919"
-                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+                                      Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
 				<Rectangle Height="2"
                            Fill="#494A4E"
                            Margin="0,4"></Rectangle>
@@ -76,7 +83,8 @@
               Margin="0,0">
             <StackPanel VerticalAlignment="Top">
                 <navigation:NavButton CornerRadius="5"
-                                      Text="Support Assist"
+                                      Text="{x:Static p:Resources.Support_SupportAssistText}"
+                                      Click="SupportBtn_Click"
                                       BorderBrush="#5CFFB1"
                                       BorderThickness="1"
                                       HighlightColor="#477A62"
@@ -92,9 +100,11 @@
               Margin="0,0">
 			<StackPanel VerticalAlignment="Top">
 				<navigation:NavButton CornerRadius="5"
-                                      Text="Lobbies"
+                                      Text="{x:Static p:Resources.GameMode_Lobbies}"
+                                      x:Name="LobbiesBtn"
+                                      Click="LobbiesBtn_OnClick"
 									  Background="#191919"
-                                      Icon="/Resources/Icons/Dashboard_Icon.png"/>
+                                      Icon="/Resources/Game/Lobbies_Icon.png"/>
 
 				<Rectangle Height="2"
                            Fill="#494A4E"

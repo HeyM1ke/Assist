@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:dodge="clr-namespace:Assist.Game.Controls.Modules.Dodge"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
@@ -39,7 +40,7 @@
                     Height="40"
                     IsVisible="True"
                     Click="BackBtn_Click"
-                    Content="Back"
+                    Content="{x:Static p:Resources.Global_BackText}"
                     HorizontalAlignment="Right" />
         </StackPanel>
         <Border Width="878"
@@ -102,7 +103,7 @@
                     <StackPanel Orientation="Horizontal"
                                 Spacing="10"
                                 HorizontalAlignment="Center">
-                        <TextBlock Text="Enable Global List"
+                        <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalText}"
                                    Grid.ColumnSpan="2"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="14"
@@ -117,7 +118,7 @@
                                   VerticalAlignment="Center"
                                   Unchecked="GlobalCheckbox_OnUnchecked"
                                   Checked="GlobalCheckbox_OnChecked"/>
-                        <TextBlock Text="A List of Verified Players who are classified as players who Throw Matches, Wintrade, Betting, and more."
+                        <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalDetailText}"
                                    Grid.ColumnSpan="2"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="12"
@@ -160,7 +161,7 @@
                     Grid.Row="1"
                     IsVisible="True"
 					Click="ClearBtn_Click"
-                    Content="Clear"
+                    Content="{x:Static p:Resources.Global_Clear}"
                     HorizontalAlignment="Right"></Button>
             <Button Width="100"
                     Height="40"

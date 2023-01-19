@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:live="clr-namespace:Assist.Game.Controls.Live"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
@@ -16,7 +17,7 @@
                             VerticalAlignment="Center"
                             Spacing="15"
                             Orientation="Horizontal">
-                    <TextBlock Text="PARTY"
+                    <TextBlock Text="{x:Static p:Resources.GameMode_PartyText}"
                                FontFamily="{StaticResource WorkSans}"
                                FontWeight="ExtraBold"
                                FontSize="40"

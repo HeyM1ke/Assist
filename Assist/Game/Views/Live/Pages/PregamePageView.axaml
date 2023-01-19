@@ -52,7 +52,7 @@
                                   HorizontalAlignment="Center"
                                   FontSize="36" IsVisible="False"></TextBlock>
 
-                       <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png"
+                       <Image Source="/Resources/Icons/Assist_Logo_SweetRed_LQ.png"
                               Width="38"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"></Image>

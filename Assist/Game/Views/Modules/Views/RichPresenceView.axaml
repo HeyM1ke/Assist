@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
 			 d:DesignWidth="1125"
              d:DesignHeight="590"
@@ -33,7 +34,7 @@
             <Grid ColumnDefinitions="245,*"
                   RowDefinitions="50,*,90"
                   Margin="13">
-                <TextBlock Text="SETTINGS"
+                <TextBlock Text="{x:Static p:Resources.RichPres_Settings}"
                            Grid.ColumnSpan="2"
                            VerticalAlignment="Top"
                            FontFamily="{StaticResource WorkSans}"
@@ -56,7 +57,7 @@
 											Margin="4">
 									<Border>
 										<Grid>
-											<TextBlock Text="Enable Discord Rich Presence"
+											<TextBlock Text="{x:Static p:Resources.RichPres_Enable}"
 													   Grid.ColumnSpan="2"
 													   FontFamily="{StaticResource WorkSans}"
 													   FontSize="14"
@@ -74,7 +75,7 @@
 
 									<StackPanel Orientation="Vertical"
 												Spacing="5">
-										<TextBlock Text="Details"
+										<TextBlock Text="{x:Static p:Resources.RichPres_Details}"
 												   Grid.ColumnSpan="2"
 												   FontFamily="{StaticResource WorkSans}"
 												   FontSize="14"
@@ -92,7 +93,7 @@
 
                                     <StackPanel Orientation="Vertical"
                                                 Spacing="5">
-										<TextBlock Text="Large Image"
+										<TextBlock Text="{x:Static p:Resources.RichPres_LargeImage}"
 												   Grid.ColumnSpan="2"
 												   FontFamily="{StaticResource WorkSans}"
 												   FontSize="14"
@@ -110,7 +111,7 @@
 
 									<StackPanel Orientation="Vertical"
 												Spacing="5">
-										<TextBlock Text="Small Image"
+										<TextBlock Text="{x:Static p:Resources.RichPres_SmallImage}"
 												   Grid.ColumnSpan="2"
 												   FontFamily="{StaticResource WorkSans}"
 												   FontSize="14"
@@ -139,7 +140,7 @@
 							<Border>
 								<StackPanel 
 											Margin="4">
-                                    <TextBlock Text="PRIVACY SETTINGS"
+                                    <TextBlock Text="{x:Static p:Resources.RichPres_Privacy}"
                                                FontFamily="{StaticResource WorkSans}"
                                                FontSize="14"
                                                FontWeight="Bold"
@@ -147,7 +148,7 @@
                                                HorizontalAlignment="Left"/>
 									<Border>
 										<Grid>
-											<TextBlock Text="Show Party Size"
+											<TextBlock Text="{x:Static p:Resources.RichPres_ShowParty}"
 													   Grid.ColumnSpan="2"
 													   FontFamily="{StaticResource WorkSans}"
 													   FontSize="14"
@@ -184,7 +185,7 @@
 
                                     <Border>
                                         <Grid>
-                                            <TextBlock Text="Show Score"
+                                            <TextBlock Text="{x:Static p:Resources.RichPres_ShowScore}"
                                                        Grid.ColumnSpan="2"
                                                        FontFamily="{StaticResource WorkSans}"
                                                        FontSize="14"
@@ -202,7 +203,7 @@
 
                                     <Border>
                                         <Grid>
-                                            <TextBlock Text="Show Gamemode"
+                                            <TextBlock Text="{x:Static p:Resources.RichPres_ShowGamemode}"
                                                        Grid.ColumnSpan="2"
                                                        FontFamily="{StaticResource WorkSans}"
                                                        FontSize="14"
@@ -220,7 +221,7 @@
 
                                     <Border>
                                         <Grid>
-                                            <TextBlock Text="Show Rank"
+                                            <TextBlock Text="{x:Static p:Resources.RichPres_ShowRank}"
                                                        Grid.ColumnSpan="2"
                                                        FontFamily="{StaticResource WorkSans}"
                                                        FontSize="14"
@@ -269,13 +270,13 @@
                             <Setter Property="Cursor" Value="Hand"></Setter>
                         </Style>
                     </StackPanel.Styles>
-                    <Button Content="Back"
+                    <Button Content="{x:Static p:Resources.Global_BackText}"
                             Width="130"
                             Height="40"
                             Click="BackBtn_Click"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"></Button>
-                    <Button Content="Apply"
+                    <Button Content="{x:Static p:Resources.Global_Apply}"
                             Width="130"
                             Height="40"
                             Click="ApplyBtn_Click"

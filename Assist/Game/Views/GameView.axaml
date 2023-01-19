@@ -9,19 +9,19 @@
              x:Class="Assist.Game.Views.GameView"
              Background="#151515">
   <Grid ColumnDefinitions="225,*">
-	  <Grid Grid.Row="0" Grid.ColumnSpan="2" x:Name="Background" Background="{DynamicResource AssistBackground}">
+	  <Grid Grid.ColumnSpan="2" x:Name="Background" Background="{DynamicResource AssistBackground}">
           
           <Rectangle Fill="black" Opacity=".9"></Rectangle>
       </Grid>
 
-      <navigation:VerticalGameNavigation/>
+      <navigation:VerticalGameNavigation Width="225"/>
       
 
 
       <TransitioningContentControl Grid.Column="1" x:Name="ContentView"
-                                   >
+      >
           <TransitioningContentControl.PageTransition>
-              <CrossFade Duration="0.25" />
+              <CrossFade Duration="0.25"/>
           </TransitioningContentControl.PageTransition>
       </TransitioningContentControl>
   </Grid>

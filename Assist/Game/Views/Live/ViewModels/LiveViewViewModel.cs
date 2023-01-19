@@ -114,7 +114,7 @@ namespace Assist.Game.Views.Live.ViewModels
             return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
         }
 
-         private async Task DeterminePage(PlayerPresence dataMessage, ChatV4PresenceObj.Presence fullMessage = null)
+        private async Task DeterminePage(PlayerPresence dataMessage, ChatV4PresenceObj.Presence fullMessage = null)
         {
             /*Dispatcher.UIThread.InvokeAsync(() =>
             {

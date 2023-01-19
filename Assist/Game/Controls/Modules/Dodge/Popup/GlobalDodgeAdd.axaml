@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
              mc:Ignorable="d" 
-             Width="1125"
+             Width="1350"
              Height="690"
              x:Class="Assist.Game.Controls.Modules.Dodge.Popup.GlobalDodgeAdd">
 	<Grid Background="#3D000000">
