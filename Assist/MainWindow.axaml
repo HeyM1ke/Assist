@@ -44,7 +44,7 @@
             <!--Content View-->
 			<Grid>
                 <Grid x:Name="MainContentView"
-                      Width="1125"
+                      
                       Height="690"
                       VerticalAlignment="Center"
                       Background="{StaticResource AssistGray}">

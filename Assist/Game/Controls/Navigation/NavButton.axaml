@@ -14,6 +14,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border CornerRadius="{TemplateBinding CornerRadius}"
+				Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 x:Name="PART_Border">

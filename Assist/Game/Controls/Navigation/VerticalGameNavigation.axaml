@@ -6,9 +6,11 @@
              mc:Ignorable="d" 
              d:DesignWidth="225" 
              d:DesignHeight="692"
+			 Background="{DynamicResource AssistLightBackground}"
+			 xmlns:assist="clr-namespace:Assist.Controls.Assist"
              x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
-	<Grid RowDefinitions="Auto,Auto,Auto,Auto"
-          Margin="10">
+	<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+          Margin="23,19">
 
         <Grid Row="0">
             <StackPanel Orientation="Vertical">
@@ -26,12 +28,12 @@
                            
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
-                           Margin="12,0,0,0"></Image>
+                           ></Image>
 
                 </StackPanel>
 
-                <DockPanel Margin="0,5">
-                    <Ellipse Fill="Green"
+                <DockPanel Margin="0,5" HorizontalAlignment="Left">
+                    <Ellipse Fill="#82FF6D"
                              Width="8"
                              Height="8"
                              DockPanel.Dock="Left"></Ellipse>
@@ -48,25 +50,28 @@
         </Grid>
 
         <Grid Row="1"
+			  Height="420"
               Margin="0,0">
             <StackPanel VerticalAlignment="Top">
 				<navigation:NavButton CornerRadius="5"
                                       Text="Dashboard"
                                       IsSelected="True"
+									  Background="#191919"
                                       Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
                                       Text="Live"
-                                      
+                                      Background="#191919"
                                       Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
                                       Text="Modules"
-                                      
+                                      Background="#191919"
                                       Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
 				<Rectangle Height="2"
                            Fill="#494A4E"
                            Margin="0,4"></Rectangle>
             </StackPanel>
         </Grid>
+		
         <Grid Row="2"
               Margin="0,0">
             <StackPanel VerticalAlignment="Top">
@@ -75,9 +80,31 @@
                                       BorderBrush="#5CFFB1"
                                       BorderThickness="1"
                                       HighlightColor="#477A62"
-                                      Icon="/Resources/Icons/Dashboard_Icon.png"></navigation:NavButton>
+                                      Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
+				<Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
                 
             </StackPanel>
         </Grid>
+		
+		<Grid Row="3"
+              Margin="0,0">
+			<StackPanel VerticalAlignment="Top">
+				<navigation:NavButton CornerRadius="5"
+                                      Text="Lobbies"
+									  Background="#191919"
+                                      Icon="/Resources/Icons/Dashboard_Icon.png"/>
+
+				<Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
+			</StackPanel>
+		</Grid>
+
+		<Grid Row="4">
+			<assist:UserPreview ></assist:UserPreview>
+		</Grid>
+		
     </Grid>
 </UserControl>
