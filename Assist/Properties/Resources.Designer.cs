@@ -465,6 +465,16 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VALORANT is currently open. 
+        /// Would you like to open Game Mode?.
+        /// </summary>
+        public static string Popup_GameModeWarning {
+            get {
+                return ResourceManager.GetString("Popup_GameModeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOSS.
         /// </summary>
         public static string Profile_LossText {

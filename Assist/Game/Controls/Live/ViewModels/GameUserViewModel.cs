@@ -116,7 +116,19 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             if (Player != null)
             {
-
+                /*if (!Player.PlayerIdentity.Incognito) // If Incognito is false, means that the player has their name publicly shown.
+                {
+                    var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+                    var data = pres.presences.Find(user => user.puuid == Player.Subject);
+                    
+                    if (data != null)
+                        PlayerName = data.game_name;
+                }*/
+                
+                
+                
+                
+                
                 // Get player name from Presence.
                 if (string.Equals(PlayerName, "Player") || string.IsNullOrEmpty(PlayerRankIcon))
                 {
@@ -144,7 +156,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         // Set Agent Icon
                         PlayerAgentIcon = $"https://content.assistapp.dev/agents/{Player.CharacterID}_displayicon.png";
                         // Set Agent Name
-                        PlayerAgentName = AgentNames.AgentIdToNames?[Player.CharacterID];
+                        PlayerAgentName = AgentNames.AgentIdToNames?[Player.CharacterID.ToLower()];
                     }
                     catch (Exception ex)
                     {
@@ -192,8 +204,6 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             if (CorePlayer != null)
             {
-
-                // Get player name from Presence.
                 if (string.Equals(PlayerName, "Player") || string.IsNullOrEmpty(PlayerRankIcon))
                 {
                     var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
@@ -202,7 +212,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     if (!CorePlayer.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
                             PlayerName = data.game_name;
-
+                    
                     if (data != null)
                     {
                         var t = await GetPresenceData(data);
@@ -210,8 +220,27 @@ namespace Assist.Game.Controls.Live.ViewModels
                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                     }
                 }
+                /*if (!Player.PlayerIdentity.Incognito) // If Incognito is false, means that the player has their name publicly shown.
+                {
+                    var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+                    var data = pres.presences.Find(user => user.puuid == Player.Subject);
+                    
+                    if (data != null)
+                        PlayerName = data.game_name;
+                }
 
-
+                if (string.IsNullOrEmpty(PlayerRankIcon))
+                {
+                    var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+                    var data = pres.presences.Find(user => user.puuid == Player.Subject);
+                    
+                    if (data != null)
+                    {
+                        var t = await GetPresenceData(data);
+                        // Set rank icon
+                        PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                    }
+                }*/
 
                 if (!string.IsNullOrEmpty(CorePlayer.CharacterID))
                 {

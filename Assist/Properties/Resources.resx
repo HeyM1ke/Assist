@@ -315,4 +315,7 @@
   <data name="Support_SupportAssistDesc" xml:space="preserve">
     <value>Help keep the project alive! There are many different ways to help assist. Listed below there are a few options.</value>
   </data>
+  <data name="Popup_GameModeWarning" xml:space="preserve">
+    <value>VALORANT is currently open. &#x0a; Would you like to open Game Mode?</value>
+  </data>
 </root>

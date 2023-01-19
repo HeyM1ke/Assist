@@ -26,7 +26,6 @@
                                Margin="0,0,0,0"></TextBlock>
                     <Image x:Name="PART_AssistLogo"
                            Source="../../../Resources/Icons/AssistText_Temp.png"
-                           
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
                            ></Image>

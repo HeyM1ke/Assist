@@ -193,7 +193,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     foreach (var allyPlayer in allyTeam)
                     {
                         Log.Information("Updating Ally Player to Coregame. : " + allyPlayer.Subject);
-                        await AddUserToAllyList(allyPlayer, parties);
+                        await UpdateUserInAllyList(allyPlayer, parties);
                     }
                 }
 
@@ -211,7 +211,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     foreach (var enemyPlayer in enemyTeam)
                     {
                         Log.Information("Updating Enemy Player to Coregame. : " + enemyPlayer.Subject);
-                        await AddUserToEnemyList(enemyPlayer, parties);
+                        await UpdateUserInEnemyList(enemyPlayer, parties);
                     }
                 }
             });
@@ -415,7 +415,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             dic.TryGetValue(Player.Subject, out IBrush? color);
             if (control != null)
             {
-                Log.Information("Updating Data for Previously found player for pregame. : " + Player.Subject);
+                Log.Information("Updating Data for Previously found player for Coregame. : " + Player.Subject);
                 Dispatcher.UIThread.InvokeAsync(async () =>
                 {
                     await control.UpdatePlayer(Player, color);
