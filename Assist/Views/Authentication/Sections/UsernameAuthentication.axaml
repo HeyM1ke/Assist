@@ -80,6 +80,7 @@
                      FontWeight="Medium"
                      FontSize="12"
                      VerticalContentAlignment="Center"
+                     KeyDown="PasswordBox_OnKeyDown"
                      ></TextBox>
             <StackPanel>
                 <Button Content="{x:Static p:Resources.Authentication_LoginText}"
@@ -90,6 +91,7 @@
                         FontFamily="{StaticResource WorkSans}"
                         FontWeight="Medium"
                         FontSize="12"
+                        x:Name="LoginBtn"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Center"
                         Click="LoginBtn_OnClick"></Button>
