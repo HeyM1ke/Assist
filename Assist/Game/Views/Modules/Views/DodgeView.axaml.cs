@@ -48,5 +48,15 @@ namespace Assist.Game.Views.Modules.Views
         {
             PopupSystem.SpawnCustomPopup(new GlobalDodgeAdd());
         }
+
+        private void ClearBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            _viewModel.RemoveAllDodgeUsers();
+        }
+
+        private void BackBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            ModulesViewNavigationController.Change(new SelectionView());
+        }
     }
 }

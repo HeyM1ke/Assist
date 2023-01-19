@@ -163,12 +163,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             if (MatchResp.Players == null || MatchResp.Players.Count == 0)
                 return;
-
-            var allyTeam = await GetAllyTeam(MatchResp.Players);
-            var enemyTeam = await GetEnemyTeam(MatchResp.Players);
+            
 
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
+                var allyTeam = await GetAllyTeam(MatchResp.Players);
+                var enemyTeam = await GetEnemyTeam(MatchResp.Players);
                 var allMatchPlayerIds = MatchResp.Players.Select(p => p.Subject).ToList();
 
                 var allTeamPresences =
@@ -246,16 +246,17 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
 
                 if (partyIDtoPlayerList.Count == 0)
-                    partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                    partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
                 else
                 {
                     if (partyIDtoPlayerList.ContainsKey(playerPres.partyId))
                     {
-                        partyIDtoPlayerList[playerPres.partyId].Add(pres.puuid);
+                        partyIDtoPlayerList[playerPres.partyId.ToLower()].Add(pres.puuid);
+                        Log.Information($"Player ID of : {pres.puuid} | Belongs to Party ID of : {playerPres.partyId.ToLower()}");
                     }
                     else
                     {
-                        partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                        partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
                     }
                 }
 
@@ -266,6 +267,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             // Now As we want the ID to Color Translation, convert the list to a new list.
             foreach (var party in partyIDtoPlayerList)
             {
+                
                 if (party.Value.Count > 1)
                 {
                     // The party has value with multiple people on the team being in the party.
@@ -345,17 +347,17 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
             if (Match.MapID != null)
             {
-                Log.Information("Getting map data for ID of: " + Match.MapID);
-                MapName = MapNames.MapsByPath?[Match.MapID].ToUpper();
+                Log.Information("Getting map data for ID of: " + Match.MapID.ToLower());
+                MapName = MapNames.MapsByPath?[Match.MapID.ToLower()].ToUpper();
                 MapImage =
-                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID]}_Featured.png";
+                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID.ToLower()]}_Featured.png";
             }
 
             if (Match.MatchData != null)
             {
-                Log.Information("Getting queue data for ID of: " + Match.MatchData.QueueID);
+                Log.Information("Getting queue data for ID of: " + Match.MatchData.QueueID.ToLower());
 
-                var queueName = await DetermineQueueKey(Match.MatchData.QueueID);
+                var queueName = await DetermineQueueKey(Match.MatchData.QueueID.ToLower());
                 QueueName = queueName.ToUpper();
             }
 

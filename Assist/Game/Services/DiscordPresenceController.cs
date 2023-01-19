@@ -166,7 +166,7 @@ namespace Assist.Game.Services
             switch (GameSettings.Current.RichPresenceSettings.LargeImageData)
             {
                 case "Map":
-                    rpObj.Assets.LargeImageKey = MapNames.MapsByPath[playerPres.matchMap].ToLower();
+                    rpObj.Assets.LargeImageKey = MapNames.MapsByPath[playerPres.matchMap.ToLower()].ToLower();
                     break;
                 case "Agent":
                     if(GameSettings.Current.RichPresenceSettings.ShowAgent)
@@ -233,8 +233,8 @@ namespace Assist.Game.Services
 
             string state = "Agent Select";
 
-            Log.Information("DISCORD PRC MAP: " + playerPres.matchMap);
-            string mapName = MapNames.MapsByPath[playerPres.matchMap];
+            Log.Information("DISCORD PRC MAP: " + playerPres.matchMap.ToLower());
+            string mapName = MapNames.MapsByPath[playerPres.matchMap.ToLower()];
 
             if (GameSettings.Current.RichPresenceSettings.ShowRank && string.Equals(GameSettings.Current.RichPresenceSettings.DetailsTextData, "Rank")) // Show Rank as Details
             {

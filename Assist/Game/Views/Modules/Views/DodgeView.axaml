@@ -11,7 +11,37 @@
              x:Class="Assist.Game.Views.Modules.Views.DodgeView">
 	<Grid>
 
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="10"
+                    Spacing="10">
+            <StackPanel.Styles>
+                <Style Selector="Button">
+                    <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                    <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                </Style>
 
+                <Style Selector="Button:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                    <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Style>
+
+            </StackPanel.Styles>
+            <Button Width="100"
+                    Height="40"
+                    IsVisible="True"
+                    Click="BackBtn_Click"
+                    Content="Back"
+                    HorizontalAlignment="Right" />
+        </StackPanel>
         <Border Width="878"
                 Height="467"
                 VerticalAlignment="Center"
@@ -129,6 +159,7 @@
                     Height="40"
                     Grid.Row="1"
                     IsVisible="True"
+					Click="ClearBtn_Click"
                     Content="Clear"
                     HorizontalAlignment="Right"></Button>
             <Button Width="100"

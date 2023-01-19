@@ -201,16 +201,18 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
 
                 if(partyIDtoPlayerList.Count == 0)
-                    partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                    partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
                 else
                 {
-                    if (partyIDtoPlayerList.ContainsKey(playerPres.partyId))
+                    if (partyIDtoPlayerList.ContainsKey(playerPres.partyId.ToLower()))
                     {
-                        partyIDtoPlayerList[playerPres.partyId].Add(pres.puuid);
+                        partyIDtoPlayerList[playerPres.partyId.ToLower()].Add(pres.puuid);
+                        Log.Information($"Player ID of : {pres.puuid} | Belongs to Party ID of : {playerPres.partyId.ToLower()}");
                     }
                     else
                     {
-                        partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                        partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
+                        Log.Information($"Player ID of : {pres.puuid} | Belongs to Party ID of : {playerPres.partyId.ToLower()}");
                     }
                 }
                 
@@ -301,8 +303,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
             if (Match.MapID != null)
             {
-                Log.Information("Getting map data for ID of: " +  Match.MapID);
-                MapName = MapNames.MapsByPath?[Match.MapID].ToUpper();
+                Log.Information("Getting map data for ID of: " +  Match.MapID.ToLower());
+                MapName = MapNames.MapsByPath?[Match.MapID.ToLower()].ToUpper();
                 MapImage =
                     $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID]}_BWlistview.png";
             }
