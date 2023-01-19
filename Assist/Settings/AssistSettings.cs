@@ -161,6 +161,14 @@ namespace Assist.Settings
             get => _gameModeEnabled;
             set => this.SetProperty(ref _gameModeEnabled, value);
         }
+        
+        private bool _eglEnabled = false;
+
+        public bool EglEnabled
+        {
+            get => _eglEnabled;
+            set => this.SetProperty(ref _eglEnabled, value);
+        }
         public BackupsSettings Backups = new BackupsSettings();
     }
 }

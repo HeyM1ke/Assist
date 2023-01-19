@@ -223,10 +223,10 @@
     <value>Assist Rich Presence. Gives your Discord profile a live status of your current VALORANT Game.</value>
   </data>
   <data name="GameMode_AllyTeam" xml:space="preserve">
-    <value>Ally</value>
+    <value>ALLY</value>
   </data>
   <data name="GameMode_EnemyTeam" xml:space="preserve">
-    <value>Enemy</value>
+    <value>ENEMY</value>
   </data>
   <data name="GameMode_EnableGlobalText" xml:space="preserve">
     <value>Enable Global List</value>

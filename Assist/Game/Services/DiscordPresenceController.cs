@@ -166,7 +166,10 @@ namespace Assist.Game.Services
             switch (GameSettings.Current.RichPresenceSettings.LargeImageData)
             {
                 case "Map":
-                    rpObj.Assets.LargeImageKey = MapNames.MapsByPath[playerPres.matchMap.ToLower()].ToLower();
+                    if (!string.IsNullOrEmpty(playerPres.matchMap))
+                    {
+                        rpObj.Assets.LargeImageKey = MapNames.MapsByPath[playerPres.matchMap.ToLower()].ToLower();    
+                    }
                     break;
                 case "Agent":
                     if(GameSettings.Current.RichPresenceSettings.ShowAgent)

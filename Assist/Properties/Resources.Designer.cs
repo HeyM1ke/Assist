@@ -231,7 +231,7 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ally.
+        ///   Looks up a localized string similar to ALLY.
         /// </summary>
         public static string GameMode_AllyTeam {
             get {
@@ -285,7 +285,7 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enemy.
+        ///   Looks up a localized string similar to ENEMY.
         /// </summary>
         public static string GameMode_EnemyTeam {
             get {

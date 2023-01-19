@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
 using System;
+using System.IO;
+using System.Text.Json;
 using Assist.Settings;
 using Assist.ViewModels;
 using Serilog;
@@ -19,6 +21,8 @@ namespace Assist
         {
             try
             {
+                var settingsContent = File.ReadAllText(AssistSettings.SettingsFilePath);
+                AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(settingsContent);
                 BuildAvaloniaApp()
                     .StartWithClassicDesktopLifetime(args);
             }
@@ -47,7 +51,7 @@ namespace Assist
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect().With(new Win32PlatformOptions
                 {
-                    AllowEglInitialization = false
+                    AllowEglInitialization = AssistSettings.Current.EglEnabled
                 })
                 .UseReactiveUI();
 
