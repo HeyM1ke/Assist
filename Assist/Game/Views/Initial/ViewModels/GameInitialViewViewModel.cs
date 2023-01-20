@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Assist.Game.Services;
+using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
@@ -129,7 +130,7 @@ namespace Assist.Game.Views.Initial.ViewModels
 
             AssistApplication.Current.CurrentUser = user;
 
-            
+            AssistApplication.Current.RefreshService = new RiotUserTokenRefreshService();
 
 
         }

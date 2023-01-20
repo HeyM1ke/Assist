@@ -244,7 +244,7 @@ namespace Assist.ViewModels
         #region Experimental
 
         public ServerHub ServerHub;
-
+        public RiotUserTokenRefreshService RefreshService;
         public void ConnectToServerHub()
         {
             ServerHub = new ServerHub();
