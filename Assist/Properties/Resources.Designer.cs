@@ -60,6 +60,51 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string Assist_Chat {
+            get {
+                return ResourceManager.GetString("Assist_Chat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking For Updates....
+        /// </summary>
+        public static string Assist_CheckingForUpdates {
+            get {
+                return ResourceManager.GetString("Assist_CheckingForUpdates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Message...
+        /// </summary>
+        public static string Assist_EnterMessage {
+            get {
+                return ResourceManager.GetString("Assist_EnterMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating....
+        /// </summary>
+        public static string Assist_Updating {
+            get {
+                return ResourceManager.GetString("Assist_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users Online.
+        /// </summary>
+        public static string Assist_UsersOnline {
+            get {
+                return ResourceManager.GetString("Assist_UsersOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assist.
         /// </summary>
         public static string AssistTitle {
@@ -438,11 +483,29 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Global_Remove {
+            get {
+                return ResourceManager.GetString("Global_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Global_Save {
             get {
                 return ResourceManager.GetString("Global_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Global_Send {
+            get {
+                return ResourceManager.GetString("Global_Send", resourceCulture);
             }
         }
         
@@ -456,11 +519,74 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch.
+        /// </summary>
+        public static string Global_Switch {
+            get {
+                return ResourceManager.GetString("Global_Switch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Global_Yes {
             get {
                 return ResourceManager.GetString("Global_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Announcement.
+        /// </summary>
+        public static string Leagues_Announcement {
+            get {
+                return ResourceManager.GetString("Leagues_Announcement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join a League.
+        /// </summary>
+        public static string Leagues_Join {
+            get {
+                return ResourceManager.GetString("Leagues_Join", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaderboard.
+        /// </summary>
+        public static string Leagues_Leaderboard {
+            get {
+                return ResourceManager.GetString("Leagues_Leaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave League.
+        /// </summary>
+        public static string Leagues_Leave {
+            get {
+                return ResourceManager.GetString("Leagues_Leave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queue.
+        /// </summary>
+        public static string Leagues_Queue {
+            get {
+                return ResourceManager.GetString("Leagues_Queue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a League:.
+        /// </summary>
+        public static string Leagues_Swap {
+            get {
+                return ResourceManager.GetString("Leagues_Swap", resourceCulture);
             }
         }
         
@@ -682,6 +808,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Game Mode:.
+        /// </summary>
+        public static string Settings_EnableGameMode {
+            get {
+                return ResourceManager.GetString("Settings_EnableGameMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable GPU:.
         /// </summary>
         public static string Settings_EnableGpu {
@@ -705,6 +840,24 @@ namespace Assist.Properties {
         public static string Settings_General {
             get {
                 return ResourceManager.GetString("Settings_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Language:.
+        /// </summary>
+        public static string Settings_Language {
+            get {
+                return ResourceManager.GetString("Settings_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launch Settings.
+        /// </summary>
+        public static string Settings_Launch {
+            get {
+                return ResourceManager.GetString("Settings_Launch", resourceCulture);
             }
         }
         

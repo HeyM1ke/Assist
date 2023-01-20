@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              Width="1125"
              Height="690"
@@ -32,7 +33,7 @@
 				   <Image Source="/Resources/Icons/Settings_Icon.png"
                           Width="18"
                           Height="18"></Image>
-				   <TextBlock Text="Launch Settings"
+				   <TextBlock Text="{x:Static p:Resources.Settings_Launch}"
                               FontFamily="{StaticResource WorkSans}"
                               VerticalAlignment="Center"
                               FontWeight="Bold"
@@ -47,7 +48,7 @@
                             Margin="0,5">
                     
 						<Grid>
-							<TextBlock Text="Enable Game Mode :"
+							<TextBlock Text="{x:Static p:Resources.Settings_EnableGameMode}"
                                        FontFamily="{StaticResource WorkSans}"
                                        VerticalAlignment="Center"
                                        FontWeight="Normal"
@@ -58,7 +59,7 @@
 						</Grid>
 
                     <Grid>
-                        <TextBlock Text="Patchline :"
+                        <TextBlock Text="{x:Static p:Resources.GameLaunch_SelectedPatchlineText}"
                                    FontFamily="{StaticResource WorkSans}"
                                    VerticalAlignment="Center"
                                    FontWeight="Normal"
@@ -100,7 +101,7 @@
                         </Style>
                     </StackPanel.Styles>
 
-                    <Button Content="Apply"
+                    <Button Content="{x:Static p:Resources.Global_Apply}"
                             Width="100"
                             Click="Apply_Click"></Button>
                 </StackPanel>

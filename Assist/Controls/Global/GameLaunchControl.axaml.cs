@@ -32,7 +32,7 @@ namespace Assist.Controls.Global
         {
             var btn = sender as Button;
             btn.IsEnabled = false;
-            btn.Content = "Launching...";
+            btn.Content = Properties.Resources.Global_Loading;
             await new RiotClientService().LaunchClient();
         }
 

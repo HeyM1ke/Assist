@@ -25,6 +25,7 @@
                                        FontFamily="{StaticResource WorkSans}"
                                        FontWeight="Bold"
                                        FontSize="16"
+                                       
                                        Foreground="{DynamicResource NavButtonText}"
                                        Padding="5,0"></TextBlock>
 						</StackPanel>

@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" 
              d:DesignWidth="745" 
              d:DesignHeight="500"
@@ -12,7 +13,7 @@
             <Border 
                     CornerRadius="5">
 				<Grid>
-					<TextBlock Text="Change Window Size"
+					<TextBlock Text="{x:Static p:Resources.Settings_Resolution}"
                                Margin="10"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"
@@ -32,9 +33,36 @@
                     </ComboBox>
 				</Grid>
             </Border>
+	        
+	        <Border 
+		        CornerRadius="5">
+		        <Grid>
+			        <TextBlock Text="{x:Static p:Resources.Settings_Language}"
+			                   Margin="10"
+			                   HorizontalAlignment="Left"
+			                   VerticalAlignment="Center"
+			                   FontFamily="{StaticResource WorkSans}"
+			                   FontWeight="Medium"
+			                   FontSize="18"
+			                   Foreground="white"/>
+
+			        <ComboBox x:Name="LanguageBox"
+			                  HorizontalAlignment="Right"
+			                  Margin="10"
+			                  SelectedIndex="0"
+			                  Width="200" Initialized="LanguageBox_OnInitialized">
+				        <ComboBoxItem Content="English"></ComboBoxItem>
+				        <ComboBoxItem Content="Spanish"></ComboBoxItem>
+				        <ComboBoxItem Content="French"></ComboBoxItem>
+				        <ComboBoxItem Content="German"></ComboBoxItem>
+				        <ComboBoxItem Content="Chinese Simplified"></ComboBoxItem>
+				        <ComboBoxItem Content="Portuguese"></ComboBoxItem>
+			        </ComboBox>
+		        </Grid>
+	        </Border>
         </StackPanel>
 
-        <Button Content="SAVE"
+        <Button Content="{x:Static p:Resources.Global_Save}"
                 Foreground="White"
                 Background="{StaticResource SettingsNavButtonSelectedBackground}"
                 VerticalAlignment="Bottom"

@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:store="clr-namespace:Assist.Controls.Store"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" 
              d:DesignWidth="1125" d:DesignHeight="200"
              x:Class="Assist.Controls.Store.OfferContainer"
@@ -10,7 +11,7 @@
              >
   <Grid>
       <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-              <TextBlock Text="OFFERS"
+              <TextBlock Text="{x:Static p:Resources.Store_OffersText}"
                          Foreground="White"
                          FontFamily="{StaticResource WorkSans}"
                          FontWeight="Bold"

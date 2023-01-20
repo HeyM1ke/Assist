@@ -16,12 +16,14 @@ namespace Assist.Objects.Enums
         [Language("fr-FR")] 
         French = 2,
 
-        [Language("ja-JP")] 
-        Japanese = 3,
+        [Language("de")] 
+        German = 3,
+
+        [Language("zh-CN")] 
+        Chinese_Simplified = 4,
 
         [Language("pt-BR")] 
-        Portuguese = 4,
-
+        Portuguese = 5,
 
     }
 

@@ -8,9 +8,10 @@
              x:Class="Assist.Controls.Store.BundleItem"
              Background="{StaticResource AssistGray}"
              Initialized="BundleItem_Initialized"
-             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:p="clr-namespace:Assist.Properties">
 	<Grid>
-        <TextBlock Text="Loading.."
+        <TextBlock Text="{x:Static p:Resources.Global_Loading}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Foreground="white"
@@ -22,7 +23,7 @@
             <StackPanel Orientation="Horizontal" 
                         Spacing="0" 
                         >
-                    <Label Content="FEATURED"
+                    <Label Content="{x:Static p:Resources.Store_FeaturedText}"
                            Foreground="White"
                            FontFamily="{StaticResource WorkSans}"
                            FontWeight="Regular"
