@@ -8,7 +8,9 @@
              d:DesignWidth="1125"
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.Live.Pages.MenusPageView"
-             Initialized="MenuPage_Init">
+             Initialized="MenuPage_Init"
+             Unloaded="MenuPageControl_OnUnloaded"
+             >
 	<Grid RowDefinitions="79,*"
           Margin="12,0">
 		<Border>

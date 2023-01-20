@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
 using Assist.Objects.Helpers;
+using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -127,13 +128,16 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
             await UpdateData(); // Do inital Pregame Check
 
-            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += async o =>
-            {
-                // On message recieved Check if it is a PREGAME Message.
+            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
+        }
+
+        private async void RiotWebsocketServiceOnUserPresenceMessageEvent(PresenceV4Message obj)
+        {
+            // On message recieved Check if it is a PREGAME Message.
                 Log.Information("CORE GAME UPDATE GOTTEN");
                 await UpdateData();
-            };
         }
+
 
         private async Task UpdateData()
         {
@@ -496,6 +500,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     return "VALORANT";
             }
 
+        }
+
+        public void UnsubscribeFromEvents()
+        {
+            Log.Information("Page is Unloaded, Unsubbing from Events from IngameView");
+            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
         }
     }
 }

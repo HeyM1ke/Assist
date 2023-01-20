@@ -100,11 +100,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
             await UpdateData(); // Do inital Pregame Check
 
-            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += async o =>
-            {
-                // On message recieved Check if it is a PREGAME Message.
-                await UpdateData();
-            };
+            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += RiotWebsocketServiceOnPregameMessageEvent;
+        }
+
+        private async void RiotWebsocketServiceOnPregameMessageEvent(object obj)
+        {
+            // On message recieved Check if it is a PREGAME Message.
+            await UpdateData();
         }
 
         public async Task UpdateData()
@@ -317,6 +319,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             byte[] stringData = Convert.FromBase64String(data.Private);
             string decodedString = Encoding.UTF8.GetString(stringData);
             return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+        }
+
+        public void UnsubscribeFromEvents()
+        {
+            Log.Information("Page is Unloaded, Unsubbing from Events from PregamePageView");
+            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= RiotWebsocketServiceOnPregameMessageEvent;
         }
     }
 }

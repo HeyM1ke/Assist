@@ -2,6 +2,8 @@ using System;
 using Assist.Game.Services;
 using Assist.Game.Views.Live.Pages.ViewModels;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Serilog;
 
 namespace Assist.Game.Views.Live.Pages
 {
@@ -23,6 +25,13 @@ namespace Assist.Game.Views.Live.Pages
                 return;
 
             await _viewModel.Setup();
+        }
+
+        private void Control_OnUnloaded(object? sender, RoutedEventArgs e)
+        {
+            Log.Error("Control Unloaded");
+            _viewModel.UnsubscribeFromEvents();
+            Log.Error("Events Unsubbed Unloaded");
         }
     }
 }

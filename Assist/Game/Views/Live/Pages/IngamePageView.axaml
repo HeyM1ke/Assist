@@ -9,6 +9,7 @@
              d:DesignWidth="1125"
              d:DesignHeight="590"
              Initialized="IngamePage_Init"
+             Unloaded="Control_OnUnloaded"
              x:Class="Assist.Game.Views.Live.Pages.IngamePageView">
   <Grid ColumnDefinitions="315,*,315"
         Margin="10,20">

@@ -263,5 +263,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             string decodedString = Encoding.UTF8.GetString(stringData);
             return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
         }
+
+        public void UnsubscribeFromEvents()
+        {
+            Log.Information("Page is Unloaded, Unsubbing from Events from MenusPageView");
+            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
+        }
     }
 }
