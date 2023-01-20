@@ -65,8 +65,7 @@ namespace Assist.Game.Controls.Live
         {
             _viewModel.CorePlayer = player;
 
-            if (_viewModel.PlayerBrush == null)
-                _viewModel.PlayerBrush = playerColor;
+            _viewModel.PlayerBrush = playerColor;
 
         
 
