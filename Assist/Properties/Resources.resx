@@ -255,6 +255,18 @@
   <data name="Global_Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="Global_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Global_Expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="Global_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Global_Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
   <data name="Dodge_AddPlayer" xml:space="preserve">
     <value>ADD PLAYER</value>
   </data>
@@ -317,5 +329,26 @@
   </data>
   <data name="Popup_GameModeWarning" xml:space="preserve">
     <value>VALORANT is currently open. &#x0a; Would you like to open Game Mode?</value>
+  </data>
+  <data name="Settings_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Settings_Accounts" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
+  <data name="Settings_AssistAccount" xml:space="preserve">
+    <value>Assist Account</value>
+  </data>
+  <data name="Settings_Resolution" xml:space="preserve">
+    <value>Resolution:</value>
+  </data>
+  <data name="Settings_EnableGpu" xml:space="preserve">
+    <value>Enable GPU:</value>
+  </data>
+  <data name="Settings_EnableGpuWarning" xml:space="preserve">
+    <value>Enabling GPU will allow Assist to Perform better, but at the cost of using more resources.</value>
+  </data>
+  <data name="Settings_RestartReq" xml:space="preserve">
+    <value>Restart Required for Settings to Apply.</value>
   </data>
 </root>

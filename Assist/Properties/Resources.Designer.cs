@@ -402,6 +402,33 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expired.
+        /// </summary>
+        public static string Global_Expired {
+            get {
+                return ResourceManager.GetString("Global_Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Global_Information {
+            get {
+                return ResourceManager.GetString("Global_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string Global_Loading {
+            get {
+                return ResourceManager.GetString("Global_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string Global_No {
@@ -416,6 +443,15 @@ namespace Assist.Properties {
         public static string Global_Save {
             get {
                 return ResourceManager.GetString("Global_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        public static string Global_Support {
+            get {
+                return ResourceManager.GetString("Global_Support", resourceCulture);
             }
         }
         
@@ -624,6 +660,69 @@ namespace Assist.Properties {
         public static string RichPres_SmallImage {
             get {
                 return ResourceManager.GetString("RichPres_SmallImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounts.
+        /// </summary>
+        public static string Settings_Accounts {
+            get {
+                return ResourceManager.GetString("Settings_Accounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist Account.
+        /// </summary>
+        public static string Settings_AssistAccount {
+            get {
+                return ResourceManager.GetString("Settings_AssistAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable GPU:.
+        /// </summary>
+        public static string Settings_EnableGpu {
+            get {
+                return ResourceManager.GetString("Settings_EnableGpu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling GPU will allow Assist to Perform better, but at the cost of using more resources..
+        /// </summary>
+        public static string Settings_EnableGpuWarning {
+            get {
+                return ResourceManager.GetString("Settings_EnableGpuWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string Settings_General {
+            get {
+                return ResourceManager.GetString("Settings_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution:.
+        /// </summary>
+        public static string Settings_Resolution {
+            get {
+                return ResourceManager.GetString("Settings_Resolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart Required for Settings to Apply..
+        /// </summary>
+        public static string Settings_RestartReq {
+            get {
+                return ResourceManager.GetString("Settings_RestartReq", resourceCulture);
             }
         }
         
