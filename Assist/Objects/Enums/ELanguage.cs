@@ -13,7 +13,7 @@ namespace Assist.Objects.Enums
         [Language("es-ES")] 
         Spanish = 1,
 
-        [Language("fr-FR")] 
+        [Language("fr")] 
         French = 2,
 
         [Language("de")] 

@@ -118,288 +118,288 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AssistTitle" xml:space="preserve">
-    <value>Assistência</value>
+    <value>Assist</value>
   </data>
   <data name="Authentication_LoginText" xml:space="preserve">
-    <value>INICIAR SESSÃO</value>
+    <value>CONNEXION</value>
   </data>
   <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
-    <value>Código</value>
+    <value>Code</value>
   </data>
   <data name="Authentication_MultiFactorDescription" xml:space="preserve">
-    <value>Insira seu código de autenticação Multi Fatores</value>
+    <value>Entrez votre code d'authentification multifacteur</value>
   </data>
   <data name="Authentication_PasswordText" xml:space="preserve">
-    <value>Senha</value>
+    <value>Mot de passe</value>
   </data>
   <data name="Authentication_RiotClientTitle" xml:space="preserve">
-    <value>Cliente Riot</value>
+    <value>Client Riot</value>
   </data>
   <data name="Authentication_RiotClientTitleDescription" xml:space="preserve">
-    <value>Inicie a sessão com seu Cliente da Riot Games.</value>
+    <value>Connectez-vous avec votre Client Riot Games.</value>
   </data>
   <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
-    <value>Inicie a sessão com o Cliente da Riot! Quando iniciar a sessão, se certifique que a opção "Lembrar de mim" está ativada. Selecione todas as opções ao iniciar a sessão ou não será válido. Clique em Iniciar Sessão quando estiver pronto!</value>
+    <value>Connectez-vous avec le Client Riot! Quand vous vous connectez, assurez-vous d'avoir l'option « Se souvenir de moi » activée. Sélectionnez toutes les options « Se souvenir de moi » lors de la connexion ou celle-ci ne sera pas valide. Cliquez sur « Connexion » quand vous serez prêt !</value>
   </data>
   <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
-    <value>Inicie a sessão com seu nome de usuário e senha da Riot Games. Recomendado</value>
+    <value>Se connecter avec le nom d'utilisateur et le mot de passe Riot Games. Recommandé</value>
   </data>
   <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
-    <value>Nome de Usuário/Senha</value>
+    <value>Nom d'utilisateur/Mot de passe</value>
   </data>
   <data name="Authentication_UsernameText" xml:space="preserve">
-    <value>Nome de Usuário</value>
+    <value>Nom d'utilisateur</value>
   </data>
   <data name="GameLaunch_PlayText" xml:space="preserve">
-    <value>JOGAR</value>
+    <value>JOUER</value>
   </data>
   <data name="GameLaunch_SelectedPatchlineText" xml:space="preserve">
-    <value>Canal Selecionado:</value>
+    <value>Version de jeu sélectionnée :</value>
   </data>
   <data name="NavigationBar_Dashboard" xml:space="preserve">
-    <value>Painel</value>
+    <value>Tableau de bord</value>
   </data>
   <data name="NavigationBar_Progression" xml:space="preserve">
-    <value>Progressão</value>
+    <value>Progression</value>
   </data>
   <data name="NavigationBar_Store" xml:space="preserve">
-    <value>Loja</value>
+    <value>Magasin</value>
   </data>
   <data name="Navigation_BackText" xml:space="preserve">
-    <value>Voltar</value>
+    <value>Retour</value>
   </data>
   <data name="ProfileManager_AddAccountText" xml:space="preserve">
-    <value>Adicionar Conta</value>
+    <value>Ajouter un Compte</value>
   </data>
   <data name="ProfileManager_LogoutText" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Déconnexion</value>
   </data>
   <data name="ProfileManager_ManageAccountText" xml:space="preserve">
-    <value>Gerenciar Conta</value>
+    <value>Gérer les comptes</value>
   </data>
   <data name="Profile_LossText" xml:space="preserve">
-    <value>DERROTA</value>
+    <value>DÉFAITE</value>
   </data>
   <data name="Profile_WonText" xml:space="preserve">
-    <value>VITÓRIA</value>
+    <value>VICTOIRE</value>
   </data>
   <data name="Progression_DailyMissions" xml:space="preserve">
-    <value>Missões Diárias</value>
+    <value>Missions Quotidiennes</value>
   </data>
   <data name="Progression_WeeklyMissions" xml:space="preserve">
-    <value>Missões Semanais</value>
+    <value>Missions de la semaine</value>
   </data>
   <data name="Store_FeaturedText" xml:space="preserve">
-    <value>Destaque</value>
+    <value>Nouveautés</value>
   </data>
   <data name="Store_OffersText" xml:space="preserve">
-    <value>Ofertas</value>
+    <value>Offres</value>
   </data>
   <data name="GameMode_Dashboard" xml:space="preserve">
-    <value>Painel</value>
+    <value>Tableau de bord</value>
   </data>
   <data name="GameMode_Live" xml:space="preserve">
-    <value>AO VIVO</value>
+    <value>LIVE</value>
   </data>
   <data name="GameMode_Modules" xml:space="preserve">
-    <value>Módulos</value>
+    <value>Modules</value>
   </data>
   <data name="GameMode_Lobbies" xml:space="preserve">
-    <value>Salas de Espera</value>
+    <value>Lobbys</value>
   </data>
   <data name="GameMode_Leagues" xml:space="preserve">
-    <value>Ligas</value>
+    <value>Ligues</value>
   </data>
   <data name="GameMode_Dodge" xml:space="preserve">
-    <value>DODGE</value>
+    <value>ÉVITER</value>
   </data>
   <data name="GameMode_RichPres" xml:space="preserve">
-    <value>Status de Atividade</value>
+    <value>Présence Riche</value>
   </data>
   <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
-    <value>Sistema Assist de Aviso de Dodge. Te dá um toque quando um jogador que você marcou está no seu time.</value>
+    <value>Système d'alerte d'évitement Assist. Vous avertit lorsqu'un joueur que vous avez marqué se trouve dans votre équipe.</value>
   </data>
   <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
-    <value>Status de Atividade do Assist. Mostra em seu perfil do Discord um status ao vivo da sua partida atual do VALORANT.</value>
+    <value>Rich Presence d'Assist. Ajoute à votre profil Discord un statut de votre partie VALORANT en cours.</value>
   </data>
   <data name="GameMode_AllyTeam" xml:space="preserve">
-    <value>ALIADO</value>
+    <value>ALLIÉ</value>
   </data>
   <data name="GameMode_EnemyTeam" xml:space="preserve">
-    <value>INIMIGO</value>
+    <value>ENNEMI</value>
   </data>
   <data name="GameMode_EnableGlobalText" xml:space="preserve">
-    <value>Ativar Lista Global</value>
+    <value>Activer la liste globale</value>
   </data>
   <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
-    <value>Uma Lista de Jogadores Verificados classificados como jogadores que Entregam Partidas, Trocam Vitórias, Apostam, e mais.</value>
+    <value>Une liste de joueurs vérifiés comme joueurs qui gâche des matchs, font des échanges de victoire, parient et plus.</value>
   </data>
   <data name="Global_BackText" xml:space="preserve">
-    <value>Voltar</value>
+    <value>Retour</value>
   </data>
   <data name="Global_Yes" xml:space="preserve">
-    <value>Sim</value>
+    <value>Oui</value>
   </data>
   <data name="Global_Switch" xml:space="preserve">
-    <value>Trocar</value>
+    <value>Changer</value>
   </data>
   <data name="Global_Remove" xml:space="preserve">
-    <value>Remover</value>
+    <value>Effacer</value>
   </data>
   <data name="Global_No" xml:space="preserve">
-    <value>Não</value>
+    <value>Non</value>
   </data>
   <data name="Global_Save" xml:space="preserve">
-    <value>Salvar</value>
+    <value>Sauvegarder</value>
   </data>
   <data name="Global_Apply" xml:space="preserve">
-    <value>Aplicar</value>
+    <value>Appliquer</value>
   </data>
   <data name="Global_Add" xml:space="preserve">
-    <value>Adicionar</value>
+    <value>Ajouter</value>
   </data>
   <data name="Global_Clear" xml:space="preserve">
-    <value>Limpar</value>
+    <value>Effacer</value>
   </data>
   <data name="Global_Loading" xml:space="preserve">
-    <value>Carregando...</value>
+    <value>Chargement...</value>
   </data>
   <data name="Global_Expired" xml:space="preserve">
-    <value>Expirado</value>
+    <value>Expiré</value>
   </data>
   <data name="Global_Information" xml:space="preserve">
-    <value>Informação</value>
+    <value>Information</value>
   </data>
   <data name="Global_Support" xml:space="preserve">
-    <value>Suporte</value>
+    <value>Support</value>
   </data>
   <data name="Dodge_AddPlayer" xml:space="preserve">
-    <value>ADICIONAR JOGADOR</value>
+    <value>Ajouter un joueur</value>
   </data>
   <data name="Dodge_AddPlayerDesc" xml:space="preserve">
-    <value>Se um jogador mudar de nome depois que você o adiciona, ele continuará na sua lista mesmo depois da mudança de nome.</value>
+    <value>Si un joueur change de pseudo après que vous l'ayez ajouté, il restera dans la liste même après un changement de pseudo.</value>
   </data>
   <data name="Dodge_AddTextOption" xml:space="preserve">
-    <value>Nome no Jogo (USERNAME#TAG):</value>
+    <value>Nom en jeu (NOMDUTILISATEUR#TAG):</value>
   </data>
   <data name="Dodge_AddTextOptionExample" xml:space="preserve">
-    <value>Ex.: UsuárioAssist#GMEUE</value>
+    <value>Exemple: UtilisateurAssist#EUW</value>
   </data>
   <data name="Dodge_NoteTextOption" xml:space="preserve">
-    <value>Nota (Opcional):</value>
+    <value>Note (Facultatif):</value>
   </data>
   <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
-    <value>Exemplo: Usuário é tóxico</value>
+    <value>Ex: Joueur est toxique</value>
   </data>
   <data name="RichPres_Settings" xml:space="preserve">
-    <value>CONFIGURAÇÕES</value>
+    <value>PARAMÈTRES</value>
   </data>
   <data name="RichPres_Privacy" xml:space="preserve">
-    <value>CONFIGURAÇÕES DE PRIVACIDADE</value>
+    <value>Paramètres de confidentialité</value>
   </data>
   <data name="RichPres_Enable" xml:space="preserve">
-    <value>Habilitar Status da Atividade do Discord</value>
+    <value>Activer Rich Presence de Discord</value>
   </data>
   <data name="RichPres_Details" xml:space="preserve">
-    <value>Detalhes</value>
+    <value>Détails</value>
   </data>
   <data name="RichPres_LargeImage" xml:space="preserve">
-    <value>Imagem Grande</value>
+    <value>Image large</value>
   </data>
   <data name="RichPres_SmallImage" xml:space="preserve">
-    <value>Imagem Pequena</value>
+    <value>Petite image</value>
   </data>
   <data name="RichPres_ShowParty" xml:space="preserve">
-    <value>Mostrar Tamanho do Grupo</value>
+    <value>Afficher la taille du groupe</value>
   </data>
   <data name="RichPres_ShowScore" xml:space="preserve">
-    <value>Mostrar Pontuação</value>
+    <value>Afficher le score</value>
   </data>
   <data name="RichPres_ShowRank" xml:space="preserve">
-    <value>Mostrar Classificação</value>
+    <value>Afficher le grade</value>
   </data>
   <data name="RichPres_ShowGamemode" xml:space="preserve">
-    <value>Mostrar Modo de Jogo</value>
+    <value>Afficher le Mode de Jeu</value>
   </data>
   <data name="GameMode_UpdateText" xml:space="preserve">
-    <value>Aguardando uma atualização de VALORANT...</value>
+    <value>En attente de la mise à jour de VALORANT...</value>
   </data>
   <data name="GameMode_PartyText" xml:space="preserve">
-    <value>GRUPO</value>
+    <value>GROUPE</value>
   </data>
   <data name="Support_SupportAssistText" xml:space="preserve">
-    <value>Apoie o Assist</value>
+    <value>Soutenir Assist</value>
   </data>
   <data name="Support_SupportAssistDesc" xml:space="preserve">
-    <value>Ajude a manter o projeto vivo! Existem diferentes maneiras de ajudar o Assistente. Algumas opções estão listadas abaixo.</value>
+    <value>Aidez à maintenir le projet en vie ! Il y a de nombreuses manières d'aider Assist. Quelques options sont listées ci-dessous.</value>
   </data>
   <data name="Popup_GameModeWarning" xml:space="preserve">
-    <value>VALORANT está aberto. &#x0a; Gostaria de abrir Modo de Jogo?</value>
+    <value>VALORANT est actuellement ouvert. &#x0a; Souhaitez-vous ouvrir Mode de Jeu?</value>
   </data>
   <data name="Settings_General" xml:space="preserve">
-    <value>Geral</value>
+    <value>Général</value>
   </data>
   <data name="Settings_Accounts" xml:space="preserve">
-    <value>Contas</value>
+    <value>Comptes</value>
   </data>
   <data name="Settings_AssistAccount" xml:space="preserve">
-    <value>Conta do Assistente</value>
+    <value>Assistance de Compte </value>
   </data>
   <data name="Settings_Resolution" xml:space="preserve">
-    <value>Resolução:</value>
+    <value>Résolution :</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Mudar Idioma:</value>
+    <value>Changer de langue :</value>
   </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
-    <value>Habilitar GPU:</value>
+    <value>Activer le GPU :</value>
   </data>
   <data name="Settings_EnableGpuWarning" xml:space="preserve">
-    <value>Habilitando a Placa Gráfica (GPU), fará com que o Assist tenha um desempenho melhor, porém utilizando mais recursos.</value>
+    <value>Activer le GPU permet à Assist de mieux performer, au prix de coûter plus en ressources.</value>
   </data>
   <data name="Settings_RestartReq" xml:space="preserve">
-    <value>Reinicialização necessária para aplicar as configurações.</value>
+    <value>Un redémarrage est nécessaire pour appliquer les changements.</value>
   </data>
   <data name="Settings_Launch" xml:space="preserve">
-    <value>Configurações de inicialização</value>
+    <value>Paramètres de lancement </value>
   </data>
   <data name="Settings_EnableGameMode" xml:space="preserve">
-    <value>Ativar Modo de Jogo:</value>
+    <value>Mode de jeu activé :</value>
   </data>
   <data name="Assist_UsersOnline" xml:space="preserve">
-    <value>Usuários Online</value>
+    <value>Utilisateur en ligne</value>
   </data>
   <data name="Assist_CheckingForUpdates" xml:space="preserve">
-    <value>Checando atualizações...</value>
+    <value>Recherche de mise à jours...</value>
   </data>
   <data name="Assist_Updating" xml:space="preserve">
-    <value>Atualizando...</value>
+    <value>Mise à jour...</value>
   </data>
   <data name="Leagues_Join" xml:space="preserve">
-    <value>Se Junte a uma Liga</value>
+    <value>Rejoindre la League</value>
   </data>
   <data name="Leagues_Leave" xml:space="preserve">
-    <value>Sair da Liga</value>
+    <value>Quitter la League</value>
   </data>
   <data name="Leagues_Queue" xml:space="preserve">
-    <value>Fila</value>
+    <value>Queue</value>
   </data>
   <data name="Leagues_Announcement" xml:space="preserve">
-    <value>Anúncio</value>
+    <value>Annonces</value>
   </data>
   <data name="Leagues_Leaderboard" xml:space="preserve">
-    <value>Placar de Líderes</value>
+    <value>Classement</value>
   </data>
   <data name="Leagues_Swap" xml:space="preserve">
-    <value>Selecione uma Liga:</value>
+    <value>Sélectionner une langue :</value>
   </data>
   <data name="Assist_Chat" xml:space="preserve">
     <value>Chat</value>
   </data>
   <data name="Assist_EnterMessage" xml:space="preserve">
-    <value>Digite uma mensagem..</value>
+    <value>Entrer un message..</value>
   </data>
   <data name="Global_Send" xml:space="preserve">
-    <value>Enviar</value>
+    <value>Envoyer</value>
   </data>
 </root>

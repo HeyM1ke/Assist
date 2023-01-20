@@ -240,6 +240,12 @@
   <data name="Global_Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
+  <data name="Global_Switch" xml:space="preserve">
+    <value>Cambiar</value>
+  </data>
+  <data name="Global_Remove" xml:space="preserve">
+    <value>Remover</value>
+  </data>
   <data name="Global_No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -342,6 +348,9 @@
   <data name="Settings_Resolution" xml:space="preserve">
     <value>Resolución:</value>
   </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Cambiar Idioma:</value>
+  </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
     <value>Habilitar GPU:</value>
   </data>
@@ -350,5 +359,47 @@
   </data>
   <data name="Settings_RestartReq" xml:space="preserve">
     <value>Se requiere reiniciar para que se aplique la configuración.</value>
+  </data>
+  <data name="Settings_Launch" xml:space="preserve">
+    <value>Abrir Configuración</value>
+  </data>
+  <data name="Settings_EnableGameMode" xml:space="preserve">
+    <value>Habilitar modo de juego:</value>
+  </data>
+  <data name="Assist_UsersOnline" xml:space="preserve">
+    <value>Usuarios conectados</value>
+  </data>
+  <data name="Assist_CheckingForUpdates" xml:space="preserve">
+    <value>Buscando actualizaciones...</value>
+  </data>
+  <data name="Assist_Updating" xml:space="preserve">
+    <value>Actualizando...</value>
+  </data>
+  <data name="Leagues_Join" xml:space="preserve">
+    <value>Únete a una Liga</value>
+  </data>
+  <data name="Leagues_Leave" xml:space="preserve">
+    <value>Abandonar Liga</value>
+  </data>
+  <data name="Leagues_Queue" xml:space="preserve">
+    <value>Cola de espera</value>
+  </data>
+  <data name="Leagues_Announcement" xml:space="preserve">
+    <value>Anuncio</value>
+  </data>
+  <data name="Leagues_Leaderboard" xml:space="preserve">
+    <value>Tabla de posiciones</value>
+  </data>
+  <data name="Leagues_Swap" xml:space="preserve">
+    <value>Selecciona una Liga:</value>
+  </data>
+  <data name="Assist_Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="Assist_EnterMessage" xml:space="preserve">
+    <value>Ingresar mensaje..</value>
+  </data>
+  <data name="Global_Send" xml:space="preserve">
+    <value>Enviar</value>
   </data>
 </root>
