@@ -111,7 +111,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
                 await UpdateData(); // Do inital Pregame Check
                 
-                AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnPregameMessageEvent;
+                AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += RiotWebsocketServiceOnPregameMessageEvent;
                 
                 setupSucc = true;
             }
@@ -333,7 +333,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Information("Getting map data for ID of: " +  Match.MapID.ToLower());
                 MapName = MapNames.MapsByPath?[Match.MapID.ToLower()].ToUpper();
                 MapImage =
-                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID]}_BWlistview.png";
+                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID.ToLower()]}_BWlistview.png";
             }
         }
 
@@ -349,6 +349,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         public void UnsubscribeFromEvents()
         {
             Log.Information("Page is Unloaded, Unsubbing from Events from PregamePageView");
+            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= RiotWebsocketServiceOnPregameMessageEvent;
             AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= RiotWebsocketServiceOnPregameMessageEvent;
         }
     }
