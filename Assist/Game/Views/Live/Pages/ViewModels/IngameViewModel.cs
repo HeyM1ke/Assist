@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -90,6 +91,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
         }
 
+        private bool setupSucc = false;
+
         public async Task Setup()
         {
             // Get the current match ID for the game. 
@@ -114,6 +117,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("COREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("COREGAME ERROR: " + e.Content);
                 Log.Fatal("COREGAME ERROR: " + e.Message);
+                
+                if (e.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    Log.Fatal("TOKEN ERROR: " + e.Content);
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                }
             }
 
             try
@@ -125,10 +134,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             }
 
-            // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
-            await UpdateData(); // Do inital Pregame Check
+            if (setupSucc == false)
+            {
+                // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
+                await UpdateData(); // Do inital Pregame Check
 
-            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
+                AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
+
+                setupSucc = true;
+            }
         }
 
         private async void RiotWebsocketServiceOnUserPresenceMessageEvent(PresenceV4Message obj)
@@ -147,6 +161,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             try
             {
+                if (string.IsNullOrEmpty(MatchId))
+                {
+                    Setup();
+                }
+                
                 MatchResp = await AssistApplication.Current.CurrentUser.CoreGame.FetchMatch(MatchId!);
                 PresenceResp = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
                 if (MatchResp == null || PresenceResp == null)
@@ -162,9 +181,18 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("COREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("COREGAME ERROR: " + e.Content);
                 Log.Fatal("COREGAME ERROR: " + e.Message);
+                
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("TOKEN ERROR: ");
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    
+                }
                 return;
             }
 
+            
+                
+            
             if (MatchResp.Players == null || MatchResp.Players.Count == 0)
                 return;
             

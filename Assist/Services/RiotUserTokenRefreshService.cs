@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Assist.ViewModels;
 using Serilog;
 using ValNet.Enums;
@@ -8,14 +9,23 @@ namespace Assist.Services;
 public class RiotUserTokenRefreshService
 {
     private bool _attemptingReauth = false;
-    
+    private DateTime timeOfLastRe;
     public RiotUserTokenRefreshService()
     {
         AssistApplication.Current.CurrentUser.TokensExpired += CurrentUserOnTokensExpired;
     }
 
-    private async void CurrentUserOnTokensExpired()
+    public async void CurrentUserOnTokensExpired()
     {
+        if (timeOfLastRe != null)
+        {
+            if (DateTime.Compare(DateTime.Now, timeOfLastRe) < 0)
+            {
+                return;
+            }
+        }
+        
+        
         // Do Something on TOken Expire Detected
         Log.Information("Token Expired Detected");
         if (_attemptingReauth) // Check in place just in case of multiple requests sent at once
@@ -42,6 +52,9 @@ public class RiotUserTokenRefreshService
                     Log.Information("Auth type of unknown found. No Reauth.");
                     break;
             }
+            
+            timeOfLastRe = DateTime.Now.AddSeconds(10);
+            _attemptingReauth = false;
         }
         catch (Exception e)
         {

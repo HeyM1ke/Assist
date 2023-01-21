@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -60,6 +61,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _mapName, value);
         }
 
+        private bool setupSucc = false;
 
         public async Task Setup()
         {
@@ -85,6 +87,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("PREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("PREGAME ERROR: " + e.Content);
                 Log.Fatal("PREGAME ERROR: " + e.Message);
+                
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("TOKEN ERROR: ");
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                       
+                }
             }
 
             try
@@ -97,10 +105,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             }
 
 
-            // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
-            await UpdateData(); // Do inital Pregame Check
+            if (setupSucc == false)
+            {
+                // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
+                await UpdateData(); // Do inital Pregame Check
 
-            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += RiotWebsocketServiceOnPregameMessageEvent;
+                AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnPregameMessageEvent;
+
+                setupSucc = true;
+            }
         }
 
         private async void RiotWebsocketServiceOnPregameMessageEvent(object obj)
@@ -111,6 +124,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
         public async Task UpdateData()
         {
+            
+            
+            if (string.IsNullOrEmpty(MatchId))
+            {
+                Setup();
+            }
             Log.Error("Updating Data");
             PregameMatch MatchResp = new PregameMatch();
             ChatV4PresenceObj PresenceResp = new ChatV4PresenceObj();
@@ -131,6 +150,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("PREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("PREGAME ERROR: " + e.Content);
                 Log.Fatal("PREGAME ERROR: " + e.Message);
+                
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("PREGAME TOKEN ERROR: ");
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                }
                 return;
             }
 
