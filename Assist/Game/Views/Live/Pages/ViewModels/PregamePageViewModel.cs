@@ -107,11 +107,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             if (setupSucc == false)
             {
+                
                 // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
                 await UpdateData(); // Do inital Pregame Check
-
+                
                 AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnPregameMessageEvent;
-
+                
                 setupSucc = true;
             }
         }
