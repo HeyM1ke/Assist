@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
@@ -29,7 +30,6 @@ namespace Assist.Game.Controls.Navigation
             NavigationButtons.Add(this.FindControl<NavButton>("ModulesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));
             NavigationButtons[0].IsSelected = true;
-            _viewModel.SetupUserCount();
         }
 
         private void DashboardBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -73,12 +73,17 @@ namespace Assist.Game.Controls.Navigation
         {
             
         }
+
+        private void VerticalGameNav_Init(object? sender, EventArgs e)
+        {
+            _viewModel.SetupUserCount();
+        }
     }
 
     public class VertGameNavVM : ViewModelBase
     {
         // Small Class for User Count Updating
-        private string _currentAssistUserCount;
+        private string _currentAssistUserCount = "Online";
 
         public string CurrentAssistUserCount
         {
@@ -96,15 +101,15 @@ namespace Assist.Game.Controls.Navigation
         
         public void SetupUserCount()
         {
-            /*AssistApplication.Current.ServerHub.RecieveMessageEvent += o =>
+            AssistApplication.Current.ServerHub.RecieveMessageEvent += o =>
             {
                 var number = o is int ? (int)o : (int?)null;
 
                 if (number != null)
                 {
-                    CurrentAssistUserCount = $"{number}: {Resources.Assist_UsersOnline}";
+                    CurrentAssistUserCount = $"{number} {Resources.Assist_UsersOnline}";
                 }
-            };*/
+            };
         }
     }
 }

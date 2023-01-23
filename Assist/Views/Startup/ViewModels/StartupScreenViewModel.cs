@@ -55,7 +55,8 @@ namespace Assist.Views.Startup.ViewModels
                 MainWindowContentController.Change(new SelectLanguage());
                 return;
             }
-
+            Log.Information("Connecting to GENERAL SERVER");
+            await AssistApplication.Current.ConnectToServerHub();
             // Check Args
             if (AssistApplication.CurrentApplication.Args.Contains("--forcegame"))
             {
@@ -74,7 +75,7 @@ namespace Assist.Views.Startup.ViewModels
             }
 
 
-
+            
             await StartStartupAuthentication();
         }
 

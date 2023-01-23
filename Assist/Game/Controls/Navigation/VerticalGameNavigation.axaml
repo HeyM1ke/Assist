@@ -9,6 +9,7 @@
 			 Background="{DynamicResource AssistLightBackground}"
 			 xmlns:assist="clr-namespace:Assist.Controls.Assist"
 			 xmlns:p="clr-namespace:Assist.Properties"
+             Initialized="VerticalGameNav_Init"
 			 x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
 	<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
           Margin="23,19">
@@ -37,7 +38,7 @@
                              Width="8"
                              Height="8"
                              DockPanel.Dock="Left"></Ellipse>
-                    <TextBlock Text="234 Users Online"
+                    <TextBlock Text="{Binding CurrentAssistUserCount}"
                                Margin="7,0"
                                FontFamily="{StaticResource WorkSans}"
                                FontWeight="Medium"

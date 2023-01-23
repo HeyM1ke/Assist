@@ -39,8 +39,6 @@ namespace Assist.Views
 
         private async void MainView_Initializaed(object? sender, EventArgs e)
         {
-          
-            AssistApplication.Current.ConnectToServerHub();
             _viewModel.SetupUserCount();
         }
     }
