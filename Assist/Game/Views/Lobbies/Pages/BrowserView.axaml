@@ -18,6 +18,7 @@
                         HorizontalContentAlignment="Center"
                         FontFamily="{StaticResource WorkSans}"
                         Background="#191919"
+                        Click="JoinLobbyCode_Click"
                         FontWeight="Medium"/>
             </StackPanel>
             

@@ -1,5 +1,7 @@
 ﻿using System;
+using Assist.Game.Controls.Lobbies.Popup;
 using Assist.Game.Views.Lobbies.ViewModels;
+using Assist.Services.Popup;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -51,5 +53,10 @@ public partial class BrowserView : UserControl
         {
             Search_Click(null, null);
         }
+    }
+
+    private void JoinLobbyCode_Click(object? sender, RoutedEventArgs e)
+    {
+        PopupSystem.SpawnCustomPopup(new JoinWithLobbyCode());
     }
 }

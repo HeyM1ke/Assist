@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -149,7 +150,7 @@ namespace Assist.Services
             throw new RequestException(data.StatusCode, content, content);
         }
         
-        public async Task<List<AssistLobby>> JoinLobbyById(string lobbyId, string? password = null)
+        public async Task<JoinLobbyData> JoinLobbyById(string lobbyId, string? password = null)
         {
             var builder = new UriBuilder($"{LobbiesUrl}/join/id/{lobbyId}");
             
@@ -162,13 +163,13 @@ namespace Assist.Services
             var content = await data.Content.ReadAsStringAsync();
             if (data.IsSuccessStatusCode)
             {
-                return JsonSerializer.Deserialize<List<AssistLobby>>(content);
+                return JsonSerializer.Deserialize<JoinLobbyData>(content);
             }
 
             throw new RequestException(data.StatusCode, content, content);
         }
         
-        public async Task<List<AssistLobby>> JoinLobbyByCode(string code, string? password = null)
+        public async Task<JoinLobbyData> JoinLobbyByCode(string code, string? password = null)
         {
             var builder = new UriBuilder($"{LobbiesUrl}/join/code/{code}");
             
@@ -179,9 +180,9 @@ namespace Assist.Services
             
             var data = await userClient.PostAsync(builder.ToString(), null);
             var content = await data.Content.ReadAsStringAsync();
-            if (data.IsSuccessStatusCode)
+            if (data.IsSuccessStatusCode || data.StatusCode == HttpStatusCode.BadRequest)
             {
-                return JsonSerializer.Deserialize<List<AssistLobby>>(content);
+                return JsonSerializer.Deserialize<JoinLobbyData>(content);
             }
 
             throw new RequestException(data.StatusCode, content, content);

@@ -1,0 +1,150 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d"
+             Width="1350"
+             Height="690"
+             x:Class="Assist.Game.Controls.Lobbies.Popup.JoinWithLobbyCode">
+    <Grid Background="#6D000000">
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                CornerRadius="10"
+                Background="{StaticResource AssistBlack}"
+                Width="450" Height="265">
+            <Grid Margin="18">
+                <Grid.Styles>
+                    <Style Selector="Button">
+                        <Setter Property="Background" Value="#191919"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                        <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                    </Style>
+
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                        <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                    </Style>
+                    
+                    <Style Selector="TextBox">
+                        <Setter Property="Background" Value="#191919" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="BorderBrush" Value="Gray" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                        <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource TextInputFocus}" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                        <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource TextInputHover}" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                </Grid.Styles>
+                <StackPanel VerticalAlignment="Center"
+                            Spacing="5">
+                    
+                    <StackPanel Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                            <TextBlock Text="ENTER LOBBY CODE"
+                                       HorizontalAlignment="Left"
+                                       FontWeight="Bold"
+                                       FontSize="20"
+                                       FontFamily="{StaticResource WorkSans}"></TextBlock>
+                            <TextBlock Text="{Binding Message}"
+                                       VerticalAlignment="Center"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="14"
+                                       Opacity="1"
+                                       Foreground="{DynamicResource AssistRed}"
+                                       FontWeight="SemiBold"/>
+                        </StackPanel>
+                        
+                        <Rectangle Height="1"
+                                   Fill="{DynamicResource AssistRed}"></Rectangle>
+                        <TextBlock Text="Lobby Code:"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="14"
+                                   Opacity=".5"
+                                   FontWeight="Regular"/>
+                        <TextBox 
+                            Height="35"
+                            Foreground="White"
+                            Watermark="Enter Code"
+                            FontFamily="{StaticResource WorkSans}"
+                            FontWeight="Regular"
+                            x:Name="LobbyCodeBox"
+                            AcceptsReturn="False"
+                            FontSize="12"
+                            VerticalContentAlignment="Center"/>
+                        <TextBlock Text="Password (Optional):"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="14"
+                                   Opacity=".5"
+                                   FontWeight="Regular"/>
+                        <TextBox
+                            Height="35"
+                            Foreground="White"
+                            Watermark="Enter Password"
+                            FontFamily="{StaticResource WorkSans}"
+                            FontWeight="Regular"
+                            FontSize="12"
+                            x:Name="LobbyPasswordBox"
+                            VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    
+                    
+                    <StackPanel Orientation="Horizontal" Spacing="15">
+                        <Button 
+                            Margin="0,5"
+                            Height="40"
+                            Width="50"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            FontFamily="{StaticResource WorkSans}"
+                            Background="#191919"
+                            CornerRadius="5"
+                            BorderThickness="1"
+                            
+                            FontSize="12"
+                            FontWeight="SemiBold"
+                            Click="BackButton_Click">
+                        <Image Source="/Resources/Game/ArrowLeft_Icon.png"
+                               Width="10"
+                               Height="10"></Image>
+                        </Button>
+                        <Button 
+                            Margin="0,5"
+                            Height="40"
+                            Width="350"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            FontFamily="{StaticResource WorkSans}"
+                            Background="#191919"
+                            CornerRadius="5"
+                            BorderThickness="1"
+                            Content="Join"
+                            FontSize="12"
+                            FontWeight="SemiBold"
+                            Click="JoinLobby_Click">
+                        
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
