@@ -4,8 +4,11 @@ using Assist.Game.Views.Live;
 using Assist.Game.Views.Live.Pages;
 using Assist.Game.Views.Lobbies;
 using Assist.Game.Views.Modules;
+using Assist.Properties;
+using Assist.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using ReactiveUI;
 
 namespace Assist.Game.Controls.Navigation
 {
@@ -14,8 +17,11 @@ namespace Assist.Game.Controls.Navigation
         
         public static VerticalGameNavigation Instance;
         public List<NavButton> NavigationButtons = new List<NavButton>();
+        private readonly VertGameNavVM _viewModel;
+
         public VerticalGameNavigation()
         {
+            DataContext = _viewModel = new VertGameNavVM();
             Instance = this;
             InitializeComponent();
             NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
@@ -23,6 +29,7 @@ namespace Assist.Game.Controls.Navigation
             NavigationButtons.Add(this.FindControl<NavButton>("ModulesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));
             NavigationButtons[0].IsSelected = true;
+            _viewModel.SetupUserCount();
         }
 
         private void DashboardBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -51,7 +58,7 @@ namespace Assist.Game.Controls.Navigation
         {
             ClearSelected();
 
-            if (GameViewNavigationController.CurrentPage != Services.Page.MODULES)
+            if (GameViewNavigationController.CurrentPage != Services.Page.LOBBIES)
                 GameViewNavigationController.Change(new LobbiesView());
 
             (sender as NavButton).IsSelected = true;
@@ -65,6 +72,39 @@ namespace Assist.Game.Controls.Navigation
         private void SupportBtn_Click(object? sender, RoutedEventArgs e)
         {
             
+        }
+    }
+
+    public class VertGameNavVM : ViewModelBase
+    {
+        // Small Class for User Count Updating
+        private string _currentAssistUserCount;
+
+        public string CurrentAssistUserCount
+        {
+            get => _currentAssistUserCount;
+            set => this.RaiseAndSetIfChanged(ref _currentAssistUserCount, value);
+        }
+        
+        private string _currentAssistGameUserCount;
+        
+        public string CurrentAssistGameUserCount
+        {
+            get => _currentAssistGameUserCount;
+            set => this.RaiseAndSetIfChanged(ref _currentAssistGameUserCount, value);
+        }
+        
+        public void SetupUserCount()
+        {
+            /*AssistApplication.Current.ServerHub.RecieveMessageEvent += o =>
+            {
+                var number = o is int ? (int)o : (int?)null;
+
+                if (number != null)
+                {
+                    CurrentAssistUserCount = $"{number}: {Resources.Assist_UsersOnline}";
+                }
+            };*/
         }
     }
 }

@@ -259,10 +259,10 @@ namespace Assist.ViewModels
 
         public AssistApiUser AssistUser = new AssistApiUser();
         public RiotWebsocketService RiotWebsocketService = new RiotWebsocketService();
-
+        public AssistGameServerConnection GameServerConnection = new AssistGameServerConnection();
 
         #endregion
 
-        
+
     }
 }

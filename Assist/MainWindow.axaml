@@ -56,7 +56,6 @@
                 </Grid>
 <StackPanel></StackPanel>
                 <popup:PopupMaster x:Name="PopupMaster" 
-                                   Width="1125"
                                    Height="690"/>
 			</Grid>
 		</LayoutTransformControl>

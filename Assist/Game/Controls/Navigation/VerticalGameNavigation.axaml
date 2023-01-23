@@ -59,6 +59,7 @@
                                       IsSelected="True"
 				                      Click="DashboardBtn_OnClick"
 									  Background="#191919"
+				                      IsVisible="False"
                                       Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
                                       x:Name="LiveBtn"

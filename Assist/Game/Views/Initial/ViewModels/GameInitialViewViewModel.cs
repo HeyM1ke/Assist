@@ -64,6 +64,7 @@ namespace Assist.Game.Views.Initial.ViewModels
                 return;
             }
 
+            Message = "Logging into Assist";
             // Authenticate User with Code
             try
             {
@@ -84,6 +85,19 @@ namespace Assist.Game.Views.Initial.ViewModels
             if (GameSettings.Current.DiscordPresenceEnabled)
             {
                 await DiscordPresenceController.ControllerInstance.Initalize();
+            }
+            
+            //Connect to Assist Game Server.
+            try
+            {
+                Message = "Connecting to Assist";
+                Log.Information("Attempting To Connect to Game Server");
+                await AssistApplication.Current.GameServerConnection.Connect();
+            }
+            catch (Exception e)
+            {
+                Log.Fatal("Failed to Connect to Game Server");
+                return;
             }
             AssistApplication.Current.OpenGameView();
         }

@@ -109,8 +109,10 @@
         <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundDisabled}" />
         <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundDisabled}" />
     </Style>
+    
             </Grid.Styles>
             <TabControl>
+                
                 <TabItem Header="Browser">
                     <pages:BrowserView></pages:BrowserView>
                 </TabItem>

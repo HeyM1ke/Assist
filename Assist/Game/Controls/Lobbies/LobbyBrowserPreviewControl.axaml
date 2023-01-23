@@ -4,7 +4,7 @@
     <Design.PreviewWith>
         <controls:LobbyBrowserPreviewControl Width="1029"
                                              Height="60"
-                                             Background="#1A1B21"
+                                             Background="#212121"
                                              />
     </Design.PreviewWith>
 
@@ -66,14 +66,8 @@
                             <Image Width="19"
                                    Height="19"
                                    Source="/Resources/Game/Unlock_Icon.png"></Image>
-                            <Button Width="60"
-                                    Height="40"
-                                    Content="JOIN"
-                                    VerticalContentAlignment="Center"
-                                    HorizontalContentAlignment="Center"
-                                    FontFamily="{StaticResource WorkSans}"
-                                    FontSize="12"
-                                    FontWeight="SemiBold"/>
+                            <controls:LobbyJoinButton Width="100"
+                                                      Height="40"></controls:LobbyJoinButton>
                         </StackPanel>
                     </Grid>
                 </Border>
