@@ -5,7 +5,8 @@
              xmlns:lobbies="clr-namespace:Assist.Game.Controls.Lobbies"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
              mc:Ignorable="d" d:DesignWidth="1081" d:DesignHeight="621"
-             x:Class="Assist.Game.Views.Lobbies.Pages.BrowserView">
+             x:Class="Assist.Game.Views.Lobbies.Pages.BrowserView"
+             Initialized="BrowserView_Init">
     <Grid RowDefinitions="Auto,Auto">
         <Grid Row="0"
               Margin="0,5,0,15">
@@ -25,6 +26,8 @@
                         Spacing="10">
                 <TextBox Height="35"
                          Width="200"
+                         x:Name="SearchBox"
+                         KeyDown="SearchBox_OnKeyDown"
                 ></TextBox>
                 <Button 
                     Height="35"
@@ -32,8 +35,21 @@
                     HorizontalContentAlignment="Center"
                     FontFamily="{StaticResource WorkSans}"
                     Background="#191919"
+                    Click="Search_Click"
                     FontWeight="Medium">
                     <Image Source="/Resources/Game/Search_Icon.png"
+                           Width="15"
+                           Height="15"></Image>
+                </Button>
+                <Button 
+                    Height="35"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    FontFamily="{StaticResource WorkSans}"
+                    Background="#191919"
+                    Click="Refresh_Click"
+                    FontWeight="Medium">
+                    <Image Source="/Resources/Game/Refresh_Icon.png"
                            Width="15"
                            Height="15"></Image>
                 </Button>
@@ -101,7 +117,7 @@
 
                 </Grid.Styles>
                 <ScrollViewer Height="550">
-                    <ItemsControl>
+                    <ItemsControl Items="{Binding CurrentlyShownLobbies}">
                         <ItemsControl.Styles>
                             <Style Selector="lobbies|LobbyBrowserPreviewControl">
                                 <Setter Property="Background" Value="#212121"></Setter>
@@ -115,10 +131,7 @@
                                 </StackPanel>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                        <lobbies:LobbyBrowserPreviewControl></lobbies:LobbyBrowserPreviewControl>
-                        <lobbies:LobbyBrowserPreviewControl></lobbies:LobbyBrowserPreviewControl>
-                        <lobbies:LobbyBrowserPreviewControl></lobbies:LobbyBrowserPreviewControl>
-                        <lobbies:LobbyBrowserPreviewControl></lobbies:LobbyBrowserPreviewControl>
+                        
                         
                     </ItemsControl>
                 </ScrollViewer>
