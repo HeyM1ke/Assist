@@ -17,7 +17,7 @@
             <StackPanel Orientation="Vertical">
 				<StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Left">
-                    <TextBlock Text="DEV BETA"
+                    <TextBlock Text="BETA"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"
                                FontFamily="{StaticResource WorkSans}"
@@ -96,6 +96,7 @@
         </Grid>
 		
 		<Grid Row="3"
+		      IsVisible="True"
               Margin="0,0">
 			<StackPanel VerticalAlignment="Top">
 				<navigation:NavButton CornerRadius="5"

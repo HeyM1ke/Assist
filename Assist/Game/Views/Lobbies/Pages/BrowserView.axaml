@@ -1,0 +1,95 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lobbies="clr-namespace:Assist.Game.Controls.Lobbies"
+             mc:Ignorable="d" d:DesignWidth="1081" d:DesignHeight="621"
+             x:Class="Assist.Game.Views.Lobbies.Pages.BrowserView">
+    <Grid RowDefinitions="Auto,Auto">
+        <Grid Row="0"
+              Margin="0,5,0,15">
+            <StackPanel HorizontalAlignment="Left">
+                <Button 
+                        Height="35"
+                        Content="Join with Lobby Code"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        FontFamily="{StaticResource WorkSans}"
+                        Background="#191919"
+                        FontWeight="Medium"/>
+            </StackPanel>
+            
+            <StackPanel HorizontalAlignment="Right"
+                        Orientation="Horizontal"
+                        Spacing="10">
+                <TextBox Height="35"
+                         Width="200"
+                ></TextBox>
+                <Button 
+                    Height="35"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    FontFamily="{StaticResource WorkSans}"
+                    Background="#191919"
+                    FontWeight="Medium">
+                    <Image Source="/Resources/Game/Search_Icon.png"
+                           Width="15"
+                           Height="15"></Image>
+                </Button>
+            </StackPanel>
+        </Grid>
+        
+        
+        <Border Grid.Row="1"
+                Background="#191919">
+            <Grid RowDefinitions="Auto,Auto">
+                <StackPanel Grid.Row="0">
+                    <StackPanel.Styles>
+                        <Style Selector="lobbies|LobbyBrowserPreviewControl">
+                            <Setter Property="Margin" Value="5"></Setter>
+                            <Setter Property="Background" Value="#212121"></Setter>
+                        </Style>
+                    </StackPanel.Styles>
+                    <lobbies:LobbyBrowserPreviewControl/>
+                    <lobbies:LobbyBrowserPreviewControl/>
+                    <lobbies:LobbyBrowserPreviewControl/>
+                    <lobbies:LobbyBrowserPreviewControl/>
+                    <lobbies:LobbyBrowserPreviewControl/>
+                    <lobbies:LobbyBrowserPreviewControl/>
+                    <lobbies:LobbyBrowserPreviewControl/>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="1"
+                            Spacing="19"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="5">
+                    <Button Width="35"
+                            Height="35"
+                            Background="#212121"
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <Image Source="/Resources/Game/ArrowLeft_Icon.png"
+                               Width="14"
+                               Height="14"></Image>
+                    </Button>
+                    <TextBlock Text="1"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                               FontWeight="Medium"></TextBlock>
+                    
+                    <Button Width="35"
+                            Height="35"
+                            Background="#212121"
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <Image Source="/Resources/Game/ArrowRight_Icon.png"
+                               Width="14"
+                               Height="14"></Image>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

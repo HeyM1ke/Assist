@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using Assist.Game.Services;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
@@ -8,6 +9,7 @@ public partial class LobbiesView : UserControl
 {
     public LobbiesView()
     {
+        GameViewNavigationController.CurrentPage = Page.LOBBIES;
         InitializeComponent();
     }
 

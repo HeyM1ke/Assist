@@ -1,0 +1,83 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Lobbies">
+    <Design.PreviewWith>
+        <controls:LobbyBrowserPreviewControl Width="1029"
+                                             Height="60"
+                                             Background="#1A1B21"
+                                             />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|LobbyBrowserPreviewControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border CornerRadius="5"
+                        Background="{TemplateBinding Background}">
+                    <Grid VerticalAlignment="Center" Margin="8">
+                        <StackPanel x:Name="LeftHandPanel"
+                                    Spacing="17"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal"
+                                    >
+                            <TextBlock Text="{TemplateBinding LobbyName}"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       FontWeight="SemiBold"></TextBlock>
+                            <StackPanel Orientation="Horizontal" Spacing="0">
+                                <Image Width="19"
+                                       Height="19"
+                                       Source="/Resources/Icons/User_Icon.png"
+                                       VerticalAlignment="Center"></Image>
+                                <TextBlock Text="{TemplateBinding CurrentSize}"
+                                           FontFamily="{StaticResource WorkSans}"
+                                           FontSize="16"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Light"></TextBlock>
+                                <TextBlock Text="/"
+                                           FontFamily="{StaticResource WorkSans}"
+                                           FontSize="16"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Light"></TextBlock>
+                                <TextBlock Text="{TemplateBinding MaxSize}"
+                                           FontFamily="{StaticResource WorkSans}"
+                                           FontSize="16"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Light"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel x:Name="RightHandPanel"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal"
+                                    Spacing="8">
+                            
+                            <StackPanel.Styles>
+                                <Style Selector="controls|LobbyBrowserPreviewControl[IsPasswordProtected=True] /template/ Image">
+                                    <Setter Property="Source" Value="/Resources/Game/Lock_Icon.png"></Setter>
+                                </Style>
+                                
+                                <Style Selector="controls|LobbyBrowserPreviewControl[IsPasswordProtected=False] /template/ Image">
+                                    <Setter Property="Source" Value="/Resources/Game/Unlock_Icon.png"></Setter>
+                                </Style>
+                            </StackPanel.Styles>
+                            
+                            
+                            <Image Width="19"
+                                   Height="19"
+                                   Source="/Resources/Game/Unlock_Icon.png"></Image>
+                            <Button Width="60"
+                                    Height="40"
+                                    Content="JOIN"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    FontFamily="{StaticResource WorkSans}"
+                                    FontSize="12"
+                                    FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

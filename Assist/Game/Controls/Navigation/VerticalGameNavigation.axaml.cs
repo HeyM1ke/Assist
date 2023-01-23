@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
 using Assist.Game.Views.Live.Pages;
+using Assist.Game.Views.Lobbies;
 using Assist.Game.Views.Modules;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -51,7 +52,7 @@ namespace Assist.Game.Controls.Navigation
             ClearSelected();
 
             if (GameViewNavigationController.CurrentPage != Services.Page.MODULES)
-                GameViewNavigationController.Change(new UnkownPageView());
+                GameViewNavigationController.Change(new LobbiesView());
 
             (sender as NavButton).IsSelected = true;
         }
