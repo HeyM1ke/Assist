@@ -99,6 +99,7 @@ namespace Assist.Game.Views.Initial.ViewModels
                 Log.Fatal("Failed to Connect to Game Server");
                 return;
             }
+            new LobbyService();
             AssistApplication.Current.OpenGameView();
         }
 

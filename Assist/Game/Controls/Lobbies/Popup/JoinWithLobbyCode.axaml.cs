@@ -1,4 +1,6 @@
-﻿using Assist.Services.Popup;
+﻿using Assist.Game.Services;
+using Assist.Objects.AssistApi.Game;
+using Assist.Services.Popup;
 using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -39,12 +41,30 @@ public partial class JoinWithLobbyCode : UserControl
         if (!joinPtyResp.IsSuccessful)
         {
             _viewModel.Message = joinPtyResp.Message;
+            (sender as Button).IsEnabled = true;
             return;
         }
         
         // Send Join Message to Lobbies Service to handle Valorant side.
-        
-        
+        if (joinPtyResp.PartyClosed)
+        {
+            // This means the VALORANT party is closed on VALORANT. Needs to request invite.
+
+            var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+            var p = pres.presences.Find(pres => pres.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
+            // Get CurrentUsername
+            RequestPartyJoin data = new RequestPartyJoin()
+            {
+                CurrentGameName = p.game_name,
+                CurrentTag = p.game_tag,
+                IsPrivate = true,
+                PartyId = joinPtyResp.PartyId
+            };
+
+            await LobbyService.Instance.RequestPartyJoin(data);
+        }
+     
+        PopupSystem.KillPopups();// close popup
     }
 
     private void BackButton_Click(object? sender, RoutedEventArgs e)
