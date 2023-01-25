@@ -1,4 +1,5 @@
-﻿using Assist.Game.Services;
+﻿using System;
+using Assist.Game.Services;
 using Assist.Objects.AssistApi.Game;
 using Assist.Services.Popup;
 using Assist.ViewModels;
@@ -60,10 +61,29 @@ public partial class JoinWithLobbyCode : UserControl
                 IsPrivate = true,
                 PartyId = joinPtyResp.PartyId
             };
-
+            LobbyService.Instance.CurrentLobbyOwner = false;
             await LobbyService.Instance.RequestPartyJoin(data);
         }
-     
+        else
+        {
+            // Party is Open
+            try
+            {
+                
+                Log.Information("Attempting to Join Party of id " + joinPtyResp.PartyId);
+                LobbyService.Instance.CurrentLobbyOwner = false;
+                AssistApplication.Current.CurrentUser.Party.JoinParty(joinPtyResp.PartyId);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed to Join party from base Lobbie.");
+                Log.Error("Failed to Join party from base Lobbie. MESSAGE " + ex.Message);
+                Log.Error("Failed to Join party from base Lobbie. STACK " + ex.StackTrace);
+                return;
+            }
+        }
+        
+        LobbyService.Instance.CurrentLobbyOwner = false;
         PopupSystem.KillPopups();// close popup
     }
 

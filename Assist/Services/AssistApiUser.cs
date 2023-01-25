@@ -187,6 +187,32 @@ namespace Assist.Services
 
             throw new RequestException(data.StatusCode, content, content);
         }
+        
+        public async Task<CreateLobbyResp> CreateLobby(CreateLobbyData lobbyData)
+        {
+            var jsonContent = new StringContent(JsonSerializer.Serialize(lobbyData), Encoding.UTF8, "application/json");
+            var data = await userClient.PostAsync($"{LobbiesUrl}/create", jsonContent);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode || data.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return JsonSerializer.Deserialize<CreateLobbyResp>(content);
+            }
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+        
+        public async Task<HttpResponseMessage> UpdateLobby(UpdateLobbyData lobbyData)
+        {
+            var jsonContent = new StringContent(JsonSerializer.Serialize(lobbyData), Encoding.UTF8, "application/json");
+            var data = await userClient.PostAsync($"{LobbiesUrl}/update", jsonContent);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode || data.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return data;
+            }
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
 
         #endregion
     }

@@ -67,7 +67,8 @@
                                    Height="19"
                                    Source="/Resources/Game/Unlock_Icon.png"></Image>
                             <controls:LobbyJoinButton Width="100"
-                                                      Height="40"></controls:LobbyJoinButton>
+                                                      Height="40"
+                                                      AssistLobbyId="{TemplateBinding LobbyCode}"></controls:LobbyJoinButton>
                         </StackPanel>
                     </Grid>
                 </Border>

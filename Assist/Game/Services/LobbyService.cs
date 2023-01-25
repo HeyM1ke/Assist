@@ -1,17 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Game.Controls.Lobbies.Popup;
+using Assist.Game.Models;
 using Assist.Objects.AssistApi.Game;
+using Assist.Objects.RiotSocket;
+using Assist.Services.Popup;
 using Assist.ViewModels;
 using Serilog;
 using Serilog.Core;
+using ValNet.Enums;
+using ValNet.Objects.Local;
+using ValNet.Objects.Parties;
 
 namespace Assist.Game.Services;
 
 public class LobbyService
 {
     public static LobbyService Instance;
-
+    public DateTime CreatedLobbyAt;
+    public bool CurrentLobbyOwner;
+    private bool previousPartyMade = false;
     public LobbyService()
     {
         if (Instance == null)
@@ -25,7 +36,86 @@ public class LobbyService
     // Join Lobbies
     
     // Create Lobbies
-    
+    public async Task CreateLobby(CreateLobbyData data)
+    {
+        AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= UpdatePartyOnPresenceMessage;
+
+        var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+        var p = pres.presences.Find(pres => pres.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
+
+        ValorantParty? pData;
+        try
+        {
+            pData = await AssistApplication.Current.CurrentUser.Party.FetchParty();
+        }
+        catch (Exception e)
+        {
+            Log.Error("FAILED TO GET PARTY");
+            Log.Error("FAILED TO GET PARTY Message: " + e.Message);
+            Log.Error("FAILED TO GET PARTY Stack: " + e.StackTrace);
+            return;
+        }
+        data.valorantPartyId = pData.ID.ToLower();
+        data.region = Enum.GetName(typeof(RiotRegion), AssistApplication.Current.CurrentUser.GetRegion());
+        data.requiresPassword = !string.IsNullOrEmpty(data.password);
+        
+        var r = await AssistApplication.Current.AssistUser.CreateLobby(data);
+
+        if (r.IsSuccessful)
+        {
+            // Subscribe to Events to update the party
+            CreatedLobbyAt = DateTime.Now;
+            previousPartyMade = true;
+            CurrentLobbyOwner = true;
+            UpdatePartyOnPresenceMessage(null);
+            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += UpdatePartyOnPresenceMessage;
+        }
+
+        
+        PopupSystem.SpawnCustomPopup(new CreateLobbyPopup(r));
+    }
+
+    private async void UpdatePartyOnPresenceMessage(PresenceV4Message? obj)
+    {
+        
+        if (CreatedLobbyAt.AddMinutes(5) <= DateTime.Now || CurrentLobbyOwner == false)  // Party is Expired
+        {
+            Log.Information("Lobby Expired No Longer Sending Updates.");
+            previousPartyMade = false;
+            AssistApplication.Current.RiotWebsocketService.PresenceMessageEvent -= UpdatePartyOnPresenceMessage;
+            return;
+        }
+        Log.Information("Lobby Sending Update.");
+        ValorantParty? pData;
+        try
+        {
+            pData = await AssistApplication.Current.CurrentUser.Party.FetchParty();
+        }
+        catch (Exception e)
+        {
+            Log.Error("FAILED TO GET PARTY");
+            Log.Error("FAILED TO GET PARTY Message: " + e.Message);
+            Log.Error("FAILED TO GET PARTY Stack: " + e.StackTrace);
+            return;
+        }
+        var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+        var p = pres.presences.Find(pres => pres.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
+        var presData = await GetPresenceData(p);
+        var updateData = new UpdateLobbyData();
+        updateData.MaxPartySize = presData.maxPartySize;
+        updateData.CurrentPartySize = presData.partySize;
+        updateData.PartyClosed = string.Equals(pData.Accessibility, "CLOSED");
+        updateData.CurrentValorantQueue = presData.maxPartySize > 5 ? "CUSTOM_GAME" : presData.queueId;
+        updateData.ValorantIdsParty = new List<string>();
+        foreach (var member in pData.Members)
+        {
+            updateData.ValorantIdsParty.Add(member.Subject);
+        }
+        var r = await AssistApplication.Current.AssistUser.UpdateLobby(updateData);
+        if (r.IsSuccessStatusCode)
+            Log.Information("Lobby Sent Update.");
+    }
+
     //Send Join Request
     public async Task RequestPartyJoin(RequestPartyJoin data)
     {
@@ -76,5 +166,14 @@ public class LobbyService
             return;
         }
         
+    }
+    
+    private async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
+    {
+        if (string.IsNullOrEmpty(data.Private))
+            return new PlayerPresence();
+        byte[] stringData = Convert.FromBase64String(data.Private);
+        string decodedString = Encoding.UTF8.GetString(stringData);
+        return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
     }
 }
