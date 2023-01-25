@@ -90,6 +90,7 @@
                                    FontSize="18"
                                    Opacity=".5"
                                    IsVisible="{Binding LobbySuccessful}"
+                                   TextWrapping="Wrap"
                                    FontWeight="Regular"/>
                         <Rectangle Height="1"
                                    Fill="{DynamicResource AssistRed}"></Rectangle>

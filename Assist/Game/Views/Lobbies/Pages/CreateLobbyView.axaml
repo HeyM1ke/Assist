@@ -190,11 +190,14 @@
                            FontSize="12"
                            HorizontalAlignment="Center"
                            FontWeight="Medium"></TextBlock>
-                <Button Content="Create" Width="100"
+                <Button Content="Create" 
+                        Width="100"
                         Height="40"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Click="CreateLobby_Click"></Button>
+                        Click="CreateLobby_Click"
+                        IsEnabled="{Binding IsEnabled}"
+                        ></Button>
             </StackPanel>
         </Border>
     </Grid>

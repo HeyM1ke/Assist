@@ -1,4 +1,5 @@
-﻿using Assist.Game.Services;
+﻿using System.Threading.Tasks;
+using Assist.Game.Services;
 using Assist.Objects.AssistApi.Game;
 using Assist.ViewModels;
 using Avalonia;
@@ -24,12 +25,13 @@ public partial class CreateLobbyView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
-    private void CreateLobby_Click(object? sender, RoutedEventArgs e)
+    private async void CreateLobby_Click(object? sender, RoutedEventArgs e)
     {
         if (_alreadyClicked)
             return;
         _alreadyClicked = true;
-        (sender as Button).IsEnabled = false;
+        _viewModel.IsEnabled = false;
+        
         _viewModel.Message = "";
         var lobbyNameBox = this.FindControl<TextBox>("LobbyNameBox");
         var passwordBox = this.FindControl<TextBox>("PasswordBox");
@@ -38,14 +40,14 @@ public partial class CreateLobbyView : UserControl
 
         if (string.IsNullOrEmpty(lobbyNameBox.Text)){
             _viewModel.Message = "Lobby Name is Required"; _alreadyClicked = false;
-            (sender as Button).IsEnabled = true;
+            _viewModel.IsEnabled = false;
             return;
         }
         
         if (lobbyNameBox.Text.Length < 4)
         {
             _viewModel.Message = "Lobby Name is too short."; _alreadyClicked = false;
-            (sender as Button).IsEnabled = true;
+            _viewModel.IsEnabled = false;
             return;
         }
         
@@ -53,7 +55,7 @@ public partial class CreateLobbyView : UserControl
         {
             _viewModel.Message = "Password is too short.";
             _alreadyClicked = false;
-            (sender as Button).IsEnabled = true;
+            _viewModel.IsEnabled = false;
             return;
         }
         
@@ -61,7 +63,7 @@ public partial class CreateLobbyView : UserControl
         {
             _viewModel.Message = "Code is too short.";
             _alreadyClicked = false;
-            (sender as Button).IsEnabled = true;
+            _viewModel.IsEnabled = false;
             return;
         }
 
@@ -72,10 +74,10 @@ public partial class CreateLobbyView : UserControl
             lobbyName = string.IsNullOrEmpty(lobbyNameBox?.Text) ? "" : lobbyNameBox?.Text,
             password = string.IsNullOrEmpty(passwordBox?.Text) ? "" : passwordBox?.Text
         };
-        LobbyService.Instance.CreateLobby(d);
-        
+
+        await _viewModel.CreateLobby(d);
         _alreadyClicked = false;
-        (sender as Button).IsEnabled = true;
+        _viewModel.IsEnabled = false;
     }
 }
 
@@ -87,5 +89,18 @@ internal class CreateLobbyVm : ViewModelBase
     {
         get => _message;
         set => this.RaiseAndSetIfChanged(ref _message, value);
+    }
+    
+    private bool _isEnabled = true;
+
+    public bool IsEnabled
+    {
+        get => _isEnabled;
+        set => this.RaiseAndSetIfChanged(ref _isEnabled, value);
+    }
+
+    public async Task CreateLobby(CreateLobbyData d )
+    {
+        LobbyService.Instance.CreateLobby(d);
     }
 }

@@ -102,7 +102,7 @@ internal class CreateLobbyVm : ViewModelBase
         LobbySuccessful = CreateLobbyData.IsSuccessful;
 
         YourLobbyCode = "Your Lobby Code is: " + CreateLobbyData.Lobby.Code;
-        YourLobbyPassword = "This Lobby does required the password you wanted.";
+        YourLobbyPassword = "This Lobby requires the password you requested.";
 
     }
 }
