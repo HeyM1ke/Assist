@@ -44,7 +44,7 @@ public partial class LobbyJoinButton : UserControl
         if (joinPtyResp.PartyClosed)
         {
             // This means the VALORANT party is closed on VALORANT. Needs to request invite.
-
+            PopupSystem.SpawnCustomPopup(new LoadingPopup());
             var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
             var p = pres.presences.Find(pres => pres.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
             // Get CurrentUsername
@@ -57,6 +57,7 @@ public partial class LobbyJoinButton : UserControl
             };
             LobbyService.Instance.CurrentLobbyOwner = false;
             await LobbyService.Instance.RequestPartyJoin(data);
+            PopupSystem.KillPopups();
         }
         else
         {
