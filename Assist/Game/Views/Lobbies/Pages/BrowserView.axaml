@@ -7,7 +7,27 @@
              mc:Ignorable="d" d:DesignWidth="1081" d:DesignHeight="621"
              x:Class="Assist.Game.Views.Lobbies.Pages.BrowserView"
              Initialized="BrowserView_Init">
+    
     <Grid RowDefinitions="Auto,Auto">
+        <Grid.Styles>
+            <Style Selector="TextBox">
+                <Setter Property="Background" Value="#191919" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+            <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource TextInputFocus}" />
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+            <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource TextInputHover}" />
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+        </Grid.Styles>
         <Grid Row="0"
               Margin="0,5,0,15">
             <StackPanel HorizontalAlignment="Left">

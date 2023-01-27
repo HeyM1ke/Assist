@@ -5,6 +5,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Game.Views.Lobbies.Pages.CreateLobbyView">
     <UserControl.Styles>
+        <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
+
+            <Setter Property="BorderBrush" Value="White" />
+        </Style>
+
+        <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
+            <Setter Property="Background" Value="{DynamicResource AssistRed}" />
+            <Setter Property="BorderBrush" Value="White" />
+        </Style>
         <Style Selector="TextBox">
             <Setter Property="Background" Value="#191919" />
             <Setter Property="Foreground" Value="White" />

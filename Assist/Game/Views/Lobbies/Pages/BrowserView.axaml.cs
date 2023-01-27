@@ -52,6 +52,10 @@ public partial class BrowserView : UserControl
     private async void Search_Click(object? sender, RoutedEventArgs e)
     {
         var textBox = this.FindControl<TextBox>("SearchBox");
+        
+        if(string.IsNullOrEmpty(textBox.Text))
+            return;
+        
         await _viewModel.FilterList(textBox.Text);
     }
 

@@ -6,6 +6,7 @@
                         Height="36"
                         CornerRadius="5"
                         Background="#191919"
+                        IsSpecial="True"
     />
   </Design.PreviewWith>
 
@@ -28,12 +29,17 @@
                            FontFamily="{StaticResource WorkSans}"
                            FontSize="12"
                            FontWeight="Medium"
-                           Margin="8,0"></TextBlock>
-                <TextBlock Text="TEST"
+                           Margin="7,0,5,0"></TextBlock>
+                <TextBlock Text="BETA"
                            FontFamily="{StaticResource WorkSans}"
                            VerticalAlignment="Center"
+                           TextAlignment="Center"
                            Foreground="{DynamicResource AssistRed}"
-                           FontWeight="Bold"
+                           FontWeight="SemiBold"
+                           FontSize="10"
+                           Height="7"
+                           Padding="0"
+                           
                            IsVisible="{TemplateBinding IsSpecial}"
                            ></TextBlock>
             </DockPanel>

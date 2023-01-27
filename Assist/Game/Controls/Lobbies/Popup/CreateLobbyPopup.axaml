@@ -72,12 +72,29 @@
                         
                         <Rectangle Height="1"
                                    Fill="{DynamicResource AssistRed}"></Rectangle>
-                        <TextBlock Text="{Binding YourLobbyCode}"
-                                   FontFamily="{StaticResource WorkSans}"
-                                   FontSize="18"
-                                   Opacity=".5"
-                                   IsVisible="{Binding LobbySuccessful}"
-                                   FontWeight="Regular"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Your Lobby Code is: "
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="18"
+                                       Opacity=".5"
+                                       VerticalAlignment="Center"
+                                       IsVisible="{Binding LobbySuccessful}"
+                                       FontWeight="Regular"/>
+                            <TextBox Text="{Binding YourLobbyCode}"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="18"
+                                       Opacity=".5"
+                                       IsReadOnly="True"
+                                       IsVisible="{Binding LobbySuccessful}"
+                                       FontWeight="Regular"/>
+                            <Button Height="40"
+                                    Margin="10,0">
+                                <Image Width="10"
+                                       Height="10"
+                                       
+                                       Source="/Resources/Game/Link_Icon.png"></Image>
+                            </Button>
+                        </StackPanel>
                         <TextBlock Text="{Binding LobbyMessage}"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="18"
