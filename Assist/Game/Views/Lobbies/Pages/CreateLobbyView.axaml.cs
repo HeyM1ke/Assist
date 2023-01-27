@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
+using Serilog;
 
 namespace Assist.Game.Views.Lobbies.Pages;
 
@@ -40,30 +41,33 @@ public partial class CreateLobbyView : UserControl
 
         if (string.IsNullOrEmpty(lobbyNameBox.Text)){
             _viewModel.Message = "Lobby Name is Required"; _alreadyClicked = false;
-            _viewModel.IsEnabled = false;
+            _viewModel.IsEnabled = true;
             return;
         }
         
-        if (lobbyNameBox.Text.Length < 4)
+        if (!string.IsNullOrEmpty(lobbyNameBox.Text) &&lobbyNameBox.Text.Length < 4)
         {
             _viewModel.Message = "Lobby Name is too short."; _alreadyClicked = false;
-            _viewModel.IsEnabled = false;
+            lobbyNameBox.Text = string.Empty;
+            _viewModel.IsEnabled = true;
             return;
         }
         
-        if (passwordBox.Text?.Length < 4)
+        if ( !string.IsNullOrEmpty(passwordBox.Text) && passwordBox.Text?.Length < 4)
         {
             _viewModel.Message = "Password is too short.";
+            passwordBox.Text = string.Empty;
             _alreadyClicked = false;
-            _viewModel.IsEnabled = false;
+            _viewModel.IsEnabled = true;
             return;
         }
         
-        if (lobbyCodeBox.Text?.Length < 4)
+        if (!string.IsNullOrEmpty(lobbyCodeBox.Text) &&lobbyCodeBox.Text?.Length < 4)
         {
             _viewModel.Message = "Code is too short.";
+            lobbyCodeBox.Text = string.Empty;
             _alreadyClicked = false;
-            _viewModel.IsEnabled = false;
+            _viewModel.IsEnabled = true;
             return;
         }
 
@@ -101,6 +105,7 @@ internal class CreateLobbyVm : ViewModelBase
 
     public async Task CreateLobby(CreateLobbyData d )
     {
+        Log.Information("Attempting to Create Lobby.");
         LobbyService.Instance.CreateLobby(d);
     }
 }

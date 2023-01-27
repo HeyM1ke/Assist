@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Game.Controls.Global;
 using Assist.Game.Controls.Lobbies.Popup;
 using Assist.Game.Models;
 using Assist.Objects.AssistApi.Game;
@@ -126,15 +127,17 @@ public class LobbyService
     
     private async void GameServerConnectionOnLOBBY_InviteRequested(string? obj)
     {
+        Log.Information("Received Request to Invite Player");
         var data = JsonSerializer.Deserialize<InvitePlayerData>(obj);
         
-        Log.Information("Recieved Request to Invite Player");
+        Log.Information("Deserialized Data from Server.");
         
         Log.Information($"Sending invite to Player {data.CurrentGameName}#{data.CurrentTag}");
 
         try
         {
             await AssistApplication.Current.CurrentUser.Party.InvitePlayerToParty(data.CurrentGameName, data.CurrentTag);
+            await Task.Delay(1000);// Delay 1 Second after sending request, prevent spam to riot servers.
         }
         catch (Exception e)
         {
@@ -155,6 +158,7 @@ public class LobbyService
         Log.Information("recieved an invite for party of id of: " + data.PartyId);
         try
         {
+            PopupSystem.SpawnCustomPopup(new LoadingPopup());
             AssistApplication.Current.CurrentUser.Party.JoinParty(data.PartyId);
             Log.Information("Joined Party of id " + data.PartyId);
         }
@@ -163,9 +167,10 @@ public class LobbyService
             Log.Error("Failed to Join party from an Invite to the expected lobby.");
             Log.Error("Failed to Join party from an Invite to the expected lobby. MESSAGE " + e.Message);
             Log.Error("Failed to Join party from an Invite to the expected lobby. STACK " + e.StackTrace);
+            PopupSystem.KillPopups();
             return;
         }
-        
+        PopupSystem.KillPopups();
     }
     
     private async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)

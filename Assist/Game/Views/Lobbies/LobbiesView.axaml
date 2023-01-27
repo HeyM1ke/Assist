@@ -114,7 +114,7 @@
             <TabControl>
                 
                 <TabItem Header="Browser">
-                    <pages:BrowserView></pages:BrowserView>
+                    <pages:BrowserView Loaded="BrowserView_Loaded"></pages:BrowserView>
                 </TabItem>
                 <TabItem Header="Create Lobby">
                     <pages:CreateLobbyView/>

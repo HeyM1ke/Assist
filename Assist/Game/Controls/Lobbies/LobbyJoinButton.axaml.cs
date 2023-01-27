@@ -1,6 +1,8 @@
 ﻿using System;
+using Assist.Game.Controls.Global;
 using Assist.Game.Services;
 using Assist.Objects.AssistApi.Game;
+using Assist.Services.Popup;
 using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -35,7 +37,6 @@ public partial class LobbyJoinButton : UserControl
         if (!joinPtyResp.IsSuccessful)
         {
             Log.Error(joinPtyResp.Message);
-            (sender as LobbyJoinButton).IsEnabled = true;
             return;
         }
         
@@ -63,6 +64,7 @@ public partial class LobbyJoinButton : UserControl
             try
             {
                 Log.Information("Attempting to Join Party of id " + joinPtyResp.PartyId);
+                PopupSystem.SpawnCustomPopup(new LoadingPopup());
                 LobbyService.Instance.CurrentLobbyOwner = false;
                 AssistApplication.Current.CurrentUser.Party.JoinParty(joinPtyResp.PartyId);
             }
@@ -71,6 +73,7 @@ public partial class LobbyJoinButton : UserControl
                 Log.Error("Failed to Join party from base Lobbie.");
                 Log.Error("Failed to Join party from base Lobbie. MESSAGE " + ex.Message);
                 Log.Error("Failed to Join party from base Lobbie. STACK " + ex.StackTrace);
+                PopupSystem.KillPopups();
                 (sender as Button).IsEnabled = true;
                 return;
             }

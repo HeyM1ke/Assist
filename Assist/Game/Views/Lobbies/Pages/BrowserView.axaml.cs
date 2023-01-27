@@ -25,6 +25,14 @@ public partial class BrowserView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
+    public async void ReloadBrowser()
+    {
+        if(Design.IsDesignMode)
+            return;
+
+        await _viewModel.Setup();
+    }
+    
     private async void BrowserView_Init(object? sender, EventArgs e)
     {
         if(Design.IsDesignMode)

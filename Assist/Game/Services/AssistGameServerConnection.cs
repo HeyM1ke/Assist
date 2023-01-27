@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Game.Controls.Global;
 using Assist.Objects.AssistApi.Game;
+using Assist.Services.Popup;
 using Assist.Services.Server;
 using Assist.ViewModels;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -41,12 +43,14 @@ public class AssistGameServerConnection : HubClient
     public async Task RequestPartyInvite(RequestPartyJoin data)
     {
         Log.Information("Requesting new Party Invite Data From Server: " + data);
+        // Request Invite from server Data Confirming that an invite was sent.
         await _hubConnection.SendAsync("requestPrivateLobbyInvite", JsonSerializer.Serialize(data));
     }
     
     public async Task PartyInviteSentFromAssist(InvitePlayerData data)
     {
         Log.Information("Recieved new InviteData Data From Server: " + data);
-        await _hubConnection.SendAsync("confirmPrivateLobbyInvite", JsonSerializer.Serialize(data));
+        // Send Server Data Confirming that an invite was sent.
+        _hubConnection.SendAsync("confirmPrivateLobbyInvite", JsonSerializer.Serialize(data));
     }
 }
