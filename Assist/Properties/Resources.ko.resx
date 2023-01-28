@@ -118,288 +118,288 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AssistTitle" xml:space="preserve">
-    <value>Assist</value>
+    <value>어시스트</value>
   </data>
   <data name="Authentication_LoginText" xml:space="preserve">
-    <value>CONNEXION</value>
+    <value>로그인</value>
   </data>
   <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
-    <value>Code</value>
+    <value>인증 코드</value>
   </data>
   <data name="Authentication_MultiFactorDescription" xml:space="preserve">
-    <value>Entrez votre code d'authentification multifacteur</value>
+    <value>인증 필요</value>
   </data>
   <data name="Authentication_PasswordText" xml:space="preserve">
-    <value>Mot de passe</value>
+    <value>비밀번호</value>
   </data>
   <data name="Authentication_RiotClientTitle" xml:space="preserve">
-    <value>Client Riot</value>
+    <value>라이엇 클라이언트</value>
   </data>
   <data name="Authentication_RiotClientTitleDescription" xml:space="preserve">
-    <value>Connectez-vous avec votre Client Riot Games.</value>
+    <value>라이엇 클라이언트로 로그인</value>
   </data>
   <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
-    <value>Connectez-vous avec le Client Riot! Quand vous vous connectez, assurez-vous d'avoir l'option « Se souvenir de moi » activée. Sélectionnez toutes les options « Se souvenir de moi » lors de la connexion ou celle-ci ne sera pas valide. Cliquez sur « Connexion » quand vous serez prêt !</value>
+    <value>Riot 클라이언트에서 로그인을 부탁드립니다! 로그인 후 반드시 "Remember me"를 선택하십시오. 준비가되면 로그인을 선택하십시오.</value>
   </data>
   <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
-    <value>Se connecter avec le nom d'utilisateur et le mot de passe Riot Games. Recommandé</value>
+    <value>Riot Games 계정 이름과 비밀번호로 로그인. 권장</value>
   </data>
   <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
-    <value>Nom d'utilisateur/Mot de passe</value>
+    <value>계정 이름/비밀번호</value>
   </data>
   <data name="Authentication_UsernameText" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>계정 이름</value>
   </data>
   <data name="GameLaunch_PlayText" xml:space="preserve">
-    <value>JOUER</value>
+    <value>플레이</value>
   </data>
   <data name="GameLaunch_SelectedPatchlineText" xml:space="preserve">
-    <value>Version de jeu sélectionnée :</value>
+    <value>선택한 패치:</value>
   </data>
   <data name="NavigationBar_Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
+    <value>대시보드</value>
   </data>
   <data name="NavigationBar_Progression" xml:space="preserve">
-    <value>Progression</value>
+    <value>진행도</value>
   </data>
   <data name="NavigationBar_Store" xml:space="preserve">
-    <value>Boutique</value>
+    <value>상점 - store</value>
   </data>
   <data name="Navigation_BackText" xml:space="preserve">
-    <value>Retour</value>
+    <value>뒤로</value>
   </data>
   <data name="ProfileManager_AddAccountText" xml:space="preserve">
-    <value>Ajouter un Compte</value>
+    <value>계정 추가하기</value>
   </data>
   <data name="ProfileManager_LogoutText" xml:space="preserve">
-    <value>Déconnexion</value>
+    <value>로그아웃</value>
   </data>
   <data name="ProfileManager_ManageAccountText" xml:space="preserve">
-    <value>Gérer les comptes</value>
+    <value>계정 관리하기</value>
   </data>
   <data name="Profile_LossText" xml:space="preserve">
-    <value>DÉFAITE</value>
+    <value>패배</value>
   </data>
   <data name="Profile_WonText" xml:space="preserve">
-    <value>VICTOIRE</value>
+    <value>승리</value>
   </data>
   <data name="Progression_DailyMissions" xml:space="preserve">
-    <value>Missions Quotidiennes</value>
+    <value>일일 임무</value>
   </data>
   <data name="Progression_WeeklyMissions" xml:space="preserve">
-    <value>Missions de la semaine</value>
+    <value>주간 임무</value>
   </data>
   <data name="Store_FeaturedText" xml:space="preserve">
-    <value>Nouveautés</value>
+    <value>스페셜</value>
   </data>
   <data name="Store_OffersText" xml:space="preserve">
-    <value>Offres</value>
+    <value>구매 가능 - available for purchase/offers</value>
   </data>
   <data name="GameMode_Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
+    <value>대시보드</value>
   </data>
   <data name="GameMode_Live" xml:space="preserve">
     <value>LIVE</value>
   </data>
   <data name="GameMode_Modules" xml:space="preserve">
-    <value>Modules</value>
+    <value>모듈</value>
   </data>
   <data name="GameMode_Lobbies" xml:space="preserve">
-    <value>Lobbys</value>
+    <value>로비</value>
   </data>
   <data name="GameMode_Leagues" xml:space="preserve">
-    <value>Ligues</value>
+    <value>리그</value>
   </data>
   <data name="GameMode_Dodge" xml:space="preserve">
-    <value>ÉVITER</value>
+    <value>회피</value>
   </data>
   <data name="GameMode_RichPres" xml:space="preserve">
     <value>Rich Presence</value>
   </data>
   <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
-    <value>Système d'alerte d'évitement Assist. Vous avertit lorsqu'un joueur que vous avez marqué se trouve dans votre équipe.</value>
+    <value>Assist 회피 시스템. 표시된 플레이어가 팀에있을 때 경고하는 기능.</value>
   </data>
   <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
-    <value>Rich Presence d'Assist. Ajoute à votre profil Discord un statut de votre partie VALORANT en cours.</value>
+    <value>Assist Rich Presence. 디스코드의 라이브 상태에 현재 VALORANT 경기 상황을 표시하는 것.</value>
   </data>
   <data name="GameMode_AllyTeam" xml:space="preserve">
-    <value>ALLIÉ</value>
+    <value>동맹국</value>
   </data>
   <data name="GameMode_EnemyTeam" xml:space="preserve">
-    <value>ENNEMI</value>
+    <value>적</value>
   </data>
   <data name="GameMode_EnableGlobalText" xml:space="preserve">
-    <value>Activer la liste globale</value>
+    <value>글로벌 리스트 사용</value>
   </data>
   <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
-    <value>Une liste de joueurs vérifiés comme joueurs qui gâche des matchs, font des échanges de victoire, parient et plus.</value>
+    <value>게임 포기, win 무역, 도박 행위를 하고 있는 것으로 분류되어 그것이 확인된 플레이어의 리스트.</value>
   </data>
   <data name="Global_BackText" xml:space="preserve">
-    <value>Retour</value>
+    <value>뒤로</value>
   </data>
   <data name="Global_Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>네</value>
   </data>
   <data name="Global_Switch" xml:space="preserve">
-    <value>Changer</value>
+    <value>스위치</value>
   </data>
   <data name="Global_Remove" xml:space="preserve">
-    <value>Effacer</value>
+    <value>지우기</value>
   </data>
   <data name="Global_No" xml:space="preserve">
-    <value>Non</value>
+    <value>아님</value>
   </data>
   <data name="Global_Save" xml:space="preserve">
-    <value>Sauvegarder</value>
+    <value>저장</value>
   </data>
   <data name="Global_Apply" xml:space="preserve">
-    <value>Appliquer</value>
+    <value>적용</value>
   </data>
   <data name="Global_Add" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>추가</value>
   </data>
   <data name="Global_Clear" xml:space="preserve">
-    <value>Effacer</value>
+    <value>지우기</value>
   </data>
   <data name="Global_Loading" xml:space="preserve">
-    <value>Chargement...</value>
+    <value>로딩중...</value>
   </data>
   <data name="Global_Expired" xml:space="preserve">
-    <value>Expiré</value>
+    <value>만료됨</value>
   </data>
   <data name="Global_Information" xml:space="preserve">
-    <value>Information</value>
+    <value>정보</value>
   </data>
   <data name="Global_Support" xml:space="preserve">
-    <value>Support</value>
+    <value>지원</value>
   </data>
   <data name="Dodge_AddPlayer" xml:space="preserve">
-    <value>Ajouter un joueur</value>
+    <value>플레이어 초대</value>
   </data>
   <data name="Dodge_AddPlayerDesc" xml:space="preserve">
-    <value>Si un joueur change de pseudo après que vous l'ayez ajouté, il restera dans la liste même après un changement de pseudo.</value>
+    <value>플레이어를 추가한 후 이름이 변경된 경우. 그 플레이어는 이름이 바뀌어도 목록에 남아 있습니다.</value>
   </data>
   <data name="Dodge_AddTextOption" xml:space="preserve">
-    <value>Nom en jeu (NOMDUTILISATEUR#TAG):</value>
+    <value>계정 (USERNAME#TAG):</value>
   </data>
   <data name="Dodge_AddTextOptionExample" xml:space="preserve">
-    <value>Exemple: UtilisateurAssist#EUW</value>
+    <value>Ex: AssistUser#GMEUE</value>
   </data>
   <data name="Dodge_NoteTextOption" xml:space="preserve">
-    <value>Note (Facultatif):</value>
+    <value>메모 (선택적):</value>
   </data>
   <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
-    <value>Ex: Joueur est toxique</value>
+    <value>Ex: 플레이어가 폭언을 뱉고 있습니다.</value>
   </data>
   <data name="RichPres_Settings" xml:space="preserve">
-    <value>PARAMÈTRES</value>
+    <value>설정</value>
   </data>
   <data name="RichPres_Privacy" xml:space="preserve">
-    <value>Paramètres de confidentialité</value>
+    <value>개인 정보 보호 설정</value>
   </data>
   <data name="RichPres_Enable" xml:space="preserve">
-    <value>Activer Rich Presence de Discord</value>
+    <value>Discord Rich Presence 사용</value>
   </data>
   <data name="RichPres_Details" xml:space="preserve">
-    <value>Détails</value>
+    <value>상세</value>
   </data>
   <data name="RichPres_LargeImage" xml:space="preserve">
-    <value>Image large</value>
+    <value>큰 이미지</value>
   </data>
   <data name="RichPres_SmallImage" xml:space="preserve">
-    <value>Petite image</value>
+    <value>작은 이미지</value>
   </data>
   <data name="RichPres_ShowParty" xml:space="preserve">
-    <value>Afficher la taille du groupe</value>
+    <value>파티 인원수 표시</value>
   </data>
   <data name="RichPres_ShowScore" xml:space="preserve">
-    <value>Afficher le score</value>
+    <value>점수 표시</value>
   </data>
   <data name="RichPres_ShowRank" xml:space="preserve">
-    <value>Afficher le grade</value>
+    <value>랭크 표시</value>
   </data>
   <data name="RichPres_ShowGamemode" xml:space="preserve">
-    <value>Afficher le Mode de Jeu</value>
+    <value>게임 모드 표시</value>
   </data>
   <data name="GameMode_UpdateText" xml:space="preserve">
-    <value>En attente de la mise à jour de VALORANT...</value>
+    <value>VALORANT 업데이트를 기다리는 중…</value>
   </data>
   <data name="GameMode_PartyText" xml:space="preserve">
-    <value>GROUPE</value>
+    <value>파티</value>
   </data>
   <data name="Support_SupportAssistText" xml:space="preserve">
-    <value>Soutenir Assist</value>
+    <value>Assist를 지원</value>
   </data>
   <data name="Support_SupportAssistDesc" xml:space="preserve">
-    <value>Aidez à maintenir le projet en vie ! Il y a de nombreuses manières d'aider Assist. Quelques options sont listées ci-dessous.</value>
+    <value>Assist 계속을 위해 협력하십시오! 지원에는 여러 가지 방법이 있습니다. 아래에 몇 가지 방법이 있습니다.</value>
   </data>
   <data name="Popup_GameModeWarning" xml:space="preserve">
-    <value>VALORANT est actuellement ouvert. &#x0a; Souhaitez-vous ouvrir Mode de Jeu?</value>
+    <value>VALORANT 켜짐</value>
   </data>
   <data name="Settings_General" xml:space="preserve">
-    <value>Général</value>
+    <value>일반</value>
   </data>
   <data name="Settings_Accounts" xml:space="preserve">
-    <value>Comptes</value>
+    <value>계정들</value>
   </data>
   <data name="Settings_AssistAccount" xml:space="preserve">
-    <value>Assistance de Compte </value>
+    <value>Assist 계정</value>
   </data>
   <data name="Settings_Resolution" xml:space="preserve">
-    <value>Résolution :</value>
+    <value>해상도</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Changer de langue :</value>
+    <value>어너 선택</value>
   </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
-    <value>Activer le GPU :</value>
+    <value>GPU 사용</value>
   </data>
   <data name="Settings_EnableGpuWarning" xml:space="preserve">
-    <value>Activer le GPU permet à Assist d'être plus performant, mais cela utilisera plus de ressources.</value>
+    <value>GPU를 사용하면 Assist의 성능이 향상되지만 리소스 소비도 증가합니다.</value>
   </data>
   <data name="Settings_RestartReq" xml:space="preserve">
-    <value>Un redémarrage est nécessaire pour appliquer les changements.</value>
+    <value>설정 적용하게 리스타트 시켜 주십시오</value>
   </data>
   <data name="Settings_Launch" xml:space="preserve">
-    <value>Paramètres de lancement </value>
+    <value>부팅 설정</value>
   </data>
   <data name="Settings_EnableGameMode" xml:space="preserve">
-    <value>Mode de jeu activé :</value>
+    <value>게임모드 사용:</value>
   </data>
   <data name="Assist_UsersOnline" xml:space="preserve">
-    <value>Utilisateur en ligne</value>
+    <value>온라인 사용자</value>
   </data>
   <data name="Assist_CheckingForUpdates" xml:space="preserve">
-    <value>Recherche de mise à jours...</value>
+    <value>업데이트 확인 중...</value>
   </data>
   <data name="Assist_Updating" xml:space="preserve">
-    <value>Mise à jour...</value>
+    <value>업데이트 중...</value>
   </data>
   <data name="Leagues_Join" xml:space="preserve">
-    <value>Rejoindre la League</value>
+    <value>리그에 가입</value>
   </data>
   <data name="Leagues_Leave" xml:space="preserve">
-    <value>Quitter la League</value>
+    <value>리그 탈퇴</value>
   </data>
   <data name="Leagues_Queue" xml:space="preserve">
-    <value>Queue</value>
+    <value>큐</value>
   </data>
   <data name="Leagues_Announcement" xml:space="preserve">
-    <value>Annonces</value>
+    <value>공고</value>
   </data>
   <data name="Leagues_Leaderboard" xml:space="preserve">
-    <value>Classement</value>
+    <value>리더보드</value>
   </data>
   <data name="Leagues_Swap" xml:space="preserve">
-    <value>Sélectionner une langue :</value>
+    <value>리그 선택</value>
   </data>
   <data name="Assist_Chat" xml:space="preserve">
-    <value>Chat</value>
+    <value>채팅</value>
   </data>
   <data name="Assist_EnterMessage" xml:space="preserve">
-    <value>Entrer un message..</value>
+    <value>메시지 입력...</value>
   </data>
   <data name="Global_Send" xml:space="preserve">
-    <value>Envoyer</value>
+    <value>전송</value>
   </data>
 </root>

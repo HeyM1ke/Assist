@@ -118,288 +118,288 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AssistTitle" xml:space="preserve">
-    <value>Assist</value>
+    <value>助理</value>
   </data>
   <data name="Authentication_LoginText" xml:space="preserve">
-    <value>CONNEXION</value>
+    <value>登入</value>
   </data>
   <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
-    <value>Code</value>
+    <value>驗證碼</value>
   </data>
   <data name="Authentication_MultiFactorDescription" xml:space="preserve">
-    <value>Entrez votre code d'authentification multifacteur</value>
+    <value>輸入您的二次驗證碼</value>
   </data>
   <data name="Authentication_PasswordText" xml:space="preserve">
-    <value>Mot de passe</value>
+    <value>密碼</value>
   </data>
   <data name="Authentication_RiotClientTitle" xml:space="preserve">
-    <value>Client Riot</value>
+    <value>Riot用戶端</value>
   </data>
   <data name="Authentication_RiotClientTitleDescription" xml:space="preserve">
-    <value>Connectez-vous avec votre Client Riot Games.</value>
+    <value>使用Riot用戶端登入</value>
   </data>
   <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
-    <value>Connectez-vous avec le Client Riot! Quand vous vous connectez, assurez-vous d'avoir l'option « Se souvenir de moi » activée. Sélectionnez toutes les options « Se souvenir de moi » lors de la connexion ou celle-ci ne sera pas valide. Cliquez sur « Connexion » quand vous serez prêt !</value>
+    <value>當您使用Riot用戶端登入時，請確保您已勾選“保持登入”這個選項。所有的帳號登入都需要點擊”保持登入“的選項，否則會無法登入！當您準備好了請點擊登入！</value>
   </data>
   <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
-    <value>Se connecter avec le nom d'utilisateur et le mot de passe Riot Games. Recommandé</value>
+    <value>使用Riot使用者名稱和密碼登入。[推薦]</value>
   </data>
   <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
-    <value>Nom d'utilisateur/Mot de passe</value>
+    <value>使用者名稱/密碼</value>
   </data>
   <data name="Authentication_UsernameText" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>使用者名稱</value>
   </data>
   <data name="GameLaunch_PlayText" xml:space="preserve">
-    <value>JOUER</value>
+    <value>起動</value>
   </data>
   <data name="GameLaunch_SelectedPatchlineText" xml:space="preserve">
-    <value>Version de jeu sélectionnée :</value>
+    <value>選擇版本:</value>
   </data>
   <data name="NavigationBar_Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
+    <value>儀表板</value>
   </data>
   <data name="NavigationBar_Progression" xml:space="preserve">
-    <value>Progression</value>
+    <value>進度</value>
   </data>
   <data name="NavigationBar_Store" xml:space="preserve">
-    <value>Boutique</value>
+    <value>商店</value>
   </data>
   <data name="Navigation_BackText" xml:space="preserve">
-    <value>Retour</value>
+    <value>返回</value>
   </data>
   <data name="ProfileManager_AddAccountText" xml:space="preserve">
-    <value>Ajouter un Compte</value>
+    <value>新增帳號</value>
   </data>
   <data name="ProfileManager_LogoutText" xml:space="preserve">
-    <value>Déconnexion</value>
+    <value>登出</value>
   </data>
   <data name="ProfileManager_ManageAccountText" xml:space="preserve">
-    <value>Gérer les comptes</value>
+    <value>帳號管理</value>
   </data>
   <data name="Profile_LossText" xml:space="preserve">
-    <value>DÉFAITE</value>
+    <value>輸</value>
   </data>
   <data name="Profile_WonText" xml:space="preserve">
-    <value>VICTOIRE</value>
+    <value>贏</value>
   </data>
   <data name="Progression_DailyMissions" xml:space="preserve">
-    <value>Missions Quotidiennes</value>
+    <value>每日任務</value>
   </data>
   <data name="Progression_WeeklyMissions" xml:space="preserve">
-    <value>Missions de la semaine</value>
+    <value>每週任務</value>
   </data>
   <data name="Store_FeaturedText" xml:space="preserve">
-    <value>Nouveautés</value>
+    <value>精選</value>
   </data>
   <data name="Store_OffersText" xml:space="preserve">
-    <value>Offres</value>
+    <value>提供</value>
   </data>
   <data name="GameMode_Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
+    <value>儀表板</value>
   </data>
   <data name="GameMode_Live" xml:space="preserve">
     <value>LIVE</value>
   </data>
   <data name="GameMode_Modules" xml:space="preserve">
-    <value>Modules</value>
+    <value>模組</value>
   </data>
   <data name="GameMode_Lobbies" xml:space="preserve">
-    <value>Lobbys</value>
+    <value>遊戲大廳</value>
   </data>
   <data name="GameMode_Leagues" xml:space="preserve">
-    <value>Ligues</value>
+    <value>特務</value>
   </data>
   <data name="GameMode_Dodge" xml:space="preserve">
-    <value>ÉVITER</value>
+    <value>棄賽</value>
   </data>
   <data name="GameMode_RichPres" xml:space="preserve">
-    <value>Rich Presence</value>
+    <value>狀態顯示</value>
   </data>
   <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
-    <value>Système d'alerte d'évitement Assist. Vous avertit lorsqu'un joueur que vous avez marqué se trouve dans votre équipe.</value>
+    <value>當一名被標記要棄賽的玩家在您隊伍裡時，Assist棄賽警示系統會警告您。</value>
   </data>
   <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
-    <value>Rich Presence d'Assist. Ajoute à votre profil Discord un statut de votre partie VALORANT en cours.</value>
+    <value>Assist狀態顯示會在Discord顯示您在特戰英豪的遊戲狀態。</value>
   </data>
   <data name="GameMode_AllyTeam" xml:space="preserve">
-    <value>ALLIÉ</value>
+    <value>隊友</value>
   </data>
   <data name="GameMode_EnemyTeam" xml:space="preserve">
-    <value>ENNEMI</value>
+    <value>敵人</value>
   </data>
   <data name="GameMode_EnableGlobalText" xml:space="preserve">
-    <value>Activer la liste globale</value>
+    <value>開啟Global List</value>
   </data>
   <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
-    <value>Une liste de joueurs vérifiés comme joueurs qui gâche des matchs, font des échanges de victoire, parient et plus.</value>
+    <value>全局躲閃玩家列表是一個認證的列表， 會列出演員, 送分玩家, 虛擬貨幣賭博等惡劣玩家。</value>
   </data>
   <data name="Global_BackText" xml:space="preserve">
-    <value>Retour</value>
+    <value>返回</value>
   </data>
   <data name="Global_Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>是</value>
   </data>
   <data name="Global_Switch" xml:space="preserve">
-    <value>Changer</value>
+    <value>切換</value>
   </data>
   <data name="Global_Remove" xml:space="preserve">
-    <value>Effacer</value>
+    <value>移除</value>
   </data>
   <data name="Global_No" xml:space="preserve">
-    <value>Non</value>
+    <value>否</value>
   </data>
   <data name="Global_Save" xml:space="preserve">
-    <value>Sauvegarder</value>
+    <value>保存</value>
   </data>
   <data name="Global_Apply" xml:space="preserve">
-    <value>Appliquer</value>
+    <value>套用</value>
   </data>
   <data name="Global_Add" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>新增</value>
   </data>
   <data name="Global_Clear" xml:space="preserve">
-    <value>Effacer</value>
+    <value>清除</value>
   </data>
   <data name="Global_Loading" xml:space="preserve">
-    <value>Chargement...</value>
+    <value>加載中...</value>
   </data>
   <data name="Global_Expired" xml:space="preserve">
-    <value>Expiré</value>
+    <value>已過期</value>
   </data>
   <data name="Global_Information" xml:space="preserve">
-    <value>Information</value>
+    <value>資訊</value>
   </data>
   <data name="Global_Support" xml:space="preserve">
-    <value>Support</value>
+    <value>幫助</value>
   </data>
   <data name="Dodge_AddPlayer" xml:space="preserve">
-    <value>Ajouter un joueur</value>
+    <value>新增玩家</value>
   </data>
   <data name="Dodge_AddPlayerDesc" xml:space="preserve">
-    <value>Si un joueur change de pseudo après que vous l'ayez ajouté, il restera dans la liste même après un changement de pseudo.</value>
+    <value>如果一名玩家在被您加入躲閃列表後更改了他的遊戲用戶名的話，Assist將會繼續自動跟踪改名後的用戶名並警示您。</value>
   </data>
   <data name="Dodge_AddTextOption" xml:space="preserve">
-    <value>Nom en jeu (NOMDUTILISATEUR#TAG):</value>
+    <value>遊戲名(使用者名稱#標籤)</value>
   </data>
   <data name="Dodge_AddTextOptionExample" xml:space="preserve">
-    <value>Exemple: UtilisateurAssist#EUW</value>
+    <value>例如: AssistUser#GMEUE</value>
   </data>
   <data name="Dodge_NoteTextOption" xml:space="preserve">
-    <value>Note (Facultatif):</value>
+    <value>備註(可選擇)</value>
   </data>
   <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
-    <value>Ex: Joueur est toxique</value>
+    <value>例如: 遊戲行為不良</value>
   </data>
   <data name="RichPres_Settings" xml:space="preserve">
-    <value>PARAMÈTRES</value>
+    <value>設定</value>
   </data>
   <data name="RichPres_Privacy" xml:space="preserve">
-    <value>Paramètres de confidentialité</value>
+    <value>隱私設定</value>
   </data>
   <data name="RichPres_Enable" xml:space="preserve">
-    <value>Activer Rich Presence de Discord</value>
+    <value>啟用Discord狀態顯示</value>
   </data>
   <data name="RichPres_Details" xml:space="preserve">
-    <value>Détails</value>
+    <value>詳情</value>
   </data>
   <data name="RichPres_LargeImage" xml:space="preserve">
-    <value>Image large</value>
+    <value>大圖</value>
   </data>
   <data name="RichPres_SmallImage" xml:space="preserve">
-    <value>Petite image</value>
+    <value>小圖</value>
   </data>
   <data name="RichPres_ShowParty" xml:space="preserve">
-    <value>Afficher la taille du groupe</value>
+    <value>顯示團隊人數</value>
   </data>
   <data name="RichPres_ShowScore" xml:space="preserve">
-    <value>Afficher le score</value>
+    <value>顯示比分</value>
   </data>
   <data name="RichPres_ShowRank" xml:space="preserve">
-    <value>Afficher le grade</value>
+    <value>顯示牌位</value>
   </data>
   <data name="RichPres_ShowGamemode" xml:space="preserve">
-    <value>Afficher le Mode de Jeu</value>
+    <value>顯示遊戲模式</value>
   </data>
   <data name="GameMode_UpdateText" xml:space="preserve">
-    <value>En attente de la mise à jour de VALORANT...</value>
+    <value>等待Valorant更新...</value>
   </data>
   <data name="GameMode_PartyText" xml:space="preserve">
-    <value>GROUPE</value>
+    <value>團隊</value>
   </data>
   <data name="Support_SupportAssistText" xml:space="preserve">
-    <value>Soutenir Assist</value>
+    <value>幫助Assist</value>
   </data>
   <data name="Support_SupportAssistDesc" xml:space="preserve">
-    <value>Aidez à maintenir le projet en vie ! Il y a de nombreuses manières d'aider Assist. Quelques options sont listées ci-dessous.</value>
+    <value>幫助項目! 以下有幾種方式能支持項目發展</value>
   </data>
   <data name="Popup_GameModeWarning" xml:space="preserve">
-    <value>VALORANT est actuellement ouvert. &#x0a; Souhaitez-vous ouvrir Mode de Jeu?</value>
+    <value>Valorant已啟動。&#x0a; 您想打開遊戲模式嗎?</value>
   </data>
   <data name="Settings_General" xml:space="preserve">
-    <value>Général</value>
+    <value>一般</value>
   </data>
   <data name="Settings_Accounts" xml:space="preserve">
-    <value>Comptes</value>
+    <value>帳號</value>
   </data>
   <data name="Settings_AssistAccount" xml:space="preserve">
-    <value>Assistance de Compte </value>
+    <value>Assist帳號</value>
   </data>
   <data name="Settings_Resolution" xml:space="preserve">
-    <value>Résolution :</value>
+    <value>解析度</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Changer de langue :</value>
+    <value>更換特務</value>
   </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
-    <value>Activer le GPU :</value>
+    <value>啟用GPU加速</value>
   </data>
   <data name="Settings_EnableGpuWarning" xml:space="preserve">
-    <value>Activer le GPU permet à Assist d'être plus performant, mais cela utilisera plus de ressources.</value>
+    <value>開啟GPU加速能讓Assist的運行更加流暢, 但是會佔用GPU更多資源。</value>
   </data>
   <data name="Settings_RestartReq" xml:space="preserve">
-    <value>Un redémarrage est nécessaire pour appliquer les changements.</value>
+    <value>如果要應用設定，電腦須重啟</value>
   </data>
   <data name="Settings_Launch" xml:space="preserve">
-    <value>Paramètres de lancement </value>
+    <value>啟動設定</value>
   </data>
   <data name="Settings_EnableGameMode" xml:space="preserve">
-    <value>Mode de jeu activé :</value>
+    <value>啟動遊戲模式</value>
   </data>
   <data name="Assist_UsersOnline" xml:space="preserve">
-    <value>Utilisateur en ligne</value>
+    <value>在線玩家玩家</value>
   </data>
   <data name="Assist_CheckingForUpdates" xml:space="preserve">
-    <value>Recherche de mise à jours...</value>
+    <value>檢查更新中...</value>
   </data>
   <data name="Assist_Updating" xml:space="preserve">
-    <value>Mise à jour...</value>
+    <value>更新中...</value>
   </data>
   <data name="Leagues_Join" xml:space="preserve">
-    <value>Rejoindre la League</value>
+    <value>加入團隊</value>
   </data>
   <data name="Leagues_Leave" xml:space="preserve">
-    <value>Quitter la League</value>
+    <value>離開團隊</value>
   </data>
   <data name="Leagues_Queue" xml:space="preserve">
-    <value>Queue</value>
+    <value>排隊</value>
   </data>
   <data name="Leagues_Announcement" xml:space="preserve">
-    <value>Annonces</value>
+    <value>公告</value>
   </data>
   <data name="Leagues_Leaderboard" xml:space="preserve">
-    <value>Classement</value>
+    <value>排行榜</value>
   </data>
   <data name="Leagues_Swap" xml:space="preserve">
-    <value>Sélectionner une langue :</value>
+    <value>選擇特務</value>
   </data>
   <data name="Assist_Chat" xml:space="preserve">
-    <value>Chat</value>
+    <value>聊天</value>
   </data>
   <data name="Assist_EnterMessage" xml:space="preserve">
-    <value>Entrer un message..</value>
+    <value>輸入訊息...</value>
   </data>
   <data name="Global_Send" xml:space="preserve">
-    <value>Envoyer</value>
+    <value>發送</value>
   </data>
 </root>

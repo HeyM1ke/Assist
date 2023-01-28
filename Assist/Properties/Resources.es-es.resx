@@ -139,7 +139,7 @@
     <value>Inicia sesión con tu Cliente de Riot Games.</value>
   </data>
   <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
-    <value>¡Inicia Sesión con el cliente de Riot! Cuando inicie sesión, asegúrese de tener "Recuérdame" habilitado. Seleccione todas las opciones de "Recuérdame" al iniciar sesión o no será válido. ¡Haz clic en Iniciar Sesión cuando estés listo!</value>
+    <value>¡Inicia sesión con el cliente de Riot! Cuando inicies sesión, asegúrate de tener "Recuérdame" habilitado. Seleccione todas las opciones de "Recuérdame" al iniciar sesión o no será válido. ¡Haz clic en Iniciar Sesión cuando estés listo!</value>
   </data>
   <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
     <value>Inicia sesión con tu Nombre de Usuario y Contraseña de Riot Games. Recomendado</value>

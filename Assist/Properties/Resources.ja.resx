@@ -121,285 +121,285 @@
     <value>Assist</value>
   </data>
   <data name="Authentication_LoginText" xml:space="preserve">
-    <value>CONNEXION</value>
+    <value>ログイン</value>
   </data>
   <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
-    <value>Code</value>
+    <value>コード</value>
   </data>
   <data name="Authentication_MultiFactorDescription" xml:space="preserve">
-    <value>Entrez votre code d'authentification multifacteur</value>
+    <value>多要素確認コードを入力してください</value>
   </data>
   <data name="Authentication_PasswordText" xml:space="preserve">
-    <value>Mot de passe</value>
+    <value>パスワード</value>
   </data>
   <data name="Authentication_RiotClientTitle" xml:space="preserve">
-    <value>Client Riot</value>
+    <value>Riotクライアント</value>
   </data>
   <data name="Authentication_RiotClientTitleDescription" xml:space="preserve">
-    <value>Connectez-vous avec votre Client Riot Games.</value>
+    <value>Riot Gamesクライアントでログイン</value>
   </data>
   <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
-    <value>Connectez-vous avec le Client Riot! Quand vous vous connectez, assurez-vous d'avoir l'option « Se souvenir de moi » activée. Sélectionnez toutes les options « Se souvenir de moi » lors de la connexion ou celle-ci ne sera pas valide. Cliquez sur « Connexion » quand vous serez prêt !</value>
+    <value>Riotクライアントからログインをお願いします！ログイン後、必ず「Remember me」を選択して下さい。準備が出来たらログインを選択して下さい。</value>
   </data>
   <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
-    <value>Se connecter avec le nom d'utilisateur et le mot de passe Riot Games. Recommandé</value>
+    <value>Riot Gamesのユーザー名とパスワードでログインする(推奨)</value>
   </data>
   <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
-    <value>Nom d'utilisateur/Mot de passe</value>
+    <value>ユーザー名/パスワード</value>
   </data>
   <data name="Authentication_UsernameText" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>ユーザー名</value>
   </data>
   <data name="GameLaunch_PlayText" xml:space="preserve">
-    <value>JOUER</value>
+    <value>PLAY</value>
   </data>
   <data name="GameLaunch_SelectedPatchlineText" xml:space="preserve">
-    <value>Version de jeu sélectionnée :</value>
+    <value>選択されたパッチ</value>
   </data>
   <data name="NavigationBar_Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
+    <value>ダッシュボード</value>
   </data>
   <data name="NavigationBar_Progression" xml:space="preserve">
-    <value>Progression</value>
+    <value>進行度</value>
   </data>
   <data name="NavigationBar_Store" xml:space="preserve">
-    <value>Boutique</value>
+    <value>ストア</value>
   </data>
   <data name="Navigation_BackText" xml:space="preserve">
-    <value>Retour</value>
+    <value>戻る</value>
   </data>
   <data name="ProfileManager_AddAccountText" xml:space="preserve">
-    <value>Ajouter un Compte</value>
+    <value>アカウントを追加</value>
   </data>
   <data name="ProfileManager_LogoutText" xml:space="preserve">
-    <value>Déconnexion</value>
+    <value>ログアウト</value>
   </data>
   <data name="ProfileManager_ManageAccountText" xml:space="preserve">
-    <value>Gérer les comptes</value>
+    <value>アカウントを管理</value>
   </data>
   <data name="Profile_LossText" xml:space="preserve">
-    <value>DÉFAITE</value>
+    <value>敗北</value>
   </data>
   <data name="Profile_WonText" xml:space="preserve">
-    <value>VICTOIRE</value>
+    <value>勝利</value>
   </data>
   <data name="Progression_DailyMissions" xml:space="preserve">
-    <value>Missions Quotidiennes</value>
+    <value>デイリーミッション</value>
   </data>
   <data name="Progression_WeeklyMissions" xml:space="preserve">
-    <value>Missions de la semaine</value>
+    <value>ウィークリーミッション</value>
   </data>
   <data name="Store_FeaturedText" xml:space="preserve">
-    <value>Nouveautés</value>
+    <value>注目</value>
   </data>
   <data name="Store_OffersText" xml:space="preserve">
-    <value>Offres</value>
+    <value>オファー</value>
   </data>
   <data name="GameMode_Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
+    <value>ダッシュボード</value>
   </data>
   <data name="GameMode_Live" xml:space="preserve">
     <value>LIVE</value>
   </data>
   <data name="GameMode_Modules" xml:space="preserve">
-    <value>Modules</value>
+    <value>モジュール</value>
   </data>
   <data name="GameMode_Lobbies" xml:space="preserve">
-    <value>Lobbys</value>
+    <value>ロビー</value>
   </data>
   <data name="GameMode_Leagues" xml:space="preserve">
-    <value>Ligues</value>
+    <value>リーグ</value>
   </data>
   <data name="GameMode_Dodge" xml:space="preserve">
-    <value>ÉVITER</value>
+    <value>対戦回避</value>
   </data>
   <data name="GameMode_RichPres" xml:space="preserve">
     <value>Rich Presence</value>
   </data>
   <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
-    <value>Système d'alerte d'évitement Assist. Vous avertit lorsqu'un joueur que vous avez marqué se trouve dans votre équipe.</value>
+    <value>Assist試合放棄警告システム。これはあなたがマークしたプレイヤーがあなたのチームにいるとき、あなたに警告をする機能です。</value>
   </data>
   <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
-    <value>Rich Presence d'Assist. Ajoute à votre profil Discord un statut de votre partie VALORANT en cours.</value>
+    <value>Assist Rich Presence. これはあなたのディスコードのライブステータスに現在のVALORANTの試合状況を表示するものです。</value>
   </data>
   <data name="GameMode_AllyTeam" xml:space="preserve">
-    <value>ALLIÉ</value>
+    <value>味方</value>
   </data>
   <data name="GameMode_EnemyTeam" xml:space="preserve">
-    <value>ENNEMI</value>
+    <value>敵</value>
   </data>
   <data name="GameMode_EnableGlobalText" xml:space="preserve">
-    <value>Activer la liste globale</value>
+    <value>グローバルリストを有効化</value>
   </data>
   <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
-    <value>Une liste de joueurs vérifiés comme joueurs qui gâche des matchs, font des échanges de victoire, parient et plus.</value>
+    <value>マッチ放棄、八百長、賭博行為をしていると分類され、それが確認されたプレイヤーのリスト。</value>
   </data>
   <data name="Global_BackText" xml:space="preserve">
-    <value>Retour</value>
+    <value>戻る</value>
   </data>
   <data name="Global_Yes" xml:space="preserve">
-    <value>Oui</value>
+    <value>はい</value>
   </data>
   <data name="Global_Switch" xml:space="preserve">
-    <value>Changer</value>
+    <value>切り替え</value>
   </data>
   <data name="Global_Remove" xml:space="preserve">
-    <value>Effacer</value>
+    <value>削除</value>
   </data>
   <data name="Global_No" xml:space="preserve">
-    <value>Non</value>
+    <value>いいえ</value>
   </data>
   <data name="Global_Save" xml:space="preserve">
-    <value>Sauvegarder</value>
+    <value>保存</value>
   </data>
   <data name="Global_Apply" xml:space="preserve">
-    <value>Appliquer</value>
+    <value>適用</value>
   </data>
   <data name="Global_Add" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>追加</value>
   </data>
   <data name="Global_Clear" xml:space="preserve">
-    <value>Effacer</value>
+    <value>削除</value>
   </data>
   <data name="Global_Loading" xml:space="preserve">
-    <value>Chargement...</value>
+    <value>ロード中...</value>
   </data>
   <data name="Global_Expired" xml:space="preserve">
-    <value>Expiré</value>
+    <value>期限切れ</value>
   </data>
   <data name="Global_Information" xml:space="preserve">
-    <value>Information</value>
+    <value>情報</value>
   </data>
   <data name="Global_Support" xml:space="preserve">
-    <value>Support</value>
+    <value>サポート</value>
   </data>
   <data name="Dodge_AddPlayer" xml:space="preserve">
-    <value>Ajouter un joueur</value>
+    <value>プレイヤーを追加</value>
   </data>
   <data name="Dodge_AddPlayerDesc" xml:space="preserve">
-    <value>Si un joueur change de pseudo après que vous l'ayez ajouté, il restera dans la liste même après un changement de pseudo.</value>
+    <value>プレイヤーを追加後に名前が変更された場合。そのプレイヤーは名前が変わってもリストに残ります。</value>
   </data>
   <data name="Dodge_AddTextOption" xml:space="preserve">
-    <value>Nom en jeu (NOMDUTILISATEUR#TAG):</value>
+    <value>ゲーム内ネーム(ユーザー名#タグ)</value>
   </data>
   <data name="Dodge_AddTextOptionExample" xml:space="preserve">
-    <value>Exemple: UtilisateurAssist#EUW</value>
+    <value>例：Assistユーザー#GMEUE</value>
   </data>
   <data name="Dodge_NoteTextOption" xml:space="preserve">
-    <value>Note (Facultatif):</value>
+    <value>メモ(任意)</value>
   </data>
   <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
-    <value>Ex: Joueur est toxique</value>
+    <value>Ex: ユーザーは暴言を吐いています</value>
   </data>
   <data name="RichPres_Settings" xml:space="preserve">
-    <value>PARAMÈTRES</value>
+    <value>設定</value>
   </data>
   <data name="RichPres_Privacy" xml:space="preserve">
-    <value>Paramètres de confidentialité</value>
+    <value>プライバシー設定</value>
   </data>
   <data name="RichPres_Enable" xml:space="preserve">
-    <value>Activer Rich Presence de Discord</value>
+    <value>Discord Rich Presenceを有効にする</value>
   </data>
   <data name="RichPres_Details" xml:space="preserve">
-    <value>Détails</value>
+    <value>詳細</value>
   </data>
   <data name="RichPres_LargeImage" xml:space="preserve">
-    <value>Image large</value>
+    <value>大きい画像</value>
   </data>
   <data name="RichPres_SmallImage" xml:space="preserve">
-    <value>Petite image</value>
+    <value>小さい画像</value>
   </data>
   <data name="RichPres_ShowParty" xml:space="preserve">
-    <value>Afficher la taille du groupe</value>
+    <value>パーティーの人数を表示</value>
   </data>
   <data name="RichPres_ShowScore" xml:space="preserve">
-    <value>Afficher le score</value>
+    <value>スコアを表示</value>
   </data>
   <data name="RichPres_ShowRank" xml:space="preserve">
-    <value>Afficher le grade</value>
+    <value>ランクを表示</value>
   </data>
   <data name="RichPres_ShowGamemode" xml:space="preserve">
-    <value>Afficher le Mode de Jeu</value>
+    <value>ゲームモードを表示</value>
   </data>
   <data name="GameMode_UpdateText" xml:space="preserve">
-    <value>En attente de la mise à jour de VALORANT...</value>
+    <value>VALORANTからの更新を待機中…</value>
   </data>
   <data name="GameMode_PartyText" xml:space="preserve">
-    <value>GROUPE</value>
+    <value>パーティー</value>
   </data>
   <data name="Support_SupportAssistText" xml:space="preserve">
-    <value>Soutenir Assist</value>
+    <value>Assistをサポートする</value>
   </data>
   <data name="Support_SupportAssistDesc" xml:space="preserve">
-    <value>Aidez à maintenir le projet en vie ! Il y a de nombreuses manières d'aider Assist. Quelques options sont listées ci-dessous.</value>
+    <value>プロジェクトの継続のためにご協力ください！支援にはさまざまな方法があります。以下にいくつかの方法を掲載しています。</value>
   </data>
   <data name="Popup_GameModeWarning" xml:space="preserve">
-    <value>VALORANT est actuellement ouvert. &#x0a; Souhaitez-vous ouvrir Mode de Jeu?</value>
+    <value>VALORANTは現在起動されています。&#x0a; 「ゲームモード」を開きますか？</value>
   </data>
   <data name="Settings_General" xml:space="preserve">
-    <value>Général</value>
+    <value>一般</value>
   </data>
   <data name="Settings_Accounts" xml:space="preserve">
-    <value>Comptes</value>
+    <value>アカウント</value>
   </data>
   <data name="Settings_AssistAccount" xml:space="preserve">
-    <value>Assistance de Compte </value>
+    <value>Assistアカウント</value>
   </data>
   <data name="Settings_Resolution" xml:space="preserve">
-    <value>Résolution :</value>
+    <value>解像度</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Changer de langue :</value>
+    <value>言語を変える:</value>
   </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
-    <value>Activer le GPU :</value>
+    <value>GPUを有効化:</value>
   </data>
   <data name="Settings_EnableGpuWarning" xml:space="preserve">
-    <value>Activer le GPU permet à Assist d'être plus performant, mais cela utilisera plus de ressources.</value>
+    <value>GPUを有効化することでAssistのパフォーマンスが向上しますが、リソース消費も増加します。</value>
   </data>
   <data name="Settings_RestartReq" xml:space="preserve">
-    <value>Un redémarrage est nécessaire pour appliquer les changements.</value>
+    <value>設定を適用するには、再起動する必要があります。</value>
   </data>
   <data name="Settings_Launch" xml:space="preserve">
-    <value>Paramètres de lancement </value>
+    <value>起動設定</value>
   </data>
   <data name="Settings_EnableGameMode" xml:space="preserve">
-    <value>Mode de jeu activé :</value>
+    <value>次のゲームモードを有効化:</value>
   </data>
   <data name="Assist_UsersOnline" xml:space="preserve">
-    <value>Utilisateur en ligne</value>
+    <value>オンラインのユーザー</value>
   </data>
   <data name="Assist_CheckingForUpdates" xml:space="preserve">
-    <value>Recherche de mise à jours...</value>
+    <value>アップデートをチェック中...</value>
   </data>
   <data name="Assist_Updating" xml:space="preserve">
-    <value>Mise à jour...</value>
+    <value>更新中...</value>
   </data>
   <data name="Leagues_Join" xml:space="preserve">
-    <value>Rejoindre la League</value>
+    <value>リーグに加入</value>
   </data>
   <data name="Leagues_Leave" xml:space="preserve">
-    <value>Quitter la League</value>
+    <value>リーグを脱退</value>
   </data>
   <data name="Leagues_Queue" xml:space="preserve">
-    <value>Queue</value>
+    <value>キュー</value>
   </data>
   <data name="Leagues_Announcement" xml:space="preserve">
-    <value>Annonces</value>
+    <value>お知らせ</value>
   </data>
   <data name="Leagues_Leaderboard" xml:space="preserve">
-    <value>Classement</value>
+    <value>リーダーボード</value>
   </data>
   <data name="Leagues_Swap" xml:space="preserve">
-    <value>Sélectionner une langue :</value>
+    <value>リーグを選択</value>
   </data>
   <data name="Assist_Chat" xml:space="preserve">
-    <value>Chat</value>
+    <value>チャット</value>
   </data>
   <data name="Assist_EnterMessage" xml:space="preserve">
-    <value>Entrer un message..</value>
+    <value>メッセージを入力..</value>
   </data>
   <data name="Global_Send" xml:space="preserve">
-    <value>Envoyer</value>
+    <value>送信</value>
   </data>
 </root>

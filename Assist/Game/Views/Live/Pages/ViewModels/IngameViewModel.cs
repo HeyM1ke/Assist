@@ -163,7 +163,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             {
                 if (string.IsNullOrEmpty(MatchId))
                 {
-                    Setup();
+                    await Setup();
                 }
                 
                 MatchResp = await AssistApplication.Current.CurrentUser.CoreGame.FetchMatch(MatchId!);

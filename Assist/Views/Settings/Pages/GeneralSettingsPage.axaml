@@ -57,6 +57,13 @@
 				        <ComboBoxItem Content="German"></ComboBoxItem>
 				        <ComboBoxItem Content="Chinese Simplified"></ComboBoxItem>
 				        <ComboBoxItem Content="Portuguese"></ComboBoxItem>
+                        <ComboBoxItem Content="Japanese"></ComboBoxItem>
+                        <ComboBoxItem Content="Vietnamese"></ComboBoxItem>
+                        <ComboBoxItem Content="Chinese Traditional"></ComboBoxItem>
+                        <ComboBoxItem Content="Korean"></ComboBoxItem>
+                        <ComboBoxItem Content="Russian"></ComboBoxItem>
+                        <ComboBoxItem Content="Greek"></ComboBoxItem>
+                        <ComboBoxItem Content="Turkish"></ComboBoxItem>
 			        </ComboBox>
 		        </Grid>
 	        </Border>

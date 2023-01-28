@@ -240,6 +240,12 @@
   <data name="Global_Yes" xml:space="preserve">
     <value>是</value>
   </data>
+  <data name="Global_Switch" xml:space="preserve">
+    <value>切换</value>
+  </data>
+  <data name="Global_Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
   <data name="Global_No" xml:space="preserve">
     <value>否</value>
   </data>
@@ -343,7 +349,7 @@
     <value>分辨率</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Change Language:</value>
+    <value>更改语言</value>
   </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
     <value>开启GPU加速</value>
@@ -353,5 +359,47 @@
   </data>
   <data name="Settings_RestartReq" xml:space="preserve">
     <value>如果要应用这些设定改变, Assist需要重启。</value>
+  </data>
+  <data name="Settings_Launch" xml:space="preserve">
+    <value>启动设定</value>
+  </data>
+  <data name="Settings_EnableGameMode" xml:space="preserve">
+    <value>开启游戏模式</value>
+  </data>
+  <data name="Assist_UsersOnline" xml:space="preserve">
+    <value>在线用户</value>
+  </data>
+  <data name="Assist_CheckingForUpdates" xml:space="preserve">
+    <value>检查更新...</value>
+  </data>
+  <data name="Assist_Updating" xml:space="preserve">
+    <value>更新中...</value>
+  </data>
+  <data name="Leagues_Join" xml:space="preserve">
+    <value>加入团队</value>
+  </data>
+  <data name="Leagues_Leave" xml:space="preserve">
+    <value>离开团队</value>
+  </data>
+  <data name="Leagues_Queue" xml:space="preserve">
+    <value>队列</value>
+  </data>
+  <data name="Leagues_Announcement" xml:space="preserve">
+    <value>公告</value>
+  </data>
+  <data name="Leagues_Leaderboard" xml:space="preserve">
+    <value>排行榜</value>
+  </data>
+  <data name="Leagues_Swap" xml:space="preserve">
+    <value>选择一个团队</value>
+  </data>
+  <data name="Assist_Chat" xml:space="preserve">
+    <value>聊天</value>
+  </data>
+  <data name="Assist_EnterMessage" xml:space="preserve">
+    <value>输入消息...</value>
+  </data>
+  <data name="Global_Send" xml:space="preserve">
+    <value>发送</value>
   </data>
 </root>
