@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:gDashboard="clr-namespace:Assist.Game.Controls.GDashboard"
+             mc:Ignorable="d" 
+             d:DesignWidth="300" 
+             d:DesignHeight="800"
+             Loaded="GlobalChatBox_Loaded"
+             Unloaded="GlobalChatBox_Unloaded"
+             x:Class="Assist.Game.Controls.GDashboard.GlobalChatBox">
+  <Border>
+      <Grid Margin="10" RowDefinitions="*,Auto">
+          <Grid>
+              <Border Background="{DynamicResource AssistLightBackground}">
+                  <Grid>
+                      <ScrollViewer>
+                          <ItemsControl VerticalAlignment="Bottom"
+                                        Margin="7,12"
+                                        Items="{Binding MessageControls}"
+                          >
+                              <ItemsControl.ItemsPanel>
+                                  <ItemsPanelTemplate>
+                                      <StackPanel Orientation="Vertical" Spacing="14"
+
+                                      />
+                                  </ItemsPanelTemplate>
+                              </ItemsControl.ItemsPanel>
+                          </ItemsControl>
+
+
+					  </ScrollViewer>
+                  </Grid>
+              </Border>
+          </Grid>
+          <Grid Grid.Row="1"
+                Margin="0,5"
+                ColumnDefinitions="Auto,Auto">
+<Grid.Styles>
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{DynamicResource AssistLightBackground}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextInputFocus}" />
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextInputHover}" />
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+</Grid.Styles>
+            <TextBox Grid.Column="0"
+                     x:Name="ChatMessageTextBox"
+                     Watermark="Message"
+                     TextWrapping="WrapWithOverflow"
+                     Width="240"
+                     MaxLength="128"
+                     FontFamily="{StaticResource WorkSans}"
+                     FontWeight="Regular"
+                     Margin="0,0,5,0"></TextBox>
+            <Button
+                    Height="60"
+                    Grid.Column="1"
+                    Click="SendMessageBtn_Click">
+                <Image Source="/Resources/Game/ArrowRight_Icon.png"
+                       Width="16"></Image>
+            </Button>
+        </Grid>
+      </Grid>
+  </Border>
+</UserControl>

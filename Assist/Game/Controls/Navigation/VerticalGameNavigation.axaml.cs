@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
+using Assist.Game.Views.GDashboard;
 using Assist.Game.Views.Live.Pages;
 using Assist.Game.Views.Lobbies;
 using Assist.Game.Views.Modules;
@@ -25,7 +26,7 @@ namespace Assist.Game.Controls.Navigation
             DataContext = _viewModel = new VertGameNavVM();
             Instance = this;
             InitializeComponent();
-            //NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
+            NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LiveBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("ModulesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));
@@ -34,7 +35,12 @@ namespace Assist.Game.Controls.Navigation
 
         private void DashboardBtn_OnClick(object? sender, RoutedEventArgs e)
         {
-            
+            ClearSelected();
+
+            if (GameViewNavigationController.CurrentPage != Services.Page.DASHBOARD)
+                GameViewNavigationController.Change(new Views.GDashboard.GDashboard());
+
+            (sender as NavButton).IsSelected = true;
         }
         private void LiveBtn_OnClick(object? sender, RoutedEventArgs e)
         {

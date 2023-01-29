@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using Assist.Game.Services;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
@@ -8,6 +9,8 @@ public partial class GDashboard : UserControl
 {
     public GDashboard()
     {
+
+        GameViewNavigationController.CurrentPage = Page.DASHBOARD;
         InitializeComponent();
     }
 

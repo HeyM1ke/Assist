@@ -2,11 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:gDashboard="clr-namespace:Assist.Game.Controls.GDashboard"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.GDashboard.GDashboard">
-    <Grid>
+    <Grid Margin="10"
+          ColumnDefinitions="Auto, Auto">
         
+
+        <Grid Column="1">
+            <gDashboard:GlobalChatBox/>
+        </Grid>
     </Grid>
 </UserControl>
