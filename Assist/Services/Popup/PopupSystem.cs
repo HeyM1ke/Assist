@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Controls.Global.Popup;
+using Avalonia.Threading;
 
 namespace Assist.Services.Popup
 {
@@ -28,11 +29,14 @@ namespace Assist.Services.Popup
 
         public static void KillPopups()
         {
-            if (PopupController != null)
+            Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                Log.Information("Killing popup on Main Window");
-                PopupController.Children.Clear();
-            }
+                if (PopupController != null)
+                {
+                    Log.Information("Killing popup on Main Window");
+                    PopupController.Children.Clear();
+                }
+            });
 
         }
 
@@ -43,7 +47,10 @@ namespace Assist.Services.Popup
 
         public static void SpawnCustomPopup(UserControl control)
         {
-            PopupController.Children.Add(control);
+            Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                PopupController.Children.Add(control);
+            });
         }
     }
 

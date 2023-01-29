@@ -10,6 +10,7 @@ using Assist.Objects.AssistApi.Game;
 using Assist.Objects.RiotSocket;
 using Assist.Services.Popup;
 using Assist.ViewModels;
+using Avalonia.Threading;
 using Serilog;
 using Serilog.Core;
 using ValNet.Enums;
@@ -150,7 +151,7 @@ public class LobbyService
         await AssistApplication.Current.GameServerConnection.PartyInviteSentFromAssist(data);
     }
     
-    private void GameServerConnectionOnLOBBY_InviteSentFromCreator(string? obj)
+    private async void GameServerConnectionOnLOBBY_InviteSentFromCreator(string? obj)
     {
         Log.Information("Received an Invite from a Creator");
         var data = JsonSerializer.Deserialize<InvitePlayerData>(obj);
@@ -158,8 +159,11 @@ public class LobbyService
         Log.Information("recieved an invite for party of id of: " + data.PartyId);
         try
         {
-            PopupSystem.SpawnCustomPopup(new LoadingPopup());
-            AssistApplication.Current.CurrentUser.Party.JoinParty(data.PartyId);
+            Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                PopupSystem.SpawnCustomPopup(new LoadingPopup());
+            });
+            await AssistApplication.Current.CurrentUser.Party.JoinParty(data.PartyId);
             Log.Information("Joined Party of id " + data.PartyId);
         }
         catch (Exception e)
@@ -167,10 +171,16 @@ public class LobbyService
             Log.Error("Failed to Join party from an Invite to the expected lobby.");
             Log.Error("Failed to Join party from an Invite to the expected lobby. MESSAGE " + e.Message);
             Log.Error("Failed to Join party from an Invite to the expected lobby. STACK " + e.StackTrace);
-            PopupSystem.KillPopups();
+            Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                PopupSystem.KillPopups();
+            });
             return;
         }
-        PopupSystem.KillPopups();
+        Dispatcher.UIThread.InvokeAsync(async () =>
+        {
+            PopupSystem.KillPopups();
+        });
     }
     
     private async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
