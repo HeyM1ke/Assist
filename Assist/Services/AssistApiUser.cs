@@ -149,7 +149,19 @@ namespace Assist.Services
             
             throw new RequestException(data.StatusCode, content, content);
         }
-        
+        public async Task<List<AssistLobby>> GetAllLobbies(string regionCode)
+        {
+            var data = await userClient.GetAsync($"{LobbiesUrl}/all/{regionCode.ToLower()}");
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode)
+            {
+                return JsonSerializer.Deserialize<List<AssistLobby>>(content);
+            }
+
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+
         public async Task<JoinLobbyData> JoinLobbyById(string lobbyId, string? password = null)
         {
             var builder = new UriBuilder($"{LobbiesUrl}/join/id/{lobbyId}");

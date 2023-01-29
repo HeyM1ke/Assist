@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Lobbies;
 using Assist.Objects.AssistApi.Game;
 using Assist.ViewModels;
 using ReactiveUI;
+using ValNet.Enums;
 
 namespace Assist.Game.Views.Lobbies.ViewModels;
 
@@ -35,7 +37,7 @@ public class BrowserViewModel : ViewModelBase
         // Get Users Region LATER
         // Make Request to get Lobbies
         // Store all Lobbies in Storage.
-        AllLobbiesStorage = await AssistApplication.Current.AssistUser.GetAllLobbies();
+        AllLobbiesStorage = await AssistApplication.Current.AssistUser.GetAllLobbies(Enum.GetName(typeof(RiotRegion), AssistApplication.Current.CurrentUser.GetRegion()));
 
         List<LobbyBrowserPreviewControl> controls = new List<LobbyBrowserPreviewControl>();
         for (int i = 0; i < AllLobbiesStorage.Count; i++)
@@ -81,7 +83,7 @@ public class BrowserViewModel : ViewModelBase
     {
         IsLoading = true;
         
-        AllLobbiesStorage = await AssistApplication.Current.AssistUser.GetAllLobbies();
+        AllLobbiesStorage = await AssistApplication.Current.AssistUser.GetAllLobbies(Enum.GetName(typeof(RiotRegion), AssistApplication.Current.CurrentUser.GetRegion()));
 
         List<LobbyBrowserPreviewControl> controls = new List<LobbyBrowserPreviewControl>();
         for (int i = 0; i < AllLobbiesStorage.Count; i++)
