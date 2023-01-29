@@ -61,9 +61,11 @@
                      MaxLength="128"
                      FontFamily="{StaticResource WorkSans}"
                      FontWeight="Regular"
+                     KeyDown="ChatMessageTextBox_OnKeyDown"
                      Margin="0,0,5,0"></TextBox>
             <Button
                     Height="60"
+                    x:Name="SendMessageBtn"
                     Grid.Column="1"
                     Click="SendMessageBtn_Click">
                 <Image Source="/Resources/Game/ArrowRight_Icon.png"

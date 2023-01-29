@@ -15,7 +15,7 @@ namespace Assist.Game.Services;
 public class AssistGameServerConnection : HubClient
 {
     public event Action<object>? RecieveMessageEvent;
-    private const string GAMESERVERURL = "https://localhost:7253/game/main";
+    private const string GAMESERVERURL = "https://api.assistapp.dev/game/main";
 
     public event Action<string?> LOBBY_InviteRequested;
     public event Action<string?> LOBBY_InviteSentFromCreator;

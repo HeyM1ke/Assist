@@ -10,7 +10,6 @@
 	<Grid>
         
 		<Border x:Name="Backing"
-                Background="{DynamicResource ArticleControlBacking}"
                 HorizontalAlignment="Left"
                 CornerRadius="10"
                 >

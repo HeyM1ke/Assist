@@ -3,6 +3,7 @@ using Assist.Game.Controls.GDashboard.ViewModels;
 using Assist.Objects.AssistApi.Server;
 using Assist.ViewModels;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 
 namespace Assist.Game.Controls.GDashboard
@@ -22,11 +23,16 @@ namespace Assist.Game.Controls.GDashboard
             (sender as Button).IsEnabled = false;
             var messageTextBox = this.GetControl<TextBox>("ChatMessageTextBox");
 
-            if(string.IsNullOrEmpty(messageTextBox.Text))
+            if (string.IsNullOrEmpty(messageTextBox.Text))
+            {
+                (sender as Button).IsEnabled = true;
                 return;
+            }
+                
 
             
             _viewModel.SendMessage(messageTextBox.Text);
+            messageTextBox.Text = string.Empty;
             (sender as Button).IsEnabled = true;
         }
 
@@ -49,6 +55,14 @@ namespace Assist.Game.Controls.GDashboard
         private void GlobalChatBox_Unloaded(object? sender, RoutedEventArgs e)
         {
             AssistApplication.Current.GameServerConnection.GLOBALCHAT_MessageReceived -= GameServerConnectionOnGLOBALCHAT_MessageReceived;
+        }
+
+        private void ChatMessageTextBox_OnKeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SendMessageBtn_Click(this.GetControl<Button>("SendMessageBtn"), null);
+            }
         }
     }
 }
