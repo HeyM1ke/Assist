@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AssistTitle" xml:space="preserve">
+    <value>Assist</value>
+  </data>
+  <data name="Authentication_LoginText" xml:space="preserve">
+    <value>ANMELDEN</value>
+  </data>
+  <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Authentication_MultiFactorDescription" xml:space="preserve">
+    <value>Gib deinen 2-Faktor-Authentifizierungscode ein</value>
+  </data>
+  <data name="Authentication_PasswordText" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Authentication_RiotClientTitle" xml:space="preserve">
+    <value>Riot Client</value>
+  </data>
+  <data name="Authentication_RiotClientTitleDescription" xml:space="preserve">
+    <value>Melde dich mit dem Riot Games Client an.</value>
+  </data>
+  <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
+    <value>Melde dich mit dem Riot Client an! Wenn du dich anmeldest, gehe sicher, dass du "Angemeldet bleiben" auswählst. Wähle alle "Angemeldet bleiben" Optionen aus, ansonsten funktioniert die Anmeldung nicht. Drücke "Anmelden", wenn du bereit bist!</value>
+  </data>
+  <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
+    <value>Melde dich mit deinem Riot Games Benutzernamen und Passwort an. Empfohlen</value>
+  </data>
+  <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
+    <value>Benutzername/Passwort</value>
+  </data>
+  <data name="Authentication_UsernameText" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="GameLaunch_PlayText" xml:space="preserve">
+    <value>SPIELEN</value>
+  </data>
+  <data name="GameLaunch_SelectedPatchlineText" xml:space="preserve">
+    <value>Ausgewählte Spielversion:</value>
+  </data>
+  <data name="NavigationBar_Dashboard" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="NavigationBar_Progression" xml:space="preserve">
+    <value>Fortschritt</value>
+  </data>
+  <data name="NavigationBar_Store" xml:space="preserve">
+    <value>Shop</value>
+  </data>
+  <data name="Navigation_BackText" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="ProfileManager_AddAccountText" xml:space="preserve">
+    <value>Account hinzufügen</value>
+  </data>
+  <data name="ProfileManager_LogoutText" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="ProfileManager_ManageAccountText" xml:space="preserve">
+    <value>Account verwalten</value>
+  </data>
+  <data name="Profile_LossText" xml:space="preserve">
+    <value>VERLOREN</value>
+  </data>
+  <data name="Profile_WonText" xml:space="preserve">
+    <value>GEWONNEN</value>
+  </data>
+  <data name="Progression_DailyMissions" xml:space="preserve">
+    <value>Tägliche Missionen</value>
+  </data>
+  <data name="Progression_WeeklyMissions" xml:space="preserve">
+    <value>Wöchentliche Missionen</value>
+  </data>
+  <data name="Store_FeaturedText" xml:space="preserve">
+    <value>Vorgestellt</value>
+  </data>
+  <data name="Store_OffersText" xml:space="preserve">
+    <value>Angebote</value>
+  </data>
+  <data name="GameMode_Dashboard" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="GameMode_Live" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
+  <data name="GameMode_Modules" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="GameMode_Lobbies" xml:space="preserve">
+    <value>Lobbies</value>
+  </data>
+  <data name="GameMode_Leagues" xml:space="preserve">
+    <value>Ligen</value>
+  </data>
+  <data name="GameMode_Dodge" xml:space="preserve">
+    <value>Vermeiden</value>
+  </data>
+  <data name="GameMode_RichPres" xml:space="preserve">
+    <value>Aktivitätsstatus</value>
+  </data>
+  <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
+    <value>Assist Dodge Warn-System. Gibt dir eine Vorwarnung, wenn ein Spieler, den du markiert hast, in deinem Team ist.</value>
+  </data>
+  <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
+    <value>Assist Aktivitätsstaus. Gibt deinem Discord-Profil einen Live-Status von deinem aktuellen VALORANT-Spiel.</value>
+  </data>
+  <data name="GameMode_AllyTeam" xml:space="preserve">
+    <value>VERBÜNDETER</value>
+  </data>
+  <data name="GameMode_EnemyTeam" xml:space="preserve">
+    <value>GEGNER</value>
+  </data>
+  <data name="GameMode_EnableGlobalText" xml:space="preserve">
+    <value>Aktiviere globale Liste</value>
+  </data>
+  <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
+    <value>Eine Liste an verifizierten Spielern, die als Spieler klassifiziert wurden, die Spiele manipulieren, negativ beeinflussen und Ähnliches.</value>
+  </data>
+  <data name="Global_BackText" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="Global_Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="Global_Switch" xml:space="preserve">
+    <value>Wechseln</value>
+  </data>
+  <data name="Global_Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Global_No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Global_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Global_Apply" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="Global_Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Global_Clear" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Global_Loading" xml:space="preserve">
+    <value>Lädt...</value>
+  </data>
+  <data name="Global_Expired" xml:space="preserve">
+    <value>Ausgelaufen</value>
+  </data>
+  <data name="Global_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Global_Support" xml:space="preserve">
+    <value>Unterstützung</value>
+  </data>
+  <data name="Dodge_AddPlayer" xml:space="preserve">
+    <value>Spieler hinzufügen</value>
+  </data>
+  <data name="Dodge_AddPlayerDesc" xml:space="preserve">
+    <value>Wenn ein Spieler den Namen ändert, nachdem du sie hinzugefügt hast. Spieler werden weiterhin in der Liste angezeigt, auch wenn sie ihren Namen geändert haben.</value>
+  </data>
+  <data name="Dodge_AddTextOption" xml:space="preserve">
+    <value>Spiel Name (BENUTZERNAME#TAG):</value>
+  </data>
+  <data name="Dodge_AddTextOptionExample" xml:space="preserve">
+    <value>Bsp: AssistUser#GMEUE</value>
+  </data>
+  <data name="Dodge_NoteTextOption" xml:space="preserve">
+    <value>Notiz (Optional):</value>
+  </data>
+  <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
+    <value>Beispiel: Nutzer ist toxisch</value>
+  </data>
+  <data name="RichPres_Settings" xml:space="preserve">
+    <value>EINSTELLUNGEN</value>
+  </data>
+  <data name="RichPres_Privacy" xml:space="preserve">
+    <value>PRIVATSPHÄRE EINSTELLUNGEN</value>
+  </data>
+  <data name="RichPres_Enable" xml:space="preserve">
+    <value>Discord Aktivitätsstatus Einschalten</value>
+  </data>
+  <data name="RichPres_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="RichPres_LargeImage" xml:space="preserve">
+    <value>Großes Bild</value>
+  </data>
+  <data name="RichPres_SmallImage" xml:space="preserve">
+    <value>Kleines Bild</value>
+  </data>
+  <data name="RichPres_ShowParty" xml:space="preserve">
+    <value>Zeige Party Größe</value>
+  </data>
+  <data name="RichPres_ShowScore" xml:space="preserve">
+    <value>Spielstand anzeigen</value>
+  </data>
+  <data name="RichPres_ShowRank" xml:space="preserve">
+    <value>Rang anzeigen</value>
+  </data>
+  <data name="RichPres_ShowGamemode" xml:space="preserve">
+    <value>Spielmodus anzeigen</value>
+  </data>
+  <data name="GameMode_UpdateText" xml:space="preserve">
+    <value>Warte auf VALORANT Update...</value>
+  </data>
+  <data name="GameMode_PartyText" xml:space="preserve">
+    <value>GRUPPE</value>
+  </data>
+  <data name="Support_SupportAssistText" xml:space="preserve">
+    <value>Unterstütze Assist</value>
+  </data>
+  <data name="Support_SupportAssistDesc" xml:space="preserve">
+    <value>Hilf uns das Projekt am Laufen zu halten! Es gibt viele verschiedene Wege Assist zu unterstützen. Hier sind einige Möglichkeiten aufgelistet.</value>
+  </data>
+  <data name="Popup_GameModeWarning" xml:space="preserve">
+    <value>VALORANT ist gerade geöffnet. &#x0a; Möchtest du den Game Modus öffnen?</value>
+  </data>
+  <data name="Settings_General" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="Settings_Accounts" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
+  <data name="Settings_AssistAccount" xml:space="preserve">
+    <value>Assist Account</value>
+  </data>
+  <data name="Settings_Resolution" xml:space="preserve">
+    <value>Auflösung:</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Sprache ändern:</value>
+  </data>
+  <data name="Settings_EnableGpu" xml:space="preserve">
+    <value>GPU aktivieren:</value>
+  </data>
+  <data name="Settings_EnableGpuWarning" xml:space="preserve">
+    <value>Assist läuft besser und performanter, wenn GPU aktiviert ist. Dafür verbraucht diese Einstellung mehr Leistung.</value>
+  </data>
+  <data name="Settings_RestartReq" xml:space="preserve">
+    <value>Neustart nötig um die Einstellungen anzuwenden.</value>
+  </data>
+  <data name="Settings_Launch" xml:space="preserve">
+    <value>Starteinstellungen</value>
+  </data>
+  <data name="Settings_EnableGameMode" xml:space="preserve">
+    <value>Game-Mode aktivieren:</value>
+  </data>
+  <data name="Assist_UsersOnline" xml:space="preserve">
+    <value>Benutzer Online</value>
+  </data>
+  <data name="Assist_CheckingForUpdates" xml:space="preserve">
+    <value>Suchen nach Updates...</value>
+  </data>
+  <data name="Assist_Updating" xml:space="preserve">
+    <value>Update läuft...</value>
+  </data>
+  <data name="Leagues_Join" xml:space="preserve">
+    <value>Einer Liga beitreten</value>
+  </data>
+  <data name="Leagues_Leave" xml:space="preserve">
+    <value>Liga verlassen</value>
+  </data>
+  <data name="Leagues_Queue" xml:space="preserve">
+    <value>Warteschlange</value>
+  </data>
+  <data name="Leagues_Announcement" xml:space="preserve">
+    <value>Ankündigung</value>
+  </data>
+  <data name="Leagues_Leaderboard" xml:space="preserve">
+    <value>Leaderbaord</value>
+  </data>
+  <data name="Leagues_Swap" xml:space="preserve">
+    <value>Wähle eine Sprache:</value>
+  </data>
+  <data name="Assist_Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="Assist_EnterMessage" xml:space="preserve">
+    <value>Nachricht eingeben..</value>
+  </data>
+  <data name="Global_Send" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+</root>

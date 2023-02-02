@@ -24,17 +24,17 @@ namespace Assist.Objects.Helpers
 
         public static Dictionary<string, string> MapsByPath = new Dictionary<string, string>
         {
-            {"/Game/Maps/Ascent/Ascent","Ascent"},
-            {"/Game/Maps/Bonsai/Bonsai","Split"},
-            {"/Game/Maps/Canyon/Canyon","Fracture"},
-            {"/Game/Maps/Duality/Duality","Bind"},
-            {"/Game/Maps/Foxtrot/Foxtrot","Breeze"},
-            {"/Game/Maps/Foxtrot_Copy/Foxtrot_Copy","Breeze"},
-            {"/Game/Maps/Pitt/Pitt","Pearl"},
-            {"/Game/Maps/Port/Port","Icebox"},
-            {"/Game/Maps/Poveglia/Range","The Range"},
-            {"/Game/Maps/Triad/Triad","Haven"},
-            {"/Game/Maps/Jam/Jam","Lotus"},
+            {"/game/maps/ascent/ascent","Ascent"},
+            {"/game/maps/bonsai/bonsai","Split"},
+            {"/game/maps/canyon/canyon","Fracture"},
+            {"/game/maps/duality/duality","Bind"},
+            {"/game/maps/foxtrot/foxtrot","Breeze"},
+            {"/game/maps/foxtrot_Copy/foxtrot_Copy","Breeze"},
+            {"/game/maps/pitt/pitt","Pearl"},
+            {"/game/maps/port/port","Icebox"},
+            {"/game/maps/poveglia/range","The Range"},
+            {"/game/maps/triad/triad","Haven"},
+            {"/game/maps/jam/jam","Lotus"},
         };
     }
 }

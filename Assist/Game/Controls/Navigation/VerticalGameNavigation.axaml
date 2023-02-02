@@ -1,0 +1,124 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:Assist.Game.Controls.Navigation"
+             mc:Ignorable="d" 
+             d:DesignWidth="225" 
+             d:DesignHeight="692"
+			 Background="{DynamicResource AssistLightBackground}"
+			 xmlns:assist="clr-namespace:Assist.Controls.Assist"
+			 xmlns:p="clr-namespace:Assist.Properties"
+             Initialized="VerticalGameNav_Init"
+			 x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
+	<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+          Margin="23,19">
+
+        <Grid Row="0">
+            <StackPanel Orientation="Vertical">
+				<StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="BETA"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Bold"
+                               Opacity=".7"
+                               Margin="0,0,0,0"></TextBlock>
+                    <Image x:Name="PART_AssistLogo"
+                           Source="../../../Resources/Icons/AssistText_Temp.png"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           ></Image>
+
+                </StackPanel>
+
+                <DockPanel Margin="0,5" HorizontalAlignment="Left">
+                    <Ellipse Fill="#82FF6D"
+                             Width="8"
+                             Height="8"
+                             DockPanel.Dock="Left"></Ellipse>
+                    <TextBlock Text="{Binding CurrentAssistUserCount}"
+                               Margin="7,0"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Medium"
+                               FontSize="12"></TextBlock>
+                </DockPanel>
+                <Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
+            </StackPanel>
+        </Grid>
+
+        <Grid Row="1"
+			  Height="420"
+              Margin="0,0">
+            <StackPanel VerticalAlignment="Top">
+				<navigation:NavButton CornerRadius="5"
+				                      x:Name="DashboardBtn"
+                                      Text="{x:Static p:Resources.GameMode_Dashboard}"
+                                      IsSelected="False"
+				                      Click="DashboardBtn_OnClick"
+									  Background="#191919"
+				                      IsVisible="False"
+                                      Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
+                <navigation:NavButton CornerRadius="5"
+                                      x:Name="LiveBtn"
+                                      Text="{x:Static p:Resources.GameMode_Live}"
+                                      Click="LiveBtn_OnClick"
+                                      Background="#191919"
+                                      Icon="/Resources/Game/Live_Icon.png"></navigation:NavButton>
+                <navigation:NavButton CornerRadius="5"
+                                      Text="{x:Static p:Resources.GameMode_Modules}"
+                                      x:Name="ModulesBtn"
+                                      Click="ModulesBtn_OnClick"
+                                      Background="#191919"
+                                      Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
+				<Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
+            </StackPanel>
+        </Grid>
+		
+        <Grid Row="2"
+              Margin="0,0">
+            <StackPanel VerticalAlignment="Top">
+                <navigation:NavButton CornerRadius="5"
+                                      Text="{x:Static p:Resources.Support_SupportAssistText}"
+                                      Click="SupportBtn_Click"
+                                      BorderBrush="#5CFFB1"
+                                      BorderThickness="1"
+                                      HighlightColor="#477A62"
+                                      IsVisible="False"
+                                      Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
+				<Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
+                
+            </StackPanel>
+        </Grid>
+		
+		<Grid Row="3"
+		      IsVisible="True"
+              Margin="0,0">
+			<StackPanel VerticalAlignment="Top">
+				<navigation:NavButton CornerRadius="5"
+                                      Text="{x:Static p:Resources.GameMode_Lobbies}"
+                                      x:Name="LobbiesBtn"
+                                      IsSpecial="True"
+                                      Click="LobbiesBtn_OnClick"
+									  Background="#191919"
+                                      Icon="/Resources/Game/Lobbies_Icon.png"/>
+
+				<Rectangle Height="2"
+                           Fill="#494A4E"
+                           Margin="0,4"></Rectangle>
+			</StackPanel>
+		</Grid>
+
+		<Grid Row="4">
+			<assist:UserPreview ></assist:UserPreview>
+		</Grid>
+		
+    </Grid>
+</UserControl>

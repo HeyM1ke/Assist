@@ -11,6 +11,12 @@
 	<Application.Resources>
 		<!-- Color Resources -->
 
+        <SolidColorBrush x:Key="AssistBackground" Color="#0F0F0F"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistLightBackground" Color="#191919"></SolidColorBrush>
+
+
+
+
 		<SolidColorBrush  x:Key="AssistRed" Color="#F61E51"/>
 		<SolidColorBrush  x:Key="AssistGray" Color="#17181D"/>
 		<SolidColorBrush  x:Key="AssistBlack" Color="#101115"/>
@@ -182,12 +188,14 @@
 
 		<!--GameMode-->
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>
-
+        <StyleInclude Source="avares://Assist/Game/Controls/Navigation/NavButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Lobbies/LobbyBrowserPreviewControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/GameAuthenticationButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Modules/Dodge/DodgeAddUserButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Modules/Dodge/DodgeUserButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Modules/ModuleSelectionControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Live/LiveMenuPartyUser.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/GDashboard/GlobalChatMessageControl.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
 

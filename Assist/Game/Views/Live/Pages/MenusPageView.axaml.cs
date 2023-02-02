@@ -4,6 +4,7 @@ using Assist.Game.Services;
 using Assist.Game.Views.Live.Pages.ViewModels;
 using Assist.Objects.RiotSocket;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using ValNet.Objects.Local;
 
 namespace Assist.Game.Views.Live.Pages
@@ -30,6 +31,11 @@ namespace Assist.Game.Views.Live.Pages
         private async void MenuPage_Init(object? sender, EventArgs e)
         {
             _viewModel.Setup(initalMessage!);
+        }
+
+        private void MenuPageControl_OnUnloaded(object? sender, RoutedEventArgs e)
+        {
+            _viewModel.UnsubscribeFromEvents();
         }
     }
 }

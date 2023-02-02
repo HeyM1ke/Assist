@@ -9,6 +9,7 @@ using Assist.Views.Authentication;
 using Assist.Views.Dashboard;
 using Assist.Views.Startup;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
@@ -19,9 +20,11 @@ namespace Assist
         
         private readonly MainWindowViewModel _viewModel;
         private int number = 0;
+        WindowNotificationManager notificationManager;
         public MainWindow()
         {
             DataContext = _viewModel = new MainWindowViewModel();
+            notificationManager = new WindowNotificationManager(this);
             _viewModel.DetermineScaleRate();
             InitializeComponent();
         }
@@ -32,22 +35,14 @@ namespace Assist
             PopupSystem.PopupController = this.FindControl<PopupMaster>("PopupMaster");
         }
 
-
-        private void Button_OnClick(object? sender, RoutedEventArgs e)
-        {
-            if(number % 2 == 0)
-                MainWindowContentController.Change(new MainView());
-            else
-            {
-                MainWindowContentController.Change(new AuthenticationView());
-            }
-
-            number++;
-        }
-
         public void ChangeResolution(EResolution res)
         {
             _viewModel.ChangeResolution(res);
+        }
+
+        public void ChangeGameResolution(EResolution res)
+        {
+            _viewModel.ChangeGameModeResolution(res);
         }
     }
 }

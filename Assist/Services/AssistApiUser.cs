@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Assist.Objects.AssistApi.Game;
 using Avalonia.Controls;
 using DynamicData;
 using ValNet.Objects.Exceptions;
@@ -19,6 +21,7 @@ namespace Assist.Services
         private const string BaseUrl = "https://api.assistapp.dev{0}";
         private string AuthenticationUrl => String.Format(BaseUrl, "/authentication/auth");
         private string UserInfoUrl => String.Format(BaseUrl, "/user/userinfo");
+        private string LobbiesUrl => String.Format(BaseUrl, "/lobbies");
         private string ChangeUsernameUrl => String.Format(BaseUrl, "/user/changeusername");
         private string GetDodgeList => String.Format(BaseUrl, "/dodge/global/list");
         private string CheckDodgeStatus => String.Format(BaseUrl, "/dodge/check");
@@ -130,6 +133,100 @@ namespace Assist.Services
             return false;
         }
 
+
+
+        #region Lobbies
+
+        public async Task<List<AssistLobby>> GetAllLobbies()
+        {
+            var data = await userClient.GetAsync($"{LobbiesUrl}/all");
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode)
+            {
+                return JsonSerializer.Deserialize<List<AssistLobby>>(content);
+            }
+
+            
+            throw new RequestException(data.StatusCode, content, content);
+        }
+        public async Task<List<AssistLobby>> GetAllLobbies(string regionCode)
+        {
+            var data = await userClient.GetAsync($"{LobbiesUrl}/all/{regionCode.ToLower()}");
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode)
+            {
+                return JsonSerializer.Deserialize<List<AssistLobby>>(content);
+            }
+
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+
+        public async Task<JoinLobbyData> JoinLobbyById(string lobbyId, string? password = null)
+        {
+            var builder = new UriBuilder($"{LobbiesUrl}/join/id/{lobbyId}");
+            
+            if (!string.IsNullOrEmpty(password))
+            {
+                builder.Query = $"password={password}";
+            }
+            
+            var data = await userClient.PostAsync(builder.ToString(), null);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode)
+            {
+                return JsonSerializer.Deserialize<JoinLobbyData>(content);
+            }
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+        
+        public async Task<JoinLobbyData> JoinLobbyByCode(string code, string? password = null)
+        {
+            var builder = new UriBuilder($"{LobbiesUrl}/join/code/{code}");
+            
+            if (!string.IsNullOrEmpty(password))
+            {
+                builder.Query = $"password={password}";
+            }
+            
+            var data = await userClient.PostAsync(builder.ToString(), null);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode || data.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return JsonSerializer.Deserialize<JoinLobbyData>(content);
+            }
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+        
+        public async Task<CreateLobbyResp> CreateLobby(CreateLobbyData lobbyData)
+        {
+            var jsonContent = new StringContent(JsonSerializer.Serialize(lobbyData), Encoding.UTF8, "application/json");
+            var data = await userClient.PostAsync($"{LobbiesUrl}/create", jsonContent);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode || data.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return JsonSerializer.Deserialize<CreateLobbyResp>(content);
+            }
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+        
+        public async Task<HttpResponseMessage> UpdateLobby(UpdateLobbyData lobbyData)
+        {
+            var jsonContent = new StringContent(JsonSerializer.Serialize(lobbyData), Encoding.UTF8, "application/json");
+            var data = await userClient.PostAsync($"{LobbiesUrl}/update", jsonContent);
+            var content = await data.Content.ReadAsStringAsync();
+            if (data.IsSuccessStatusCode || data.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return data;
+            }
+
+            throw new RequestException(data.StatusCode, content, content);
+        }
+
+        #endregion
     }
 
     internal class AssistToken

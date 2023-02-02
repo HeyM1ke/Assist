@@ -28,14 +28,13 @@ namespace Assist.Services.Server
 
         public void Recieve_UpdateTotalUsers(int? users)
         {
-            if (users != null) RecieveMessageEvent.Invoke(users);
-            Log.Information("Got Updated User Count");
+            if (users != null) RecieveMessageEvent?.Invoke(users);
         }
         
 
         public void Disconnect()
         {
-            
+            base.CloseHub();
         }
     }
 }

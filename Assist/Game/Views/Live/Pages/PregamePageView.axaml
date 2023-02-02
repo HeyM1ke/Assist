@@ -8,7 +8,8 @@
              d:DesignWidth="1125"
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.Live.Pages.PregamePageView"
-             Initialized="PreGamePage_Init">
+             Initialized="PreGamePage_Init"
+             Unloaded="PregamePageControl_OnUnloaded">
   <Grid Margin="15">
       <Border Width="300"
               Background="#101115"
@@ -52,7 +53,7 @@
                                   HorizontalAlignment="Center"
                                   FontSize="36" IsVisible="False"></TextBlock>
 
-                       <Image Source="../../../../Resources/Icons/Assist_Logo_SweetRed_LQ.png"
+                       <Image Source="/Resources/Icons/Assist_Logo_SweetRed_LQ.png"
                               Width="38"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"></Image>

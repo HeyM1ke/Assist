@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Controls.Settings.ProfileControl">
   <UserControl.Styles>
@@ -60,13 +61,13 @@
 								Orientation="Horizontal"
 								HorizontalAlignment="Center"
                                  >
-						<Button Content="SWITCH"
+						<Button Content="{x:Static p:Resources.Global_Switch}"
 								IsEnabled="{Binding isSwitchEnabled}"
 								Classes="switchremove"
 								Click="SwitchBtn_OnClick"
 								x:Name="SwitchBtn"
                                      ></Button>
-						<Button Content="REMOVE"
+						<Button Content="{x:Static p:Resources.Global_Remove}"
 								Classes="switchremove"
                                 Click="RemoveBtn_OnClick"></Button>
 					</StackPanel>
@@ -78,6 +79,7 @@
 				Source="{Binding AccountPlayercard}"
 				Width="65"
 				Height="65"
+				CornerRadius="10"
 				Grid.RowSpan="2"
 				Margin="7"
 				VerticalAlignment="Top"

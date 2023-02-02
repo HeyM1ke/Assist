@@ -3,13 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Game.Views.Live.Pages.UnkownPageView">
 	<Grid>
         <StackPanel VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Spacing="10">
-            <TextBlock Text="Waiting for Update."
+            <TextBlock Text="{x:Static p:Resources.GameMode_UpdateText}"
                        FontFamily="{StaticResource WorkSans}"
                        FontWeight="Regular"
                        HorizontalAlignment="Center"

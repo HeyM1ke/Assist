@@ -7,14 +7,26 @@ using Serilog;
 
 namespace Assist.Services.Server
 {
-    internal class HubClient
+    public class HubClient
     {
         protected HubConnection _hubConnection;
         public string HubConnectionUrl { get; set; }
         public string? ConnectionId => _hubConnection.ConnectionId;
         protected void Init()
         {
-            _hubConnection = new HubConnectionBuilder().WithUrl(HubConnectionUrl).Build();
+            _hubConnection = new HubConnectionBuilder().WithUrl(HubConnectionUrl).WithAutomaticReconnect().Build();
+
+            _hubConnection.Reconnected += _hubConnection_Reconnected;
+            _hubConnection.Reconnecting += _hubConnection_Reconnecting;
+            _hubConnection.Closed += _hubConnection_Closed;
+        }
+        
+        protected void InitWithAuth(string accessToken)
+        {
+            _hubConnection = new HubConnectionBuilder().WithUrl(HubConnectionUrl, settings =>
+            {
+                settings.AccessTokenProvider = () => Task.FromResult(accessToken);
+            }).WithAutomaticReconnect().Build();
 
             _hubConnection.Reconnected += _hubConnection_Reconnected;
             _hubConnection.Reconnecting += _hubConnection_Reconnecting;

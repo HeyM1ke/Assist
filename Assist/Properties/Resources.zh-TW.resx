@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AssistTitle" xml:space="preserve">
+    <value>助理</value>
+  </data>
+  <data name="Authentication_LoginText" xml:space="preserve">
+    <value>登入</value>
+  </data>
+  <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
+    <value>驗證碼</value>
+  </data>
+  <data name="Authentication_MultiFactorDescription" xml:space="preserve">
+    <value>輸入您的二次驗證碼</value>
+  </data>
+  <data name="Authentication_PasswordText" xml:space="preserve">
+    <value>密碼</value>
+  </data>
+  <data name="Authentication_RiotClientTitle" xml:space="preserve">
+    <value>Riot用戶端</value>
+  </data>
+  <data name="Authentication_RiotClientTitleDescription" xml:space="preserve">
+    <value>使用Riot用戶端登入</value>
+  </data>
+  <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
+    <value>當您使用Riot用戶端登入時，請確保您已勾選“保持登入”這個選項。所有的帳號登入都需要點擊”保持登入“的選項，否則會無法登入！當您準備好了請點擊登入！</value>
+  </data>
+  <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
+    <value>使用Riot使用者名稱和密碼登入。[推薦]</value>
+  </data>
+  <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
+    <value>使用者名稱/密碼</value>
+  </data>
+  <data name="Authentication_UsernameText" xml:space="preserve">
+    <value>使用者名稱</value>
+  </data>
+  <data name="GameLaunch_PlayText" xml:space="preserve">
+    <value>起動</value>
+  </data>
+  <data name="GameLaunch_SelectedPatchlineText" xml:space="preserve">
+    <value>選擇版本:</value>
+  </data>
+  <data name="NavigationBar_Dashboard" xml:space="preserve">
+    <value>儀表板</value>
+  </data>
+  <data name="NavigationBar_Progression" xml:space="preserve">
+    <value>進度</value>
+  </data>
+  <data name="NavigationBar_Store" xml:space="preserve">
+    <value>商店</value>
+  </data>
+  <data name="Navigation_BackText" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="ProfileManager_AddAccountText" xml:space="preserve">
+    <value>新增帳號</value>
+  </data>
+  <data name="ProfileManager_LogoutText" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="ProfileManager_ManageAccountText" xml:space="preserve">
+    <value>帳號管理</value>
+  </data>
+  <data name="Profile_LossText" xml:space="preserve">
+    <value>輸</value>
+  </data>
+  <data name="Profile_WonText" xml:space="preserve">
+    <value>贏</value>
+  </data>
+  <data name="Progression_DailyMissions" xml:space="preserve">
+    <value>每日任務</value>
+  </data>
+  <data name="Progression_WeeklyMissions" xml:space="preserve">
+    <value>每週任務</value>
+  </data>
+  <data name="Store_FeaturedText" xml:space="preserve">
+    <value>精選</value>
+  </data>
+  <data name="Store_OffersText" xml:space="preserve">
+    <value>提供</value>
+  </data>
+  <data name="GameMode_Dashboard" xml:space="preserve">
+    <value>儀表板</value>
+  </data>
+  <data name="GameMode_Live" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
+  <data name="GameMode_Modules" xml:space="preserve">
+    <value>模組</value>
+  </data>
+  <data name="GameMode_Lobbies" xml:space="preserve">
+    <value>遊戲大廳</value>
+  </data>
+  <data name="GameMode_Leagues" xml:space="preserve">
+    <value>特務</value>
+  </data>
+  <data name="GameMode_Dodge" xml:space="preserve">
+    <value>棄賽</value>
+  </data>
+  <data name="GameMode_RichPres" xml:space="preserve">
+    <value>狀態顯示</value>
+  </data>
+  <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
+    <value>當一名被標記要棄賽的玩家在您隊伍裡時，Assist棄賽警示系統會警告您。</value>
+  </data>
+  <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
+    <value>Assist狀態顯示會在Discord顯示您在特戰英豪的遊戲狀態。</value>
+  </data>
+  <data name="GameMode_AllyTeam" xml:space="preserve">
+    <value>隊友</value>
+  </data>
+  <data name="GameMode_EnemyTeam" xml:space="preserve">
+    <value>敵人</value>
+  </data>
+  <data name="GameMode_EnableGlobalText" xml:space="preserve">
+    <value>開啟Global List</value>
+  </data>
+  <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
+    <value>全局躲閃玩家列表是一個認證的列表， 會列出演員, 送分玩家, 虛擬貨幣賭博等惡劣玩家。</value>
+  </data>
+  <data name="Global_BackText" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="Global_Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="Global_Switch" xml:space="preserve">
+    <value>切換</value>
+  </data>
+  <data name="Global_Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Global_No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="Global_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Global_Apply" xml:space="preserve">
+    <value>套用</value>
+  </data>
+  <data name="Global_Add" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="Global_Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="Global_Loading" xml:space="preserve">
+    <value>加載中...</value>
+  </data>
+  <data name="Global_Expired" xml:space="preserve">
+    <value>已過期</value>
+  </data>
+  <data name="Global_Information" xml:space="preserve">
+    <value>資訊</value>
+  </data>
+  <data name="Global_Support" xml:space="preserve">
+    <value>幫助</value>
+  </data>
+  <data name="Dodge_AddPlayer" xml:space="preserve">
+    <value>新增玩家</value>
+  </data>
+  <data name="Dodge_AddPlayerDesc" xml:space="preserve">
+    <value>如果一名玩家在被您加入躲閃列表後更改了他的遊戲用戶名的話，Assist將會繼續自動跟踪改名後的用戶名並警示您。</value>
+  </data>
+  <data name="Dodge_AddTextOption" xml:space="preserve">
+    <value>遊戲名(使用者名稱#標籤)</value>
+  </data>
+  <data name="Dodge_AddTextOptionExample" xml:space="preserve">
+    <value>例如: AssistUser#GMEUE</value>
+  </data>
+  <data name="Dodge_NoteTextOption" xml:space="preserve">
+    <value>備註(可選擇)</value>
+  </data>
+  <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
+    <value>例如: 遊戲行為不良</value>
+  </data>
+  <data name="RichPres_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="RichPres_Privacy" xml:space="preserve">
+    <value>隱私設定</value>
+  </data>
+  <data name="RichPres_Enable" xml:space="preserve">
+    <value>啟用Discord狀態顯示</value>
+  </data>
+  <data name="RichPres_Details" xml:space="preserve">
+    <value>詳情</value>
+  </data>
+  <data name="RichPres_LargeImage" xml:space="preserve">
+    <value>大圖</value>
+  </data>
+  <data name="RichPres_SmallImage" xml:space="preserve">
+    <value>小圖</value>
+  </data>
+  <data name="RichPres_ShowParty" xml:space="preserve">
+    <value>顯示團隊人數</value>
+  </data>
+  <data name="RichPres_ShowScore" xml:space="preserve">
+    <value>顯示比分</value>
+  </data>
+  <data name="RichPres_ShowRank" xml:space="preserve">
+    <value>顯示牌位</value>
+  </data>
+  <data name="RichPres_ShowGamemode" xml:space="preserve">
+    <value>顯示遊戲模式</value>
+  </data>
+  <data name="GameMode_UpdateText" xml:space="preserve">
+    <value>等待Valorant更新...</value>
+  </data>
+  <data name="GameMode_PartyText" xml:space="preserve">
+    <value>團隊</value>
+  </data>
+  <data name="Support_SupportAssistText" xml:space="preserve">
+    <value>幫助Assist</value>
+  </data>
+  <data name="Support_SupportAssistDesc" xml:space="preserve">
+    <value>幫助項目! 以下有幾種方式能支持項目發展</value>
+  </data>
+  <data name="Popup_GameModeWarning" xml:space="preserve">
+    <value>Valorant已啟動。&#x0a; 您想打開遊戲模式嗎?</value>
+  </data>
+  <data name="Settings_General" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="Settings_Accounts" xml:space="preserve">
+    <value>帳號</value>
+  </data>
+  <data name="Settings_AssistAccount" xml:space="preserve">
+    <value>Assist帳號</value>
+  </data>
+  <data name="Settings_Resolution" xml:space="preserve">
+    <value>解析度</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>更換特務</value>
+  </data>
+  <data name="Settings_EnableGpu" xml:space="preserve">
+    <value>啟用GPU加速</value>
+  </data>
+  <data name="Settings_EnableGpuWarning" xml:space="preserve">
+    <value>開啟GPU加速能讓Assist的運行更加流暢, 但是會佔用GPU更多資源。</value>
+  </data>
+  <data name="Settings_RestartReq" xml:space="preserve">
+    <value>如果要應用設定，電腦須重啟</value>
+  </data>
+  <data name="Settings_Launch" xml:space="preserve">
+    <value>啟動設定</value>
+  </data>
+  <data name="Settings_EnableGameMode" xml:space="preserve">
+    <value>啟動遊戲模式</value>
+  </data>
+  <data name="Assist_UsersOnline" xml:space="preserve">
+    <value>在線玩家玩家</value>
+  </data>
+  <data name="Assist_CheckingForUpdates" xml:space="preserve">
+    <value>檢查更新中...</value>
+  </data>
+  <data name="Assist_Updating" xml:space="preserve">
+    <value>更新中...</value>
+  </data>
+  <data name="Leagues_Join" xml:space="preserve">
+    <value>加入團隊</value>
+  </data>
+  <data name="Leagues_Leave" xml:space="preserve">
+    <value>離開團隊</value>
+  </data>
+  <data name="Leagues_Queue" xml:space="preserve">
+    <value>排隊</value>
+  </data>
+  <data name="Leagues_Announcement" xml:space="preserve">
+    <value>公告</value>
+  </data>
+  <data name="Leagues_Leaderboard" xml:space="preserve">
+    <value>排行榜</value>
+  </data>
+  <data name="Leagues_Swap" xml:space="preserve">
+    <value>選擇特務</value>
+  </data>
+  <data name="Assist_Chat" xml:space="preserve">
+    <value>聊天</value>
+  </data>
+  <data name="Assist_EnterMessage" xml:space="preserve">
+    <value>輸入訊息...</value>
+  </data>
+  <data name="Global_Send" xml:space="preserve">
+    <value>發送</value>
+  </data>
+</root>
