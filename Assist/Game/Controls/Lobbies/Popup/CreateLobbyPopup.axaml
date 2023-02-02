@@ -88,6 +88,7 @@
                                        IsVisible="{Binding LobbySuccessful}"
                                        FontWeight="Regular"/>
                             <Button Height="40"
+                                    IsVisible="False"
                                     Margin="10,0">
                                 <Image Width="10"
                                        Height="10"
