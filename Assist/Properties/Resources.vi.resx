@@ -217,7 +217,7 @@
     <value>Rich Presence</value>
   </data>
   <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
-    <value>Hỗ trợ hệ thống cảnh báo có người thoát trận. Cho bạn biết trước khi một người chơi mà bạn đánh dấu thuộc đội của bạn.</value>
+    <value>Hệ thống hỗ trợ cảnh báo có người thoát trận. Cho bạn biết trước khi một người chơi mà bạn đánh dấu thuộc đội của bạn.</value>
   </data>
   <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
     <value>Assist Rich Presence. Cung cấp cho hồ sơ Discord của bạn trạng thái trực tiếp của Trò chơi VALORANT.</value>
@@ -337,7 +337,7 @@
     <value>VALORANT đã mở. &#x0a; Bạn có muốn mở "Chế độ chơi"?</value>
   </data>
   <data name="Settings_General" xml:space="preserve">
-    <value>Chung</value>
+    <value>Cài đặt chung</value>
   </data>
   <data name="Settings_Accounts" xml:space="preserve">
     <value>Tài khoản</value>

@@ -214,13 +214,13 @@
     <value>対戦回避</value>
   </data>
   <data name="GameMode_RichPres" xml:space="preserve">
-    <value>Rich Presence</value>
+    <value>リッチプレゼンス</value>
   </data>
   <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
     <value>Assist試合放棄警告システム。これはあなたがマークしたプレイヤーがあなたのチームにいるとき、あなたに警告をする機能です。</value>
   </data>
   <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
-    <value>Assist Rich Presence. これはあなたのディスコードのライブステータスに現在のVALORANTの試合状況を表示するものです。</value>
+    <value>Assistリッチプレゼンス. ディスコードのアクティビティステータスに現在のVALORANTの試合状況を表示します。</value>
   </data>
   <data name="GameMode_AllyTeam" xml:space="preserve">
     <value>味方</value>
