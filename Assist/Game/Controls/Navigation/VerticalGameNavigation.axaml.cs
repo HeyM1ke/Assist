@@ -26,7 +26,7 @@ namespace Assist.Game.Controls.Navigation
             DataContext = _viewModel = new VertGameNavVM();
             Instance = this;
             InitializeComponent();
-            NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
+            //NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LiveBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("ModulesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));

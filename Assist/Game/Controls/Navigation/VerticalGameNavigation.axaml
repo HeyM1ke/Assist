@@ -18,7 +18,7 @@
             <StackPanel Orientation="Vertical">
 				<StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Left">
-                    <TextBlock Text="DEV BETA"
+                    <TextBlock Text="BETA"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"
                                FontFamily="{StaticResource WorkSans}"
@@ -57,10 +57,10 @@
 				<navigation:NavButton CornerRadius="5"
 				                      x:Name="DashboardBtn"
                                       Text="{x:Static p:Resources.GameMode_Dashboard}"
-                                      IsSelected="True"
+                                      IsSelected="False"
 				                      Click="DashboardBtn_OnClick"
 									  Background="#191919"
-				                      IsVisible="True"
+				                      IsVisible="False"
                                       Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
                                       x:Name="LiveBtn"
@@ -89,6 +89,7 @@
                                       BorderBrush="#5CFFB1"
                                       BorderThickness="1"
                                       HighlightColor="#477A62"
+                                      IsVisible="False"
                                       Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
 				<Rectangle Height="2"
                            Fill="#494A4E"

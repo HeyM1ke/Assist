@@ -16,7 +16,7 @@ namespace Assist.Game.Views
             DataContext = _viewModel = new GameViewViewModel();
             InitializeComponent();
             GameViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
-            GameViewNavigationController.Change(new GDashboard.GDashboard());
+            GameViewNavigationController.Change(new LiveView());
         }
 
         public GameView(UserControl pageToLoad)
