@@ -1,0 +1,30 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:leagues="clr-namespace:Assist.Game.Views.Leagues"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Game.Views.Leagues.LeagueMainPage">
+    <Grid Margin="10"
+          RowDefinitions="Auto,*">
+        <StackPanel Orientation="Horizontal"
+                    Spacing="5"
+                    VerticalAlignment="Top"
+                    Grid.Row="0">
+            <TextBlock Text="ASSIST OPEN LEAGUE"
+                       FontFamily="{StaticResource WorkSans}"
+                       FontWeight="ExtraBold"
+                       VerticalAlignment="Center"
+                       FontSize="32"
+                       />
+            <Polygon Points="0,0 12,0 6,12"
+                     Fill="White"
+                     Opacity=".3"
+                     VerticalAlignment="Center"
+                     />
+        </StackPanel>
+        
+        <leagues:LeaguesPage
+            Grid.Row="1"/>
+    </Grid>
+</UserControl>

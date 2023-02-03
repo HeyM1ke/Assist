@@ -74,6 +74,12 @@
                                       Click="ModulesBtn_OnClick"
                                       Background="#191919"
                                       Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
+	            <navigation:NavButton CornerRadius="5"
+	                                  x:Name="LeaguesBtn"
+	                                  Text="{x:Static p:Resources.GameMode_Leagues}"
+	                                  Click="LeaguesBtn_OnClick"
+	                                  Background="#191919"
+	                                  Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
 				<Rectangle Height="2"
                            Fill="#494A4E"
                            Margin="0,4"></Rectangle>

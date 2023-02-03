@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
 using Assist.Game.Views.GDashboard;
+using Assist.Game.Views.Leagues;
 using Assist.Game.Views.Live.Pages;
 using Assist.Game.Views.Lobbies;
 using Assist.Game.Views.Modules;
@@ -29,6 +30,7 @@ namespace Assist.Game.Controls.Navigation
             //NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LiveBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("ModulesBtn"));
+            NavigationButtons.Add(this.FindControl<NavButton>("LeaguesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));
             NavigationButtons[0].IsSelected = true;
         }
@@ -69,6 +71,17 @@ namespace Assist.Game.Controls.Navigation
 
             (sender as NavButton).IsSelected = true;
         }
+        
+        private void LeaguesBtn_OnClick(object? sender, RoutedEventArgs e)
+        {
+            ClearSelected();
+
+            if (GameViewNavigationController.CurrentPage != Services.Page.LEAGUES)
+                GameViewNavigationController.Change(new LeagueMainPage());
+
+            (sender as NavButton).IsSelected = true;
+        }
+        
         private void ClearSelected()
         {
             NavigationButtons.ForEach(btn => btn.IsSelected = false);
@@ -84,6 +97,8 @@ namespace Assist.Game.Controls.Navigation
         {
             _viewModel.SetupUserCount();
         }
+
+        
     }
 
     public class VertGameNavVM : ViewModelBase
