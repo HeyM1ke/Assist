@@ -5,6 +5,7 @@ using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
@@ -70,6 +71,13 @@ namespace Assist.Views.Authentication.Sections
             btn.IsEnabled = true;
         }
 
+        private void PasswordBox_OnKeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginBtn_OnClick(this.FindControl<Button>("LoginBtn"), null);
+            }
+        }
     }
 
     class UAVM : ViewModelBase

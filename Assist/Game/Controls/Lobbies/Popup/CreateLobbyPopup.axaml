@@ -1,0 +1,139 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d"
+             Width="1350"
+             Height="690"
+             Initialized="CreateLobbyPopup_Init"
+             x:Class="Assist.Game.Controls.Lobbies.Popup.CreateLobbyPopup">
+    <Grid Background="#6D000000">
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                CornerRadius="10"
+                Background="{StaticResource AssistBlack}"
+                Width="450" Height="265">
+            <Grid Margin="18">
+                <Grid.Styles>
+                    <Style Selector="Button">
+                        <Setter Property="Background" Value="#191919"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                        <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                    </Style>
+
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                        <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                    </Style>
+                    
+                    <Style Selector="TextBox">
+                        <Setter Property="Background" Value="#191919" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="BorderBrush" Value="Gray" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                        <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource TextInputFocus}" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                        <Setter Property="Background" Value="{DynamicResource TextInputBackground}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource TextInputHover}" />
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                </Grid.Styles>
+                <StackPanel VerticalAlignment="Center"
+                            Spacing="5">
+                    
+                    <StackPanel Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                            <TextBlock Text="YOUR LOBBY:"
+                                       HorizontalAlignment="Left"
+                                       FontWeight="Bold"
+                                       FontSize="20"
+                                       FontFamily="{StaticResource WorkSans}"></TextBlock>
+                            <TextBlock Text="{Binding CreatedMessage}"
+                                       VerticalAlignment="Center"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="20"
+                                       Opacity="1"
+                                       Foreground="{DynamicResource AssistRed}"
+                                       FontWeight="Bold"/>
+                        </StackPanel>
+                        
+                        <Rectangle Height="1"
+                                   Fill="{DynamicResource AssistRed}"></Rectangle>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Your Lobby Code is: "
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="18"
+                                       Opacity=".5"
+                                       VerticalAlignment="Center"
+                                       IsVisible="{Binding LobbySuccessful}"
+                                       FontWeight="Regular"/>
+                            <TextBox Text="{Binding YourLobbyCode}"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="18"
+                                       Opacity=".5"
+                                       IsReadOnly="True"
+                                       IsVisible="{Binding LobbySuccessful}"
+                                       FontWeight="Regular"/>
+                            <Button Height="40"
+                                    IsVisible="False"
+                                    Margin="10,0">
+                                <Image Width="10"
+                                       Height="10"
+                                       
+                                       Source="/Resources/Game/Link_Icon.png"></Image>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Text="{Binding LobbyMessage}"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="18"
+                                   Opacity=".5"
+                                   
+                                   FontWeight="Regular"/>
+                        
+                        <TextBlock Text="{Binding YourLobbyPassword}"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="18"
+                                   Opacity=".5"
+                                   IsVisible="{Binding LobbySuccessful}"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Regular"/>
+                        <Rectangle Height="1"
+                                   Fill="{DynamicResource AssistRed}"></Rectangle>
+                        <TextBlock Text="Your Lobby Expires in 5 Minutes."
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="18"
+                                   Opacity=".5"
+                                   IsVisible="{Binding LobbySuccessful}"
+                                   FontWeight="Regular"/>
+                        
+                        <Button Width="420"
+                                Height="40"
+                                Margin="0,10"
+                                Content="{x:Static p:Resources.Global_BackText}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Click="BackBtn_Click"></Button>
+                    </StackPanel>
+                    
+                    
+                    <StackPanel Orientation="Horizontal" Spacing="15">
+                        
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

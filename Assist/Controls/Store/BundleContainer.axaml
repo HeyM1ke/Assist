@@ -1,6 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:Assist.Controls.Store">
+        xmlns:controls="using:Assist.Controls.Store"
+        xmlns:p="clr-namespace:Assist.Properties">
   <Design.PreviewWith>
     <controls:BundleContainer Width="800"
                               Height="450"
@@ -20,7 +21,7 @@
                 </ItemsControl>
 
                 <Border x:Name="PART_LoadingBorder" Background="#17181D">
-                    <TextBlock Text="Loading.."
+                    <TextBlock Text="{x:Static p:Resources.Global_Loading}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                     />

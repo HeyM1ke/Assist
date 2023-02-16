@@ -5,7 +5,7 @@
              xmlns:p="clr-namespace:Assist.Properties"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
              mc:Ignorable="d"
-             Width="1125"
+             Width="1350"
              Height="690"
              x:Class="Assist.Game.Controls.Modules.Dodge.Popup.DodgeAddPopup">
 	<Grid Background="#3D000000">
@@ -18,7 +18,7 @@
                 <StackPanel Spacing="6">
                     <StackPanel Orientation="Horizontal"
                                 Spacing="10">
-                        <TextBlock Text="ADD PLAYER"
+                        <TextBlock Text="{x:Static p:Resources.Dodge_AddPlayer}"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="20"
                                    FontWeight="Bold"/>
@@ -30,7 +30,7 @@
                                    Foreground="{DynamicResource AssistRed}"
                                    VerticalAlignment="Center"/>
 					</StackPanel>
-                    <TextBlock Text="If a player changes their name after you add them. They will continue being on the list even after a name switch"
+                    <TextBlock Text="{x:Static p:Resources.Dodge_AddPlayerDesc}"
                                FontFamily="{StaticResource WorkSans}"
                                FontSize="14"
                                Opacity=".5"
@@ -41,7 +41,7 @@
                                Fill="#FFF"></Rectangle>
 
                     <StackPanel Spacing="6">
-                        <TextBlock Text="Game Name (USERNAME#TAG):"
+                        <TextBlock Text="{x:Static p:Resources.Dodge_AddTextOption}"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="14"
                                    Opacity=".5"
@@ -49,14 +49,14 @@
                         <TextBox 
                                  Height="35"
                                  Foreground="White"
-                                 Watermark="Ex: AssistUser#GMEUE"
+                                 Watermark="{x:Static p:Resources.Dodge_AddTextOptionExample}"
                                  FontFamily="{StaticResource WorkSans}"
                                  FontWeight="Regular"
                                  x:Name="GameNameBox"
                                  AcceptsReturn="False"
                                  FontSize="12"
                                  VerticalContentAlignment="Center"/>
-                        <TextBlock Text="Note (Optional):"
+                        <TextBlock Text="{x:Static p:Resources.Dodge_NoteTextOption}"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="14"
                                    Opacity=".5"
@@ -64,7 +64,7 @@
                         <TextBox
                             Height="35"
                             Foreground="White"
-                            Watermark="Ex: User is Toxic"
+                            Watermark="{x:Static p:Resources.Dodge_NoteTextOptionExample}"
                             FontFamily="{StaticResource WorkSans}"
                             FontWeight="Regular"
                             FontSize="12"
@@ -96,12 +96,12 @@
                         </StackPanel.Styles>
                         <Button Height="40"
                                 Width="120"
-                                Content="Back"
+                                Content="{x:Static p:Resources.Global_BackText}"
                                 x:Name="BackBtn"
                                 Click="BackBtn_OnClick"></Button>
                         <Button Height="40"
                                 Width="120"
-                                Content="Add"
+                                Content="{x:Static p:Resources.Global_Add}"
                                 x:Name="AddBtn"
                                 Click="AddBtn_OnClick"></Button>
                     </StackPanel>

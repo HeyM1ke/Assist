@@ -15,6 +15,7 @@ namespace Assist.Views.Settings.Pages
     public partial class GeneralSettingsPage : UserControl
     {
         private ComboBox _resComboBox;
+        private ComboBox _settComboBox;
         public GeneralSettingsPage()
         {
             SettingsViewNavigationController.CurrentPage = SettingsPages.GENERAL;
@@ -26,6 +27,9 @@ namespace Assist.Views.Settings.Pages
         {
             _resComboBox = this.FindControl<ComboBox>("WindowSizeBox");
             _resComboBox.SelectedIndex = (int)AssistSettings.Current.SelectedResolution;
+            
+            _settComboBox = this.FindControl<ComboBox>("LanguageBox");
+            _settComboBox.SelectedIndex = (int)AssistSettings.Current.Language;
         }
 
         private void ApplyBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -37,6 +41,12 @@ namespace Assist.Views.Settings.Pages
             {
                 AssistApplication.Current.ChangeMainWindowResolution((EResolution)_resComboBox.SelectedIndex);
                 AssistSettings.Current.SelectedResolution = (EResolution)_resComboBox.SelectedIndex; changed = true;
+            }
+
+            if (AssistSettings.Current.Language != (ELanguage)_settComboBox.SelectedIndex)
+            {
+                AssistSettings.Current.Language = (ELanguage)_settComboBox.SelectedIndex;
+                App.ChangeLanguage();
             }
 
             if(changed)
@@ -59,6 +69,11 @@ namespace Assist.Views.Settings.Pages
                     comboBox.Items = list;
                 }
             }
+        }
+
+        private void LanguageBox_OnInitialized(object? sender, EventArgs e)
+        {
+            
         }
     }
 }

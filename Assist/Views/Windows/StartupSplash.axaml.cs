@@ -15,9 +15,6 @@ namespace Assist.Views.Windows
             DataContext = _viewModel = new StartupSplashViewModel();
 
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
         }
 
         private async void StartupSplash_Initialized(object? sender, System.EventArgs e)

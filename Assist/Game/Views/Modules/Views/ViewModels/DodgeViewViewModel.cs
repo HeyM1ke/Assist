@@ -83,6 +83,15 @@ namespace Assist.Game.Views.Modules.Views.ViewModels
             UserButtons = t;
         }
 
+        public void RemoveAllDodgeUsers()
+        {
+            DodgeService.Current.UserList.Clear();
+            DodgeService.SaveSettings();
+            
+            // Update UI
+            UserButtons = new List<DodgeUserButton>();
+        }
+
         private void DodgeUserAddedToList(DodgeUser user)
         {
             var btn = new DodgeUserButton()

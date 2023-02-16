@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:live="clr-namespace:Assist.Game.Controls.Live"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
              Initialized="IngamePage_Init"
+             Unloaded="Control_OnUnloaded"
              x:Class="Assist.Game.Views.Live.Pages.IngamePageView">
   <Grid ColumnDefinitions="315,*,315"
         Margin="10,20">
@@ -20,7 +22,7 @@
                       Spacing="10"
                       VerticalAlignment="Center">
               <StackPanel>
-                  <TextBlock Text="ALLY"
+                  <TextBlock Text="{x:Static p:Resources.GameMode_AllyTeam}"
                              FontFamily="{StaticResource WorkSans}"
                              FontWeight="Bold"
                              FontSize="32"
@@ -149,7 +151,7 @@
                       Spacing="10"
                       VerticalAlignment="Center">
               <StackPanel>
-                  <TextBlock Text="ENEMY"
+                  <TextBlock Text="{x:Static p:Resources.GameMode_EnemyTeam}"
                              FontFamily="{StaticResource WorkSans}"
                              FontWeight="Bold"
                              FontSize="32"

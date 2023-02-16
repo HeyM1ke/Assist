@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" 
              d:DesignWidth="245"
              d:DesignHeight="586"
@@ -59,7 +60,7 @@
                     
                     <Button Width="185"
                             Height="60"
-                            Content="PLAY"
+                            Content="{x:Static p:Resources.GameLaunch_PlayText}"
                             FontFamily="{StaticResource WorkSans}"
                             FontWeight="Bold"
                             FontSize="32"

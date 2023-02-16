@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
 using Assist.Objects.Helpers;
+using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -89,6 +91,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
         }
 
+        private bool setupSucc = false;
+
         public async Task Setup()
         {
             // Get the current match ID for the game. 
@@ -113,6 +117,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("COREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("COREGAME ERROR: " + e.Content);
                 Log.Fatal("COREGAME ERROR: " + e.Message);
+                
+                if (e.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    Log.Fatal("TOKEN ERROR: " + e.Content);
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                }
             }
 
             try
@@ -124,16 +134,24 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             }
 
-            // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
-            await UpdateData(); // Do inital Pregame Check
-
-            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += async o =>
+            if (setupSucc == false)
             {
-                // On message recieved Check if it is a PREGAME Message.
+                // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
+                await UpdateData(); // Do inital Pregame Check
+
+                AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
+
+                setupSucc = true;
+            }
+        }
+
+        private async void RiotWebsocketServiceOnUserPresenceMessageEvent(PresenceV4Message obj)
+        {
+            // On message recieved Check if it is a PREGAME Message.
                 Log.Information("CORE GAME UPDATE GOTTEN");
                 await UpdateData();
-            };
         }
+
 
         private async Task UpdateData()
         {
@@ -143,6 +161,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             try
             {
+                if (string.IsNullOrEmpty(MatchId))
+                {
+                    await Setup();
+                }
+                
                 MatchResp = await AssistApplication.Current.CurrentUser.CoreGame.FetchMatch(MatchId!);
                 PresenceResp = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
                 if (MatchResp == null || PresenceResp == null)
@@ -158,17 +181,26 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("COREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("COREGAME ERROR: " + e.Content);
                 Log.Fatal("COREGAME ERROR: " + e.Message);
+                
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("TOKEN ERROR: ");
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    
+                }
                 return;
             }
 
+            
+                
+            
             if (MatchResp.Players == null || MatchResp.Players.Count == 0)
                 return;
-
-            var allyTeam = await GetAllyTeam(MatchResp.Players);
-            var enemyTeam = await GetEnemyTeam(MatchResp.Players);
+            
 
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
+                var allyTeam = await GetAllyTeam(MatchResp.Players);
+                var enemyTeam = await GetEnemyTeam(MatchResp.Players);
                 var allMatchPlayerIds = MatchResp.Players.Select(p => p.Subject).ToList();
 
                 var allTeamPresences =
@@ -193,7 +225,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     foreach (var allyPlayer in allyTeam)
                     {
                         Log.Information("Updating Ally Player to Coregame. : " + allyPlayer.Subject);
-                        await AddUserToAllyList(allyPlayer, parties);
+                        await UpdateUserInAllyList(allyPlayer, parties);
                     }
                 }
 
@@ -211,7 +243,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     foreach (var enemyPlayer in enemyTeam)
                     {
                         Log.Information("Updating Enemy Player to Coregame. : " + enemyPlayer.Subject);
-                        await AddUserToEnemyList(enemyPlayer, parties);
+                        await UpdateUserInEnemyList(enemyPlayer, parties);
                     }
                 }
             });
@@ -246,16 +278,17 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
 
                 if (partyIDtoPlayerList.Count == 0)
-                    partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                    partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
                 else
                 {
                     if (partyIDtoPlayerList.ContainsKey(playerPres.partyId))
                     {
-                        partyIDtoPlayerList[playerPres.partyId].Add(pres.puuid);
+                        partyIDtoPlayerList[playerPres.partyId.ToLower()].Add(pres.puuid);
+                        Log.Information($"Player ID of : {pres.puuid} | Belongs to Party ID of : {playerPres.partyId.ToLower()}");
                     }
                     else
                     {
-                        partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                        partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
                     }
                 }
 
@@ -266,6 +299,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             // Now As we want the ID to Color Translation, convert the list to a new list.
             foreach (var party in partyIDtoPlayerList)
             {
+                
                 if (party.Value.Count > 1)
                 {
                     // The party has value with multiple people on the team being in the party.
@@ -345,17 +379,17 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
             if (Match.MapID != null)
             {
-                Log.Information("Getting map data for ID of: " + Match.MapID);
-                MapName = MapNames.MapsByPath?[Match.MapID].ToUpper();
+                Log.Information("Getting map data for ID of: " + Match.MapID.ToLower());
+                MapName = MapNames.MapsByPath?[Match.MapID.ToLower()].ToUpper();
                 MapImage =
-                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID]}_Featured.png";
+                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID.ToLower()]}_Featured.png";
             }
 
             if (Match.MatchData != null)
             {
-                Log.Information("Getting queue data for ID of: " + Match.MatchData.QueueID);
+                Log.Information("Getting queue data for ID of: " + Match.MatchData.QueueID.ToLower());
 
-                var queueName = await DetermineQueueKey(Match.MatchData.QueueID);
+                var queueName = await DetermineQueueKey(Match.MatchData.QueueID.ToLower());
                 QueueName = queueName.ToUpper();
             }
 
@@ -413,7 +447,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             dic.TryGetValue(Player.Subject, out IBrush? color);
             if (control != null)
             {
-                Log.Information("Updating Data for Previously found player for pregame. : " + Player.Subject);
+                Log.Information("Updating Data for Previously found player for Coregame. : " + Player.Subject);
                 Dispatcher.UIThread.InvokeAsync(async () =>
                 {
                     await control.UpdatePlayer(Player, color);
@@ -494,6 +528,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     return "VALORANT";
             }
 
+        }
+
+        public void UnsubscribeFromEvents()
+        {
+            Log.Information("Page is Unloaded, Unsubbing from Events from IngameView");
+            AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
         }
     }
 }

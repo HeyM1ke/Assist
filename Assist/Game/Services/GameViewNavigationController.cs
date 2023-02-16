@@ -17,7 +17,10 @@ namespace Assist.Game.Services
 
     enum Page
     {
+        DASHBOARD,
+        LOBBIES,
         LIVE,
-        MODULES
+        MODULES,
+        LEAGUES
     }
 }

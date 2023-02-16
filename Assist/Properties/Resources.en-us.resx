@@ -183,4 +183,19 @@
   <data name="Store_OffersText" xml:space="preserve">
     <value>Offers</value>
   </data>
+  <data name="GameMode_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="GameMode_Live" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
+  <data name="GameMode_Modules" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="GameMode_Dodge" xml:space="preserve">
+    <value>DODGE</value>
+  </data>
+  <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
+    <value>Assist Dodge Warning System. Gives you a heads up when a player you marked is on your team.</value>
+  </data>
 </root>

@@ -99,10 +99,11 @@ namespace Assist.Settings
 
 
 
-            if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault)) { clients.Add(rcDefault.GetString()); }
+            
             if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive)) { clients.Add(rcLive.GetString()); }
             if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta)) { clients.Add(rcBeta.GetString()); }
-
+            if (config.RootElement.TryGetProperty("rc_esports", out JsonElement rcEsports)) { clients.Add(rcEsports.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault)) { clients.Add(rcDefault.GetString()); }
 
             foreach (var clientPath in clients)
             {
@@ -159,6 +160,14 @@ namespace Assist.Settings
         {
             get => _gameModeEnabled;
             set => this.SetProperty(ref _gameModeEnabled, value);
+        }
+        
+        private bool _eglEnabled = false;
+
+        public bool EglEnabled
+        {
+            get => _eglEnabled;
+            set => this.SetProperty(ref _eglEnabled, value);
         }
         public BackupsSettings Backups = new BackupsSettings();
     }

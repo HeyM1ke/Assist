@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:dodge="clr-namespace:Assist.Game.Controls.Modules.Dodge"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
@@ -11,7 +12,37 @@
              x:Class="Assist.Game.Views.Modules.Views.DodgeView">
 	<Grid>
 
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Margin="10"
+                    Spacing="10">
+            <StackPanel.Styles>
+                <Style Selector="Button">
+                    <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                    <Setter Property="FontWeight"  Value="SemiBold"></Setter>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                </Style>
 
+                <Style Selector="Button:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+                    <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Style>
+
+            </StackPanel.Styles>
+            <Button Width="100"
+                    Height="40"
+                    IsVisible="True"
+                    Click="BackBtn_Click"
+                    Content="{x:Static p:Resources.Global_BackText}"
+                    HorizontalAlignment="Right" />
+        </StackPanel>
         <Border Width="878"
                 Height="467"
                 VerticalAlignment="Center"
@@ -72,7 +103,7 @@
                     <StackPanel Orientation="Horizontal"
                                 Spacing="10"
                                 HorizontalAlignment="Center">
-                        <TextBlock Text="Enable Global List"
+                        <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalText}"
                                    Grid.ColumnSpan="2"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="14"
@@ -87,7 +118,7 @@
                                   VerticalAlignment="Center"
                                   Unchecked="GlobalCheckbox_OnUnchecked"
                                   Checked="GlobalCheckbox_OnChecked"/>
-                        <TextBlock Text="A List of Verified Players who are classified as players who Throw Matches, Wintrade, Betting, and more."
+                        <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalDetailText}"
                                    Grid.ColumnSpan="2"
                                    FontFamily="{StaticResource WorkSans}"
                                    FontSize="12"
@@ -129,7 +160,8 @@
                     Height="40"
                     Grid.Row="1"
                     IsVisible="True"
-                    Content="Clear"
+					Click="ClearBtn_Click"
+                    Content="{x:Static p:Resources.Global_Clear}"
                     HorizontalAlignment="Right"></Button>
             <Button Width="100"
                     Height="40"

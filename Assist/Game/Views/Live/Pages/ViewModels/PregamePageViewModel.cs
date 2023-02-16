@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -52,7 +53,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _mapImage, value);
         }
 
-        private string? _mapName = "FRACTURE";
+        private string? _mapName = "Loading...";
 
         public string? MapName
         {
@@ -60,6 +61,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _mapName, value);
         }
 
+        private bool setupSucc = false;
 
         public async Task Setup()
         {
@@ -85,6 +87,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("PREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("PREGAME ERROR: " + e.Content);
                 Log.Fatal("PREGAME ERROR: " + e.Message);
+                
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("TOKEN ERROR: ");
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                       
+                }
             }
 
             try
@@ -97,18 +105,32 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             }
 
 
-            // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
-            await UpdateData(); // Do inital Pregame Check
-
-            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += async o =>
+            if (setupSucc == false)
             {
-                // On message recieved Check if it is a PREGAME Message.
-                await UpdateData();
-            };
+                
+                // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
+                await UpdateData(); // Do inital Pregame Check
+                
+                AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += RiotWebsocketServiceOnPregameMessageEvent;
+                
+                setupSucc = true;
+            }
+        }
+
+        private async void RiotWebsocketServiceOnPregameMessageEvent(object obj)
+        {
+            // On message recieved Check if it is a PREGAME Message.
+            await UpdateData();
         }
 
         public async Task UpdateData()
         {
+            
+            
+            if (string.IsNullOrEmpty(MatchId))
+            {
+                Setup();
+            }
             Log.Error("Updating Data");
             PregameMatch MatchResp = new PregameMatch();
             ChatV4PresenceObj PresenceResp = new ChatV4PresenceObj();
@@ -129,6 +151,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("PREGAME ERROR: " + e.StatusCode);
                 Log.Fatal("PREGAME ERROR: " + e.Content);
                 Log.Fatal("PREGAME ERROR: " + e.Message);
+                
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("PREGAME TOKEN ERROR: ");
+                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                }
                 return;
             }
 
@@ -201,16 +228,18 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
 
                 if(partyIDtoPlayerList.Count == 0)
-                    partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                    partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
                 else
                 {
-                    if (partyIDtoPlayerList.ContainsKey(playerPres.partyId))
+                    if (partyIDtoPlayerList.ContainsKey(playerPres.partyId.ToLower()))
                     {
-                        partyIDtoPlayerList[playerPres.partyId].Add(pres.puuid);
+                        partyIDtoPlayerList[playerPres.partyId.ToLower()].Add(pres.puuid);
+                        Log.Information($"Player ID of : {pres.puuid} | Belongs to Party ID of : {playerPres.partyId.ToLower()}");
                     }
                     else
                     {
-                        partyIDtoPlayerList.Add(playerPres.partyId, new List<string>() { pres.puuid });
+                        partyIDtoPlayerList.Add(playerPres.partyId.ToLower(), new List<string>() { pres.puuid });
+                        Log.Information($"Player ID of : {pres.puuid} | Belongs to Party ID of : {playerPres.partyId.ToLower()}");
                     }
                 }
                 
@@ -301,10 +330,10 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
             if (Match.MapID != null)
             {
-                Log.Information("Getting map data for ID of: " +  Match.MapID);
-                MapName = MapNames.MapsByPath?[Match.MapID].ToUpper();
+                Log.Information("Getting map data for ID of: " +  Match.MapID.ToLower());
+                MapName = MapNames.MapsByPath?[Match.MapID.ToLower()].ToUpper();
                 MapImage =
-                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID]}_BWlistview.png";
+                    $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID.ToLower()]}_BWlistview.png";
             }
         }
 
@@ -315,6 +344,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             byte[] stringData = Convert.FromBase64String(data.Private);
             string decodedString = Encoding.UTF8.GetString(stringData);
             return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+        }
+
+        public void UnsubscribeFromEvents()
+        {
+            Log.Information("Page is Unloaded, Unsubbing from Events from PregamePageView");
+            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= RiotWebsocketServiceOnPregameMessageEvent;
+            AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= RiotWebsocketServiceOnPregameMessageEvent;
         }
     }
 }

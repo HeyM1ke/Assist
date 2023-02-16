@@ -2,6 +2,7 @@ using System;
 using Assist.Game.Services;
 using Assist.Game.Views.Live.Pages.ViewModels;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 
 namespace Assist.Game.Views.Live.Pages
 {
@@ -22,6 +23,11 @@ namespace Assist.Game.Views.Live.Pages
                 return;
 
             await _viewModel.Setup();
+        }
+
+        private void PregamePageControl_OnUnloaded(object? sender, RoutedEventArgs e)
+        {
+            _viewModel.UnsubscribeFromEvents();
         }
     }
 }

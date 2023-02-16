@@ -29,7 +29,7 @@
 
 	
 
-	<Grid RowDefinitions="30,*">
+	<Grid RowDefinitions="30,Auto">
 
 		<!--Window Bar-->
         <Grid Row="0" Background="{StaticResource AssistBlack}">
@@ -44,7 +44,6 @@
             <!--Content View-->
 			<Grid>
                 <Grid x:Name="MainContentView"
-                      Width="1125"
                       Height="690"
                       VerticalAlignment="Center"
                       Background="{StaticResource AssistGray}">
@@ -56,7 +55,6 @@
                 </Grid>
 <StackPanel></StackPanel>
                 <popup:PopupMaster x:Name="PopupMaster" 
-                                   Width="1125"
                                    Height="690"/>
 			</Grid>
 		</LayoutTransformControl>

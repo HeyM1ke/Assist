@@ -27,12 +27,15 @@
 			  <asyncImageLoader:AdvancedImage
 				  Source="{TemplateBinding ImageUrl}"
 				  Stretch="UniformToFill"
+				  CornerRadius="10"
                   
                                 ></asyncImageLoader:AdvancedImage>
 			  <Border BorderThickness="{TemplateBinding BorderThickness}"
-                                    ></Border>
-			  <Rectangle Height="108" VerticalAlignment="Bottom" Fill="{DynamicResource ArticleItemDefaultGrad}"
-                         x:Name="PART_Rectangle"></Rectangle>
+                                    CornerRadius="10">
+                  <Rectangle Height="108" VerticalAlignment="Bottom" Fill="{DynamicResource ArticleItemDefaultGrad}"
+                             x:Name="PART_Rectangle"></Rectangle>
+			  </Border>
+			  
 			  <StackPanel VerticalAlignment="Bottom" Margin="5,3">
 				  <TextBlock Text="{TemplateBinding ArticleTitle}"
 							 TextWrapping="WrapWithOverflow"

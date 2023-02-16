@@ -13,15 +13,38 @@ namespace Assist.Objects.Enums
         [Language("es-ES")] 
         Spanish = 1,
 
-        [Language("fr-FR")] 
+        [Language("fr")] 
         French = 2,
 
-        [Language("ja-JP")] 
-        Japanese = 3,
+        [Language("de")] 
+        German = 3,
+
+        [Language("zh-CN")] 
+        Chinese_Simplified = 4,
 
         [Language("pt-BR")] 
-        Portuguese = 4,
+        Portuguese = 5,
 
+        [Language("ja")]
+        Japanese = 6,
+
+        [Language("vi")]
+        Vietnamese = 7,
+
+        [Language("zh-TW")]
+        Chinese_Traditional = 8,
+
+        [Language("ko")]
+        Korean = 9,
+
+        [Language("ru")]
+        Russian = 10,
+
+        [Language("el")]
+        Greek = 11,
+
+        [Language("tr")]
+        Turkish = 12,
 
     }
 

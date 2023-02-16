@@ -6,6 +6,7 @@ using Assist.Views.Progression;
 using Assist.Views.Store;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
@@ -14,7 +15,7 @@ namespace Assist.Views
     public partial class MainView : UserControl
     {
         private MainViewViewModel _viewModel;
-
+     
         public MainView()
         {
             DataContext = _viewModel = new MainViewViewModel();
@@ -38,7 +39,6 @@ namespace Assist.Views
 
         private async void MainView_Initializaed(object? sender, EventArgs e)
         {
-            AssistApplication.Current.ConnectToServerHub();
             _viewModel.SetupUserCount();
         }
     }

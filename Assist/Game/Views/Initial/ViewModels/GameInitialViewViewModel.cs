@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Assist.Game.Services;
+using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
@@ -29,13 +30,18 @@ namespace Assist.Game.Views.Initial.ViewModels
 
         public async Task Setup()
         {
-            PopupSystem.KillPopups();
-            // Start Setup
-
-            // Check if you are in Design Mode
-            if(Design.IsDesignMode)
+            if (Design.IsDesignMode)
                 return;
 
+            if (!AssistApplication.Current.GameModeEnabled)
+            {
+                AssistApplication.Current.ChangeToGameModeResolution(AssistSettings.Current.SelectedResolution);
+                return;
+            }
+                
+
+            PopupSystem.KillPopups();
+            // Start Setup
 
             while (!IsValorantRunning())
             {
@@ -58,6 +64,7 @@ namespace Assist.Game.Views.Initial.ViewModels
                 return;
             }
 
+            Message = "Logging into Assist";
             // Authenticate User with Code
             try
             {
@@ -79,6 +86,20 @@ namespace Assist.Game.Views.Initial.ViewModels
             {
                 await DiscordPresenceController.ControllerInstance.Initalize();
             }
+            
+            //Connect to Assist Game Server.
+            try
+            {
+                Message = "Connecting to Assist";
+                Log.Information("Attempting To Connect to Game Server");
+                await AssistApplication.Current.GameServerConnection.Connect();
+            }
+            catch (Exception e)
+            {
+                Log.Fatal("Failed to Connect to Game Server");
+                return;
+            }
+            new LobbyService();
             AssistApplication.Current.OpenGameView();
         }
 
@@ -124,7 +145,7 @@ namespace Assist.Game.Views.Initial.ViewModels
 
             AssistApplication.Current.CurrentUser = user;
 
-            
+            AssistApplication.Current.RefreshService = new RiotUserTokenRefreshService();
 
 
         }
