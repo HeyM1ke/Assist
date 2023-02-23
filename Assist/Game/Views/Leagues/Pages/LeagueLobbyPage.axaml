@@ -2,7 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             mc:Ignorable="d" d:DesignWidth="1105" d:DesignHeight="582"
              x:Class="Assist.Game.Views.Leagues.Pages.LeagueLobbyPage">
-    <Grid Background="Red"></Grid>
+    <Grid RowDefinitions="4*,6*">
+        <Grid Row="0">
+            <leagues:LeaguePartyControl Width="985"
+                                        Height="220"/>
+        </Grid>
+    </Grid>
 </UserControl>

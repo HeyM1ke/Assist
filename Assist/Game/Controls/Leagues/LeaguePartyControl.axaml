@@ -1,0 +1,48 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             mc:Ignorable="d" d:DesignWidth="990" d:DesignHeight="220"
+             x:Class="Assist.Game.Controls.Leagues.LeaguePartyControl">
+    <Border BorderBrush="#212229"
+            BorderThickness="1"
+            CornerRadius="5"
+            Background="#191919"
+            >
+        <Grid RowDefinitions="1*,9*"
+              Margin="10">
+            <Grid Row="0"
+                  x:Name="InfoGrid">
+                <TextBlock Text="Your Party"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontWeight="Regular"
+                           Opacity=".3"
+                           HorizontalAlignment="Left"></TextBlock>
+                
+                <TextBlock Text="2/5"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontWeight="Regular"
+                           Opacity=".3"
+                           HorizontalAlignment="Right"></TextBlock>
+            </Grid>
+            
+            <Grid Row="1"
+                  x:Name="DataGrid">
+                <UniformGrid Rows="1"
+                             Columns="5">
+                    <UniformGrid.Styles>
+                        <Style Selector="leagues|LeaguePartyMemberControl">
+                            <Setter Property="Padding" Value="0,0,5,0"/>
+                        </Style>
+                    </UniformGrid.Styles>
+                    <leagues:LeaguePartyMemberControl/>
+                    <leagues:LeaguePartyMemberControl/>
+                    <leagues:LeaguePartyMemberControl/>
+                    <leagues:LeaguePartyMemberControl/>
+                    <leagues:LeaguePartyMemberControl/>
+                </UniformGrid>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,57 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="190" d:DesignHeight="180"
+             x:Class="Assist.Game.Controls.Leagues.LeaguePartyMemberControl">
+    <Grid Background="#191919">
+        
+         <Border BorderBrush="#212229"
+                 BorderThickness="1"
+                 CornerRadius="5">
+             
+             <Grid>
+                 <Grid x:Name="EmptyMember">
+                     <StackPanel Spacing="5"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center">
+                         <Panel>
+                             <Ellipse Fill="#232323"
+                                      Width="85"
+                                      Height="85">
+                             </Ellipse>
+                     
+                             <TextBlock Text="+"
+                                        FontFamily="{StaticResource WorkSans}"
+                                        FontWeight="Medium"
+                                        FontSize="33"
+                                        Opacity=".3"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"></TextBlock>
+                         </Panel>
+                         <TextBlock Text="Invite Player"
+                                    FontFamily="{StaticResource WorkSans}"
+                                    FontWeight="Regular"
+                                    FontSize="12"
+                                    Opacity=".3"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"></TextBlock>
+                     </StackPanel>
+                     
+                     <Grid.Styles>
+                         <Style Selector="Ellipse.pointerover">
+                             <Setter Property="Cursor" Value="Hand"/>
+                             <Setter Property="Fill" Value="#2B2B2B"/>
+                         </Style>
+                     </Grid.Styles>
+                 </Grid>
+                 
+                 <Grid x:Name="PartyMember"
+                       IsVisible="False"></Grid>
+                 
+             </Grid>
+             
+         </Border>
+        
+    </Grid>
+</UserControl>
