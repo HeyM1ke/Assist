@@ -27,6 +27,9 @@ namespace Assist.Views.Startup
 
             Log.Information("Initial Screen Initialized");
 
+            if(Design.IsDesignMode)
+                return;
+
             await _viewModel.StartupSetup();
         }
     }

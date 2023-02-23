@@ -29,7 +29,7 @@
 
 	
 
-	<Grid RowDefinitions="30,*">
+	<Grid RowDefinitions="30,Auto">
 
 		<!--Window Bar-->
         <Grid Row="0" Background="{StaticResource AssistBlack}">
@@ -44,7 +44,6 @@
             <!--Content View-->
 			<Grid>
                 <Grid x:Name="MainContentView"
-                      
                       Height="690"
                       VerticalAlignment="Center"
                       Background="{StaticResource AssistGray}">
