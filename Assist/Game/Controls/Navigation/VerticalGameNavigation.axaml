@@ -4,17 +4,91 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:Assist.Game.Controls.Navigation"
              mc:Ignorable="d" 
-             d:DesignWidth="225" 
+             d:DesignWidth="65" 
              d:DesignHeight="692"
 			 Background="{DynamicResource AssistLightBackground}"
 			 xmlns:assist="clr-namespace:Assist.Controls.Assist"
 			 xmlns:p="clr-namespace:Assist.Properties"
              Initialized="VerticalGameNav_Init"
 			 x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
-	<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
-          Margin="23,19">
+	<Grid>
 
-        <Grid Row="0">
+		<Grid x:Name="CompressedView"
+		      Width="54"
+		      HorizontalAlignment="Center">
+			<StackPanel>
+				<StackPanel.Styles>
+					<Style Selector="navigation|NavButton">
+						<Setter Property="Height" Value="54"></Setter>
+					</Style>
+				</StackPanel.Styles>
+				<Image Width="32"
+				       Height="54"
+				       Source="/Resources/Icons/Assist_Logo_SweetRed_LQ.png"
+				       />
+				
+				<ScrollViewer>
+					<StackPanel Spacing="6">
+						<navigation:NavButton CornerRadius="5"
+						                      Text="{x:Static p:Resources.GameMode_Dashboard}"
+						                      IsSelected="False"
+						                      x:Name="DashboardBtn"
+						                      Click="DashboardBtn_OnClick"
+						                      Background="#191919"
+						                      IsVisible="True"
+						                      IsCompressed="True"
+						                      IsFullSize="False"
+						                      Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
+						
+						<navigation:NavButton CornerRadius="5"
+						                      Text="{x:Static p:Resources.GameMode_Live}"
+						                      Click="LiveBtn_OnClick"
+						                      x:Name="LiveBtn"
+						                      Background="#191919"
+						                      IsCompressed="True"
+						                      IsFullSize="False"
+						                      Icon="/Resources/Game/Live_Icon.png"></navigation:NavButton>
+						<navigation:NavButton CornerRadius="5"
+						                      x:Name="ModulesBtn"
+						                      Text="{x:Static p:Resources.GameMode_Modules}"
+						                      Click="ModulesBtn_OnClick"
+						                      Background="#191919"
+						                      IsCompressed="True"
+						                      IsFullSize="False"
+						                      Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
+						
+						<navigation:NavButton CornerRadius="5"
+						                      x:Name="LeaguesBtn"
+						                      Text="{x:Static p:Resources.GameMode_Leagues}"
+						                      Click="LeaguesBtn_OnClick"
+						                      Background="#191919"
+						                      IsCompressed="True"
+						                      IsFullSize="False"
+						                      IsSpecial="True"
+						                      Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
+						
+						<navigation:NavButton CornerRadius="5"
+						                      Text="{x:Static p:Resources.GameMode_Lobbies}"
+						                      IsSpecial="True"
+						                      x:Name="LobbiesBtn"
+						                      Click="LobbiesBtn_OnClick"
+						                      Background="#191919"
+						                      IsCompressed="True"
+						                      IsFullSize="False"
+						                      Icon="/Resources/Game/Lobbies_Icon.png"/>
+						
+						
+						
+					</StackPanel>
+				</ScrollViewer>
+			</StackPanel>
+		</Grid>
+        <Grid
+	        x:Name="FullView"
+	        IsVisible="False"
+	        RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+	        Margin="23,19">
+	        <Grid Row="0">
             <StackPanel Orientation="Vertical">
 				<StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Left">
@@ -55,31 +129,24 @@
               Margin="0,0">
             <StackPanel VerticalAlignment="Top">
 				<navigation:NavButton CornerRadius="5"
-				                      x:Name="DashboardBtn"
-                                      Text="{x:Static p:Resources.GameMode_Dashboard}"
+				                      Text="{x:Static p:Resources.GameMode_Dashboard}"
                                       IsSelected="False"
 				                      Click="DashboardBtn_OnClick"
 									  Background="#191919"
 				                      IsVisible="False"
                                       Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
-                                      x:Name="LiveBtn"
+                                      
                                       Text="{x:Static p:Resources.GameMode_Live}"
                                       Click="LiveBtn_OnClick"
                                       Background="#191919"
                                       Icon="/Resources/Game/Live_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
                                       Text="{x:Static p:Resources.GameMode_Modules}"
-                                      x:Name="ModulesBtn"
                                       Click="ModulesBtn_OnClick"
                                       Background="#191919"
                                       Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
-	            <navigation:NavButton CornerRadius="5"
-	                                  x:Name="LeaguesBtn"
-	                                  Text="{x:Static p:Resources.GameMode_Leagues}"
-	                                  Click="LeaguesBtn_OnClick"
-	                                  Background="#191919"
-	                                  Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
+	            
 				<Rectangle Height="2"
                            Fill="#494A4E"
                            Margin="0,4"></Rectangle>
@@ -110,7 +177,6 @@
 			<StackPanel VerticalAlignment="Top">
 				<navigation:NavButton CornerRadius="5"
                                       Text="{x:Static p:Resources.GameMode_Lobbies}"
-                                      x:Name="LobbiesBtn"
                                       IsSpecial="True"
                                       Click="LobbiesBtn_OnClick"
 									  Background="#191919"
@@ -125,6 +191,7 @@
 		<Grid Row="4">
 			<assist:UserPreview ></assist:UserPreview>
 		</Grid>
+        </Grid>
 		
     </Grid>
 </UserControl>

@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="43"
              x:Class="Assist.Controls.Assist.UserPreview"
              Initialized="UserPreview_Initialized">
@@ -12,16 +13,18 @@
                   VerticalAlignment="Center"
                   Margin="4,0">
 		  <Panel>
-			  <Rectangle Fill="#0F0F0F"
+			  <Border  Background="#0F0F0F"
                        Width="34"
                        Height="34"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center">
+                       HorizontalAlignment="Center"
+                       CornerRadius="5">
 
-              </Rectangle>
-			  <Image Source="/Resources/Icons/Assist_Logo_White.png"
+              </Border>
+			  <asyncImageLoader:AdvancedImage Source="/Resources/Icons/Assist_Logo_White.png"
                      Width="24"
-					 Height="24"></Image>
+					 Height="24"
+                     CornerRadius="5"></asyncImageLoader:AdvancedImage>
 		  </Panel>
           <StackPanel
               VerticalAlignment="Center">

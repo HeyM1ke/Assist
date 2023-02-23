@@ -12,6 +12,8 @@ namespace Assist.Game.Controls.Navigation
         public static readonly StyledProperty<string?> TextProperty = AvaloniaProperty.Register<NavButton, string?>("Text", "Navigation");
         public static readonly StyledProperty<bool?> IsSpecialProperty = AvaloniaProperty.Register<NavButton, bool?>("IsSpecial", false);
         public static readonly StyledProperty<IBrush?> HighlightColorProperty = AvaloniaProperty.Register<NavButton, IBrush?>("HighlightColor", new SolidColorBrush(new Color(255,30,30,30)));
+        public static readonly StyledProperty<bool?> IsCompressedProperty = AvaloniaProperty.Register<NavButton, bool?>("IsCompressed", false);
+        public static readonly StyledProperty<bool?> IsFullSizeProperty = AvaloniaProperty.Register<NavButton, bool?>("IsFullSize");
 
         public bool? IsSelected
         {
@@ -41,6 +43,18 @@ namespace Assist.Game.Controls.Navigation
         {
             get { return (IBrush?)GetValue(HighlightColorProperty); }
             set { SetValue(HighlightColorProperty, value); }
+        }
+
+        public bool? IsCompressed
+        {
+            get { return (bool?)GetValue(IsCompressedProperty); }
+            set { SetValue(IsCompressedProperty, value); }
+        }
+
+        public bool? IsFullSize
+        {
+            get { return (bool?)GetValue(IsFullSizeProperty); }
+            set { SetValue(IsFullSizeProperty, value); }
         }
     }
 }

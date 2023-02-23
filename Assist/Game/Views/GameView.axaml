@@ -8,13 +8,13 @@
              d:DesignHeight="690"
              x:Class="Assist.Game.Views.GameView"
              Background="#151515">
-  <Grid ColumnDefinitions="225,*">
+  <Grid ColumnDefinitions="65,*">
 	  <Grid Grid.ColumnSpan="2" x:Name="Background" Background="{DynamicResource AssistBackground}">
           
           <Rectangle Fill="black" Opacity=".9"></Rectangle>
       </Grid>
 
-      <navigation:VerticalGameNavigation Width="225"/>
+      <navigation:VerticalGameNavigation Width="65"/>
       
 
 

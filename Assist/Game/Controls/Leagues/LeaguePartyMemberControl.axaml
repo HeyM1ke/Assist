@@ -11,7 +11,8 @@
                  CornerRadius="5">
              
              <Grid>
-                 <Grid x:Name="EmptyMember">
+                 <Grid x:Name="EmptyMember"
+                       >
                      <StackPanel Spacing="5"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center">
@@ -39,9 +40,12 @@
                      </StackPanel>
                      
                      <Grid.Styles>
-                         <Style Selector="Ellipse.pointerover">
+                         <Style Selector="Grid">
+                             <Setter Property="Background" Value="Transparent"/>
+                         </Style>
+                         <Style Selector="Grid:pointerover">
                              <Setter Property="Cursor" Value="Hand"/>
-                             <Setter Property="Fill" Value="#2B2B2B"/>
+                             <Setter Property="Background" Value="#202020"/>
                          </Style>
                      </Grid.Styles>
                  </Grid>

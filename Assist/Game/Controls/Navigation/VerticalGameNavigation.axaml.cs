@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
 using Assist.Game.Views.GDashboard;
@@ -11,6 +12,7 @@ using Assist.Properties;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using ReactiveUI;
 
 namespace Assist.Game.Controls.Navigation
@@ -27,12 +29,13 @@ namespace Assist.Game.Controls.Navigation
             DataContext = _viewModel = new VertGameNavVM();
             Instance = this;
             InitializeComponent();
-            //NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
+            
+            NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LiveBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("ModulesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LeaguesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));
-            NavigationButtons[0].IsSelected = true;
+            NavigationButtons[1].IsSelected = true;
         }
 
         private void DashboardBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -95,6 +98,8 @@ namespace Assist.Game.Controls.Navigation
 
         private void VerticalGameNav_Init(object? sender, EventArgs e)
         {
+            if (Design.IsDesignMode) return;
+            
             _viewModel.SetupUserCount();
         }
 
