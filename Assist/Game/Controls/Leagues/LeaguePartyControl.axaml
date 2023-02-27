@@ -14,17 +14,24 @@
               Margin="10">
             <Grid Row="0"
                   x:Name="InfoGrid">
-                <TextBlock Text="Your Party"
-                           FontFamily="{StaticResource WorkSans}"
-                           FontWeight="Regular"
-                           Opacity=".3"
-                           HorizontalAlignment="Left"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Your Party"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Regular"
+                               Opacity=".3"
+                               HorizontalAlignment="Left"></TextBlock>
                 
-                <TextBlock Text="2/5"
-                           FontFamily="{StaticResource WorkSans}"
-                           FontWeight="Regular"
-                           Opacity=".3"
-                           HorizontalAlignment="Right"></TextBlock>
+                    <TextBlock Text=" // "
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Regular"
+                               Opacity=".3"
+                               HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Text="1/5"
+                               FontFamily="{StaticResource WorkSans}"
+                               FontWeight="Regular"
+                               Opacity=".3"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
             </Grid>
             
             <Grid Row="1"
@@ -35,12 +42,15 @@
                         <Style Selector="leagues|LeaguePartyMemberControl">
                             <Setter Property="Padding" Value="0,0,5,0"/>
                         </Style>
+                        <Style Selector="leagues|LeaguePartyInviteControl">
+                            <Setter Property="Margin" Value="0,0,5,0"/>
+                        </Style>
                     </UniformGrid.Styles>
                     <leagues:LeaguePartyMemberControl/>
-                    <leagues:LeaguePartyMemberControl/>
-                    <leagues:LeaguePartyMemberControl/>
-                    <leagues:LeaguePartyMemberControl/>
-                    <leagues:LeaguePartyMemberControl/>
+                    <leagues:LeaguePartyInviteControl/>
+                    <leagues:LeaguePartyInviteControl/>
+                    <leagues:LeaguePartyInviteControl/>
+                    <leagues:LeaguePartyInviteControl/>
                 </UniformGrid>
             </Grid>
         </Grid>

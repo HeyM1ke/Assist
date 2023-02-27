@@ -1,0 +1,60 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Match"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:MatchPlayerControl 
+        />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MatchPlayerControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border CornerRadius="5"
+                        BorderThickness="1"
+                        BorderBrush="#212229"
+                        Background="#191919">
+                    <Grid Margin="5">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="5">
+                            <asyncImageLoader:AdvancedImage CornerRadius="100"
+                                                            Width="30"
+                                                            Height="30"
+                                                            Source="https://cdn.discordapp.com/avatars/915764393332047883/e99e0a13abee237d6709ad51cf4c3228.png"/>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="0000000000000000"
+                                           FontFamily="{StaticResource WorkSans}"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           TextAlignment="Left"
+                                           FontWeight="Medium"/>
+                                <TextBlock Text="LP:10000"
+                                           FontFamily="{StaticResource WorkSans}"
+                                           FontSize="12"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           TextAlignment="Left"
+                                           FontWeight="Regular"
+                                           Opacity=".4"/>
+                                <StackPanel Spacing="5"
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Left">
+                                    <Image Source="/Resources/Icons/Assist_Logo_White.png"
+                                           Width="12"
+                                           Height="12"
+                                    ></Image>
+                                    <Image Source="/Resources/Game/Refresh_Icon.png"
+                                           Width="12"
+                                           Height="12"
+                                    ></Image>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

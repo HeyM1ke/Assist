@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="190" d:DesignHeight="180"
              x:Class="Assist.Game.Controls.Leagues.LeaguePartyMemberControl">
     <Grid Background="#191919">
@@ -11,48 +12,48 @@
                  CornerRadius="5">
              
              <Grid>
-                 <Grid x:Name="EmptyMember"
-                       >
+                 <StackPanel Spacing="5"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center">
+                     <Panel> 
+                         <Ellipse Fill="#232323"
+                                  Width="82"
+                                  Height="82">
+                         </Ellipse>
+                     
+                         <asyncImageLoader:AdvancedImage CornerRadius="999"
+                                                         Width="82"
+                                                         Height="82"
+                                                         Source="https://cdn.discordapp.com/avatars/915764393332047883/e99e0a13abee237d6709ad51cf4c3228.png"/>
+                     </Panel>
                      <StackPanel Spacing="5"
-                                 VerticalAlignment="Center"
+                                 Orientation="Horizontal"
                                  HorizontalAlignment="Center">
-                         <Panel>
-                             <Ellipse Fill="#232323"
-                                      Width="85"
-                                      Height="85">
-                             </Ellipse>
-                     
-                             <TextBlock Text="+"
-                                        FontFamily="{StaticResource WorkSans}"
-                                        FontWeight="Medium"
-                                        FontSize="33"
-                                        Opacity=".3"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"></TextBlock>
-                         </Panel>
-                         <TextBlock Text="Invite Player"
-                                    FontFamily="{StaticResource WorkSans}"
-                                    FontWeight="Regular"
-                                    FontSize="12"
-                                    Opacity=".3"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"></TextBlock>
+                         <Image Source="/Resources/Icons/Assist_Logo_White.png"
+                                Width="14"
+                                Height="14"
+                                ></Image>
+                         <Image Source="/Resources/Game/Refresh_Icon.png"
+                                Width="14"
+                                Height="14"
+                         ></Image>
+                         
                      </StackPanel>
+                     <TextBlock Text="Mike"
+                                FontFamily="{StaticResource WorkSans}"
+                                FontWeight="Regular"
+                                FontSize="14"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"></TextBlock>
                      
-                     <Grid.Styles>
-                         <Style Selector="Grid">
-                             <Setter Property="Background" Value="Transparent"/>
-                         </Style>
-                         <Style Selector="Grid:pointerover">
-                             <Setter Property="Cursor" Value="Hand"/>
-                             <Setter Property="Background" Value="#202020"/>
-                         </Style>
-                     </Grid.Styles>
-                 </Grid>
-                 
-                 <Grid x:Name="PartyMember"
-                       IsVisible="False"></Grid>
-                 
+                     <TextBlock Text="READY"
+                                FontFamily="{StaticResource WorkSans}"
+                                FontWeight="SemiBold"
+                                FontSize="14"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Foreground="#5CFFB1"></TextBlock>
+                 </StackPanel>
              </Grid>
              
          </Border>

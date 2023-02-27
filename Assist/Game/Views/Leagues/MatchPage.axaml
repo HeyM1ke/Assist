@@ -1,0 +1,123 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:match="clr-namespace:Assist.Game.Controls.Match"
+             xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="590"
+             x:Class="Assist.Game.Views.Leagues.MatchPage"
+             Loaded="MatchPage_Loaded">
+    
+    <Grid RowDefinitions="7*, 3*"
+          Margin="10">
+        <Grid Row="0"
+              VerticalAlignment="Top"
+              Margin="0,10,0,0"
+              RowDefinitions="*,*,*">
+            
+            <!-- Team 1 -->
+            <StackPanel
+                Margin="0,0,0,30">
+                <TextBlock Text="TEAM 1"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontSize="18"
+                           FontWeight="Bold"></TextBlock>
+                <Border CornerRadius="5"
+                        Background="#191919"
+                        >
+                    <UniformGrid Rows="1"
+                                 Margin="5">
+                        <UniformGrid.Styles>
+                            <Style Selector="match|MatchPlayerControl">
+                                <Setter Property="Margin" Value="2,0"></Setter>
+                            </Style>
+                        </UniformGrid.Styles>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                    </UniformGrid>
+                </Border>
+            </StackPanel>
+            <!-- Match Data -->
+            <Grid Row="1"
+                  
+                  ColumnDefinitions="6*,4*">
+                
+                <UniformGrid Rows="3"
+                             Columns="3"
+                             >
+                    <UniformGrid.Styles>
+                        <Style Selector="leagues|MapPickControl">
+                            <Setter Property="Margin" Value="10"></Setter>
+                            <Setter Property="Height" Value="35"></Setter>
+                            <Setter Property="Width" Value="180"></Setter>
+                        </Style>
+                    </UniformGrid.Styles>
+                    <leagues:MapPickControl/>
+                    <leagues:MapPickControl/>
+                    <leagues:MapPickControl/>
+                    <leagues:MapPickControl/>
+                    <leagues:MapPickControl/>
+                    <leagues:MapPickControl/>
+                    <leagues:MapPickControl/>
+                </UniformGrid>
+                
+                <StackPanel Grid.Column="1"
+                            Spacing="15"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <Border Background="#191919"
+                            CornerRadius="5"
+                            Width="300">
+                        <TextBlock Text="HAVEN"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="{StaticResource WorkSans}"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Margin="5"
+                                   />
+                    </Border>
+                    <Button Width="300" Height="60"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+            <!-- Team 2 -->
+            <StackPanel Grid.Row="2"
+                        Margin="0,30,0,0">
+                <TextBlock Text="TEAM 2"
+                           FontFamily="{StaticResource WorkSans}"
+                           FontSize="18"
+                           FontWeight="Bold"></TextBlock>
+                <Border CornerRadius="5"
+                        Background="#191919"
+                >
+                    <UniformGrid Rows="1"
+                                 Margin="5">
+                        <UniformGrid.Styles>
+                            <Style Selector="match|MatchPlayerControl">
+                                <Setter Property="Margin" Value="2,0"></Setter>
+                            </Style>
+                        </UniformGrid.Styles>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                        <match:MatchPlayerControl/>
+                    </UniformGrid>
+                </Border>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Row="1">
+            <Border Background="{StaticResource AssistBlack}"
+                    Width="915"
+                    CornerRadius="5"></Border>
+        </Grid>
+    </Grid>
+</UserControl>
