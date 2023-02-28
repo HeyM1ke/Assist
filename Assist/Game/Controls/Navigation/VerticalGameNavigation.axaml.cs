@@ -80,7 +80,7 @@ namespace Assist.Game.Controls.Navigation
             ClearSelected();
 
             if (GameViewNavigationController.CurrentPage != Services.Page.LEAGUES)
-                GameViewNavigationController.Change(new LeagueMainPage());
+                GameViewNavigationController.Change(new MatchPage());
 
             (sender as NavButton).IsSelected = true;
         }
@@ -90,6 +90,10 @@ namespace Assist.Game.Controls.Navigation
             NavigationButtons.ForEach(btn => btn.IsSelected = false);
         }
 
+        public void DisableAll()
+        {
+            NavigationButtons.ForEach(btn => btn.IsEnabled = false);
+        }
 
         private void SupportBtn_Click(object? sender, RoutedEventArgs e)
         {

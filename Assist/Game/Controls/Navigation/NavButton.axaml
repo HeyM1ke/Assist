@@ -28,14 +28,17 @@
                <StackPanel>
                  <Image Source="{TemplateBinding Icon}"
                         Width="24"
-                        Height="24"/>
+                        Height="24"
+                        x:Name="PART_Icon"/>
                  <TextBlock Text="{TemplateBinding Text}"
                             FontFamily="{StaticResource WorkSans}"
                             FontSize="10"
+                            x:Name="PART_Text"
                             FontWeight="Regular"
                             HorizontalAlignment="Center"
                             TextAlignment="Center"/>
                  <TextBlock Text="BETA"
+                            x:Name="PART_TextBeta"
                             FontFamily="{StaticResource WorkSans}"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
@@ -89,4 +92,26 @@
     <Style Selector="controls|NavButton[IsSelected=True] /template/ Border#PART_Border">
         <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightColor}"></Setter>
     </Style>
+  
+  
+  <Style Selector="controls|NavButton[IsEnabled=True] /template/ Image#PART_Icon">
+    <Setter Property="Opacity" Value="1"></Setter>
+  </Style>
+  <Style Selector="controls|NavButton[IsEnabled=False] /template/ Image#PART_Icon">
+    <Setter Property="Opacity" Value=".2"></Setter>
+  </Style>
+  
+  <Style Selector="controls|NavButton[IsEnabled=True] /template/ TextBlock#PART_Text">
+    <Setter Property="Opacity" Value="1"></Setter>
+  </Style>
+  <Style Selector="controls|NavButton[IsEnabled=False] /template/ TextBlock#PART_Text">
+    <Setter Property="Opacity" Value=".2"></Setter>
+  </Style>
+  
+  <Style Selector="controls|NavButton[IsEnabled=True] /template/ TextBlock#PART_TextBeta">
+    <Setter Property="Opacity" Value="1"></Setter>
+  </Style>
+  <Style Selector="controls|NavButton[IsEnabled=False] /template/ TextBlock#PART_TextBeta">
+    <Setter Property="Opacity" Value=".2"></Setter>
+  </Style>
 </Styles>
