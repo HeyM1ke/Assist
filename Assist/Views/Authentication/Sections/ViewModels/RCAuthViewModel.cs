@@ -194,8 +194,7 @@ namespace Assist.Views.Authentication.Sections.ViewModels
                     Name = cookie.name,
                     Domain = cookie.domain,
                     Path = cookie.path,
-                    Value = cookie.value,
-                    Secure = cookie.secureOnly
+                    Value = cookie.value
                 });
             }
 
