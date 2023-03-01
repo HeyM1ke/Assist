@@ -20,6 +20,10 @@
 		<SolidColorBrush  x:Key="AssistRed" Color="#F61E51"/>
 		<SolidColorBrush  x:Key="AssistGray" Color="#17181D"/>
 		<SolidColorBrush  x:Key="AssistBlack" Color="#101115"/>
+        
+        <SolidColorBrush  x:Key="AssistPrimary" Color="#0B0C0E"/>
+        <SolidColorBrush  x:Key="AssistSecondary" Color="#030303"/>
+        <SolidColorBrush  x:Key="AssistOutline" Color="#212229"/>
 
 		<LinearGradientBrush x:Key="RedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
             <GradientStop Color="#FF0000" Offset="0" />
@@ -77,6 +81,7 @@
         <SolidColorBrush  x:Key="ValorantRadiant" Color="#ffffaa"/>
 
 		<FontFamily x:Key="WorkSans">avares://Assist/Resources/Fonts#Work Sans</FontFamily>
+        <FontFamily x:Key="Inter">avares://Assist/Resources/Fonts#Inter</FontFamily>
         
         
         <!-- Button Styles -->
