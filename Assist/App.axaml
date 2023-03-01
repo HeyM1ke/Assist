@@ -22,8 +22,10 @@
 		<SolidColorBrush  x:Key="AssistBlack" Color="#101115"/>
         
         <SolidColorBrush  x:Key="AssistPrimary" Color="#0B0C0E"/>
+        <SolidColorBrush  x:Key="AssistPrimaryLight" Color="#131518"/>
         <SolidColorBrush  x:Key="AssistSecondary" Color="#030303"/>
         <SolidColorBrush  x:Key="AssistOutline" Color="#212229"/>
+        <SolidColorBrush  x:Key="AssistTextWhite" Color="#DEE3E8"/>
 
 		<LinearGradientBrush x:Key="RedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
             <GradientStop Color="#FF0000" Offset="0" />

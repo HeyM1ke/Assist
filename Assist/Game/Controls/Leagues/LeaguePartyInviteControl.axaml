@@ -18,9 +18,10 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center">
                             <Panel>
-                                <Ellipse Fill="#232323"
+                                <Ellipse Fill="#000000"
                                          Width="85"
-                                         Height="85">
+                                         Height="85"
+                                         x:Name="PART_Circle">
                                 </Ellipse>
                      
                                 <TextBlock Text="+"
@@ -48,10 +49,11 @@
     </Style>
     <Style Selector="controls|LeaguePartyInviteControl:pointerover">
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="Background" Value="{StaticResource AssistPrimaryLight}"/>
     </Style>
+    
     <Style Selector="controls|LeaguePartyInviteControl">
-        <Setter Property="Background" Value="#191919"/>
+        <Setter Property="Background" Value="{StaticResource AssistPrimary}"/>
     </Style>
     
 </Styles>

@@ -5,15 +5,31 @@
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="190" d:DesignHeight="180"
              x:Class="Assist.Game.Controls.Leagues.LeaguePartyMemberControl">
-    <Grid Background="#191919">
+    <Grid Background="{StaticResource AssistPrimary}">
         
-         <Border BorderBrush="#212229"
+         <Border BorderBrush="{StaticResource AssistOutline}"
                  BorderThickness="1"
                  CornerRadius="5">
              
-             <Grid>
+             <Grid Margin="5">
                  <StackPanel Spacing="5"
-                             VerticalAlignment="Center"
+                             Orientation="Horizontal"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Margin="5">
+                     <Image Source="/Resources/Icons/Assist_Logo_White.png"
+                            Width="14"
+                            Height="14"
+                     ></Image>
+                     <Image Source="/Resources/Game/Refresh_Icon.png"
+                            Width="14"
+                            Height="14"
+                     ></Image>
+                         
+                 </StackPanel>
+                 <StackPanel Spacing="8"
+                             Margin="5"
+                             VerticalAlignment="Top"
                              HorizontalAlignment="Center">
                      <Panel> 
                          <Ellipse Fill="#232323"
@@ -26,25 +42,29 @@
                                                          Height="82"
                                                          Source="https://cdn.discordapp.com/avatars/915764393332047883/e99e0a13abee237d6709ad51cf4c3228.png"/>
                      </Panel>
-                     <StackPanel Spacing="5"
-                                 Orientation="Horizontal"
-                                 HorizontalAlignment="Center">
-                         <Image Source="/Resources/Icons/Assist_Logo_White.png"
-                                Width="14"
-                                Height="14"
-                                ></Image>
-                         <Image Source="/Resources/Game/Refresh_Icon.png"
-                                Width="14"
-                                Height="14"
-                         ></Image>
-                         
-                     </StackPanel>
                      <TextBlock Text="Mike"
                                 FontFamily="{StaticResource WorkSans}"
                                 FontWeight="Regular"
                                 FontSize="14"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"></TextBlock>
+                     
+                     <Border BorderBrush="{StaticResource AssistOutline}"
+                             Background="{StaticResource AssistSecondary}"
+                             BorderThickness="1"
+                             Width="150"
+                             Height="20"
+                             CornerRadius="5">
+                         <Grid Margin="10,4">
+                             <TextBlock Grid.Column="1"
+                                        Text="Rank: #53 // LP: 230"
+                                        FontFamily="{StaticResource Inter}"
+                                        FontWeight="SemiBold"
+                                        FontSize="10"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                         </Grid>
+                     </Border>
                      
                      <TextBlock Text="READY"
                                 FontFamily="{StaticResource WorkSans}"

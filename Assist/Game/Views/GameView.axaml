@@ -11,7 +11,9 @@
   <Grid ColumnDefinitions="65,*">
 	  <Grid Grid.ColumnSpan="2" x:Name="Background" Background="{DynamicResource AssistBackground}">
           
-          <Rectangle Fill="black" Opacity=".9"></Rectangle>
+          
+          <Image Source="/Resources/Game_Background.png" Stretch="UniformToFill"></Image>
+          <Rectangle Fill="black" Opacity=".7"></Rectangle>
       </Grid>
 
       <navigation:VerticalGameNavigation Width="65"/>
