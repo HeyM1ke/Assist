@@ -42,7 +42,7 @@
                                                          Height="82"
                                                          Source="https://cdn.discordapp.com/avatars/915764393332047883/e99e0a13abee237d6709ad51cf4c3228.png"/>
                      </Panel>
-                     <TextBlock Text="Mike"
+                     <TextBlock Text="{Binding PlayerName}"
                                 FontFamily="{StaticResource WorkSans}"
                                 FontWeight="Regular"
                                 FontSize="14"
@@ -57,7 +57,7 @@
                              CornerRadius="5">
                          <Grid Margin="10,4">
                              <TextBlock Grid.Column="1"
-                                        Text="Rank: #53 // LP: 230"
+                                        Text="{Binding PlayerRanking}"
                                         FontFamily="{StaticResource Inter}"
                                         FontWeight="SemiBold"
                                         FontSize="10"

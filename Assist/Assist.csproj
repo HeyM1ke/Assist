@@ -68,6 +68,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AssistUser.Lib">
+      <HintPath>Library\AssistUser.Lib.dll</HintPath>
+    </Reference>
     <Reference Include="ValNet">
       <HintPath>Library\ValNet.dll</HintPath>
     </Reference>

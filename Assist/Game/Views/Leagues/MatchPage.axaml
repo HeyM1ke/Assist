@@ -5,7 +5,7 @@
              xmlns:match="clr-namespace:Assist.Game.Controls.Match"
              xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
              mc:Ignorable="d"
-             d:DesignWidth="1125"
+             d:DesignWidth="1105"
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.Leagues.MatchPage"
              Loaded="MatchPage_Loaded">
@@ -75,6 +75,7 @@
                                 <Style Selector="leagues|MapPickControl">
                                     <Setter Property="Margin" Value="6, 0,0,24"></Setter>
                                     <Setter Property="Height" Value="34"></Setter>
+                                    <Setter Property="Width" Value="175"></Setter>
                                 </Style>
                             </UniformGrid.Styles>
                             <leagues:MapPickControl></leagues:MapPickControl>
