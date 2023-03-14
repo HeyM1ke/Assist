@@ -20,8 +20,7 @@
       
 
 
-      <TransitioningContentControl Grid.Column="1" x:Name="ContentView"
-      >
+      <TransitioningContentControl Grid.Column="1" x:Name="ContentView">
           <TransitioningContentControl.PageTransition>
               <CrossFade Duration="0.25"/>
           </TransitioningContentControl.PageTransition>

@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:match="clr-namespace:Assist.Game.Controls.Match"
              xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             xmlns:chat="clr-namespace:Assist.Game.Controls.Chat"
              mc:Ignorable="d"
-             d:DesignWidth="1105"
+             d:DesignWidth="1125"
              d:DesignHeight="590"
              x:Class="Assist.Game.Views.Leagues.MatchPage"
              Loaded="MatchPage_Loaded">
@@ -31,7 +32,7 @@
             />
         </Grid>
         
-        <Grid Row="1" ColumnDefinitions="*, * ,*"
+        <Grid Row="1" ColumnDefinitions="329, * ,329"
               Margin="10"
               VerticalAlignment="Top"
         >
@@ -65,15 +66,13 @@
         <Grid Column="1"
               VerticalAlignment="Top"
               >
-            <Grid RowDefinitions="5*,Auto">
-                <Grid Row="0"
-                      >
-                    <StackPanel>
+            <Grid RowDefinitions="7*,6*">
+                <StackPanel Grid.Row="0">
                         <UniformGrid Rows="4"
                                      Columns="2">
                             <UniformGrid.Styles>
                                 <Style Selector="leagues|MapPickControl">
-                                    <Setter Property="Margin" Value="6, 0,0,24"></Setter>
+                                    <Setter Property="Margin" Value="0, 0,0,23"></Setter>
                                     <Setter Property="Height" Value="34"></Setter>
                                     <Setter Property="Width" Value="175"></Setter>
                                 </Style>
@@ -85,10 +84,11 @@
                             <leagues:MapPickControl></leagues:MapPickControl>
                             <leagues:MapPickControl></leagues:MapPickControl>
                             <leagues:MapPickControl></leagues:MapPickControl>
+                            
+                            
                         </UniformGrid>
                         
-                        <Grid HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal"
+                         <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center" Spacing="20">
                                 <StackPanel Grid.Column="0"
                                             Spacing="4"
@@ -104,9 +104,9 @@
                                                    HorizontalAlignment="Center"
                                         />
                                     </Border>
-                                    <Border Width="121"
+                                    <Border Width="150"
                                             Background="{StaticResource AssistRed}"
-                                            CornerRadius="0,10,0,10">
+                                            CornerRadius="10,10,0,0">
                                         <TextBlock Grid.Column="1"
                                                    Margin="5"
                                                    Text="BAN"
@@ -155,18 +155,13 @@
                                                Width="19"></Rectangle>
                                 </UniformGrid>
                             </StackPanel>
-                        </Grid>
                     </StackPanel>
-                </Grid>
                 
-                <Grid Row="1"
+                <Grid Row="1" VerticalAlignment="Bottom"
+                      
+                      
                       Margin="0,10,0,0">
-                    <Border Background="{StaticResource AssistPrimary}"
-                            Height="170"
-                            Width="360"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            ></Border>
+                    <chat:AssistChatbox Height="180"/>
                 </Grid>
             </Grid>
             

@@ -98,17 +98,17 @@ namespace Assist.ViewModels
                 switch (Res)
                 {
                     case (EResolution.R900):
-                        Width = 1688;
+                        Width = 1488;
                         Height = 890;
                         ScaleRate = 1.25;
                         break;
                     case EResolution.R1080:
-                        Width = 2025;
+                        Width = 1785;
                         Height = 1070;
                         ScaleRate = 1.5;
                         break;
                     default:
-                        Width = 1350;
+                        Width = 1190;
                         ScaleRate = 1.0;
                         break;
                 }
