@@ -30,7 +30,8 @@ namespace Assist.Objects.Helpers
             {"a3bfb853-43b2-7238-a4f1-ad90e9e46bcc", "Reyna"},
             {"f94c3b30-42be-e959-889c-5aa313dba261", "Raze"},
             {"dade69b4-4f5a-8528-247b-219e5a1facd6", "Fade"},
-            {"bb2a4828-46eb-8cd1-e765-15848195d751", "Neon"}
+            {"bb2a4828-46eb-8cd1-e765-15848195d751", "Neon"},
+            {"e370fa57-4757-3604-3648-499e1f642d3f", "Gekko"}
         };
     }
 }
