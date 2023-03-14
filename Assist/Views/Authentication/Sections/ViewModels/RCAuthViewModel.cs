@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Objects.RiotClient;
@@ -181,14 +182,20 @@ namespace Assist.Views.Authentication.Sections.ViewModels
             return false;
         }
 
-        public static async Task<Dictionary<string, string>> CreateCookieDic(RiotGamesPrivateModel settings)
+        public static async Task<Dictionary<string, Cookie>> CreateCookieDic(RiotGamesPrivateModel settings)
         {
-            Dictionary<string, string> cookies = new Dictionary<string, string>();
+            Dictionary<string, Cookie> cookies = new Dictionary<string, Cookie>();
 
             var cook = settings.RiotLogin.Persist.Session.Cookies;
             foreach (var cookie in cook)
             {
-                cookies.Add(cookie.name, cookie.value);
+                cookies.Add(cookie.name, new Cookie()
+                {
+                    Name = cookie.name,
+                    Domain = cookie.domain,
+                    Path = cookie.path,
+                    Value = cookie.value
+                });
             }
 
             return cookies;

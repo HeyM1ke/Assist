@@ -45,32 +45,39 @@ namespace Assist.Settings
             Log.Information("Tag being Read" + Tagline);
         }
 
-        public Dictionary<string, string> Convert64ToCookies()
+        public Dictionary<string, Cookie> Convert64ToCookies()
         {
-            Dictionary<string, string> cookiecontainer = new Dictionary<string, string>();
+            Dictionary<string, Cookie> cookiecontainer = new Dictionary<string, Cookie>();
 
-            foreach (string cookie in CAuth.Split(";assist;"))
+            foreach (string cookie in CAuth.Split("||assist||"))
             {
                 var regCookie = Encoding.UTF8.GetString(Convert.FromBase64String(cookie));
-                var c = regCookie.Split("::");
-                if(c.Length <= 1)
+                if (string.IsNullOrEmpty(regCookie))
+                {
                     continue;
-                cookiecontainer.Add(c[0], c[1]);
+                }
+                var newCookieObj = CreateCookieFromString(regCookie);
+                if (newCookieObj.Name == "did")
+                {
+                    continue;
+                }
+                
+                cookiecontainer.Add(newCookieObj.Name, newCookieObj);
             }
 
             return cookiecontainer;
 
         }
 
-        public void ConvertCookiesTo64(Dictionary<string, string> container)
+        public void ConvertCookiesTo64(Dictionary<string, Cookie> container)
         {
             string sixFour = "";
 
             foreach (var cookie in container)
             {
-                string s = $"{cookie.Key}::{cookie.Value}";
+                string s = $"{cookie.Value}";
                 var plainTextBytes = Encoding.UTF8.GetBytes(s);
-                sixFour += Convert.ToBase64String(plainTextBytes) + ";assist;";
+                sixFour += Convert.ToBase64String(plainTextBytes) + "||assist||";
             }
 
             this.CAuth = sixFour;
@@ -82,9 +89,9 @@ namespace Assist.Settings
 
             foreach (var cookie in container)
             {
-                string s = $"{cookie.Name}::{cookie.Value}";
+                string s = $"{cookie}";
                 var plainTextBytes = Encoding.UTF8.GetBytes(s);
-                sixFour += Convert.ToBase64String(plainTextBytes) + ";assist;";
+                sixFour += Convert.ToBase64String(plainTextBytes) + "||assist||";
             }
 
             this.CAuth = sixFour;
@@ -96,6 +103,52 @@ namespace Assist.Settings
             var inv = await pUser.Inventory.GetPlayerInventory();
 
             this.PlayerCardId = inv.PlayerData.PlayerCardID;
+        }
+        
+        
+        public static Cookie CreateCookieFromString(string cookieString)
+        {
+            // Create a new cookie object
+            Cookie cookie = new Cookie();
+
+            // Split the cookie string into individual parts
+            string[] cookieParts = cookieString.Split(';');
+
+            // Loop through the parts and set the corresponding cookie properties
+            foreach (string part in cookieParts)
+            {
+                string[] nameValue = part.Trim().Split('=');
+                string name = nameValue[0].Trim();
+                string value = nameValue.Length > 1 ? nameValue[1].Trim() : string.Empty;
+
+                switch (name.ToLower())
+                {
+                    case "path":
+                        cookie.Path = value;
+                        break;
+                    case "domain":
+                        cookie.Domain = value;
+                        break;
+                    case "expires":
+                        if (DateTime.TryParse(value, out DateTime expires))
+                        {
+                            cookie.Expires = expires;
+                        }
+                        break;
+                    case "secure":
+                        cookie.Secure = true;
+                        break;
+                    case "httponly":
+                        cookie.HttpOnly = true;
+                        break;
+                    default:
+                        cookie.Name = name;
+                        cookie.Value = value;
+                        break;
+                }
+            }
+
+            return cookie;
         }
     }
 }
