@@ -57,7 +57,7 @@ namespace Assist.Settings
                     continue;
                 }
                 var newCookieObj = CreateCookieFromString(regCookie);
-                if (newCookieObj.Name == "did" || newCookieObj.Name == "tdid")
+                if (newCookieObj.Name == "did")
                 {
                     continue;
                 }

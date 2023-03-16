@@ -50,7 +50,7 @@ namespace Assist.Services
         {
             var cookies = ps.Convert64ToCookies();
 
-            user.GetAuthClient().SetCookies(cookies);
+            user.GetAuthClient().SaveCookies(cookies);
             Log.Information("Authenticating with Cookies");
             try
             {
