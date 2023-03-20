@@ -24,7 +24,7 @@ public class AssistGameServerConnection : HubClient
     {
         HubConnectionUrl = GAMESERVERURL;
 
-        base.InitWithAuth(AssistApplication.Current.AssistUser.Tokens.AccessToken);
+        base.InitWithAuth(AssistApplication.Current.AssistUser.userTokens.AccessToken);
 
         _hubConnection.On<string>("inviteLobbyPlayerToParty", PartyInviteRequestedFromLobbyUser);
         _hubConnection.On<string>("inviteLobbyRecieved", PartyInviteSentFromCreator);
@@ -70,7 +70,7 @@ public class AssistGameServerConnection : HubClient
         {
             Message = messageText,
             TimeSent = DateTime.Now,
-            UserId = AssistApplication.Current.AssistUser.UserInfo.id
+            UserId = AssistApplication.Current.AssistUser.Account.AccountInfo.id
         };
 
         await _hubConnection.SendAsync("sendGlobalChatMessage", JsonSerializer.Serialize(data));

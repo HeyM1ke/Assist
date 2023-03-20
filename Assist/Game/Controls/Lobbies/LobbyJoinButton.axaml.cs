@@ -33,7 +33,7 @@ public partial class LobbyJoinButton : UserControl
         Log.Information("Pointer Pressed on LobbyJoinBtn, Attempting ID of: " + AssistLobbyId);
         (sender as LobbyJoinButton).IsEnabled = false;
         
-        var joinPtyResp = await AssistApplication.Current.AssistUser.JoinLobbyByCode(AssistLobbyId);
+        var joinPtyResp = await AssistApplication.Current.AssistUser.Lobbies.JoinLobbyByCode(AssistLobbyId);
         if (!joinPtyResp.IsSuccessful)
         {
             Log.Error(joinPtyResp.Message);

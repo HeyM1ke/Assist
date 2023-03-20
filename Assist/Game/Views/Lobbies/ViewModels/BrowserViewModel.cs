@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Lobbies;
 using Assist.Objects.AssistApi.Game;
 using Assist.ViewModels;
+using AssistUser.Lib.Lobbies.Models;
 using ReactiveUI;
+using Serilog;
 using ValNet.Enums;
 
 namespace Assist.Game.Views.Lobbies.ViewModels;
@@ -32,29 +35,7 @@ public class BrowserViewModel : ViewModelBase
     
     public async Task Setup()
     {
-        // Set Loading to True.
-        IsLoading = true;
-        // Get Users Region LATER
-        // Make Request to get Lobbies
-        // Store all Lobbies in Storage.
-        AllLobbiesStorage = await AssistApplication.Current.AssistUser.GetAllLobbies(Enum.GetName(typeof(RiotRegion), AssistApplication.Current.CurrentUser.GetRegion()));
-
-        List<LobbyBrowserPreviewControl> controls = new List<LobbyBrowserPreviewControl>();
-        for (int i = 0; i < AllLobbiesStorage.Count; i++)
-        {
-            controls.Add(new LobbyBrowserPreviewControl()
-            {
-                LobbyName = AllLobbiesStorage[i].LobbyName,
-                LobbyCode = AllLobbiesStorage[i].Code,
-                CurrentSize = AllLobbiesStorage[i].CurrentPartySize.ToString(),
-                MaxSize = AllLobbiesStorage[i].MaxPartySize.ToString(),
-                IsPasswordProtected = AllLobbiesStorage[i].RequiresPassword
-            });
-        }
-
-        // Create Controls and Set them to the Shown list. 
-        CurrentlyShownLobbies = controls;
-        IsLoading = false;
+        RefreshList();
     }
 
     public async Task FilterList(string filter)
@@ -81,24 +62,31 @@ public class BrowserViewModel : ViewModelBase
     
     public async Task RefreshList()
     {
-        IsLoading = true;
-        
-        AllLobbiesStorage = await AssistApplication.Current.AssistUser.GetAllLobbies(Enum.GetName(typeof(RiotRegion), AssistApplication.Current.CurrentUser.GetRegion()));
-
-        List<LobbyBrowserPreviewControl> controls = new List<LobbyBrowserPreviewControl>();
-        for (int i = 0; i < AllLobbiesStorage.Count; i++)
+        try
         {
-            controls.Add(new LobbyBrowserPreviewControl()
-            {
-                LobbyName = AllLobbiesStorage[i].LobbyName,
-                LobbyCode = AllLobbiesStorage[i].Code,
-                CurrentSize = AllLobbiesStorage[i].CurrentPartySize.ToString(),
-                MaxSize = AllLobbiesStorage[i].MaxPartySize.ToString(),
-                IsPasswordProtected = AllLobbiesStorage[i].RequiresPassword
-            });
-        }
+            IsLoading = true;
         
-        CurrentlyShownLobbies = controls;
-        IsLoading = false;
+            AllLobbiesStorage = await AssistApplication.Current.AssistUser.Lobbies.GetAllLobbies(Enum.GetName(typeof(RiotRegion), AssistApplication.Current.CurrentUser.GetRegion()));
+
+            List<LobbyBrowserPreviewControl> controls = new List<LobbyBrowserPreviewControl>();
+            for (int i = 0; i < AllLobbiesStorage.Count; i++)
+            {
+                controls.Add(new LobbyBrowserPreviewControl()
+                {
+                    LobbyName = AllLobbiesStorage[i].LobbyName,
+                    LobbyCode = AllLobbiesStorage[i].Code,
+                    CurrentSize = AllLobbiesStorage[i].CurrentPartySize.ToString(),
+                    MaxSize = AllLobbiesStorage[i].MaxPartySize.ToString(),
+                    IsPasswordProtected = AllLobbiesStorage[i].RequiresPassword
+                });
+            }
+        
+            CurrentlyShownLobbies = controls;
+            IsLoading = false;
+        }
+        catch (Exception e)
+        {
+            Log.Error(e.Message);
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace Assist.Game.Views.Modules.Views.ViewModels
             }
 
             IsGlobalEnabled = GameSettings.Current.GlobalListEnabled;
-            IsGlobalModEnabled = await AssistApplication.Current.AssistUser.CheckGlobalDodgeList();
+            IsGlobalModEnabled = await AssistApplication.Current.AssistUser.Dodge.CheckGlobalDodgeList();
         }
 
         private void DodgeUserButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

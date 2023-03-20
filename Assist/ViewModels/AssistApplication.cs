@@ -18,6 +18,7 @@ using Assist.Views.Authentication;
 using Assist.Views.Settings;
 using Assist.Views.Startup;
 using Assist.Views.Windows;
+using AssistUser.Lib;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -28,6 +29,7 @@ using ValNet;
 using ValNet.Enums;
 using ValNet.Objects;
 using ValNet.Objects.Exceptions;
+using AssistUser.Lib;
 
 namespace Assist.ViewModels
 {
@@ -257,7 +259,7 @@ namespace Assist.ViewModels
 
         #region Gamemode
 
-        public AssistApiUser AssistUser = new AssistApiUser();
+        public AssistUser.Lib.AssistUser AssistUser = new AssistUserBuilder().Build();
         public RiotWebsocketService RiotWebsocketService = new RiotWebsocketService();
         public AssistGameServerConnection GameServerConnection = new AssistGameServerConnection();
         

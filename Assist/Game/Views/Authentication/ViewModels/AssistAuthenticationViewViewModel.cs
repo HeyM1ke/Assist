@@ -8,6 +8,7 @@ using Assist.Services;
 using Assist.Services.Server;
 using Assist.Settings;
 using Assist.ViewModels;
+using AssistUser.Lib.Account.Models;
 using Avalonia.Threading;
 using ReactiveUI;
 using Serilog;
@@ -84,13 +85,13 @@ namespace Assist.Game.Views.Authentication.ViewModels
 
             try
             {
-                var authResp = await AssistApplication.Current.AssistUser.AuthenticateWithRedirectCode(obj);
+                var authResp = await AssistApplication.Current.AssistUser.Authentication.AuthenticateWithRedirectCode(obj);
 
                 //Temp Location for Refresh token, save settings
                 AssistSettings.Current.AssistUserCode = authResp.RefreshToken;
                 AssistSettings.Save();
 
-                var userInfo = await AssistApplication.Current.AssistUser.GetUserInfo();
+                var userInfo = await AssistApplication.Current.AssistUser.Account.GetUserInfo();
 
                 if (string.IsNullOrEmpty(userInfo.username))
                 {
@@ -117,7 +118,7 @@ namespace Assist.Game.Views.Authentication.ViewModels
         {
             try
             {
-                var authResp = await AssistApplication.Current.AssistUser.ChangeUsername(new AssistChangeUsernameModel()
+                var authResp = await AssistApplication.Current.AssistUser.Account.ChangeUsername(new AssistChangeUsernameModel()
                 {
                     username = userName
                 });

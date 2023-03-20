@@ -168,7 +168,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                 // if so enable red border and icon popup.
                 var user = DodgeService.Current.UserList.Find(player => player.UserId == Player.Subject);
                 var checkGlobal =
-                    AssistApplication.Current.AssistUser.GlobalDodgeUsers.Find(player => player.id == Player.Subject);
+                    AssistApplication.Current.AssistUser.Dodge.GlobalDodgeUsers.Find(player => player.id == Player.Subject);
                 if (user != null)
                 {
                     // This means the user was found on the dodge list.
@@ -261,7 +261,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                 // if so enable red border and icon popup.
                 var user = DodgeService.Current.UserList.Find(player => player.UserId == CorePlayer.Subject);
                 var checkGlobal =
-                    AssistApplication.Current.AssistUser.GlobalDodgeUsers.Find(player => player.id == CorePlayer.Subject);
+                    AssistApplication.Current.AssistUser.Dodge.GlobalDodgeUsers.Find(player => player.id == CorePlayer.Subject);
                 if (user != null)
                 {
                     // This means the user was found on the dodge list.

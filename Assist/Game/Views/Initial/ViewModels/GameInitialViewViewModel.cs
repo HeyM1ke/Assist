@@ -68,11 +68,11 @@ namespace Assist.Game.Views.Initial.ViewModels
             // Authenticate User with Code
             try
             {
-                var authResp = await AssistApplication.Current.AssistUser.AuthenticateWithRefreshToken(AssistSettings.Current
+                var authResp = await AssistApplication.Current.AssistUser.Authentication.AuthenticateWithRefreshToken(AssistSettings.Current
                     .AssistUserCode);
                 AssistSettings.Current.AssistUserCode = authResp.RefreshToken;
                 AssistSettings.Save();
-                await AssistApplication.Current.AssistUser.GetUserInfo();
+                await AssistApplication.Current.AssistUser.Account.GetUserInfo();
             }
             catch (Exception e)
             {

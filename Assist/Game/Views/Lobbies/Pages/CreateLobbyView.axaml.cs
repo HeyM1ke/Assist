@@ -2,6 +2,7 @@
 using Assist.Game.Services;
 using Assist.Objects.AssistApi.Game;
 using Assist.ViewModels;
+using AssistUser.Lib.Lobbies.Models;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;

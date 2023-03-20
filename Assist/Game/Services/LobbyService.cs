@@ -10,6 +10,7 @@ using Assist.Objects.AssistApi.Game;
 using Assist.Objects.RiotSocket;
 using Assist.Services.Popup;
 using Assist.ViewModels;
+using AssistUser.Lib.Lobbies.Models;
 using Avalonia.Threading;
 using Serilog;
 using Serilog.Core;
@@ -61,7 +62,7 @@ public class LobbyService
         data.region = Enum.GetName(typeof(RiotRegion), AssistApplication.Current.CurrentUser.GetRegion());
         data.requiresPassword = !string.IsNullOrEmpty(data.password);
         
-        var r = await AssistApplication.Current.AssistUser.CreateLobby(data);
+        var r = await AssistApplication.Current.AssistUser.Lobbies.CreateLobby(data);
 
         if (r.IsSuccessful)
         {
@@ -113,7 +114,7 @@ public class LobbyService
         {
             updateData.ValorantIdsParty.Add(member.Subject);
         }
-        var r = await AssistApplication.Current.AssistUser.UpdateLobby(updateData);
+        var r = await AssistApplication.Current.AssistUser.Lobbies.UpdateLobby(updateData);
         if (r.IsSuccessStatusCode)
             Log.Information("Lobby Sent Update.");
     }

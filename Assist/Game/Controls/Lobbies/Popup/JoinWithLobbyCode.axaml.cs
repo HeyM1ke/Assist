@@ -37,7 +37,7 @@ public partial class JoinWithLobbyCode : UserControl
         Log.Information("Attempting to Join Party with Code of");
         
         // Attempt to join party
-        var joinPtyResp = await AssistApplication.Current.AssistUser.JoinLobbyByCode(codeBox.Text, passBox.Text);
+        var joinPtyResp = await AssistApplication.Current.AssistUser.Lobbies.JoinLobbyByCode(codeBox.Text, passBox.Text);
 
         if (!joinPtyResp.IsSuccessful)
         {

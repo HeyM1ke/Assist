@@ -97,7 +97,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             try
             {
-                await AssistApplication.Current.AssistUser.GetGlobalDodgeList();
+                await AssistApplication.Current.AssistUser.Dodge.GetGlobalDodgeList();
             }
             catch (Exception e)
             {

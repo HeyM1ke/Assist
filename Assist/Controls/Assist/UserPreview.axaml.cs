@@ -21,7 +21,7 @@ namespace Assist.Controls.Assist
             if(Design.IsDesignMode)
                 return;
 
-            _viewModel.AssistUserName = AssistApplication.Current.AssistUser.UserInfo.username;
+            _viewModel.AssistUserName = AssistApplication.Current.AssistUser.Account.AccountInfo.username;
         }
     }
 }
