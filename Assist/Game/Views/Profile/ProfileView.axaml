@@ -36,13 +36,16 @@
                             </Style>
                         </TabControl.Styles>
                         <TabItem Classes="Assist"
-                                 Header="Profile">
+                                 Header="{x:Static p:Resources.Profile_ProfileHeader}">
                             <pages:ProfilePage/>
                         </TabItem>
                         <TabItem Classes="Assist"
-                                 Header="Badges"/>
+                                 Header="{x:Static p:Resources.Profile_BadgeHeader}">
+                            <pages:BadgesPage/>
+                        </TabItem>
                         <TabItem Classes="Assist"
-                                 Header="Leagues"/>
+                                 Header="{x:Static p:Resources.Profile_LeagueHeader}"
+                                 IsEnabled="False"/>
                     </TabControl>
                 </Grid>
                 
@@ -54,9 +57,8 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"
                             Click="CloseBtn_Click"
-                            
                             HorizontalContentAlignment="Center"
-                            ></Button>
+                            />
                 </Grid>
             </Grid>
         </Border>

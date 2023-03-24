@@ -637,11 +637,65 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Earned at:.
+        /// </summary>
+        public static string Profile_Badge_EarnedAt {
+            get {
+                return ResourceManager.GetString("Profile_Badge_EarnedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Featured Badge.
+        /// </summary>
+        public static string Profile_Badge_RemoveFeatured {
+            get {
+                return ResourceManager.GetString("Profile_Badge_RemoveFeatured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Featured Badge.
+        /// </summary>
+        public static string Profile_Badge_SetFeatured {
+            get {
+                return ResourceManager.GetString("Profile_Badge_SetFeatured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badges.
+        /// </summary>
+        public static string Profile_BadgeHeader {
+            get {
+                return ResourceManager.GetString("Profile_BadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leagues.
+        /// </summary>
+        public static string Profile_LeagueHeader {
+            get {
+                return ResourceManager.GetString("Profile_LeagueHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOSS.
         /// </summary>
         public static string Profile_LossText {
             get {
                 return ResourceManager.GetString("Profile_LossText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Profile_ProfileHeader {
+            get {
+                return ResourceManager.GetString("Profile_ProfileHeader", resourceCulture);
             }
         }
         

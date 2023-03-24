@@ -150,6 +150,10 @@
         <SolidColorBrush x:Key="MissionsText" Color="#FFFFFF"/>
 
 
+        <SolidColorBrush x:Key="TwitchPurple" Color="#9146FF"></SolidColorBrush>
+        <SolidColorBrush x:Key="TwitchDarkPurple" Color="#772CE8"></SolidColorBrush>
+        <SolidColorBrush x:Key="TwitchBlack" Color="#000000"></SolidColorBrush>
+        
         <!--Missions Control Styles-->
         <SolidColorBrush x:Key="MissionsFillBarColor" Color="#F61E51"/>
         <SolidColorBrush x:Key="MissionsBackgroundBarColor" Color="#101115"/>
@@ -212,6 +216,9 @@
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/MapPickControl.axaml"></StyleInclude>
         
         <StyleInclude Source="avares://Assist/Styles/AssistStyles.axaml"></StyleInclude>
+        
+        <StyleInclude Source="avares://Assist/Controls/Profile/ProfileLeagueShowcase.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Profile/ProfileBadgeShowcase.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
 

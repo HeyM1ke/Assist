@@ -408,5 +408,23 @@
   <data name="Global_Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="Profile_ProfileHeader" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Profile_BadgeHeader" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="Profile_LeagueHeader" xml:space="preserve">
+    <value>Leagues</value>
+  </data>
+  <data name="Profile_Badge_SetFeatured" xml:space="preserve">
+    <value>Set Featured Badge</value>
+  </data>
+  <data name="Profile_Badge_RemoveFeatured" xml:space="preserve">
+    <value>Remove Featured Badge</value>
+  </data>
+  <data name="Profile_Badge_EarnedAt" xml:space="preserve">
+    <value>Earned at:</value>
+  </data>
   
 </root>
