@@ -6,8 +6,7 @@
              mc:Ignorable="d" 
              d:DesignWidth="65" 
              d:DesignHeight="692"
-			 
-			 xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
 			 xmlns:p="clr-namespace:Assist.Properties"
              Initialized="VerticalGameNav_Init"
              x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
@@ -16,7 +15,7 @@
 		<Grid x:Name="CompressedView"
 		      Width="54"
 		      HorizontalAlignment="Center"
-		      RowDefinitions="9*,1*">
+		      RowDefinitions="7*,3*">
 			<StackPanel>
 				<StackPanel.Styles>
 					<Style Selector="navigation|NavButton">
@@ -83,15 +82,17 @@
 					</StackPanel>
 				</ScrollViewer>
 			</StackPanel>
-			<StackPanel Grid.Row="1">
+			<StackPanel Grid.Row="1"
+			            VerticalAlignment="Bottom">
 				<StackPanel.Styles>
 					<Style Selector="navigation|NavButton">
 						<Setter Property="Height" Value="54"></Setter>
 					</Style>
 				</StackPanel.Styles>
+				<assist:UserPreview Height="54"></assist:UserPreview>
 				
 				<navigation:NavButton CornerRadius="5"
-				                      Text="{x:Static p:Resources.Settings_Settings}"
+				                      Text=""
 				                      IsSelected="False"
 				                      x:Name="SettingsBtn"
 				                      Click="SettingsBtn_OnClick"
@@ -101,6 +102,8 @@
 				                      Icon="/Resources/Icons/Settings_Icon.png"></navigation:NavButton>
 			</StackPanel>
 		</Grid>
+		
+		
         <Grid
 	        x:Name="FullView"
 	        IsVisible="False"
@@ -204,7 +207,7 @@
 		</Grid>
 
 		<Grid Row="4">
-			<assist:UserPreview ></assist:UserPreview>
+			
 		</Grid>
         </Grid>
 		

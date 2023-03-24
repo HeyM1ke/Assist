@@ -175,6 +175,9 @@
         <SolidColorBrush  x:Key="AssistComboBoxItemForeground" Color="#FFFFFF"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverForeground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverBackground" Color="#F61E51"/>
+        
+        <SolidColorBrush x:Key="AssistOnlineColor" Color="#5CFFB1"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistOnlineBorderColor" Color="#558D72"></SolidColorBrush>
 	</Application.Resources>
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
