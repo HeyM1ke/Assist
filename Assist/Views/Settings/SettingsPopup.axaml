@@ -1,0 +1,84 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d"
+             Width="1190"
+             Height="690"
+             Opacity="1"
+             x:Class="Assist.Views.Settings.SettingsPopup">
+    
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/AssistStyles.axaml" />
+        
+        
+       
+    </UserControl.Styles>
+    
+    
+    
+    <Grid Background="#3D000000">
+        <Border VerticalAlignment="Center"
+                Opacity="1"
+                CornerRadius="10"
+                HorizontalAlignment="Center"
+                Background="{StaticResource AssistPrimary}"
+                BorderThickness="2"
+                BorderBrush="{StaticResource AssistPrimaryLight}"
+                Width="600" Height="500">
+            <Grid RowDefinitions="9*,1*"
+                  Margin="25">
+                <Grid Row="0">
+                    <StackPanel>
+                       <StackPanel Orientation="Horizontal"
+                                   Spacing="10"
+                                   VerticalAlignment="Center">
+                           <TextBlock Text="{x:Static p:Resources.Settings_Settings}"
+                                      FontFamily="{StaticResource Inter}"
+                                      FontWeight="SemiBold"
+                                      
+                                      FontSize="24"></TextBlock>
+                           
+                           <TextBlock Text="Version 1.3.0"
+                                      FontFamily="{StaticResource Inter}"
+                                      FontWeight="SemiBold"
+                                      VerticalAlignment="Center"
+                                      TextAlignment="Center"
+                                      Foreground="#50FFFFFF"
+                                      FontSize="12"></TextBlock>
+                       </StackPanel>
+                        <TabControl Classes="Assist">
+                            <TabControl.Styles>
+                                <Style Selector="TabItem">
+                                    <Setter Property="FontSize" Value="13"></Setter>
+                                </Style>
+                            </TabControl.Styles>
+                            <TabItem Classes="Assist"
+                                     Header="{x:Static p:Resources.Settings_General}"/>
+                            <TabItem Classes="Assist"
+                                     Header="{x:Static p:Resources.Settings_Accounts}"/>
+                            <TabItem Classes="Assist"
+                                     Header="{x:Static p:Resources.Settings_Sound}"/>
+                            <TabItem Classes="Assist"
+                                     Header="{x:Static p:Resources.Settings_AssistAccount}"/>
+                        </TabControl>
+                    </StackPanel>
+                </Grid>
+                
+                
+                
+                <Grid Row="1">
+                    <Button Content="Close"
+                            Classes="AssistBtn"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Click="CloseBtn_Click"
+                            
+                            HorizontalContentAlignment="Center"
+                            ></Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

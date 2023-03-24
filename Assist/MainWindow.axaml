@@ -54,8 +54,12 @@
                     </TransitioningContentControl>
                 </Grid>
 <StackPanel></StackPanel>
-                <popup:PopupMaster x:Name="PopupMaster" 
-                                   Height="690"/>
+                
+                <TransitioningContentControl x:Name="PopupMaster" >
+	                <TransitioningContentControl.PageTransition>
+		                <CrossFade Duration="0:00:00.250"/>
+	                </TransitioningContentControl.PageTransition>
+                </TransitioningContentControl>
 			</Grid>
 		</LayoutTransformControl>
         

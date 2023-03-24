@@ -880,6 +880,24 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings_Settings {
+            get {
+                return ResourceManager.GetString("Settings_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound.
+        /// </summary>
+        public static string Settings_Sound {
+            get {
+                return ResourceManager.GetString("Settings_Sound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Featured.
         /// </summary>
         public static string Store_FeaturedText {

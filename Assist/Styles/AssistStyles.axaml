@@ -1,0 +1,139 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="0">
+            <!-- Add Controls for Previewer Here -->
+            <TabControl Classes="Assist">
+                <TabItem Classes="Assist"
+                         Header="General"/>
+                <TabItem Classes="Assist"
+                         Header="General"/>
+                <TabItem Classes="Assist"
+                         Header="General"/>
+            </TabControl>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+    <Style  Selector="Button.AssistBtn">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        
+    </Style>
+    
+    
+    <Style Selector="Button.AssistBtn /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="TextBlock.FontFamily" Value="{StaticResource Inter}" />
+        <Setter Property="TextBlock.FontWeight" Value="Medium" />
+    </Style>
+    
+    <Style Selector="Button.AssistBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonHoverBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    <Style Selector="Button.AssistBtn:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonClickBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonClickText}" />
+    </Style>
+    
+    
+    <Style Selector="TabItem.Assist">
+        <Setter Property="FontSize" Value="{TemplateBinding FontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="-10,0,0,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Margin="0,0,0,0"
+                    Name="PART_LayoutRootn"
+                    Padding="{TemplateBinding Padding}">
+                    <Panel>
+                        <ContentPresenter
+                            Content="{TemplateBinding Header}"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Name="PART_ContentPresenter"
+                            TextBlock.FontFamily="{TemplateBinding FontFamily}"
+                            TextBlock.FontSize="{TemplateBinding FontSize}"
+                            TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <ContentPresenter.Transitions>
+                                <Transitions>
+                                    <DoubleTransition Duration="0:0:0.5" Property="Opacity" />
+                                </Transitions>
+                            </ContentPresenter.Transitions>
+                        </ContentPresenter>
+                        <Border
+                            Background="{DynamicResource AssistRed}"
+                            CornerRadius="10"
+                            Height="3"
+                            Name="PART_SelectedPipe">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition Duration="0:0:0.3" Property="Opacity"/>
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="TabItem.Assist /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{Binding $parent[TabItem].Background}" />
+    </Style>
+    
+    <Style Selector="TabItem.Assist /template/ Border#PART_SelectedPipe">
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+    </Style>
+                
+    <!--  Selected state  -->
+    <Style Selector="TabItem.Assist:selected">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundSelected}" />
+        <Setter Property="TextBlock.FontWeight" Value="DemiBold" />
+    </Style>
+
+    <Style Selector="TabItem.Assist:pointerover">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundSelected}" />
+    </Style>
+    <Style Selector="TabItem.Assist:selected /template/ Border#PART_SelectedPipe">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="TabItem.Assist:selected /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="TabItem.Assist:selected /template/ Border#PART_SelectedPipe">
+        <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+
+
+                <!--  Pressed state  -->
+    <Style Selector="TabItem.Assist:pressed /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundUnselectedPressed}" />
+        <!--   <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundUnselectedPressed}" /> -->
+    </Style>
+
+    <!--  Selected Pressed state  -->
+    <Style Selector="TabItem.Assist:selected:pressed /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundSelectedPressed}" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundSelectedPressed}" />
+    </Style>
+
+    <!--  Disabled state  -->
+    <Style Selector="TabItem.Assist:disabled /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundDisabled}" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundDisabled}" />
+    </Style>
+</Styles>

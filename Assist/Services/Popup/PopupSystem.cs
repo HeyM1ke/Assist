@@ -14,16 +14,15 @@ namespace Assist.Services.Popup
 {
     public class PopupSystem
     {
-        public static PopupMaster PopupController;
-
+        public static TransitioningContentControl ContentControl;
         public static void SpawnPopup(PopupSettings settings)
         {
             var popup = new BasicPopup();
 
-            if (PopupController != null)
+            if (ContentControl != null)
             {
                 Log.Information("Spawning popup on Main Window");
-                PopupController.Children.Add(popup);
+                ContentControl.Content = (popup);
             }
         }
 
@@ -31,25 +30,22 @@ namespace Assist.Services.Popup
         {
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                if (PopupController != null)
+                
+                if (ContentControl != null)
                 {
                     Log.Information("Killing popup on Main Window");
-                    PopupController.Children.Clear();
+                    ContentControl.Content = null;
+                    
                 }
             });
 
         }
-
-        public static void ModifyCurrentPopup(PopupSettings settings)
-        {
-            
-        }
-
         public static void SpawnCustomPopup(UserControl control)
         {
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                PopupController.Children.Add(control);
+                //PopupController.Children.Add(control);
+                ContentControl.Content = control;
             });
         }
     }

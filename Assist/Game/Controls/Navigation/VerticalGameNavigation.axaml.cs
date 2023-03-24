@@ -9,7 +9,9 @@ using Assist.Game.Views.Live.Pages;
 using Assist.Game.Views.Lobbies;
 using Assist.Game.Views.Modules;
 using Assist.Properties;
+using Assist.Services.Popup;
 using Assist.ViewModels;
+using Assist.Views.Settings;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
@@ -107,7 +109,13 @@ namespace Assist.Game.Controls.Navigation
             _viewModel.SetupUserCount();
         }
 
-        
+
+        private void SettingsBtn_OnClick(object? sender, RoutedEventArgs e)
+        {
+            if (Design.IsDesignMode) return;
+            
+            PopupSystem.SpawnCustomPopup(new SettingsPopup());
+        }
     }
 
     public class VertGameNavVM : ViewModelBase

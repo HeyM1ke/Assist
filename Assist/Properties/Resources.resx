@@ -345,11 +345,17 @@
   <data name="Settings_AssistAccount" xml:space="preserve">
     <value>Assist Account</value>
   </data>
+  <data name="Settings_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Settings_Resolution" xml:space="preserve">
     <value>Resolution:</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
     <value>Change Language:</value>
+  </data>
+  <data name="Settings_Sound" xml:space="preserve">
+    <value>Sound</value>
   </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
     <value>Enable GPU:</value>

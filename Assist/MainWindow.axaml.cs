@@ -32,7 +32,7 @@ namespace Assist
         private void MainWindow_Initialized(object? sender, EventArgs e)
         {
             MainWindowContentController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
-            PopupSystem.PopupController = this.FindControl<PopupMaster>("PopupMaster");
+            PopupSystem.ContentControl = this.FindControl<TransitioningContentControl>("PopupMaster");
         }
 
         public void ChangeResolution(EResolution res)

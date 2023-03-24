@@ -6,16 +6,17 @@
              mc:Ignorable="d" 
              d:DesignWidth="65" 
              d:DesignHeight="692"
-			 Background="{DynamicResource AssistLightBackground}"
+			 
 			 xmlns:assist="clr-namespace:Assist.Controls.Assist"
 			 xmlns:p="clr-namespace:Assist.Properties"
              Initialized="VerticalGameNav_Init"
-			 x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
-	<Grid>
+             x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
+	<Grid Background="{DynamicResource AssistPrimary}">
 
 		<Grid x:Name="CompressedView"
 		      Width="54"
-		      HorizontalAlignment="Center">
+		      HorizontalAlignment="Center"
+		      RowDefinitions="9*,1*">
 			<StackPanel>
 				<StackPanel.Styles>
 					<Style Selector="navigation|NavButton">
@@ -29,12 +30,16 @@
 				
 				<ScrollViewer>
 					<StackPanel Spacing="6">
+						<StackPanel.Styles>
+							<Style Selector="navigation|NavButton">
+								<Setter Property="Background" Value="{DynamicResource AssistPrimary}"></Setter>
+							</Style>
+						</StackPanel.Styles>
 						<navigation:NavButton CornerRadius="5"
 						                      Text="{x:Static p:Resources.GameMode_Dashboard}"
 						                      IsSelected="False"
 						                      x:Name="DashboardBtn"
 						                      Click="DashboardBtn_OnClick"
-						                      Background="#191919"
 						                      IsVisible="True"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
@@ -44,7 +49,6 @@
 						                      Text="{x:Static p:Resources.GameMode_Live}"
 						                      Click="LiveBtn_OnClick"
 						                      x:Name="LiveBtn"
-						                      Background="#191919"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
 						                      Icon="/Resources/Game/Live_Icon.png"></navigation:NavButton>
@@ -52,7 +56,6 @@
 						                      x:Name="ModulesBtn"
 						                      Text="{x:Static p:Resources.GameMode_Modules}"
 						                      Click="ModulesBtn_OnClick"
-						                      Background="#191919"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
 						                      Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
@@ -61,7 +64,6 @@
 						                      x:Name="LeaguesBtn"
 						                      Text="{x:Static p:Resources.GameMode_Leagues}"
 						                      Click="LeaguesBtn_OnClick"
-						                      Background="#191919"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
 						                      IsSpecial="True"
@@ -72,7 +74,6 @@
 						                      IsSpecial="True"
 						                      x:Name="LobbiesBtn"
 						                      Click="LobbiesBtn_OnClick"
-						                      Background="#191919"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
 						                      Icon="/Resources/Game/Lobbies_Icon.png"/>
@@ -81,6 +82,23 @@
 						
 					</StackPanel>
 				</ScrollViewer>
+			</StackPanel>
+			<StackPanel Grid.Row="1">
+				<StackPanel.Styles>
+					<Style Selector="navigation|NavButton">
+						<Setter Property="Height" Value="54"></Setter>
+					</Style>
+				</StackPanel.Styles>
+				
+				<navigation:NavButton CornerRadius="5"
+				                      Text="{x:Static p:Resources.Settings_Settings}"
+				                      IsSelected="False"
+				                      x:Name="SettingsBtn"
+				                      Click="SettingsBtn_OnClick"
+				                      IsVisible="True"
+				                      IsCompressed="True"
+				                      IsFullSize="False"
+				                      Icon="/Resources/Icons/Settings_Icon.png"></navigation:NavButton>
 			</StackPanel>
 		</Grid>
         <Grid
@@ -132,19 +150,17 @@
 				                      Text="{x:Static p:Resources.GameMode_Dashboard}"
                                       IsSelected="False"
 				                      Click="DashboardBtn_OnClick"
-									  Background="#191919"
 				                      IsVisible="False"
                                       Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
                                       
                                       Text="{x:Static p:Resources.GameMode_Live}"
                                       Click="LiveBtn_OnClick"
-                                      Background="#191919"
                                       Icon="/Resources/Game/Live_Icon.png"></navigation:NavButton>
                 <navigation:NavButton CornerRadius="5"
                                       Text="{x:Static p:Resources.GameMode_Modules}"
                                       Click="ModulesBtn_OnClick"
-                                      Background="#191919"
+                                      
                                       Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
 	            
 				<Rectangle Height="2"
@@ -162,7 +178,6 @@
                                       BorderBrush="#5CFFB1"
                                       BorderThickness="1"
                                       HighlightColor="#477A62"
-                                      IsVisible="False"
                                       Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
 				<Rectangle Height="2"
                            Fill="#494A4E"
