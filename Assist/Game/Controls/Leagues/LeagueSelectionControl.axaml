@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Assist.Game.Controls.Leagues.LeagueSelectionControl">
+             x:Class="Assist.Game.Controls.Leagues.LeagueSelectionControl"
+             Initialized="StyledElement_OnInitialized">
     <Grid>
         <Grid.Styles>
             <Style Selector="Button.UserDropdown">
@@ -23,7 +24,7 @@
                                                                 Spacing="5"
                                                                 VerticalAlignment="Top"
                                                                 Grid.Row="0">
-	                                                    <TextBlock Text="ASSIST OPEN LEAGUE"
+	                                                    <TextBlock Text="{Binding CurrentLeagueName, FallbackValue='Loading..'}"
 	                                                               FontFamily="{StaticResource WorkSans}"
 	                                                               FontWeight="ExtraBold"
 	                                                               VerticalAlignment="Center"
@@ -51,15 +52,27 @@
 		    <Grid Name="LeagueSelectionPopup"
 		          IsVisible="{Binding PopupOpen}"
 		          Margin="0"
+		          Width="400"
+		          HorizontalAlignment="Left"
 		          PointerExited="LeagueSelectionPopup_OnPointerExited"
 		    >
 			    <Grid>
-				    <Border Opacity=".9"
-				            Background="{StaticResource ButtonBackground}"
+				    <Border Opacity="1"
 				            CornerRadius="0,0,5,5"
 				    />
 				    <ScrollViewer>
 					    <ItemsControl Items="{Binding LeagueSelectionControls}" >
+						    <ItemsControl.ItemsPanel>
+							    <ItemsPanelTemplate>
+								    <StackPanel Orientation="Vertical" Spacing="2"
+								                VerticalAlignment="Top"
+								                HorizontalAlignment="Left">
+                                    
+								    </StackPanel>
+							    </ItemsPanelTemplate>
+						    </ItemsControl.ItemsPanel>
+						    
+						    
 						    
 					    </ItemsControl>
 				    </ScrollViewer>

@@ -1,4 +1,6 @@
-﻿using Assist.Game.Controls.Leagues.ViewModels;
+﻿using System;
+using System.Threading.Tasks;
+using Assist.Game.Controls.Leagues.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -22,6 +24,11 @@ public partial class LeagueSelectionControl : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
+    public async Task SetupLeagueChildren()
+    {
+        await _viewModel.Setup();
+    }
+
     private void NameBtn_Click(object? sender, RoutedEventArgs e)
     {
         _viewModel.PopupOpen = true;
@@ -30,5 +37,12 @@ public partial class LeagueSelectionControl : UserControl
     private void LeagueSelectionPopup_OnPointerExited(object? sender, PointerEventArgs e)
     {
         _viewModel.PopupOpen = false;
+    }
+
+    private async void StyledElement_OnInitialized(object? sender, EventArgs e)
+    {
+        if (Design.IsDesignMode) return;
+
+        await SetupLeagueChildren();
     }
 }

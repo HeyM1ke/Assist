@@ -82,7 +82,7 @@ namespace Assist.Game.Controls.Navigation
             ClearSelected();
 
             if (GameViewNavigationController.CurrentPage != Services.Page.LEAGUES)
-                GameViewNavigationController.Change(new MatchPage());
+                GameViewNavigationController.Change(new LeagueMainPage());
 
             (sender as NavButton).IsSelected = true;
         }

@@ -29,6 +29,9 @@ public class AssistGameServerConnection : HubClient
         _hubConnection.On<string>("inviteLobbyPlayerToParty", PartyInviteRequestedFromLobbyUser);
         _hubConnection.On<string>("inviteLobbyRecieved", PartyInviteSentFromCreator);
         _hubConnection.On<string>("recieveGlobalChatMessage", GlobalChatMessageReceived);
+        _hubConnection.On<string>("receiveLeaguePartyInformation", PartyUpdateReceived);
+        _hubConnection.On<string>("receiveLeaguePartyKickedUpdate", PartyKickReceived);
+
         await StartHubInternal();
     }
 
@@ -75,4 +78,22 @@ public class AssistGameServerConnection : HubClient
 
         await _hubConnection.SendAsync("sendGlobalChatMessage", JsonSerializer.Serialize(data));
     }
+
+
+    #region League Parties
+
+    public event Action<string?> PARTY_PartyUpdateReceived;
+    public event Action<string?> PARTY_PartyKickReceived;
+    
+    private async void PartyUpdateReceived(string data)
+    {
+        PARTY_PartyUpdateReceived?.Invoke(data);
+    }
+    
+    private async void PartyKickReceived(string data)
+    {
+        PARTY_PartyKickReceived?.Invoke(data);
+    }
+
+    #endregion
 }

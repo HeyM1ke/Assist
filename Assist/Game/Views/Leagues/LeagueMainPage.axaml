@@ -6,13 +6,19 @@
              xmlns:assist="clr-namespace:Assist.Controls.Assist"
              xmlns:leagues1="clr-namespace:Assist.Game.Controls.Leagues"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Assist.Game.Views.Leagues.LeagueMainPage">
+             x:Class="Assist.Game.Views.Leagues.LeagueMainPage"
+             Initialized="LeagueMain_Init">
     <Grid Margin="10">
         
-        <leagues1:LeagueSelectionControl  ZIndex="999"/>    
+        <leagues1:LeagueSelectionControl  ZIndex="999"
+                                          x:Name="LeagueSelection"/>    
         
-        <leagues:LeaguesPage
-            Margin="0,30,0,0"
-            Grid.Row="1"/>
+        <TransitioningContentControl Margin="0,30,0,0"
+                                     Grid.Row="1"
+                                     x:Name="LeagueContentControl">
+            <TransitioningContentControl.PageTransition>
+                <CrossFade Duration="0.15" />
+            </TransitioningContentControl.PageTransition>
+        </TransitioningContentControl>
     </Grid>
 </UserControl>

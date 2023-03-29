@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Controls.Profile;
 using Assist.ViewModels;
+using AssistUser.Lib.Leagues.Models;
 using AssistUser.Lib.Profiles.Models;
 using ReactiveUI;
 using Serilog;
@@ -36,17 +37,27 @@ public class ProfilePageViewModel : ViewModelBase
 
         if (ProfileData.Leagues.Count > 0)
         {
+            var listOfLeagues = new List<ProfileLeagueShowcase>();
             for (int i = 0; i < ProfileData.Leagues.Count; i++)
             {
-                LeagueShowcases = new List<ProfileLeagueShowcase>()
+                var data = await AssistApplication.Current.AssistUser.League.GetLeagueInfo(ProfileData.Leagues[i].Id);
+
+                if (data.Code != 200)
                 {
-                    new ProfileLeagueShowcase()
-                    {
-                        LeagueName = ProfileData.Leagues[i].Id,
-                        LeagueStatText = $"{ProfileData.Leagues[i].CurrentLeaguePoints} LP - {ProfileData.Leagues[i].Matches.Count} Matches"
-                    }
-                };
+                    Log.Fatal("Failed to Get league data.");
+                    Log.Fatal(data.Message);
+                }
+                var d = JsonSerializer.Deserialize<AssistLeague>(data.Data.ToString());
+                
+                
+                listOfLeagues.Add(new ProfileLeagueShowcase()
+                {
+                    LeagueName = d.Name,
+                    LeagueStatText = $"{ProfileData.Leagues[i].CurrentLeaguePoints} LP - {ProfileData.Leagues[i].Matches.Count} Matches"
+                });
             }
+
+            LeagueShowcases = listOfLeagues;
         }
     }
 
