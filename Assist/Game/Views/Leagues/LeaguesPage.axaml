@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:Assist.Game.Views.Leagues.Pages"
              mc:Ignorable="d" d:DesignWidth="1105" d:DesignHeight="470"
-             x:Class="Assist.Game.Views.Leagues.LeaguesPage">
+             x:Class="Assist.Game.Views.Leagues.LeaguesPage"
+             Initialized="LeaguesPage_Init">
     <Grid>
         <Grid.Styles>
                 <Style Selector="TabItem">
@@ -114,13 +115,14 @@
                 
             <TabControl 
                         Padding="0"
-                        TabStripPlacement="Top"
-            >
+                        TabStripPlacement="Top">
                 <TabItem Header="Lobby">
                     <pages:LeagueLobbyPage/>
                 </TabItem>
-                <TabItem Header="Leaderboard"/>
-                <TabItem Header="Moderation"/>
+                <TabItem Header="Leaderboard"
+                         IsVisible="{Binding LeaderboardEnabled}"/>
+                <TabItem Header="Moderation"
+                         IsVisible="{Binding ModerationEnabled}"/>
             </TabControl>  
         
     </Grid>

@@ -1,4 +1,6 @@
-﻿using Assist.Game.Controls.Leagues.ViewModels;
+﻿using System;
+using Assist.Game.Controls.Leagues.ViewModels;
+using AssistUser.Lib.Parties.Models;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -15,9 +17,10 @@ public partial class LeaguePartyMemberControl : UserControl
         InitializeComponent();
     }
 
-    public LeaguePartyMemberControl(object data)
+    public LeaguePartyMemberControl(AssistPartyMember data)
     {
         DataContext = _viewModel = new LeaguePartyMemberViewModel();
+        _viewModel.PartyMemberData = data;
         InitializeComponent();
     }
     private void InitializeComponent()
@@ -25,8 +28,19 @@ public partial class LeaguePartyMemberControl : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
-    public void UpdatePlayerData()
+    public void UpdatePlayerData(AssistPartyMember data)
     {
+        _viewModel.UpdatePartyMember(data);
+    }
+
+    private void PartyMemberControl_Init(object? sender, EventArgs e)
+    {
+        if (Design.IsDesignMode || _viewModel.PartyMemberData is null) 
+        {
+            return;
+        }
+
         
+        UpdatePlayerData(_viewModel.PartyMemberData);
     }
 }

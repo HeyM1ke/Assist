@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="190" d:DesignHeight="180"
-             x:Class="Assist.Game.Controls.Leagues.LeaguePartyMemberControl">
+             x:Class="Assist.Game.Controls.Leagues.LeaguePartyMemberControl"
+             Initialized="PartyMemberControl_Init">
     <Grid Background="{StaticResource AssistPrimary}">
         
          <Border BorderBrush="{StaticResource AssistOutline}"
@@ -12,21 +13,18 @@
                  CornerRadius="5">
              
              <Grid Margin="5">
-                 <StackPanel Spacing="5"
-                             Orientation="Horizontal"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top"
-                             Margin="5">
-                     <Image Source="/Resources/Icons/Assist_Logo_White.png"
-                            Width="14"
-                            Height="14"
-                     ></Image>
-                     <Image Source="/Resources/Game/Refresh_Icon.png"
-                            Width="14"
-                            Height="14"
-                     ></Image>
-                         
-                 </StackPanel>
+                 <ItemsControl HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Margin="5"
+                               Items="{Binding BadgeImages}">
+                     <ItemsControl.ItemsPanel >
+                         <ItemsPanelTemplate>
+                             <StackPanel Spacing="5"
+                                         Orientation="Vertical">
+                             </StackPanel>
+                         </ItemsPanelTemplate>
+                     </ItemsControl.ItemsPanel>
+                 </ItemsControl>
                  <StackPanel Spacing="8"
                              Margin="5"
                              VerticalAlignment="Top"
@@ -40,7 +38,7 @@
                          <asyncImageLoader:AdvancedImage CornerRadius="999"
                                                          Width="82"
                                                          Height="82"
-                                                         Source="https://cdn.discordapp.com/avatars/915764393332047883/e99e0a13abee237d6709ad51cf4c3228.png"/>
+                                                         Source="{Binding PlayerImage}"/>
                      </Panel>
                      <TextBlock Text="{Binding PlayerName}"
                                 FontFamily="{StaticResource WorkSans}"
@@ -66,13 +64,26 @@
                          </Grid>
                      </Border>
                      
-                     <TextBlock Text="READY"
-                                FontFamily="{StaticResource WorkSans}"
-                                FontWeight="SemiBold"
-                                FontSize="14"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Foreground="#5CFFB1"></TextBlock>
+                     <Panel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                         <TextBlock Text="READY"
+                                    FontFamily="{StaticResource WorkSans}"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"
+                                    IsVisible="{Binding IsReady}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#5CFFB1"></TextBlock>
+                         
+                         <TextBlock Text="NOT READY"
+                                    FontFamily="{StaticResource WorkSans}"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"
+                                    IsVisible="{Binding !IsReady}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Foreground="{DynamicResource AssistRed}"></TextBlock>
+                     </Panel>
                  </StackPanel>
              </Grid>
              

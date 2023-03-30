@@ -87,11 +87,16 @@ public class AssistGameServerConnection : HubClient
     
     private async void PartyUpdateReceived(string data)
     {
+        Log.Information("RECEIVED PARTY UPDATE MESSAGE FROM SERVER");
+        Log.Information("DATA:");
+        Log.Information(data);
+        Log.Information("------------------");
         PARTY_PartyUpdateReceived?.Invoke(data);
     }
     
     private async void PartyKickReceived(string data)
     {
+        Log.Information("RECEIVED PARTY KICK MESSAGE FROM SERVER");
         PARTY_PartyKickReceived?.Invoke(data);
     }
 

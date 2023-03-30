@@ -45,11 +45,8 @@ public class LeagueSelectionViewModel : ViewModelBase
         new LeagueService();
         
         // Set name of Current League using League Service
-
-        if (LeagueService.Instance.ProfileData is null)
-        {
-            await LeagueService.Instance.GetProfileData();
-        }
+        await LeagueService.Instance.GetProfileData();
+        
         
         var leagueIds = LeagueService.Instance.ProfileData.Leagues;
         if (leagueIds.Count <= 0)
@@ -170,6 +167,10 @@ public class LeagueSelectionViewModel : ViewModelBase
         }
 
         LeagueService.Instance.CurrentLeagueId = btn.LeagueId;
-        CurrentLeagueName = btn.Name;
+        CurrentLeagueName = btn.LeagueName;
+        
+        // Load the page
+        LeagueNavigationController.Change(new LeaguesPage());
+
     }
 }

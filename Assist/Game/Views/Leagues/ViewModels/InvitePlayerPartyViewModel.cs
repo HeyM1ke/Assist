@@ -2,6 +2,7 @@
 using Assist.Game.Services.Leagues;
 using Assist.ViewModels;
 using ReactiveUI;
+using Serilog;
 
 namespace Assist.Game.Views.Leagues.ViewModels;
 
@@ -19,6 +20,11 @@ public class InvitePlayerPartyViewModel : ViewModelBase
     
     public async Task InvitePlayer(string? textInputText)
     {
+        if (string.IsNullOrEmpty(textInputText))
+        {
+            Log.Error("No Username was inputted in the textbox");
+            return;
+        }
         var ptyId = LeagueService.Instance.CurrentPartyInfo.Id;
 
         var response = await AssistApplication.Current.AssistUser.Party.InviteUserToParty(ptyId, textInputText);

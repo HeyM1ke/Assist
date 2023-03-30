@@ -3,12 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="990" d:DesignHeight="220"
-             x:Class="Assist.Game.Controls.Leagues.LeaguePartyControl">
-    <Border BorderBrush="#212229"
+             x:Class="Assist.Game.Controls.Leagues.LeaguePartyControl"
+             Initialized="PartyControl_Init">
+    <Border BorderBrush="{DynamicResource AssistOutline}"
             BorderThickness="1"
             CornerRadius="5"
-            Background="#191919"
+            Background="{DynamicResource AssistPrimary}"
             >
         <Grid RowDefinitions="1*,9*"
               Margin="10">
@@ -16,7 +19,7 @@
                   x:Name="InfoGrid">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Your Party"
-                               FontFamily="{StaticResource WorkSans}"
+                               FontFamily="{StaticResource Inter}"
                                FontWeight="Regular"
                                Opacity=".3"
                                HorizontalAlignment="Left"></TextBlock>
@@ -26,8 +29,8 @@
                                FontWeight="Regular"
                                Opacity=".3"
                                HorizontalAlignment="Left"></TextBlock>
-                    <TextBlock Text="1/5"
-                               FontFamily="{StaticResource WorkSans}"
+                    <TextBlock Text="{Binding PartyMemberCount, FallbackValue='0/5'}"
+                               FontFamily="{StaticResource Inter}"
                                FontWeight="Regular"
                                Opacity=".3"
                                HorizontalAlignment="Left"></TextBlock>
@@ -36,22 +39,46 @@
             
             <Grid Row="1"
                   x:Name="DataGrid">
-                <UniformGrid Rows="1"
-                             Columns="5">
-                    <UniformGrid.Styles>
+                <ItemsControl Items="{Binding PartyControls}">
+                    <ItemsControl.Styles>
                         <Style Selector="leagues|LeaguePartyMemberControl">
                             <Setter Property="Padding" Value="0,0,5,0"/>
                         </Style>
                         <Style Selector="leagues|LeaguePartyInviteControl">
                             <Setter Property="Margin" Value="0,0,5,0"/>
                         </Style>
-                    </UniformGrid.Styles>
-                    <leagues:LeaguePartyMemberControl/>
-                    <leagues:LeaguePartyInviteControl/>
-                    <leagues:LeaguePartyInviteControl/>
-                    <leagues:LeaguePartyInviteControl/>
-                    <leagues:LeaguePartyInviteControl/>
-                </UniformGrid>
+                    </ItemsControl.Styles>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1"
+                                         Columns="5">
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    
+                </ItemsControl>
+            </Grid>
+            
+            <Grid RowSpan="2"
+                  Background="{DynamicResource AssistPrimary}"
+                  IsVisible="{Binding IsLoading}">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="50">
+                    <TextBlock Text="{x:Static p:Resources.Global_Loading}"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="SemiBold"
+                               FontSize="16"
+                               HorizontalAlignment="Left"></TextBlock>
+                
+                    <avaloniaProgressRing:ProgressRing Width="25"
+                                                       Height="25"
+                                                       IsActive="{Binding IsLoading}"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="White"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

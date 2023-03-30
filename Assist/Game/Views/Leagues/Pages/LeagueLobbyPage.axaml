@@ -3,12 +3,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="1105" d:DesignHeight="582"
              x:Class="Assist.Game.Views.Leagues.Pages.LeagueLobbyPage">
     <Grid RowDefinitions="4*,6*">
         <Grid Row="0">
-            <leagues:LeaguePartyControl Width="985"
-                                        Height="220"/>
+            <StackPanel Spacing="20">
+                <leagues:LeaguePartyControl Width="985"
+                                            Height="220"/>
+
+                <Border Background="{DynamicResource AssistPrimary}"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                        BorderThickness="2"
+                        Width="985"
+                        Height="50">
+                    <Grid VerticalAlignment="Center" Margin="20,0">
+                        <StackPanel Orientation="Horizontal" Spacing="20"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="DEVELOPER OVERRIDE"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"/>
+                            <TextBox x:Name="PartyIDJoin"
+                                     Width="300"></TextBox>
+                            <Button Classes="AssistBtn"
+                                    Content="Join Party"
+                                    Click="DevJoinBtn_Click"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

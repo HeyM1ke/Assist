@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.ViewModels;
+using AssistUser.Lib.Leagues.Models;
 using AssistUser.Lib.Parties;
 using AssistUser.Lib.Parties.Models;
 using AssistUser.Lib.Profiles.Models;
@@ -17,6 +18,7 @@ public class LeagueService
     public AssistProfile ProfileData;
     public string CurrentLeagueId { get; set; }
     public AssistParty CurrentPartyInfo { get; set; }
+    public AssistLeague CurrentLeagueInfo { get; set; }
 
     public LeagueNavigationController NavigationController = new LeagueNavigationController();
     public LeagueService()
@@ -45,6 +47,24 @@ public class LeagueService
         if (resp.Code != 200)
         {
             Log.Error("CANNOT GET PARTY DATA ON LEAGUESERVICE");
+            Log.Error(resp.Message);
+            return new AssistParty();
+        }
+
+        CurrentPartyInfo = JsonSerializer.Deserialize<AssistParty>(resp.Data.ToString());
+        return CurrentPartyInfo;
+        
+    }
+    
+    public async Task<AssistParty> CreateNewParty()
+    {
+        var resp = await AssistApplication.Current.AssistUser.Party.CreateParty(new CreateParty()
+        {
+            LeagueId = CurrentLeagueId,
+        });
+        if (resp.Code != 200)
+        {
+            Log.Error("CANNOT CREATE PARTY ON LEAGUESERVICE");
             Log.Error(resp.Message);
         }
 
@@ -85,5 +105,17 @@ public class LeagueService
             Log.Error(e.StackTrace);
         }
     }
-    
+
+    public async Task<AssistLeague> GetCurrentLeagueInformation()
+    {
+        var resp = await AssistApplication.Current.AssistUser.League.GetLeagueInfo(Instance.CurrentLeagueId);
+        if (resp.Code != 200)
+        {
+            Log.Error("CANNOT GET LEAGUE DATA ON LEAGUESERVICE");
+            Log.Error(resp.Message);
+        }
+
+        CurrentLeagueInfo = JsonSerializer.Deserialize<AssistLeague>(resp.Data.ToString());
+        return CurrentLeagueInfo;
+    }
 }
