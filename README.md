@@ -4,8 +4,8 @@
 </h1>
 
 <h1 align="center">Assist</h2>
-<h3 align="center">VALORANT Extension Launcher that adds contains different features regarding VALORANT.</h3>
-<h5 align="center">Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games.</h5>
+<h3 align="center">VALORANT Extension Launcher that adds different features regarding VALORANT.</h3>
+<h5 align="center">Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by the company.</h5>
 <h5 align="center">Riot Games does not endorse or sponsor this project.</h5>
 
 <p align="center">
@@ -22,17 +22,17 @@
 
 
 ## Why?
-Well, why not? Assist was created from the culmination of different ideas from many different individuals over a few months. Assist was made to replace the VALORANT icon on your desktop and become a hub for all VALORANT players. Assist brings a plethora of features that make your life easier and better with everything at a few click strokes away. Assist does not replace the Riot Client, The Riot Client continues to Download, Patch, Authenticate and Launch you into the game. Assist is made to be an extension launcher that is separate but together to create a better launcher for players.
+Well, why not? Assist was created from the culmination of different ideas from many different individuals over a few months. Assist was made to replace the VALORANT icon on your desktop and become a hub for all VALORANT players. Assist brings a plethora of quality-of-life features that make of your experience a more pleasurable one, and only at a few clicks away. Assist does not replace the Riot Client, the official client continues to download, patch, authenticate and launch you into the game. Assist is made to be an extension launcher that is separate, but works together with the Riot Client to create an ideal gameplay environment for players.
 
 ## Features
   * Dashboard
-    - Taking from the original dashboard we have revamped it. Now it gives you a bit of an insight into your day in VALORANT at a glance. Containing your Missions, your recent stats, and the latest news.
+    - Taking from the original dashboard we have revamped it. Now it gives you a bit of an insight into your day in VALORANT at a glance. Containing your Missions, recent stats, and the latest news.
   * Account Switcher
-    - Allows you to add up to 5 accounts to assist, allowing you to hotswap between accounts and launch Valorant without having to login everytime.
+    - Allows you to add up to 5 accounts to Assist, allowing you to hotswap between them and launch Valorant without having to login everytime.
   * Store
-    - You can now check your store without having to load up the game now, simply click on the store tab and look at your store!
-  * ALOT More to come in the future!
+    - You can now check your store without having to load up the game, simply click on the store tab and have a look!
+  * And A LOT MORE in store for the future!
 
 
 ## Disclaimer
-Assist is not a part of Riot Games nor is it Endorsed or affiliated in any way. Assist was made to be safe for everyone to use, and to our knowledge, no one ever got into trouble for using Assist. Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games. If you need to contact me, DM on twitter @Hey_M1ke, or other places if you know where to look.
+Assist is not a part of Riot Games nor is it endorsed or affiliated in any way. Assist was made to be safe for everyone to use, and to our knowledge, no one ever got into trouble for using it. Our tool was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games. If you need to contact me, DM on twitter @Hey_M1ke, or other places if you know where to look.
