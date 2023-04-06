@@ -7,7 +7,8 @@
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="990" d:DesignHeight="220"
              x:Class="Assist.Game.Controls.Leagues.LeaguePartyControl"
-             Initialized="PartyControl_Init">
+             Initialized="PartyControl_Init"
+             Unloaded="Control_OnUnloaded">
     <Border BorderBrush="{DynamicResource AssistOutline}"
             BorderThickness="1"
             CornerRadius="5"

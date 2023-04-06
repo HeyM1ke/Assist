@@ -35,5 +35,10 @@
                 </Border>
             </StackPanel>
         </Grid>
+        
+        <Grid Row="1" Margin="60,0">
+            <leagues:LeagueQueueControl HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"></leagues:LeagueQueueControl>
+        </Grid>
     </Grid>
 </UserControl>

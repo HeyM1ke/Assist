@@ -73,7 +73,10 @@ public class LeaguePartyControlViewModel : ViewModelBase
     private async void GameServerConnectionOnPARTY_PartyUpdateReceived(string? obj)
     {
         Log.Information("RECEIVED PARTY UPDATE MESSAGE ON CONTROLVIEWMODEL FOR PARTY CONTROL");
-        var pty = JsonSerializer.Deserialize<AssistParty>(obj);
+        var pty = JsonSerializer.Deserialize<AssistParty>(obj,new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
 
         LeagueService.Instance.CurrentPartyInfo = pty;
         UpdateObjects(pty);
@@ -94,6 +97,7 @@ public class LeaguePartyControlViewModel : ViewModelBase
         }
         PartyMemberCount = $"{pty.CurrentSize}/{pty.MaxSize}";
         // Get all members and generate their objects
+        BindToEvents();
         await UpdateObjects(pty);
 
         IsLoading = false;
@@ -106,20 +110,20 @@ public class LeaguePartyControlViewModel : ViewModelBase
         {
             Log.Information("We have an issue, Party has zero members");
         }
-        
+
+        PartyControls.Clear();
         
         for (int i = 0; i < partyData.CurrentSize; i++)
         {
-            var control = new LeaguePartyMemberControl(partyData.Members[i]);
-            AddToControls(control);
+            AddToControls(partyData.Members[i]);
         }
-        
+
         for (int i = 0; i < (partyData.MaxSize - partyData.CurrentSize); i++)
         {
-            var control = new LeaguePartyInviteControl();
-            control.Click += InviteControl_Click;
-            AddToControls(control);
+            AddInviteControl();
         }
+        
+
     }
 
     private void InviteControl_Click(object? sender, RoutedEventArgs e)
@@ -128,10 +132,22 @@ public class LeaguePartyControlViewModel : ViewModelBase
     }
 
 
-    private async Task AddToControls(Control control)
+    private async Task AddToControls(AssistPartyMember data)
     {
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
+            var control = new LeaguePartyMemberControl();
+            control.UpdatePlayerData(data);
+            PartyControls.Add(control);
+        });
+    }
+
+    private async Task AddInviteControl()
+    {
+        Dispatcher.UIThread.InvokeAsync(async () =>
+        {
+            var control = new LeaguePartyInviteControl();
+            control.Click += InviteControl_Click;
             PartyControls.Add(control);
         });
     }
