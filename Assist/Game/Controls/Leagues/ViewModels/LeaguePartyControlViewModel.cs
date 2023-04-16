@@ -115,6 +115,11 @@ public class LeaguePartyControlViewModel : ViewModelBase
         
         for (int i = 0; i < partyData.CurrentSize; i++)
         {
+            if (i==0)
+            {
+                await AssistApplication.Current.PlaySound(
+                    "https://content.assistapp.dev/audio/709fe49c-293b-4cd6-987d-848304f28eee/PartyMemberJoin.mp3");
+            }
             AddToControls(partyData.Members[i]);
         }
 
@@ -149,6 +154,7 @@ public class LeaguePartyControlViewModel : ViewModelBase
             var control = new LeaguePartyInviteControl();
             control.Click += InviteControl_Click;
             PartyControls.Add(control);
+            
         });
     }
     
@@ -157,7 +163,11 @@ public class LeaguePartyControlViewModel : ViewModelBase
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
             PartyControls.Remove(control);
+            await AssistApplication.Current.PlaySound(
+                "https://content.assistapp.dev/audio/709fe49c-293b-4cd6-987d-848304f28eee/MemberLeft.mp3");
         });
+        
+        
     }
     
     private async Task ClearControls(Control control)

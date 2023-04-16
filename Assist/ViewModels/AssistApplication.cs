@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LibVLCSharp.Shared;
 using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Game.Views;
@@ -41,6 +42,26 @@ namespace Assist.ViewModels
 
         #endregion
 
+        public AssistApplication()
+        {
+            _libVLC = new LibVLC();
+            _mp = new MediaPlayer(_libVLC);
+            
+            _mp.EndReached += EndReached;
+            _mp.Playing += Playing;
+
+        }
+
+        private void Playing(object? sender, EventArgs e)
+        {
+            Log.Information("Playing sound now.");
+            Log.Information($"Sound Length {_mp.Length} ms");
+        }
+
+        private void EndReached(object? sender, EventArgs e)
+        {
+            Log.Information("End of sound reached.");
+        }
 
         public static AssistApplication Current = new AssistApplication();
         public static AssistApiService ApiService = new AssistApiService();
@@ -245,6 +266,8 @@ namespace Assist.ViewModels
 
         #region Experimental
 
+        readonly MediaPlayer _mp;
+        readonly LibVLC _libVLC;
         public ServerHub ServerHub;
         public RiotUserTokenRefreshService RefreshService;
         public async Task ConnectToServerHub()
@@ -253,6 +276,24 @@ namespace Assist.ViewModels
 
             Log.Information("Attempting To Connect to Server");
             ServerHub.Connect();
+        }
+
+        public async Task PlaySound(string url)
+        {
+            using (var media = new Media(_libVLC, new Uri(url)))
+                _mp.Media = media;
+
+            _mp.Play();
+        }
+        
+        public async Task Pause()
+        {
+            _mp.Pause();
+        }
+        
+        public async Task SetVolume(int num)
+        {
+            _mp.Volume = num;
         }
 
         #endregion
