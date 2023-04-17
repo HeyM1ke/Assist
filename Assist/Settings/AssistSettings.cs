@@ -170,5 +170,13 @@ namespace Assist.Settings
             set => this.SetProperty(ref _eglEnabled, value);
         }
         public BackupsSettings Backups = new BackupsSettings();
+        
+        
+        private SoundSettings _soundSettings = new SoundSettings();
+        public SoundSettings SoundSettings
+        {
+            get => _soundSettings;
+            set => this.SetProperty(ref _soundSettings, value);
+        }
     }
 }

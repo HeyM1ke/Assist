@@ -59,7 +59,37 @@
                             <TabItem Classes="Assist"
                                      Header="{x:Static p:Resources.Settings_Accounts}"/>
                             <TabItem Classes="Assist"
-                                     Header="{x:Static p:Resources.Settings_Sound}"/>
+                                     Header="{x:Static p:Resources.Settings_Sound}">  <StackPanel Margin="-10,0">
+                                    <Panel HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal" Spacing="7">
+                                            <TextBlock Text="Volume"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontWeight="Medium"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="#FFFFFF"
+                                                       FontSize="15"></TextBlock>
+                                            <Slider Width="100" VerticalAlignment="Center"></Slider>
+                                            <TextBlock Text="100"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontWeight="Medium"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="#FFFFFF"
+                                                       FontSize="12"></TextBlock>
+                                        </StackPanel>
+                                    </Panel>
+                                    <Panel HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="Sound Pack"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontWeight="Medium"
+                                                       Foreground="#FFFFFF"
+                                                       FontSize="15"></TextBlock>
+                                            <ComboBox Width="300">
+                                                <ComboBoxItem Content="Biden"></ComboBoxItem>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Panel>
+                                </StackPanel> </TabItem>
                             <TabItem Classes="Assist"
                                      Header="{x:Static p:Resources.Settings_AssistAccount}"/>
                         </TabControl>
