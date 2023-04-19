@@ -7,7 +7,8 @@
              xmlns:leagues1="clr-namespace:Assist.Game.Controls.Leagues"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Game.Views.Leagues.LeagueMainPage"
-             Initialized="LeagueMain_Init">
+             Initialized="LeagueMain_Init"
+             Unloaded="LeagueMain_Unloaded">
     <Grid Margin="10">
         
         <leagues1:LeagueSelectionControl  ZIndex="999"

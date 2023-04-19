@@ -5,6 +5,7 @@ using Assist.Game.Services;
 using Assist.Game.Services.Leagues;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Serilog;
 using LeagueService = Assist.Game.Services.Leagues.LeagueService;
@@ -55,6 +56,11 @@ public partial class LeagueMainPage : UserControl
 
     private async Task ComebackSetup()
     {
-        
+        LeagueService.Instance.BindToEvents();
+    }
+
+    private void LeagueMain_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        //LeagueService.Instance.UnbindToEvents();
     }
 }

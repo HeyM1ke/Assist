@@ -84,7 +84,8 @@
                                                        FontWeight="Medium"
                                                        Foreground="#FFFFFF"
                                                        FontSize="15"></TextBlock>
-                                            <ComboBox Width="300">
+                                            <ComboBox Width="300"
+                                                      SelectedIndex="0">
                                                 <ComboBoxItem Content="Biden"></ComboBoxItem>
                                             </ComboBox>
                                         </StackPanel>

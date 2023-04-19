@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="362" d:DesignHeight="450"
-             
+             Initialized="QueueControl_Init"
              x:Class="Assist.Game.Controls.Leagues.LeagueQueueControl">
     <Grid>
         <StackPanel>
@@ -21,10 +21,12 @@
                 <Button Classes="AssistBtn"
                         Width="362"
                         Height="90"
-                        Content="READY"
+                        Content="{Binding ButtonText}"
                         FontWeight="Bold"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
+                        IsEnabled="{Binding ButtonEnabled}"
+                        Click="QueueBtn_Click"
                         FontSize="48"/>
                 
             </Panel>

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Game.Views.Leagues;
 using Assist.ViewModels;
 using AssistUser.Lib.Leagues.Models;
 using AssistUser.Lib.Parties;
 using AssistUser.Lib.Parties.Models;
 using AssistUser.Lib.Profiles.Models;
+using Avalonia.Threading;
 using Serilog;
 
 namespace Assist.Game.Services.Leagues;
@@ -19,6 +21,7 @@ public class LeagueService
     public string CurrentLeagueId { get; set; }
     public AssistParty CurrentPartyInfo { get; set; }
     public AssistLeague CurrentLeagueInfo { get; set; }
+    private bool currentlyBinded = false;
 
     public LeagueNavigationController NavigationController = new LeagueNavigationController();
     public LeagueService()
@@ -75,14 +78,20 @@ public class LeagueService
     
     public void BindToEvents()
     {
+        if (currentlyBinded)return;
         AssistApplication.Current.GameServerConnection.PARTY_PartyUpdateReceived += GameServerConnectionOnPARTY_PartyUpdateReceived;
         AssistApplication.Current.GameServerConnection.PARTY_PartyKickReceived += GameServerConnectionOnPARTY_PartyKickReceived;
+        AssistApplication.Current.GameServerConnection.QUEUE_InQueueMessageReceived += GameServerConnectionOnQUEUE_InQueueMessageReceived;
+        AssistApplication.Current.GameServerConnection.QUEUE_LeaveQueueMessageReceived += GameServerConnectionOnQUEUE_LeaveQueueMessageReceived;
+        currentlyBinded = !currentlyBinded;
     }
     
     public void UnbindToEvents()
     {
         AssistApplication.Current.GameServerConnection.PARTY_PartyUpdateReceived -= GameServerConnectionOnPARTY_PartyUpdateReceived;
         AssistApplication.Current.GameServerConnection.PARTY_PartyKickReceived -= GameServerConnectionOnPARTY_PartyKickReceived;
+        AssistApplication.Current.GameServerConnection.QUEUE_InQueueMessageReceived -= GameServerConnectionOnQUEUE_InQueueMessageReceived;
+        AssistApplication.Current.GameServerConnection.QUEUE_LeaveQueueMessageReceived -= GameServerConnectionOnQUEUE_LeaveQueueMessageReceived;
     }
     
     private void GameServerConnectionOnPARTY_PartyKickReceived(string? obj)
@@ -117,5 +126,24 @@ public class LeagueService
 
         CurrentLeagueInfo = JsonSerializer.Deserialize<AssistLeague>(resp.Data.ToString());
         return CurrentLeagueInfo;
+    }
+    
+    private void GameServerConnectionOnQUEUE_InQueueMessageReceived(object? obj)
+    {
+        Log.Error("InqueueMessageReceived");
+        Dispatcher.UIThread.InvokeAsync(async () =>
+        {
+            GameViewNavigationController.Change(new QueuePage());
+        });
+    }
+    
+    private void GameServerConnectionOnQUEUE_LeaveQueueMessageReceived(object? obj)
+    {
+        Log.Error("LeaveMessageReceived");
+        
+        Dispatcher.UIThread.InvokeAsync(async () =>
+        {
+            GameViewNavigationController.Change(new LeagueMainPage());
+        });
     }
 }

@@ -31,6 +31,8 @@ public class AssistGameServerConnection : HubClient
         _hubConnection.On<string>("recieveGlobalChatMessage", GlobalChatMessageReceived);
         _hubConnection.On<string>("receiveLeaguePartyInformation", PartyUpdateReceived);
         _hubConnection.On<string>("receiveLeaguePartyKickedUpdate", PartyKickReceived);
+        _hubConnection.On<string?>("receiveInQueueMessage", InQueueMessageReceived);
+        _hubConnection.On<string?>("receiveLeaveQueueMessage", LeaveQueueMessageReceived);
 
         await StartHubInternal();
     }
@@ -100,5 +102,24 @@ public class AssistGameServerConnection : HubClient
         PARTY_PartyKickReceived?.Invoke(data);
     }
 
+    #endregion
+
+    #region Queue
+
+    public event Action<object?> QUEUE_InQueueMessageReceived;
+    public event Action<object?> QUEUE_LeaveQueueMessageReceived;
+
+    
+    private async void InQueueMessageReceived(string data)
+    {
+        Log.Information("RECEIVED InQueue MESSAGE FROM SERVER");
+        QUEUE_InQueueMessageReceived?.Invoke(data);
+    }
+    
+    private async void LeaveQueueMessageReceived(string data)
+    {
+        Log.Information("RECEIVED LeaveQueue MESSAGE FROM SERVER");
+        QUEUE_LeaveQueueMessageReceived?.Invoke(null);
+    }
     #endregion
 }

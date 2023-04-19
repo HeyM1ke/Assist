@@ -1,0 +1,31 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Leagues"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:QueuePlayerPreview ImageUrl=""
+                                     PlayerName=""/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|QueuePlayerPreview">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="18">
+                    <asyncImageLoader:AdvancedImage Source="{TemplateBinding ImageUrl}"
+                                                    Height="42"
+                                                    Width="42"
+                                                    CornerRadius="100"
+                                                    />
+
+                    <TextBlock Text="{TemplateBinding PlayerName}"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Regular"
+                               VerticalAlignment="Center"
+                               Foreground="#FFFFFF"
+                               FontSize="15"></TextBlock>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
