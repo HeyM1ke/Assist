@@ -10,6 +10,15 @@ namespace Assist.Objects.RiotClient
 
         [YamlMember(Alias = "rso-authenticator", ApplyNamingConventions = false)]
         public object? rsoAuth = null;
+
+        [YamlMember(Alias = "singular", ApplyNamingConventions = false)]
+        public object? HasCompletedFirstRun = null;
+    }
+
+    public class HasCompletedFirstRun
+    {
+        [YamlMember(Alias = "has_completed_first_run", ApplyNamingConventions = false)]
+        public string has_completed_first_run;
     }
 
     public class RiotLoginSection
