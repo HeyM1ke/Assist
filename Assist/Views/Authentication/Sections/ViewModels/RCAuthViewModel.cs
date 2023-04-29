@@ -127,8 +127,7 @@ namespace Assist.Views.Authentication.Sections.ViewModels
                     .WithNamingConvention(CamelCaseNamingConvention.Instance)
                     .Build();
 
-                string rgpm = File.ReadAllText(defaultConfigPath);
-                settings = deserializer.Deserialize<RiotGamesPrivateModel>(rgpm);
+                settings = deserializer.Deserialize<RiotGamesPrivateModel>(File.ReadAllText(defaultConfigPath));
             }
             catch (Exception e)
             {
