@@ -99,7 +99,7 @@ public class LeagueQueueViewModel : ViewModelBase
             return;
         }
 
-        playerData.IsLeader = pty.LeagueId == playerData.Id;
+        playerData.IsLeader = pty.LeaderId == playerData.Id;
         _partyMember = playerData;
 
         if (playerData.IsLeader)
