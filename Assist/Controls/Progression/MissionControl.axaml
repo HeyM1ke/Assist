@@ -17,7 +17,7 @@
 
                   <Grid>
                       <TextBlock Text="{TemplateBinding Title}"
-                                 FontFamily="{StaticResource WorkSans}"
+                                 FontFamily="{StaticResource Inter}"
                                  FontSize="{TemplateBinding TitleFontSize}"
                                  FontWeight="Regular"
                                  HorizontalAlignment="Left"
@@ -25,7 +25,7 @@
                                  Foreground="{DynamicResource MissionsTextColor}"/>
 
                       <TextBlock Text="{TemplateBinding XpGrantAmount}"
-                                 FontFamily="{StaticResource WorkSans}"
+                                 FontFamily="{StaticResource Inter}"
                                  FontSize="12"
                                  FontWeight="Light"
                                  HorizontalAlignment="Right"
@@ -45,7 +45,7 @@
                       </ProgressBar>
 
                       <TextBlock Text="{TemplateBinding PreviewText}"
-                                 FontFamily="{StaticResource WorkSans}"
+                                 FontFamily="{StaticResource Inter}"
                                  FontSize="8"
                                  FontWeight="Light"
                                  HorizontalAlignment="Center"

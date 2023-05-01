@@ -51,8 +51,8 @@ namespace Assist.Controls.Dashboard
                         ArticleTitle = "node1",
                         ImageUrl = 
                             "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg",
-                        Width=790, 
-                        Height=225
+                        Width=747, 
+                        Height=300
                     }
                 };
 
@@ -62,8 +62,8 @@ namespace Assist.Controls.Dashboard
             
             // what the hell is this FIX LMFAOOO
             List<ArticleNodeItem> AI = articles.Select(x => new ArticleNodeItem(){
-                Width=790,
-                Height=225,
+                Width=747,
+                Height=300,
                 ArticleTitle = x.title,
                 ArticleDescription = x.description,
                 ImageUrl = x.imageUrl,

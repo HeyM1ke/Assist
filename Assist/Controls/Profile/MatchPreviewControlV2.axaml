@@ -1,0 +1,75 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Profile"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:MatchPreviewControlV2 Height="146"
+                                        Width="94"
+                                        ResultText="WIN"
+                                        MatchWin=""
+                                        ResultColor="{DynamicResource ValorantGreenWin}"
+                                        MatchScore="13 - 20"
+                                        MatchMap="ASCENT"
+                                        MatchMapImage="https://content.assistapp.dev/maps/EE613EE9-28B7-4BEB-9666-08DB13BB2244_BWlistview.png"
+                                        ExtraData="23 / 4 / 2"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MatchPreviewControlV2">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border CornerRadius="5"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                        BorderThickness="1">
+                    <Grid>
+                        <asyncImageLoader:AdvancedImage x:Name="PART_MapImage"
+                               Source="{TemplateBinding MatchMapImage}"
+                               Stretch="UniformToFill"
+                               CornerRadius="5"
+                               >
+                        </asyncImageLoader:AdvancedImage>
+                        <Border CornerRadius="5"
+                                Background="#000000"
+                                Opacity=".6"></Border>
+                        
+                        <Rectangle Opacity=".3" Fill="{TemplateBinding ResultColor}">
+                      
+                        </Rectangle>
+                        
+                        <Grid>
+                            <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Spacing="7">
+                                <Image x:Name="PART_AgentIcon"
+                                       asyncImageLoader:ImageLoader.Source="{TemplateBinding PlayerAgent}"
+                                       Width="33"
+                                       Height="33"
+                                       HorizontalAlignment="Center"/>  
+                                
+                                <TextBlock Text="{TemplateBinding MatchScore}"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontSize="22"
+                                           Width="80"
+                                           FontWeight="Bold"
+                                           TextAlignment="Center"
+                                           ></TextBlock>
+                                
+                                <StackPanel Spacing="5">
+                                    <Rectangle Fill="{DynamicResource AssistRed}"
+                                               Height="1"></Rectangle>
+                                    <TextBlock Text="{TemplateBinding ExtraData}"
+                                               FontFamily="{StaticResource Inter}"
+                                               FontSize="11"
+                                               FontWeight="SemiBold"
+                                               TextAlignment="Center"
+                                    ></TextBlock>
+                                    
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+				  </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

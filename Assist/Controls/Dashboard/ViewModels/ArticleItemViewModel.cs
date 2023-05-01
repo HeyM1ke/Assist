@@ -15,7 +15,7 @@ namespace Assist.Controls.Dashboard.ViewModels
         private string _articleTitle = "Valorant Patch Notes 5.01";
         public string ArticleTitle
         {
-            get => _articleTitle;
+            get => _articleTitle.ToUpper();
             set => this.RaiseAndSetIfChanged(ref _articleTitle, value);
         }
 

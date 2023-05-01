@@ -1,0 +1,77 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Dashboard"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:RankPreviewControl Width="278"
+                                     Height="135"
+                                     RankColorText=""/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|RankPreviewControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistPrimary}"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                        BorderThickness="1"
+                        CornerRadius="5">
+                    <Grid Margin="13,10">
+                        <DockPanel Dock="Top">
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="Current Rank"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource MissionsText}"
+                                           FontWeight="Bold"
+                                           DockPanel.Dock="Top"></TextBlock>
+                                <Rectangle Fill="{DynamicResource AssistRed}"
+                                           Height="1"
+                                />
+                            
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="8">
+                                    <Border Background="{DynamicResource AssistSecondary}"
+                                            Width="90"
+                                            Height="90"
+                                            CornerRadius="5">
+                                        <asyncImageLoader:AdvancedImage Margin="15"
+                                                                        Source="{TemplateBinding PlayerRankIcon}"/>
+                                    </Border>
+                                    
+                                    <Border Background="{DynamicResource AssistSecondary}"
+                                            Width="152"
+                                            Height="90"
+                                            CornerRadius="5">
+                                        <StackPanel VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <TextBlock Text="{TemplateBinding RankName}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="20"
+                                                       FontWeight="Bold"
+                                                       DockPanel.Dock="Top"
+                                                       ></TextBlock>
+                                            <TextBlock Text="{TemplateBinding PlayerRR}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="16"
+                                                       Foreground="#50FFFFFF"
+                                                       FontWeight="Medium"
+                                                       TextAlignment="Center"
+                                                       DockPanel.Dock="Top"
+                                            ></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                                
+                        
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel>
+                    
+                        </DockPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

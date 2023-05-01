@@ -62,14 +62,16 @@
             <GradientStop Color="Transparent" Offset="1" />
         </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="ValorantRedLoss" StartPoint="0%,100%">
-            <GradientStop Color="#00FF5C5C" Offset="0.2" />
+        <LinearGradientBrush x:Key="ValorantRedLoss" EndPoint="0%,0%" StartPoint="0%,100%">
             <GradientStop Color="#FF5C5C" Offset="1" />
+            <GradientStop Color="#00FF5C5C" Offset="0.2" />
+            
         </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="ValorantGreenWin" StartPoint="0%,100%">
-			<GradientStop Color="#005CFFB1" Offset="0.2" />
-            <GradientStop Color="#5CFFB1" Offset="1" />
+        <LinearGradientBrush x:Key="ValorantGreenWin" EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#5CFFB1" Offset=".2" />
+            <GradientStop Color="#005CFFB1" Offset="1" />
+            
         </LinearGradientBrush>
 
         <SolidColorBrush  x:Key="ValorantIron" Color="#4f514f"/>
@@ -156,7 +158,7 @@
         
         <!--Missions Control Styles-->
         <SolidColorBrush x:Key="MissionsFillBarColor" Color="#F61E51"/>
-        <SolidColorBrush x:Key="MissionsBackgroundBarColor" Color="#101115"/>
+        <SolidColorBrush x:Key="MissionsBackgroundBarColor" Color="#030303"/>
         <SolidColorBrush x:Key="MissionsTextColor" Color="#FFFFFF"/>
         <SolidColorBrush x:Key="MissionsLineColor" Color="#F61E51"/>
         
@@ -199,6 +201,9 @@
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
         <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
+        <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControlV2.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/RecentMatchesView.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/RankPreviewControl.axaml"></StyleInclude>
 
 		<!--GameMode-->
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>

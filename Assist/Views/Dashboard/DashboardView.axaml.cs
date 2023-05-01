@@ -9,6 +9,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Assist.Services;
 using Assist.Views.Dashboard.ViewModels;
+using Avalonia.Layout;
 using Serilog;
 
 namespace Assist.Views.Dashboard
@@ -22,7 +23,6 @@ namespace Assist.Views.Dashboard
             DataContext = _viewModel = new DashboardViewModel();
             InitializeComponent();
             MainViewNavigationController.CurrentPage = Page.DASHBOARD;
-            NavigationBar.Instance.SetSelected(0);
         }
 
         private void InitializeComponent()
@@ -51,6 +51,14 @@ namespace Assist.Views.Dashboard
 
                     s.Children.AddRange(r);
 
+                    if (s.Children.Count == 0)
+                    {
+                        // There is no missions available. 
+                        s.Children.Add(new TextBlock()
+                        {
+                            Text = "All Missions Completed!",
+                        });
+                    }
                     obj.Content = s;
 
 
@@ -102,6 +110,15 @@ namespace Assist.Views.Dashboard
 
                     s.Children.AddRange(r);
 
+                    if (s.Children.Count == 0)
+                    {
+                        // There is no missions available. 
+                        s.Children.Add(new TextBlock()
+                        {
+                            Text = "All Missions Completed!",
+                        });
+                    }
+                    
                     obj.Content = s;
 
 
@@ -132,6 +149,11 @@ namespace Assist.Views.Dashboard
             }
         }
 
+        /// <summary>
+        /// Old RecentMatchesView Init 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Stats_Init(object? sender, EventArgs e)
         {
             if (Design.IsDesignMode)
@@ -167,6 +189,74 @@ namespace Assist.Views.Dashboard
             catch (Exception exception)
             {
                 var obj = sender as PlayerStatisticsView;
+                if (obj != null)
+                {
+                    obj.isLoading = true;
+                }
+            }
+        }
+
+
+        private async void RecentMatchesView_Init(object? sender, EventArgs e)
+        {
+            if (Design.IsDesignMode)
+                return;
+            
+            try
+            {
+                var obj = sender as RecentMatchesView;
+                if (obj != null)
+                {
+                    obj.isLoading = true;
+                    var r = await _viewModel.GetMatchHistory();
+                    if (r is null)
+                        return;
+
+                    var details = await _viewModel.GetMatchDetails(r);
+                    var getMatchHistoryControls = await _viewModel.CreateMatchControlsV2(details);
+                    
+                    var s = new StackPanel()
+                    {
+                        Spacing = 6,
+                        Orientation = Orientation.Horizontal
+                    };
+
+                    s.Children.AddRange(getMatchHistoryControls);
+
+                    obj.Content = s;
+
+                    obj.isLoading = false;
+                }
+            }
+            catch (Exception exception)
+            {
+                var obj = sender as RecentMatchesView;
+                if (obj != null)
+                {
+                    obj.isLoading = true;
+                }
+            }
+        }
+
+        private async void RankPreviewControl_Init(object? sender, EventArgs e)
+        {
+            if (Design.IsDesignMode)
+                return;
+            
+            try
+            {
+                var obj = sender as RankPreviewControl;
+                if (obj != null)
+                {
+                    obj.isLoading = true;
+                    await _viewModel.SetupCompetitiveDetails(obj);
+
+                    obj.isLoading = false;
+                }
+            }
+            catch (Exception exception)
+            {
+                var obj = sender as RankPreviewControl;
                 if (obj != null)
                 {
                     obj.isLoading = true;

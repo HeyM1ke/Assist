@@ -19,18 +19,21 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{DynamicResource MissionsBackground}">
+        <Border Background="{DynamicResource AssistPrimary}"
+                BorderBrush="{DynamicResource AssistOutline}"
+                BorderThickness="1"
+                CornerRadius="5">
             <Grid Margin="10">
                 <DockPanel Dock="Top">
                     <StackPanel>
                         <TextBlock Text="{TemplateBinding Title}"
-                                   FontFamily="{StaticResource WorkSans}"
+                                   FontFamily="{StaticResource Inter}"
                                    FontSize="12"
                                    Foreground="{DynamicResource MissionsText}"
                                    FontWeight="Bold"
                                    DockPanel.Dock="Top"
                                    Padding="0,0,0,3"></TextBlock>
-                        <Rectangle Fill="{DynamicResource MissionsLineColor}"
+                        <Rectangle Fill="{DynamicResource AssistRed}"
                                    Height="1"
                                    />
                         

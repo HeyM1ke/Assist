@@ -36,7 +36,7 @@ namespace Assist.ViewModels
             set => this.RaiseAndSetIfChanged(ref _height, value);
         }
 
-        private int _width = 1125;
+        private int _width = 1190;
 
         public int Width
         {
@@ -65,12 +65,12 @@ namespace Assist.ViewModels
                 switch (Res)
                 {
                     case (EResolution.R900):
-                        Width = 1406;
+                        Width = 1488;
                         Height = 890;
                         ScaleRate = 1.25;
                         break;
                     case EResolution.R1080:
-                        Width = 1688;
+                        Width = 1785;
                         Height = 1070;
                         ScaleRate = 1.5;
                         break;
@@ -108,7 +108,6 @@ namespace Assist.ViewModels
                         ScaleRate = 1.5;
                         break;
                     default:
-                        Width = 1190;
                         ScaleRate = 1.0;
                         break;
                 }
