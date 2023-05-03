@@ -38,13 +38,13 @@
             </StackPanel.Styles>
             <Button Width="100"
                     Height="40"
-                    IsVisible="True"
+                    IsVisible="False"
                     Click="BackBtn_Click"
                     Content="{x:Static p:Resources.Global_BackText}"
                     HorizontalAlignment="Right" />
         </StackPanel>
         <Border Width="878"
-                Height="467"
+                Height="520"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Background="#101115">
@@ -100,32 +100,63 @@
 
 </Grid.Styles>
 
-                    <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Vertical"
                                 Spacing="10"
                                 HorizontalAlignment="Center">
-                        <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalText}"
-                                   Grid.ColumnSpan="2"
-                                   FontFamily="{StaticResource WorkSans}"
-                                   FontSize="14"
-                                   FontWeight="Medium"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="10">
+                            <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalText}"
+                                       Grid.ColumnSpan="2"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="14"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
 
-                        <CheckBox HorizontalAlignment="Center"
-                                  x:Name="GlobalCheckbox"
-                                  IsChecked="{Binding IsGlobalEnabled}"
-                                  Margin="0,0,-8,0"
-                                  VerticalAlignment="Center"
-                                  Unchecked="GlobalCheckbox_OnUnchecked"
-                                  Checked="GlobalCheckbox_OnChecked"/>
-                        <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalDetailText}"
-                                   Grid.ColumnSpan="2"
-                                   FontFamily="{StaticResource WorkSans}"
-                                   FontSize="12"
-                                   FontWeight="Medium"
-                                   Opacity=".5"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                            <CheckBox HorizontalAlignment="Center"
+                                      x:Name="GlobalCheckbox"
+                                      IsChecked="{Binding IsGlobalEnabled}"
+                                      Margin="0,0,-8,0"
+                                      VerticalAlignment="Center"
+                                      Unchecked="GlobalCheckbox_OnUnchecked"
+                                      Checked="GlobalCheckbox_OnChecked"/>
+                            <TextBlock Text="{x:Static p:Resources.GameMode_EnableGlobalDetailText}"
+                                       Grid.ColumnSpan="2"
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="12"
+                                       FontWeight="Medium"
+                                       Opacity=".5"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <UniformGrid Rows="1"
+                                     HorizontalAlignment="Center"
+                                     >
+                            <UniformGrid.Styles>
+                                <Style Selector="Button">
+                                    <Setter Property="Height" Value="40"></Setter>
+                                    <Setter Property="Width" Value="100"></Setter>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                                    <Setter Property="Margin" Value="20,0,0,0"></Setter>
+                                </Style>
+                            </UniformGrid.Styles>
+                            <Button Classes="AssistBtn"
+                                    Click="BackBtn_Click"
+                                    Content="{x:Static p:Resources.Global_BackText}"
+                                    HorizontalAlignment="Left"
+                                    ></Button>
+                            <Button Classes="AssistBtn"
+                                    Content="Export"
+                                    Click="ExportBtn_Click"></Button>
+                            <Button Classes="AssistBtn"
+                                    Content="Import"
+                                    Click="ImportBtn_Click"></Button>
+                            <Button Classes="AssistBtn"
+                                    Content="{x:Static p:Resources.Global_Clear}"
+                                    IsVisible="True"
+                                    Click="ClearBtn_Click"></Button>
+                        </UniformGrid>
 					</StackPanel>
                 </Grid>    
 
@@ -159,13 +190,6 @@
             <Button Width="100"
                     Height="40"
                     Grid.Row="1"
-                    IsVisible="True"
-					Click="ClearBtn_Click"
-                    Content="{x:Static p:Resources.Global_Clear}"
-                    HorizontalAlignment="Right"></Button>
-            <Button Width="100"
-                    Height="40"
-                    Grid.Row="1"
                     IsVisible="{Binding IsGlobalModEnabled}"
                     Content="MODERATE"
                     Click="ModButton_Click"
@@ -173,3 +197,4 @@
         </StackPanel>
     </Grid>
 </UserControl>
+

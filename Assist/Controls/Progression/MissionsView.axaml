@@ -9,8 +9,6 @@
                 <controls:MissionControl></controls:MissionControl>
                 <controls:MissionControl></controls:MissionControl>
 			</StackPanel>
-
-            
         </controls:MissionsView.Content>
     </controls:MissionsView>
   </Design.PreviewWith>

@@ -25,6 +25,9 @@ namespace Assist.Game.Services
         public Action<DodgeUser> DodgeUserRemovedFromList;
         public DodgeService()
         {
+            if (Current is not null)
+                return; 
+            
             Current = this;
             Directory.CreateDirectory(DodgeFolderPath);
             LoadDodgeList();

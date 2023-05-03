@@ -25,7 +25,8 @@
             <modules:ModuleSelectionControl ModuleName="{x:Static p:Resources.GameMode_RichPres}"
                                             ModuleDescription="{x:Static p:Resources.GameMode_RichPres_ModuleText}"
                                             ModuleIcon="../../../../Resources/Game/DiscordLogo_Icon.png"
-                                            PointerPressed="RichPresence_Press"/>
+                                            PointerPressed="RichPresence_Press"
+                                            IsEnabled="{Binding IsGameMode}"/>
         </StackPanel>
   </Grid>
 </UserControl>

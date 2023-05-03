@@ -25,7 +25,8 @@
 				       />
 				
 				<ScrollViewer>
-					<StackPanel Spacing="6">
+					<StackPanel Spacing="6"
+					            x:Name="ButtonHolder">
 						<StackPanel.Styles>
 							<Style Selector="navigation|NavButton">
 								<Setter Property="Background" Value="{DynamicResource AssistPrimary}"></Setter>
@@ -33,12 +34,14 @@
 						</StackPanel.Styles>
 						<navigation:NavButton CornerRadius="5"
 						                      Text="{x:Static p:Resources.NavigationBar_Dashboard}"
-						                      IsSelected="False"
+						                      IsSelected="True"
 						                      x:Name="DashboardBtn"
 						                      IsVisible="True"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
-						                      Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
+						                      Click="DashboardBtn_OnClick"
+						                      Icon="/Resources/Game/Dashboard_Icon.png"
+						                      ></navigation:NavButton>
 						
 						<navigation:NavButton CornerRadius="5"
 						                      Text="{x:Static p:Resources.NavigationBar_Store}"
@@ -47,16 +50,18 @@
 						                      IsVisible="True"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
-						                      Icon="/Resources/Game/Dashboard_Icon.png"></navigation:NavButton>
+						                      Click="StoreBtn_OnClick"
+						                      Icon="/Resources/Icons/Store_Icon.png"></navigation:NavButton>
 						
 						<navigation:NavButton CornerRadius="5"
-						                      Text="Inventory"
+						                      Text="{x:Static p:Resources.GameMode_Modules}"
 						                      IsSelected="False"
-						                      x:Name="InventoryBtn"
+						                      x:Name="ModulesBtn"
 						                      IsVisible="True"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
-						                      Icon="/Resources/Icons/VP_Icon.png"></navigation:NavButton>
+						                      Click="ModulesBtn_OnClick"
+						                      Icon="/Resources/Game/Modules_Icon.png"></navigation:NavButton>
 						
 					</StackPanel>
 				</ScrollViewer>
@@ -68,7 +73,15 @@
 						<Setter Property="Height" Value="54"></Setter>
 					</Style>
 				</StackPanel.Styles>
-				<assist:UserPreview Height="54"></assist:UserPreview>
+				<navigation:NavButton CornerRadius="5"
+				                      Text=""
+				                      IsSelected="False"
+				                      x:Name="AccountsBtn"
+				                      IsVisible="True"
+				                      IsCompressed="True"
+				                      IsFullSize="False"
+				                      Click="AccountsBtn_OnClick"
+				                      Icon="/Resources/Icons/Settings_Icon.png"></navigation:NavButton>
 				
 				<navigation:NavButton CornerRadius="5"
 				                      Text=""

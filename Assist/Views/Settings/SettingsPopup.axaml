@@ -11,9 +11,6 @@
     
     <UserControl.Styles>
         <StyleInclude Source="/Styles/AssistStyles.axaml" />
-        
-        
-       
     </UserControl.Styles>
     
     

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Services.Riot;
 using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Controls;
@@ -35,6 +36,11 @@ namespace Assist.Controls.Global.ViewModels
             get => _profilePlayercard;
             set => this.RaiseAndSetIfChanged(ref _profilePlayercard, value);
         }
+        
+        public string SelectedPatchLine
+        {
+            get => AssistApplication.Current.ClientLaunchSettings.Patchline.ToUpper();
+        }
 
         public string ProfileUsername
         {
@@ -45,6 +51,11 @@ namespace Assist.Controls.Global.ViewModels
         {
             get => Profile.Tagline;
         }
+
+        public string ProfileGamename
+        {
+            get => Profile.RiotId;
+        }
         public void CheckEnable()
         {
             if (Design.IsDesignMode)
@@ -54,8 +65,8 @@ namespace Assist.Controls.Global.ViewModels
             }
                 
             var p = AssistApplication.Current.Platform;
-
-            IsEnabled = p.OperatingSystem == OperatingSystemType.WinNT ? true : false;
+            
+            IsEnabled = p.OperatingSystem == OperatingSystemType.WinNT && !RiotClientService.ClientOpened;
         }
 
         public async Task<PlayerInventory> SetPlayercard()

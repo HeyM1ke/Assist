@@ -58,5 +58,15 @@ namespace Assist.Game.Views.Modules.Views
         {
             ModulesViewNavigationController.Change(new SelectionView());
         }
+
+        private async void ExportBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            await _viewModel.ExportDodgeList();
+        }
+        
+        private async void ImportBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            await _viewModel.ImportDodgeList();
+        }
     }
 }

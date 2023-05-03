@@ -19,11 +19,11 @@
                     <StackPanel Orientation="Horizontal"
                                 Spacing="10">
                         <TextBlock Text="{x:Static p:Resources.Dodge_AddPlayer}"
-                                   FontFamily="{StaticResource WorkSans}"
+                                   FontFamily="{StaticResource Inter}"
                                    FontSize="20"
                                    FontWeight="Bold"/>
                         <TextBlock Text="{Binding ErrorMessage}"
-                                   FontFamily="{StaticResource WorkSans}"
+                                   FontFamily="{StaticResource Inter}"
                                    FontSize="12"
                                    FontWeight="Medium"
                                    TextWrapping="WrapWithOverflow"
@@ -31,7 +31,7 @@
                                    VerticalAlignment="Center"/>
 					</StackPanel>
                     <TextBlock Text="{x:Static p:Resources.Dodge_AddPlayerDesc}"
-                               FontFamily="{StaticResource WorkSans}"
+                               FontFamily="{StaticResource Inter}"
                                FontSize="14"
                                Opacity=".5"
                                FontWeight="Light"
@@ -42,7 +42,7 @@
 
                     <StackPanel Spacing="6">
                         <TextBlock Text="{x:Static p:Resources.Dodge_AddTextOption}"
-                                   FontFamily="{StaticResource WorkSans}"
+                                   FontFamily="{StaticResource Inter}"
                                    FontSize="14"
                                    Opacity=".5"
                                    FontWeight="Regular"/>
@@ -50,14 +50,14 @@
                                  Height="35"
                                  Foreground="White"
                                  Watermark="{x:Static p:Resources.Dodge_AddTextOptionExample}"
-                                 FontFamily="{StaticResource WorkSans}"
+                                 FontFamily="{StaticResource Inter}"
                                  FontWeight="Regular"
                                  x:Name="GameNameBox"
                                  AcceptsReturn="False"
                                  FontSize="12"
                                  VerticalContentAlignment="Center"/>
                         <TextBlock Text="{x:Static p:Resources.Dodge_NoteTextOption}"
-                                   FontFamily="{StaticResource WorkSans}"
+                                   FontFamily="{StaticResource Inter}"
                                    FontSize="14"
                                    Opacity=".5"
                                    FontWeight="Regular"/>
@@ -65,9 +65,10 @@
                             Height="35"
                             Foreground="White"
                             Watermark="{x:Static p:Resources.Dodge_NoteTextOptionExample}"
-                            FontFamily="{StaticResource WorkSans}"
+                            FontFamily="{StaticResource Inter}"
                             FontWeight="Regular"
                             FontSize="12"
+                            MaxLength="64"
                             x:Name="NoteBox"
                             VerticalContentAlignment="Center"/>
                     </StackPanel>
@@ -79,7 +80,7 @@
                                 <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
                                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
+                                <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
                                 <Setter Property="FontWeight"  Value="SemiBold"></Setter>
                                 <Setter Property="BorderThickness" Value="1"/>
                                 <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>

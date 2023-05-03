@@ -1,0 +1,68 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1125" d:DesignHeight="100"
+             Initialized="GameLaunchControlV2_Init"
+             
+             x:Class="Assist.Controls.Dashboard.GameLaunchControlV2">
+    <Grid RowDefinitions="Auto,*">
+        <Grid Row="0">
+            <Button Content="Settings"
+                    Classes="AssistBtn"
+                    HorizontalAlignment="Right"
+                    Click="SettingsBtn_Click"></Button>
+        </Grid>
+        
+        <Grid Row="1"
+              HorizontalAlignment="Right">
+        
+            <StackPanel Spacing="47"
+                        Orientation="Horizontal">
+                <Panel >
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Playing As:"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="14"
+                                   FontWeight="Light"
+                        />
+                        <TextBlock Text="{Binding ProfileGamename, FallbackValue='VALORANTPLAYER#00000'}"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   />
+                    </StackPanel>
+                </Panel>
+        
+                <Panel>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Patchline:"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="14"
+                                   FontWeight="Light"
+                        />
+                        <TextBlock Text="{Binding SelectedPatchLine, FallbackValue='EXT1'}"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Panel>
+        
+                <Panel
+                       HorizontalAlignment="Right">
+                    <Button Classes="AssistBtn"
+                            Content="PLAY"
+                            HorizontalContentAlignment="Right"
+                            VerticalContentAlignment="Center"
+                            FontSize="24"
+                            FontWeight="SemiBold"
+                            Width="267"
+                            Height="60"
+                            BorderBrush="{DynamicResource AssistRed}"
+                            Click="LaunchBtn_Click"
+                            IsEnabled="{Binding IsEnabled}"></Button>
+                </Panel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
