@@ -11,8 +11,10 @@
              Initialized="IngamePage_Init"
              Unloaded="Control_OnUnloaded"
              x:Class="Assist.Game.Views.Live.Pages.IngamePageView">
-  <Grid ColumnDefinitions="315,*,315"
-        Margin="10,20">
+  <Grid>
+      <Grid ColumnDefinitions="315,*,315"
+        Margin="10,20"
+        IsVisible="{Binding !IsDeathmatch}">
 
       <Grid Column="0"
             Margin="10,0"
@@ -184,6 +186,53 @@
                   </ItemsControl>
               </Border>
           </StackPanel>
+      </Grid>
+  </Grid>
+      <Grid Margin="10"
+            IsVisible="{Binding IsDeathmatch}">
+           <Grid >
+              <StackPanel VerticalAlignment="Top"
+                          Spacing="10"
+                          >
+                  
+                  <TextBlock Text="{Binding MapName}"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="ExtraBlack"
+                             FontSize="64"
+                             HorizontalAlignment="Center"
+                  />
+                  <TextBlock Text="{Binding QueueName}"
+                             FontFamily="{StaticResource WorkSans}"
+                             FontWeight="Regular"
+                             FontSize="20"
+                             HorizontalAlignment="Center"
+                  />
+              </StackPanel>
+              
+          </Grid>
+          
+          
+          <ItemsControl VerticalAlignment="Center"
+                        Background="#17181D"
+                        Margin="7,12"
+                        Items="{Binding DeathTeamControls}"
+                                
+          >
+              <ItemsControl.Styles>
+                      <Style Selector="live|GameUserControl">
+                          <Setter Property="Padding" Value="5"></Setter>
+                      </Style>
+                  </ItemsControl.Styles>
+                  <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                          <UniformGrid Rows="3"
+                                       Columns="4"
+                                   
+                          />
+                      </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  
+              </ItemsControl>
       </Grid>
   </Grid>
 </UserControl>

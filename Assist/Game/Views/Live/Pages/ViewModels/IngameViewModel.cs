@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -25,17 +26,25 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 {
     internal class IngameViewModel : ViewModelBase
     {
-        private List<GameUserControl> _allyTeamControls = new List<GameUserControl>();
+        private ObservableCollection<GameUserControl> _allyTeamControls = new ObservableCollection<GameUserControl>();
 
-        public List<GameUserControl> AllyTeamControls
+        public ObservableCollection<GameUserControl> AllyTeamControls
         {
             get => this._allyTeamControls;
             set => this.RaiseAndSetIfChanged(ref _allyTeamControls, value);
         }
+        
+        private ObservableCollection<GameUserControl> _deathTeamControls = new ObservableCollection<GameUserControl>();
 
-        private List<GameUserControl> _enemyTeamControls = new List<GameUserControl>();
+        public ObservableCollection<GameUserControl> DeathTeamControls
+        {
+            get => this._deathTeamControls;
+            set => this.RaiseAndSetIfChanged(ref _deathTeamControls, value);
+        }
 
-        public List<GameUserControl> EnemyTeamControls
+        private ObservableCollection<GameUserControl> _enemyTeamControls = new ObservableCollection<GameUserControl>();
+
+        public ObservableCollection<GameUserControl> EnemyTeamControls
         {
             get => this._enemyTeamControls;
             set => this.RaiseAndSetIfChanged(ref _enemyTeamControls, value);
@@ -90,6 +99,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             get => _errorMessage;
             set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
         }
+        
+        private bool _isDeathmatch = false;
+
+        public bool IsDeathmatch
+        {
+            get => _isDeathmatch;
+            set => this.RaiseAndSetIfChanged(ref _isDeathmatch, value);
+        }
+        
 
         private bool setupSucc = false;
 
@@ -390,6 +408,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Information("Getting queue data for ID of: " + Match.MatchData.QueueID.ToLower());
 
                 var queueName = await DetermineQueueKey(Match.MatchData.QueueID.ToLower());
+                
+                // Check if the Queue is Deathmatch.
+                IsDeathmatch = Match.MatchData.QueueID.ToLower() == "deathmatch";
+                
+                
                 QueueName = queueName.ToUpper();
             }
 
@@ -426,7 +449,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         private async Task AddUserToAllyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic)
         {
             var checkForExcisting =
-                AllyTeamControls.Find(control => control.PlayerId == Player.Subject);
+                AllyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
             if (checkForExcisting != null)
                 return;
 
@@ -435,15 +458,22 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                var temp = new List<GameUserControl>();
-                temp.Add(new GameUserControl(Player, color));
-                AllyTeamControls = AllyTeamControls.Concat(temp).ToList();
+                if (IsDeathmatch)
+                    DeathTeamControls.Add(new GameUserControl(Player, color));
+                else
+                    AllyTeamControls.Add(new GameUserControl(Player, color));
             });
         }
 
         private async Task UpdateUserInAllyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic)
         {
-            var control = AllyTeamControls.Find(control => control.PlayerId == Player.Subject);
+            GameUserControl control;
+            
+            if (IsDeathmatch)
+                control = DeathTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
+            else
+                control = AllyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
+            
             dic.TryGetValue(Player.Subject, out IBrush? color);
             if (control != null)
             {
@@ -466,7 +496,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
 
             var checkForExcisting =
-                EnemyTeamControls.Find(control => control.PlayerId == Player.Subject);
+                EnemyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
             if (checkForExcisting != null)
                 return;
 
@@ -475,15 +505,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                var temp = new List<GameUserControl>();
-                temp.Add(new GameUserControl(Player, color));
-                EnemyTeamControls = EnemyTeamControls.Concat(temp).ToList();
+                EnemyTeamControls.Add(new GameUserControl(Player, color));
             });
         }
 
         private async Task UpdateUserInEnemyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic)
         {
-            var control = EnemyTeamControls.Find(control => control.PlayerId == Player.Subject);
+            var control = EnemyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
             dic.TryGetValue(Player.Subject, out IBrush? color);
             if (control != null)
             {
