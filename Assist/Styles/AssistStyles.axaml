@@ -154,4 +154,31 @@
         <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundDisabled}" />
         <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundDisabled}" />
     </Style>
+    
+    
+    
+    
+    <Style  Selector="Button.AssistPlayBtn">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}" />
+    </Style>
+    
+    
+    <Style Selector="Button.AssistPlayBtn /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="TextBlock.FontFamily" Value="{StaticResource Inter}" />
+        <Setter Property="TextBlock.FontWeight" Value="Medium" />
+    </Style>
+    
+    <Style Selector="Button.AssistPlayBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AssistRed}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    <Style Selector="Button.AssistPlayBtn:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonHoverBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonClickText}" />
+    </Style>
 </Styles>

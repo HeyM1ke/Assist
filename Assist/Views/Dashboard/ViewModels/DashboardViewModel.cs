@@ -12,6 +12,7 @@ using Assist.Controls.Progression;
 using Assist.Objects.AssistApi.Valorant;
 using Assist.Objects.Helpers;
 using Assist.Properties;
+using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -183,6 +184,11 @@ namespace Assist.Views.Dashboard.ViewModels
                 if (currentRankTier >= 24) rankPreviewControl.PlayerRR = $"{currentRR}RR";
                 else rankPreviewControl.PlayerRR = $"{currentRR}/100 RR";
                 rankPreviewControl.PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{currentRankTier}.png";
+                var t = AssistSettings.Current.Profiles.Find(pfp =>
+                    pfp.ProfileUuid == AssistApplication.Current.CurrentProfile.ProfileUuid);
+
+                t.ValRankTier = currentRankTier;
+                
                 if (currentRankTier != null)
                     rankPreviewControl.RankName = CompetitiveNames.RankNames[currentRankTier].ToUpper();
                 

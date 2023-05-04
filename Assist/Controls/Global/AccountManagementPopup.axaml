@@ -3,8 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:global="clr-namespace:Assist.Controls.Global"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="1125" d:DesignHeight="690"
-             x:Class="Assist.Controls.Global.AccountManagementPopup">
+             x:Class="Assist.Controls.Global.AccountManagementPopup"
+             Initialized="AccountManagementPopup_Init">
      <Grid Background="#3D000000">
         <Border VerticalAlignment="Center"
                 Opacity="1"
@@ -18,7 +20,7 @@
                   Margin="25">
                 <Grid Row="0" >
                     <StackPanel Spacing="6">
-                        <TextBlock Text="ACCOUNT MANAGEMNT"
+                        <TextBlock Text="ACCOUNT MANAGEMENT"
                                    FontFamily="{StaticResource Inter}"
                                    FontWeight="SemiBold"
                                    FontSize="24"
@@ -29,7 +31,7 @@
                         <ScrollViewer VerticalScrollBarVisibility="Visible"
                                       HorizontalScrollBarVisibility="Hidden"
                                       Height="400">
-                            <ItemsControl>
+                            <ItemsControl Items="{Binding AccountItems}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Spacing="6">
@@ -38,8 +40,7 @@
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 
-                                <global:AccountManagementUserButton Height="80"/>
-                                <global:AccountManagementUserButton Height="80"/>
+                                
                             </ItemsControl>
                         </ScrollViewer>
                     </StackPanel>
@@ -48,11 +49,12 @@
                 
                 
                 <Grid Row="1">
-                    <Button Content="Close"
+                    <Button Content="{x:Static p:Resources.Global_BackText}"
                             Classes="AssistBtn"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             HorizontalContentAlignment="Center"
+                            Click="BackBtn_Click"
                             ></Button>
                 </Grid>
             </Grid>

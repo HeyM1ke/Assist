@@ -49,8 +49,9 @@
                 </Panel>
         
                 <Panel
+                    
                        HorizontalAlignment="Right">
-                    <Button Classes="AssistBtn"
+                    <Button Classes="AssistPlayBtn"
                             Content="PLAY"
                             HorizontalContentAlignment="Right"
                             VerticalContentAlignment="Center"
@@ -58,7 +59,6 @@
                             FontWeight="SemiBold"
                             Width="267"
                             Height="60"
-                            BorderBrush="{DynamicResource AssistRed}"
                             Click="LaunchBtn_Click"
                             IsEnabled="{Binding IsEnabled}"></Button>
                 </Panel>

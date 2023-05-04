@@ -3,75 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="570" d:DesignHeight="85"
              x:Class="Assist.Controls.Global.AccountManagementUserButton">
-     <Border 
-            BorderBrush="{DynamicResource AssistOutline}"
-            BorderThickness="1"
-            x:Name="PART_Border"
-            CornerRadius="10">
-
-        <Grid Margin="10"
-              ColumnDefinitions="Auto, *">
-            
-            <Grid VerticalAlignment="Center"
-                  HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            Spacing="5">
-                    <asyncImageLoader:AdvancedImage Width="65"
-                                                    Height="65"
-                                                    CornerRadius="10"
-                                                    Source="https://static.wikia.nocookie.net/valorant/images/1/12/Champions_2022_Hero_Card_Small.png/revision/latest"/>
-                    <StackPanel Orientation="Vertical"
-                                VerticalAlignment="Center">
-                        <StackPanel Orientation="Horizontal"
-                                    >
-                            <TextBlock Text="VALORANTPLAYER#00000"
-                                       FontFamily="{StaticResource Inter}"
-                                       FontWeight="SemiBold"
-                                       FontSize="20"
-                                       TextAlignment="Center"></TextBlock>
-                            <asyncImageLoader:AdvancedImage Width="24"
-                                                            Height="24"
-                                                            Source="https://static.wikia.nocookie.net/valorant/images/a/ae/Bronze_3_Rank.png/revision/latest?cb=20200623203313"/>
-                        </StackPanel>
-                        <TextBlock Text="Region: LATAM"
-                                   FontFamily="{StaticResource Inter}"
-                                   FontWeight="Regular"
-                                   Opacity=".5"
-                                   FontSize="14"
-                                   TextAlignment="Left"></TextBlock>  
-                    </StackPanel>
-                    
-                </StackPanel>
-            </Grid>
-            
-            <Grid Column="1" VerticalAlignment="Center"
-                  HorizontalAlignment="Right">
-                <StackPanel Orientation="Vertical"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom">
-                    <TextBlock Text="Region: LATAM"
-                               FontFamily="{StaticResource Inter}"
-                               Foreground="{DynamicResource AssistRed}"
-                               FontWeight="Bold"
-                               FontSize="14"
-                               TextAlignment="Right"></TextBlock> 
-                    
-                    <TextBlock Text="Last Used: 00/00/0000"
-                               FontFamily="{StaticResource Inter}"
-                               FontWeight="Light"
-                               FontStyle="Italic"
-                               Opacity=".5"
-                               FontSize="12"
-                               TextAlignment="Right"></TextBlock> 
-                    
-                </StackPanel>
-            </Grid>
-            
-        </Grid>
-    </Border>
+    
+    
+    
+    <Button HorizontalAlignment="Stretch" Click="Button_PointerPressed"></Button>
    
     <UserControl.ContextMenu>
         <ContextMenu Background="{DynamicResource AssistPrimary}"
@@ -102,6 +40,7 @@
             <MenuItem Header="Set Default"
                       FontFamily="{StaticResource WorkSans}"
                       FontWeight="Medium"
+                      Click="SetDefault_Btn"
                       
             >
             </MenuItem>
@@ -110,7 +49,7 @@
             <MenuItem Header="Remove Account"
                       FontFamily="{StaticResource WorkSans}"
                       FontWeight="Medium"
-                      
+                      Click="RemoveAccount_Btn"
             >
                
             </MenuItem>
@@ -119,6 +58,94 @@
     </UserControl.ContextMenu>
     
     <UserControl.Styles>
+        
+        <Style Selector="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border 
+            BorderBrush="{DynamicResource AssistOutline}"
+            BorderThickness="1"
+            x:Name="PART_Border"
+            CornerRadius="10">
+
+        <Grid Margin="10"
+              ColumnDefinitions="Auto, *">
+            
+            <Grid VerticalAlignment="Center"
+                  HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Spacing="5">
+                    <asyncImageLoader:AdvancedImage Width="65"
+                                                    Height="65"
+                                                    CornerRadius="10"
+                                                    Source="{Binding ProfilePicture}"/>
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal"
+                                    >
+                            <TextBlock Text="{Binding Username}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontWeight="SemiBold"
+                                       FontSize="20"
+                                       TextAlignment="Center"></TextBlock>
+                            <asyncImageLoader:AdvancedImage Width="24"
+                                                            Height="24"
+                                                            Source="{Binding RankIcon}"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding Region}"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontWeight="Regular"
+                                   Opacity=".5"
+                                   FontSize="14"
+                                   TextAlignment="Left"></TextBlock>  
+                    </StackPanel>
+                    
+                </StackPanel>
+            </Grid>
+            
+            <Grid Column="1" VerticalAlignment="Center"
+                  HorizontalAlignment="Right">
+                <StackPanel Orientation="Vertical"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom">
+                    
+                    <TextBlock Text="Default"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Light"
+                               FontStyle="Italic"
+                               Opacity=".5"
+                               FontSize="12"
+                               IsVisible="{Binding IsDefault}"
+                               TextAlignment="Right"></TextBlock> 
+                    
+                    <TextBlock Text="{x:Static p:Resources.Global_Expired}"
+                               FontFamily="{StaticResource Inter}"
+                               Foreground="{DynamicResource AssistRed}"
+                               FontWeight="Bold"
+                               FontSize="14"
+                               IsVisible="{Binding isExpired}"
+                               TextAlignment="Right"></TextBlock> 
+                    
+                    <TextBlock Text="{Binding LastUsed}"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Light"
+                               FontStyle="Italic"
+                               Opacity=".5"
+                               FontSize="12"
+                               TextAlignment="Right"></TextBlock> 
+                    
+                </StackPanel>
+            </Grid>
+            
+        </Grid>
+    </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style Selector="Border">
             <Setter Property="Background" Value="{DynamicResource AssistPrimary}"/>
         </Style>
