@@ -61,6 +61,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _mapName, value);
         }
 
+        private string? _serverName = "Loading...";
+
+        public string? ServerName
+        {
+            get => _serverName;
+            set => this.RaiseAndSetIfChanged(ref _serverName, value);
+        }
+        
         private bool setupSucc = false;
 
         public async Task Setup()
@@ -334,6 +342,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 MapName = MapNames.MapsByPath?[Match.MapID.ToLower()].ToUpper();
                 MapImage =
                     $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[Match.MapID.ToLower()]}_BWlistview.png";
+                try
+                {
+                    ServerName = ServerNames.ValorantServers[Match.GamePodID];
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Failed to get server from ServerNames List.");
+                }
             }
         }
 

@@ -204,6 +204,7 @@
         <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControlV2.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/RecentMatchesView.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/RankPreviewControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Global/AccountManagementNavBtn.axaml"></StyleInclude>
 
 		<!--GameMode-->
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>

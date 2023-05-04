@@ -8,33 +8,44 @@
              Initialized="UserPreview_Initialized">
 	
 	<UserControl.Styles>
-		<Style Selector="Grid:pointerover">
+		<Style Selector="Border">
+			<Setter Property="BorderBrush" Value="{DynamicResource AssistOutline}"></Setter>
+		</Style>
+		
+		<Style Selector="Border:pointerover">
+			<Setter Property="BorderBrush" Value="{DynamicResource AssistRed}"></Setter>
 			<Setter Property="Cursor" Value="Hand"></Setter>
 		</Style>
 	</UserControl.Styles>
 	
-	<Grid VerticalAlignment="Center"
-	      Background="Transparent"
-	      PointerReleased="GridClicked">
-	  <asyncImageLoader:AdvancedImage Source="{Binding AssistDisplayImage}"
-	                                  Width="44"
-	                                  Height="44"
-	                                  CornerRadius="300"
-	                                  Stretch="Uniform"></asyncImageLoader:AdvancedImage>
-	  <Panel VerticalAlignment="Bottom"
-	         HorizontalAlignment="Right"
-	         Margin="2,0">
+	<Border 
+	        BorderThickness="1"
+	        CornerRadius="300"
+	        VerticalAlignment="Stretch"
+	        Background="Transparent"
+	        MinHeight="30"
+	        MinWidth="30"
+	        
+	        PointerReleased="GridClicked">
+		 <Grid>
+			 <asyncImageLoader:AdvancedImage Source="{Binding AssistDisplayImage}"
+			                                 CornerRadius="300"
+			                                 Stretch="Uniform"></asyncImageLoader:AdvancedImage>
+			 <Panel VerticalAlignment="Bottom"
+			        HorizontalAlignment="Right"
+			        Margin="2,0">
 		  
 		  
 		  
-		  <Ellipse Width="14"
-		           Height="14"
-		           Fill="{DynamicResource AssistOnlineBorderColor}"/>
-		  <Ellipse Width="12"
-		           Height="12"
-		           Fill="{DynamicResource AssistOnlineColor}"/>
-	  </Panel>
-  </Grid>
+				 <Ellipse Width="12"
+				          Height="12"
+				          Fill="{DynamicResource AssistOnlineBorderColor}"/>
+				 <Ellipse Width="10"
+				          Height="10"
+				          Fill="{DynamicResource AssistOnlineColor}"/>
+			 </Panel>
+		 </Grid>
+	 </Border>
 	
 	
 </UserControl>

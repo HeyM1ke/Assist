@@ -23,18 +23,32 @@
 					   <Border x:Name="MapBorder"
                                BorderBrush="{DynamicResource AssistRed}"
                                BorderThickness="1">
-                           <asyncImageLoader:AdvancedImage Source="{Binding MapImage}"/>
+                           <asyncImageLoader:AdvancedImage Source="{Binding MapImage}"
+                                                           Height="61"/>
                        </Border>
 
+                      
 					   <TextBlock Text="{Binding MapName}"
-                                  FontFamily="{StaticResource WorkSans}"
+                                  FontFamily="{StaticResource Inter}"
                                   FontWeight="ExtraBold"
                                   FontSize="36"></TextBlock>
+                       <StackPanel Orientation="Horizontal" Spacing="2">
+                           <Image Source="/Resources/Game/Lobbies_Icon.png"
+                                  Height="12"
+                                  Stretch="Uniform"
+                                  VerticalAlignment="Center"></Image>
+                           <TextBlock Text="{Binding ServerName, FallbackValue='Loading..'}"
+                                      FontFamily="{StaticResource Inter}"
+                                      FontWeight="Medium"
+                                      FontSize="10"
+                                      VerticalAlignment="Center"></TextBlock>
+                       </StackPanel>
 				   </StackPanel>
 
 				   <!--Magical Circle for Design-->
 				   <Panel VerticalAlignment="Bottom"
-                          HorizontalAlignment="Right">
+                          HorizontalAlignment="Right"
+                          Margin="0,0,0,12">
 					   <Ellipse Fill="{DynamicResource AssistRed}"
                                 Width="79"
                                 Height="79"
@@ -60,6 +74,7 @@
 				   </Panel>
 
 			   </Grid>
+              
 			  <!--Player Information-->
               <Grid Row="1" VerticalAlignment="Top" >
                   <Border Background="#17181D"

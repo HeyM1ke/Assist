@@ -74,6 +74,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _mapName, value);
         }
 
+        private string? _serverName = "Loading...";
+
+        public string? ServerName
+        {
+            get => _serverName;
+            set => this.RaiseAndSetIfChanged(ref _serverName, value);
+        }
+        
         private string _mapImage;
 
         public string MapImage
@@ -412,8 +420,16 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 // Check if the Queue is Deathmatch.
                 IsDeathmatch = Match.MatchData.QueueID.ToLower() == "deathmatch";
                 
-                
                 QueueName = queueName.ToUpper();
+
+                try
+                {
+                    ServerName = ServerNames.ValorantServers[Match.GamePodID];
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Failed to get Gamepod Server Name from Dictionary");
+                }
             }
 
             if (Match.ProvisioningFlow == "CustomGame")
@@ -421,6 +437,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Information("Getting ProvisioningFlow data for ID of: " + Match.ProvisioningFlow);
 
                 QueueName = "CUSTOM GAME";
+                
+                try
+                {
+                    ServerName = ServerNames.ValorantServers[Match.GamePodID];
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Failed to get Gamepod Server Name from Dictionary");
+                }
             }
 
             if (currentUser != null)

@@ -8,7 +8,8 @@
              d:DesignHeight="692"
              xmlns:assist="clr-namespace:Assist.Controls.Assist"
 			 xmlns:p="clr-namespace:Assist.Properties"
-             Initialized="VerticalGameNav_Init"
+			 xmlns:global="clr-namespace:Assist.Controls.Global"
+			 Initialized="VerticalGameNav_Init"
              x:Class="Assist.Game.Controls.Navigation.VerticalGameNavigation">
 	<Grid Background="{DynamicResource AssistPrimary}">
 
@@ -83,23 +84,41 @@
 				</ScrollViewer>
 			</StackPanel>
 			<StackPanel Grid.Row="1"
-			            VerticalAlignment="Bottom">
+			            Margin="0,0,0,10"
+			            VerticalAlignment="Bottom"
+			            Spacing="10">
 				<StackPanel.Styles>
 					<Style Selector="navigation|NavButton">
 						<Setter Property="Height" Value="54"></Setter>
 					</Style>
 				</StackPanel.Styles>
-				<assist:UserPreview Height="54"></assist:UserPreview>
+				<assist:UserPreview Height="42"
+				                    Width="42"></assist:UserPreview>
 				
-				<navigation:NavButton CornerRadius="5"
-				                      Text=""
-				                      IsSelected="False"
-				                      x:Name="SettingsBtn"
-				                      Click="SettingsBtn_OnClick"
-				                      IsVisible="True"
-				                      IsCompressed="True"
-				                      IsFullSize="False"
-				                      Icon="/Resources/Icons/Settings_Icon.png"></navigation:NavButton>
+				<StackPanel Orientation="Horizontal"
+				            HorizontalAlignment="Center"
+				            Spacing="4">
+					<global:SocialButton Source="/Resources/Icons/Twitter_Icon.png" 
+					                     Height="24"
+					                     Width="24"
+					                     BorderBrush="{DynamicResource AssistOutline}"
+					                     LinkTo="https://twitter.com/assistlauncher"
+					                     CornerRadius="40"></global:SocialButton>
+					<global:SocialButton Source="/Resources/Icons/Discord_Icon.png" 
+					                     Height="24"
+					                     Width="24"
+					                     BorderBrush="{DynamicResource AssistOutline}"
+					                     LinkTo="https://discord.gg/5gw2j7Swh6"
+					                     CornerRadius="40"></global:SocialButton>
+				</StackPanel>
+				
+				<global:SocialButton Source="/Resources/Icons/Settings_Icon.png" 
+				                     Height="36"
+				                     Width="36"
+				                     x:Name="SettingsBtn"
+				                     BorderBrush="{DynamicResource AssistOutline}"
+				                     Click="SettingsBtn_OnClick"
+				                     CornerRadius="40"></global:SocialButton>
 			</StackPanel>
 		</Grid>
 		

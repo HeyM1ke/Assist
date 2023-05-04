@@ -1,8 +1,11 @@
-﻿using Assist.Game.Controls.Navigation;
+﻿using System;
+using Assist.Game.Controls.Navigation;
 using Assist.Game.Views.Modules;
 using Assist.Services;
 using Assist.Services.Popup;
+using Assist.ViewModels;
 using Assist.Views.Dashboard;
+using Assist.Views.Settings;
 using Assist.Views.Store;
 using Avalonia;
 using Avalonia.Controls;
@@ -68,5 +71,19 @@ public partial class LauncherVerticalNavigationBar : UserControl
         {
             buttonHolderChild.IsSelected = false;
         }
+    }
+
+    private void LauncherVertNavBar_Init(object? sender, EventArgs e)
+    {
+        if(Design.IsDesignMode)
+            return;
+        var t = this.FindControl<AccountManagementNavBtn>("AccountsBtn");
+
+        t.PlayercardImage = $"https://cdn.assistapp.dev/PlayerCards/{AssistApplication.Current.CurrentProfile.PlayerCardId}_DisplayIcon.png";
+    }
+
+    private void SettingsBtn_OnClick(object? sender, RoutedEventArgs e)
+    {
+        PopupSystem.SpawnCustomPopup(new SettingsPopup());
     }
 }

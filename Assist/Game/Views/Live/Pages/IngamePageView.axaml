@@ -25,7 +25,7 @@
                       VerticalAlignment="Center">
               <StackPanel>
                   <TextBlock Text="{x:Static p:Resources.GameMode_AllyTeam}"
-                             FontFamily="{StaticResource WorkSans}"
+                             FontFamily="{StaticResource Inter}"
                              FontWeight="Bold"
                              FontSize="32"
                              HorizontalAlignment="Center"
@@ -62,19 +62,44 @@
           <Grid >
               <StackPanel VerticalAlignment="Center"
                           Spacing="10">
-                  <StackPanel>
+                  <StackPanel HorizontalAlignment="Center">
                   <TextBlock Text="{Binding MapName}"
-                             FontFamily="{StaticResource WorkSans}"
+                             FontFamily="{StaticResource Inter}"
                              FontWeight="ExtraBlack"
                              FontSize="64"
                              HorizontalAlignment="Center"
                   />
-                  <TextBlock Text="{Binding QueueName}"
-                             FontFamily="{StaticResource WorkSans}"
-                             FontWeight="Regular"
-                             FontSize="20"
-                             HorizontalAlignment="Center"
-                  />
+                  <StackPanel Orientation="Horizontal"
+                              HorizontalAlignment="Center"
+                              Spacing="10">
+                      <TextBlock Text="{Binding QueueName}"
+                                 FontFamily="{StaticResource Inter}"
+                                 FontWeight="Regular"
+                                 FontSize="20"
+                                 HorizontalAlignment="Center"
+                      />
+                      
+                      <Rectangle Width="2"
+                                 Fill="{StaticResource AssistRed}">
+                      </Rectangle>
+                      
+                      <Panel>
+                          <StackPanel Spacing="2"
+                                      Orientation="Horizontal">
+                              <StackPanel Orientation="Horizontal" Spacing="2">
+                                  <Image Source="/Resources/Game/Lobbies_Icon.png"
+                                         Height="18"
+                                         Stretch="Uniform"
+                                         VerticalAlignment="Center"></Image>
+                                  <TextBlock Text="{Binding ServerName, FallbackValue='Loading..'}"
+                                             FontFamily="{StaticResource Inter}"
+                                             FontWeight="Medium"
+                                             FontSize="20"
+                                             VerticalAlignment="Center"></TextBlock>
+                              </StackPanel>
+                          </StackPanel>
+                      </Panel>
+                  </StackPanel>
                   </StackPanel>
                   <Border Height="260"
                           Background="{DynamicResource AssistBlack}">
@@ -97,7 +122,7 @@
                                       HorizontalAlignment="Center"
                                       Spacing="40">
                               <TextBlock Text="{Binding AllyScore}"
-                                         FontFamily="{StaticResource WorkSans}"
+                                         FontFamily="{StaticResource Inter}"
                                          FontWeight="Bold"
                                          FontSize="132"
                                          Width="165"
@@ -107,7 +132,7 @@
                               />
 
                               <TextBlock Text="x"
-                                         FontFamily="{StaticResource WorkSans}"
+                                         FontFamily="{StaticResource Inter}"
                                          FontWeight="Thin"
                                          FontSize="42"
                                          HorizontalAlignment="Center"
@@ -115,7 +140,7 @@
                               />
 
                               <TextBlock Text="{Binding EnemyScore}"
-                                         FontFamily="{StaticResource WorkSans}"
+                                         FontFamily="{StaticResource Inter}"
                                          FontWeight="Bold"
                                          FontSize="132"
                                          Width="165"
@@ -154,7 +179,7 @@
                       VerticalAlignment="Center">
               <StackPanel>
                   <TextBlock Text="{x:Static p:Resources.GameMode_EnemyTeam}"
-                             FontFamily="{StaticResource WorkSans}"
+                             FontFamily="{StaticResource Inter}"
                              FontWeight="Bold"
                              FontSize="32"
                              HorizontalAlignment="Center"
@@ -196,17 +221,42 @@
                           >
                   
                   <TextBlock Text="{Binding MapName}"
-                             FontFamily="{StaticResource WorkSans}"
+                             FontFamily="{StaticResource Inter}"
                              FontWeight="ExtraBlack"
                              FontSize="64"
                              HorizontalAlignment="Center"
                   />
-                  <TextBlock Text="{Binding QueueName}"
-                             FontFamily="{StaticResource WorkSans}"
-                             FontWeight="Regular"
-                             FontSize="20"
-                             HorizontalAlignment="Center"
-                  />
+                  <StackPanel Orientation="Horizontal"
+                              HorizontalAlignment="Center"
+                              Spacing="10">
+                      <TextBlock Text="{Binding QueueName}"
+                                 FontFamily="{StaticResource Inter}"
+                                 FontWeight="Regular"
+                                 FontSize="20"
+                                 HorizontalAlignment="Center"
+                      />
+                      
+                      <Rectangle Width="2"
+                                 Fill="{StaticResource AssistRed}">
+                      </Rectangle>
+                      
+                      <Panel>
+                          <StackPanel Spacing="2"
+                                      Orientation="Horizontal">
+                              <StackPanel Orientation="Horizontal" Spacing="2">
+                                  <Image Source="/Resources/Game/Lobbies_Icon.png"
+                                         Height="18"
+                                         Stretch="Uniform"
+                                         VerticalAlignment="Center"></Image>
+                                  <TextBlock Text="{Binding ServerName, FallbackValue='Loading..'}"
+                                             FontFamily="{StaticResource Inter}"
+                                             FontWeight="Medium"
+                                             FontSize="20"
+                                             VerticalAlignment="Center"></TextBlock>
+                              </StackPanel>
+                          </StackPanel>
+                      </Panel>
+                  </StackPanel>
               </StackPanel>
               
           </Grid>

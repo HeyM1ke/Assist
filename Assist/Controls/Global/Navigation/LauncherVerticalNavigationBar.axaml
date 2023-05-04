@@ -5,8 +5,10 @@
              xmlns:navigation="clr-namespace:Assist.Game.Controls.Navigation"
              xmlns:assist="clr-namespace:Assist.Controls.Assist"
              xmlns:p="clr-namespace:Assist.Properties"
+             xmlns:global="clr-namespace:Assist.Controls.Global"
              mc:Ignorable="d" d:DesignWidth="65" d:DesignHeight="450"
-             x:Class="Assist.Controls.Global.Navigation.LauncherVerticalNavigationBar">
+             x:Class="Assist.Controls.Global.Navigation.LauncherVerticalNavigationBar"
+             Initialized="LauncherVertNavBar_Init">
     <Grid Background="{DynamicResource AssistPrimary}">
 
 		<Grid x:Name="CompressedView"
@@ -67,30 +69,46 @@
 				</ScrollViewer>
 			</StackPanel>
 			<StackPanel Grid.Row="1"
-			            VerticalAlignment="Bottom">
+			            Spacing="10"
+			            VerticalAlignment="Bottom"
+			            Margin="0,0,0,10">
 				<StackPanel.Styles>
 					<Style Selector="navigation|NavButton">
 						<Setter Property="Height" Value="54"></Setter>
 					</Style>
 				</StackPanel.Styles>
-				<navigation:NavButton CornerRadius="5"
-				                      Text=""
-				                      IsSelected="False"
-				                      x:Name="AccountsBtn"
-				                      IsVisible="True"
-				                      IsCompressed="True"
-				                      IsFullSize="False"
-				                      Click="AccountsBtn_OnClick"
-				                      Icon="/Resources/Icons/Settings_Icon.png"></navigation:NavButton>
 				
-				<navigation:NavButton CornerRadius="5"
-				                      Text=""
-				                      IsSelected="False"
-				                      x:Name="SettingsBtn"
-				                      IsVisible="True"
-				                      IsCompressed="True"
-				                      IsFullSize="False"
-				                      Icon="/Resources/Icons/Settings_Icon.png"></navigation:NavButton>
+				<global:AccountManagementNavBtn x:Name="AccountsBtn"
+				                                Click="AccountsBtn_OnClick"
+				                                CornerRadius="5"
+				                                Height="42"
+				                                Width="42"
+				/>
+				
+				<StackPanel Orientation="Horizontal"
+				            HorizontalAlignment="Center"
+				            Spacing="4">
+					<global:SocialButton Source="/Resources/Icons/Twitter_Icon.png" 
+					                     Height="24"
+					                     Width="24"
+					                     BorderBrush="{DynamicResource AssistOutline}"
+					                     LinkTo="https://twitter.com/assistlauncher"
+					                     CornerRadius="40"></global:SocialButton>
+					<global:SocialButton Source="/Resources/Icons/Discord_Icon.png" 
+					                     Height="24"
+					                     Width="24"
+					                     BorderBrush="{DynamicResource AssistOutline}"
+					                     LinkTo="https://discord.gg/5gw2j7Swh6"
+					                     CornerRadius="40"></global:SocialButton>
+				</StackPanel>
+				
+				<global:SocialButton Source="/Resources/Icons/Settings_Icon.png" 
+				                     Height="36"
+				                     Width="36"
+				                     x:Name="SettingsBtn"
+				                     BorderBrush="{DynamicResource AssistOutline}"
+				                     Click="SettingsBtn_OnClick"
+				                     CornerRadius="40"></global:SocialButton>
 			</StackPanel>
 		</Grid>
 		
