@@ -12,7 +12,9 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-		  <Border>
+		  <Border CornerRadius="10"
+                  BorderThickness="1"
+                  BorderBrush="{DynamicResource AssistOutline}">
             <Grid>
                 <ItemsControl x:Name="BundleCarousel"
                           Margin="0"
@@ -20,7 +22,10 @@
                     
                 </ItemsControl>
 
-                <Border x:Name="PART_LoadingBorder" Background="#17181D">
+                <Border x:Name="PART_LoadingBorder" Background="{DynamicResource AssistPrimary}"
+                        CornerRadius="10"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource AssistOutline}">
                     <TextBlock Text="{x:Static p:Resources.Global_Loading}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"

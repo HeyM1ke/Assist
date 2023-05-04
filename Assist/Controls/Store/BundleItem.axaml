@@ -6,7 +6,7 @@
              d:DesignWidth="808"
              d:DesignHeight="395"
              x:Class="Assist.Controls.Store.BundleItem"
-             Background="{StaticResource AssistGray}"
+             
              Initialized="BundleItem_Initialized"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:p="clr-namespace:Assist.Properties">
@@ -17,27 +17,28 @@
                    Foreground="white"
                    FontSize="18"></TextBlock>
         <asyncImageLoader:AdvancedImage Source="{Binding BundleImage}"
-                                        Stretch="UniformToFill"/>
+                                        Stretch="UniformToFill"
+                                        CornerRadius="10"/>
 
-        <Grid x:Name="TopLeftData" Margin="9">
+        <StackPanel x:Name="TopLeftData" Margin="9">
             <StackPanel Orientation="Horizontal" 
-                        Spacing="0" 
+                        Spacing="2" 
                         >
                     <Label Content="{x:Static p:Resources.Store_FeaturedText}"
                            Foreground="White"
-                           FontFamily="{StaticResource WorkSans}"
+                           FontFamily="{StaticResource Inter}"
                            FontWeight="Regular"
                            FontSize="16"
-                           Padding="2"></Label>
+                           ></Label>
 
                     <Label Content="-"
                            Foreground="White"
-                           FontFamily="{StaticResource WorkSans}"
+                           FontFamily="{StaticResource Inter}"
                            FontWeight="Regular"
                            FontSize="14"
-                           Padding="2"></Label>
+                           ></Label>
 
-                    <Grid VerticalAlignment="Top"
+                    <Grid VerticalAlignment="Center"
                           Margin="4">
                         <Border
                             Width="120"
@@ -45,6 +46,7 @@
                             CornerRadius="5"
                             BorderBrush="White"
                             BorderThickness="1"
+                            VerticalAlignment="Center"
                         
                         >
                             <Grid>
@@ -56,25 +58,26 @@
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            Foreground="White"
-                                           FontFamily="{StaticResource WorkSans}"
+                                           FontFamily="{StaticResource Inter}"
                                            FontWeight="Medium"
                                            FontSize="12"/>
                             </Grid>
                         </Border>
                     </Grid>
+                
                 </StackPanel>
-
-			<StackPanel>
-				<TextBlock Text="{Binding BundleName}"
-                           FontFamily="{StaticResource WorkSans}"
+            <StackPanel Spacing="3">
+                <TextBlock Text="{Binding BundleName}"
+                           FontFamily="{StaticResource Inter}"
                            FontWeight="Black"
                            Foreground="White"
-                           FontSize="56"
-                           Margin="0,12,0,0"
+                           FontSize="48"
+                           TextWrapping="Wrap"
+                           
                            Padding="0,0"
                 />
                 <TextBlock Text="{Binding BundleDescription}"
-                           FontFamily="{StaticResource WorkSans}"
+                           FontFamily="{StaticResource Inter}"
                            FontWeight="Thin"
                            HorizontalAlignment="Left"
                            Width="350"
@@ -82,8 +85,8 @@
                            FontSize="14"
                            TextWrapping="Wrap"
                            Padding="0,0"></TextBlock>
-			</StackPanel>
-        </Grid>
+            </StackPanel>
+        </StackPanel>
 
         <Grid x:Name="SmallDataGrid"
               Height="40"
@@ -107,7 +110,7 @@
                     
                     <TextBlock Text="{Binding BundlePrice}"
                                Foreground="White"
-                               FontFamily="{StaticResource WorkSans}"
+                               FontFamily="{StaticResource Inter}"
                                FontWeight="Medium"
                                FontSize="16"
                                HorizontalAlignment="Center"

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.ViewModels;
+using ReactiveUI;
 using ValNet.Core.Store;
 using ValNet.Objects.Store;
 
@@ -11,7 +12,33 @@ namespace Assist.Views.Store.ViewModels
 {
     internal class StoreViewModel : ViewModelBase
     {
+        private bool _nightMarketEnabled = false;
+
+        public bool NightMarketEnabled
+        {
+            get => _nightMarketEnabled;
+            set => this.RaiseAndSetIfChanged(ref _nightMarketEnabled, value);
+        }
+        
+        private string _accountVp = "";
+
+        public string AccountVP
+        {
+            get => _accountVp;
+            set => this.RaiseAndSetIfChanged(ref _accountVp, value);
+        }
+        
+        private string _accountRp = "";
+
+        public string AccountRP
+        {
+            get => _accountRp;
+            set => this.RaiseAndSetIfChanged(ref _accountRp, value);
+        }
+        
+        
         static Dictionary<string, ValUserStore> _UserStores = new Dictionary<string, ValUserStore>();
+        static Dictionary<string, ValWallet> _UserWallets = new Dictionary<string, ValWallet>();
         /// <summary>
         /// Get's the current RiotUser's Store
         /// </summary>
@@ -20,6 +47,15 @@ namespace Assist.Views.Store.ViewModels
         {
             if (_UserStores.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
             {
+
+                if (_UserWallets.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
+                {
+                    AccountVP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.ValorantPoints:n0}";
+                    AccountRP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.RadianitePoints:n0}";    
+                }
+                
+                NightMarketEnabled = _UserStores[AssistApplication.Current.CurrentUser.UserData.sub].BonusStore is not null;
+                
                 return _UserStores[AssistApplication.Current.CurrentUser.UserData.sub];
             }
 
@@ -28,6 +64,13 @@ namespace Assist.Views.Store.ViewModels
             if (r == null)
                 return null;
 
+            NightMarketEnabled = r.BonusStore is not null;
+            
+            var t = await AssistApplication.Current.CurrentUser.Store.GetPlayerWallet();
+            AccountVP = $"{t.Balances.ValorantPoints:n0}";
+            AccountRP = $"{t.Balances.RadianitePoints:n0}";
+            
+            _UserWallets.Add(AssistApplication.Current.CurrentUser.UserData.sub,t);
             _UserStores.Add(AssistApplication.Current.CurrentUser.UserData.sub, r);
 
             return r;
