@@ -65,6 +65,12 @@ namespace Assist.Settings
         public static async Task<bool> CheckIfBackupExistsForId(string id)
         {
             string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.TopDirectoryOnly);
+
+            if (folders is null || folders.Length == 0)
+            {
+                return false;
+            }
+            
             var f = folders.ToList().Find(folder => folder.Contains(id));
 
             if (string.IsNullOrEmpty(f))
@@ -76,6 +82,12 @@ namespace Assist.Settings
         public static async Task<ProfileSettings> ReadBackupFromId(string id)
         {
             string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.TopDirectoryOnly);
+            
+            if (folders is null || folders.Length == 0)
+            {
+                throw new Exception("Folders do not exist.");
+            }
+            
             var f = folders.ToList().Find(folder => folder.Contains(id));
 
             if (f == null)
@@ -133,6 +145,13 @@ namespace Assist.Settings
         public static void LoadBackupConfigFromId(string id)
         {
             string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.AllDirectories);
+            
+            if (folders is null || folders.Length == 0)
+            {
+                throw new Exception("Folders do not exist.");
+            }
+            
+            
             var f = folders.ToList().Find(folder => folder == id);
 
             if (f == null)
