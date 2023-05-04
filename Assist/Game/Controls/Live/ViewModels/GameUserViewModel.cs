@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -37,6 +38,19 @@ namespace Assist.Game.Controls.Live.ViewModels
         private CoregameMatch.Player? _corePlayer;
         public CoregameMatch.Player? CorePlayer { get => _corePlayer; set => this.RaiseAndSetIfChanged(ref _corePlayer, value); }
 
+        public bool PlayerIsHidden = false;
+        
+        
+        private string? _playerLevel = null;
+
+        public string? PlayerLevel
+        {
+            get => _playerLevel;
+            set => this.RaiseAndSetIfChanged(ref _playerLevel, value);
+        }
+        
+        
+        
         private string? _playerRankIcon = null;
 
         public string? PlayerRankIcon
@@ -67,6 +81,14 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             get => _playerName;
             set => this.RaiseAndSetIfChanged(ref _playerName, value);
+        }
+        
+        private string? _playerTag = "000";
+
+        public string? PlayerTag
+        {
+            get => _playerTag;
+            set => this.RaiseAndSetIfChanged(ref _playerTag, value);
         }
 
         private string? _playerRankRating = "";
@@ -137,13 +159,19 @@ namespace Assist.Game.Controls.Live.ViewModels
 
                     if (!Player.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
+                        {
+                            PlayerTag = data.game_tag; 
                             PlayerName = data.game_name;
+                            PlayerIsHidden = false;
+                        }
+                            
 
                     if (data != null)
                     {
                         var t = await GetPresenceData(data);
                         // Set rank icon
                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                        PlayerLevel = $"{t.accountLevel}";
                     }
                 }
                 
@@ -211,13 +239,19 @@ namespace Assist.Game.Controls.Live.ViewModels
 
                     if (!CorePlayer.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
+                        {
                             PlayerName = data.game_name;
+                            PlayerTag = data.game_tag;
+                            PlayerIsHidden = false;
+                        }
+                            
                     
                     if (data != null)
                     {
                         var t = await GetPresenceData(data);
                         // Set rank icon
                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                        PlayerLevel = $"{t.accountLevel}";
                     }
                 }
                 /*if (!Player.PlayerIdentity.Incognito) // If Incognito is false, means that the player has their name publicly shown.
@@ -299,5 +333,19 @@ namespace Assist.Game.Controls.Live.ViewModels
         }
 
 
+        public async Task OpenTracker()
+        {
+            if (!PlayerIsHidden)
+            {
+                var trackerName = PlayerName.Replace(" ", "%20");
+                string url = $"https://tracker.gg/valorant/profile/riot/{trackerName}%23{PlayerTag}/overview";
+            
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+        }
     }
 }

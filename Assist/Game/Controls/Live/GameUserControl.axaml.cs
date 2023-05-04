@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live.ViewModels;
@@ -109,6 +110,11 @@ namespace Assist.Game.Controls.Live
                 Log.Error(exception.Message);
                 btn.IsEnabled = true;
             }
+        }
+
+        private async void OpenTracker_Click(object? sender, RoutedEventArgs e)
+        {
+            await _viewModel.OpenTracker();
         }
     }
 }

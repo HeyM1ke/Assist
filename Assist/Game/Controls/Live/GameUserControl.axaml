@@ -26,6 +26,19 @@
 													  Height="30"
 													  VerticalAlignment="Top"
 													  HorizontalAlignment="Left"/>
+					  
+					  <Border Background="{DynamicResource AssistRed}"
+					          CornerRadius="2,0,2,0"
+					          VerticalAlignment="Bottom"
+					          HorizontalAlignment="Right"
+					          Margin="0">
+						  <TextBlock Text="{Binding PlayerLevel, FallbackValue='0'}"
+						             FontFamily="{StaticResource Inter}"
+						             MinWidth="10"
+						             TextAlignment="Center"
+						             FontSize="8"
+						             Padding="1"></TextBlock>
+					  </Border>
 				  </Grid>
 			  </Border>
 
@@ -117,6 +130,13 @@
 						  Width="100"
                               />
 				</MenuItem.Icon>
+			</MenuItem>
+			<MenuItem Header="Open TrackerGG"
+			          FontFamily="{StaticResource WorkSans}"
+			          FontWeight="Medium"
+			          IsVisible="{Binding !PlayerIsHidden}"
+			          Click="OpenTracker_Click"
+			>
 			</MenuItem>
 			<Separator />
 		</ContextMenu>
