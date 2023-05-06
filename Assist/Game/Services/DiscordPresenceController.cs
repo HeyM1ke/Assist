@@ -431,6 +431,8 @@ namespace Assist.Game.Services
                     return "Snowball";
                 case "lotus":
                     return "Lotus";
+                case "premier-seasonmatch":
+                    return "Premier";
                 default:
                     return "VALORANT";
             }

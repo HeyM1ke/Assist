@@ -104,6 +104,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         public async void UpdateGeneralPartyInformation(PlayerPresence data, PresenceV4Message obj)
         {
             var currentUserBtn = CurrentUsers.ToList().Find(member => member.PlayerId == obj.data.presences[0].puuid);
+            Log.Information($"QUEUE ID {data.queueId}");
             QueueName = GetQueueId(data.queueId).ToUpper();
             PartySize = $"{data.partySize}/{data.maxPartySize}";
 
@@ -147,6 +148,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     return "Snowball";
                 case "lotus":
                     return "Lotus";
+                case "premier-seasonmatch":
+                    return "Premier";
                 default:
                     return "VALORANT";
             }
