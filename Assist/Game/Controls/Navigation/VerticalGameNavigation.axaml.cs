@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using Assist.Controls.Global;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
 using Assist.Game.Views.GDashboard;
@@ -115,6 +117,20 @@ namespace Assist.Game.Controls.Navigation
             if (Design.IsDesignMode) return;
             
             PopupSystem.SpawnCustomPopup(new SettingsPopup());
+        }
+
+        private void SocialBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            var btn = sender as SocialButton;
+        
+            if (btn.LinkTo == null)
+                return;
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = btn.LinkTo,
+                UseShellExecute = true
+            });
         }
     }
 

@@ -93,12 +93,14 @@
 					                     Width="24"
 					                     BorderBrush="{DynamicResource AssistOutline}"
 					                     LinkTo="https://twitter.com/assistlauncher"
+					                     Click="SocialBtn_Click"
 					                     CornerRadius="40"></global:SocialButton>
 					<global:SocialButton Source="/Resources/Icons/Discord_Icon.png" 
 					                     Height="24"
 					                     Width="24"
 					                     BorderBrush="{DynamicResource AssistOutline}"
 					                     LinkTo="https://discord.gg/5gw2j7Swh6"
+					                     Click="SocialBtn_Click"
 					                     CornerRadius="40"></global:SocialButton>
 				</StackPanel>
 				

@@ -1,0 +1,38 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Global">
+    <Design.PreviewWith>
+        <controls:AccountManagementAddButton Width="548"
+                                             Height="100"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|AccountManagementAddButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistPrimary}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistOutline}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border 
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1"
+                    x:Name="PART_Border"
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="10">
+                    <TextBlock Text="+"
+                               FontFamily="{StaticResource Inter}"
+                               Opacity=".5"
+                               FontSize="46"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"/>    
+                </Border>
+                
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|AccountManagementAddButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AssistSecondary}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+</Styles>

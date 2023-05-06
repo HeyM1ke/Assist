@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Assist.Game.Controls.Navigation;
 using Assist.Game.Views.Modules;
 using Assist.Services;
@@ -85,5 +86,19 @@ public partial class LauncherVerticalNavigationBar : UserControl
     private void SettingsBtn_OnClick(object? sender, RoutedEventArgs e)
     {
         PopupSystem.SpawnCustomPopup(new SettingsPopup());
+    }
+
+    private void SocialBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        var btn = sender as SocialButton;
+        
+        if (btn.LinkTo == null)
+            return;
+
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = btn.LinkTo,
+            UseShellExecute = true
+        });
     }
 }
