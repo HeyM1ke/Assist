@@ -3,6 +3,7 @@ using Assist.Controls.Global.Popup;
 using Assist.Controls.Global.ViewModels;
 using Assist.Services.Popup;
 using Assist.Services.Riot;
+using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;

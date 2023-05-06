@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LibVLCSharp.Shared;
 using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Game.Views;
@@ -31,6 +30,7 @@ using ValNet.Enums;
 using ValNet.Objects;
 using ValNet.Objects.Exceptions;
 using AssistUser.Lib;
+using NAudio.Wave;
 
 namespace Assist.ViewModels
 {
@@ -44,25 +44,9 @@ namespace Assist.ViewModels
 
         public AssistApplication()
         {
-            _libVLC = new LibVLC();
-            _mp = new MediaPlayer(_libVLC);
-            
-            _mp.EndReached += EndReached;
-            _mp.Playing += Playing;
-
+            AudioOutputDevice = new WaveOutEvent();
         }
-
-        private void Playing(object? sender, EventArgs e)
-        {
-            Log.Information("Playing sound now.");
-            Log.Information($"Sound Length {_mp.Length} ms");
-        }
-
-        private void EndReached(object? sender, EventArgs e)
-        {
-            Log.Information("End of sound reached.");
-        }
-
+        
         public static AssistApplication Current = new AssistApplication();
         public static AssistApiService ApiService = new AssistApiService();
         public RiotUser CurrentUser;
@@ -265,9 +249,8 @@ namespace Assist.ViewModels
         }
 
         #region Experimental
-
-        readonly MediaPlayer _mp;
-        readonly LibVLC _libVLC;
+        
+        public WaveOutEvent AudioOutputDevice;
         public ServerHub ServerHub;
         public RiotUserTokenRefreshService RefreshService;
         public async Task ConnectToServerHub()
@@ -280,20 +263,22 @@ namespace Assist.ViewModels
 
         public async Task PlaySound(string url)
         {
-            using (var media = new Media(_libVLC, new Uri(url)))
-                _mp.Media = media;
-
-            _mp.Play();
+            using (var mf = new MediaFoundationReader(url))
+            {
+                AudioOutputDevice.Init(mf);
+                AudioOutputDevice.Play();
+            }
+            
         }
         
         public async Task Pause()
         {
-            _mp.Pause();
+            AudioOutputDevice.Pause();
         }
         
         public async Task SetVolume(int num)
         {
-            _mp.Volume = num;
+            AudioOutputDevice.Volume = num;
         }
 
         #endregion
