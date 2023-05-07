@@ -1,5 +1,6 @@
 using System;
 using Assist.Services;
+using Assist.Services.Popup;
 using Assist.ViewModels;
 using Assist.Views.Dashboard;
 using Assist.Views.Progression;
@@ -23,13 +24,32 @@ namespace Assist.Views
             MainViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
             MainViewNavigationController.Change(new DashboardView());
         }
-
-        public MainView(UserControl PageToOpenTo)
+        
+        public MainView(UserControl popup)
         {
             DataContext = _viewModel = new MainViewViewModel();
             InitializeComponent();
             MainViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
-            MainViewNavigationController.Change(PageToOpenTo);
+            if (MainViewNavigationController.CurrentPage != null)
+            {
+                switch (MainViewNavigationController.CurrentPage)
+                {
+                    case Page.STORE:
+                        MainViewNavigationController.Change(new StoreView());
+                        break;
+                    case Page.MODULES:
+                        MainViewNavigationController.Change(new StoreView());
+                        break;
+                    case Page.DASHBOARD:
+                        MainViewNavigationController.Change(new DashboardView());
+                        break;
+                    default:
+                        MainViewNavigationController.Change(new DashboardView());
+                        break;
+                }
+                
+                PopupSystem.SpawnCustomPopup(popup);
+            }
         }
 
         private void InitializeComponent()

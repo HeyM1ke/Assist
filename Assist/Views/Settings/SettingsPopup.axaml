@@ -52,9 +52,92 @@
                                 </Style>
                             </TabControl.Styles>
                             <TabItem Classes="Assist"
-                                     Header="{x:Static p:Resources.Settings_General}"/>
-                            <TabItem Classes="Assist"
-                                     Header="{x:Static p:Resources.Settings_Accounts}"/>
+                                     Header="{x:Static p:Resources.Settings_General}">
+                                <Grid Margin="-10,0">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Stretch"
+                                                Spacing="10">
+                                        <Panel HorizontalAlignment="Stretch">
+                                            <TextBlock Text="{x:Static p:Resources.Settings_Language}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"
+                                                       ></TextBlock>
+                                            <ComboBox x:Name="LanguageBox"
+                                                      SelectedIndex="0"
+                                                      Width="200" 
+                                                      HorizontalAlignment="Right"
+                                                      Initialized="LanguageBox_OnInitialized"
+                                                      SelectionChanged="LanguageBox_OnSelectionChanged">
+                                                <ComboBoxItem Content="English"></ComboBoxItem>
+                                                <ComboBoxItem Content="Spanish"></ComboBoxItem>
+                                                <ComboBoxItem Content="French"></ComboBoxItem>
+                                                <ComboBoxItem Content="German"></ComboBoxItem>
+                                                <ComboBoxItem Content="Chinese Simplified"></ComboBoxItem>
+                                                <ComboBoxItem Content="Portuguese"></ComboBoxItem>
+                                                <ComboBoxItem Content="Japanese"></ComboBoxItem>
+                                                <ComboBoxItem Content="Vietnamese"></ComboBoxItem>
+                                                <ComboBoxItem Content="Chinese Traditional"></ComboBoxItem>
+                                                <ComboBoxItem Content="Korean"></ComboBoxItem>
+                                                <ComboBoxItem Content="Russian"></ComboBoxItem>
+                                                <ComboBoxItem Content="Greek"></ComboBoxItem>
+                                                <ComboBoxItem Content="Turkish"></ComboBoxItem>
+                                            </ComboBox>
+                                        </Panel>
+                                        <Panel HorizontalAlignment="Stretch">
+                                            <TextBlock Text="{x:Static p:Resources.Settings_Resolution}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"
+                                                       ></TextBlock>
+                                             <ComboBox x:Name="WindowSizeBox"
+                                                       HorizontalAlignment="Right"
+                                                       Initialized="WindowSizeBox_OnInitialized"
+                                                       SelectedIndex="2"
+                                                       SelectionChanged="WindowSizeBox_OnSelectionChanged"
+                                                       Width="200">
+                                                 <ComboBoxItem Content="595 x 375"></ComboBoxItem>
+                                                 <ComboBoxItem Content="893 x 550"></ComboBoxItem>
+                                                 <ComboBoxItem Content="1190 x 720"></ComboBoxItem>
+                                                 <ComboBoxItem Content="1488 x 890"></ComboBoxItem>
+                                                 <ComboBoxItem Content="1785 x 1060"></ComboBoxItem>
+                                                 <ComboBoxItem Content="2083 x 1240"></ComboBoxItem>
+                                             </ComboBox>
+                                        </Panel>
+                                        <Panel HorizontalAlignment="Stretch">
+                                           <StackPanel>
+                                               <TextBlock Text="{x:Static p:Resources.Settings_EnableGpu}"
+                                                          FontFamily="{StaticResource Inter}"
+                                                          FontSize="16"
+                                                          FontWeight="SemiBold"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Left"
+                                               ></TextBlock>
+                                               <TextBlock Text="{x:Static p:Resources.Settings_EnableGpuWarning}"
+                                                          FontFamily="{StaticResource Inter}"
+                                                          FontSize="10"
+                                                          Opacity=".4"
+                                                          FontWeight="Medium"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Left"
+                                               ></TextBlock>
+                                           </StackPanel>
+                                            <CheckBox x:Name="EnableGPUBox"
+                                                      HorizontalAlignment="Right"
+                                                      VerticalAlignment="Center"
+                                                      Initialized="EnableGPUBox_OnInitialized"
+                                                      Checked="EnableGPUBox_OnChecked"
+                                                      Unchecked="EnableGPUBox_OnUnchecked"
+                                                     >
+                                            </CheckBox>
+                                        </Panel>
+                                    </StackPanel>
+                                </Grid>
+                            </TabItem>
                             <TabItem Classes="Assist"
                                      Header="{x:Static p:Resources.Settings_Sound}">  <StackPanel Margin="-10,0">
                                     <Panel HorizontalAlignment="Left">

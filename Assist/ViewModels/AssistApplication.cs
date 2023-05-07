@@ -125,7 +125,17 @@ namespace Assist.ViewModels
 
                 mainRef.Close();
                 desktop.MainWindow = main;
-                MainWindowContentController.Change(new MainView(new SettingsView()));
+
+                if (AssistApplication.Current.GameModeEnabled)
+                {
+                    MainWindowContentController.Change(new GameView());
+                }
+                else
+                {
+                    MainWindowContentController.Change(new MainView(new SettingsPopup()));
+                }
+                
+                
             }
         }
 
