@@ -139,6 +139,7 @@
                                 </Grid>
                             </TabItem>
                             <TabItem Classes="Assist"
+                                     IsVisible="False"
                                      Header="{x:Static p:Resources.Settings_Sound}">  <StackPanel Margin="-10,0">
                                     <Panel HorizontalAlignment="Left">
                                         <StackPanel Orientation="Horizontal" Spacing="7">
@@ -172,6 +173,7 @@
                                     </Panel>
                                 </StackPanel> </TabItem>
                             <TabItem Classes="Assist"
+                                     IsVisible="False"
                                      Header="{x:Static p:Resources.Settings_AssistAccount}"/>
                         </TabControl>
                     </StackPanel>
@@ -180,7 +182,7 @@
                 
                 
                 <Grid Row="1">
-                    <Button Content="Close"
+                    <Button Content="{x:Static p:Resources.Global_BackText}"
                             Classes="AssistBtn"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"

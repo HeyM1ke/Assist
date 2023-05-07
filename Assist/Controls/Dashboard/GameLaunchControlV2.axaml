@@ -2,12 +2,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="1125" d:DesignHeight="100"
              Initialized="GameLaunchControlV2_Init"
              
              x:Class="Assist.Controls.Dashboard.GameLaunchControlV2">
     <Grid RowDefinitions="Auto,*">
         <Grid Row="0">
+            <Grid.Styles>
+                <Style Selector="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,5"
+                                            Opacity=".7">
+                                    <Image Source="/Resources/Icons/Settings_Icon.png"
+                                           Height="14"
+                                           Width="14"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                    ></Image>
+                                    
+                                    <TextBlock Text="{x:Static p:Resources.Settings_Settings}"
+                                               FontFamily="{StaticResource Inter}"
+                                               FontWeight="Regular"
+                                               FontSize="14"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                    />
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style Selector="Button:pointerover /template/ TextBlock">
+                    <Setter Property="TextDecorations" Value="Underline"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Style>
+            </Grid.Styles>
             <Button Content="Settings"
                     Classes="AssistBtn"
                     HorizontalAlignment="Right"
@@ -66,3 +99,4 @@
         </Grid>
     </Grid>
 </UserControl>
+
