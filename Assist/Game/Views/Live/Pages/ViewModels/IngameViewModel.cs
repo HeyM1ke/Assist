@@ -577,6 +577,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     return "Snowball";
                 case "lotus":
                     return "Lotus";
+                case "premier-seasonmatch":
+                    return "Premier";
                 default:
                     return "VALORANT";
             }

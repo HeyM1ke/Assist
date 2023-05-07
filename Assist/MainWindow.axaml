@@ -45,7 +45,7 @@
 			<Grid>
                 <Grid x:Name="MainContentView"
                       Height="690"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Stretch"
                       Background="{StaticResource AssistGray}">
                     <TransitioningContentControl x:Name="ContentView" >
                         <TransitioningContentControl.PageTransition>

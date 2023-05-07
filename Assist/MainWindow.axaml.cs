@@ -42,7 +42,7 @@ namespace Assist
 
         public void ChangeGameResolution(EResolution res)
         {
-            _viewModel.ChangeGameModeResolution(res);
+            _viewModel.ChangeResolution(res);
         }
     }
 }
