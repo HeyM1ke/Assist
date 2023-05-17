@@ -173,8 +173,32 @@
                                     </Panel>
                                 </StackPanel> </TabItem>
                             <TabItem Classes="Assist"
-                                     IsVisible="False"
-                                     Header="{x:Static p:Resources.Settings_AssistAccount}"/>
+                                     IsVisible="True"
+                                     IsSelected="True"
+                                     Header="{x:Static p:Resources.Settings_AssistAccount}">
+                                <Grid Margin="-10,0">
+                                    <Grid VerticalAlignment="Center">
+                                        <StackPanel Spacing="7">
+                                            <TextBlock Text="You are currently not signed in."
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Left"
+                                            ></TextBlock>
+                                            <Button Classes="AssistBtn"
+                                                    Content="Sign In"
+                                                    HorizontalAlignment="Stretch"
+                                                    HorizontalContentAlignment="Center"
+                                                    Click="SignInBtn_Click"></Button>
+                                        </StackPanel>
+                                    </Grid>
+                                    
+                                    <Grid>
+                                        
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
                         </TabControl>
                     </StackPanel>
                 </Grid>

@@ -1,5 +1,7 @@
 ﻿using System;
+using Assist.Game.Views.Authentication;
 using Assist.Objects.Enums;
+using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
@@ -109,5 +111,10 @@ public partial class SettingsPopup : UserControl
     private void EnableGPUBox_OnUnchecked(object? sender, RoutedEventArgs e)
     {
         AssistSettings.Current.EglEnabled = false;
+    }
+
+    private void SignInBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        MainWindowContentController.Change(new AssistAuthenticationView());
     }
 }

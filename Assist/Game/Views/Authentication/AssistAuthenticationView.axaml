@@ -12,8 +12,10 @@
         <Image Source="/Resources/EOY_Background.png" Stretch="UniformToFill"/>
         <Rectangle Fill="black" Opacity=".9"></Rectangle>
 
-        <Border Background="#101115"
-                CornerRadius="5"
+        <Border Background="{DynamicResource AssistPrimary}"
+                BorderBrush="{DynamicResource AssistOutline}"
+                BorderThickness="1"
+                CornerRadius="10"
                 Width="350"
                 Height="250">
             <Grid>
