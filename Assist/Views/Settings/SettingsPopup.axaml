@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d"
              Width="1190"
              Height="690"
@@ -176,9 +177,10 @@
                                      IsVisible="True"
                                      IsSelected="True"
                                      Header="{x:Static p:Resources.Settings_AssistAccount}">
-                                <Grid Margin="-10,0">
-                                    <Grid VerticalAlignment="Center">
-                                        <StackPanel Spacing="7">
+                                <Grid Margin="-10,5">
+                                    <Grid VerticalAlignment="Center"
+                                          IsVisible="{Binding !IsAssistSignedIn}">
+                                        <StackPanel Spacing="15">
                                             <TextBlock Text="You are currently not signed in."
                                                        FontFamily="{StaticResource Inter}"
                                                        FontSize="16"
@@ -194,8 +196,33 @@
                                         </StackPanel>
                                     </Grid>
                                     
-                                    <Grid>
-                                        
+                                    <Grid Loaded="SignedInGrid_Loaded"
+                                          IsVisible="{Binding IsAssistSignedIn}">
+                                        <StackPanel Spacing="15">
+                                            <asyncImageLoader:AdvancedImage Source="{Binding DisplayImage}"
+                                                                            Stretch="UniformToFill"
+                                                                            Width="100"
+                                                                            Height="100"/>
+                                            <TextBlock Text="{Binding DisplayName, FallbackValue='Loading...'}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       HorizontalAlignment="Center"
+                                            ></TextBlock>
+                                            <TextBlock Text="{Binding AccountEmail, FallbackValue='Loading...'}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="14"
+                                                       FontWeight="Medium"
+                                                       Opacity=".8"
+                                                       HorizontalAlignment="Center"
+                                            ></TextBlock>
+                                            
+                                            <Button Classes="AssistBtn"
+                                                    Content="Sign Out"
+                                                    HorizontalAlignment="Stretch"
+                                                    HorizontalContentAlignment="Center"
+                                                    Click="SignOutBtn_Click"></Button>
+                                        </StackPanel>
                                     </Grid>
                                 </Grid>
                             </TabItem>

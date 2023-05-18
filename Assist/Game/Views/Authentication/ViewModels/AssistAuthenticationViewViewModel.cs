@@ -8,6 +8,7 @@ using Assist.Services;
 using Assist.Services.Server;
 using Assist.Settings;
 using Assist.ViewModels;
+using Assist.Views;
 using AssistUser.Lib.Account.Models;
 using Avalonia.Threading;
 using ReactiveUI;
@@ -102,6 +103,11 @@ namespace Assist.Game.Views.Authentication.ViewModels
 
                 Dispatcher.UIThread.InvokeAsync(async () =>
                 {
+                    if (!AssistApplication.Current.GameModeEnabled)
+                    {
+                        MainWindowContentController.Change(new MainView());
+                        return;
+                    }
                     AssistApplication.Current.OpenGameView();
                 });
             }
@@ -125,6 +131,11 @@ namespace Assist.Game.Views.Authentication.ViewModels
 
                 if (authResp)
                 {
+                    if (!AssistApplication.Current.GameModeEnabled)
+                    {
+                        MainWindowContentController.Change(new MainView());
+                        return;
+                    }
                     AssistApplication.Current.OpenGameView();
                 }
                 else

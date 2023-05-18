@@ -44,7 +44,11 @@ namespace Assist.Views.Startup.ViewModels
         {
             Log.Information("Checking for Update");
             Message = "Checking for Updates...";
-            await CheckForUpdates();
+            var cont = await CheckForUpdates();
+            if (!cont)
+            {
+                // Means update is found and needs to stop.
+            }
 
 
             Log.Information("Running Setup");
@@ -203,7 +207,7 @@ namespace Assist.Views.Startup.ViewModels
             return processlist.Any();
         }
 
-        public async Task CheckForUpdates()
+        public async Task<bool> CheckForUpdates()
         {
 #if (!DEBUG)
 
@@ -218,6 +222,7 @@ namespace Assist.Views.Startup.ViewModels
                         var newVersion = await mgr.UpdateApp();
                         // You must restart to complete the update. 
                         // This can be done later / at any time.
+                        return false;
                         if (newVersion != null)
                             UpdateManager.RestartApp();
                     }
@@ -239,6 +244,7 @@ namespace Assist.Views.Startup.ViewModels
 
                     // You must restart to complete the update. 
                     // This can be done later / at any time.
+return false;
                     if (newVersion != null)
                         UpdateManager.RestartApp();
 
@@ -259,6 +265,7 @@ namespace Assist.Views.Startup.ViewModels
 
                     // You must restart to complete the update. 
                     // This can be done later / at any time.
+return false;
                     if (newVersion != null)
                         UpdateManager.RestartApp();
 
@@ -271,7 +278,7 @@ namespace Assist.Views.Startup.ViewModels
             }
 #endif
 
-
+            return true;
 
         }
 

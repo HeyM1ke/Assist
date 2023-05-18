@@ -5,6 +5,7 @@ using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
+using Assist.Views.Settings.ViewModels;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
@@ -19,8 +20,11 @@ public partial class SettingsPopup : UserControl
     private bool load = false;
     private bool load2 = false;
     private bool load3 = false;
+    private readonly SettingsPopupViewModel _viewModel;
+
     public SettingsPopup()
     {
+        DataContext = _viewModel = new SettingsPopupViewModel();
         InitializeComponent();
     }
 
@@ -116,5 +120,18 @@ public partial class SettingsPopup : UserControl
     private void SignInBtn_Click(object? sender, RoutedEventArgs e)
     {
         MainWindowContentController.Change(new AssistAuthenticationView());
+    }
+
+    private async void SignedInGrid_Loaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+            return;
+        
+        await _viewModel.SetupSignedInGrid();
+    }
+
+    private void SignOutBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        
     }
 }

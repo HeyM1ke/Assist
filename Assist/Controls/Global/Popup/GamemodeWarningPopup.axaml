@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
-             Width="1125"
-             Height="690"
+             d:DesignWidth="1125" d:DesignHeight="690"
              x:Class="Assist.Controls.Global.Popup.GamemodeWarningPopup">
     <Grid Background="#3D000000">
         <Border VerticalAlignment="Center"

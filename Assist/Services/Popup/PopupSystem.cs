@@ -35,7 +35,6 @@ namespace Assist.Services.Popup
                 {
                     Log.Information("Killing popup on Main Window");
                     ContentControl.Content = null;
-                    
                 }
             });
 
@@ -54,7 +53,6 @@ namespace Assist.Services.Popup
     {
         public string PopupTitle { get; set; }
         public string PopupDescription { get; set; }
-
         public PopupType PopupType { get; set; }
     }
 
