@@ -162,6 +162,7 @@
         <Setter Property="Background" Value="{DynamicResource ButtonBackground}"></Setter>
         <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}" />
+        
     </Style>
     
     

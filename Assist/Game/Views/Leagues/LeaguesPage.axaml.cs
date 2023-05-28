@@ -28,6 +28,10 @@ public partial class LeaguesPage : UserControl
 
     private async void LeaguesPage_Init(object? sender, EventArgs e)
     {
+        if (Design.IsDesignMode)
+        {
+            return;
+        }
         await _viewModel.Setup();
     }
 }

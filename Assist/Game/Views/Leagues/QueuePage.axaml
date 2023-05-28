@@ -6,6 +6,8 @@
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
+             Loaded="QueuePage_Loaded"
+             Unloaded="QueuePage_Unloaded"
              x:Class="Assist.Game.Views.Leagues.QueuePage"
              Initialized="QueuePage_Init"
              Background="{DynamicResource AssistBackground}">

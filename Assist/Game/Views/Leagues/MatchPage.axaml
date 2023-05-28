@@ -3,195 +3,275 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:match="clr-namespace:Assist.Game.Controls.Match"
-             xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
-             xmlns:chat="clr-namespace:Assist.Game.Controls.Chat"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d"
              d:DesignWidth="1125"
-             d:DesignHeight="590"
+             d:DesignHeight="690"
              x:Class="Assist.Game.Views.Leagues.MatchPage"
              Loaded="MatchPage_Loaded">
     
-    <Grid RowDefinitions="Auto,*"
-          VerticalAlignment="Center"
-          Margin="10">
+    <Grid RowDefinitions="91, *">
         
-        <Grid Row="0"
-              Margin="10,0">
-            <TextBlock Text="TEAM 1"
+        <Panel VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+            <TextBlock Text="{Binding MatchHeaderTitle}"
                        FontFamily="{StaticResource Inter}"
-                       FontWeight="ExtraBold"
-                       FontSize="18"
-                       HorizontalAlignment="Left"
-            />
-            
-            <TextBlock Text="TEAM 2"
-                       FontFamily="{StaticResource Inter}"
-                       FontWeight="ExtraBold"
-                       FontSize="18"
-                       HorizontalAlignment="Right"
-            />
-        </Grid>
+                       FontWeight="Black"
+                       Foreground="{DynamicResource AssistTextWhite}"
+                       FontSize="48"></TextBlock>
+        </Panel>
         
-        <Grid Row="1" ColumnDefinitions="329, * ,329"
-              Margin="10"
-              VerticalAlignment="Top"
-        >
-        <Grid Column="0"
-              >
+        <Grid Row="1"
+              ColumnDefinitions="Auto,*,Auto">
             
-                <StackPanel VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            Spacing="15">
-                    <Border Width="320"
-                            Height="468"
-                            CornerRadius="5"
-                            HorizontalAlignment="Left"
-                            Background="{StaticResource AssistPrimary}">
-                        
-                        <Grid Margin="10">
-                            <StackPanel Spacing="15"
-                                        VerticalAlignment="Center">
-                                <match:MatchPlayerControl IsReady="True"></match:MatchPlayerControl>
-                                <match:MatchPlayerControl></match:MatchPlayerControl>
-                                <match:MatchPlayerControl></match:MatchPlayerControl>
-                                <match:MatchPlayerControl></match:MatchPlayerControl>
-                                <match:MatchPlayerControl></match:MatchPlayerControl>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    
-                </StackPanel>
-        </Grid>
-        
-        <Grid Column="1"
-              VerticalAlignment="Top"
-              >
-            <Grid RowDefinitions="7*,6*">
-                <StackPanel Grid.Row="0">
-                        <UniformGrid Rows="4"
-                                     Columns="2">
-                            <UniformGrid.Styles>
-                                <Style Selector="leagues|MapPickControl">
-                                    <Setter Property="Margin" Value="0, 0,0,23"></Setter>
-                                    <Setter Property="Height" Value="34"></Setter>
-                                    <Setter Property="Width" Value="175"></Setter>
-                                </Style>
-                            </UniformGrid.Styles>
-                            <leagues:MapPickControl></leagues:MapPickControl>
-                            <leagues:MapPickControl></leagues:MapPickControl>
-                            <leagues:MapPickControl></leagues:MapPickControl>
-                            <leagues:MapPickControl></leagues:MapPickControl>
-                            <leagues:MapPickControl></leagues:MapPickControl>
-                            <leagues:MapPickControl></leagues:MapPickControl>
-                            <leagues:MapPickControl></leagues:MapPickControl>
-                            
-                            
-                        </UniformGrid>
-                        
-                         <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Center" Spacing="20">
-                                <StackPanel Grid.Column="0"
-                                            Spacing="4"
-                                            VerticalAlignment="Center">
-                                    <Border Width="121"
-                                            Background="{StaticResource AssistPrimary}">
-                                        <TextBlock Grid.Column="1"
-                                                   Margin="5"
-                                                   Text="BANNING FRACTURE"
-                                                   FontFamily="{StaticResource WorkSans}"
-                                                   FontWeight="Bold"
-                                                   FontSize="8"
-                                                   HorizontalAlignment="Center"
-                                        />
-                                    </Border>
-                                    <Border Width="150"
-                                            Background="{StaticResource AssistRed}"
-                                            CornerRadius="10,10,0,0">
-                                        <TextBlock Grid.Column="1"
-                                                   Margin="5"
-                                                   Text="BAN"
-                                                   FontFamily="{StaticResource WorkSans}"
-                                                   FontWeight="Bold"
-                                                   FontSize="18"
-                                                   HorizontalAlignment="Center"
-                                        />
-                                    </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Column="1"
-                                           Text="1:00"
-                                           FontFamily="{StaticResource Inter}"
-                                           FontWeight="Bold"
-                                           FontSize="19"
-                                           VerticalAlignment="Center"
-                                           
-                                />
-                                <UniformGrid Grid.Column="2"
-                                             Rows="2"
-                                             Columns="3"
-                                             VerticalAlignment="Center">
-                                    <UniformGrid.Styles>
-                                        <Style Selector="Rectangle">
-                                            <Setter Property="Margin" Value="0, 0,20,7"></Setter>
-                                            <Setter Property="Height" Value="34"></Setter>
-                                        </Style>
-                                    </UniformGrid.Styles>
-                                    <Rectangle Fill="white"
-                                               Height="19"
-                                               Width="19"></Rectangle>
-                                    <Rectangle Fill="white"
-                                               Height="19"
-                                               Width="19"></Rectangle>
-                                    <Rectangle Fill="white"
-                                               Height="19"
-                                               Width="19"></Rectangle>
-                                    <Rectangle Fill="white"
-                                               Height="19"
-                                               Width="19"></Rectangle>
-                                    <Rectangle Fill="white"
-                                               Height="19"
-                                               Width="19"></Rectangle>
-                                    <Rectangle Fill="white"
-                                               Height="19"
-                                               Width="19"></Rectangle>
-                                </UniformGrid>
-                            </StackPanel>
-                    </StackPanel>
+            <Grid x:Name="Team1Grid"
+                  Margin="10,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Height="473"
+                  Width="329">
                 
-                <Grid Row="1" VerticalAlignment="Bottom"
-                      
-                      
-                      Margin="0,10,0,0">
-                    <chat:AssistChatbox Height="180"/>
-                </Grid>
-            </Grid>
-            
-        </Grid>
-        
-        <Grid Column="2">
-            <StackPanel VerticalAlignment="Center"
-                        Spacing="15">
-                <Border Width="320"
-                        Height="468"
+                <Border Background="{DynamicResource AssistPrimary}"
                         CornerRadius="5"
-                        HorizontalAlignment="Right"
-                        Background="{StaticResource AssistPrimary}">
-                        
-                    <Grid Margin="10">
-                        <StackPanel Spacing="15"
-                                    VerticalAlignment="Center">
-                            <match:MatchPlayerControl IsReady="True"></match:MatchPlayerControl>
-                            <match:MatchPlayerControl></match:MatchPlayerControl>
-                            <match:MatchPlayerControl></match:MatchPlayerControl>
-                            <match:MatchPlayerControl></match:MatchPlayerControl>
-                            <match:MatchPlayerControl></match:MatchPlayerControl>
-                        </StackPanel>
+                        BorderBrush="{DynamicResource AssistOutline}"
+                >
+                    <Grid Margin="3,10">
+                        <ItemsControl Items="{Binding TeamAControls}">
+                            
+                            <ItemsControl.Styles>
+                                <Style Selector="match|MatchPlayerControl">
+                                    <Setter Property="Width" Value="323"></Setter>
+                                    <Setter Property="Height" Value="80"></Setter>
+                                </Style>
+                            </ItemsControl.Styles>
+                            
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="10"
+                                                VerticalAlignment="Center"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
                     </Grid>
                 </Border>
-                    
-            </StackPanel>
+                
+            </Grid>
             
+            <Grid x:Name="Team2Grid"
+                  Margin="10,0"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  Height="473"
+                  Width="329"
+                  Column="2">
+                
+                <Border Background="{DynamicResource AssistPrimary}"
+                        CornerRadius="5"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                >
+                    <Grid Margin="3,10">
+                        <ItemsControl Items="{Binding TeamBControls}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="10"
+                                                VerticalAlignment="Center"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.Styles>
+                                <Style Selector="match|MatchPlayerControl">
+                                    <Setter Property="Width" Value="323"></Setter>
+                                    <Setter Property="Height" Value="80"></Setter>
+                                </Style>
+                            </ItemsControl.Styles>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+                
+            </Grid>
+            <TextBlock Text="{Binding TeamAName}"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       FontFamily="{StaticResource Inter}"
+                       FontWeight="ExtraBold"
+                       FontSize="18"
+                       Foreground="{DynamicResource AssistTextWhite}"
+                       TextAlignment="Left"
+                       Margin="10,100"></TextBlock>
+            <TextBlock Text="{Binding TeamBName}"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Right"
+                       FontFamily="{StaticResource Inter}"
+                       Foreground="{DynamicResource AssistTextWhite}"
+                       FontWeight="ExtraBold"
+                       FontSize="18"
+                       TextAlignment="Right"
+                       Margin="10,100"
+                       Grid.Column="2"/>
+            
+            <Grid VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  ShowGridLines="True"
+                  Grid.Column="1"
+                  RowDefinitions="6*,4*">
+                <Border Grid.Row="0">
+                   <StackPanel>
+                       <Grid x:Name="MapSelectionPanel"
+                             IsVisible="{Binding MapPickBanEnabled}">
+                           <StackPanel><ScrollViewer Height="250"
+                                     CornerRadius="50"
+                                     BorderBrush="{DynamicResource AssistOutline}"
+                                     BorderThickness="1"
+                                     VerticalAlignment="Top">
+                           <ItemsControl Items="{Binding MapControls}">
+                               <ItemsControl.Styles>
+                                   <Style Selector="match|MatchSelectionControl">
+                                       <Setter Property="Width" Value="177"></Setter>
+                                       <Setter Property="Height" Value="35"></Setter>
+                                       <Setter Property="Margin" Value="5,12"></Setter>
+                                   </Style>
+                               </ItemsControl.Styles>
+                               <ItemsControl.ItemsPanel>
+                                   <ItemsPanelTemplate>
+                                       <UniformGrid Columns="2">
+                                        
+                                       </UniformGrid>
+                                   </ItemsPanelTemplate>
+                               </ItemsControl.ItemsPanel>
+                           </ItemsControl>
+                       </ScrollViewer>
+                       <Panel Margin="18,0">
+                          <Button Content="BAN"
+                                     Classes="AssistBtn"
+                                     Click="BanBtn_Click"
+                                     Width="120"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     FontWeight="Black"
+                                     FontSize="20"
+                                     Height="35"/>
+                             
+                             <TextBlock Text="00:00"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        FontFamily="{StaticResource Inter}"
+                                        FontWeight="Bold"
+                                        FontSize="18"
+                                        Foreground="{DynamicResource AssistTextWhite}"
+                                        TextAlignment="Center"
+                                        ></TextBlock>
+                             
+                             <UniformGrid Columns="3"
+                                          HorizontalAlignment="Right">
+                                 <UniformGrid.Styles>
+                                     <Style Selector="Border">
+                                         <Setter Property="Margin" Value="16,4"></Setter>
+                                     </Style>
+                                 </UniformGrid.Styles>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                                 <Border Background="White"
+                                         Height="19"
+                                         Width="19">
+                                 </Border>
+                             </UniformGrid>
+                       </Panel></StackPanel>
+                       </Grid>
+                       <Grid x:Name="MatchFormingPanel"
+                             IsVisible="{Binding !MapPickBanEnabled}">
+                           <StackPanel Spacing="2">
+                               <Panel HorizontalAlignment="Stretch">
+                                   <asyncImageLoader:AdvancedImage CornerRadius="5"
+                                                                   Stretch="UniformToFill"
+                                                                   Height="200"
+                                                                   Source="{Binding MatchMapImage}"/>
+                                   <StackPanel Orientation="Horizontal"
+                                               VerticalAlignment="Bottom"
+                                               HorizontalAlignment="Center"
+                                               Spacing="3"
+                                               Margin="6">
+                                       <Image Source="/Resources/Game/Lobbies_Icon.png"
+                                              Height="18"
+                                              Stretch="Uniform"
+                                              VerticalAlignment="Center"></Image>
+                                       <TextBlock Text="{Binding MatchServerName}"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"
+                                                  FontFamily="{StaticResource Inter}"
+                                                  Foreground="{DynamicResource AssistTextWhite}"
+                                                  FontWeight="Medium"
+                                                  FontSize="15"
+                                                  TextAlignment="Right"
+                                       />
+                                   </StackPanel>
+                               </Panel>
+                               <TextBlock Text="{Binding MatchMapName}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          FontFamily="{StaticResource Inter}"
+                                          FontWeight="Black"
+                                          FontSize="46"
+                                          Foreground="{DynamicResource AssistTextWhite}"
+                                          TextAlignment="Center"
+                               ></TextBlock>
+                               <Button Content="Join Lobby"
+                                       IsEnabled="{Binding JoinLobbyButtonEnabled}"
+                                       Classes="AssistBtn"
+                                       Click="LobbyJoinOrReadyBtn_Click"
+                                       Width="150"
+                                       VerticalContentAlignment="Center"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Thin" 
+                                       FontSize="16"
+                                       Height="40"/>
+                           </StackPanel>
+                       </Grid>
+                       
+                   </StackPanel>
+                </Border>
+                
+                <Border Grid.Row="1"
+                        Height="200"
+                        Margin="0,28"
+                        CornerRadius="10"
+                        Background="{DynamicResource AssistPrimary}"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                        BorderThickness="1"></Border>
+            </Grid>
         </Grid>
-    </Grid>
     </Grid>
 </UserControl>
 

@@ -1,4 +1,6 @@
-﻿using Assist.ViewModels;
+﻿using Assist.Game.Services;
+using Assist.Game.Services.Leagues;
+using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -29,5 +31,10 @@ public partial class LeagueLobbyPage : UserControl
             Log.Information(r.Message);
             Log.Information("Attempting to jOin party.");
         }
+    }
+
+    private void MatchPageBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        GameViewNavigationController.Change(new MatchPage());
     }
 }

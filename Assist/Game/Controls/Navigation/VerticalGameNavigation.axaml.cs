@@ -132,6 +132,11 @@ namespace Assist.Game.Controls.Navigation
                 UseShellExecute = true
             });
         }
+
+        public void EnableAll()
+        {
+            NavigationButtons.ForEach(btn => btn.IsEnabled = true);
+        }
     }
 
     public class VertGameNavVM : ViewModelBase

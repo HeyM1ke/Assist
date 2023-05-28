@@ -21,6 +21,7 @@ namespace Assist.Game.Services
         LOBBIES,
         LIVE,
         MODULES,
+        MATCH,
         LEAGUES
     }
 }

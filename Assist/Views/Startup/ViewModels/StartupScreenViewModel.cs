@@ -215,7 +215,7 @@ namespace Assist.Views.Startup.ViewModels
             {
                 try
                 {
-                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/live/windows/");
+                    using var mgr = new UpdateManager("https://content.assistapp.dev/releases/3a4f7214-2ab5-4bf2-b2cd-7db4d560a82d/windows/");
                     var updateInfo = await mgr.CheckForUpdate();
                     if (updateInfo.ReleasesToApply.Any())
                     {
@@ -227,7 +227,7 @@ namespace Assist.Views.Startup.ViewModels
                             UpdateManager.RestartApp();
                     }
 
-                    return;
+                   return true;
                 }
                 catch (Exception e)
                 {
@@ -248,7 +248,8 @@ return false;
                     if (newVersion != null)
                         UpdateManager.RestartApp();
 
-                    return;
+                    return true;
+
                 }
                 catch (Exception e)
                 {
@@ -269,7 +270,8 @@ return false;
                     if (newVersion != null)
                         UpdateManager.RestartApp();
 
-                    return;
+                    return true;
+
                 }
                 catch (Exception e)
                 {

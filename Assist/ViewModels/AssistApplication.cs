@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Game.Views;
@@ -273,10 +274,15 @@ namespace Assist.ViewModels
 
         public async Task PlaySound(string url)
         {
-            using (var mf = new MediaFoundationReader(url))
+            using(var mf = new MediaFoundationReader(url))
+            using(var wo = new WasapiOut())
             {
-                AudioOutputDevice.Init(mf);
-                AudioOutputDevice.Play();
+                wo.Init(mf);
+                wo.Play();
+                while (wo.PlaybackState == PlaybackState.Playing)
+                {
+                    Thread.Sleep(1000);
+                }
             }
             
         }

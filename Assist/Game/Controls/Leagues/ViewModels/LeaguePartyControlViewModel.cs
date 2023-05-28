@@ -117,8 +117,7 @@ public class LeaguePartyControlViewModel : ViewModelBase
         {
             if (i==0)
             {
-                await AssistApplication.Current.PlaySound(
-                    "https://content.assistapp.dev/audio/709fe49c-293b-4cd6-987d-848304f28eee/PartyMemberJoin.mp3");
+                //await AssistApplication.Current.PlaySound("https://content.assistapp.dev/audio/709fe49c-293b-4cd6-987d-848304f28eee/PartyMemberJoin.mp3");
             }
             AddToControls(partyData.Members[i]);
         }

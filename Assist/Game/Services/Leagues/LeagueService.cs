@@ -83,6 +83,7 @@ public class LeagueService
         AssistApplication.Current.GameServerConnection.PARTY_PartyKickReceived += GameServerConnectionOnPARTY_PartyKickReceived;
         AssistApplication.Current.GameServerConnection.QUEUE_InQueueMessageReceived += GameServerConnectionOnQUEUE_InQueueMessageReceived;
         AssistApplication.Current.GameServerConnection.QUEUE_LeaveQueueMessageReceived += GameServerConnectionOnQUEUE_LeaveQueueMessageReceived;
+        AssistApplication.Current.GameServerConnection.MATCH_JoinedMatchMessageReceived += GameServerConnectionOnMATCH_JoinedMatchMessageReceived;
         currentlyBinded = !currentlyBinded;
     }
     
@@ -144,6 +145,22 @@ public class LeagueService
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
             GameViewNavigationController.Change(new LeagueMainPage());
+        });
+    }
+    
+    
+    /// <summary>
+    /// Handles Switching the UI Control to the Match Page.
+    /// </summary>
+    /// <param name="obj"></param>
+    private async void GameServerConnectionOnMATCH_JoinedMatchMessageReceived(object? obj)
+    {
+        Log.Error("Match has Been Joined Message has been recieved.");
+        Log.Error("Switching UI to MatchPage.");
+        AssistApplication.Current.PlaySound("https://content.assistapp.dev/audio/709fe49c-293b-4cd6-987d-848304f28eee/MemberJoined.mp3");
+        Dispatcher.UIThread.InvokeAsync(async () =>
+        {
+            GameViewNavigationController.Change(new MatchPage());
         });
     }
 }

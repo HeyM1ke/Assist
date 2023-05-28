@@ -33,6 +33,8 @@ public class AssistGameServerConnection : HubClient
         _hubConnection.On<string>("receiveLeaguePartyKickedUpdate", PartyKickReceived);
         _hubConnection.On<string?>("receiveInQueueMessage", InQueueMessageReceived);
         _hubConnection.On<string?>("receiveLeaveQueueMessage", LeaveQueueMessageReceived);
+        _hubConnection.On<string?>("receiveMatchUpdateMessage", MatchUpdateMessageReceived);
+        _hubConnection.On<string?>("receiveJoinedMatchMessage", JoinedMatchMessageReceived);
 
         await StartHubInternal();
     }
@@ -120,6 +122,38 @@ public class AssistGameServerConnection : HubClient
     {
         Log.Information("RECEIVED LeaveQueue MESSAGE FROM SERVER");
         QUEUE_LeaveQueueMessageReceived?.Invoke(null);
+    }
+    #endregion
+    
+    #region Match
+
+    public event Action<object?> MATCH_JoinedMatchMessageReceived;
+    public event Action<object?> MATCH_MatchUpdateMessageReceived; // Recieves Update for Ready Change, Map Change, State Change,
+    public event Action<object?> MATCH_PartyInformationRequested; // When Recieves, Server is Requesting Information on VALORANT Party.
+    public event Action<object?> MATCH_CustomGameSettingsReceived; // When Recieves, Server is has sent custom game settings.
+    
+    private async void JoinedMatchMessageReceived(string data)
+    {
+        Log.Information("RECEIVED Match Joined MESSAGE FROM SERVER");
+        MATCH_JoinedMatchMessageReceived?.Invoke(data);
+    }
+    
+    private async void MatchUpdateMessageReceived(string data)
+    {
+        Log.Information("RECEIVED Match Update MESSAGE FROM SERVER");
+        MATCH_MatchUpdateMessageReceived?.Invoke(null);
+    }
+    
+    private async void PartyInformationRequested(string data)
+    {
+        Log.Information("RECEIVED PartyInformationRequested MESSAGE FROM SERVER");
+        MATCH_PartyInformationRequested?.Invoke(null);
+    }
+    
+    private async void CustomGameSettingsReceived(string data)
+    {
+        Log.Information("RECEIVED CustomGameSettings MESSAGE FROM SERVER");
+        MATCH_CustomGameSettingsReceived?.Invoke(null);
     }
     #endregion
 }

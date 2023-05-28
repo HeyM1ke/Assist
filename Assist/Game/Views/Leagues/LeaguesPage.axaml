@@ -125,5 +125,12 @@
                          IsVisible="{Binding ModerationEnabled}"/>
             </TabControl>  
         
+        <TextBlock Text="IN DEVELOPMENT, SUBJECT TO CHANGE"
+                   Opacity=".5"
+                   FontSize="32"
+                   FontFamily="{StaticResource Inter}"
+                   FontWeight="Bold"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"></TextBlock>
     </Grid>
 </UserControl>

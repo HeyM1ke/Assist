@@ -1,4 +1,5 @@
 ﻿using System;
+using Assist.Game.Controls.Navigation;
 using Assist.Game.Views.Leagues.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -36,5 +37,15 @@ public partial class QueuePage : UserControl
             return;
         
         await _viewModel.Setup();
+    }
+
+    private void QueuePage_Loaded(object? sender, RoutedEventArgs e)
+    {
+         VerticalGameNavigation.Instance.DisableAll();       
+    }
+
+    private void QueuePage_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        VerticalGameNavigation.Instance.EnableAll();
     }
 }

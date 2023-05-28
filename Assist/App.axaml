@@ -220,6 +220,7 @@
         
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeaguePartyInviteControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchPlayerControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchSelectionControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/MapPickControl.axaml"></StyleInclude>
         
         <StyleInclude Source="avares://Assist/Styles/AssistStyles.axaml"></StyleInclude>

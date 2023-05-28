@@ -30,6 +30,9 @@
                             <Button Classes="AssistBtn"
                                     Content="Join Party"
                                     Click="DevJoinBtn_Click"></Button>
+                            <Button Classes="AssistBtn"
+                                    Content="Open MatchPage"
+                                    Click="MatchPageBtn_Click"></Button>
                         </StackPanel>
                     </Grid>
                 </Border>
