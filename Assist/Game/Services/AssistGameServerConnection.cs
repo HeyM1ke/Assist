@@ -127,33 +127,79 @@ public class AssistGameServerConnection : HubClient
     
     #region Match
 
+    /// <summary>
+    /// Received when a Match is Joined.
+    /// </summary>
     public event Action<object?> MATCH_JoinedMatchMessageReceived;
-    public event Action<object?> MATCH_MatchUpdateMessageReceived; // Recieves Update for Ready Change, Map Change, State Change,
-    public event Action<object?> MATCH_PartyInformationRequested; // When Recieves, Server is Requesting Information on VALORANT Party.
-    public event Action<object?> MATCH_CustomGameSettingsReceived; // When Recieves, Server is has sent custom game settings.
+    /// <summary>
+    /// Receives Update for Ready Change, Map Change, State Change,
+    /// </summary>
+    public event Action<object?> MATCH_MatchUpdateMessageReceived;
+    /// <summary>
+    /// When Receives, Server is Requesting Information on VALORANT Party.
+    /// </summary>
+    public event Action<object?> MATCH_PartyInformationRequested; 
     
-    private async void JoinedMatchMessageReceived(string data)
+    /// <summary>
+    /// When Receives, Server is has sent custom game settings.
+    /// </summary>
+    public event Action<object?> MATCH_CustomGameSettingsReceived;
+    
+    /// <summary>
+    /// When Receives, Server has ordered the start of the VALORANT game.
+    /// </summary>
+    public event Action<object?> MATCH_StartValorantMatchReceived; 
+    
+    /// <summary>
+    /// When Receives, Server has ordered client to join VALORANT Party.
+    /// </summary>
+    public event Action<object?> MATCH_ValorantPartyJoinMatchReceived; 
+    
+    /// <summary>
+    /// When Receives, Server has ordered the transfer of party ownership to another user.
+    /// </summary>
+    public event Action<object?> MATCH_TransferValorantPartyOwnershipReceived; 
+    
+    private void JoinedMatchMessageReceived(string data)
     {
         Log.Information("RECEIVED Match Joined MESSAGE FROM SERVER");
         MATCH_JoinedMatchMessageReceived?.Invoke(data);
     }
     
-    private async void MatchUpdateMessageReceived(string data)
+    private void MatchUpdateMessageReceived(string data)
     {
         Log.Information("RECEIVED Match Update MESSAGE FROM SERVER");
-        MATCH_MatchUpdateMessageReceived?.Invoke(null);
+        MATCH_MatchUpdateMessageReceived?.Invoke(data);
     }
     
-    private async void PartyInformationRequested(string data)
+    private void PartyInformationRequested(string data)
     {
         Log.Information("RECEIVED PartyInformationRequested MESSAGE FROM SERVER");
         MATCH_PartyInformationRequested?.Invoke(null);
     }
     
-    private async void CustomGameSettingsReceived(string data)
+    private void CustomGameSettingsReceived(string data)
     {
         Log.Information("RECEIVED CustomGameSettings MESSAGE FROM SERVER");
-        MATCH_CustomGameSettingsReceived?.Invoke(null);
+        MATCH_CustomGameSettingsReceived?.Invoke(data);
+    }
+
+    private void StartValorantMatchReceived(string data)
+    {
+        Log.Information("RECEIVED StartValorantMatch MESSAGE FROM SERVER");
+        MATCH_StartValorantMatchReceived?.Invoke(data);
+    }
+    
+    private void ValorantPartyJoinMatchReceived(string data)
+    {
+        Log.Information("RECEIVED ValorantPartyJoinMatch MESSAGE FROM SERVER");
+        MATCH_ValorantPartyJoinMatchReceived?.Invoke(data);
+    }
+    
+    private void TransferValorantPartyOwnershipReceived(string data)
+    {
+        Log.Information("RECEIVED TransferValorantPartyOwnership MESSAGE FROM SERVER");
+        MATCH_TransferValorantPartyOwnershipReceived?.Invoke(data);
     }
     #endregion
 }
