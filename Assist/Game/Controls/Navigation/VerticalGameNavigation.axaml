@@ -68,7 +68,7 @@
 						                      IsFullSize="False"
 						                      IsEnabled="True"
 						                      IsSpecial="True"
-						                      Icon="/Resources/Icons/Assist_Logo_White.png"></navigation:NavButton>
+						                      Icon="/Resources/Icons/L_Icon.png"></navigation:NavButton>
 						
 						<navigation:NavButton CornerRadius="5"
 						                      Text="{x:Static p:Resources.GameMode_Lobbies}"

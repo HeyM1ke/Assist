@@ -130,35 +130,35 @@ public class AssistGameServerConnection : HubClient
     /// <summary>
     /// Received when a Match is Joined.
     /// </summary>
-    public event Action<object?> MATCH_JoinedMatchMessageReceived;
+    public event Action<string?> MATCH_JoinedMatchMessageReceived;
     /// <summary>
     /// Receives Update for Ready Change, Map Change, State Change,
     /// </summary>
-    public event Action<object?> MATCH_MatchUpdateMessageReceived;
+    public event Action<string?> MATCH_MatchUpdateMessageReceived;
     /// <summary>
     /// When Receives, Server is Requesting Information on VALORANT Party.
     /// </summary>
-    public event Action<object?> MATCH_PartyInformationRequested; 
+    public event Action<string?> MATCH_PartyInformationRequested; 
     
     /// <summary>
     /// When Receives, Server is has sent custom game settings.
     /// </summary>
-    public event Action<object?> MATCH_CustomGameSettingsReceived;
+    public event Action<string?> MATCH_CustomGameSettingsReceived;
     
     /// <summary>
     /// When Receives, Server has ordered the start of the VALORANT game.
     /// </summary>
-    public event Action<object?> MATCH_StartValorantMatchReceived; 
+    public event Action<string?> MATCH_StartValorantMatchReceived; 
     
     /// <summary>
     /// When Receives, Server has ordered client to join VALORANT Party.
     /// </summary>
-    public event Action<object?> MATCH_ValorantPartyJoinMatchReceived; 
+    public event Action<string?> MATCH_ValorantPartyJoinMatchReceived; 
     
     /// <summary>
     /// When Receives, Server has ordered the transfer of party ownership to another user.
     /// </summary>
-    public event Action<object?> MATCH_TransferValorantPartyOwnershipReceived; 
+    public event Action<string?> MATCH_TransferValorantPartyOwnershipReceived; 
     
     private void JoinedMatchMessageReceived(string data)
     {
@@ -200,6 +200,20 @@ public class AssistGameServerConnection : HubClient
     {
         Log.Information("RECEIVED TransferValorantPartyOwnership MESSAGE FROM SERVER");
         MATCH_TransferValorantPartyOwnershipReceived?.Invoke(data);
+    }
+    
+    public async Task RequestPartyInviteForMatch(RequestPartyInviteMatch data)
+    {
+        Log.Information("Requesting new Party Invite Data From Server for Match: " + data);
+        // Request Invite from server Data Confirming that an invite was sent.
+        await _hubConnection.SendAsync("requestPrivateLobbyInviteForMatch", JsonSerializer.Serialize(data));
+    }
+    
+    public async Task PartyInviteSentFromAssistForMatch(PartyInviteMatch data)
+    {
+        Log.Information("Recieved new InviteData Data From Server: " + data);
+        // Send Server Data Confirming that an invite was sent.
+        _hubConnection.SendAsync("confirmPrivateLobbyInvite", JsonSerializer.Serialize(data));
     }
     #endregion
 }
