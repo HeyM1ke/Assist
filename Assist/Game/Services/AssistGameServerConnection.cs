@@ -31,11 +31,19 @@ public class AssistGameServerConnection : HubClient
         _hubConnection.On<string>("recieveGlobalChatMessage", GlobalChatMessageReceived);
         _hubConnection.On<string>("receiveLeaguePartyInformation", PartyUpdateReceived);
         _hubConnection.On<string>("receiveLeaguePartyKickedUpdate", PartyKickReceived);
+        
         _hubConnection.On<string?>("receiveInQueueMessage", InQueueMessageReceived);
         _hubConnection.On<string?>("receiveLeaveQueueMessage", LeaveQueueMessageReceived);
-        _hubConnection.On<string?>("receiveMatchUpdateMessage", MatchUpdateMessageReceived);
+        
+        _hubConnection.On<string?>("receiveMatchUpdate", MatchUpdateMessageReceived);
         _hubConnection.On<string?>("receiveJoinedMatchMessage", JoinedMatchMessageReceived);
-
+        
+        _hubConnection.On<string?>("receiveValorantPartyJoinMatch", ValorantPartyJoinMatchReceived);
+        _hubConnection.On<string?>("receiveMatchValorantPartyCreate", MatchValorantPartyCreateReceived);
+        _hubConnection.On<string?>("requestValorantPartyInformation", PartyInformationRequested);
+        
+        _hubConnection.On<string?>("receiveStartValorantMatch", StartValorantMatchReceived);
+        
         await StartHubInternal();
     }
 
@@ -151,6 +159,11 @@ public class AssistGameServerConnection : HubClient
     public event Action<string?> MATCH_StartValorantMatchReceived; 
     
     /// <summary>
+    /// When Receieves, Server has ordered client to create VALORANT Party. 
+    /// </summary>
+    public event Action<string?> MATCH_MatchValorantPartyCreateReceived;
+    
+    /// <summary>
     /// When Receives, Server has ordered client to join VALORANT Party.
     /// </summary>
     public event Action<string?> MATCH_ValorantPartyJoinMatchReceived; 
@@ -200,6 +213,12 @@ public class AssistGameServerConnection : HubClient
     {
         Log.Information("RECEIVED TransferValorantPartyOwnership MESSAGE FROM SERVER");
         MATCH_TransferValorantPartyOwnershipReceived?.Invoke(data);
+    }
+
+    private void MatchValorantPartyCreateReceived(string data)
+    {
+        Log.Information("RECEIVED MatchValorantPartyCreate MESSAGE FROM SERVER");
+        MATCH_MatchValorantPartyCreateReceived?.Invoke(data);
     }
     
     public async Task RequestPartyInviteForMatch(RequestPartyInviteMatch data)

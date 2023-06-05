@@ -26,7 +26,7 @@ namespace Assist.Services.Popup
             }
         }
 
-        public static void KillPopups()
+        public static async void KillPopups()
         {
             Dispatcher.UIThread.InvokeAsync(async () =>
             {

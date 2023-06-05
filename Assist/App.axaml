@@ -86,7 +86,7 @@
 
 		<FontFamily x:Key="WorkSans">avares://Assist/Resources/Fonts#Work Sans</FontFamily>
         <FontFamily x:Key="Inter">avares://Assist/Resources/Fonts#Inter</FontFamily>
-        
+        <FontFamily x:Key="WhiteNt">avares://Assist/Resources/Fonts#WhiteNT</FontFamily>
         
         <!-- Button Styles -->
         <SolidColorBrush  x:Key="ButtonHoverBorder" Color="#F61E51"/>

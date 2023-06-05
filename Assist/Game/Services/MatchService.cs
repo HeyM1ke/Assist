@@ -44,6 +44,7 @@ public class MatchService
         AssistApplication.Current.GameServerConnection.MATCH_PartyInformationRequested += GameServerConnectionOnMATCH_PartyInformationRequested;
         AssistApplication.Current.GameServerConnection.MATCH_StartValorantMatchReceived += GameServerConnectionOnMATCH_StartValorantMatchReceived;
         AssistApplication.Current.GameServerConnection.MATCH_ValorantPartyJoinMatchReceived += GameServerConnectionOnMATCH_ValorantPartyJoinMatchReceived;
+        AssistApplication.Current.GameServerConnection.MATCH_MatchValorantPartyCreateReceived += GameServerConnectionOnMATCH_MatchValorantPartyCreateReceived;
         currentlyBinded = !currentlyBinded;
     }
     
@@ -103,6 +104,65 @@ public class MatchService
     private void GameServerConnectionOnMATCH_PartyInformationRequested(object? obj)
     {
         
+    }
+
+    private async void GameServerConnectionOnMATCH_MatchValorantPartyCreateReceived(string? customGameSettings)
+    {
+        Log.Information("Party Create has been received from the server.");
+        
+        // Check if the player is ingame.
+        // If the player is INGAME, Leave the game. 
+
+        var currPres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+        var clientPres = currPres.presences.Find(x => x.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
+        var decodedPres = await GetPresenceData(clientPres);
+
+        if (decodedPres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
+        {
+            try
+            {
+                await QuitIngameValorantMatch();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+        
+        
+        try
+        {
+            if (!decodedPres.isPartyOwner || decodedPres.partySize != 1)
+            {
+                Log.Information("Leaving Current Party");
+                await AssistApplication.Current.CurrentUser.Party.LeaveParty(decodedPres.partyId);
+            }
+
+            await AssistApplication.Current.CurrentUser.Party.SetPartyAccessibility(true);
+            await AssistApplication.Current.CurrentUser.CustomGame.MakeCustomGame();
+            
+            var customData = JsonSerializer.Deserialize<AssistMatchValorantSettings>(customGameSettings);
+            var data = new
+            {
+                Map = customData.Map,
+                Mode = customData.GameMode,
+                GamePod = customData.Server,
+                GameRules = new Dictionary<string, string>()
+                {
+                    {"TournamentMode",customData.UseTournamentMode ? "true" : "false"},
+                    {"UseCheats",customData.UseCheats ? "true" : "false"},
+                    {"IsOvertimeWinByTwo",customData.WinByTwo ? "true" : "false"}
+                }
+            };
+
+            var t = await AssistApplication.Current.CurrentUser.CustomGame.SetCustomGameSettings(data);
+            await AssistApplication.Current.AssistUser.League.SetupMatch(CurrentMatchData.Id, t);
+        }
+        catch(Exception e)
+        {
+            Log.Error("Failed to setup Custom Game");
+            Log.Error($"Exception: {e.Message}");
+            Log.Error($"Stack: {e.StackTrace}");
+        }
     }
 
     private async void GameServerConnectionOnMATCH_CustomGameSettingsReceived(string? customGamesSettings)

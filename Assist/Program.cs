@@ -32,7 +32,7 @@ namespace Assist
                 Log.Fatal(e.Message);
                 Log.Fatal("Fatal Error STACK == ");
                 Log.Fatal(e.StackTrace);
-                
+                Log.CloseAndFlush();
             }
             finally
             {
@@ -51,7 +51,8 @@ namespace Assist
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect().With(new Win32PlatformOptions
                 {
-                    AllowEglInitialization = AssistSettings.Current.EglEnabled
+                    AllowEglInitialization = AssistSettings.Current.EglEnabled,
+                    UseDeferredRendering = true
                 })
                 .UseReactiveUI();
 

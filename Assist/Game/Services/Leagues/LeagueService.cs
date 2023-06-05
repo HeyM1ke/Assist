@@ -69,6 +69,7 @@ public class LeagueService
         {
             Log.Error("CANNOT CREATE PARTY ON LEAGUESERVICE");
             Log.Error(resp.Message);
+            return new AssistParty();
         }
 
         CurrentPartyInfo = JsonSerializer.Deserialize<AssistParty>(resp.Data.ToString());

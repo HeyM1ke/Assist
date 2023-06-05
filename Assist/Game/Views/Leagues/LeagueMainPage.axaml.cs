@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using Assist.Game.Controls.Leagues;
 using Assist.Game.Services;
 using Assist.Game.Services.Leagues;
+using Assist.Game.Views.Leagues.Popup;
+using Assist.Services.Popup;
+using Assist.Settings;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -36,6 +39,11 @@ public partial class LeagueMainPage : UserControl
         Log.Information("Checking if Leagues have been opened Previously.");
 
         LeagueNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("LeagueContentControl");
+
+        if (!AssistSettings.Current.SeenLeaguesNP)
+        {
+            PopupSystem.SpawnCustomPopup(new WelcomeLeaguesView());
+        }
         
         if (LeagueService.Instance is null)
             await InitialSetup();

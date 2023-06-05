@@ -1,0 +1,74 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Width="1190"
+             Height="690"
+             x:Class="Assist.Game.Views.Leagues.Popup.WelcomeLeaguesView">
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/AssistStyles.axaml" />
+    </UserControl.Styles>
+    
+      <Grid Background="#3D000000">
+          <Image Source="/Resources/AssistM_Pose.png"
+                 Stretch="Uniform"
+                 Width="450"
+                 Height="1400"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Center"
+                 ></Image>
+          <Border Width="635"
+                  
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Margin="0,120"
+                  Background="{DynamicResource AssistPrimary}"
+                  BorderBrush="{DynamicResource AssistOutline}"
+                  BorderThickness="1"
+                  CornerRadius="10">
+            <Grid RowDefinitions="Auto, Auto,Auto">
+                <Panel Grid.Row="0"
+                       Margin="10">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="8">
+                        <TextBlock Text="WELCOME TO"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontWeight="Black"
+                                   VerticalAlignment="Center"
+                                   FontSize="24"></TextBlock>
+                        <TextBlock Text="LEAGUES"
+                                   Padding="11,0"
+                                   VerticalAlignment="Center"
+                                   FontSize="48"
+                                   FontFamily="{StaticResource WhiteNt}"></TextBlock>
+                    </StackPanel>
+                </Panel>
+                <Panel Grid.Row="1"
+                       Margin="10,0,10,10">
+                    <TextBlock
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Medium"
+                               TextWrapping="WrapWithOverflow"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="16">Welcome to Leagues. Join a League, Queue, and Compete against other players.
+                    This feature is currently in development and will be prone to bugs, so please be patient. I hope you enjoy and thanks for testing.</TextBlock>
+                </Panel>
+                <Panel Grid.Row="2"
+                       Margin="10">
+                    <Button Classes="AssistPlayBtn"
+                            Content="READY"
+                            Width="115"
+                            Height="40"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Click="ReadyBtn_Click"/>
+                </Panel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

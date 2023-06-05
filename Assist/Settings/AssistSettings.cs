@@ -170,7 +170,8 @@ namespace Assist.Settings
             set => this.SetProperty(ref _eglEnabled, value);
         }
         public BackupsSettings Backups = new BackupsSettings();
-        
+
+        public bool SeenLeaguesNP { get; set; }= false;
         
         private SoundSettings _soundSettings = new SoundSettings();
         public SoundSettings SoundSettings
