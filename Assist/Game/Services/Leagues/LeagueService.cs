@@ -27,8 +27,8 @@ public class LeagueService
     public LeagueService()
     {
         if (Instance is null) Instance = this; else return;
-        
-        BindToEvents();   
+        new MatchService();
+        BindToEvents();     
     }
 
     public async Task<AssistProfile> GetProfileData()

@@ -1,5 +1,6 @@
 ﻿using System;
 using Assist.Game.Views.Authentication;
+using Assist.Game.Views.LinkRiot;
 using Assist.Objects.Enums;
 using Assist.Services;
 using Assist.Services.Popup;
@@ -120,6 +121,7 @@ public partial class SettingsPopup : UserControl
     private void SignInBtn_Click(object? sender, RoutedEventArgs e)
     {
         MainWindowContentController.Change(new AssistAuthenticationView());
+        PopupSystem.KillPopups();
     }
 
     private async void SignedInGrid_Loaded(object? sender, RoutedEventArgs e)
@@ -133,5 +135,10 @@ public partial class SettingsPopup : UserControl
     private void SignOutBtn_Click(object? sender, RoutedEventArgs e)
     {
         
+    }
+
+    private void LinkRiotAccBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        PopupSystem.SpawnCustomPopup(new LinkRiotPopupView());
     }
 }

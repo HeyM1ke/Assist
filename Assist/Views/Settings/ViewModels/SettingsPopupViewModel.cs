@@ -11,6 +11,7 @@ namespace Assist.Views.Settings.ViewModels;
 public class SettingsPopupViewModel : ViewModelBase
 {
     public bool IsAssistSignedIn => AssistApplication.Current.AssistUser.Account.AccountInfo is not null;
+    public bool RiotAccountLinked = false;
     private string _displayName;
 
     public string DisplayName
@@ -39,6 +40,14 @@ public class SettingsPopupViewModel : ViewModelBase
         get => _accountCreated;
         set => this.RaiseAndSetIfChanged(ref _accountCreated, value);
     }
+    
+    private string _linkedAccountText;
+
+    public string LinkedAccountText
+    {
+        get => _linkedAccountText;
+        set => this.RaiseAndSetIfChanged(ref _linkedAccountText, value);
+    }
 
     public async Task SetupSignedInGrid()
     {
@@ -58,5 +67,12 @@ public class SettingsPopupViewModel : ViewModelBase
         DisplayName = ProfilePageViewModel.ProfileData.DisplayName;
         DisplayImage = ProfilePageViewModel.ProfileData.ProfileImage;
         AccountEmail = AssistApplication.Current.AssistUser.Account.AccountInfo.email;
+        RiotAccountLinked = ProfilePageViewModel.ProfileData.LinkedRiotAccounts.Count <= 0;
+
+        if (RiotAccountLinked)
+            LinkedAccountText =
+                $"Linked Account: {ProfilePageViewModel.ProfileData.LinkedRiotAccounts[0].Gamename}#{ProfilePageViewModel.ProfileData.LinkedRiotAccounts[0].TagLine}";
+        else
+            LinkedAccountText = "No account linked.";
     }
 }

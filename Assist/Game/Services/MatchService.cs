@@ -38,7 +38,9 @@ public class MatchService
 
     private void BindToEvents()
     {
-        if (currentlyBinded)return;
+        if (currentlyBinded)
+            return;
+        
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived += GameServerConnectionOnMATCH_MatchUpdateMessageReceived;
         AssistApplication.Current.GameServerConnection.MATCH_CustomGameSettingsReceived += GameServerConnectionOnMATCH_CustomGameSettingsReceived;
         AssistApplication.Current.GameServerConnection.MATCH_PartyInformationRequested += GameServerConnectionOnMATCH_PartyInformationRequested;

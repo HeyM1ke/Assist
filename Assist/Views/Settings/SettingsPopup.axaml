@@ -217,6 +217,28 @@
                                                        HorizontalAlignment="Center"
                                             ></TextBlock>
                                             
+                                            <Grid ColumnDefinitions="Auto, Auto"
+                                                  HorizontalAlignment="Center"
+                                                  >
+                                                <TextBlock Text="{Binding LinkedAccountText}"
+                                                           FontFamily="{StaticResource Inter}"
+                                                           FontSize="14"
+                                                           FontWeight="Medium"
+                                                           Opacity=".8"
+                                                           Padding="10,0"
+                                                           HorizontalAlignment="Left"
+                                                           VerticalAlignment="Center"
+                                                           Grid.Column="0"/>
+                                              
+                                                <Button Classes="AssistPlayBtn"
+                                                        Content="Link Riot Account"
+                                                        HorizontalAlignment="Stretch"
+                                                        IsVisible="{Binding !RiotAccountLinked}"
+                                                        HorizontalContentAlignment="Center"
+                                                        Click="LinkRiotAccBtn_Click"
+                                                        Grid.Column="1"/>
+                                            </Grid>
+                                            
                                             <Button Classes="AssistBtn"
                                                     Content="Sign Out"
                                                     HorizontalAlignment="Stretch"

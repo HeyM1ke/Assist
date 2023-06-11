@@ -1,0 +1,88 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Game.Views.LinkRiot.LinkRiotPopupView"
+             Loaded="RiotLink_Loaded">
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/AssistStyles.axaml" />
+    </UserControl.Styles>
+    
+    
+    
+    <Grid Background="#3D000000">
+        <Border VerticalAlignment="Center"
+                Opacity="1"
+                CornerRadius="10"
+                HorizontalAlignment="Center"
+                Background="{StaticResource AssistPrimary}"
+                BorderThickness="2"
+                BorderBrush="{StaticResource AssistPrimaryLight}"
+                Width="400" Height="200">
+            <Grid Margin="10">
+                
+                <StackPanel Spacing="10">
+                    <TextBlock FontFamily="{StaticResource Inter}"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="24"
+                               Text="Riot Link"/>
+                    <Rectangle Fill="{DynamicResource AssistRed}"
+                               Height="1"></Rectangle>
+                    <TextBlock FontFamily="{StaticResource Inter}"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               FontSize="14"
+                               TextWrapping="WrapWithOverflow"
+                               TextAlignment="Center"
+                               Text="You will be linking the Riot Account below to your assist account."/>
+                    <Grid x:Name="RiotAccountGrid"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="10">
+                            <asyncImageLoader:AdvancedImage Width="54"
+                                                            Height="54"
+                                                            CornerRadius="10"
+                                                            Source="{Binding ValorantProfilePicture}"
+                                                            Background="Red"/>
+                            <StackPanel Orientation="Vertical"
+                                        Spacing="5">
+                                <TextBlock FontFamily="{StaticResource Inter}"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Foreground="{DynamicResource AssistTextWhite}"
+                                           FontSize="14"
+                                           Text="{Binding ValorantAccountRiotName, FallbackValue='Loading...'}"/>
+                                <TextBlock FontFamily="{StaticResource Inter}"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Left"
+                                           Foreground="{DynamicResource AssistTextWhite}"
+                                           Opacity=".8"
+                                           FontSize="12"
+                                           Text="{Binding ValorantAccountRegion, FallbackValue='Loading...'}"/>
+                            </StackPanel>
+                            
+                            
+                        </StackPanel>
+                    </Grid>
+                    <Button Classes="AssistPlayBtn"
+                            Content="Link"
+                            HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            Click="LinkBtn_Click"></Button>
+                    <TextBlock Text="ErrorMessage"
+                               Foreground="Red"
+                               FontSize="10"
+                               FontFamily="{StaticResource Inter}"></TextBlock>
+                </StackPanel>
+               
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

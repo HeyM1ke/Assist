@@ -91,6 +91,23 @@ namespace Assist.Views.Startup.ViewModels
 
         private async Task StartStartupAuthentication()
         {
+            if (!string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
+            {
+                Log.Information("Logging into Assist Account");
+                try
+                {
+                    var authResp = await AssistApplication.Current.AssistUser.Authentication.AuthenticateWithRefreshToken(AssistSettings.Current
+                        .AssistUserCode);
+                    AssistSettings.Current.AssistUserCode = authResp.RefreshToken;
+                    AssistSettings.Save();
+                    await AssistApplication.Current.AssistUser.Account.GetUserInfo();
+                }
+                catch (Exception e)
+                {
+                    Log.Fatal("Account Token is not Valid");
+                }
+            }
+            
             if (AssistSettings.Current.Profiles.Count == 0)
             {
                 Log.Information("No Profiles Found, Going to Auth View");

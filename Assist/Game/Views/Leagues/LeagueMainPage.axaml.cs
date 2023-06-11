@@ -10,6 +10,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 using Serilog;
 using LeagueService = Assist.Game.Services.Leagues.LeagueService;
 
@@ -40,10 +41,13 @@ public partial class LeagueMainPage : UserControl
 
         LeagueNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("LeagueContentControl");
 
-        if (!AssistSettings.Current.SeenLeaguesNP)
+        Dispatcher.UIThread.InvokeAsync(async () =>
         {
-            PopupSystem.SpawnCustomPopup(new WelcomeLeaguesView());
-        }
+            if (!AssistSettings.Current.SeenLeaguesNP)
+            {
+                PopupSystem.SpawnCustomPopup(new WelcomeLeaguesView());
+            }
+        });
         
         if (LeagueService.Instance is null)
             await InitialSetup();
@@ -57,7 +61,7 @@ public partial class LeagueMainPage : UserControl
     {
         // Fill Dropdown with Leagues
         new LeagueService();
-
+        
         var profileData = await LeagueService.Instance.GetProfileData();
         
     }
