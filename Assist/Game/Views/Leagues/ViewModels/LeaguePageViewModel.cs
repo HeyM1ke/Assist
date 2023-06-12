@@ -18,7 +18,7 @@ public class LeaguePageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _leagueId, value);
     }
 
-    private bool _leaderboardEnabled = false;
+    private bool _leaderboardEnabled = true;
 
     public bool LeaderboardEnabled
     {

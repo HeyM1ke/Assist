@@ -120,7 +120,9 @@
                     <pages:LeagueLobbyPage/>
                 </TabItem>
                 <TabItem Header="Leaderboard"
-                         IsVisible="{Binding LeaderboardEnabled}"/>
+                         IsVisible="{Binding LeaderboardEnabled}">
+                    <pages:LeagueLeaderboardPage/>
+                </TabItem>
                 <TabItem Header="Moderation"
                          IsVisible="{Binding ModerationEnabled}"/>
             </TabControl>  

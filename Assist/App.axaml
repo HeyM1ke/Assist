@@ -218,6 +218,7 @@
         <StyleInclude Source="avares://Assist/Game/Controls/Live/LiveMenuPartyUser.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/GDashboard/GlobalChatMessageControl.axaml"></StyleInclude>
         
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueLeaderboardMemberControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeaguePartyInviteControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchPlayerControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchSelectionControl.axaml"></StyleInclude>

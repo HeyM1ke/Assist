@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Leagues">
+    <Design.PreviewWith>
+        <controls:LeagueLeaderboardMemberControl Width="555"
+                                                 Height="40"
+                                                 PositionText=""
+                                                 PlayerText=""
+                                                 LeaguePointText=""/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|LeagueLeaderboardMemberControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="Transparent"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                        BorderThickness="1"
+                        CornerRadius="5">
+                    <Grid Margin="18,5">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="12">
+                            <TextBlock Text="{TemplateBinding PositionText}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontWeight="SemiBold"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Width="67"
+                                       TextAlignment="Center"></TextBlock>
+                            <Rectangle Fill="{DynamicResource AssistRed}"
+                                       Width="2"/>
+                            <TextBlock Text="{TemplateBinding PlayerText}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontWeight="Medium"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Left"/>
+                        </StackPanel>
+                        <TextBlock Text="{TemplateBinding LeaguePointText}"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontWeight="SemiBold"
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   TextAlignment="Right"></TextBlock>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
