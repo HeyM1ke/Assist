@@ -53,6 +53,7 @@
                                 </Style>
                             </TabControl.Styles>
                             <TabItem Classes="Assist"
+                                     IsSelected="True"
                                      Header="{x:Static p:Resources.Settings_General}">
                                 <Grid Margin="-10,0">
                                     <StackPanel Orientation="Vertical"
@@ -175,7 +176,6 @@
                                 </StackPanel> </TabItem>
                             <TabItem Classes="Assist"
                                      IsVisible="True"
-                                     IsSelected="True"
                                      Header="{x:Static p:Resources.Settings_AssistAccount}">
                                 <Grid Margin="-10,5">
                                     <Grid VerticalAlignment="Center"
@@ -233,7 +233,7 @@
                                                 <Button Classes="AssistPlayBtn"
                                                         Content="Link Riot Account"
                                                         HorizontalAlignment="Stretch"
-                                                        IsVisible="{Binding !RiotAccountLinked}"
+                                                        IsEnabled="{Binding !RiotAccountLinked}"
                                                         HorizontalContentAlignment="Center"
                                                         Click="LinkRiotAccBtn_Click"
                                                         Grid.Column="1"/>
@@ -243,7 +243,7 @@
                                                     Content="Sign Out"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center"
-                                                    Click="SignOutBtn_Click"></Button>
+                                                    Click="SignOutBtn_Click" IsVisible="False"></Button>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>

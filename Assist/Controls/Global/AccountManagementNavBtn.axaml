@@ -16,7 +16,8 @@
             <ControlTemplate>
                 <Border BorderBrush="{TemplateBinding BorderBrush}"
                         CornerRadius="{TemplateBinding CornerRadius}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="Transparent">
                     <Grid>
                         <asyncImageLoader:AdvancedImage Source="{TemplateBinding PlayercardImage}"
                                                         CornerRadius="5"/>

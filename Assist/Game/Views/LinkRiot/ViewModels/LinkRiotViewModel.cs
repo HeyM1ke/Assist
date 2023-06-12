@@ -3,6 +3,7 @@ using Assist.Services.Popup;
 using Assist.ViewModels;
 using AssistUser.Lib.Account.Models;
 using ReactiveUI;
+using Serilog;
 using ValNet.Enums;
 
 namespace Assist.Game.Views.LinkRiot.ViewModels;
@@ -64,6 +65,8 @@ public class LinkRiotViewModel : ViewModelBase
         if (resp.Code != 200)
         {
             ErrorMessage = resp.Message;
+            Log.Error("Failed to Link Accounts.");
+            Log.Error(resp.Message);
             return;
         }
         

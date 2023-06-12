@@ -20,7 +20,7 @@
                 Background="{StaticResource AssistPrimary}"
                 BorderThickness="2"
                 BorderBrush="{StaticResource AssistPrimaryLight}"
-                Width="400" Height="200">
+                Width="400" >
             <Grid Margin="10">
                 
                 <StackPanel Spacing="10">
@@ -76,7 +76,7 @@
                             HorizontalContentAlignment="Center"
                             HorizontalAlignment="Stretch"
                             Click="LinkBtn_Click"></Button>
-                    <TextBlock Text="ErrorMessage"
+                    <TextBlock Text="{Binding ErrorMessage}"
                                Foreground="Red"
                                FontSize="10"
                                FontFamily="{StaticResource Inter}"></TextBlock>

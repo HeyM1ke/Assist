@@ -11,7 +11,13 @@ namespace Assist.Views.Settings.ViewModels;
 public class SettingsPopupViewModel : ViewModelBase
 {
     public bool IsAssistSignedIn => AssistApplication.Current.AssistUser.Account.AccountInfo is not null;
-    public bool RiotAccountLinked = false;
+    private bool _riotAccountLinked = true;
+
+    public bool RiotAccountLinked
+    {
+        get => _riotAccountLinked;
+        set => this.RaiseAndSetIfChanged(ref _riotAccountLinked, value);
+    }
     private string _displayName;
 
     public string DisplayName
@@ -67,7 +73,7 @@ public class SettingsPopupViewModel : ViewModelBase
         DisplayName = ProfilePageViewModel.ProfileData.DisplayName;
         DisplayImage = ProfilePageViewModel.ProfileData.ProfileImage;
         AccountEmail = AssistApplication.Current.AssistUser.Account.AccountInfo.email;
-        RiotAccountLinked = ProfilePageViewModel.ProfileData.LinkedRiotAccounts.Count <= 0;
+        RiotAccountLinked = ProfilePageViewModel.ProfileData.LinkedRiotAccounts.Count > 0;
 
         if (RiotAccountLinked)
             LinkedAccountText =
