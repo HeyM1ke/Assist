@@ -62,7 +62,7 @@ public partial class LeagueMainPage : UserControl
         // Fill Dropdown with Leagues
         new LeagueService();
         
-        var profileData = await LeagueService.Instance.GetProfileData();
+        //var profileData = await LeagueService.Instance.GetProfileData();
         
     }
 

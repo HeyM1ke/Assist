@@ -42,7 +42,7 @@ namespace Assist.Game.Views.Initial.ViewModels
 
             PopupSystem.KillPopups();
             // Start Setup
-
+#if !DEBUG
             while (!IsValorantRunning())
             {
                 Message = "Please Run Assist, When Valorant is Open. Checking in 5 seconds.";
@@ -50,11 +50,13 @@ namespace Assist.Game.Views.Initial.ViewModels
             }
 
             // Connect to Valorant Websocket Through Socket Service.
-            Message = "Connecting to Game...";
+
+             Message = "Connecting to Game...";
             await ConnectToGame();
+
             Message = "Connecting to Live Data Socket...";
             await StartSocketConnection();
-            
+#endif         
             new DodgeService();
             
             // Introduce Authentication

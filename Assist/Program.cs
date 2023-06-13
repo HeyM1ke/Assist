@@ -53,6 +53,11 @@ namespace Assist
                 {
                     AllowEglInitialization = AssistSettings.Current.EglEnabled,
                     UseDeferredRendering = true
+                }).With(new MacOSPlatformOptions()
+                {
+                    DisableDefaultApplicationMenuItems = true,
+                    DisableNativeMenus = true,
+                    ShowInDock = true
                 })
                 .UseReactiveUI();
 

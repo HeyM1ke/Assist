@@ -11,6 +11,7 @@ namespace Assist.Services.Server
     {
         protected HubConnection _hubConnection;
         public string HubConnectionUrl { get; set; }
+        public bool IsConnected => _hubConnection.ConnectionId != null;
         public string? ConnectionId => _hubConnection.ConnectionId;
         protected void Init()
         {

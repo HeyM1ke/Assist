@@ -1,0 +1,81 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Leagues"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:LeagueFinderShowcaseButton Width="300"
+                                             Height="220"
+                                             LeagueImage=""/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|LeagueFinderShowcaseButton">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistPrimary}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        BorderBrush="{DynamicResource AssistOutline}">
+                    <Grid Margin="10"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical"
+                                    Spacing="10">
+                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                <Panel>
+                                    <asyncImageLoader:AdvancedImage Width="70"
+                                                                    Height="70"
+                                                                    CornerRadius="5"
+                                                                    Source="{TemplateBinding LeagueImage}"/>
+                                    <Border Width="70"
+                                            Height="70"
+                                            CornerRadius="5"
+                                            Background="{DynamicResource AssistGray}"></Border>
+                                </Panel>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Assist League Name"
+                                               FontFamily="{StaticResource Inter}"
+                                               FontWeight="Bold"
+                                               FontSize="20"
+                                               TextAlignment="Left"/>
+                                    
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="3">
+                                        <Panel>
+                                            <Rectangle Fill="{DynamicResource AssistRed}"
+                                                       Width="16"
+                                                       Height="16">
+                                                <Rectangle.OpacityMask>
+                                                    <ImageBrush Source="/Resources/Game/CheckCircle_Icon.png"></ImageBrush>
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </Panel>
+                                        <TextBlock Text="Partnered League"
+                                                   FontFamily="{StaticResource Inter}"
+                                                   FontWeight="Light"
+                                                   FontSize="15"
+                                                   TextAlignment="Left"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Supporter-Only League"
+                                               FontFamily="{StaticResource Inter}"
+                                               Foreground="{DynamicResource ValorantGreenWin}"
+                                               FontWeight="Medium"
+                                               FontSize="12"
+                                               TextAlignment="Left"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <TextBlock TextWrapping="WrapWithOverflow"
+                                       Height="63"
+                                       Text="This is a normal text for the text block for featured leagues."
+                                       FontFamily="{StaticResource WorkSans}"
+                                       FontSize="13"
+                                       HorizontalAlignment="Stretch"
+                                       Background="{DynamicResource AssistSecondary}"></TextBlock>
+                            
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

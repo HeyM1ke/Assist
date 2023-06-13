@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1105" d:DesignHeight="582"
+             x:Class="Assist.Game.Views.Leagues.LeaguesErrorPage">
+    <Grid>
+        <Border Width="590"
+                Height="225"
+                Background="{DynamicResource AssistPrimary}"
+                BorderBrush="{DynamicResource AssistRed}"
+                BorderThickness="1"
+                CornerRadius="5">
+            <Grid Margin="10">
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Spacing="14">
+                    <TextBlock Text="WE RAN INTO A PROBLEM"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Black"
+                               FontSize="36"
+                               TextAlignment="Right"
+                               HorizontalAlignment="Right"
+                    ></TextBlock>
+                    <TextBlock Text="We ran into an error."
+                               x:Name="ErrorBox"
+                               FontFamily="{StaticResource Inter}"
+                               Width="450"
+                               FontWeight="Medium"
+                               FontSize="20"
+                               TextAlignment="Right"
+                               TextWrapping="WrapWithOverflow"
+                               HorizontalAlignment="Right"
+                    ></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Image Source="/Resources/AssistM_Pose.png"
+               Width="450"
+               Height="1400"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Margin="20,0"></Image>
+    </Grid>
+</UserControl>
