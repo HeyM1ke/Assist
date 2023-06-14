@@ -145,7 +145,7 @@ public class MatchService
             var customData = JsonSerializer.Deserialize<AssistMatchValorantSettings>(customGameSettings);
             var data = new
             {
-                Map = customData.Map,
+                Map = customData.Map.ToString(),
                 Mode = customData.GameMode,
                 GamePod = customData.Server,
                 GameRules = new Dictionary<string, string>()
@@ -164,6 +164,12 @@ public class MatchService
             Log.Error("Failed to setup Custom Game");
             Log.Error($"Exception: {e.Message}");
             Log.Error($"Stack: {e.StackTrace}");
+            if (e is RequestException)
+            {
+                var ex = e as RequestException;
+                Log.Error($"Exception: {ex.Content}");
+                Log.Error($"Stack: {ex.Message}");
+            }
         }
     }
 
@@ -327,12 +333,18 @@ public class MatchService
                             onCorrectTeam = true;
                         break;
                 }
-                
-                await Task.Delay(3000);
             }
             catch (Exception e)
             {
                 Log.Error("Error on Swapping Teams.");
+                if (e is RequestException)
+                {
+                    var ex = e as RequestException;
+                    Log.Error(ex.Content);
+                    Log.Error(ex.Content);
+                }
+                
+                await Task.Delay(3000);
             }
         }
         
