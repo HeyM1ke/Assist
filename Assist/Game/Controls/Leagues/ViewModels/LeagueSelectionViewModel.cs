@@ -231,7 +231,6 @@ public class LeagueSelectionViewModel : ViewModelBase
     private async Task<bool> CheckForLeagueErrors()
     {
         // Check if the player is currently have valorant open
-        return true;
         if (!IsValorantRunning())
         {
             _errorMessage = "Valorant is not open. Please reopen Leagues, when VALORANT is open.";
