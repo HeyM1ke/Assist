@@ -36,6 +36,7 @@ public class AssistGameServerConnection : HubClient
         _hubConnection.On<string?>("receiveLeaveQueueMessage", LeaveQueueMessageReceived);
         
         _hubConnection.On<string?>("receiveMatchUpdate", MatchUpdateMessageReceived);
+        
         _hubConnection.On<string?>("receiveJoinedMatchMessage", JoinedMatchMessageReceived);
         
         _hubConnection.On<string?>("receiveValorantPartyJoinMatch", ValorantPartyJoinMatchReceived);

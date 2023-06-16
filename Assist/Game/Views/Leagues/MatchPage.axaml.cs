@@ -38,6 +38,8 @@ public partial class MatchPage : UserControl
 
     private async void LobbyJoinOrReadyBtn_Click(object? sender, RoutedEventArgs e)
     {
+        
         await _viewModel.JoinOrReadyInMatch();
+        
     }
 }

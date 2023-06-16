@@ -206,7 +206,7 @@ public class MatchService
     
     private async void GameServerConnectionOnMATCH_StartValorantMatchReceived(string? startMatchReceiveData)
     {
-        var customData = JsonSerializer.Deserialize<LeaderMatchData>(startMatchReceiveData);
+        var customData = JsonSerializer.Deserialize<AssistMatchValorantSettings>(startMatchReceiveData);
         /*AssistApplication.Current.CurrentUser.CustomGame.
         // Start the custom game, Check players to make sure they are on the right team.
         for (int i = 0; i < CurrentMatchData.TeamOne.Players.Count; i++)
@@ -217,14 +217,14 @@ public class MatchService
 
         var vData = new
         {
-            Map = customData.CustomSettings.Map,
-            Mode = customData.CustomSettings.GameMode,
-            GamePod = customData.CustomSettings.Server,
+            Map = customData.Map,
+            Mode = customData.GameMode,
+            GamePod = customData.Server,
             GameRules = new Dictionary<string, string>()
             {
-                {"TournamentMode",customData.CustomSettings.UseTournamentMode ? "true" : "false"},
-                {"UseCheats",customData.CustomSettings.UseCheats ? "true" : "false"},
-                {"IsOvertimeWinByTwo",customData.CustomSettings.WinByTwo ? "true" : "false"}
+                {"TournamentMode",customData.UseTournamentMode ? "true" : "false"},
+                {"UseCheats",customData.UseCheats ? "true" : "false"},
+                {"IsOvertimeWinByTwo",customData.WinByTwo ? "true" : "false"}
             }
         };
         

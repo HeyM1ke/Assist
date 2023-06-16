@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Controls.Match;
@@ -7,8 +9,10 @@ using Assist.Game.Services;
 using Assist.Objects.Helpers;
 using Assist.ViewModels;
 using AssistUser.Lib.Leagues.Models;
+using Avalonia.Threading;
 using DynamicData.Kernel;
 using ReactiveUI;
+using Serilog;
 
 namespace Assist.Game.Views.Leagues.ViewModels;
 
@@ -91,6 +95,13 @@ public class MatchPageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _joinLobbyButtonEnabled, value);
     }
     
+    private bool _readyButtonEnabled = false;
+    public bool ReadyLobbyButtonEnabled
+    {
+        get => this._readyButtonEnabled;
+        set => this.RaiseAndSetIfChanged(ref _readyButtonEnabled, value);
+    }
+    
     #endregion
     
     public async Task SetupBasePage()
@@ -110,6 +121,26 @@ public class MatchPageViewModel : ViewModelBase
         await AssistApplication.Current.CurrentUser.Party.SetPartyReadiness(false);
 
         await UpdatePage(MatchData);
+        
+        AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived += MatchUpdateRecieved;
+    }
+
+    private void MatchUpdateRecieved(string? obj)
+    {
+        try
+        {
+            var MatchData = JsonSerializer.Deserialize<AssistMatch>(obj);
+            Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                await UpdatePage(MatchData);
+            });
+        }
+        catch (Exception e)
+        {
+            Log.Error("Failed to Parse Match Data from Server");
+            Log.Error($"Exception: {e.Message}");
+            Log.Error($"Stack: {e.StackTrace}");
+        }
     }
 
 
@@ -122,6 +153,7 @@ public class MatchPageViewModel : ViewModelBase
                 await SetupPregameState(matchData);
                 break;
             case "INGAME":
+                await SetupIngameState(matchData);
                 break;
             case "POSTGAME":
                 break;
@@ -130,7 +162,7 @@ public class MatchPageViewModel : ViewModelBase
         
         await UpdatePlayerControls(matchData);
     }
-
+    
 
     private async Task SetupPregameState(AssistMatch matchData)
     {
@@ -166,18 +198,14 @@ public class MatchPageViewModel : ViewModelBase
             
             
             // If So Enable the Join Lobby button.
-            JoinLobbyButtonEnabled = true;
+            ReadyLobbyButtonEnabled = true;
             
             // Once a player joins the lobby, unready them on valorant.
             // Bind to the Pres and Check on If they leave the party.
             // If they leave force them back, if they were kicked Report to server. DO THIS ALL IN THE MATCH SERVICE.
             // Once a player joins the lobby.  DO THIS WHEN THE PLAYER IS IN THE PARTY.
             // Showcase the ready button
-        }
-
-        if (matchData.SpecialState.Equals("WAITING"))
-        {
-            // This means we are waiting for players to join and ready themselves. 
+            
             
         }
         
@@ -185,6 +213,11 @@ public class MatchPageViewModel : ViewModelBase
         
     }
 
+    private async Task SetupIngameState(AssistMatch matchData)
+    {
+        
+    }
+    
     private async Task BindToEvents()
     {
         
@@ -282,6 +315,57 @@ public class MatchPageViewModel : ViewModelBase
     }
     public async Task JoinOrReadyInMatch()
     {
-        await MatchService.QuitIngameValorantMatch();
+        ReadyLobbyButtonEnabled = false; // Disable the button to prevent multiple requests.
+        var pty = await AssistApplication.Current.CurrentUser.Party.FetchParty();
+        
+        if (!pty.ID.Equals(MatchService.Instance.CurrentMatchData.PregameDetails.ValorantPartyId))
+        {
+            Log.Error("Player is not in the right party!");
+            Log.Error("Player is not in the right party!");
+            Log.Error("Player is not in the right party!");
+            Log.Error("Player is not in the right party!");
+            ReadyLobbyButtonEnabled = true; // reenable the btn
+            return;
+        }
+
+        try
+        {
+            var resp = await AssistApplication.Current.AssistUser.League.ReadyInPreMatch(MatchService.Instance.CurrentMatchData
+                .Id);
+
+            if (resp.Code != 200)
+            {
+                Log.Error("Failed to ready up in the pregame");
+                Log.Error("Message: " + resp.Message);
+                ReadyLobbyButtonEnabled = true; // reenable the btn
+                return;
+            }
+
+            try
+            {
+                await AssistApplication.Current.CurrentUser.Party.SetPartyReadiness(true); // Set ready in party.
+            }
+            catch (Exception e)
+            {
+                Log.Error("We caught a bad exception when swapping ready status in the match.");
+                Log.Error("Exception Message: " + e.Message);
+                Log.Error("Exception Stack: " + e.StackTrace);
+                ReadyLobbyButtonEnabled = true; // reenable the btn
+                return;
+            }
+
+            ReadyLobbyButtonEnabled = false; // Disable the button to prevent multiple requests.
+        }
+        catch (Exception e)
+        {
+            Log.Error("We caught a bad exception within the ready process for the player in the match.");
+            Log.Error("Exception Message: " + e.Message);
+            Log.Error("Exception Stack: " + e.StackTrace);
+            ReadyLobbyButtonEnabled = true; // reenable the btn
+            return;
+        }
+        
+        
+        
     }
 }

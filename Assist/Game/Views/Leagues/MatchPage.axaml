@@ -245,9 +245,9 @@
                                           Foreground="{DynamicResource AssistTextWhite}"
                                           TextAlignment="Center"
                                ></TextBlock>
-                               <Button Content="Join Lobby"
-                                       IsEnabled="{Binding JoinLobbyButtonEnabled}"
-                                       Classes="AssistBtn"
+                               <Button Content="READY"
+                                       IsEnabled="{Binding ReadyLobbyButtonEnabled}"
+                                       Classes="AssistPlayBtn"
                                        Click="LobbyJoinOrReadyBtn_Click"
                                        Width="150"
                                        VerticalContentAlignment="Center"
