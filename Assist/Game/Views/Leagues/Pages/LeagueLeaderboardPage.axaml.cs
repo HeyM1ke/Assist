@@ -1,3 +1,4 @@
+using System;
 using Assist.Game.Views.Leagues.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -29,5 +30,10 @@ public partial class LeagueLeaderboardPage : UserControl
     private void PlayerStats_Loaded(object? sender, RoutedEventArgs e)
     {
         _viewModel.SetupPlayerStats();
+    }
+
+    private void LeaderboardMemberControl_Initialize(object? sender, EventArgs e)
+    {
+        _viewModel.SetupLeaderboard();
     }
 }

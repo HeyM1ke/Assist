@@ -18,7 +18,7 @@
                     Height="515">
                 <Grid Margin="10">
                     <ItemsControl Items="{Binding MemberControls}"
-                                  Loaded="LeaderboardMemberControl_Loaded">
+                                  Initialized="LeaderboardMemberControl_Initialize">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Spacing="10"></StackPanel>
