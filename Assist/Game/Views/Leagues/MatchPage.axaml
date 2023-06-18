@@ -8,7 +8,8 @@
              d:DesignWidth="1125"
              d:DesignHeight="690"
              x:Class="Assist.Game.Views.Leagues.MatchPage"
-             Loaded="MatchPage_Loaded">
+             Loaded="MatchPage_Loaded"
+             Unloaded="MatchPage_Unloaded">
     
     <Grid RowDefinitions="91, *">
         
@@ -115,7 +116,9 @@
                   RowDefinitions="6*,4*">
                 <Border Grid.Row="0">
                    <StackPanel>
-                       <Grid x:Name="MapSelectionPanel"
+                       <Grid x:Name="PregameHostPanel"
+                             IsVisible="{Binding !CurrentlyInMatch}">
+                           <Grid x:Name="MapSelectionPanel"
                              IsVisible="{Binding MapPickBanEnabled}">
                            <StackPanel><ScrollViewer Height="250"
                                      CornerRadius="50"
@@ -259,7 +262,11 @@
                                        Height="40"/>
                            </StackPanel>
                        </Grid>
-                       
+                       </Grid>
+                        <Grid x:Name="InGameMatchScreen"
+                             IsVisible="{Binding CurrentlyInMatch}">
+                           <TextBlock Text="IN GAME, IN MATCH"></TextBlock>
+                       </Grid>
                    </StackPanel>
                 </Border>
                 

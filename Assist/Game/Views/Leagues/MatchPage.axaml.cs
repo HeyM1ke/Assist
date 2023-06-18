@@ -42,4 +42,11 @@ public partial class MatchPage : UserControl
         await _viewModel.JoinOrReadyInMatch();
         
     }
+
+    private async void MatchPage_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode) return;
+
+        await _viewModel.UnbindToEvents();
+    }
 }

@@ -15,7 +15,7 @@ namespace Assist.Objects.RiotSocket
 
         public class Data
         {
-            public Presence[] presences { get; set; }
+            public List<Presence> presences { get; set; }
         }
 
         public class Presence
