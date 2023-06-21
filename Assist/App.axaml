@@ -73,6 +73,11 @@
             <GradientStop Color="#005CFFB1" Offset="1" />
             
         </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="LeagueMapOverlayGradient"  EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#F61E51" Offset="0" />
+            <GradientStop Color="#66000000" Offset="1" />
+        </LinearGradientBrush>
 
         <SolidColorBrush  x:Key="ValorantIron" Color="#4f514f"/>
         <SolidColorBrush  x:Key="ValorantBronze" Color="#a5855d"/>

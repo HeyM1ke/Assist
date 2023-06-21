@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Leagues;
+using Assist.Game.Services;
 using Assist.Game.Services.Leagues;
 using Assist.Services;
 using Assist.ViewModels;
@@ -60,6 +61,15 @@ public class QueuePageViewModel : ViewModelBase
         }
 
         await StartTimer();
+
+        try
+        {
+            await MatchService.UnreadyClient();
+        }
+        catch (Exception e)
+        {
+            
+        }
     }
     
     

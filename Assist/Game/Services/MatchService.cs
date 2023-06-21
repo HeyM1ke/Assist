@@ -85,6 +85,18 @@ public class MatchService
             Console.WriteLine(e);
         }
     }
+    
+    public static async Task UnreadyClient()
+    {
+        try
+        {
+            await AssistApplication.Current.CurrentUser.Party.SetPartyReadiness(false);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
 
     
     #region Event Handlers

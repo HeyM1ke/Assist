@@ -122,6 +122,22 @@ public class MatchPageViewModel : ViewModelBase
 
 
     private string _matchId;
+    
+    
+    
+    private string _currentGameScoreTeamOne = "0";
+    public string CurrentGameScoreTeamOne
+    {
+        get => this._currentGameScoreTeamOne;
+        set => this.RaiseAndSetIfChanged(ref _currentGameScoreTeamOne, value);
+    }
+    
+    private string _currentGameScoreTeamTwo = "0";
+    public string CurrentGameScoreTeamTwo
+    {
+        get => this._currentGameScoreTeamTwo;
+        set => this.RaiseAndSetIfChanged(ref _currentGameScoreTeamTwo, value);
+    }
     #endregion
     
     public async Task SetupBasePage()
@@ -249,6 +265,7 @@ public class MatchPageViewModel : ViewModelBase
     {
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived -= MatchUpdateRecieved;
         AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= PlayerPresenceMessageReceived;
+        AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= PregameMessageReceived;
     }
     
     
@@ -431,6 +448,7 @@ public class MatchPageViewModel : ViewModelBase
             {
                 
                 Log.Information("Already Determined if the player was in the match.");
+                await UpdateIngameData(privatePlayerPres);
                 return;
             }
             
@@ -445,6 +463,22 @@ public class MatchPageViewModel : ViewModelBase
 
            
         }
+    }
+
+    private async Task UpdateIngameData(PlayerPresence privatePlayerPres)
+    {
+        if (MatchService.Instance.CurrentMatchData.TeamOne.Players.Exists(x => x.ValorantId.Equals(AssistApplication.Current.CurrentUser.UserData.sub, StringComparison.OrdinalIgnoreCase)))
+        {
+            CurrentGameScoreTeamOne = $"{privatePlayerPres.partyOwnerMatchScoreAllyTeam}";
+            CurrentGameScoreTeamTwo = $"{privatePlayerPres.partyOwnerMatchScoreEnemyTeam}";
+        }
+        else
+        {
+            CurrentGameScoreTeamOne = $"{privatePlayerPres.partyOwnerMatchScoreEnemyTeam}";
+            CurrentGameScoreTeamTwo = $"{privatePlayerPres.partyOwnerMatchScoreAllyTeam}";
+        }
+        
+        //TODO: Send Assist the Match Data and Presence Data
     }
 
     private async Task HandlePregameMatchData()
