@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:dodge="clr-namespace:Assist.Game.Controls.Modules.Dodge"
-             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              d:DesignWidth="1125"
@@ -61,7 +61,7 @@
                         Height="330"
                         VerticalAlignment="Top">
                     <ScrollViewer>
-                        <ItemsControl Items="{Binding UserButtons}">
+                        <ItemsControl ItemsSource="{Binding UserButtons}">
 							<ItemsControl.Styles>
 								<Style Selector="dodge|DodgeUserButton">
 									<Setter Property="Height" Value="39"></Setter>
@@ -76,11 +76,7 @@
                         Background="#17181D"
                         VerticalAlignment="Top"
                         IsVisible="{Binding IsLoading}">
-                    <avaloniaProgressRing:ProgressRing Width="50"
-                                                       Height="50"
-                                                       IsActive="{Binding IsLoading}"
-                                                       HorizontalAlignment="Center"
-                                                       Foreground="White"/>
+                   
                 </Border>
 				<Grid Grid.Row="1"
                       VerticalAlignment="Bottom"

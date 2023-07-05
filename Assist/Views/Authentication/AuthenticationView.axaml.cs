@@ -34,11 +34,6 @@ namespace Assist.Views.Authentication
             
         }
         
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
         
         private void AuthView_Init(object? sender, EventArgs e)
         {

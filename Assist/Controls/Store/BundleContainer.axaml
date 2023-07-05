@@ -18,7 +18,7 @@
             <Grid>
                 <ItemsControl x:Name="BundleCarousel"
                           Margin="0"
-                          Items="{TemplateBinding Bundles}">
+                          ItemsSource="{TemplateBinding Bundles}">
                     
                 </ItemsControl>
 

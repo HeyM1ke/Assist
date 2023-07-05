@@ -21,7 +21,7 @@
             <StackPanel Orientation="Horizontal">
                 <ScrollViewer>
                     <ItemsControl VerticalAlignment="Top"
-                                  Items="{Binding BadgeShowcases}">
+                                  ItemsSource="{Binding BadgeShowcases}">
                         <ItemsControl.Styles>
                             <Style Selector="profile|ProfileBadgeShowcase">
                                 <Setter Property="Margin" Value="0,2,0,2"></Setter>

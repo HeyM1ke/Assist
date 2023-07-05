@@ -17,10 +17,7 @@ public partial class LeaguePartyControl : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void PartyControl_Init(object? sender, EventArgs e)
     {

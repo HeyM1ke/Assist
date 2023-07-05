@@ -10,7 +10,7 @@
         <Border Background="Black" Opacity=".5"></Border>
         <Carousel x:Name="BundleCarousel" 
                   Margin="0"
-                  Items="{Binding Bundles}">
+                  ItemsSource="{Binding Bundles}">
             <Carousel.PageTransition>
                 <CrossFade Duration="0.15" />
             </Carousel.PageTransition>

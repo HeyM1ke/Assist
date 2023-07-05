@@ -24,10 +24,7 @@ namespace Assist.Controls.Store
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void OfferControl_OnInitialized(object? sender, EventArgs e)
         {

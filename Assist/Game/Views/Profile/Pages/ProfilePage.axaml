@@ -68,7 +68,7 @@
                 ></Rectangle>
             
                 <ScrollViewer Width="190">
-                    <ItemsControl Items="{Binding LeagueShowcases}">
+                    <ItemsControl ItemsSource="{Binding LeagueShowcases}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical" Spacing="6"

@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lobbies="clr-namespace:Assist.Game.Controls.Lobbies"
-             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             
              mc:Ignorable="d" d:DesignWidth="1081" d:DesignHeight="621"
              x:Class="Assist.Game.Views.Lobbies.Pages.BrowserView"
              Initialized="BrowserView_Init">
@@ -138,7 +138,7 @@
 
                 </Grid.Styles>
                 <ScrollViewer Height="550">
-                    <ItemsControl Items="{Binding CurrentlyShownLobbies}">
+                    <ItemsControl ItemsSource="{Binding CurrentlyShownLobbies}">
                         <ItemsControl.Styles>
                             <Style Selector="lobbies|LobbyBrowserPreviewControl">
                                 <Setter Property="Background" Value="#212121"></Setter>
@@ -159,12 +159,7 @@
                 <Grid RowSpan="2"
                       Background="#191919"
                       IsVisible="{Binding IsLoading}">
-                    <avaloniaProgressRing:ProgressRing Width="25"
-                                                       Height="25"
-                                                       IsActive="True"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       Foreground="White"/>
+                    
                 </Grid>
             </Grid>
         </Border>

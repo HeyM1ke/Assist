@@ -16,8 +16,5 @@ public partial class LeaguesErrorPage : UserControl
         InitializeComponent();
         this.FindControl<TextBlock>("ErrorBox").Text = message;
     }
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 }

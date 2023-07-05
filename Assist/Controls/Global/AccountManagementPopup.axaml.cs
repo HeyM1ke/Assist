@@ -18,10 +18,6 @@ public partial class AccountManagementPopup : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private async void AccountManagementPopup_Init(object? sender, EventArgs e)
     {

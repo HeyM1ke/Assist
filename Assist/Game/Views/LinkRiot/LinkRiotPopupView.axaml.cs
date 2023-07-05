@@ -16,10 +16,7 @@ public partial class LinkRiotPopupView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void LinkBtn_Click(object? sender, RoutedEventArgs e)
     {

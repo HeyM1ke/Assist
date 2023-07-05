@@ -26,11 +26,7 @@ namespace Assist.Controls.Dashboard
             _carousel = this.FindControl<Carousel>("ArticleCarousel");
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-        
+
         private async void StyledElement_OnInitialized(object? sender, EventArgs e)
         {
             var randomNullArt = new ArticleNodeItem()
@@ -56,7 +52,7 @@ namespace Assist.Controls.Dashboard
                     }
                 };
 
-                _carousel.Items = n;
+                _carousel.ItemsSource = n;
                 return;
             }
             
@@ -70,7 +66,7 @@ namespace Assist.Controls.Dashboard
                 Url = x.nodeUrl,
             }).ToList();
             AI.Insert(0, randomNullArt);
-            _carousel.Items = (AI);
+            _carousel.ItemsSource = (AI);
             // To Fix Carousell not loading right
             _carousel.Next();
         }

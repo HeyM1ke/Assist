@@ -25,10 +25,6 @@ namespace Assist.Views.Dashboard
             MainViewNavigationController.CurrentPage = Page.DASHBOARD;
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
 
         private async void WeeklyMissions_Init(object? sender, EventArgs e)
         {

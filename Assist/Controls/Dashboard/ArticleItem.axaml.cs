@@ -32,10 +32,7 @@ namespace Assist.Controls.Dashboard
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void ArticleItem_Click(object? sender, RoutedEventArgs e)
         {

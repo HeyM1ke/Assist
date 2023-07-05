@@ -62,11 +62,11 @@ namespace Assist.Views.Settings.Pages
                 {
                     var comboBox = sender as ComboBox;
 
-                    var list = comboBox.Items as AvaloniaList<Object>;
+                    var list = comboBox.ItemsSource as AvaloniaList<Object>;
 
                     list.RemoveAt(list.Count-1);
 
-                    comboBox.Items = list;
+                    comboBox.ItemsSource = list;
                 }
             }
         }

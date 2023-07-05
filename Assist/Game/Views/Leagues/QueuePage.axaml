@@ -28,7 +28,7 @@
                        HorizontalAlignment="Center"
                        Foreground="#FFFFFF"
                        FontSize="32"></TextBlock>
-            <ItemsControl Items="{Binding PlayerControls}">
+            <ItemsControl ItemsSource="{Binding PlayerControls}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Margin="10"

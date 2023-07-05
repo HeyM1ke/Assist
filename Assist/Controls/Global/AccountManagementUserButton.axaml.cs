@@ -24,10 +24,6 @@ public partial class AccountManagementUserButton : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private async void SetDefault_Btn(object? sender, RoutedEventArgs e)
     {

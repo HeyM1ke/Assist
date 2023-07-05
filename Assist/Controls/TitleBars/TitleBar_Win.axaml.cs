@@ -16,10 +16,7 @@ namespace Assist.Controls.TitleBars
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private void MinimizeBtn_Click(object? sender, RoutedEventArgs e)
         {

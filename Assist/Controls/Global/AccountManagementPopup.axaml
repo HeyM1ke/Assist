@@ -31,7 +31,7 @@
                         <ScrollViewer VerticalScrollBarVisibility="Visible"
                                       HorizontalScrollBarVisibility="Hidden"
                                       Height="400">
-                            <ItemsControl Items="{Binding AccountItems}">
+                            <ItemsControl ItemsSource="{Binding AccountItems}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Spacing="6">

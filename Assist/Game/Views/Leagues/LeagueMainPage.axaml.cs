@@ -23,12 +23,7 @@ public partial class LeagueMainPage : UserControl
         GameViewNavigationController.CurrentPage = Page.LEAGUES;
         InitializeComponent();
     }
-
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
-
+    
     private async void LeagueMain_Init(object? sender, EventArgs e)
     {
         if (Design.IsDesignMode)

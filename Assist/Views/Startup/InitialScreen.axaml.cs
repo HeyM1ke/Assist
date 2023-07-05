@@ -17,10 +17,7 @@ namespace Assist.Views.Startup
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void StyledElement_OnInitialized(object? sender, EventArgs e)
         {

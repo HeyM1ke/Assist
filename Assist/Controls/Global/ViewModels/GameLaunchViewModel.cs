@@ -66,7 +66,7 @@ namespace Assist.Controls.Global.ViewModels
                 
             var p = AssistApplication.Current.Platform;
             
-            IsEnabled = p.OperatingSystem == OperatingSystemType.WinNT && !RiotClientService.ClientOpened;
+            IsEnabled = OperatingSystem.IsWindows() && !RiotClientService.ClientOpened;
         }
 
         public async Task<PlayerInventory> SetPlayercard()

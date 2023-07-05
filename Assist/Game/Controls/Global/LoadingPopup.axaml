@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:properties="clr-namespace:Assist.Properties"
-             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             
              mc:Ignorable="d"
              Width="1350"
              Height="690"
@@ -18,10 +18,7 @@
                 <StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Spacing="15">
-                    <avaloniaProgressRing:ProgressRing Width="25"
-                                                       Height="25"
-                                                       IsActive="{Binding Working}"
-                                                       Foreground="White"/>
+                    
                     <TextBlock Text="{x:Static properties:Resources.Global_Loading}"
                                FontFamily="{StaticResource WorkSans}"
                                FontSize="22"></TextBlock>

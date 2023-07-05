@@ -13,10 +13,7 @@ public partial class ProfileView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private void CloseBtn_Click(object? sender, RoutedEventArgs e)
     {

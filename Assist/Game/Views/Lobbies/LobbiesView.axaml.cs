@@ -16,10 +16,7 @@ public partial class LobbiesView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private void BrowserView_Loaded(object? sender, RoutedEventArgs e)
     {

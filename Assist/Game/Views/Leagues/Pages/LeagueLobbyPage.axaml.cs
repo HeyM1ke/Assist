@@ -16,10 +16,7 @@ public partial class LeagueLobbyPage : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void DevJoinBtn_Click(object? sender, RoutedEventArgs e)
     {

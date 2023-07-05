@@ -52,10 +52,6 @@ namespace Assist.Views
             }
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
 
         private async void MainView_Initializaed(object? sender, EventArgs e)
         {

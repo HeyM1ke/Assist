@@ -82,7 +82,7 @@
                           >
                       <ItemsControl VerticalAlignment="Top"
                                     Margin="7,12"
-                                    Items="{Binding UserControls}"
+                                    ItemsSource="{Binding UserControls}"
                                     >
 						  <ItemsControl.ItemsPanel>
                               <ItemsPanelTemplate>

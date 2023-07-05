@@ -17,7 +17,7 @@
                     Width="575"
                     Height="515">
                 <Grid Margin="10">
-                    <ItemsControl Items="{Binding MemberControls}"
+                    <ItemsControl ItemsSource="{Binding MemberControls}"
                                   Initialized="LeaderboardMemberControl_Initialize">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

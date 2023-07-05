@@ -24,10 +24,7 @@ namespace Assist.Controls.Store
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void BundleItem_Initialized(object? sender, EventArgs e)
         {

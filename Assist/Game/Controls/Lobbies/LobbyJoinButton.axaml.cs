@@ -83,8 +83,4 @@ public partial class LobbyJoinButton : UserControl
         LobbyService.Instance.CurrentLobbyOwner = false;
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 }

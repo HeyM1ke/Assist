@@ -18,10 +18,6 @@ namespace Assist.Views.Authentication.Sections
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
         
         private void UsernameBtn_OnPointerEnter(object? sender, PointerEventArgs e)
         {

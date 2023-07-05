@@ -1,23 +1,21 @@
-<Application xmlns="https://github.com/avaloniaui"
+<Application x:Class="Assist.App"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:Assist"
-             x:Class="Assist.App">
+             RequestedThemeVariant="Dark"
+>
+    
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
-
     
-
-	<Application.Resources>
+    <Application.Resources>
 		<!-- Color Resources -->
 
         <SolidColorBrush x:Key="AssistBackground" Color="#0F0F0F"></SolidColorBrush>
         <SolidColorBrush x:Key="AssistLightBackground" Color="#191919"></SolidColorBrush>
 
-
-
-
-		<SolidColorBrush  x:Key="AssistRed" Color="#F61E51"/>
+        <SolidColorBrush  x:Key="AssistRed" Color="#F61E51"/>
 		<SolidColorBrush  x:Key="AssistGray" Color="#17181D"/>
 		<SolidColorBrush  x:Key="AssistBlack" Color="#101115"/>
         
@@ -191,7 +189,7 @@
         <SolidColorBrush x:Key="AssistOnlineBorderColor" Color="#558D72"></SolidColorBrush>
 	</Application.Resources>
     <Application.Styles>
-        <FluentTheme Mode="Dark"/>
+        <FluentTheme/>
         <StyleInclude Source="avares://Assist/Controls/Global/Navigation/NavigationButton.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Progression/MissionControl.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Progression/MissionsView.axaml" />
@@ -205,7 +203,7 @@
         <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
-        <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
+        
         <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControlV2.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/RecentMatchesView.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/RankPreviewControl.axaml"></StyleInclude>
@@ -229,8 +227,6 @@
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchPlayerControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchSelectionControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/MapPickControl.axaml"></StyleInclude>
-        
-        <StyleInclude Source="avares://Assist/Styles/AssistStyles.axaml"></StyleInclude>
         
         <StyleInclude Source="avares://Assist/Controls/Profile/ProfileLeagueShowcase.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Profile/ProfileBadgeShowcase.axaml"></StyleInclude>

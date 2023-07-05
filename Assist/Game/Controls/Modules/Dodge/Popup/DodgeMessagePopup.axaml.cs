@@ -32,10 +32,6 @@ public partial class DodgeMessagePopup : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private void BackBtn_Click(object? sender, RoutedEventArgs e)
     {

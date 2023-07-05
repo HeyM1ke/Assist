@@ -17,10 +17,6 @@ public partial class LeagueQueueControl : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private async void QueueBtn_Click(object? sender, RoutedEventArgs e)
     {

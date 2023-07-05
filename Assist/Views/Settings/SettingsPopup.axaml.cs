@@ -29,10 +29,7 @@ public partial class SettingsPopup : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private void CloseBtn_Click(object? sender, RoutedEventArgs e)
     {
@@ -47,11 +44,11 @@ public partial class SettingsPopup : UserControl
             var comboBox = sender as ComboBox;
             if (mainRef.Screens.Primary.WorkingArea.Height <= 1080)
             {
-                var list = comboBox.Items as AvaloniaList<Object>;
+                var list = comboBox.ItemsSource as AvaloniaList<Object>;
 
                 list.RemoveAt(list.Count-2);
 
-                comboBox.Items = list;
+                comboBox.ItemsSource = list;
             }
             
             comboBox.SelectedIndex = (int)AssistSettings.Current.SelectedResolution + 2;

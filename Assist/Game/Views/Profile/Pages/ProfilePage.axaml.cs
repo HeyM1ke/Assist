@@ -16,10 +16,7 @@ public partial class ProfilePage : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void ProfilePage_Init(object? sender, EventArgs e)
     {

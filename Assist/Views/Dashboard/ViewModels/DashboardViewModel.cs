@@ -344,7 +344,7 @@ namespace Assist.Views.Dashboard.ViewModels
         }
 
 
-        public async Task<IEnumerable<IControl>> CreateMatchControlsV2(List<MatchDetailsObj> details)
+        public async Task<IEnumerable<Control>> CreateMatchControlsV2(List<MatchDetailsObj> details)
         {
             List<MatchPreviewControlV2> controls = new List<MatchPreviewControlV2>();
 

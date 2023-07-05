@@ -37,7 +37,7 @@
                                            FontSize="16"
                                            />
                                 
-                               <ItemsControl Items="{TemplateBinding Content}">
+                               <ItemsControl ItemsSource="{TemplateBinding Content}">
                                    <ItemsControl.ItemsPanel>
                                        <ItemsPanelTemplate>
                                            <StackPanel Orientation="Horizontal"

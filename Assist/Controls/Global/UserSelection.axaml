@@ -87,7 +87,7 @@
 					        />
 					<ScrollViewer MaxHeight="400">
                         <ItemsControl x:Name="UserSelectionItems"
-                                      Items="{Binding ProfileControls}"
+                                      ItemsSource="{Binding ProfileControls}"
                                       >
                             <ItemsControl.Styles>
                                 <Style Selector="global|UserSelectionBtn">

@@ -11,9 +11,6 @@ namespace Assist.Controls.Global.RPP
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
     }
 }

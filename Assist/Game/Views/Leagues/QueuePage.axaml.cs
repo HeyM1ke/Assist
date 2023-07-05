@@ -18,10 +18,7 @@ public partial class QueuePage : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void CancelQueue_Click(object? sender, RoutedEventArgs e)
     {

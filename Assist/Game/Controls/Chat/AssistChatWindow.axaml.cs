@@ -14,10 +14,7 @@ public partial class AssistChatWindow : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
     
     public AssistChatWindow(string groupID)
     {

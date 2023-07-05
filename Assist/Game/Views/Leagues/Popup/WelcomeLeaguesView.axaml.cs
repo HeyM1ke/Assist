@@ -14,10 +14,7 @@ public partial class WelcomeLeaguesView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private void ReadyBtn_Click(object? sender, RoutedEventArgs e)
     {

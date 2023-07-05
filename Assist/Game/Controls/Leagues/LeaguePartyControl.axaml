@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
-             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="990" d:DesignHeight="220"
              x:Class="Assist.Game.Controls.Leagues.LeaguePartyControl"
@@ -40,7 +40,7 @@
             
             <Grid Row="1"
                   x:Name="DataGrid">
-                <ItemsControl Items="{Binding PartyControls}">
+                <ItemsControl ItemsSource="{Binding PartyControls}">
                     <ItemsControl.Styles>
                         <Style Selector="leagues|LeaguePartyMemberControl">
                             <Setter Property="Padding" Value="0,0,5,0"/>
@@ -73,12 +73,7 @@
                                FontSize="16"
                                HorizontalAlignment="Left"></TextBlock>
                 
-                    <avaloniaProgressRing:ProgressRing Width="25"
-                                                       Height="25"
-                                                       IsActive="{Binding IsLoading}"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       Foreground="White"/>
+                    
                 </StackPanel>
             </Grid>
         </Grid>

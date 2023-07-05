@@ -11,8 +11,4 @@ public partial class AgentSelectionControl : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 }

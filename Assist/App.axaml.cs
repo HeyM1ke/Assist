@@ -23,17 +23,19 @@ using Assist.Settings;
 using Avalonia;
 using Avalonia.Platform;
 using Assist.ViewModels.Windows;
+using Avalonia.Controls;
 using Avalonia.Threading;
 using Squirrel;
 using NuGet.Versioning;
 
 namespace Assist
 {
+    
+    
     public partial class App : Application
     {
 
-        [DllImport("kernel32")]
-        public static extern bool AllocConsole();
+        
 
         public override void Initialize()
         {
@@ -41,7 +43,7 @@ namespace Assist
             SetupLogger();
             SetupUpdator();
             Log.Information("Starting application");
-            Log.Information("Getting Platform..." + AssistApplication.Current.GetCurrentPlatform().OperatingSystem);
+            Log.Information($"Getting Platform... WINDOWS: {OperatingSystem.IsWindows()} |  MACOS: {OperatingSystem.IsMacOS()} | LINUX: {OperatingSystem.IsLinux()} ");
         }
 
         public override void OnFrameworkInitializationCompleted()
@@ -69,8 +71,8 @@ namespace Assist
 
 #if DEBUG 
 
-            if(AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo().OperatingSystem == OperatingSystemType.WinNT)
-                AllocConsole();
+            //if(OperatingSystem.IsWindows()) AllocConsole();
+            
 #endif
 
             var directory = GetApplicationDataFolder();

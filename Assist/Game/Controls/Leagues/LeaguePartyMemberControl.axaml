@@ -16,7 +16,7 @@
                  <ItemsControl HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                Margin="5"
-                               Items="{Binding BadgeImages}">
+                               ItemsSource="{Binding BadgeImages}">
                      <ItemsControl.ItemsPanel >
                          <ItemsPanelTemplate>
                              <StackPanel Spacing="5"

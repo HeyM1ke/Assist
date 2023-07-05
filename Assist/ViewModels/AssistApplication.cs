@@ -57,12 +57,7 @@ namespace Assist.ViewModels
         public bool GameModeEnabled = false;
 
         public static ClassicDesktopStyleApplicationLifetime CurrentApplication = Application.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
-        public RuntimePlatformInfo GetCurrentPlatform()
-        {
-            Platform = AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo();
-            return Platform;
-        }
-
+        
         public void ChangeMainWindowResolution(EResolution res)
         {
             if (CurrentApplication.MainWindow is MainWindow)

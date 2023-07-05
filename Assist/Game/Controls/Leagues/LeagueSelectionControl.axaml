@@ -61,7 +61,7 @@
 				            CornerRadius="0,0,5,5"
 				    />
 				    <ScrollViewer>
-					    <ItemsControl Items="{Binding LeagueSelectionControls}" >
+					    <ItemsControl ItemsSource="{Binding LeagueSelectionControls}" >
 						    <ItemsControl.ItemsPanel>
 							    <ItemsPanelTemplate>
 								    <StackPanel Orientation="Vertical" Spacing="2"

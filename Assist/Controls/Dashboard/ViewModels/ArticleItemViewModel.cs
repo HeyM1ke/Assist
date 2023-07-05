@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.ViewModels;
-using JetBrains.Annotations;
 using ReactiveUI;
 
 namespace Assist.Controls.Dashboard.ViewModels

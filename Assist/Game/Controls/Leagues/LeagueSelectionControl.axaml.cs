@@ -19,10 +19,6 @@ public partial class LeagueSelectionControl : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     public async Task SetupLeagueChildren()
     {

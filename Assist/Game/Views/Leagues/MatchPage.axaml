@@ -38,7 +38,7 @@
                         BorderBrush="{DynamicResource AssistOutline}"
                 >
                     <Grid Margin="3,10">
-                        <ItemsControl Items="{Binding TeamAControls}">
+                        <ItemsControl ItemsSource="{Binding TeamAControls}">
                             
                             <ItemsControl.Styles>
                                 <Style Selector="match|MatchPlayerControl">
@@ -72,7 +72,7 @@
                         BorderBrush="{DynamicResource AssistOutline}"
                 >
                     <Grid Margin="3,10">
-                        <ItemsControl Items="{Binding TeamBControls}">
+                        <ItemsControl ItemsSource="{Binding TeamBControls}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Spacing="10"
@@ -126,7 +126,7 @@
                                      BorderBrush="{DynamicResource AssistOutline}"
                                      BorderThickness="1"
                                      VerticalAlignment="Top">
-                           <ItemsControl Items="{Binding MapControls}">
+                           <ItemsControl ItemsSource="{Binding MapControls}">
                                <ItemsControl.Styles>
                                    <Style Selector="match|MatchSelectionControl">
                                        <Setter Property="Width" Value="177"></Setter>

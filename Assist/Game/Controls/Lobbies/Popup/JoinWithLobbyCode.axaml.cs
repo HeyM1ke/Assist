@@ -22,10 +22,6 @@ public partial class JoinWithLobbyCode : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private async void JoinLobby_Click(object? sender, RoutedEventArgs e)
     {

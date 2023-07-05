@@ -22,11 +22,6 @@ namespace Assist.Controls.Global
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            _viewModel.CheckEnable();
-        }
 
         private async void LaunchBtn_Click(object? sender, RoutedEventArgs e)
         {

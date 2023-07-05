@@ -25,11 +25,7 @@ namespace Assist.Views.Settings
             SetupButtons();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
+ 
         private void SetupButtons()
         {
             navigationButtons.Add(this.FindControl<SettingsNavigationButton>("GeneralSettingsBtn"));

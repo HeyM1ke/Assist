@@ -11,8 +11,5 @@ public partial class GlobalChatControl : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 }

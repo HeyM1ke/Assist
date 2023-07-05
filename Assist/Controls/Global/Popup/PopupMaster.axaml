@@ -10,7 +10,7 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-        <ItemsControl Items="{TemplateBinding Children}">
+        <ItemsControl ItemsSource="{TemplateBinding Children}">
             <ItemsControl.Styles>
                 <Style Selector="controls|BasicPopup">
                     <Setter Property="Height" Value="690"></Setter>

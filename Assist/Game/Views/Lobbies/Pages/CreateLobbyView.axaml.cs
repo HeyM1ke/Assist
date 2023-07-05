@@ -22,10 +22,7 @@ public partial class CreateLobbyView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void CreateLobby_Click(object? sender, RoutedEventArgs e)
     {

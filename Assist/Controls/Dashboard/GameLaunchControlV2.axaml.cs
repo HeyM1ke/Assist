@@ -21,11 +21,6 @@ public partial class GameLaunchControlV2 : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
-
     private async void LaunchBtn_Click(object? sender, RoutedEventArgs e)
     {
         var btn = sender as Button;

@@ -27,11 +27,7 @@ namespace Assist.Controls.Global.Navigation
             Instance.SetSelected(3); // TEMP FIX
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            
-        }
+
 
 
         private void DashboardBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)

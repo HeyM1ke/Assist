@@ -41,7 +41,7 @@
               >
                   <ItemsControl VerticalAlignment="Top"
                                 Margin="7,12"
-                                Items="{Binding AllyTeamControls}"
+                                ItemsSource="{Binding AllyTeamControls}"
                                 
                   >
                       <ItemsControl.ItemsPanel>
@@ -195,7 +195,7 @@
               >
                   <ItemsControl VerticalAlignment="Top"
                                 Margin="7,12"
-                                Items="{Binding EnemyTeamControls}"
+                                ItemsSource="{Binding EnemyTeamControls}"
                                 
                   >
 					  
@@ -265,7 +265,7 @@
           <ItemsControl VerticalAlignment="Center"
                         Background="#17181D"
                         Margin="7,12"
-                        Items="{Binding DeathTeamControls}"
+                        ItemsSource="{Binding DeathTeamControls}"
                                 
           >
               <ItemsControl.Styles>

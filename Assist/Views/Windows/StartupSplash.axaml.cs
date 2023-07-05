@@ -21,13 +21,8 @@ namespace Assist.Views.Windows
         {
             
         }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
-
+        
+        
         private async void StartupSplash_OnOpened(object? sender, EventArgs e)
         {
             if(Design.IsDesignMode)

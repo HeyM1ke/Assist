@@ -18,10 +18,6 @@ public partial class MatchPage : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private async void MatchPage_Loaded(object? sender, RoutedEventArgs e)
     {

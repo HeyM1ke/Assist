@@ -26,10 +26,7 @@ public partial class LauncherVerticalNavigationBar : UserControl
         _buttonHolder = this.FindControl<StackPanel>("ButtonHolder");
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private void AccountsBtn_OnClick(object? sender, RoutedEventArgs e)
     {

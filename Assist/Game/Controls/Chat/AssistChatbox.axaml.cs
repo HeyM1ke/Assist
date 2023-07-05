@@ -16,10 +16,7 @@ public partial class AssistChatbox : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     public async void AddChat(string Name, string GroupId)
     {

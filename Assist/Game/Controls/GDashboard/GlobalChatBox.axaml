@@ -17,7 +17,7 @@
                       <ScrollViewer>
                           <ItemsControl VerticalAlignment="Bottom"
                                         Margin="7,12"
-                                        Items="{Binding MessageControls}"
+                                        ItemsSource="{Binding MessageControls}"
                           >
                               <ItemsControl.ItemsPanel>
                                   <ItemsPanelTemplate>

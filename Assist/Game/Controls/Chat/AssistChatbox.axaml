@@ -117,7 +117,7 @@
                     <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundDisabled}" />
                 </Style>
             </Grid.Styles>
-            <TabControl Items="{Binding TabItems}">
+            <TabControl ItemsSource="{Binding TabItems}">
                 
             </TabControl>
             

@@ -18,10 +18,7 @@ public partial class BadgesPage : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
 
     private async void BadgePage_Init(object? sender, EventArgs e)

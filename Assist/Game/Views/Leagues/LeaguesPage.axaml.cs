@@ -21,10 +21,7 @@ public partial class LeaguesPage : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void LeaguesPage_Init(object? sender, EventArgs e)
     {

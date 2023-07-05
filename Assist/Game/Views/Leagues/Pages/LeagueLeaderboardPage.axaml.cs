@@ -17,10 +17,7 @@ public partial class LeagueLeaderboardPage : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void LeaderboardMemberControl_Loaded(object? sender, RoutedEventArgs e)
     {

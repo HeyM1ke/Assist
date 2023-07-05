@@ -23,10 +23,6 @@ public partial class LeaguePartyMemberControl : UserControl
         _viewModel.PartyMemberData = data;
         InitializeComponent();
     }
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     public void UpdatePlayerData(AssistPartyMember data)
     {

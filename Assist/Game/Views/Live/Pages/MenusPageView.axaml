@@ -64,7 +64,7 @@
 
         <Grid Row="1"
               Margin="0,0,0,23">
-            <ItemsControl Items="{Binding CurrentUsers}">
+            <ItemsControl ItemsSource="{Binding CurrentUsers}">
 				<ItemsControl.Styles>
 					<Style Selector="live|LiveMenuPartyUser">
                         <Setter Property="Width" Value="200"></Setter>

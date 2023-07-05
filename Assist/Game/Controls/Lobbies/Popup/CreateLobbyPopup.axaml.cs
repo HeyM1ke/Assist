@@ -30,10 +30,6 @@ public partial class CreateLobbyPopup : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private void CreateLobbyPopup_Init(object? sender, EventArgs e)
     {
