@@ -174,6 +174,7 @@ public class ServerNames
         { "aresriot.mtl-riot-ord2-3.na-gp-chicago-1", "US Central (Illinois)" },
         { "aresriot.mtl-riot-ord2-3.tournament-gp-chicago-1", "US Central (Illinois)" },
         { "aresriot.aws-rclusterprod-dfw1-1.na-gp-dallas-1", "US Central (Texas)" },
+        { "aresriot.aws-dfw1-prod.na-gp-dallas-1", "US Central (Texas)" },
         { "aresriot.aws-rclusterprod-dfw1-1.tournament-gp-dallas-1", "US Central (Texas)" },
         { "aresriot.aws-rclusterprod-use1-1.na-gp-ashburn-1", "US East (N. Virginia 1)" },
         { "aresriot.aws-rclusterprod-use1-1.na-gp-ashburn-awsedge-1", "US East (N. Virginia 2)" },

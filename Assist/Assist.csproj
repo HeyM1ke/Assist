@@ -6,7 +6,7 @@
 	  <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
     <TrimMode>full</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationIcon>Resources\Assist_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Assist_IconBlack.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageIcon>Assist_Logo_SweetRed.png</PackageIcon>
     <SignAssembly>False</SignAssembly>

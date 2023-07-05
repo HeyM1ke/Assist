@@ -467,7 +467,7 @@ public class MatchPageViewModel : ViewModelBase
 
     private async Task UpdateIngameData(PlayerPresence privatePlayerPres)
     {
-        if (MatchService.Instance.CurrentMatchData.TeamOne.Players.Exists(x => x.ValorantId.Equals(AssistApplication.Current.CurrentUser.UserData.sub, StringComparison.OrdinalIgnoreCase)))
+            if (MatchService.Instance.CurrentMatchData.TeamOne.Players.Exists(x => x.ValorantId.Equals(AssistApplication.Current.CurrentUser.UserData.sub, StringComparison.OrdinalIgnoreCase)))
         {
             CurrentGameScoreTeamOne = $"{privatePlayerPres.partyOwnerMatchScoreAllyTeam}";
             CurrentGameScoreTeamTwo = $"{privatePlayerPres.partyOwnerMatchScoreEnemyTeam}";

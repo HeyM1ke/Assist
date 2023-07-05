@@ -26,8 +26,8 @@ public class LeagueService
     public LeagueNavigationController NavigationController = new LeagueNavigationController();
     public LeagueService()
     {
-        if (Instance is null) Instance = this; else return;
         new MatchService();
+        if (Instance is null) Instance = this; else return;
         BindToEvents();     
     }
 

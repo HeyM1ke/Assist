@@ -127,10 +127,11 @@ public class MatchService
         // Check if the player is ingame.
         // If the player is INGAME, Leave the game. 
 
+        Log.Information("Attempting to get Presence from Local Socket");
         var currPres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
         var clientPres = currPres.presences.Find(x => x.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
         var decodedPres = await GetPresenceData(clientPres);
-
+        Log.Information("Checking if player is inGAmE");
         if (decodedPres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
         {
             try
@@ -151,9 +152,12 @@ public class MatchService
                 await AssistApplication.Current.CurrentUser.Party.LeaveParty(decodedPres.partyId);
             }
 
+            Log.Information("Making Party Open");
             await AssistApplication.Current.CurrentUser.Party.SetPartyAccessibility(true);
+            Log.Information("Creating the custom game");
             await AssistApplication.Current.CurrentUser.CustomGame.MakeCustomGame();
             
+            Log.Information("Decoding the Settings from the server");
             var customData = JsonSerializer.Deserialize<AssistMatchValorantSettings>(customGameSettings);
             var data = new
             {
@@ -168,7 +172,9 @@ public class MatchService
                 }
             };
 
+            Log.Information("Settings the Custom Settings");
             var t = await AssistApplication.Current.CurrentUser.CustomGame.SetCustomGameSettings(data);
+            Log.Information("Sending Server Details.");
             await AssistApplication.Current.AssistUser.League.SetupMatch(CurrentMatchData.Id, t);
         }
         catch(Exception e)

@@ -91,7 +91,9 @@ public class LeagueQueueViewModel : ViewModelBase
 
     public async Task SearchPartyDetails(AssistParty pty)
     {
+        
         var playerData = pty.Members.Find(mem => mem.Id == AssistApplication.Current.AssistUser.Account.AccountInfo.id);
+        
         if (playerData is null)
         {
             Log.Error("This is a fuckign issue");
