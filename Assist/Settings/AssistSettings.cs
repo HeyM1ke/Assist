@@ -76,7 +76,7 @@ namespace Assist.Settings
 
         internal async Task<string> FindRiotClient()
         {
-            if (OperatingSystem.IsWindows())
+            if (!OperatingSystem.IsWindows())
                 return null;
 
             List<string> clients = new List<string>();

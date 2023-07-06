@@ -1,0 +1,38 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
+             mc:Ignorable="d" 
+             d:DesignWidth="1125" 
+             d:DesignHeight="690"
+             x:Class="Assist.Views.Dashboard.DashboardViewV2">
+    <Grid Margin="10">
+        <Grid Name="ArticlePanel" HorizontalAlignment="Left">
+            <StackPanel Spacing="25"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left">
+                <dashboard:FeaturedArticleControlV2 CornerRadius="10"
+                                                    ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt40eddb08d5a5317f/6488f5d048a8ffd507476531/7-1-TDM-Thumbnail-V4_Banner.jpg"
+                                                    ArticleName="Welcome to VALORANT TDM"
+                                                    ArticleCategory="GAME UPDATE"
+                                                    Width="750"
+                                                    Height="315"/>
+                <UniformGrid Rows="1">
+                    <dashboard:FeaturedArticleControlV2 CornerRadius="10"
+                                                        ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt40eddb08d5a5317f/6488f5d048a8ffd507476531/7-1-TDM-Thumbnail-V4_Banner.jpg"
+                                                        ArticleName="Welcome to VALORANT TDM"
+                                                        ArticleCategory="GAME UPDATE"
+                                                        Width="287"
+                                                        Height="90"/>
+                    <dashboard:FeaturedArticleControlV2 CornerRadius="10"
+                                                        ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt40eddb08d5a5317f/6488f5d048a8ffd507476531/7-1-TDM-Thumbnail-V4_Banner.jpg"
+                                                        ArticleName="Welcome to VALORANT TDM"
+                                                        ArticleCategory="GAME UPDATE"
+                                                        Width="287"
+                                                        Height="90"/>
+                </UniformGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
