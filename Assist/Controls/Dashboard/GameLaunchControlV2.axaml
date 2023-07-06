@@ -3,100 +3,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
-             mc:Ignorable="d" d:DesignWidth="1125" d:DesignHeight="100"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="1125" d:DesignHeight="85"
              Initialized="GameLaunchControlV2_Init"
-             
              x:Class="Assist.Controls.Dashboard.GameLaunchControlV2">
-    <Grid RowDefinitions="Auto,*">
-        <Grid Row="0">
-            <Grid.Styles>
-                <Style Selector="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="0,5"
-                                            Opacity=".7">
-                                    <Image Source="/Resources/Icons/Settings_Icon.png"
-                                           Height="14"
-                                           Width="14"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                    ></Image>
-                                    
-                                    <TextBlock Text="{x:Static p:Resources.Settings_Settings}"
-                                               FontFamily="{StaticResource Inter}"
-                                               FontWeight="Regular"
-                                               FontSize="14"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Right"
-                                    />
-                                </StackPanel>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                <Style Selector="Button:pointerover /template/ TextBlock">
-                    <Setter Property="TextDecorations" Value="Underline"></Setter>
-                    <Setter Property="Cursor" Value="Hand"></Setter>
-                </Style>
-            </Grid.Styles>
-            <Button Content="Settings"
-                    Classes="AssistBtn"
-                    HorizontalAlignment="Right"
-                    Click="SettingsBtn_Click"></Button>
-        </Grid>
+    <Grid 
+          Background="#680B0C0E">
+      <Grid Margin="10">
+          <StackPanel Orientation="Horizontal"
+                  HorizontalAlignment="Center"
+                  Spacing="17">
+          <StackPanel Orientation="Vertical"
+                      Spacing="3"
+                      VerticalAlignment="Bottom">
+              <TextBlock Text="Playing As:"
+                         Foreground="{DynamicResource AssistTextWhite}"
+                         FontFamily="{StaticResource Inter}"
+                         FontSize="14"
+                         FontWeight="Medium"/>
+              <StackPanel Orientation="Horizontal"
+                          Spacing="7">
+                  <asyncImageLoader:AdvancedImage Source="{Binding ProfilePlayercard}"
+                                                  RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                  CornerRadius="10"
+                                                  Height="41"
+                                                  Width="41"
+                                                  Background="Red"
+                                                  Stretch="UniformToFill"
+                  />
+                  
+                  <TextBlock Text="{Binding ProfileGamename}"
+                             VerticalAlignment="Center"
+                             FontFamily="{StaticResource Inter}"
+                             FontSize="14"
+                             FontWeight="Medium"/>
+              </StackPanel>
+          </StackPanel>
+          <Button CornerRadius="10"
+                  Classes="AssistPlayBtn"
+                  Width="250"
+                  Height="65"
+                  Content="{x:Static p:Resources.GameLaunch_PlayText}"
+                  FontFamily="{StaticResource Inter}"
+                  FontWeight="Bold"
+                  FontSize="24"
+                  IsEnabled="{Binding IsEnabled}"
+                  Click="LaunchBtn_Click"
+                  VerticalContentAlignment="Center"></Button>
+          
+          <StackPanel Orientation="Vertical"
+                      Spacing="3"
+                      VerticalAlignment="Bottom">
+              <TextBlock Text="{x:Static p:Resources.GameLaunch_SelectedPatchlineText}"
+                         Foreground="{DynamicResource AssistTextWhite}"
+                         FontFamily="{StaticResource Inter}"
+                         FontSize="14"
+                         FontWeight="Medium"/>
+              <ComboBox Height="41"
+                        Width="215"
+                        SelectedIndex="0">
+                  <ComboBoxItem Content="Live"></ComboBoxItem>
+              </ComboBox>
+          </StackPanel>
+      </StackPanel>
         
-        <Grid Row="1"
-              HorizontalAlignment="Right">
-        
-            <StackPanel Spacing="47"
-                        Orientation="Horizontal">
-                <Panel >
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Playing As:"
-                                   FontFamily="{StaticResource Inter}"
-                                   FontSize="14"
-                                   FontWeight="Light"
-                        />
-                        <TextBlock Text="{Binding ProfileGamename, FallbackValue='VALORANTPLAYER#00000'}"
-                                   FontFamily="{StaticResource Inter}"
-                                   FontSize="16"
-                                   FontWeight="SemiBold"
-                                   />
-                    </StackPanel>
-                </Panel>
-        
-                <Panel>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Patchline:"
-                                   FontFamily="{StaticResource Inter}"
-                                   FontSize="14"
-                                   FontWeight="Light"
-                        />
-                        <TextBlock Text="{Binding SelectedPatchLine, FallbackValue='EXT1'}"
-                                   FontFamily="{StaticResource Inter}"
-                                   FontSize="16"
-                                   FontWeight="SemiBold"/>
-                    </StackPanel>
-                </Panel>
-        
-                <Panel
-                    
-                       HorizontalAlignment="Right">
-                    <Button Classes="AssistPlayBtn"
-                            Content="PLAY"
-                            HorizontalContentAlignment="Right"
-                            VerticalContentAlignment="Center"
-                            FontSize="24"
-                            FontWeight="SemiBold"
-                            Width="267"
-                            Height="60"
-                            Click="LaunchBtn_Click"
-                            IsEnabled="{Binding IsEnabled}"></Button>
-                </Panel>
-            </StackPanel>
-        </Grid>
+        <Button Height="41"
+                Width="41"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Click="SettingsBtn_Click">
+            <Image Source="/Resources/Icons/Settings_Icon.png"
+                   Opacity=".5"></Image>
+        </Button>
+      </Grid>
     </Grid>
 </UserControl>
 

@@ -40,7 +40,7 @@ namespace Assist.Controls.Global
 
             if (inv != null)
             {
-                _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_LargeArt.png";
+                _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_SmallArt.png";
             }
         }
 

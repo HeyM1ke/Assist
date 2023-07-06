@@ -23,6 +23,9 @@ public partial class GameLaunchControlV2 : UserControl
 
     private async void LaunchBtn_Click(object? sender, RoutedEventArgs e)
     {
+        if (Design.IsDesignMode)
+            return;
+
         var btn = sender as Button;
         btn.IsEnabled = false;
         btn.Content = Properties.Resources.Global_Loading;
@@ -37,5 +40,11 @@ public partial class GameLaunchControlV2 : UserControl
     private async void GameLaunchControlV2_Init(object? sender, EventArgs e)
     {
         _viewModel.CheckEnable();
+        var inv = await _viewModel.SetPlayercard();
+
+        if (inv != null)
+        {
+            _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_DisplayIcon.png";
+        }
     }
 }

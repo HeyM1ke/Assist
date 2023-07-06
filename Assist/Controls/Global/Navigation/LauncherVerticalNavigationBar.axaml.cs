@@ -38,7 +38,7 @@ public partial class LauncherVerticalNavigationBar : UserControl
         ClearSelected();
 
         if (MainViewNavigationController.CurrentPage != Services.Page.DASHBOARD)
-            MainViewNavigationController.Change(new DashboardView());
+            MainViewNavigationController.Change(new DashboardViewV2());
 
         (sender as NavButton).IsSelected = true;
     }

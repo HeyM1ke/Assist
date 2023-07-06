@@ -22,7 +22,7 @@ namespace Assist.Views
             DataContext = _viewModel = new MainViewViewModel();
             InitializeComponent();
             MainViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
-            MainViewNavigationController.Change(new DashboardView());
+            MainViewNavigationController.Change(new DashboardViewV2());
         }
         
         public MainView(UserControl popup)
@@ -41,10 +41,10 @@ namespace Assist.Views
                         MainViewNavigationController.Change(new StoreView());
                         break;
                     case Page.DASHBOARD:
-                        MainViewNavigationController.Change(new DashboardView());
+                        MainViewNavigationController.Change(new DashboardViewV2());
                         break;
                     default:
-                        MainViewNavigationController.Change(new DashboardView());
+                        MainViewNavigationController.Change(new DashboardViewV2());
                         break;
                 }
                 

@@ -190,6 +190,7 @@
 	</Application.Resources>
     <Application.Styles>
         <FluentTheme/>
+        <StyleInclude Source="avares://Assist/Styles/AssistStyles.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Global/Navigation/NavigationButton.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Progression/MissionControl.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Progression/MissionsView.axaml" />

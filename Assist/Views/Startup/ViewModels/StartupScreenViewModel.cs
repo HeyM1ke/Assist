@@ -70,7 +70,7 @@ namespace Assist.Views.Startup.ViewModels
 
             // Check if Game the game is running, if so launch gamemode.
 
-            if (IsValorantRunning())
+            if (!IsValorantRunning())
             {
                 var menuPopup = new GamemodeWarningPopup();
                 menuPopup.WarningClosing += GamemodePopupClose;

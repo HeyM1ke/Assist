@@ -53,6 +53,7 @@ namespace Assist
             {
                 // Initial Window Opened at launch.
                 desktop.Exit += OnExit;
+                
                 desktop.MainWindow = new StartupSplash();
             }
 

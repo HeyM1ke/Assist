@@ -7,8 +7,9 @@
              d:DesignWidth="1125" 
              d:DesignHeight="690"
              x:Class="Assist.Views.Dashboard.DashboardViewV2">
-    <Grid Margin="10">
-        <Grid Name="ArticlePanel" HorizontalAlignment="Left">
+    <Grid RowDefinitions="*, 85">
+        <Grid Name="ArticlePanel" HorizontalAlignment="Left"
+              Margin="10">
             <StackPanel Spacing="25"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left">
@@ -33,6 +34,11 @@
                                                         Height="90"/>
                 </UniformGrid>
             </StackPanel>
+            
+           
         </Grid>
+        <dashboard:GameLaunchControlV2 VerticalAlignment="Bottom"
+                                       Grid.Row="1"
+                                       HorizontalAlignment="Stretch"></dashboard:GameLaunchControlV2>
     </Grid>
 </UserControl>
