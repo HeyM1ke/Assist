@@ -44,7 +44,7 @@
                                    FontFamily="{StaticResource Inter}"
                                    FontSize="12"
                                    Foreground="{DynamicResource AssistTextWhite}"
-                                   FontWeight="ExtraBold"
+                                   FontWeight="SemiBold"
                                    HorizontalAlignment="Stretch"
                                    TextWrapping="WrapWithOverflow"
                                    VerticalAlignment="Stretch"

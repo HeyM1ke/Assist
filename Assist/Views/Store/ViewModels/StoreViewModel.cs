@@ -38,7 +38,7 @@ namespace Assist.Views.Store.ViewModels
         
         
         static Dictionary<string, ValUserStore> _UserStores = new Dictionary<string, ValUserStore>();
-        static Dictionary<string, ValWallet> _UserWallets = new Dictionary<string, ValWallet>();
+        public static Dictionary<string, ValWallet> _UserWallets = new Dictionary<string, ValWallet>();
         /// <summary>
         /// Get's the current RiotUser's Store
         /// </summary>
@@ -65,12 +65,21 @@ namespace Assist.Views.Store.ViewModels
                 return null;
 
             NightMarketEnabled = r.BonusStore is not null;
+
+           
+            if (!_UserWallets.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
+            {
+                var t = await AssistApplication.Current.CurrentUser.Store.GetPlayerWallet();
+                _UserWallets.Add(AssistApplication.Current.CurrentUser.UserData.sub,t);
+            }
             
-            var t = await AssistApplication.Current.CurrentUser.Store.GetPlayerWallet();
-            AccountVP = $"{t.Balances.ValorantPoints:n0}";
-            AccountRP = $"{t.Balances.RadianitePoints:n0}";
             
-            _UserWallets.Add(AssistApplication.Current.CurrentUser.UserData.sub,t);
+            if (_UserWallets.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
+            {
+                AccountVP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.ValorantPoints:n0}";
+                AccountRP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.RadianitePoints:n0}";    
+            }
+            
             _UserStores.Add(AssistApplication.Current.CurrentUser.UserData.sub, r);
 
             return r;

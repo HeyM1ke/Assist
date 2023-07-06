@@ -212,6 +212,7 @@
         <StyleInclude Source="avares://Assist/Controls/Global/AccountManagementAddButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/FeaturedArticleControlV2.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Dashboard/ArticleControlV2.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Progression/AssistDailyDiamondControl.axaml"></StyleInclude>
 		<!--GameMode-->
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/NavButton.axaml"></StyleInclude>

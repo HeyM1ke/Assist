@@ -1,0 +1,133 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:progression="clr-namespace:Assist.Controls.Progression"
+             mc:Ignorable="d" 
+             d:DesignWidth="327"
+             d:DesignHeight="430"
+             Initialized="ProgressionOverview_Init"
+             x:Class="Assist.Controls.Dashboard.ProgressionOverview">
+    <Border CornerRadius="10"
+            Background="{DynamicResource AssistPrimary}"
+            >
+        <Grid RowDefinitions="*, *, *"
+              Margin="10">
+            <Grid Name="DailyTicketGrid" Row="0">
+                <StackPanel Spacing="3">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch">
+                        <TextBlock Text="Progression"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="16"
+                                   Foreground="{DynamicResource MissionsText}"
+                                   FontWeight="Bold"
+                                   DockPanel.Dock="Top"
+                                   Padding="0,0,0,3"></TextBlock>
+                        
+                        
+                    </StackPanel>
+                    <Rectangle Fill="{DynamicResource AssistRed}"
+                               Height="1"
+                    />
+                        
+                        
+                    <Panel Margin="0,10">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="10"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <progression:AssistDailyDiamondControl Height="90"
+                                                                   Name="DiamondControl1"
+                                                                   DiamondNumber="1"/>
+                            <progression:AssistDailyDiamondControl Height="90"
+                                                                   Name="DiamondControl2"
+                                                                   DiamondNumber="2"/>
+                            <progression:AssistDailyDiamondControl Height="90"
+                                                                   Name="DiamondControl3"
+                                                                   DiamondNumber="3"/>
+                            <progression:AssistDailyDiamondControl Height="90"
+                                                                   Name="DiamondControl4"
+                                                                   
+                                                                   DiamondNumber="4"/>
+                        </StackPanel>
+                    </Panel>
+                        
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Spacing="9">
+                    <Image Height="23"
+                           Width="23"
+                           Source="/Resources/Icons/KC_Icon.png"></Image>
+                    <TextBlock Text="{Binding KCAmount, FallbackValue='0 KC'}"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="12"
+                               Foreground="{DynamicResource MissionsText}"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Padding="0,0,0,3"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Row="1" Margin="0,30,0,0">
+                <StackPanel>
+                    <TextBlock Text="Weekly Missions"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="12"
+                               Foreground="{DynamicResource MissionsText}"
+                               FontWeight="Bold"
+                               DockPanel.Dock="Top"
+                               Padding="0,0,0,3"></TextBlock>
+                    <Rectangle Fill="{DynamicResource AssistRed}"
+                               Height="1"
+                    />
+                        
+                        
+                    <ItemsControl ItemsSource="{Binding WeeklyMissionControls}"
+                                  Margin="0,5">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"
+                                            Spacing="6"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        
+                        
+                    </ItemsControl>
+                        
+                </StackPanel>
+            </Grid>
+            <Grid Row="2" Margin="0,40,0,0">
+                <StackPanel>
+                    <TextBlock Text="Daily Missions"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="12"
+                               Foreground="{DynamicResource MissionsText}"
+                               FontWeight="Bold"
+                               DockPanel.Dock="Top"
+                               Padding="0,0,0,3"></TextBlock>
+                    <Rectangle Fill="{DynamicResource AssistRed}"
+                               Height="1"
+                    />
+                        
+                        
+                    <ItemsControl ItemsSource="{Binding DailyMissionControls}"
+                                  Margin="0,9">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"
+                                            Spacing="6"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        
+                       
+                        
+                    </ItemsControl>
+                        
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

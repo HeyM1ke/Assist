@@ -37,6 +37,13 @@
             
            
         </Grid>
+        
+        <dashboard:ProgressionOverview VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Height="430"
+                                       Width="327"
+                                       Margin="10"/>
+        
         <dashboard:GameLaunchControlV2 VerticalAlignment="Bottom"
                                        Grid.Row="1"
                                        HorizontalAlignment="Stretch"></dashboard:GameLaunchControlV2>
