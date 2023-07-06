@@ -1,0 +1,65 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Dashboard"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:ArticleControlV2 Width="287"
+                                   Height="90"
+                                   ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt161ecbaee385fa9f/6494ea5f9a315866d81e7f34/Banner_-_VAL23_Ep7a1_Modal_1920x1080_No-text_article.jpg?"
+                                   ArticleCategory="ASSIST NEWS"
+                                   ArticleName="LEAGUES ARE NOW IN BETA"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ArticleControlV2">
+        <!-- Set Defaults -->
+        <Setter Property="Opacity" Value=".95"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="160, *"
+                      Background="Transparent">
+                    <asyncImageLoader:AdvancedImage Stretch="UniformToFill"
+                                                    CornerRadius="10"
+                                                    RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                    Source="{TemplateBinding ArticleImage}"
+                                                    />
+                    
+                    <StackPanel Grid.Column="1"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal"
+                                    
+                                    Spacing="6">
+                            <Image Source="/Resources/Icons/Assist_Logo_White.png"
+                                   Width="15"
+                                   Height="15"></Image>
+                            <TextBlock Text="{TemplateBinding ArticleCategory}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource AssistTextWhite}"
+                                       Opacity=".77"
+                                       FontWeight="ExtraBold"
+                            />
+                        </StackPanel>
+                        <TextBlock Text="{TemplateBinding ArticleName}"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AssistTextWhite}"
+                                   FontWeight="ExtraBold"
+                                   HorizontalAlignment="Stretch"
+                                   TextWrapping="WrapWithOverflow"
+                                   VerticalAlignment="Stretch"
+                        />
+                        
+                    </StackPanel>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|ArticleControlV2:pointerover">
+        <!-- Set Defaults -->
+        <Setter Property="Opacity" Value="1"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        
+    </Style>
+</Styles>

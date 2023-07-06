@@ -13,9 +13,11 @@
 
     <Style Selector="controls|FeaturedArticleControlV2">
         <!-- Set Defaults -->
+        <Setter Property="Opacity" Value=".95"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
-                <Border CornerRadius="{TemplateBinding CornerRadius}">
+                <Border CornerRadius="{TemplateBinding CornerRadius}"
+                        Background="Transparent">
                     <Grid>
                         <asyncImageLoader:AdvancedImage Source="{TemplateBinding ArticleImage}"
                                                         RenderOptions.BitmapInterpolationMode="HighQuality"
@@ -70,11 +72,13 @@
     <Style Selector="controls|FeaturedArticleControlV2:pointerover /template/asyncImageLoader|AdvancedImage">
         
         <Setter Property="Background" Value="{DynamicResource RedGrad}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <BlurEffect Radius="5"></BlurEffect>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Opacity" Value="1"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="controls|FeaturedArticleControlV2:pointerover">
+        
+        <Setter Property="Opacity" Value="1"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
     </Style>
 </Styles>
