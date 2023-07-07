@@ -49,7 +49,7 @@
                       Background="{StaticResource AssistGray}">
                     <TransitioningContentControl x:Name="ContentView" >
                         <TransitioningContentControl.PageTransition>
-                            <CrossFade Duration="0:00:00.250"/>
+                            <CrossFade Duration="0.25" />
                         </TransitioningContentControl.PageTransition>
                     </TransitioningContentControl>
                 </Grid>
@@ -57,7 +57,7 @@
                 
                 <TransitioningContentControl x:Name="PopupMaster" >
 	                <TransitioningContentControl.PageTransition>
-		                <CrossFade Duration="0:00:00.250"/>
+		                <CrossFade Duration="0.25" />
 	                </TransitioningContentControl.PageTransition>
                 </TransitioningContentControl>
 			</Grid>

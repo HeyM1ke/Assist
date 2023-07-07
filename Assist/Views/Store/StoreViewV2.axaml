@@ -1,0 +1,86 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="clr-namespace:Assist.Views.Store.Pages"
+             mc:Ignorable="d" 
+             d:DesignWidth="1125" 
+             d:DesignHeight="690"
+             x:Class="Assist.Views.Store.StoreViewV2">
+    <Grid RowDefinitions="635, *">
+        <Border Margin="10"
+                Height="617" Width="1026"
+                x:Name="ContentView"
+                HorizontalAlignment="Left">
+            <Grid>
+                <pages:PlayerStorePageView/>
+            </Grid>
+        </Border>
+        
+        <Grid Row="0" VerticalAlignment="Center"
+              HorizontalAlignment="Right"
+              Margin="10">
+            <StackPanel Spacing="15">
+                <Button Width="66"
+                        Content="Store"
+                        Height="66"></Button>
+                <Button Width="66"
+                        Content="Accessories"
+                        Height="66"></Button>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Row="1" x:Name="BalanceGrid" Margin="10,0">
+            <Rectangle Fill="{DynamicResource AssistRed}"
+                       Height="1"
+                       VerticalAlignment="Top"></Rectangle>
+            
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="20">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="12">
+                    <Image Height="32"
+                           Width="32"
+                           Source="/Resources/Icons/VP_Icon.png"></Image>
+                    <TextBlock Text="{Binding VPAmount, FallbackValue='0 VP'}"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="16"
+                               Foreground="{DynamicResource MissionsText}"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Padding="0,0,0,3"></TextBlock>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            Spacing="12">
+                    <Image Height="32"
+                           Width="32"
+                           Source="/Resources/Icons/KC_Icon.png"></Image>
+                    <TextBlock Text="{Binding KCAmount, FallbackValue='0 KC'}"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="16"
+                               Foreground="{DynamicResource MissionsText}"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Padding="0,0,0,3"></TextBlock>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            Spacing="12">
+                    <Image Height="32"
+                           Width="32"
+                           Source="/Resources/Icons/RP_Icon.png"></Image>
+                    <TextBlock Text="{Binding RPAmount, FallbackValue='0 RP'}"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="16"
+                               Foreground="{DynamicResource MissionsText}"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Padding="0,0,0,3"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

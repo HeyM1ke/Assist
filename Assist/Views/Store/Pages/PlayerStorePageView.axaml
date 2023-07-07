@@ -1,0 +1,34 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:store="clr-namespace:Assist.Controls.Store"
+             mc:Ignorable="d" d:DesignWidth="1026" d:DesignHeight="617"
+             x:Class="Assist.Views.Store.Pages.PlayerStorePageView">
+    <Grid ColumnDefinitions="*, Auto"
+          Margin="10">
+        <store:BundleStoreOfferV2 CornerRadius="10"
+                Width="701"
+                HorizontalAlignment="Left"
+                Background="Red"
+                ></store:BundleStoreOfferV2>
+        
+        <StackPanel Spacing="25"
+                    Grid.Column="1"
+                    Margin="31,0,0,0">
+            <StackPanel.Styles>
+                <Style Selector="store|SkinStoreOfferV2">
+                    <Setter Property="Width" Value="280"/>
+                    <Setter Property="Height" Value="130"/>
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ValorantGold}"></Setter>
+                </Style>
+            </StackPanel.Styles>
+            <store:SkinStoreOfferV2/>
+            <store:SkinStoreOfferV2/>
+            <store:SkinStoreOfferV2/>
+            <store:SkinStoreOfferV2/>
+        </StackPanel>
+    </Grid>
+</UserControl>
+
