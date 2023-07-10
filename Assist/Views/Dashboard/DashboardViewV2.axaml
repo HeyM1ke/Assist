@@ -12,8 +12,7 @@
               Margin="10">
             <StackPanel Spacing="25"
                         VerticalAlignment="Center"
-                        HorizontalAlignment="Left"
-                        Loaded="">
+                        HorizontalAlignment="Left">
                 <dashboard:FeaturedArticleControlV2 CornerRadius="10"
                                                     Width="750"
                                                     Height="315"

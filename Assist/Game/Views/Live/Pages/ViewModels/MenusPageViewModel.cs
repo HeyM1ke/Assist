@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
 using Assist.Game.Services;
+using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
 using Avalonia.Collections;
@@ -105,7 +106,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
             var currentUserBtn = CurrentUsers.ToList().Find(member => member.PlayerId == obj.data.presences[0].puuid);
             Log.Information($"QUEUE ID {data.queueId}");
-            QueueName = GetQueueId(data.queueId).ToUpper();
+            QueueName = QueueNames.DetermineQueueKey(data.queueId).ToUpper();
             PartySize = $"{data.partySize}/{data.maxPartySize}";
 
             if (data.maxPartySize > 5)
@@ -183,7 +184,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                                 {
                                     PlayerName = $"{gameName.game_name}#{gameName.game_tag}",
                                     PlayerId = member.Subject,
-                                    Playercard = $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png"
+                                    Playercard = $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png",
+                                    PlayerReady = true
                                 });
                             });
                             // This means this is a new Party Member

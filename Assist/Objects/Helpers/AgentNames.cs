@@ -31,7 +31,8 @@ namespace Assist.Objects.Helpers
             {"f94c3b30-42be-e959-889c-5aa313dba261", "Raze"},
             {"dade69b4-4f5a-8528-247b-219e5a1facd6", "Fade"},
             {"bb2a4828-46eb-8cd1-e765-15848195d751", "Neon"},
-            {"e370fa57-4757-3604-3648-499e1f642d3f", "Gekko"}
+            {"e370fa57-4757-3604-3648-499e1f642d3f", "Gekko"},
+            {"cc8b64c8-4b25-4ff9-6e7f-37b4da43d235", "Deadlock"},
         };
     }
 }

@@ -12,7 +12,7 @@
 	  <Grid Grid.ColumnSpan="2" x:Name="Background" Background="{DynamicResource AssistBackground}">
           
           
-          <Image Source="/Resources/Game_Background.png" Stretch="UniformToFill"></Image>
+          <Image Source="/Resources/TDM_Background.png" Stretch="UniformToFill"></Image>
           <Rectangle Fill="black" Opacity=".7"></Rectangle>
       </Grid>
 

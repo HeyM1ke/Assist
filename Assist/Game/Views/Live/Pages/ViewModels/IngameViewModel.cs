@@ -415,7 +415,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             {
                 Log.Information("Getting queue data for ID of: " + Match.MatchData.QueueID.ToLower());
 
-                var queueName = await DetermineQueueKey(Match.MatchData.QueueID.ToLower());
+                var queueName =  QueueNames.DetermineQueueKey(Match.MatchData.QueueID.ToLower());
                 
                 // Check if the Queue is Deathmatch.
                 IsDeathmatch = Match.MatchData.QueueID.ToLower() == "deathmatch";
@@ -555,35 +555,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
         }
 
-        private async Task<string> DetermineQueueKey(string queueId)
-        {
-            switch (queueId)
-            {
-                case "ggteam":
-                    return "Escalation";
-                case "deathmatch":
-                    return "Deathmatch";
-                case "spikerush":
-                    return "SpikeRush";
-                case "competitive":
-                    return "Competitive";
-                case "unrated":
-                    return "Unrated";
-                case "onefa":
-                    return "Replication";
-                case "swiftplay":
-                    return "Swiftplay";
-                case "snowball":
-                    return "Snowball";
-                case "lotus":
-                    return "Lotus";
-                case "premier-seasonmatch":
-                    return "Premier";
-                default:
-                    return "VALORANT";
-            }
-
-        }
+        
 
         public void UnsubscribeFromEvents()
         {
