@@ -10,6 +10,7 @@
 		<StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
 			<Image Source="../../Resources/Icons/AssistText_Temp.png"
+			       RenderOptions.BitmapInterpolationMode="MediumQuality"
 			       Height="40"/>
 			<Label FontFamily="{StaticResource WorkSans}"
 			       FontWeight="Medium"

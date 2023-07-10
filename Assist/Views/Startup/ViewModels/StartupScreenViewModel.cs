@@ -232,7 +232,7 @@ namespace Assist.Views.Startup.ViewModels
         {
 #if (!DEBUG)
 
-            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.WinNT)
+            if (OperatingSystem.IsWindows())
             {
                 try
                 {
@@ -256,7 +256,7 @@ namespace Assist.Views.Startup.ViewModels
                 }
             }
 
-            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.OSX)
+            if (OperatingSystem.IsMacOS())
             {
                 try
                 {
@@ -278,7 +278,7 @@ return false;
                 }
             }
 
-            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.Linux)
+            if (OperatingSystem.IsLinux())
             {
                 try
                 {

@@ -38,12 +38,13 @@
                                       
                                       FontSize="24"></TextBlock>
                            
-                           <TextBlock Text="Version 1.3.0"
+                           <TextBlock 
                                       FontFamily="{StaticResource Inter}"
                                       FontWeight="SemiBold"
                                       VerticalAlignment="Center"
                                       TextAlignment="Center"
                                       Foreground="#50FFFFFF"
+                                      Loaded="Control_OnLoaded"
                                       FontSize="12"></TextBlock>
                        </StackPanel>
                         <TabControl Classes="Assist">
@@ -131,6 +132,7 @@
                                             <CheckBox x:Name="EnableGPUBox"
                                                       HorizontalAlignment="Right"
                                                       VerticalAlignment="Center"
+                                                      IsVisible="False"
                                                       Initialized="EnableGPUBox_OnInitialized"
                                                       Checked="EnableGPUBox_OnChecked"
                                                       Unchecked="EnableGPUBox_OnUnchecked"

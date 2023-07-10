@@ -20,7 +20,8 @@
 					  HorizontalAlignment="Left"
 					  Grid.Column="0">
 				  <Grid>
-					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerAgentIcon}"/>
+					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerAgentIcon}"
+					                                  RenderOptions.BitmapInterpolationMode="MediumQuality"/>
 					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerRankIcon}"
 													  Width="30"
 													  Height="30"

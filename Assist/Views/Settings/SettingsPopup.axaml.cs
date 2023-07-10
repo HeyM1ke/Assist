@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Assist.Game.Views.Authentication;
 using Assist.Game.Views.LinkRiot;
 using Assist.Objects.Enums;
@@ -137,5 +138,13 @@ public partial class SettingsPopup : UserControl
     private void LinkRiotAccBtn_Click(object? sender, RoutedEventArgs e)
     {
         PopupSystem.SpawnCustomPopup(new LinkRiotPopupView());
+    }
+
+    private void Control_OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        
+        var tb = sender as TextBlock;
+
+        tb.Text = $"Version: {Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version}";
     }
 }

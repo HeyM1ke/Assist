@@ -30,6 +30,7 @@
 		 <Grid>
 			 <asyncImageLoader:AdvancedImage Source="{Binding AssistDisplayImage}"
 			                                 CornerRadius="300"
+			                                 RenderOptions.BitmapInterpolationMode="MediumQuality"
 			                                 Stretch="Uniform"></asyncImageLoader:AdvancedImage>
 			 <Panel VerticalAlignment="Bottom"
 			        HorizontalAlignment="Right"
