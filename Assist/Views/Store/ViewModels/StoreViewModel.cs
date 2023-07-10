@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Controls.Store;
 using Assist.ViewModels;
 using ReactiveUI;
 using ValNet.Core.Store;
@@ -28,6 +30,14 @@ namespace Assist.Views.Store.ViewModels
             set => this.RaiseAndSetIfChanged(ref _accountVp, value);
         }
         
+        private string _accountKc = "";
+
+        public string AccountKC
+        {
+            get => _accountKc;
+            set => this.RaiseAndSetIfChanged(ref _accountKc, value);
+        }
+        
         private string _accountRp = "";
 
         public string AccountRP
@@ -35,7 +45,38 @@ namespace Assist.Views.Store.ViewModels
             get => _accountRp;
             set => this.RaiseAndSetIfChanged(ref _accountRp, value);
         }
+
+        private ObservableCollection<SkinStoreOfferV2> _skinOffers = new ObservableCollection<SkinStoreOfferV2>();
+
+        public ObservableCollection<SkinStoreOfferV2> SkinOffers
+        {
+            get => _skinOffers;
+            set => this.RaiseAndSetIfChanged(ref _skinOffers, value);
+        }
+
+        private string _bundleName = "";
+
+        public string BundleName
+        {
+            get => _bundleName;
+            set => this.RaiseAndSetIfChanged(ref _bundleName, value);
+        }
+
+        private string _bundlePrice = "";
+
+        public string BundlePrice
+        {
+            get => _bundlePrice;
+            set => this.RaiseAndSetIfChanged(ref _bundlePrice, value);
+        }
         
+        private string _bundleImage = "";
+
+        public string BundleImage
+        {
+            get => _bundleImage;
+            set => this.RaiseAndSetIfChanged(ref _bundleImage, value);
+        }
         
         static Dictionary<string, ValUserStore> _UserStores = new Dictionary<string, ValUserStore>();
         public static Dictionary<string, ValWallet> _UserWallets = new Dictionary<string, ValWallet>();
@@ -51,7 +92,8 @@ namespace Assist.Views.Store.ViewModels
                 if (_UserWallets.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
                 {
                     AccountVP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.ValorantPoints:n0}";
-                    AccountRP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.RadianitePoints:n0}";    
+                    AccountRP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.RadianitePoints:n0}";  
+                    AccountKC = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.KingdomCredits:n0}";    
                 }
                 
                 NightMarketEnabled = _UserStores[AssistApplication.Current.CurrentUser.UserData.sub].BonusStore is not null;
@@ -77,7 +119,8 @@ namespace Assist.Views.Store.ViewModels
             if (_UserWallets.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
             {
                 AccountVP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.ValorantPoints:n0}";
-                AccountRP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.RadianitePoints:n0}";    
+                AccountRP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.RadianitePoints:n0}";
+                AccountKC = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.KingdomCredits:n0}";    
             }
             
             _UserStores.Add(AssistApplication.Current.CurrentUser.UserData.sub, r);
@@ -129,6 +172,67 @@ namespace Assist.Views.Store.ViewModels
             }
 
             return thisList;
+        }
+
+        public async Task Setup()
+        {
+            var store = await GetPlayerStore();
+            SetupBundle(store);
+            CreateSkinOfferControls(store);
+        }
+
+        public async Task GetPlayerWallet()
+        {
+            try
+            {
+                if (_UserWallets.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
+                {
+                    AccountVP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.ValorantPoints:n0}";
+                    AccountRP = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.RadianitePoints:n0}";  
+                    AccountKC = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.KingdomCredits:n0}";  
+                    return;
+                }
+                var t = await AssistApplication.Current.CurrentUser.Store.GetPlayerWallet();
+                AccountVP = $"{t.Balances.ValorantPoints:n0}";
+                AccountRP = $"{t.Balances.RadianitePoints:n0}";  
+                AccountKC = $"{t.Balances.KingdomCredits:n0}";    
+            }
+            catch (Exception e)
+            {
+                
+            }
+        }
+
+        private async void SetupBundle(ValUserStore? store)
+        {
+            if(store.FeaturedBundle.Bundle.DataAssetID == null)
+                return;
+
+            var bData = await AssistApplication.ApiService.GetBundleAsync(store.FeaturedBundle.Bundle.DataAssetID);
+
+            BundleName = bData.Name.ToUpper();
+            BundleImage = bData.DisplayIcon;
+            var price = store.FeaturedBundle.Bundle.Items.Sum(x => x.DiscountedPrice);
+            BundlePrice = $"{price:n0}";
+        }
+        
+        private async void CreateSkinOfferControls(ValUserStore? store)
+        {
+            for (int i = 0; i < store.SkinsPanelLayout.SingleItemOffers.Count; i++)
+            {
+                var OfferId = store.SkinsPanelLayout.SingleItemOffers[i];
+                var sData = await AssistApplication.ApiService.GetWeaponSkinAsync(OfferId);
+                var price = await AssistApplication.ApiService.GetWeaponSkinPriceAsync(OfferId);
+                var skinOfferControl = new SkinStoreOfferV2()
+                {
+                    SkinId = OfferId,
+                    SkinImage = sData.DisplayIcon,
+                    SkinName = sData.DisplayName,
+                    SkinCost = price 
+                };
+
+               SkinOffers.Add(skinOfferControl);
+            }
         }
     }
 }

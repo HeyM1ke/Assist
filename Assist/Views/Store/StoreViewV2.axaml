@@ -6,6 +6,7 @@
              mc:Ignorable="d" 
              d:DesignWidth="1125" 
              d:DesignHeight="690"
+             Initialized="StoreView_Init"
              x:Class="Assist.Views.Store.StoreViewV2">
     <Grid RowDefinitions="635, *">
         <Border Margin="10"
@@ -19,6 +20,8 @@
         
         <Grid Row="0" VerticalAlignment="Center"
               HorizontalAlignment="Right"
+              IsEnabled="False"
+              IsVisible="False"
               Margin="10">
             <StackPanel Spacing="15">
                 <Button Width="66"
@@ -44,7 +47,7 @@
                     <Image Height="32"
                            Width="32"
                            Source="/Resources/Icons/VP_Icon.png"></Image>
-                    <TextBlock Text="{Binding VPAmount, FallbackValue='0 VP'}"
+                    <TextBlock Text="{Binding AccountVP, FallbackValue='0 VP'}"
                                FontFamily="{StaticResource Inter}"
                                FontSize="16"
                                Foreground="{DynamicResource MissionsText}"
@@ -58,7 +61,7 @@
                     <Image Height="32"
                            Width="32"
                            Source="/Resources/Icons/KC_Icon.png"></Image>
-                    <TextBlock Text="{Binding KCAmount, FallbackValue='0 KC'}"
+                    <TextBlock Text="{Binding AccountKC, FallbackValue='0 KC'}"
                                FontFamily="{StaticResource Inter}"
                                FontSize="16"
                                Foreground="{DynamicResource MissionsText}"
@@ -72,7 +75,7 @@
                     <Image Height="32"
                            Width="32"
                            Source="/Resources/Icons/RP_Icon.png"></Image>
-                    <TextBlock Text="{Binding RPAmount, FallbackValue='0 RP'}"
+                    <TextBlock Text="{Binding AccountRP, FallbackValue='0 RP'}"
                                FontFamily="{StaticResource Inter}"
                                FontSize="16"
                                Foreground="{DynamicResource MissionsText}"

@@ -6,6 +6,10 @@
         <controls:SkinStoreOfferV2 Width="280"
                                    Height="130"
                                    CornerRadius="10"
+                                   SkinCost=""
+                                   SkinId=""
+                                   SkinName=""
+                                   SkinImage=""
                                    BorderBrush="{DynamicResource ValorantRadiant}"/>
     </Design.PreviewWith>
 
@@ -23,6 +27,7 @@
                         <Grid x:Name="InfoGrid" Row="0">
                             <Image Width="27"
                                    Height="27"
+                                   IsVisible="False"
                                    Source="/Resources/Icons/KC_Icon.png"
                                    HorizontalAlignment="Left"></Image>
                             
@@ -32,7 +37,7 @@
                                 <Image Height="18"
                                        Width="18"
                                        Source="/Resources/Icons/VP_Icon.png"></Image>
-                                <TextBlock Text="{Binding VPAmount, FallbackValue='0 VP'}"
+                                <TextBlock Text="{TemplateBinding SkinCost}"
                                            FontFamily="{StaticResource Inter}"
                                            FontSize="13"
                                            Foreground="{DynamicResource MissionsText}"
@@ -43,10 +48,10 @@
                         </Grid>
                         <Grid x:Name="PictureGrid" Row="1">
                             <asyncImageLoader:AdvancedImage x:Name="SkinImage"
-                                                            Source="https://media.valorant-api.com/weaponskinchromas/e6ac3d3e-4138-436d-4d3d-4eb4043353ec/fullrender.png"/>
+                                                            Source="{TemplateBinding SkinImage}"/>
                         </Grid>
                         <Grid x:Name="NameGrid" Row="2">
-                            <TextBlock Text="Gravitational Uranium Neuroblaster Operator" 
+                            <TextBlock Text="{TemplateBinding SkinName}" 
                                        TextWrapping="WrapWithOverflow"
                                        VerticalAlignment="Bottom"
                                        FontFamily="{StaticResource Inter}"
