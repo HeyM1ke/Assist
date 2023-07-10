@@ -14,7 +14,8 @@ namespace Assist.Services.Popup
 {
     public class PopupSystem
     {
-        public static TransitioningContentControl ContentControl;
+        public static PopupMaster PopupController;
+        public static TransitioningContentControl ContentControl = new TransitioningContentControl();
         public static void SpawnPopup(PopupSettings settings)
         {
             var popup = new BasicPopup();
@@ -30,6 +31,12 @@ namespace Assist.Services.Popup
         {
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
+                if (PopupController != null)
+                {
+                    Log.Information("Killing popups on popupcontrioller on Main Window");
+                    PopupController.Children.Clear();
+                }
+                
                 
                 if (ContentControl != null)
                 {
@@ -39,14 +46,16 @@ namespace Assist.Services.Popup
             });
 
         }
-        public static void SpawnCustomPopup(UserControl control)
+        public static void cha(UserControl control)
         {
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                //PopupController.Children.Add(control);
-                ContentControl.Content = control;
+                control.BeginInit();
+                PopupController.Children.Add(control);
             });
         }
+        
+        public static void SpawnCustomPopup(UserControl c) => ContentControl.Content = c;
     }
 
     public class PopupSettings

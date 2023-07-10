@@ -32,7 +32,8 @@ namespace Assist
         private void MainWindow_Initialized(object? sender, EventArgs e)
         {
             MainWindowContentController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
-            PopupSystem.ContentControl = this.FindControl<TransitioningContentControl>("PopupMaster");
+            
+            PopupSystem.PopupController = this.FindControl<PopupMaster>("PopupMasterController");
         }
 
         public void ChangeResolution(EResolution res)
@@ -43,6 +44,11 @@ namespace Assist
         public void ChangeGameResolution(EResolution res)
         {
             _viewModel.ChangeResolution(res);
+        }
+
+        private void PopupMaster_OnLoaded(object? sender, RoutedEventArgs e)
+        {
+            PopupSystem.ContentControl = sender as TransitioningContentControl;
         }
     }
 }

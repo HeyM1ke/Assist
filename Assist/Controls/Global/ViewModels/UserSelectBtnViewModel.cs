@@ -10,7 +10,7 @@ namespace Assist.Controls.Global.ViewModels
     {
         public string ProfilePicture
         {
-            get => $"https://cdn.assistapp.dev/PlayerCards/{Profile.PlayerCardId}_DisplayIcon.png";
+            get => $"https://content.assistapp.dev/playercards/{Profile.PlayerCardId}_DisplayIcon.png";
         }
         public bool isExpired => _profile.isExpired;
         public bool IsDefault => false;

@@ -20,7 +20,7 @@ public class AccountManagementUserButtonViewModel : ViewModelBase
     
     public string ProfilePicture
     {
-        get => $"https://cdn.assistapp.dev/PlayerCards/{Profile.PlayerCardId}_DisplayIcon.png";
+        get => $"https://content.assistapp.dev/playercards/{Profile.PlayerCardId}_DisplayIcon.png";
     }
     public bool isExpired => _profile.isExpired;
     public bool IsDefault => AssistSettings.Current.DefaultAccount == Profile.ProfileUuid;

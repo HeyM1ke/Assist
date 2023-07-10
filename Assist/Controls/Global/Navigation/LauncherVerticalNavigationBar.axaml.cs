@@ -77,7 +77,7 @@ public partial class LauncherVerticalNavigationBar : UserControl
             return;
         var t = this.FindControl<AccountManagementNavBtn>("AccountsBtn");
 
-        t.PlayercardImage = $"https://cdn.assistapp.dev/PlayerCards/{AssistApplication.Current.CurrentProfile.PlayerCardId}_DisplayIcon.png";
+        t.PlayercardImage = $"https://content.assistapp.dev/playercards/{AssistApplication.Current.CurrentProfile.PlayerCardId}_DisplayIcon.png";
     }
 
     private void SettingsBtn_OnClick(object? sender, RoutedEventArgs e)

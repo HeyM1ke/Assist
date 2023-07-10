@@ -73,10 +73,12 @@ namespace Assist.Views.Startup.ViewModels
             if (IsValorantRunning())
             {
                 //TODO THIS IS BROKEN
-                /*var menuPopup = new GamemodeWarningPopup();
-                menuPopup.WarningClosing += GamemodePopupClose;
-                PopupSystem.SpawnCustomPopup(menuPopup);
-                return;*/
+                
+                /*PopupSystem.SpawnCustomPopup(new GamemodeWarningPopup()
+                {
+                    WarningClosing = GamemodePopupClose
+                });*/
+                
                 
                 MainWindowContentController.Change(new GameInitialView());
                 return;
