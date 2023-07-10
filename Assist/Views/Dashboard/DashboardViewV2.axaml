@@ -12,26 +12,21 @@
               Margin="10">
             <StackPanel Spacing="25"
                         VerticalAlignment="Center"
-                        HorizontalAlignment="Left">
+                        HorizontalAlignment="Left"
+                        Loaded="">
                 <dashboard:FeaturedArticleControlV2 CornerRadius="10"
-                                                    ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt40eddb08d5a5317f/6488f5d048a8ffd507476531/7-1-TDM-Thumbnail-V4_Banner.jpg"
-                                                    ArticleName="Welcome to VALORANT TDM"
-                                                    ArticleCategory="GAME UPDATE"
                                                     Width="750"
-                                                    Height="315"/>
+                                                    Height="315"
+                                                    Name="FeaturedArticle"/>
                 <UniformGrid Rows="1">
                     <dashboard:ArticleControlV2 CornerRadius="10"
-                                                ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt40eddb08d5a5317f/6488f5d048a8ffd507476531/7-1-TDM-Thumbnail-V4_Banner.jpg"
-                                                ArticleName="Welcome to VALORANT TDM"
-                                                ArticleCategory="GAME UPDATE"
                                                 Width="287"
-                                                Height="90"/>
+                                                Height="90"
+                                                Name="SmallArticle1"/>
                     <dashboard:ArticleControlV2 CornerRadius="10"
-                                                ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt40eddb08d5a5317f/6488f5d048a8ffd507476531/7-1-TDM-Thumbnail-V4_Banner.jpg"
-                                                ArticleName="Welcome to VALORANT TDM"
-                                                ArticleCategory="GAME UPDATE"
                                                 Width="287"
-                                                Height="90"/>
+                                                Height="90"
+                                                Name="SmallArticle2"/>
                 </UniformGrid>
             </StackPanel>
             

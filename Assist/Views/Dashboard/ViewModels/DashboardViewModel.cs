@@ -410,5 +410,6 @@ namespace Assist.Views.Dashboard.ViewModels
 
             return controls;
         }
+        
     }
 }
