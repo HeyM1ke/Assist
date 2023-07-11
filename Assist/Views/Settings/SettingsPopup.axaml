@@ -72,7 +72,7 @@
                                                       SelectedIndex="0"
                                                       Width="200" 
                                                       HorizontalAlignment="Right"
-                                                      Initialized="LanguageBox_OnInitialized"
+                                                      Loaded="LanguageBox_Loaded"
                                                       SelectionChanged="LanguageBox_OnSelectionChanged">
                                                 <ComboBoxItem Content="English"></ComboBoxItem>
                                                 <ComboBoxItem Content="Spanish"></ComboBoxItem>
@@ -99,7 +99,7 @@
                                                        ></TextBlock>
                                              <ComboBox x:Name="WindowSizeBox"
                                                        HorizontalAlignment="Right"
-                                                       Initialized="WindowSizeBox_OnInitialized"
+                                                       Initialized="WindowSizeBox_Init"
                                                        SelectedIndex="2"
                                                        SelectionChanged="WindowSizeBox_OnSelectionChanged"
                                                        Width="200">
@@ -111,7 +111,8 @@
                                                  <ComboBoxItem Content="2083 x 1240"></ComboBoxItem>
                                              </ComboBox>
                                         </Panel>
-                                        <Panel HorizontalAlignment="Stretch">
+                                        <Panel HorizontalAlignment="Stretch"
+                                               IsVisible="False">
                                            <StackPanel>
                                                <TextBlock Text="{x:Static p:Resources.Settings_EnableGpu}"
                                                           FontFamily="{StaticResource Inter}"
@@ -133,7 +134,7 @@
                                                       HorizontalAlignment="Right"
                                                       VerticalAlignment="Center"
                                                       IsVisible="False"
-                                                      Initialized="EnableGPUBox_OnInitialized"
+                                                      Loaded="EnableGPUBox_Loaded"
                                                       Checked="EnableGPUBox_OnChecked"
                                                       Unchecked="EnableGPUBox_OnUnchecked"
                                                      >
@@ -262,7 +263,6 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"
                             Click="CloseBtn_Click"
-                            
                             HorizontalContentAlignment="Center"
                             ></Button>
                 </Grid>

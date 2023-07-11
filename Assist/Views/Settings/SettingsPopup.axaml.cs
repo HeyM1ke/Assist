@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Assist.Game.Views.Authentication;
 using Assist.Game.Views.LinkRiot;
@@ -14,6 +15,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Serilog;
 
 namespace Assist.Views.Settings;
 
@@ -37,34 +39,52 @@ public partial class SettingsPopup : UserControl
         PopupSystem.KillPopups();
     }
     
-    private void WindowSizeBox_OnInitialized(object? sender, EventArgs e)
+    private void WindowSizeBox_Init(object? sender, EventArgs e)
     {
-        if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            Window mainRef = desktop.MainWindow;
+        Log.Information("Window loaded");
+        
+            Log.Information("Is main window ok?");
+
+            if (AssistApplication.CurrentApplication.MainWindow is null)
+            {
+                Log.Information("Main Window Is nulL");
+                return;
+            }
+            
+            Window mainRef = AssistApplication.CurrentApplication.MainWindow;
+            Log.Information("Seems so");
+            Log.Information("ComboBox Null?");
             var comboBox = sender as ComboBox;
+            Log.Information("ComboBox Nope doesnt seem so");
+            Log.Information("Checking MainRef");
             if (mainRef.Screens.Primary.WorkingArea.Height <= 1080)
             {
-                var list = comboBox.ItemsSource as AvaloniaList<Object>;
+                Log.Information("Screen is 1080p or less");
+                var li = comboBox.Items.Select(x => x as ComboBoxItem).ToList();
+                li.RemoveAt(li.Count-1);
+                li.RemoveAt(li.Count-1);
+                comboBox.Items.Clear();
+                comboBox.ItemsSource = li;
+            }
 
-                list.RemoveAt(list.Count-2);
-
-                comboBox.ItemsSource = list;
+            if ((int)AssistSettings.Current.SelectedResolution < -2 || (int)AssistSettings.Current.SelectedResolution > 3)
+            {
+                AssistSettings.Current.SelectedResolution = EResolution.R720;
             }
             
             comboBox.SelectedIndex = (int)AssistSettings.Current.SelectedResolution + 2;
-        }
+            load = true;
         
         
     }
 
-    private void EnableGPUBox_OnInitialized(object? sender, EventArgs e)
+    private void EnableGPUBox_Loaded(object? sender, RoutedEventArgs e)
     {
         var comboBox = sender as CheckBox;
         comboBox.IsChecked = AssistSettings.Current.EglEnabled;
     }
 
-    private void LanguageBox_OnInitialized(object? sender, EventArgs e)
+    private void LanguageBox_Loaded(object? sender, RoutedEventArgs e)
     {
         var langBox = sender as ComboBox;
         langBox.SelectedIndex = (int)AssistSettings.Current.Language;
@@ -90,8 +110,7 @@ public partial class SettingsPopup : UserControl
     private void WindowSizeBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (!load)
-        {
-            load = true; return;
+        { return;
         }
 
 
@@ -100,6 +119,7 @@ public partial class SettingsPopup : UserControl
         {
             AssistApplication.Current.ChangeMainWindowResolution((EResolution)(_resComboBox.SelectedIndex - 2));
             AssistSettings.Current.SelectedResolution = (EResolution)(_resComboBox.SelectedIndex - 2);
+            AssistSettings.Save();
             AssistApplication.Current.OpenMainWindowToSettings();
         }
         

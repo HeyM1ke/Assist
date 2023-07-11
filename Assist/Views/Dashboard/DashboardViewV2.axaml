@@ -9,6 +9,7 @@
              x:Class="Assist.Views.Dashboard.DashboardViewV2">
     <Grid RowDefinitions="*, 85">
         <Grid Name="ArticlePanel" HorizontalAlignment="Left"
+              VerticalAlignment="Center"
               Margin="10">
             <StackPanel Spacing="25"
                         VerticalAlignment="Center"
@@ -34,7 +35,7 @@
         
         <dashboard:ProgressionOverview VerticalAlignment="Center"
                                        HorizontalAlignment="Right"
-                                       Height="430"
+                                       Height="280"
                                        Width="327"
                                        Margin="10"/>
         

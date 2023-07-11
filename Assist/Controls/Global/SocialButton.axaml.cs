@@ -10,7 +10,7 @@ namespace Assist.Controls.Global
     public class SocialButton : Button
     {
         public static readonly StyledProperty<IImage?> SourceProperty = AvaloniaProperty.Register<SocialButton, IImage?>("Source");
-        public static readonly StyledProperty<string?> LinkToProperty = AvaloniaProperty.Register<SocialButton, string?>("LinkTo", "https://assistapp.dev/");
+        public static readonly StyledProperty<string?> LinkToProperty = AvaloniaProperty.Register<SocialButton, string?>("LinkTo");
 
         public SocialButton()
         {

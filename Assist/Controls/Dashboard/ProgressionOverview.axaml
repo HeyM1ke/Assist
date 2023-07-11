@@ -5,7 +5,7 @@
              xmlns:progression="clr-namespace:Assist.Controls.Progression"
              mc:Ignorable="d" 
              d:DesignWidth="327"
-             d:DesignHeight="430"
+             d:DesignHeight="320"
              Initialized="ProgressionOverview_Init"
              x:Class="Assist.Controls.Dashboard.ProgressionOverview">
     <Border CornerRadius="10"
@@ -99,7 +99,8 @@
                         
                 </StackPanel>
             </Grid>
-            <Grid Row="2" Margin="0,40,0,0">
+            <Grid Row="2" Margin="0,40,0,0"
+                  IsVisible="False">
                 <StackPanel>
                     <TextBlock Text="Daily Missions"
                                FontFamily="{StaticResource Inter}"

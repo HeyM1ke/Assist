@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
-             Width="1125"
+             Width="1190"
              Height="690"
              x:Class="Assist.Controls.Global.Popup.GameLaunchSettingsPopup"
              Initialized="GameLaunch_Init">
