@@ -88,7 +88,4 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Game\Themes\Default.axaml" />
-  </ItemGroup>
 </Project>

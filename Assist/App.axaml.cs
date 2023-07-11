@@ -42,6 +42,7 @@ namespace Assist
             AvaloniaXamlLoader.Load(this);
             SetupLogger();
             SetupUpdator();
+            ReadSettings();
             Log.Information("Starting application");
             Log.Information($"Getting Platform... WINDOWS: {OperatingSystem.IsWindows()} |  MACOS: {OperatingSystem.IsMacOS()} | LINUX: {OperatingSystem.IsLinux()} ");
         }
@@ -122,6 +123,19 @@ namespace Assist
                 Thread.CurrentThread.CurrentCulture = culture;
                 Thread.CurrentThread.CurrentUICulture = culture;
             });
+        }
+
+        public static void ReadSettings()
+        {
+            try
+            {
+                var settingsContent = File.ReadAllText(AssistSettings.SettingsFilePath);
+                AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(settingsContent);
+            }
+            catch (Exception e)
+            {
+                Log.Fatal("Failed to Read Settings, Acting like Fresh Install.");
+            }
         }
 
         public static void SetupUpdator()

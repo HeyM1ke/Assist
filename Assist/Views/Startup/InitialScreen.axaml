@@ -5,7 +5,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Views.Startup.InitialScreen"
              Background="{StaticResource AssistGray}"
-             Initialized="StyledElement_OnInitialized">
+             Initialized="StyledElement_OnInitialized"
+             Loaded="InitialScreen_Loaded">
 	<Grid>
 		<StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">

@@ -21,8 +21,6 @@ namespace Assist
         {
             try
             {
-                var settingsContent = File.ReadAllText(AssistSettings.SettingsFilePath);
-                AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(settingsContent);
                 BuildAvaloniaApp()
                     .StartWithClassicDesktopLifetime(args);
             }
