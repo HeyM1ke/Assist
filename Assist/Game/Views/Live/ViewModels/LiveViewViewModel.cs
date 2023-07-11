@@ -55,7 +55,7 @@ namespace Assist.Game.Views.Live.ViewModels
         {
             LiveViewNavigationController.Change(new UnkownPageView());
 
-            //await AttemptCurrentPage();
+            
 
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += async delegate (PresenceV4Message message)
             {
@@ -64,6 +64,7 @@ namespace Assist.Game.Views.Live.ViewModels
                 await DeterminePage(pres, message);
             };
 
+            await AttemptCurrentPage();
         }
 
         private async Task AttemptCurrentPage()
@@ -116,7 +117,7 @@ namespace Assist.Game.Views.Live.ViewModels
 
         private async Task DeterminePage(PlayerPresence dataMessage, ChatV4PresenceObj.Presence fullMessage = null)
         {
-            /*Dispatcher.UIThread.InvokeAsync(() =>
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
                 switch (dataMessage!.sessionLoopState)
             {
@@ -141,16 +142,7 @@ namespace Assist.Game.Views.Live.ViewModels
                 default:
                     break;
             }
-            });*/
-        }
-
-        public async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)
-        {
-            if(string.IsNullOrEmpty(data.Private))
-                return new PlayerPresence();
-            byte[] stringData = Convert.FromBase64String(data.Private);
-            string decodedString = Encoding.UTF8.GetString(stringData);
-            return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+            });
         }
     }
 }

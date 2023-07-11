@@ -14,6 +14,7 @@ using Assist.Game.Models;
 using Assist.Game.Views.Live.Pages;
 using Assist.Objects.Helpers;
 using Assist.Settings;
+using ValNet.Objects.Local;
 using YamlDotNet.Core;
 
 namespace Assist.Game.Services
@@ -400,7 +401,7 @@ namespace Assist.Game.Services
         }
 
 
-        private async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)
+        private async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
         {
             if (string.IsNullOrEmpty(data.Private))
                 return new PlayerPresence();

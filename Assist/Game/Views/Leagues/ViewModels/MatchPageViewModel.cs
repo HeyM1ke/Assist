@@ -589,7 +589,7 @@ public class MatchPageViewModel : ViewModelBase
         }
     }
 
-    public async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)
+    public async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
     {
         if (string.IsNullOrEmpty(data.Private))
             return new PlayerPresence();

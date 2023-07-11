@@ -7,6 +7,7 @@
                                            ArticleImage="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt40eddb08d5a5317f/6488f5d048a8ffd507476531/7-1-TDM-Thumbnail-V4_Banner.jpg"
                                            ArticleName="Welcome to VALORANT TDM"
                                            ArticleCategory="GAME UPDATE"
+                                           ArticleLink=""
                                            Width="750"
                                            Height="315"/>
     </Design.PreviewWith>

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Assist.Game.Views.Profile.ViewModels;
 using Assist.ViewModels;
@@ -72,7 +73,10 @@ public class SettingsPopupViewModel : ViewModelBase
         
         DisplayName = ProfilePageViewModel.ProfileData.DisplayName;
         DisplayImage = ProfilePageViewModel.ProfileData.ProfileImage;
-        AccountEmail = AssistApplication.Current.AssistUser.Account.AccountInfo.email;
+        string emailHidePattern = @"(?<=[\w]{1})[\w\-._\+%]*(?=[\w]{1}@)";
+        string hiddenEmail = Regex.Replace(AssistApplication.Current.AssistUser.Account.AccountInfo.email, emailHidePattern, m => new string('*', m.Length));
+        
+        AccountEmail = hiddenEmail;
         RiotAccountLinked = ProfilePageViewModel.ProfileData.LinkedRiotAccounts.Count > 0;
 
         if (RiotAccountLinked)

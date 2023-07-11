@@ -4,12 +4,12 @@ using Avalonia.Controls.Primitives;
 
 namespace Assist.Controls.Dashboard;
 
-public class FeaturedArticleControlV2 : TemplatedControl
+public class FeaturedArticleControlV2 : Button
 {
     public static readonly StyledProperty<string?> ArticleImageProperty = AvaloniaProperty.Register<FeaturedArticleControlV2, string?>("ArticleImage");
     public static readonly StyledProperty<string?> ArticleNameProperty = AvaloniaProperty.Register<FeaturedArticleControlV2, string?>("ArticleName");
     public static readonly StyledProperty<string?> ArticleCategoryProperty = AvaloniaProperty.Register<FeaturedArticleControlV2, string?>("ArticleCategory");
-
+    
     public string? ArticleImage
     {
         get { return (string?)GetValue(ArticleImageProperty); }
@@ -27,4 +27,6 @@ public class FeaturedArticleControlV2 : TemplatedControl
         get { return (string?)GetValue(ArticleCategoryProperty); }
         set { SetValue(ArticleCategoryProperty, value); }
     }
+
+    public string? ArticleLink { get; set; }
 }

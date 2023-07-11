@@ -386,15 +386,7 @@ public class MatchService
     #endregion
 
     #region Private Methods
-
-    public async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)
-    {
-        if (string.IsNullOrEmpty(data.Private))
-            return new PlayerPresence();
-        byte[] stringData = Convert.FromBase64String(data.Private);
-        string decodedString = Encoding.UTF8.GetString(stringData);
-        return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
-    }
+    
 
     public async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
     {

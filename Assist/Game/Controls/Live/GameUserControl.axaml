@@ -135,6 +135,7 @@
 			<MenuItem Header="Open TrackerGG"
 			          FontFamily="{StaticResource WorkSans}"
 			          FontWeight="Medium"
+			          IsEnabled="{Binding TrackerEnabled}"
 			          IsVisible="{Binding !PlayerIsHidden}"
 			          Click="OpenTracker_Click"
 			>

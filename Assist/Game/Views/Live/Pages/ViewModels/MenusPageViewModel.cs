@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,49 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 RiotWebsocketServiceOnUserPresenceMessageEvent(start);
             }
         }
+        
+        public async Task SetupWithLocalPresence(ChatV4PresenceObj.Presence obj = null)
+        {
+            var data = await GetPresenceData(obj);
+            if (data != null)
+            {
+                if(data.sessionLoopState != "MENUS")
+                    return;
+
+                if (CurrentUsers.Count == 0)
+                {
+                    AddUserToList(
+                    
+                        new LiveMenuPartyUser()
+                        {
+                            PlayerId = obj.puuid,
+                            PlayerName = $"{obj.game_name}#{obj.game_tag}",
+                            Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
+                            PlayerReady = true,
+                        }
+                    );
+                }
+
+                if (data.partySize == 1)
+                {
+                    for (int i = 0; i < CurrentUsers.Count; i++)
+                    {
+                        if (CurrentUsers[i].PlayerId != AssistApplication.Current.CurrentUser.UserData.sub)
+                            RemoveUserToList(CurrentUsers[i]);
+                    }
+                }
+
+                CurrentPartyId = data.partyId;
+                UpdateGeneralPartyInformation(data,obj);
+
+                if (data.partySize > 1)
+                {
+                    await Dispatcher.UIThread.InvokeAsync(() => { HandleMoreThanOneParty(data); });
+                }
+            }
+
+            await Setup(null);
+        }
 
         private async void RiotWebsocketServiceOnUserPresenceMessageEvent(PresenceV4Message obj)
         {
@@ -97,7 +141,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
                 if (data.partySize > 1)
                 {
-                    await Dispatcher.UIThread.InvokeAsync(() => { HandleMoreThanOneParty(data, obj); });
+                    await Dispatcher.UIThread.InvokeAsync(() => { HandleMoreThanOneParty(data); });
                 }
             }
         }
@@ -126,37 +170,32 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             // Update UI Elements
             
         }
-
-        private string GetQueueId(string dataQueueId)
+        
+        public async void UpdateGeneralPartyInformation(PlayerPresence data, ChatV4PresenceObj.Presence obj)
         {
-            switch (dataQueueId)
-            {
-                case "ggteam":
-                    return "Escalation";
-                case "deathmatch":
-                    return "Deathmatch";
-                case "spikerush":
-                    return "SpikeRush";
-                case "competitive":
-                    return "Competitive";
-                case "unrated":
-                    return "Unrated";
-                case "onefa":
-                    return "Replication";
-                case "swiftplay":
-                    return "Swiftplay";
-                case "snowball":
-                    return "Snowball";
-                case "lotus":
-                    return "Lotus";
-                case "premier-seasonmatch":
-                    return "Premier";
-                default:
-                    return "VALORANT";
-            }
-        }
+            var currentUserBtn = CurrentUsers.ToList().Find(member => member.PlayerId == obj.puuid);
+            Log.Information($"QUEUE ID {data.queueId}");
+            QueueName = QueueNames.DetermineQueueKey(data.queueId).ToUpper();
+            PartySize = $"{data.partySize}/{data.maxPartySize}";
 
-        public async void HandleMoreThanOneParty(PlayerPresence data, PresenceV4Message obj)
+            if (data.maxPartySize > 5)
+            {
+                QueueName = "CUSTOM GAME (Not currently supported within Assist)";
+            }
+
+            if (currentUserBtn != null)
+            {
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    currentUserBtn.Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png";
+                    
+                });
+            }
+
+            // Update UI Elements
+            
+        }
+        public async void HandleMoreThanOneParty(PlayerPresence data)
         {
             try
             {
@@ -222,6 +261,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 }
             }
         }
+        
         public async void AddUserToList(LiveMenuPartyUser u)
         {
             Dispatcher.UIThread.InvokeAsync(() =>
@@ -250,16 +290,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             });
         }
-
-        public async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)
-        {
-            if (string.IsNullOrEmpty(data.Private))
-                return new PlayerPresence();
-            byte[] stringData = Convert.FromBase64String(data.Private);
-            string decodedString = Encoding.UTF8.GetString(stringData);
-            return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
-        }
-
+        
         public async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
         {
             if (string.IsNullOrEmpty(data.Private))

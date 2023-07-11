@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -124,6 +126,14 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _globalDodgeBorder, value);
         }
 
+        private bool? _trackerEnabled = true;
+        private bool startUp = true;
+
+        public bool? TrackerEnabled
+        {
+            get => _trackerEnabled;
+            set => this.RaiseAndSetIfChanged(ref _trackerEnabled, value);
+        }
 
         public async Task Setup()
         {
@@ -138,19 +148,6 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             if (Player != null)
             {
-                /*if (!Player.PlayerIdentity.Incognito) // If Incognito is false, means that the player has their name publicly shown.
-                {
-                    var pres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
-                    var data = pres.presences.Find(user => user.puuid == Player.Subject);
-                    
-                    if (data != null)
-                        PlayerName = data.game_name;
-                }*/
-                
-                
-                
-                
-                
                 // Get player name from Presence.
                 if (string.Equals(PlayerName, "Player") || string.IsNullOrEmpty(PlayerRankIcon))
                 {
@@ -163,6 +160,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                             PlayerTag = data.game_tag; 
                             PlayerName = data.game_name;
                             PlayerIsHidden = false;
+                            //CheckTracker();
                         }
                             
 
@@ -220,6 +218,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     });
 
                 }
+                
 
             }
         }
@@ -243,6 +242,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                             PlayerName = data.game_name;
                             PlayerTag = data.game_tag;
                             PlayerIsHidden = false;
+                            //CheckTracker();
                         }
                             
                     
@@ -346,6 +346,18 @@ namespace Assist.Game.Controls.Live.ViewModels
                     UseShellExecute = true
                 });
             }
+        }
+
+        private async Task CheckTracker()
+        {
+            var trackerName = PlayerName.Replace(" ", "%20");
+            string url = $"https://tracker.gg/valorant/profile/riot/{trackerName}%23{PlayerTag}/overview";
+
+            HttpClient h = new HttpClient();
+
+            var resp = await h.GetAsync(url);
+
+            TrackerEnabled = resp.StatusCode == HttpStatusCode.OK;
         }
     }
 }

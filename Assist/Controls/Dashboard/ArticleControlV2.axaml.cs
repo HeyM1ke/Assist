@@ -27,4 +27,5 @@ public class ArticleControlV2 : Button
         get { return (string?)GetValue(ArticleCategoryProperty); }
         set { SetValue(ArticleCategoryProperty, value); }
     }
+    public string? ArticleLink { get; set; }
 }
