@@ -31,6 +31,7 @@ using ValNet.Enums;
 using ValNet.Objects;
 using ValNet.Objects.Exceptions;
 using AssistUser.Lib;
+using Avalonia.Controls.Notifications;
 using NAudio.Wave;
 
 namespace Assist.ViewModels
@@ -290,6 +291,45 @@ namespace Assist.ViewModels
         public async Task SetVolume(int num)
         {
             AudioOutputDevice.Volume = num;
+        }
+
+        public async Task ShowNotification(INotification noti)
+        {
+            if (AssistApplication.CurrentApplication.MainWindow is MainWindow)
+            {
+                var w = (MainWindow)AssistApplication.CurrentApplication.MainWindow;
+
+                if (w != null)
+                {
+                    w.notificationManager.Show(noti);
+                }
+            }
+        }
+        
+        public async Task ShowNotification(string title, string description, NotificationType type, TimeSpan? duration = null)
+        {
+            if (AssistApplication.CurrentApplication.MainWindow is MainWindow)
+            {
+                var w = (MainWindow)AssistApplication.CurrentApplication.MainWindow;
+
+                if (w != null)
+                {
+                    w.notificationManager.Show(new Notification(title,description, type, duration));
+                }
+            }
+        }
+        
+        public async Task ShowNotification(string title, string description)
+        {
+            if (AssistApplication.CurrentApplication.MainWindow is MainWindow)
+            {
+                var w = (MainWindow)AssistApplication.CurrentApplication.MainWindow;
+
+                if (w != null)
+                {
+                    w.notificationManager.Show(new Notification(title,description));
+                }
+            }
         }
 
         #endregion

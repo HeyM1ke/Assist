@@ -41,9 +41,9 @@ namespace Assist.Game.Controls.Live.ViewModels
         public CoregameMatch.Player? CorePlayer { get => _corePlayer; set => this.RaiseAndSetIfChanged(ref _corePlayer, value); }
 
         public bool PlayerIsHidden = false;
-        
-        
-        private string? _playerLevel = null;
+
+
+        private string? _playerLevel;
 
         public string? PlayerLevel
         {
@@ -53,7 +53,7 @@ namespace Assist.Game.Controls.Live.ViewModels
         
         
         
-        private string? _playerRankIcon = null;
+        private string? _playerRankIcon ;
 
         public string? PlayerRankIcon
         {

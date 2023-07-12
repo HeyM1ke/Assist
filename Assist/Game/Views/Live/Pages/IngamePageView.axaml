@@ -26,33 +26,34 @@
               <StackPanel>
                   <TextBlock Text="{x:Static p:Resources.GameMode_AllyTeam}"
                              FontFamily="{StaticResource Inter}"
+                             TextAlignment="Left"
                              FontWeight="Bold"
-                             FontSize="32"
-                             HorizontalAlignment="Center"
+                             FontSize="48"
                   />
                   <Rectangle Fill="{DynamicResource AssistRed}"
                              Height="2"
                   ></Rectangle>
 			  </StackPanel>
-              <Border Background="#17181D"
-                      Height="410"
-                      VerticalAlignment="Center"
-                    
-              >
-                  <ItemsControl VerticalAlignment="Top"
-                                Margin="7,12"
-                                ItemsSource="{Binding AllyTeamControls}"
+              <ItemsControl VerticalAlignment="Top"
+                            Margin="0,12"
+                            MinHeight="500"
+                            ItemsSource="{Binding AllyTeamControls}"
                                 
-                  >
-                      <ItemsControl.ItemsPanel>
-                          <ItemsPanelTemplate>
-                              <StackPanel Orientation="Vertical" Spacing="14"
-                              />
-                          </ItemsPanelTemplate>
-                      </ItemsControl.ItemsPanel>
+              >
+                  <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                          <StackPanel Orientation="Vertical" Spacing="7"
+                          />
+                      </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
                       
-                  </ItemsControl>
-              </Border>
+                  <ItemsControl.Styles>
+                      <Style Selector="live|GameUserControl">
+                          <Setter Property="Height" Value="95"/>
+                      </Style>
+                  </ItemsControl.Styles>
+                  
+              </ItemsControl>
           </StackPanel>
         </Grid>
 
@@ -181,36 +182,35 @@
                   <TextBlock Text="{x:Static p:Resources.GameMode_EnemyTeam}"
                              FontFamily="{StaticResource Inter}"
                              FontWeight="Bold"
-                             FontSize="32"
-                             HorizontalAlignment="Center"
+                             FontSize="48"
+                             TextAlignment="Right"
                   />
                   <Rectangle Fill="{DynamicResource AssistRed}"
                              Height="2"
                   ></Rectangle>
               </StackPanel>
-              <Border Background="#17181D"
-                      VerticalAlignment="Center"
-                      Height="410"
-                    
+              
+              <ItemsControl VerticalAlignment="Top"
+                            Margin="0,12"
+                            MinHeight="500"
+                            ItemsSource="{Binding EnemyTeamControls}"
               >
-                  <ItemsControl VerticalAlignment="Top"
-                                Margin="7,12"
-                                ItemsSource="{Binding EnemyTeamControls}"
-                                
-                  >
-					  
-                      <ItemsControl.ItemsPanel>
-                          <ItemsPanelTemplate>
-                              <StackPanel Orientation="Vertical" Spacing="14"
-                              />
-                          </ItemsPanelTemplate>
-
-
-					  </ItemsControl.ItemsPanel>
-
-                  </ItemsControl>
-              </Border>
+                  <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                          <StackPanel Orientation="Vertical" Spacing="7"
+                          />
+                      </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                      
+                  <ItemsControl.Styles>
+                      <Style Selector="live|GameUserControl">
+                          <Setter Property="Height" Value="95"/>
+                      </Style>
+                  </ItemsControl.Styles>
+                  
+              </ItemsControl>
           </StackPanel>
+          
       </Grid>
   </Grid>
       <Grid Margin="10"

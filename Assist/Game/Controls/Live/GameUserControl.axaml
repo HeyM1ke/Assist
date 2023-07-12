@@ -3,71 +3,77 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="267" d:DesignHeight="65"
+             mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="95"
              x:Class="Assist.Game.Controls.Live.GameUserControl"
              Initialized="GameUser_Init">
-  <Border Background="#101115"
+  <Border Background="{DynamicResource AssistPrimary}"
           BorderBrush="{Binding DodgeBorder}"
+          CornerRadius="10"
           BorderThickness="1">
-	  <Grid>
-		  <Grid ColumnDefinitions="64,*"
-				
-            VerticalAlignment="Top"
-            Margin="3">
-			  <Border Width="58"
-					  Height="58"
-					  Background="#20000000"
-					  HorizontalAlignment="Left"
-					  Grid.Column="0">
-				  <Grid>
+	  <Grid >
+		  <Grid ColumnDefinitions="68,*"
+		        VerticalAlignment="Center"
+		        HorizontalAlignment="Stretch"
+		        Margin="10">
+			  
+				  <Grid HorizontalAlignment="Left"
+				        Grid.Column="0">
 					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerAgentIcon}"
+					                                  Width="60"
+					                                  Height="60"
 					                                  RenderOptions.BitmapInterpolationMode="MediumQuality"/>
 					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerRankIcon}"
-													  Width="30"
-													  Height="30"
+													  Width="28"
+													  Height="28"
+													  Margin="-5"
 													  VerticalAlignment="Top"
 													  HorizontalAlignment="Left"/>
 					  
-					  <Border Background="{DynamicResource AssistRed}"
-					          CornerRadius="2,0,2,0"
+					  <Border Background="{DynamicResource AssistPrimaryLight}"
+					          BorderBrush="{DynamicResource AssistRed}"
+					          BorderThickness="1"
+					          
+					          Height="16"
+					          Padding="7,0"
+					          CornerRadius="5"
 					          VerticalAlignment="Bottom"
-					          HorizontalAlignment="Right"
-					          Margin="0">
-						  <TextBlock Text="{Binding PlayerLevel, FallbackValue='0'}"
+					          HorizontalAlignment="Center"
+					          Margin="0,-10">
+						  <TextBlock Text="{Binding PlayerLevel, FallbackValue='1000'}"
 						             FontFamily="{StaticResource Inter}"
+						             FontWeight="Medium"
 						             MinWidth="10"
 						             TextAlignment="Center"
-						             FontSize="8"
+						             VerticalAlignment="Center"
+						             FontSize="10"
 						             Padding="1"></TextBlock>
 					  </Border>
 				  </Grid>
-			  </Border>
 
 			  <Grid Column="1">
 				  <StackPanel VerticalAlignment="Center">
 					  <TextBlock Text="{Binding PlayerName}"
-								 FontFamily="{StaticResource WorkSans}"
+								 FontFamily="{StaticResource Inter}"
+								 TextAlignment="Left"
 								 FontWeight="Bold"
 								 FontSize="16"></TextBlock>
 					  <TextBlock Text="{Binding PlayerAgentName}"
-								 FontFamily="{StaticResource WorkSans}"
+								 FontFamily="{StaticResource Inter}"
+								 TextAlignment="Left"
 								 FontWeight="Light"
 								 FontSize="10"
 								 Foreground="#50FFFFFF"/>
 					  <TextBlock Text="{Binding PlayerRankRating}"
-								 FontFamily="{StaticResource WorkSans}"
+								 FontFamily="{StaticResource Inter}"
+								 TextAlignment="Left"
 								 FontWeight="Black"
 								 FontSize="12"
+								 IsVisible="{Binding IsPlayerDodge}"
 								 Foreground="{DynamicResource AssistRed}"/>
 
 				  </StackPanel>
 
-				  <Rectangle Width="10"
-							 Height="10"
-							 Fill="{Binding PlayerBrush}"
-							 VerticalAlignment="Top"
-							 HorizontalAlignment="Right"
-                         ></Rectangle>
+				  
 
 				  <Border
 					  Width="20"
@@ -86,7 +92,12 @@
 				  </Border>
 			  </Grid>
 		  </Grid>
-
+		  <Rectangle Width="100"
+		             Height="5"
+		             Fill="{Binding PlayerBrush}"
+		             VerticalAlignment="Top"
+		             HorizontalAlignment="Center"
+		  ></Rectangle>
           
 	  </Grid>
 
@@ -139,6 +150,12 @@
 			          IsVisible="{Binding !PlayerIsHidden}"
 			          Click="OpenTracker_Click"
 			>
+				<MenuItem.Icon>
+					<Image Source="/Resources/Game/Server_Icon.png"
+					       Height="100"
+					       Width="100"
+					/>
+				</MenuItem.Icon>
 			</MenuItem>
 			<Separator />
 		</ContextMenu>

@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Assist.Game.Views.Profile.ViewModels;
 using Assist.ViewModels;
 using AssistUser.Lib.Profiles.Models;
+using Avalonia.Controls.Notifications;
 using ReactiveUI;
 using Serilog;
 

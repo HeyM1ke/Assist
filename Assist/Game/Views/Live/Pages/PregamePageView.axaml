@@ -6,16 +6,14 @@
              xmlns:live="clr-namespace:Assist.Game.Controls.Live"
              mc:Ignorable="d"
              d:DesignWidth="1125"
-             d:DesignHeight="590"
+             d:DesignHeight="690"
              x:Class="Assist.Game.Views.Live.Pages.PregamePageView"
              Initialized="PreGamePage_Init"
              Unloaded="PregamePageControl_OnUnloaded">
-  <Grid Margin="15">
-      <Border Width="300"
-              Background="#101115"
-              HorizontalAlignment="Left">
-          <Grid RowDefinitions="130,*"
-                Margin="10">
+  <Grid Margin="10">
+      <Grid RowDefinitions="155,*"
+                
+                HorizontalAlignment="Left">
 
 			  <!--Map Information-->
                <Grid Row="0" VerticalAlignment="Top">
@@ -24,7 +22,8 @@
                                BorderBrush="{DynamicResource AssistRed}"
                                BorderThickness="1">
                            <asyncImageLoader:AdvancedImage Source="{Binding MapImage}"
-                                                           Height="61"/>
+                                                           MaxWidth="375"
+                                                           Height="85"/>
                        </Border>
 
                       
@@ -40,7 +39,7 @@
                            <TextBlock Text="{Binding ServerName, FallbackValue='Loading..'}"
                                       FontFamily="{StaticResource Inter}"
                                       FontWeight="Medium"
-                                      FontSize="10"
+                                      FontSize="12"
                                       VerticalAlignment="Center"></TextBlock>
                        </StackPanel>
 				   </StackPanel>
@@ -77,24 +76,26 @@
               
 			  <!--Player Information-->
               <Grid Row="1" VerticalAlignment="Top" >
-                  <Border Background="#17181D"
-                          Height="410"
-                          >
-                      <ItemsControl VerticalAlignment="Top"
-                                    Margin="7,12"
-                                    ItemsSource="{Binding UserControls}"
-                                    >
-						  <ItemsControl.ItemsPanel>
-                              <ItemsPanelTemplate>
-                                  <StackPanel Orientation="Vertical" Spacing="14"
-                                              />
-                              </ItemsPanelTemplate>
-                          </ItemsControl.ItemsPanel>
-                          
-                      </ItemsControl>
-                  </Border>
+                  <ItemsControl VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                ItemsSource="{Binding UserControls}"
+                                
+                  >
+                      <ItemsControl.ItemsPanel>
+                          <ItemsPanelTemplate>
+                              <StackPanel Orientation="Vertical" Spacing="7"
+                              />
+                          </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                      <ItemsControl.Styles>
+                          <Style Selector="live|GameUserControl">
+                              <Setter Property="Width" Value="375"/>
+                              <Setter Property="Height" Value="95"/>
+                          </Style>
+                      </ItemsControl.Styles>
+                      
+                  </ItemsControl>
               </Grid>
           </Grid>
-      </Border>
   </Grid>
 </UserControl>
