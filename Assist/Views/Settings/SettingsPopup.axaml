@@ -202,27 +202,52 @@
                                     <Grid Loaded="SignedInGrid_Loaded"
                                           IsVisible="{Binding IsAssistSignedIn}">
                                         <StackPanel Spacing="15">
-                                            <asyncImageLoader:AdvancedImage Source="{Binding DisplayImage}"
-                                                                            Stretch="UniformToFill"
-                                                                            Width="100"
-                                                                            Height="100"/>
-                                            <TextBlock Text="{Binding DisplayName, FallbackValue='Loading...'}"
-                                                       FontFamily="{StaticResource Inter}"
-                                                       FontSize="16"
-                                                       FontWeight="SemiBold"
-                                                       HorizontalAlignment="Center"
-                                            ></TextBlock>
-                                            <TextBlock Text="{Binding AccountEmail, FallbackValue='Loading...'}"
-                                                       FontFamily="{StaticResource Inter}"
-                                                       FontSize="14"
-                                                       FontWeight="Medium"
-                                                       Opacity=".8"
-                                                       HorizontalAlignment="Center"
-                                            ></TextBlock>
-                                            
+                                            <StackPanel Orientation="Horizontal"
+                                                        Spacing="15"
+                                                        HorizontalAlignment="Center">
+                                                <asyncImageLoader:AdvancedImage Source="{Binding DisplayImage}"
+                                                    Stretch="UniformToFill"
+                                                    Width="100"
+                                                    Height="100"
+                                                    CornerRadius="10"
+                                                    RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                                                
+                                                <StackPanel Orientation="Vertical">
+                                                    <StackPanel Orientation="Vertical"
+                                                                Spacing="4">
+                                                        <TextBlock Text="Details"
+                                                                   FontFamily="{StaticResource Inter}"
+                                                                   FontSize="16"
+                                                                   FontWeight="SemiBold"
+                                                                   Opacity="1"
+                                                                   Foreground="{DynamicResource AssistTextWhite}"
+                                                                   HorizontalAlignment="Left"
+                                                        ></TextBlock>
+                                                        <Rectangle Fill="{DynamicResource AssistRed}"
+                                                                   Height="1"
+                                                                   Width="285"></Rectangle>
+                                                    </StackPanel>
+                                                   <StackPanel Orientation="Horizontal" Spacing="5">
+                                                       <TextBlock Text="Email:"
+                                                                  FontFamily="{StaticResource Inter}"
+                                                                  FontSize="14"
+                                                                  FontWeight="Medium"
+                                                                  Opacity="1"
+                                                                  HorizontalAlignment="Center"
+                                                       ></TextBlock>
+                                                       <TextBlock Text="{Binding AccountEmail, FallbackValue='Loading...'}"
+                                                                  FontFamily="{StaticResource Inter}"
+                                                                  FontSize="14"
+                                                                  FontWeight="Medium"
+                                                                  Opacity=".8"
+                                                                  HorizontalAlignment="Center"
+                                                       ></TextBlock>
+                                                   </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
                                             <Grid ColumnDefinitions="Auto, Auto"
                                                   HorizontalAlignment="Center"
-                                                  >
+                                            >
                                                 <TextBlock Text="{Binding LinkedAccountText}"
                                                            FontFamily="{StaticResource Inter}"
                                                            FontSize="14"
