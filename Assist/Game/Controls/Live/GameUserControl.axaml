@@ -90,6 +90,58 @@
 							 VerticalAlignment="Center"
 							 HorizontalAlignment="Center"/>
 				  </Border>
+				  
+				  <Border 
+					  HorizontalAlignment="Right"
+				          VerticalAlignment="Center">
+					  <StackPanel Orientation="Horizontal"
+					              Spacing="20">
+						  <StackPanel Orientation="Vertical"
+						              Spacing="2">
+							  <Image Source="/Resources/Icons/REP_Shotcaller_Icon.png"
+							         Width="15"
+							         Height="15"
+							         Opacity=".3"
+							         RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+							  <TextBlock Text="{Binding ShotcallerReputation, FallbackValue='0'}"
+							             FontFamily="{StaticResource Inter}"
+							             TextAlignment="Center"
+							             FontWeight="Light"
+							             FontSize="12"
+							             Foreground="#50FFFFFF"/>
+						  </StackPanel>
+						  
+						  <StackPanel Orientation="Vertical"
+						              Spacing="2">
+							  <Image Source="/Resources/Icons/REP_Goodmate_Icon.png"
+							         Width="15"
+							         Height="15"
+							         Opacity=".3"
+							         RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+							  <TextBlock Text="{Binding GoodteammateReputation, FallbackValue='0'}"
+							             FontFamily="{StaticResource Inter}"
+							             TextAlignment="Center"
+							             FontWeight="Light"
+							             FontSize="12"
+							             Foreground="#50FFFFFF"/>
+						  </StackPanel>
+						  
+						  <StackPanel Orientation="Vertical"
+						              Spacing="2">
+							  <Image Source="/Resources/Icons/REP_Calm_Icon.png"
+							         Width="15"
+							         Height="15"
+							         Opacity=".3"
+							         RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+							  <TextBlock Text="{Binding CalmReputation, FallbackValue='0'}"
+							             FontFamily="{StaticResource Inter}"
+							             TextAlignment="Center"
+							             FontWeight="Light"
+							             FontSize="12"
+							             Foreground="#50FFFFFF"/>
+						  </StackPanel>
+					  </StackPanel>
+				  </Border>
 			  </Grid>
 		  </Grid>
 		  <Rectangle Width="100"

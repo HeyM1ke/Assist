@@ -12,6 +12,7 @@ using Assist.Game.Services;
 using Assist.Objects.Helpers;
 using Assist.Settings;
 using Assist.ViewModels;
+using AssistUser.Lib.Reputations.Models;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.Utilities;
@@ -33,6 +34,7 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _brush, value);
         }
 
+        private string? _playerId;
 
         private PregameMatch.Player? _player;
         public PregameMatch.Player? Player { get => _player; set => this.RaiseAndSetIfChanged(ref _player, value); }
@@ -135,6 +137,38 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _trackerEnabled, value);
         }
 
+        private bool _reputationChecked = false;
+        public bool ReputationChecked
+        {
+            get => _reputationChecked;
+            set => this.RaiseAndSetIfChanged(ref _reputationChecked, value);
+        }
+        
+        private string? _shotcallerReputation = "0";
+
+        public string? ShotcallerReputation
+        {
+            get => _shotcallerReputation;
+            set => this.RaiseAndSetIfChanged(ref _shotcallerReputation, value);
+        }
+        
+        private string? _goodteammateReputation = "0";
+
+        public string? GoodteammateReputation
+        {
+            get => _goodteammateReputation;
+            set => this.RaiseAndSetIfChanged(ref _goodteammateReputation, value);
+        }
+        
+        private string? _calmReputation = "0";
+
+        public string? CalmReputation
+        {
+            get => _calmReputation;
+            set => this.RaiseAndSetIfChanged(ref _calmReputation, value);
+        }
+        
+        
         public async Task Setup()
         {
 
@@ -171,6 +205,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         // Set rank icon
                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                         PlayerLevel = $"{t.accountLevel}";
+                        _playerId = data.puuid;
                     }
                 }
                 
@@ -219,7 +254,9 @@ namespace Assist.Game.Controls.Live.ViewModels
                     });
 
                 }
-                
+
+                if (!ReputationChecked) SetupReputation();
+
 
             }
         }
@@ -254,6 +291,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         // Set rank icon
                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                         PlayerLevel = $"{t.accountLevel}";
+                        _playerId = data.puuid;
                     }
                 }
                 /*if (!Player.PlayerIdentity.Incognito) // If Incognito is false, means that the player has their name publicly shown.
@@ -321,6 +359,8 @@ namespace Assist.Game.Controls.Live.ViewModels
                     });
 
                 }
+                
+                if (!ReputationChecked) SetupReputation();
 
             }
         }
@@ -360,6 +400,39 @@ namespace Assist.Game.Controls.Live.ViewModels
             var resp = await h.GetAsync(url);
 
             TrackerEnabled = resp.StatusCode == HttpStatusCode.OK;
+        }
+        
+        private async Task SetupReputation()
+        {
+            var d = await AssistApplication.Current.AssistUser.Reputation.GetUserReputation(_playerId);
+
+            if (d.Code != 200)
+            {
+                Log.Error($"Unable to Locate reputation of player ID : {Player.Subject}");
+                Log.Error($"message from request: {d.Message}");
+                return;
+            }
+
+            var rep = JsonSerializer.Deserialize<AssistReputationUser>(d.Data.ToString());
+
+            var t = rep.SeasonalReputation.TryGetValue(AssistApplication.EpisodeId, out AssistSeasonalReputation reputation);
+
+            if (!t)
+            {
+                Log.Error($"Unable to find seasonal data for ID of {AssistApplication.EpisodeId}. For reputation of player ID : {Player.Subject}");
+                return;
+            }
+
+            reputation.EndorsementsReceived.TryGetValue("SHOTCALLER", out int value);
+            ShotcallerReputation = value.ToString();
+
+            reputation.EndorsementsReceived.TryGetValue("GOODTEAMMATE", out value);
+            GoodteammateReputation = value.ToString();
+            
+            reputation.EndorsementsReceived.TryGetValue("CALMCOLLECTED", out value);
+            CalmReputation = value.ToString();
+            
+            ReputationChecked = true;
         }
     }
 }

@@ -41,6 +41,7 @@ namespace Assist.ViewModels
         #region Static Data
 
         public const string CurrentBattlepassId = "2b3a941d-4b85-a0df-5beb-8897224d290a";
+        public const string EpisodeId = "1a2fc1de-4f58-4a89-49d0-f28b720ff76f";
 
         #endregion
 
