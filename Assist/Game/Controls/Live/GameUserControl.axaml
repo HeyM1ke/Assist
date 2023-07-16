@@ -52,11 +52,20 @@
 
 			  <Grid Column="1">
 				  <StackPanel VerticalAlignment="Center">
-					  <TextBlock Text="{Binding PlayerName}"
-								 FontFamily="{StaticResource Inter}"
-								 TextAlignment="Left"
-								 FontWeight="Bold"
-								 FontSize="16"></TextBlock>
+					  <StackPanel Orientation="Horizontal">
+						  <TextBlock Text="{Binding PlayerName}"
+						             FontFamily="{StaticResource Inter}"
+						             TextAlignment="Left"
+						             FontWeight="Bold"
+						             FontSize="16"></TextBlock>
+						  <TextBlock Text="{Binding PlayerTag}"
+						             FontFamily="{StaticResource Inter}"
+						             TextAlignment="Left"
+						             VerticalAlignment="Bottom"
+						             Opacity=".3"
+						             FontWeight="Bold"
+						             FontSize="10"></TextBlock>
+					  </StackPanel>
 					  <TextBlock Text="{Binding PlayerAgentName}"
 								 FontFamily="{StaticResource Inter}"
 								 TextAlignment="Left"

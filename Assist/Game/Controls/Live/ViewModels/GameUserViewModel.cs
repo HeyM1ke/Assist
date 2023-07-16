@@ -278,7 +278,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         if (data != null)
                         {
                             PlayerName = data.game_name;
-                            PlayerTag = data.game_tag;
+                            PlayerTag = "#" + data.game_tag;
                             PlayerIsHidden = false;
                             TrackerEnabled = true;
                             //CheckTracker();
