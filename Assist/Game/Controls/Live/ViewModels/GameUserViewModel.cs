@@ -126,7 +126,7 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _globalDodgeBorder, value);
         }
 
-        private bool? _trackerEnabled = true;
+        private bool? _trackerEnabled = false;
         private bool startUp = true;
 
         public bool? TrackerEnabled
@@ -160,6 +160,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                             PlayerTag = data.game_tag; 
                             PlayerName = data.game_name;
                             PlayerIsHidden = false;
+                            TrackerEnabled = true;
                             //CheckTracker();
                         }
                             
@@ -242,6 +243,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                             PlayerName = data.game_name;
                             PlayerTag = data.game_tag;
                             PlayerIsHidden = false;
+                            TrackerEnabled = true;
                             //CheckTracker();
                         }
                             
