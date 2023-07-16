@@ -191,7 +191,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     if (!Player.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
                         {
-                            PlayerTag = data.game_tag; 
+                            PlayerTag = "#" + data.game_tag;
                             PlayerName = data.game_name;
                             PlayerIsHidden = false;
                             TrackerEnabled = true;
