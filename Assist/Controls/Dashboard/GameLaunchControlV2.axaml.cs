@@ -47,4 +47,10 @@ public partial class GameLaunchControlV2 : UserControl
             _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_DisplayIcon.png";
         }
     }
+
+    private void PatchlineSelectionBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    { 
+        AssistApplication.Current.ClientLaunchSettings.Patchline =
+            ((sender as ComboBox).SelectedItem as ComboBoxItem).Content.ToString();
+    }
 }

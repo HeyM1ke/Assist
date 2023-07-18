@@ -5,10 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assist.Controls.Progression;
 using Assist.Objects.AssistApi.Valorant;
+using Assist.Objects.Helpers;
+using Assist.Settings;
 using Assist.ViewModels;
 using Assist.Views.Store.ViewModels;
 using DynamicData;
 using ReactiveUI;
+using Serilog;
 using ValNet.Objects.Contracts;
 using ValNet.Objects.Exceptions;
 
@@ -39,6 +42,34 @@ public class ProgressionOverviewViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _kcAmount, value);
     }
     
+    private string _seasonWins = "0";
+    public string SeasonWins
+    {
+        get => _seasonWins;
+        set => this.RaiseAndSetIfChanged(ref _seasonWins, value);
+    }
+    
+    private string _playerRR = "0";
+    public string PlayerRR
+    {
+        get => _playerRR;
+        set => this.RaiseAndSetIfChanged(ref _playerRR, value);
+    }
+    
+    private string _playerRankIcon;
+    public string PlayerRankIcon
+    {
+        get => _playerRankIcon;
+        set => this.RaiseAndSetIfChanged(ref _playerRankIcon, value);
+    }
+    
+    private string _rankName;
+    public string RankName
+    {
+        get => _rankName;
+        set => this.RaiseAndSetIfChanged(ref _rankName, value);
+    }
+    
     private static List<Mission> allMissions = null;
     private static ContactsFetchObj _userContacts = null;
     public static DailyTicketObj UserTicket = null;
@@ -51,6 +82,7 @@ public class ProgressionOverviewViewModel : ViewModelBase
         DailyMissionControls.AddRange(d);
         WeeklyMissionControls.AddRange(w);
 
+        await SetupCompetitiveDetails();
         await SetupKCCredits();
     }
     
@@ -164,6 +196,47 @@ public class ProgressionOverviewViewModel : ViewModelBase
             return;
         }
         
+    }
+    
+    public async Task SetupCompetitiveDetails()
+    {
+        try
+        {
+            var playerMmr = await AssistApplication.Current.CurrentUser.Player.GetPlayerMmr();
+
+            int currentRankTier = 0;
+            int currentRR = 0;
+            var currentSeasonId = playerMmr.LatestCompetitiveUpdate.SeasonID;
+            if (playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID != null)
+            {
+                currentRankTier = playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID[currentSeasonId].CompetitiveTier;
+                currentRR = playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID[currentSeasonId].RankedRating;
+                SeasonWins =
+                    $"{playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID[currentSeasonId].NumberOfWins} Wins";
+            }
+
+            if (currentRankTier >= 24) PlayerRR = $"{currentRR}RR";
+            else PlayerRR = $"{currentRR}/100 RR";
+            PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{currentRankTier}.png";
+            var t = AssistSettings.Current.Profiles.Find(pfp => pfp.ProfileUuid == AssistApplication.Current.CurrentProfile.ProfileUuid);
+
+            t.ValRankTier = currentRankTier;
+                
+            if (currentRankTier != null)
+                RankName = CompetitiveNames.RankNames[currentRankTier].ToUpper();
+                
+                
+        }
+        catch (Exception e)
+        {
+            if (e is RequestException)
+            {
+                var t =e as RequestException;
+                Log.Error(t.Content);
+                Log.Error($"{t.StatusCode}");
+            }
+            Log.Error(e.Message);
+        }
     }
     
     

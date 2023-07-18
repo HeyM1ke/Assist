@@ -61,7 +61,9 @@
                          FontWeight="Medium"/>
               <ComboBox Height="41"
                         Width="215"
-                        SelectedIndex="0">
+                        SelectedIndex="0"
+                        x:Name="PatchlineSelectionBox"
+                        SelectionChanged="PatchlineSelectionBox_OnSelectionChanged">
                   <ComboBoxItem Content="Live"></ComboBoxItem>
               </ComboBox>
           </StackPanel>

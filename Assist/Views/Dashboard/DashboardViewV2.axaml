@@ -38,7 +38,7 @@
         
         <dashboard:ProgressionOverview VerticalAlignment="Center"
                                        HorizontalAlignment="Right"
-                                       Height="280"
+                                       Height="430"
                                        Width="327"
                                        Margin="10"/>
         

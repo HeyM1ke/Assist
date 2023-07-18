@@ -18,9 +18,8 @@ namespace Assist.Controls.Global.Popup
 
         private async void Apply_Click(object? sender, RoutedEventArgs e)
         {
-            AssistApplication.Current.ClientLaunchSettings.Patchline =
-                (patchLineBox.SelectedItem as ComboBoxItem).Content.ToString();
-
+            if(Design.IsDesignMode)return;
+            
             AssistSettings.Current.GameModeEnabled = (bool)gameModeEnabled.IsChecked;
 
             PopupSystem.KillPopups();
@@ -28,14 +27,9 @@ namespace Assist.Controls.Global.Popup
 
         private async void GameLaunch_Init(object? sender, EventArgs e)
         {
-            patchLineBox = this.FindControl<ComboBox>("PatchLineCheckbox");
             gameModeEnabled = this.FindControl<CheckBox>("GameModeEnable");
 
             gameModeEnabled.IsChecked = AssistSettings.Current.GameModeEnabled;
-
-            //TEMP
-            if (AssistApplication.Current.ClientLaunchSettings.Patchline == "PBE")
-                patchLineBox.SelectedIndex = 1;
         }
     }
 }

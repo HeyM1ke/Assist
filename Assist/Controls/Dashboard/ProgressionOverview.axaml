@@ -3,9 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:progression="clr-namespace:Assist.Controls.Progression"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" 
              d:DesignWidth="327"
-             d:DesignHeight="320"
+             d:DesignHeight="430"
              Initialized="ProgressionOverview_Init"
              x:Class="Assist.Controls.Dashboard.ProgressionOverview">
     <Border CornerRadius="10"
@@ -71,7 +72,7 @@
                                Padding="0,0,0,3"></TextBlock>
                 </StackPanel>
             </Grid>
-            <Grid Row="1" Margin="0,30,0,0">
+            <Grid Row="1" Margin="0,15,0,0">
                 <StackPanel>
                     <TextBlock Text="Weekly Missions"
                                FontFamily="{StaticResource Inter}"
@@ -99,10 +100,10 @@
                         
                 </StackPanel>
             </Grid>
-            <Grid Row="2" Margin="0,40,0,0"
-                  IsVisible="False">
+            <Grid Row="2" Margin="0,20,0,0"
+                  IsVisible="True">
                 <StackPanel>
-                    <TextBlock Text="Daily Missions"
+                    <TextBlock Text="Current Rank"
                                FontFamily="{StaticResource Inter}"
                                FontSize="12"
                                Foreground="{DynamicResource MissionsText}"
@@ -114,18 +115,41 @@
                     />
                         
                         
-                    <ItemsControl ItemsSource="{Binding DailyMissionControls}"
-                                  Margin="0,9">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical"
-                                            Spacing="6"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        
-                       
-                        
-                    </ItemsControl>
+                      <StackPanel Orientation="Horizontal"
+                                            Spacing="8"
+                                            Margin="0,8"
+                                            HorizontalAlignment="Center">
+                                    <Border Background="{DynamicResource AssistSecondary}"
+                                            Width="90"
+                                            Height="90"
+                                            CornerRadius="5">
+                                        <asyncImageLoader:AdvancedImage Margin="15"
+                                                                        Source="{Binding PlayerRankIcon}"/>
+                                    </Border>
+                                    
+                                    <Border Background="{DynamicResource AssistSecondary}"
+                                            Width="152"
+                                            Height="90"
+                                            CornerRadius="5">
+                                        <StackPanel VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding RankName}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="20"
+                                                       FontWeight="Bold"
+                                                       DockPanel.Dock="Top"
+                                                       ></TextBlock>
+                                            <TextBlock Text="{Binding PlayerRR}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontSize="16"
+                                                       Foreground="#50FFFFFF"
+                                                       FontWeight="Medium"
+                                                       TextAlignment="Center"
+                                                       DockPanel.Dock="Top"
+                                            ></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
                         
                 </StackPanel>
             </Grid>
