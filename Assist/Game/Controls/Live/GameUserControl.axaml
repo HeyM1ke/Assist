@@ -10,14 +10,13 @@
           BorderBrush="{Binding DodgeBorder}"
           CornerRadius="10"
           BorderThickness="1">
-	  <Grid >
+	  <Grid>
 		  <Grid ColumnDefinitions="68,*"
 		        VerticalAlignment="Center"
 		        HorizontalAlignment="Stretch"
 		        Margin="10">
-			  
-				  <Grid HorizontalAlignment="Left"
-				        Grid.Column="0">
+			  <Grid HorizontalAlignment="Left"
+			                Grid.Column="0">
 					  <asyncImageLoader:AdvancedImage Source="{Binding PlayerAgentIcon}"
 					                                  Width="60"
 					                                  Height="60"
@@ -49,7 +48,6 @@
 						             Padding="1"></TextBlock>
 					  </Border>
 				  </Grid>
-
 			  <Grid Column="1">
 				  <StackPanel VerticalAlignment="Center">
 					  <StackPanel Orientation="Horizontal">
@@ -87,10 +85,12 @@
 				  <Border
 					  Width="20"
 					  Height="20"
+					  Margin="-5,-10"
 					  BorderBrush="{Binding GlobalDodgeBorder}"
 					  BorderThickness="1"
 					  VerticalAlignment="Bottom"
-					  HorizontalAlignment="Right">
+					  HorizontalAlignment="Right"
+					  Opacity=".7">
 					  <Image x:Name="DodgeIcon"
 							 Source="../../../Resources/Game/DodgeLogo_Icon.png"
 							 Width="16"
@@ -102,7 +102,8 @@
 				  
 				  <Border 
 					  HorizontalAlignment="Right"
-				          VerticalAlignment="Center">
+					  VerticalAlignment="Center"
+					  Margin="0,0">
 					  <StackPanel Orientation="Horizontal"
 					              Spacing="20">
 						  <StackPanel Orientation="Vertical"

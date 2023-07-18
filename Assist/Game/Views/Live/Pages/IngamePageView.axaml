@@ -63,14 +63,16 @@
                   <StackPanel Orientation="Horizontal"
                               VerticalAlignment="Bottom"
                               HorizontalAlignment="Center"
-                              Spacing="20">
+                              Spacing="20"
+                              >
                       <TextBlock Text="{Binding QueueName}"
+                                 MinWidth="369"
                                  FontFamily="{StaticResource Inter}"
                                  FontWeight="Medium"
                                  FontSize="20"
                                  VerticalAlignment="Center"
                                  TextAlignment="Right"
-                                 HorizontalAlignment="Center"
+                                 HorizontalAlignment="Right"
                       />
                       
                       <Rectangle Width="20"
@@ -80,6 +82,7 @@
                       <TextBlock Text="{Binding MapName}"
                                  FontFamily="{StaticResource Inter}"
                                  FontWeight="ExtraBold"
+                                 
                                  FontSize="36"
                                  VerticalAlignment="Center"
                                  TextAlignment="Center"
@@ -90,7 +93,10 @@
                                  Height="5"
                                  Fill="{DynamicResource AssistRed}"
                       ></Rectangle>
-                      <StackPanel Orientation="Horizontal" Spacing="2">
+                      <StackPanel Orientation="Horizontal" 
+                                  Spacing="2"
+                                  MinWidth="369"
+                                  HorizontalAlignment="Left">
                           <Image Source="/Resources/Game/Lobbies_Icon.png"
                                  Height="20"
                                  Stretch="Uniform"
@@ -137,8 +143,10 @@
               </Grid>
               
               <Grid Column="1"
-                    Margin="20">
+                    Margin="20,15">
                   <Rectangle Width="1"
+                             
+                             
                              Opacity=".7"
                              Fill="{DynamicResource AssistRed}"></Rectangle>
               </Grid>
@@ -162,81 +170,116 @@
                               <Setter Property="Height" Value="95"/>
                           </Style>
                       </ItemsControl.Styles>
-                  
+                 
                       
                   </ItemsControl>
               </Grid>
           </Grid>
       </Grid>
       <Grid Margin="10"
+            RowDefinitions="Auto,*"
             IsVisible="{Binding IsDeathmatch}">
-           <Grid >
-              <StackPanel VerticalAlignment="Top"
-                          Spacing="10"
-                          >
+           <Grid VerticalAlignment="Top"
+                 HorizontalAlignment="Stretch">
+          <Border CornerRadius="10"
+                  Height="120"
+                  BorderBrush="{DynamicResource AssistPrimaryLight}"
+                  BorderThickness="1"
                   
-                  <TextBlock Text="{Binding MapName}"
-                             FontFamily="{StaticResource Inter}"
-                             FontWeight="ExtraBlack"
-                             FontSize="64"
-                             HorizontalAlignment="Center"
-                  />
+                  Background="{DynamicResource AssistPrimary}">
+              <Grid HorizontalAlignment="Stretch"
+                    Margin="5,00,10,0">
+                  <asyncImageLoader:AdvancedImage Source="{Binding MapImage}"
+                                                  Stretch="UniformToFill"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"
+                                                  BorderThickness="1"
+                                                  CornerRadius="10"
+                                                  Margin="-5,00,-10,0"/>
+                  <Border  HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           BorderThickness="1"
+                           CornerRadius="10"
+                           Margin="-5,00,-10,0"
+                           Opacity=".5"
+                           Background="{DynamicResource AssistPrimary}"></Border>
                   <StackPanel Orientation="Horizontal"
+                              VerticalAlignment="Center"
                               HorizontalAlignment="Center"
-                              Spacing="10">
+                              Spacing="20"
+                  >
                       <TextBlock Text="{Binding QueueName}"
+                                 MinWidth="369"
                                  FontFamily="{StaticResource Inter}"
-                                 FontWeight="Regular"
+                                 FontWeight="Medium"
                                  FontSize="20"
+                                 VerticalAlignment="Center"
+                                 TextAlignment="Right"
+                                 HorizontalAlignment="Right"
+                      />
+                      
+                      <Rectangle Width="20"
+                                 Height="5"
+                                 Fill="{DynamicResource AssistRed}"
+                                 ></Rectangle>
+                      <TextBlock Text="{Binding MapName}"
+                                 FontFamily="{StaticResource Inter}"
+                                 FontWeight="ExtraBold"
+                                 
+                                 FontSize="36"
+                                 VerticalAlignment="Center"
+                                 TextAlignment="Center"
                                  HorizontalAlignment="Center"
                       />
                       
-                      <Rectangle Width="2"
-                                 Fill="{StaticResource AssistRed}">
-                      </Rectangle>
-                      
-                      <Panel>
-                          <StackPanel Spacing="2"
-                                      Orientation="Horizontal">
-                              <StackPanel Orientation="Horizontal" Spacing="2">
-                                  <Image Source="/Resources/Game/Lobbies_Icon.png"
-                                         Height="18"
-                                         Stretch="Uniform"
-                                         VerticalAlignment="Center"></Image>
-                                  <TextBlock Text="{Binding ServerName, FallbackValue='Loading..'}"
-                                             FontFamily="{StaticResource Inter}"
-                                             FontWeight="Medium"
-                                             FontSize="20"
-                                             VerticalAlignment="Center"></TextBlock>
-                              </StackPanel>
-                          </StackPanel>
-                      </Panel>
+                      <Rectangle Width="20"
+                                 Height="5"
+                                 Fill="{DynamicResource AssistRed}"
+                      ></Rectangle>
+                      <StackPanel Orientation="Horizontal" 
+                                  Spacing="2"
+                                  MinWidth="369"
+                                  HorizontalAlignment="Left">
+                          <Image Source="/Resources/Game/Lobbies_Icon.png"
+                                 Height="20"
+                                 Stretch="Uniform"
+                                 VerticalAlignment="Center"
+                                 RenderOptions.BitmapInterpolationMode="MediumQuality"></Image>
+                          <TextBlock Text="{Binding ServerName, FallbackValue='Loading..'}"
+                                     FontFamily="{StaticResource Inter}"
+                                     FontWeight="Medium"
+                                     FontSize="20"
+                                     TextAlignment="Left"
+                                     VerticalAlignment="Center"></TextBlock>
+                      </StackPanel>
                   </StackPanel>
-              </StackPanel>
-              
-          </Grid>
+                  
+              </Grid>
+          </Border>
+      </Grid>
           
           
           <ItemsControl VerticalAlignment="Center"
-                        Background="#17181D"
-                        Margin="7,12"
+                        Grid.Row="1"
                         ItemsSource="{Binding DeathTeamControls}"
-                                
           >
               <ItemsControl.Styles>
                       <Style Selector="live|GameUserControl">
-                          <Setter Property="Padding" Value="5"></Setter>
+                          <Setter Property="Margin" Value="0,5"></Setter>
+                          <Setter Property="Width" Value="358"></Setter>
+                          <Setter Property="Height" Value="96"></Setter>
                       </Style>
                   </ItemsControl.Styles>
                   <ItemsControl.ItemsPanel>
                       <ItemsPanelTemplate>
-                          <UniformGrid Rows="3"
-                                       Columns="4"
+                          <UniformGrid Rows="4"
+                                       Columns="3"
                                    
                           />
                       </ItemsPanelTemplate>
                   </ItemsControl.ItemsPanel>
                   
+              
               </ItemsControl>
       </Grid>
   </Grid>

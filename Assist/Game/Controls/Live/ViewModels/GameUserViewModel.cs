@@ -87,7 +87,7 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _playerName, value);
         }
         
-        private string? _playerTag = "000";
+        private string? _playerTag = "";
 
         public string? PlayerTag
         {
@@ -191,7 +191,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     if (!Player.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
                         {
-                            PlayerTag = "#" + data.game_tag;
+                            PlayerTag = $"#{data.game_tag}";
                             PlayerName = data.game_name;
                             PlayerIsHidden = false;
                             TrackerEnabled = true;
@@ -278,7 +278,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         if (data != null)
                         {
                             PlayerName = data.game_name;
-                            PlayerTag = "#" + data.game_tag;
+                            PlayerTag = $"#{data.game_tag}";
                             PlayerIsHidden = false;
                             TrackerEnabled = true;
                             //CheckTracker();
@@ -380,7 +380,8 @@ namespace Assist.Game.Controls.Live.ViewModels
             if (!PlayerIsHidden)
             {
                 var trackerName = PlayerName.Replace(" ", "%20");
-                string url = $"https://tracker.gg/valorant/profile/riot/{trackerName}%23{PlayerTag}/overview";
+                var trackerTag = PlayerTag.Replace("#", "");
+                string url = $"https://tracker.gg/valorant/profile/riot/{trackerName}%23{trackerTag}/overview";
             
                 Process.Start(new ProcessStartInfo
                 {

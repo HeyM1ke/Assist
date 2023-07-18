@@ -31,7 +31,7 @@ namespace Assist.Game.Services
 
         public static Button[] clientButtons =
         {
-            new Button() { Label = "Download Assist", Url = "https://github.com/HeyM1ke/Assist/" }
+            new Button() { Label = "Download Assist", Url = "https://assistval.com/" }
         };
 
         public DiscordPresenceController()
@@ -73,6 +73,9 @@ namespace Assist.Game.Services
 
             Client.SetPresence(_currentPresence);
 
+           
+            
+            
             try
             {
                 Client.Initialize();
@@ -85,6 +88,17 @@ namespace Assist.Game.Services
                 Log.Error("Unhandled Ex Message: " + e.Message);
             }
 
+            try
+            {
+                var t = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
+                var pres = t.presences.Find(x => x.puuid.Equals(AssistApplication.Current.CurrentUser.UserData.sub));
+                UpdateDiscordRpcWithDataFromPresence(pres);
+            }
+            catch (Exception e)
+            {
+                
+            }
+            
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += UpdateDiscordRpcWithDataFromPresence;
         }
 
@@ -92,6 +106,34 @@ namespace Assist.Game.Services
         {
             // Decode Pres
             var pres = await GetPresenceData(obj.data.presences[0]);
+
+            RichPresence newPresence = new RichPresence()
+            {
+                Buttons = clientButtons
+            };
+
+            switch (pres.sessionLoopState)
+            {
+                case "MENUS":
+                    DetermineMenusPresence(newPresence, pres);
+                    break;
+                case "INGAME":
+                    DetermineIngamePresence(newPresence, pres);
+                    break;
+                case "PREGAME":
+                    DeterminePregamePresence(newPresence, pres);
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+        
+        private async void UpdateDiscordRpcWithDataFromPresence(ChatV4PresenceObj.Presence obj)
+        {
+            // Decode Pres
+            var pres = await GetPresenceData(obj);
 
             RichPresence newPresence = new RichPresence()
             {
