@@ -22,6 +22,7 @@ namespace Assist.Game.Services
         LIVE,
         MODULES,
         MATCH,
-        LEAGUES
+        LEAGUES,
+        ENDORSE
     }
 }

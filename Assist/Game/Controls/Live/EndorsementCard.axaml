@@ -1,0 +1,95 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:live="clr-namespace:Assist.Game.Controls.Live"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="265" d:DesignHeight="545"
+             x:Class="Assist.Game.Controls.Live.EndorsementCard"
+             Initialized="EndorsementCard_Init">
+    <Border CornerRadius="10"
+            BorderBrush="{DynamicResource AssistPrimaryLight}"
+            BorderThickness="1"
+            x:Name="PART_Border">
+        <Grid>
+            <asyncImageLoader:AdvancedImage CornerRadius="10"
+                                            Margin="1"
+                                            x:Name="PART_Playercard"
+                                            Stretch="UniformToFill"
+                                            Source="{Binding PlayerCard}">
+               
+            </asyncImageLoader:AdvancedImage>
+            
+            <Border Background="#50000000"></Border>
+            
+            <StackPanel VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Margin="10"
+                        Spacing="7">
+                
+                <TextBlock Text="{Binding PlayerStats}"
+                           FontFamily="{StaticResource Inter}"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                ></TextBlock>
+                
+                <TextBlock Text="{Binding PlayerName}"
+                           FontFamily="{StaticResource Inter}"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                ></TextBlock>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Spacing="10">
+                    <Button Width="55"
+                            Height="55"
+                            Classes="AssistBtn"
+                            IsEnabled="{Binding PlayerEndorsementsEnabled}"
+                            ToolTip.Tip="{x:Static p:Resources.Endorse_Shotcaller_Tooltip}"
+                            ToolTip.Placement="TopEdgeAlignedLeft"
+                            Click="ShotcallerBtn_Click"
+                            ToolTip.VerticalOffset="20">
+                        <Image Source="/Resources/Icons/REP_Shotcaller_Icon.png"
+                               Margin="7"/>
+                    </Button>
+                    <Button Width="55"
+                            Height="55"
+                            Classes="AssistBtn"
+                            IsEnabled="{Binding PlayerEndorsementsEnabled}"
+                            ToolTip.Tip="{x:Static p:Resources.Endorse_GoodTeammate_Tooltip}"
+                            ToolTip.Placement="TopEdgeAlignedLeft"
+                            ToolTip.VerticalOffset="20">
+                        <Image Source="/Resources/Icons/REP_Goodmate_Icon.png"
+                               Margin="6"/>
+                    </Button>
+                    <Button Width="55"
+                            Height="55"
+                            Classes="AssistBtn"
+                            IsEnabled="{Binding PlayerEndorsementsEnabled}"
+                            ToolTip.Tip="{x:Static p:Resources.Endorse_CalmCollected_Tooltip}"
+                            ToolTip.Placement="TopEdgeAlignedLeft"
+                            ToolTip.VerticalOffset="20">
+                        <Image Source="/Resources/Icons/REP_Calm_Icon.png"
+                               Margin="6"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+    
+    
+    <UserControl.Styles>
+        <Style Selector="asyncImageLoader|AdvancedImage:pointerover">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <BlurEffect Radius="2"></BlurEffect>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
+</UserControl>

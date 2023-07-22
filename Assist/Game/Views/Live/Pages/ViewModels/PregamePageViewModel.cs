@@ -170,6 +170,10 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             if(MatchResp.AllyTeam == null)
                 return;
 
+            // Log MatchID to Log
+            Log.Information($"PREGAME MATCH ID: {MatchResp.ID}");
+            
+            
             // With the presences grab all team members presenses
 
             // get all ids from team

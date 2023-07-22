@@ -51,5 +51,10 @@ namespace Assist.Game.Views.Live.Pages
         {
             _viewModel.UnsubscribeFromEvents();
         }
+
+        private void AttemptToOpenEndorse_Click(object? sender, RoutedEventArgs e)
+        {
+            GameViewNavigationController.Change(new EndorsePageView());
+        }
     }
 }

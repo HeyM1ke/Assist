@@ -222,7 +222,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             if (MatchResp.Players == null || MatchResp.Players.Count == 0)
                 return;
             
-
+            Log.Information($"COREGAME MATCH ID: {MatchResp.MatchID}");
+            
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 var allyTeam = await GetAllyTeam(MatchResp.Players);

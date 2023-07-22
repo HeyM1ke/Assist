@@ -258,6 +258,33 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calm &amp; Collected, your teammate was composed throughtout the match. .
+        /// </summary>
+        public static string Endorse_CalmCollected_Tooltip {
+            get {
+                return ResourceManager.GetString("Endorse_CalmCollected_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Good Teammate, your teammate was a good one, can&apos;t find those often. .
+        /// </summary>
+        public static string Endorse_GoodTeammate_Tooltip {
+            get {
+                return ResourceManager.GetString("Endorse_GoodTeammate_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shotcaller, your teammate was a leader and helped your team push through. .
+        /// </summary>
+        public static string Endorse_Shotcaller_Tooltip {
+            get {
+                return ResourceManager.GetString("Endorse_Shotcaller_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PLAY.
         /// </summary>
         public static string GameLaunch_PlayText {

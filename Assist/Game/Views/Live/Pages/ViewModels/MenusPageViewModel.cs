@@ -18,6 +18,7 @@ using ReactiveUI;
 using Serilog;
 using ValNet.Objects.Exceptions;
 using ValNet.Objects.Local;
+using ValNet.Objects.Player;
 
 namespace Assist.Game.Views.Live.Pages.ViewModels
 {
@@ -27,6 +28,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
         private List<LiveMenuPartyUser> _currentUsers = new List<LiveMenuPartyUser>();
 
+        private static DateTime LastRefreshTime = DateTime.MinValue;
+        private static MatchHistoryObj matchHistoryObj;
         public List<LiveMenuPartyUser> CurrentUsers
         {
             get => _currentUsers;
@@ -49,7 +52,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref partySize, value);
         }
 
+        private bool _endorseEnabled = false;
 
+        public bool EndorseEnabled
+        {
+            get => _endorseEnabled;
+            set => this.RaiseAndSetIfChanged(ref _endorseEnabled, value);
+        }
         public async Task Setup(PresenceV4Message start = null)
         {
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
@@ -58,6 +67,26 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             {
                 RiotWebsocketServiceOnUserPresenceMessageEvent(start);
             }
+
+            if (matchHistoryObj is null || LastRefreshTime.Equals(DateTime.MinValue) || DateTime.UtcNow > LastRefreshTime.AddMinutes(10) ) // wait 10 minutes to refresh matchhistory
+            {
+                matchHistoryObj = await AssistApplication.Current.CurrentUser.Player.GetPlayerMatchHistory(0, 3);
+                LastRefreshTime = DateTime.UtcNow;
+                if (matchHistoryObj.History.Count <= 0)
+                {
+                    
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(matchHistoryObj.History[0].QueueID) || matchHistoryObj.History[0].QueueID.Equals("deathmatch", StringComparison.OrdinalIgnoreCase ))
+                {
+                    return;
+                }
+
+                EndorseEnabled = true;
+            }
+            
+            
         }
         
         public async Task SetupWithLocalPresence(ChatV4PresenceObj.Presence obj = null)
@@ -144,6 +173,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     await Dispatcher.UIThread.InvokeAsync(() => { HandleMoreThanOneParty(data); });
                 }
             }
+            
         }
 
         public async void UpdateGeneralPartyInformation(PlayerPresence data, PresenceV4Message obj)

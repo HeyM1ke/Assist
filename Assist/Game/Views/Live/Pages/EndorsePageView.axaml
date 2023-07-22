@@ -1,0 +1,55 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="690"
+             x:Class="Assist.Game.Views.Live.Pages.EndorsePageView"
+             Initialized="EndorsePage_Init">
+    <Grid RowDefinitions="*, 555, *"
+          Margin="10">
+        
+        <Grid x:Name="TitleGrid">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="ENDORSE A PLAYER"
+                           FontFamily="{StaticResource Inter}"
+                           FontSize="40"
+                           FontWeight="ExtraBlack"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"></TextBlock>
+                <Rectangle Fill="{DynamicResource AssistRed}"
+                           Width="328"
+                           Height="1"></Rectangle>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="PlayerGrid"
+              Row="1"
+              Margin="10">
+            <ItemsControl ItemsSource="{Binding EndorsementCards}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1"
+                                     Columns="4"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.Styles>
+                    <Style Selector="Border">
+                        <Setter Property="Margin" Value="7,0"></Setter>
+                    </Style>
+                </ItemsControl.Styles>
+                
+            </ItemsControl>
+        </Grid>
+        
+        <Grid x:Name="ReturnGrid"
+              Row="2">
+            <Button Content="Back to Party"
+                    Classes="AssistBtn"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Click="BackToParty_Click"></Button>
+        </Grid>
+    </Grid>
+</UserControl>

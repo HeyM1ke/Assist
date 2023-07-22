@@ -426,5 +426,13 @@
   <data name="Profile_Badge_EarnedAt" xml:space="preserve">
     <value>Earned at:</value>
   </data>
-  
+  <data name="Endorse_CalmCollected_Tooltip" xml:space="preserve">
+    <value>Calm &amp; Collected, your teammate was composed throughtout the match. </value>
+  </data>
+  <data name="Endorse_Shotcaller_Tooltip" xml:space="preserve">
+    <value>Shotcaller, your teammate was a leader and helped your team push through. </value>
+  </data>
+  <data name="Endorse_GoodTeammate_Tooltip" xml:space="preserve">
+    <value>Good Teammate, your teammate was a good one, can't find those often. </value>
+  </data>
 </root>

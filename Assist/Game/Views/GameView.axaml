@@ -12,8 +12,8 @@
 	  <Grid Grid.ColumnSpan="2" x:Name="Background" Background="{DynamicResource AssistBackground}">
           
           
-          <Image Source="/Resources/TDM_Background.png" Stretch="UniformToFill"></Image>
-          <Rectangle Fill="black" Opacity=".7"></Rectangle>
+          <Image Source="/Resources/TDM_Background_Edit.png" Stretch="UniformToFill"></Image>
+          <Rectangle Fill="black" Opacity="0"></Rectangle>
       </Grid>
 
       <navigation:VerticalGameNavigation Width="65"/>
