@@ -18,11 +18,25 @@
                                             x:Name="PART_Playercard"
                                             Stretch="UniformToFill"
                                             Source="{Binding PlayerCard}">
-               
+               <asyncImageLoader:AdvancedImage.Effect>
+                   <BlurEffect Radius="2"></BlurEffect>
+               </asyncImageLoader:AdvancedImage.Effect>
             </asyncImageLoader:AdvancedImage>
             
-            <Border Background="#50000000"></Border>
-            
+            <Border Background="#50000000" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"></Border>
+            <asyncImageLoader:AdvancedImage CornerRadius="10"
+                                            Margin="0,-50,0,0"
+                                            x:Name="PART_AGENT"
+                                            Stretch="UniformToFill"
+                                            Height="1000"
+                                            VerticalAlignment="Top"
+                                            Source="{Binding AgentImage}">
+               <asyncImageLoader:AdvancedImage.Effect>
+                   <DropShadowDirectionEffect Direction="160" BlurRadius="50"
+                                              ></DropShadowDirectionEffect>
+               </asyncImageLoader:AdvancedImage.Effect>
+            </asyncImageLoader:AdvancedImage>
             <StackPanel VerticalAlignment="Bottom"
                         HorizontalAlignment="Center"
                         Margin="10"
@@ -63,6 +77,7 @@
                             IsEnabled="{Binding PlayerEndorsementsEnabled}"
                             ToolTip.Tip="{x:Static p:Resources.Endorse_GoodTeammate_Tooltip}"
                             ToolTip.Placement="TopEdgeAlignedLeft"
+                            Click="GoodTeammateBtn_Click"
                             ToolTip.VerticalOffset="20">
                         <Image Source="/Resources/Icons/REP_Goodmate_Icon.png"
                                Margin="6"/>
@@ -73,6 +88,7 @@
                             IsEnabled="{Binding PlayerEndorsementsEnabled}"
                             ToolTip.Tip="{x:Static p:Resources.Endorse_CalmCollected_Tooltip}"
                             ToolTip.Placement="TopEdgeAlignedLeft"
+                            Click="CalmCollectedBtn_Click"
                             ToolTip.VerticalOffset="20">
                         <Image Source="/Resources/Icons/REP_Calm_Icon.png"
                                Margin="6"/>
@@ -83,13 +99,5 @@
     </Border>
     
     
-    <UserControl.Styles>
-        <Style Selector="asyncImageLoader|AdvancedImage:pointerover">
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <BlurEffect Radius="2"></BlurEffect>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Styles>
+    
 </UserControl>

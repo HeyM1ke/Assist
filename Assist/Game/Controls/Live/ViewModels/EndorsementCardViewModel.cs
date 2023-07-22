@@ -33,6 +33,14 @@ public class EndorsementCardViewModel : ViewModelBase
         get => _playerCard;
         set => this.RaiseAndSetIfChanged(ref _playerCard, value);
     }
+    
+    private string? _agentImage = "Player";
+
+    public string? AgentImage
+    {
+        get => _agentImage;
+        set => this.RaiseAndSetIfChanged(ref _agentImage, value);
+    }
     private string? _playerStats = "0 / 0 / 0";
 
     public string? PlayerStats
@@ -48,9 +56,9 @@ public class EndorsementCardViewModel : ViewModelBase
         }
 
         PlayerCard = $"https://content.assistapp.dev/playercards/{PlayerData.PlayerCard}_LargeArt.png";
-        PlayerCard = PlayerData.GameName;
+        PlayerName = PlayerData.GameName;
         PlayerStats = $"{PlayerData.Stats.Kills} / {PlayerData.Stats.Deaths} / {PlayerData.Stats.Assists}";
-
+        AgentImage = $"https://content.assistapp.dev/agents/{PlayerData.CharacterId}_fullportrait.png";
     }
 
     public async Task EndorsePlayer(EndorsementType type)
@@ -61,6 +69,7 @@ public class EndorsementCardViewModel : ViewModelBase
         {
             await AssistApplication.Current.ShowNotification("Notification", t.Message);
             PlayerEndorsementsEnabled = true;
+            return;
         }
         
         await AssistApplication.Current.ShowNotification("Notification", "Successfully Endorsed Player");

@@ -72,21 +72,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             {
                 matchHistoryObj = await AssistApplication.Current.CurrentUser.Player.GetPlayerMatchHistory(0, 3);
                 LastRefreshTime = DateTime.UtcNow;
-                if (matchHistoryObj.History.Count <= 0)
-                {
-                    
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(matchHistoryObj.History[0].QueueID) || matchHistoryObj.History[0].QueueID.Equals("deathmatch", StringComparison.OrdinalIgnoreCase ))
-                {
-                    return;
-                }
-
-                EndorseEnabled = true;
+            }
+            if (matchHistoryObj.History.Count <= 0 || (string.IsNullOrEmpty(matchHistoryObj.History[0].QueueID) || matchHistoryObj.History[0].QueueID.Equals("deathmatch", StringComparison.OrdinalIgnoreCase )))
+            {
+                return;
             }
             
-            
+            EndorseEnabled = true;
         }
         
         public async Task SetupWithLocalPresence(ChatV4PresenceObj.Presence obj = null)

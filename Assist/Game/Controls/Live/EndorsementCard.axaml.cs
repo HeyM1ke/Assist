@@ -36,4 +36,14 @@ public partial class EndorsementCard : UserControl
     {
         await _viewModel.EndorsePlayer(EndorsementType.SHOTCALLER);
     }
+    
+    private async void GoodTeammateBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        await _viewModel.EndorsePlayer(EndorsementType.GOODTEAMMATE);
+    }
+    
+    private async void CalmCollectedBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        await _viewModel.EndorsePlayer(EndorsementType.CALMCOLLECTED);
+    }
 }
