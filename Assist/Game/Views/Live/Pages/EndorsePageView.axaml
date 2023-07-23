@@ -45,11 +45,26 @@
         
         <Grid x:Name="ReturnGrid"
               Row="2">
-            <Button Content="Back to Party"
+            <Button
                     Classes="AssistBtn"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Click="BackToParty_Click"></Button>
+                    Click="BackToParty_Click">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5">
+                    <Image Source="/Resources/Game/ArrowLeft_Icon.png"
+                           Height="12"
+                           Width="12"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"
+                           VerticalAlignment="Center"></Image>
+                    <TextBlock Text="Back to Party"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="16"
+                               FontWeight="Regular"></TextBlock>
+                </StackPanel>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

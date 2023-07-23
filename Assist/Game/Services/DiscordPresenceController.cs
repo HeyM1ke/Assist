@@ -87,17 +87,6 @@ namespace Assist.Game.Services
                 Log.Error("Unhandled Ex StackTrace: " + e.StackTrace);
                 Log.Error("Unhandled Ex Message: " + e.Message);
             }
-
-            try
-            {
-                var t = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
-                var pres = t.presences.Find(x => x.puuid.Equals(AssistApplication.Current.CurrentUser.UserData.sub));
-                UpdateDiscordRpcWithDataFromPresence(pres);
-            }
-            catch (Exception e)
-            {
-                
-            }
             
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += UpdateDiscordRpcWithDataFromPresence;
         }

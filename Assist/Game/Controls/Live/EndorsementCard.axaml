@@ -40,7 +40,7 @@
             <StackPanel VerticalAlignment="Bottom"
                         HorizontalAlignment="Center"
                         Margin="10"
-                        Spacing="7">
+                        Spacing="5">
                 
                 <TextBlock Text="{Binding PlayerStats}"
                            FontFamily="{StaticResource Inter}"
@@ -48,7 +48,11 @@
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"
                            TextAlignment="Center"
-                ></TextBlock>
+                >
+                    <TextBlock.Effect>
+                        <DropShadowEffect></DropShadowEffect>
+                    </TextBlock.Effect>
+                </TextBlock>
                 
                 <TextBlock Text="{Binding PlayerName}"
                            FontFamily="{StaticResource Inter}"
@@ -56,7 +60,11 @@
                            FontWeight="Bold"
                            HorizontalAlignment="Center"
                            TextAlignment="Center"
-                ></TextBlock>
+                >
+                    <TextBlock.Effect>
+                        <DropShadowEffect></DropShadowEffect>
+                    </TextBlock.Effect>
+                </TextBlock>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Spacing="10">

@@ -57,11 +57,24 @@
                     </StackPanel.Styles>
                     
                     <Button Classes="AssistBtn"
-                            Content="Endorse Players from Last Match"
+                            
                             VerticalContentAlignment="Center"
                             HorizontalContentAlignment="Right"
-                            IsVisible="{Binding EndorseEnabled}"
                             Click="AttemptToOpenEndorse_Click">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="5">
+                            <Image Source="/Resources/Icons/Star_Icon.png"
+                                   Height="12"
+                                   Width="12"
+                                   RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                   VerticalAlignment="Center"></Image>
+                            <TextBlock Text="Endorse Players"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontSize="16"
+                                       FontWeight="Regular"></TextBlock>
+                        </StackPanel>
                     </Button>
                 </StackPanel>
 

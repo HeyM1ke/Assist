@@ -13,6 +13,7 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Serilog;
@@ -155,8 +156,16 @@ public partial class SettingsPopup : UserControl
         
     }
 
-    private void LinkRiotAccBtn_Click(object? sender, RoutedEventArgs e)
+    private async void LinkRiotAccBtn_Click(object? sender, RoutedEventArgs e)
     {
+        if (!AssistApplication.Current.GameModeEnabled)
+        {
+            await AssistApplication.Current.ShowNotification(new Notification("Notification",
+                "Please link while you game is open."));
+            return;
+        }
+        
+        
         PopupSystem.SpawnCustomPopup(new LinkRiotPopupView());
     }
 
