@@ -174,13 +174,13 @@
 
 
 		<!--Assist ComboBox -->
-        <SolidColorBrush  x:Key="AssistComboBoxBackground" Color="#101115"/>
+        <SolidColorBrush  x:Key="AssistComboBoxBackground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxForeground" Color="#FFFFFF"/>
         <SolidColorBrush  x:Key="AssistComboBoxHoverForeground" Color="#F61E51"/>
         <SolidColorBrush  x:Key="AssistComboBoxBorderHoverColor" Color="#F61E51"/>
-        <SolidColorBrush  x:Key="AssistComboBoxHoverBackground" Color="#101115"/>
+        <SolidColorBrush  x:Key="AssistComboBoxHoverBackground" Color="#17181D"/>
 
-        <SolidColorBrush  x:Key="AssistComboBoxItemBackground" Color="#101115"/>
+        <SolidColorBrush  x:Key="AssistComboBoxItemBackground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemForeground" Color="#FFFFFF"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverForeground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverBackground" Color="#F61E51"/>

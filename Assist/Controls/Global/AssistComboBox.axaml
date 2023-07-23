@@ -20,8 +20,8 @@
 	<Style Selector="ComboBox">
         <Setter Property="Foreground" Value="{DynamicResource AssistComboBoxForeground}"/>
         <Setter Property="Background" Value="{DynamicResource AssistComboBoxBackground}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        
     </Style>
 
 	<Style Selector="ComboBox:pointerover /template/ PathIcon#DropDownGlyph">
@@ -33,6 +33,7 @@
     </Style>
 
 	<Style Selector="ComboBox:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AssistComboBoxBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource AssistComboBoxHoverForeground}"/>
     </Style>
 

@@ -53,8 +53,7 @@
           
           <StackPanel Orientation="Vertical"
                       Spacing="3"
-                      VerticalAlignment="Bottom"
-                      IsVisible="False">
+                      VerticalAlignment="Bottom">
               <TextBlock Text="{x:Static p:Resources.GameLaunch_SelectedPatchlineText}"
                          Foreground="{DynamicResource AssistTextWhite}"
                          FontFamily="{StaticResource Inter}"
