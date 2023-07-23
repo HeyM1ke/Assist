@@ -33,5 +33,13 @@ namespace Assist.Game.Views.Live.Pages
             _viewModel.UnsubscribeFromEvents();
             Log.Error("Events Unsubbed Unloaded");
         }
+
+        private async void IngamePage_Loaded(object? sender, RoutedEventArgs e)
+        {
+            if (Design.IsDesignMode)
+                return;
+
+            await _viewModel.Setup();
+        }
     }
 }

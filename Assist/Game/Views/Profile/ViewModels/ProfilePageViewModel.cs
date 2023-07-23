@@ -16,15 +16,7 @@ public class ProfilePageViewModel : ViewModelBase
 
     public async Task Setup()
     {
-        var resp = await AssistApplication.Current.AssistUser.Profile.GetProfile();
-
-        if (resp.Code != 200)
-        {
-            Log.Error("Bad Request on Profile Get");
-            Log.Error(resp.Message);
-        }
-
-        ProfileData = JsonSerializer.Deserialize<AssistProfile>(resp.Data.ToString());
+        await UpdateProfileData();
 
         await GenerateContent();
     }
@@ -61,6 +53,19 @@ public class ProfilePageViewModel : ViewModelBase
         }
     }
 
+    public static async Task UpdateProfileData()
+    {
+        var resp = await AssistApplication.Current.AssistUser.Profile.GetProfile();
+
+        if (resp.Code != 200)
+        {
+            Log.Error("Bad Request on Profile Get");
+            Log.Error(resp.Message);
+        }
+
+        ProfileData = JsonSerializer.Deserialize<AssistProfile>(resp.Data.ToString());
+    }
+    
     private string _displayName;
 
     public string DisplayName

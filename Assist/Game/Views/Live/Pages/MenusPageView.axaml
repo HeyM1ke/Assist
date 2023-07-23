@@ -57,7 +57,7 @@
                     </StackPanel.Styles>
                     
                     <Button Classes="AssistBtn"
-                            
+                            IsVisible="{Binding EndorseEnabled}"
                             VerticalContentAlignment="Center"
                             HorizontalContentAlignment="Right"
                             Click="AttemptToOpenEndorse_Click">

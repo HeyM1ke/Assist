@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
 using Assist.Game.Services;
+using Assist.Game.Views.Profile.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
@@ -68,6 +69,17 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 RiotWebsocketServiceOnUserPresenceMessageEvent(start);
             }
 
+
+            if (ProfilePageViewModel.ProfileData is null)
+            {
+                await ProfilePageViewModel.UpdateProfileData();
+            }
+            
+            if (ProfilePageViewModel.ProfileData.LinkedRiotAccounts.Count == 0 || ProfilePageViewModel.ProfileData.LinkedRiotAccounts[0].Id != AssistApplication.Current.CurrentUser.UserData.sub)
+            {
+                return;
+            }
+            
             if (matchHistoryObj is null || LastRefreshTime.Equals(DateTime.MinValue) || DateTime.UtcNow > LastRefreshTime.AddMinutes(10) ) // wait 10 minutes to refresh matchhistory
             {
                 matchHistoryObj = await AssistApplication.Current.CurrentUser.Player.GetPlayerMatchHistory(0, 3);
