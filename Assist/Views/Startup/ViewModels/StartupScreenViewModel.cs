@@ -15,6 +15,8 @@ using Assist.Settings;
 using Assist.ViewModels;
 using Assist.Views.Authentication;
 using Assist.Views.Authentication.Sections.ViewModels;
+using AsyncImageLoader;
+using AsyncImageLoader.Loaders;
 using Avalonia;
 using Avalonia.Platform;
 using ReactiveUI;
@@ -43,6 +45,7 @@ namespace Assist.Views.Startup.ViewModels
         public async Task StartupSetup()
         {
             Log.Information("Checking for Update");
+            ImageLoader.AsyncImageLoader = new BaseWebImageLoader();
             Message = "Checking for Updates...";
             var cont = await CheckForUpdates();
             if (!cont)
@@ -83,8 +86,6 @@ namespace Assist.Views.Startup.ViewModels
                 MainWindowContentController.Change(new GameInitialView());
                 return;
             }
-
-
             
             await StartStartupAuthentication();
         }
