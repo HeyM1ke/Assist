@@ -4,6 +4,7 @@ using Assist.Controls.Dashboard.ViewModels;
 using Assist.Controls.Progression;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 namespace Assist.Controls.Dashboard;
@@ -44,12 +45,24 @@ public partial class ProgressionOverview : UserControl
                 continue;
             }
             
-            if (currMilestone.Progress != 4 && currMilestone.Progress < 0)
+            if (currMilestone.Progress != 4 && currMilestone.Progress > 0)
             {
                 t[i].IsCurrent = true;
                 t[i].ProgressText = $"{currMilestone.Progress}/4";
                 break;
             }
         }
+    }
+
+    private async void ProgressionOverview_Loaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+        {
+            return;
+        }
+        
+        await _viewModel.Setup();
+        await _viewModel.HandleDailyTicket(); // Stores the ticket.
+        UpdateTicketData();
     }
 }

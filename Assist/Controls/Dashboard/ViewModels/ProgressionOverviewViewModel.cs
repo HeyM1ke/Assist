@@ -70,6 +70,13 @@ public class ProgressionOverviewViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _rankName, value);
     }
     
+    private bool _weeklyMissionsCompleted = false;
+    public bool WeeklyMissionsCompleted
+    {
+        get => _weeklyMissionsCompleted;
+        set => this.RaiseAndSetIfChanged(ref _weeklyMissionsCompleted, value);
+    }
+    
     private static List<Mission> allMissions = null;
     private static ContactsFetchObj _userContacts = null;
     public static DailyTicketObj UserTicket = null;
@@ -119,6 +126,8 @@ public class ProgressionOverviewViewModel : ViewModelBase
                 });
             }
 
+            
+            
             return controls;
         }
 
@@ -157,6 +166,11 @@ public class ProgressionOverviewViewModel : ViewModelBase
                 });
             }
 
+            if (controls.Count == 0)
+            {
+                WeeklyMissionsCompleted = true;
+            }
+            
             return controls;
         }
 

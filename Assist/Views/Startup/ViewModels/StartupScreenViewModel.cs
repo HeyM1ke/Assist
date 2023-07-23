@@ -245,7 +245,7 @@ namespace Assist.Views.Startup.ViewModels
                         var newVersion = await mgr.UpdateApp();
                         // You must restart to complete the update. 
                         // This can be done later / at any time.
-                        return false;
+                        //return false;
                         if (newVersion != null)
                             UpdateManager.RestartApp();
                     }

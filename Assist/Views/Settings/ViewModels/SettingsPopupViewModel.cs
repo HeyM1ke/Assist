@@ -83,7 +83,7 @@ public class SettingsPopupViewModel : ViewModelBase
 
         if (RiotAccountLinked)
             LinkedAccountText =
-                $"Linked Account: {ProfilePageViewModel.ProfileData.LinkedRiotAccounts[0].Gamename}#{ProfilePageViewModel.ProfileData.LinkedRiotAccounts[0].TagLine}";
+                $"{ProfilePageViewModel.ProfileData.LinkedRiotAccounts[0].Gamename}#{ProfilePageViewModel.ProfileData.LinkedRiotAccounts[0].TagLine}";
         else
             LinkedAccountText = "No account linked.";
     }

@@ -267,6 +267,12 @@
   <data name="Global_Expired" xml:space="preserve">
     <value>Expired</value>
   </data>
+  <data name="Global_Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Global_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="Global_Information" xml:space="preserve">
     <value>Information</value>
   </data>

@@ -67,7 +67,7 @@ public class EndorsementCardViewModel : ViewModelBase
         var t = await AssistApplication.Current.AssistUser.Reputation.EndorseUser(PlayerData.Subject, type, MatchId);
         if (t.Code != 200)
         {
-            await AssistApplication.Current.ShowNotification("Notification", t.Message);
+            await AssistApplication.Current.ShowNotification(Properties.Resources.Global_Notification, t.Message);
             PlayerEndorsementsEnabled = true;
             return;
         }

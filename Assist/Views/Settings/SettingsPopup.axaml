@@ -245,33 +245,59 @@
                                                    </StackPanel>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <Grid ColumnDefinitions="Auto, Auto"
-                                                  HorizontalAlignment="Center"
-                                            >
-                                                <TextBlock Text="{Binding LinkedAccountText}"
-                                                           FontFamily="{StaticResource Inter}"
-                                                           FontSize="14"
-                                                           FontWeight="Medium"
-                                                           Opacity=".8"
-                                                           Padding="10,0"
-                                                           HorizontalAlignment="Left"
-                                                           VerticalAlignment="Center"
-                                                           Grid.Column="0"/>
-                                              
-                                                <Button Classes="AssistPlayBtn"
-                                                        Content="Link Riot Account"
-                                                        HorizontalAlignment="Stretch"
-                                                        IsEnabled="{Binding !RiotAccountLinked}"
-                                                        HorizontalContentAlignment="Center"
-                                                        Click="LinkRiotAccBtn_Click"
-                                                        Grid.Column="1"/>
+                                            <Grid Width="400">
+                                                <StackPanel Orientation="Vertical"
+                                                            Spacing="8">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Text="Linked Accounts"
+                                                                   FontFamily="{StaticResource Inter}"
+                                                                   FontSize="16"
+                                                                   FontWeight="SemiBold"
+                                                                   HorizontalAlignment="Left"
+                                                                   Grid.Column="0"/>
+                                                        <TextBlock Text="Link your Account to access special features like Endorsing and Leagues."
+                                                                   FontFamily="{StaticResource Inter}"
+                                                                   FontSize="12"
+                                                                   Opacity=".7"
+                                                                   FontWeight="Medium"
+                                                                   TextWrapping="WrapWithOverflow"
+                                                                   HorizontalAlignment="Left"/>
+                                                        <Rectangle Fill="{DynamicResource AssistRed}"
+                                                                   Height="1"></Rectangle>
+                                                    </StackPanel>
+                                                    <Button Classes="AssistBtn"
+                                                            Content="Link Riot Account"
+                                                            HorizontalAlignment="Stretch"
+                                                            IsVisible="{Binding !RiotAccountLinked}"
+                                                            HorizontalContentAlignment="Center"
+                                                            Click="LinkRiotAccBtn_Click"
+                                                            Grid.Column="1"/>
+                                                    
+                                                    <Border BorderThickness="1"
+                                                            BorderBrush="{DynamicResource AssistRed}"
+                                                            IsVisible="{Binding RiotAccountLinked}"
+                                                            CornerRadius="10"
+                                                            HorizontalAlignment="Stretch">
+                                                        <StackPanel Orientation="Horizontal"
+                                                                    Margin="10"
+                                                                    HorizontalAlignment="Center"
+                                                                    VerticalAlignment="Center"
+                                                                    Spacing="10">
+                                                            <Image Source="/Resources/Icons/Fist_Icon.png"
+                                                                   Width="16"
+                                                                   Height="16"
+                                                                   VerticalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding LinkedAccountText}"
+                                                                       FontFamily="{StaticResource Inter}"
+                                                                       FontSize="14"
+                                                                       Opacity="1"
+                                                                       FontWeight="SemiBold"
+                                                                       VerticalAlignment="Center"
+                                                                       Grid.Column="0"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </StackPanel>
                                             </Grid>
-                                            
-                                            <Button Classes="AssistBtn"
-                                                    Content="Sign Out"
-                                                    HorizontalAlignment="Stretch"
-                                                    HorizontalContentAlignment="Center"
-                                                    Click="SignOutBtn_Click" IsVisible="False"></Button>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
