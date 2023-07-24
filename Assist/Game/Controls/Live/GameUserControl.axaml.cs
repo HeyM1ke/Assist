@@ -74,6 +74,7 @@ namespace Assist.Game.Controls.Live
         }
         private async void GameUser_Init(object? sender, EventArgs e)
         {
+            await _viewModel.Setup();
             if(Design.IsDesignMode)
                 return;
 

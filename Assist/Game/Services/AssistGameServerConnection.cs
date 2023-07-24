@@ -43,10 +43,12 @@ public class AssistGameServerConnection : HubClient
         _hubConnection.On<string?>("receiveMatchValorantPartyCreate", MatchValorantPartyCreateReceived);
         _hubConnection.On<string?>("requestValorantPartyInformation", PartyInformationRequested);
         
-        _hubConnection.On<string?>("receiveStartValorantMatch", StartValorantMatchReceived);
+        _hubConnection.On<string?>("receiveEndorsementReceived", EndorsementRecievedMessageReceived);
+        _hubConnection.On<string?>("receiveEndorsementLevelChanged", EndorsementLevelChangedMessageReceived);
         
         await StartHubInternal();
     }
+
 
     private async void GlobalChatMessageReceived(string data)
     {
@@ -235,5 +237,30 @@ public class AssistGameServerConnection : HubClient
         // Send Server Data Confirming that an invite was sent.
         _hubConnection.SendAsync("confirmPrivateLobbyInvite", JsonSerializer.Serialize(data));
     }
+    #endregion
+
+    #region Endorsements
+
+    /// <summary>
+    /// Received when an endorsement is received
+    /// </summary>
+    public event Action<string?> ENDORSE_EndorsementRecievedMessageReceived;
+    
+    /// <summary>
+    /// Received when an endorsement level change is received
+    /// </summary>
+    public event Action<string?> ENDORSE_EndorsementLevelChangedMessageReceived;
+    private void EndorsementRecievedMessageReceived(string data)
+    {
+        Log.Information("RECEIVED EndorsementRecieved MESSAGE FROM SERVER");
+        ENDORSE_EndorsementRecievedMessageReceived?.Invoke(data);
+    }
+    
+    private void EndorsementLevelChangedMessageReceived(string data)
+    {
+        Log.Information("RECEIVED EndorsementLevelChanged MESSAGE FROM SERVER");
+        ENDORSE_EndorsementLevelChangedMessageReceived?.Invoke(data);
+    }
+
     #endregion
 }

@@ -70,20 +70,9 @@
                             Spacing="10">
                     <Button Width="55"
                             Height="55"
-                            Classes="AssistBtn"
+                            Classes="ThumbsUp"
                             IsEnabled="{Binding PlayerEndorsementsEnabled}"
                             ToolTip.Tip="{x:Static p:Resources.Endorse_Shotcaller_Tooltip}"
-                            ToolTip.Placement="TopEdgeAlignedLeft"
-                            Click="ShotcallerBtn_Click"
-                            ToolTip.VerticalOffset="20">
-                        <Image Source="/Resources/Icons/REP_Shotcaller_Icon.png"
-                               Margin="7"/>
-                    </Button>
-                    <Button Width="55"
-                            Height="55"
-                            Classes="AssistBtn"
-                            IsEnabled="{Binding PlayerEndorsementsEnabled}"
-                            ToolTip.Tip="{x:Static p:Resources.Endorse_GoodTeammate_Tooltip}"
                             ToolTip.Placement="TopEdgeAlignedLeft"
                             Click="GoodTeammateBtn_Click"
                             ToolTip.VerticalOffset="20">
@@ -92,14 +81,16 @@
                     </Button>
                     <Button Width="55"
                             Height="55"
-                            Classes="AssistBtn"
+                            Classes="ThumbsDown"
                             IsEnabled="{Binding PlayerEndorsementsEnabled}"
-                            ToolTip.Tip="{x:Static p:Resources.Endorse_CalmCollected_Tooltip}"
-                            ToolTip.Placement="TopEdgeAlignedLeft"
-                            Click="CalmCollectedBtn_Click"
+                            Click="BadTeammateBtn_Click"
                             ToolTip.VerticalOffset="20">
-                        <Image Source="/Resources/Icons/REP_Calm_Icon.png"
-                               Margin="6"/>
+                        <Image Source="/Resources/Icons/REP_Goodmate_Icon.png"
+                               Margin="6">
+                            <Image.RenderTransform>
+                                <RotateTransform Angle="180"></RotateTransform>
+                            </Image.RenderTransform>
+                        </Image>
                     </Button>
                 </StackPanel>
             </StackPanel>

@@ -31,19 +31,15 @@ public partial class EndorsementCard : UserControl
     {
         await _viewModel.Setup();
     }
-
-    private async void ShotcallerBtn_Click(object? sender, RoutedEventArgs e)
-    {
-        await _viewModel.EndorsePlayer(EndorsementType.SHOTCALLER);
-    }
     
     private async void GoodTeammateBtn_Click(object? sender, RoutedEventArgs e)
     {
-        await _viewModel.EndorsePlayer(EndorsementType.GOODTEAMMATE);
+        await _viewModel.EndorsePlayer(EndorsementTypeV2.NEGATIVE);
     }
     
-    private async void CalmCollectedBtn_Click(object? sender, RoutedEventArgs e)
+
+    private async void BadTeammateBtn_Click(object? sender, RoutedEventArgs e)
     {
-        await _viewModel.EndorsePlayer(EndorsementType.CALMCOLLECTED);
+        await _viewModel.EndorsePlayer(EndorsementTypeV2.NEGATIVE);
     }
 }

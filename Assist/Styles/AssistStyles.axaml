@@ -183,4 +183,54 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}" />
         <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonClickText}" />
     </Style>
+    
+    
+    <Style  Selector="Button.ThumbsUp">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimary}"></Setter>
+        <Setter Property="BorderBrush" Value="#7024FF96"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        
+    </Style>
+    
+    
+    <Style Selector="Button.ThumbsUp /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="TextBlock.FontFamily" Value="{StaticResource Inter}" />
+        <Setter Property="TextBlock.FontWeight" Value="Medium" />
+    </Style>
+    
+    <Style Selector="Button.ThumbsUp:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryLight}" />
+        <Setter Property="BorderBrush" Value="#24FF96"></Setter>
+        
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    <Style Selector="Button.ThumbsUp:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimary}" />
+        <Setter Property="BorderBrush" Value="#2CFF67" />
+    </Style>
+    
+    
+    <Style  Selector="Button.ThumbsDown">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimary}"></Setter>
+        <Setter Property="BorderBrush" Value="#70FF2C2C"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        
+    </Style>
+    
+    
+    <Style Selector="Button.ThumbsDown /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="TextBlock.FontFamily" Value="{StaticResource Inter}" />
+        <Setter Property="TextBlock.FontWeight" Value="Medium" />
+    </Style>
+    
+    <Style Selector="Button.ThumbsDown:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryLight}" />
+        <Setter Property="BorderBrush" Value="#FF2C2C"></Setter>
+        
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    <Style Selector="Button.ThumbsDown:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistRed}" />
+    </Style>
 </Styles>

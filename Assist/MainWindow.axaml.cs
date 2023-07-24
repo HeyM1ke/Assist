@@ -39,7 +39,7 @@ namespace Assist
             notificationManager = new WindowNotificationManager(this)
             {
                 Position = NotificationPosition.TopRight,
-                MaxItems = 3,
+                MaxItems = 5,
                 Margin = OperatingSystem.IsWindows() ? new Thickness(0, 30, 0, 0) : new Thickness(0),
             };
         }

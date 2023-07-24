@@ -61,17 +61,34 @@ public class EndorsementCardViewModel : ViewModelBase
         AgentImage = $"https://content.assistapp.dev/agents/{PlayerData.CharacterId}_fullportrait.png";
     }
 
-    public async Task EndorsePlayer(EndorsementType type)
+    public async Task EndorsePlayer(EndorsementTypeV2 type)
     {
         PlayerEndorsementsEnabled = false;
-        var t = await AssistApplication.Current.AssistUser.Reputation.EndorseUser(PlayerData.Subject, type, MatchId);
+        var t = await AssistApplication.Current.AssistUser.Reputation.EndorseUserV2(PlayerData.Subject, type, MatchId);
         if (t.Code != 200)
         {
-            await AssistApplication.Current.ShowNotification(Properties.Resources.Global_Notification, t.Message);
+            await AssistApplication.Current.ShowNotification(Properties.Resources.Global_Notification, HandleErrorMessage(t.Message));
             PlayerEndorsementsEnabled = true;
             return;
         }
         
         await AssistApplication.Current.ShowNotification("Notification", "Successfully Endorsed Player");
+    }
+
+    private string HandleErrorMessage(string message)
+    {
+        switch (message)
+        {
+            case "MAXENDORSEPERMATCH":
+                return "Maximum Endorsements for this match has been reached.";
+            case "RIOTACCNOTLINKED":
+                return "Riot account needs to be linked to access this feature.";
+            case "ENDORSE24HOURLIMIT":
+                return "Cannot endorse the same player within 24 hours.";
+            case "ENDORSEREPEATINGPLAYER":
+                return "Cannot Endorse the same player twice.";
+            default:
+                return message;
+        }
     }
 }

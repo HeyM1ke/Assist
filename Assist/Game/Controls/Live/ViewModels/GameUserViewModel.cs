@@ -14,6 +14,8 @@ using Assist.Settings;
 using Assist.ViewModels;
 using AssistUser.Lib.Reputations.Models;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.Threading;
 using Avalonia.Utilities;
 using ReactiveUI;
@@ -69,6 +71,14 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             get => _playerAgentIcon;
             set => this.RaiseAndSetIfChanged(ref _playerAgentIcon, value);
+        }
+
+        private Bitmap? _playerReputationImage;
+
+        public Bitmap? PlayerReputationImage
+        {
+            get => _playerReputationImage;
+            set => this.RaiseAndSetIfChanged(ref _playerReputationImage, value);
         }
 
         private string? _playerAgentName = "Selecting...";
@@ -171,7 +181,7 @@ namespace Assist.Game.Controls.Live.ViewModels
         
         public async Task Setup()
         {
-
+            
         }
 
         /// <summary>
@@ -405,7 +415,7 @@ namespace Assist.Game.Controls.Live.ViewModels
         
         private async Task SetupReputation()
         {
-            var d = await AssistApplication.Current.AssistUser.Reputation.GetUserReputation(_playerId);
+            var d = await AssistApplication.Current.AssistUser.Reputation.GetUserReputationV2(_playerId);
 
             if (d.Code != 200)
             {
@@ -414,9 +424,9 @@ namespace Assist.Game.Controls.Live.ViewModels
                 return;
             }
 
-            var rep = JsonSerializer.Deserialize<AssistReputationUser>(d.Data.ToString());
+            var rep = JsonSerializer.Deserialize<AssistReputationUserV2>(d.Data.ToString());
 
-            var t = rep.SeasonalReputation.TryGetValue(AssistApplication.EpisodeId, out AssistSeasonalReputation reputation);
+            var t = rep.SeasonalReputation.TryGetValue(AssistApplication.EpisodeId, out AssistSeasonalReputationV2 reputation);
 
             if (!t)
             {
@@ -424,14 +434,8 @@ namespace Assist.Game.Controls.Live.ViewModels
                 return;
             }
 
-            reputation.EndorsementsReceived.TryGetValue("SHOTCALLER", out int value);
-            ShotcallerReputation = value.ToString();
-
-            reputation.EndorsementsReceived.TryGetValue("GOODTEAMMATE", out value);
-            GoodteammateReputation = value.ToString();
-            
-            reputation.EndorsementsReceived.TryGetValue("CALMCOLLECTED", out value);
-            CalmReputation = value.ToString();
+            var bitmap = new Bitmap(AssetLoader.Open(new Uri($@"avares://Assist/Resources/Game/Assist_EndorseLevel{reputation.Level}.png")));
+            PlayerReputationImage = bitmap;
             
             ReputationChecked = true;
         }
