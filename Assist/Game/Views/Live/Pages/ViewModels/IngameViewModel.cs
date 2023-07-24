@@ -561,6 +561,10 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         public void UnsubscribeFromEvents()
         {
             Log.Information("Page is Unloaded, Unsubbing from Events from IngameView");
+            AllyTeamControls.Clear();
+            EnemyTeamControls.Clear();
+            DeathTeamControls.Clear();
+            
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
         }
     }

@@ -67,6 +67,7 @@
 						                      IsCompressed="True"
 						                      IsFullSize="False"
 						                      IsEnabled="False"
+						                      IsVisible="False"
 						                      IsSpecial="True"
 						                      Icon="/Resources/Icons/L_Icon.png"></navigation:NavButton>
 						

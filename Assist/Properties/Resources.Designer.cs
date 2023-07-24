@@ -510,6 +510,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Member Since.
+        /// </summary>
+        public static string Global_MemberSince {
+            get {
+                return ResourceManager.GetString("Global_MemberSince", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string Global_No {
@@ -560,6 +569,24 @@ namespace Assist.Properties {
         public static string Global_Support {
             get {
                 return ResourceManager.GetString("Global_Support", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supporter.
+        /// </summary>
+        public static string Global_Supporter {
+            get {
+                return ResourceManager.GetString("Global_Supporter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supporter Pro.
+        /// </summary>
+        public static string Global_SupporterPro {
+            get {
+                return ResourceManager.GetString("Global_SupporterPro", resourceCulture);
             }
         }
         

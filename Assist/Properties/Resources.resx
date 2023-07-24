@@ -255,6 +255,15 @@
   <data name="Global_Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="Global_Supporter" xml:space="preserve">
+    <value>Supporter</value>
+  </data>
+  <data name="Global_MemberSince" xml:space="preserve">
+    <value>Member Since</value>
+  </data>
+  <data name="Global_SupporterPro" xml:space="preserve">
+    <value>Supporter Pro</value>
+  </data>
   <data name="Global_Add" xml:space="preserve">
     <value>Add</value>
   </data>

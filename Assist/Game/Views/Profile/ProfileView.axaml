@@ -45,7 +45,8 @@
                         </TabItem>
                         <TabItem Classes="Assist"
                                  Header="{x:Static p:Resources.Profile_LeagueHeader}"
-                                 IsEnabled="False"/>
+                                 IsEnabled="False"
+                                 IsVisible="False"/>
                     </TabControl>
                 </Grid>
                 

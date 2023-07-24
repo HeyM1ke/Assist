@@ -139,7 +139,9 @@
                                             Height="90"
                                             CornerRadius="5">
                                         <asyncImageLoader:AdvancedImage Margin="5"
-                                                                        Source="{Binding PlayerRankIcon}"/>
+                                                                        Source="{Binding PlayerRankIcon}">
+                                            
+                                        </asyncImageLoader:AdvancedImage>
                                     </Border>
                                     
                                     <Border 

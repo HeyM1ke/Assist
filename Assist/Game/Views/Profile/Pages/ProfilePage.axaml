@@ -20,7 +20,7 @@
                                 Width="128"
                                 Height="128"
                                 BorderThickness="2"
-                                CornerRadius="20"
+                                CornerRadius="10"
                                 BorderBrush="{DynamicResource AssistPrimaryLight}">
                             <asyncImageLoader:AdvancedImage CornerRadius="20"
                                                             HorizontalAlignment="Center"
@@ -28,30 +28,64 @@
                                                             Source="{Binding DisplayImage, FallbackValue='Wait a second'}"
                                                             Stretch="UniformToFill"></asyncImageLoader:AdvancedImage>
                         </Border>
-                        
-                        <StackPanel Orientation="Horizontal"
-                                    Spacing="8"
-                                    HorizontalAlignment="Center">
-                            
-                        </StackPanel>
                     </StackPanel>
                     
-                    <StackPanel Spacing="1">
+                    <StackPanel Spacing="4" VerticalAlignment="Center">
+                        <Panel Height="31" IsVisible="{Binding IsSupporter}">
+                            <Border BorderBrush="{DynamicResource AssistSupporter}"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    HorizontalAlignment="Left"
+                                    Width="140"
+                                    Height="22"
+                                    Padding="4"
+                                    Margin="4,0"
+                            >
+                                <TextBlock Text="{Binding SupporterText}"
+                                           Margin="4,0"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontWeight="ExtraBold"
+                                           Foreground="{DynamicResource AssistSupporter}"
+                                           TextWrapping="WrapWithOverflow"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           TextAlignment="Right"
+                                           FontSize="11"
+                                           />
+                            </Border>
+                            <Image Width="31"
+                                   Height="31"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Source="/Resources/Assist-SupporterBadge.png"
+                                   RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                            
+                        </Panel>
                         <TextBlock Text="{Binding DisplayName, FallbackValue='Wait a second'}"
                                    FontFamily="{StaticResource Inter}"
                                    FontWeight="SemiBold"
-                                   FontSize="24"></TextBlock>
+                                   FontSize="28"
+                                   HorizontalAlignment="Left"
+                                   Margin="0,-4"
+                                   TextAlignment="Left"></TextBlock>
                         
                         <TextBlock Text="{Binding DisplayStatus, FallbackValue='Loading..'}"
                                    FontFamily="{StaticResource Inter}"
                                    FontWeight="Light"
+                                   IsVisible="{Binding StatusVisible}"
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="12"></TextBlock>
+                        
+                        <TextBlock Text="{Binding MemberSinceText, FallbackValue='Loading..'}"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontWeight="Medium"
                                    TextWrapping="WrapWithOverflow"
                                    Width="180"
-                                   FontSize="14"></TextBlock>
+                                   FontSize="11"></TextBlock>
+                        
                         
                         <StackPanel Orientation="Horizontal"
-                                    Spacing="5"
-                                    Margin="0,35">
+                                    Spacing="20">
                             
                         </StackPanel>
                     </StackPanel>

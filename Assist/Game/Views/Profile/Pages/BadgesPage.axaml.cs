@@ -27,7 +27,7 @@ public partial class BadgesPage : UserControl
         {
             return;
         }
-        _viewModel.Setup();
+        await _viewModel.Setup();
     }
 
     private async void FeaturedBtn_Click(object? sender, RoutedEventArgs e)

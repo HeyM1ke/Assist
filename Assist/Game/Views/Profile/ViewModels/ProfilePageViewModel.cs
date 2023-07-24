@@ -2,11 +2,13 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Controls.Profile;
+using Assist.Properties;
 using Assist.ViewModels;
 using AssistUser.Lib.Leagues.Models;
 using AssistUser.Lib.Profiles.Models;
 using ReactiveUI;
 using Serilog;
+using WebSocketSharp;
 
 namespace Assist.Game.Views.Profile.ViewModels;
 
@@ -25,8 +27,9 @@ public class ProfilePageViewModel : ViewModelBase
     {
         DisplayName = ProfileData.DisplayName;
         DisplayImage = ProfileData.ProfileImage;
+        
+        StatusVisible = !ProfileData.Status.IsNullOrEmpty();
         DisplayStatus = ProfileData.Status;
-
         if (ProfileData.Leagues.Count > 0)
         {
             var listOfLeagues = new List<ProfileLeagueShowcase>();
@@ -51,6 +54,14 @@ public class ProfilePageViewModel : ViewModelBase
 
             LeagueShowcases = listOfLeagues;
         }
+
+        if (ProfileData.PremiumData.IsPremium)
+        {
+            IsSupporter = ProfileData.PremiumData.IsPremium;
+            var tier = ProfileData.PremiumData.Type == 1 ? Resources.Global_Supporter : Resources.Global_SupporterPro;
+            SupporterText = $"{tier}";
+        }
+        MemberSinceText = $"{Properties.Resources.Global_MemberSince}: {ProfileData.CreatedAt?.ToShortDateString()}";
     }
 
     public static async Task UpdateProfileData()
@@ -86,6 +97,34 @@ public class ProfilePageViewModel : ViewModelBase
     {
         get => _displayStatus;
         set => this.RaiseAndSetIfChanged(ref _displayStatus, value);
+    }
+    
+    private string _supporterText;
+    public string SupporterText
+    {
+        get => _supporterText;
+        set => this.RaiseAndSetIfChanged(ref _supporterText, value);
+    }
+    
+    private string _memberSinceText;
+    public string MemberSinceText
+    {
+        get => _memberSinceText;
+        set => this.RaiseAndSetIfChanged(ref _memberSinceText, value);
+    }
+    
+    private bool _isSupporter;
+    public bool IsSupporter
+    {
+        get => _isSupporter;
+        set => this.RaiseAndSetIfChanged(ref _isSupporter, value);
+    }
+    
+    private bool _statusVisible;
+    public bool StatusVisible
+    {
+        get => _statusVisible;
+        set => this.RaiseAndSetIfChanged(ref _statusVisible, value);
     }
 
     private List<ProfileLeagueShowcase> _leagueShowcases;

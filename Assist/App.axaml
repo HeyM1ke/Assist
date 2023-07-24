@@ -18,6 +18,7 @@
         <SolidColorBrush  x:Key="AssistRed" Color="#F61E51"/>
 		<SolidColorBrush  x:Key="AssistGray" Color="#17181D"/>
 		<SolidColorBrush  x:Key="AssistBlack" Color="#101115"/>
+        <SolidColorBrush x:Key="AssistSupporter" Color="#2ecc71"/>
         
         <SolidColorBrush  x:Key="AssistPrimary" Color="#0B0C0E"/>
         <SolidColorBrush  x:Key="AssistPrimaryLight" Color="#131518"/>

@@ -18,18 +18,18 @@
                         CornerRadius="10">
                     <Grid Margin="5">
                         <StackPanel Orientation="Vertical"
-                                    HorizontalAlignment="Center"
+                                    HorizontalAlignment="Right"
                                     VerticalAlignment="Center">
                             <TextBlock Text="{TemplateBinding LeagueName}"
                                        FontFamily="{StaticResource Inter}"
                                        FontWeight="SemiBold"
                                        FontSize="11"
-                                       TextAlignment="Center"></TextBlock>
+                                       TextAlignment="Right"></TextBlock>
                             <TextBlock Text="{TemplateBinding LeagueStatText}"
                                        FontFamily="{StaticResource Inter}"
                                        FontWeight="Light"
                                        FontSize="8"
-                                       TextAlignment="Center"></TextBlock>
+                                       TextAlignment="Right"></TextBlock>
                         </StackPanel>
                     </Grid>
                 </Border>
