@@ -80,7 +80,8 @@
                                    FontFamily="{StaticResource Inter}"
                                    FontWeight="Medium"
                                    TextWrapping="WrapWithOverflow"
-                                   Width="180"
+                                   Width="200"
+                                   Opacity=".6"
                                    FontSize="11"></TextBlock>
                         
                         
