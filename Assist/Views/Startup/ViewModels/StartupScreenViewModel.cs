@@ -42,6 +42,8 @@ namespace Assist.Views.Startup.ViewModels
             get => _message;
             set => this.RaiseAndSetIfChanged(ref _message, value);
         }
+
+        private static bool _checkedForGamemode = false;
         public async Task StartupSetup()
         {
             Log.Information("Checking for Update");
@@ -65,8 +67,9 @@ namespace Assist.Views.Startup.ViewModels
             Log.Information("Connecting to GENERAL SERVER");
             await AssistApplication.Current.ConnectToServerHub();
             // Check Args
-            if (AssistApplication.CurrentApplication.Args.Contains("--forcegame"))
+            if (AssistApplication.CurrentApplication.Args.Contains("--forcegame") && !_checkedForGamemode)
             {
+                _checkedForGamemode = true;
                 MainWindowContentController.Change(new GameInitialView());
                 return;
             }

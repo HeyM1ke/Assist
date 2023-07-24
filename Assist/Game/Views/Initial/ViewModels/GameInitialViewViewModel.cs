@@ -7,6 +7,7 @@ using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
+using Assist.Views.Startup;
 using Avalonia.Controls;
 using ReactiveUI;
 using Serilog;
@@ -45,8 +46,10 @@ namespace Assist.Game.Views.Initial.ViewModels
 
             while (!IsValorantRunning())
             {
-                Message = "Please Run Assist, When Valorant is Open. Checking in 5 seconds.";
+                Message = "Valorant is not Running, Heading Back to the Launcher.";
                 await Task.Delay(5000);
+                MainWindowContentController.Change(new InitialScreen());
+                return;
             }
 
             // Connect to Valorant Websocket Through Socket Service.
