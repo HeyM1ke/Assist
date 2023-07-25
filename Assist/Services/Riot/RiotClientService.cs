@@ -24,7 +24,7 @@ namespace Assist.Services.Riot
         private string RiotClientLocation;
         public static bool ClientOpened = false;
         private BackgroundWorker _worker;
-        public static RiotApplicationData RiotApplicationData = new RiotApplicationData();
+        public RiotApplicationData RiotApplicationData = new RiotApplicationData();
 
         private const string bgVidUrl = "https://cdn.rumblemike.com/Static/live/assistBackVideo_dev.mp4";
         public RiotClientService()

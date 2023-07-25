@@ -1,5 +1,6 @@
 using System;
 using Assist.Game.Views.Initial.ViewModels;
+using Assist.ViewModels;
 using Avalonia.Controls;
 
 namespace Assist.Game.Views.Initial
@@ -9,6 +10,7 @@ namespace Assist.Game.Views.Initial
         private readonly GameInitialViewViewModel _viewModel;
         public GameInitialView()
         {
+            AssistApplication.Current.GameModeEnabled = true;
             DataContext = _viewModel = new GameInitialViewViewModel();
             InitializeComponent();
         }

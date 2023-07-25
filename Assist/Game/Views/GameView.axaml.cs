@@ -2,6 +2,7 @@ using Assist.Game.Services;
 using Assist.Game.ViewModels;
 using Assist.Game.Views.Live;
 using Assist.Services;
+using Assist.ViewModels;
 using Assist.Views.Dashboard;
 using Avalonia.Controls;
 
@@ -13,6 +14,7 @@ namespace Assist.Game.Views
 
         public GameView()
         {
+            AssistApplication.Current.GameModeEnabled = true;
             DataContext = _viewModel = new GameViewViewModel();
             InitializeComponent();
             GameViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");

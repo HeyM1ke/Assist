@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Controls.Global.Popup;
+using Assist.Game.Services;
 using Assist.Game.Views;
 using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
@@ -55,7 +56,11 @@ namespace Assist.Views.Startup.ViewModels
                 // Means update is found and needs to stop.
             }
 
-
+            if (DiscordPresenceController.ControllerInstance.BDiscordPresenceActive)
+            {
+                await DiscordPresenceController.ControllerInstance.Shutdown();
+            }
+            
             Log.Information("Running Setup");
 
             if (!AssistSettings.Current.LanguageSelected)

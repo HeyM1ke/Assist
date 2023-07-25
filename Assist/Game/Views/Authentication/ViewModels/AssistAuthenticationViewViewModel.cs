@@ -105,10 +105,11 @@ namespace Assist.Game.Views.Authentication.ViewModels
                 {
                     if (!AssistApplication.Current.GameModeEnabled)
                     {
-                        Log.Information("Attempting To Connect to Game Server");
+                        
                         MainWindowContentController.Change(new MainView());
                         return;
                     }
+                    Log.Information("Attempting To Connect to Game Server");
                     await AssistApplication.Current.GameServerConnection.Connect();
 
                     AssistApplication.Current.OpenGameView();
