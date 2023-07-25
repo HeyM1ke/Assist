@@ -97,9 +97,9 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Fatal("PREGAME ERROR: " + e.Message);
                 
                 if(e.StatusCode == HttpStatusCode.BadRequest){
-                    Log.Fatal("TOKEN ERROR: ");
-                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                       
+                    Log.Fatal("TOKEN ERROR: " + e.Message);
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    await this.Setup();
                 }
             }
 

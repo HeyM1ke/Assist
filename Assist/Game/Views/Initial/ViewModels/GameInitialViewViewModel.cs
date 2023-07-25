@@ -34,13 +34,6 @@ namespace Assist.Game.Views.Initial.ViewModels
             if (Design.IsDesignMode)
                 return;
 
-            if (!AssistApplication.Current.GameModeEnabled)
-            {
-                AssistApplication.Current.ChangeToGameModeResolution(AssistSettings.Current.SelectedResolution);
-                return;
-            }
-                
-
             PopupSystem.KillPopups();
             // Start Setup
 

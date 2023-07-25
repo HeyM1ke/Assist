@@ -147,8 +147,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 if (e.StatusCode == HttpStatusCode.BadRequest)
                 {
                     Log.Fatal("TOKEN ERROR: " + e.Content);
-                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    await this.Setup();
+                    return;
                 }
+                Log.Fatal("Failed to Reauth" );
             }
 
             try
@@ -210,10 +213,9 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 
                 if(e.StatusCode == HttpStatusCode.BadRequest){
                     Log.Fatal("TOKEN ERROR: ");
-                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                    
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    return;
                 }
-                return;
             }
 
             

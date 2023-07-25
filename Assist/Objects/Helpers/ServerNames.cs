@@ -62,6 +62,8 @@ public class ServerNames
         { "aresriot.aws-rclusterprod-euw2-1.tournament-gp-london-awsedge-1", "London" },
         { "aresriot.aws-rclusterprod-mad1-1.eu-gp-madrid-1", "Madrid" },
         { "aresriot.aws-rclusterprod-mad1-1.tournament-gp-madrid-1", "Madrid" },
+        { "aresriot.aws-eus2-prod.eu-gp-madrid-1", "Madrid" },
+        { "aresriot.aws-eus2-prod.eu-gp-madrid-2", "Madrid" },
         { "aresriot.mtl-tmx-mex1-1.ext1-gp-mexicocity-1", "Mexico City" },
         { "aresriot.mtl-tmx-mex1-1.latam-gp-mexicocity-1", "Mexico City" },
         { "aresriot.mtl-tmx-mex1-1.tournament-gp-mexicocity-1", "Mexico City" },

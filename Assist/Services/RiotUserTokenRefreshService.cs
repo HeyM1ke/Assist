@@ -12,10 +12,10 @@ public class RiotUserTokenRefreshService
     private DateTime timeOfLastRe;
     public RiotUserTokenRefreshService()
     {
-        AssistApplication.Current.CurrentUser.TokensExpired += CurrentUserOnTokensExpired;
+        
     }
 
-    public async void CurrentUserOnTokensExpired()
+    public async Task CurrentUserOnTokensExpired()
     {
         if (timeOfLastRe != null)
         {
