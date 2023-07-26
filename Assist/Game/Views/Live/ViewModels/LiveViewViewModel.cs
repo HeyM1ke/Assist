@@ -9,6 +9,7 @@ using Assist.Game.Services;
 using Assist.Game.Views.Live.Pages;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
+using AssistUser.Lib.Reputations.Models;
 using Avalonia.Threading;
 using ReactiveUI;
 using Serilog;
@@ -26,6 +27,8 @@ namespace Assist.Game.Views.Live.ViewModels
             get => _output;
             set => this.RaiseAndSetIfChanged(ref _output, value);
         }
+
+        public static Dictionary<string, AssistReputationUserV2> ReputationUserV2s = new Dictionary<string, AssistReputationUserV2>();
 
         public async void DisplayWebsocketData()
         {
@@ -143,6 +146,37 @@ namespace Assist.Game.Views.Live.ViewModels
                     break;
             }
             });
+        }
+
+
+        public static async Task GetUserReputations(List<string> ids)
+        {
+            var resp = await AssistApplication.Current.AssistUser.Reputation.GetUserReputationV2(ids);
+            if (resp.Code != 200)
+            {
+                Log.Error("Failed to Request to get reputation.");
+                return;
+            }
+
+            var data = JsonSerializer.Deserialize<List<AssistReputationUserV2>>(resp.Data.ToString());
+
+            foreach (var player in data)
+            {
+                // Try to get the value, if it exists update it.
+               ReputationUserV2s.TryGetValue(player.Id, out AssistReputationUserV2? possibleStoredPlayer);
+
+               if (possibleStoredPlayer is null)
+               {
+                   Log.Information("Player requested is new, adding player to storage.");
+                   ReputationUserV2s.TryAdd(player.Id, player);
+               }
+               else
+               {
+                   Log.Information("Player requested is old, updating player to storage.");
+                   ReputationUserV2s[player.Id] = player;
+               }
+            }
+            
         }
     }
 }

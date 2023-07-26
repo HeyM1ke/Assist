@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
+using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
@@ -232,6 +233,9 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 var enemyTeam = await GetEnemyTeam(MatchResp.Players);
                 var allMatchPlayerIds = MatchResp.Players.Select(p => p.Subject).ToList();
 
+                
+                await LiveViewViewModel.GetUserReputations(allMatchPlayerIds);
+                
                 var allTeamPresences =
                     PresenceResp.presences.FindAll(pres =>
                         allMatchPlayerIds.Contains(pres.puuid));

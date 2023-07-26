@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
 using Assist.Game.Services;
+using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
 using Assist.Services;
@@ -185,6 +186,9 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     PresenceResp.presences.FindAll(pres =>
                         teamIds.Contains(pres.puuid)); // Contains every presence from the team.
 
+                //TODO Request Data for teammatesID and store them in the LiveViewViewModel Class to the ReputationUserV2s List. 
+                await LiveViewViewModel.GetUserReputations(teamIds);
+                
                 // Determine partys that are greater than 2 that are on the same team. 
                 // Mark them and store the ids in a list.
 
