@@ -72,8 +72,6 @@
                             Height="55"
                             Classes="ThumbsUp"
                             IsEnabled="{Binding PlayerEndorsementsEnabled}"
-                            ToolTip.Tip="{x:Static p:Resources.Endorse_Shotcaller_Tooltip}"
-                            ToolTip.Placement="TopEdgeAlignedLeft"
                             Click="GoodTeammateBtn_Click"
                             ToolTip.VerticalOffset="20">
                         <Image Source="/Resources/Icons/REP_Goodmate_Icon.png"

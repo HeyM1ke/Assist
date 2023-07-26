@@ -258,6 +258,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to party.
+        /// </summary>
+        public static string Endorse_BackToParty {
+            get {
+                return ResourceManager.GetString("Endorse_BackToParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calm &amp; Collected, your teammate was composed throughtout the match. .
         /// </summary>
         public static string Endorse_CalmCollected_Tooltip {
@@ -267,11 +276,20 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Good Teammate, your teammate was a good one, can&apos;t find those often. .
+        ///   Looks up a localized string similar to You received a thumbs up from.
         /// </summary>
-        public static string Endorse_GoodTeammate_Tooltip {
+        public static string Endorse_NotificationText {
             get {
-                return ResourceManager.GetString("Endorse_GoodTeammate_Tooltip", resourceCulture);
+                return ResourceManager.GetString("Endorse_NotificationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ENDORSE PLAYERS.
+        /// </summary>
+        public static string Endorse_PageTitle {
+            get {
+                return ResourceManager.GetString("Endorse_PageTitle", resourceCulture);
             }
         }
         

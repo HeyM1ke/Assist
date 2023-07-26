@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Global;
 using Assist.Objects.AssistApi.Game;
+using Assist.Objects.AssistApi.Game.Endorsement;
 using Assist.Objects.AssistApi.Server;
 using Assist.Services.Popup;
 using Assist.Services.Server;
@@ -253,6 +254,15 @@ public class AssistGameServerConnection : HubClient
     private void EndorsementRecievedMessageReceived(string data)
     {
         Log.Information("RECEIVED EndorsementRecieved MESSAGE FROM SERVER");
+        
+        // TODO Move this to a more proper place.
+        if (!string.IsNullOrEmpty(data))
+        {
+            var t = JsonSerializer.Deserialize<AssistSEndorsementReceived>(data);
+            AssistApplication.Current.ShowNotification(Properties.Resources.Global_Notification,
+                $"{Properties.Resources.Endorse_NotificationText} : {t.UsernameOfGiver}");
+        }
+
         ENDORSE_EndorsementRecievedMessageReceived?.Invoke(data);
     }
     

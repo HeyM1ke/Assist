@@ -240,8 +240,17 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     PresenceResp.presences.FindAll(pres =>
                         allMatchPlayerIds.Contains(pres.puuid));
 
-
-                var parties = await MarkPlayerSimilarParties(allTeamPresences);
+                Dictionary<string, IBrush> parties = new Dictionary<string, IBrush>();
+                try
+                {
+                    parties = await MarkPlayerSimilarParties(allTeamPresences);
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                    Log.Error(e.StackTrace);
+                    parties.Clear();
+                }
 
                 
                 if (AllyTeamControls.Count == 0) 
@@ -343,43 +352,43 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                         // Assign Color to each party, as there are 5 different partys just have 5 diff cases
                         case 0:
                             assignedColor = new SolidColorBrush(new Color(255, 0, 255, 127));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 1:
                             assignedColor = new SolidColorBrush(new Color(255, 255, 215, 0));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 2:
                             assignedColor = new SolidColorBrush(new Color(255, 32, 178, 170));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 3:
                             assignedColor = new SolidColorBrush(new Color(255, 148, 0, 211));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 4:
                             assignedColor = new SolidColorBrush(new Color(255, 112, 128, 144));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 5:
                             assignedColor = new SolidColorBrush(new Color(255, 0, 128, 128));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 6:
                             assignedColor = new SolidColorBrush(new Color(255, 221, 160, 221));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 7:
                             assignedColor = new SolidColorBrush(new Color(255, 210, 105, 30));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 8:
                             assignedColor = new SolidColorBrush(new Color(255, 128, 128, 0));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         default:
                             assignedColor = new SolidColorBrush(new Color(255, 220, 20, 60));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                     }
 

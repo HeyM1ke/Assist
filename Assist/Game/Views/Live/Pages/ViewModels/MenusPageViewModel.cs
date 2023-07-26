@@ -273,9 +273,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
                     for (int i = 0; i < partyData.Members.Count; i++)
                     {
-                        if(partyData.Members[i].Subject == AssistApplication.Current.CurrentUser.UserData.sub)
-                            continue;
-
+                        
                         var member = partyData.Members[i];
                         var currentUserBtn = CurrentUsers.ToList().Find(member => member.PlayerId == partyData.Members[i].Subject);
                         var gameName = pres.presences.Find(pres => pres.puuid == member.Subject);

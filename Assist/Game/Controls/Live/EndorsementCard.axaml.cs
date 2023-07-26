@@ -34,7 +34,7 @@ public partial class EndorsementCard : UserControl
     
     private async void GoodTeammateBtn_Click(object? sender, RoutedEventArgs e)
     {
-        await _viewModel.EndorsePlayer(EndorsementTypeV2.NEGATIVE);
+        await _viewModel.EndorsePlayer(EndorsementTypeV2.POSITIVE);
     }
     
 

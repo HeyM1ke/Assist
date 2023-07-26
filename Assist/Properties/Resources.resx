@@ -447,7 +447,13 @@
   <data name="Endorse_Shotcaller_Tooltip" xml:space="preserve">
     <value>Shotcaller, your teammate was a leader and helped your team push through. </value>
   </data>
-  <data name="Endorse_GoodTeammate_Tooltip" xml:space="preserve">
-    <value>Good Teammate, your teammate was a good one, can't find those often. </value>
+  <data name="Endorse_NotificationText" xml:space="preserve">
+    <value>You received a thumbs up from</value>
+  </data>
+  <data name="Endorse_PageTitle" xml:space="preserve">
+    <value>ENDORSE PLAYERS</value>
+  </data>
+  <data name="Endorse_BackToParty" xml:space="preserve">
+    <value>Back to party</value>
   </data>
 </root>

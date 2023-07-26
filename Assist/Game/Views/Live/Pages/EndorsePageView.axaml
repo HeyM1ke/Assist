@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="690"
@@ -12,7 +13,7 @@
         
         <Grid x:Name="TitleGrid">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="ENDORSE A PLAYER"
+                <TextBlock Text="{x:Static p:Resources.Endorse_PageTitle}"
                            FontFamily="{StaticResource Inter}"
                            FontSize="40"
                            FontWeight="ExtraBlack"
@@ -57,7 +58,7 @@
                            Width="12"
                            RenderOptions.BitmapInterpolationMode="MediumQuality"
                            VerticalAlignment="Center"></Image>
-                    <TextBlock Text="Back to Party"
+                    <TextBlock Text="{x:Static p:Resources.Endorse_BackToParty}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                FontFamily="{StaticResource Inter}"
