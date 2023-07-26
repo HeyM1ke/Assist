@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 
 namespace Assist.Game.Controls.Live
 {
@@ -36,7 +37,13 @@ namespace Assist.Game.Controls.Live
             set { SetValue(PlayerReadyProperty, value); }
         }
 
-        public string? PlayerId;
+        public Bitmap? PlayerReputationLevel
+        {
+            get { return (Bitmap?)GetValue(PlayerReputationLevelProperty); }
+            set { SetValue(PlayerReputationLevelProperty, value); }
+        }
 
+        public string? PlayerId;
+        public static readonly StyledProperty<Bitmap?> PlayerReputationLevelProperty = AvaloniaProperty.Register<LiveMenuPartyUser, Bitmap?>("PlayerReputationLevel");
     }
 }

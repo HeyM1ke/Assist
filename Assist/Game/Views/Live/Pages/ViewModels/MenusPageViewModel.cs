@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
 using Assist.Game.Services;
+using Assist.Game.Views.Live.ViewModels;
 using Assist.Game.Views.Profile.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
 using Avalonia.Collections;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.Threading;
 using ReactiveUI;
 using Serilog;
@@ -101,28 +104,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 if(data.sessionLoopState != "MENUS")
                     return;
 
-                if (CurrentUsers.Count == 0)
-                {
-                    AddUserToList(
-                    
-                        new LiveMenuPartyUser()
-                        {
-                            PlayerId = obj.puuid,
-                            PlayerName = $"{obj.game_name}#{obj.game_tag}",
-                            Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
-                            PlayerReady = true,
-                        }
-                    );
-                }
-
-                if (data.partySize == 1)
-                {
-                    for (int i = 0; i < CurrentUsers.Count; i++)
-                    {
-                        if (CurrentUsers[i].PlayerId != AssistApplication.Current.CurrentUser.UserData.sub)
-                            RemoveUserToList(CurrentUsers[i]);
-                    }
-                }
+                
 
                 CurrentPartyId = data.partyId;
                 UpdateGeneralPartyInformation(data,obj);
@@ -130,6 +112,39 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 if (data.partySize > 1)
                 {
                     await Dispatcher.UIThread.InvokeAsync(() => { HandleMoreThanOneParty(data); });
+                }
+                else
+                {
+                    var alreadyHere = LiveViewViewModel.ReputationUserV2s.ContainsKey(obj.puuid);
+                    if (!alreadyHere)
+                    {
+                        await LiveViewViewModel.GetUserReputations(new List<string>() { obj.puuid });
+                    }
+
+                    
+                    if (CurrentUsers.Count == 0)
+                    {
+                        AddUserToList(
+                    
+                            new LiveMenuPartyUser()
+                            {
+                                PlayerId = obj.puuid,
+                                PlayerName = $"{obj.game_name}",
+                                Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
+                                PlayerReady = true,
+                                PlayerReputationLevel = SetupReputation( obj.puuid)
+                            }
+                        );
+                    }
+
+                    if (data.partySize == 1)
+                    {
+                        for (int i = 0; i < CurrentUsers.Count; i++)
+                        {
+                            if (CurrentUsers[i].PlayerId != AssistApplication.Current.CurrentUser.UserData.sub)
+                                RemoveUserToList(CurrentUsers[i]);
+                        }
+                    }
                 }
             }
 
@@ -146,28 +161,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 if(data.sessionLoopState != "MENUS")
                     return;
 
-                if (CurrentUsers.Count == 0)
-                {
-                    AddUserToList(
-                    
-                        new LiveMenuPartyUser()
-                        {
-                            PlayerId = obj.data.presences[0].puuid,
-                            PlayerName = $"{obj.data.presences[0].game_name}#{obj.data.presences[0].game_tag}",
-                            Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
-                            PlayerReady = true,
-                        }
-                    );
-                }
-
-                if (data.partySize == 1)
-                {
-                    for (int i = 0; i < CurrentUsers.Count; i++)
-                    {
-                        if (CurrentUsers[i].PlayerId != AssistApplication.Current.CurrentUser.UserData.sub)
-                            RemoveUserToList(CurrentUsers[i]);
-                    }
-                }
+                
 
                 CurrentPartyId = data.partyId;
                 UpdateGeneralPartyInformation(data,obj);
@@ -175,6 +169,39 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 if (data.partySize > 1)
                 {
                     await Dispatcher.UIThread.InvokeAsync(() => { HandleMoreThanOneParty(data); });
+                }
+                else
+                {
+                    var alreadyHere = LiveViewViewModel.ReputationUserV2s.ContainsKey(obj.data.presences[0].puuid);
+                    if (!alreadyHere)
+                    {
+                        await LiveViewViewModel.GetUserReputations(new List<string>() { obj.data.presences[0].puuid });
+                    }
+                    
+                    
+                    if (CurrentUsers.Count == 0)
+                    {
+                        AddUserToList(
+                    
+                            new LiveMenuPartyUser()
+                            {
+                                PlayerId = obj.data.presences[0].puuid,
+                                PlayerName = $"{obj.data.presences[0].game_name}",
+                                Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
+                                PlayerReady = true,
+                                PlayerReputationLevel = SetupReputation(obj.data.presences[0].puuid)
+                            }
+                        );
+                    }
+
+                    if (data.partySize == 1)
+                    {
+                        for (int i = 0; i < CurrentUsers.Count; i++)
+                        {
+                            if (CurrentUsers[i].PlayerId != AssistApplication.Current.CurrentUser.UserData.sub)
+                                RemoveUserToList(CurrentUsers[i]);
+                        }
+                    }
                 }
             }
             
@@ -240,6 +267,10 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     if(partyData.Members.Count <= 1)
                         return;
 
+                    var allIds = partyData.Members.Select(x => x.Subject).ToList();
+
+                    await LiveViewViewModel.GetUserReputations(allIds);
+
                     for (int i = 0; i < partyData.Members.Count; i++)
                     {
                         if(partyData.Members[i].Subject == AssistApplication.Current.CurrentUser.UserData.sub)
@@ -255,10 +286,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                             {
                                 AddUserToList(new LiveMenuPartyUser()
                                 {
-                                    PlayerName = $"{gameName.game_name}#{gameName.game_tag}",
+                                    PlayerName = $"{gameName.game_name}",
                                     PlayerId = member.Subject,
                                     Playercard = $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png",
-                                    PlayerReady = true
+                                    PlayerReady = true,
+                                    PlayerReputationLevel = SetupReputation(member.Subject)
                                 });
                             });
                             // This means this is a new Party Member
@@ -338,6 +370,24 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
             Log.Information("Page is Unloaded, Unsubbing from Events from MenusPageView");
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
+        }
+        
+        private Bitmap? SetupReputation(string _playerId)
+        {
+            LiveViewViewModel.ReputationUserV2s.TryGetValue(_playerId, out var reputationUserV2);
+
+            if (reputationUserV2 is null)
+            {
+                Log.Information("User requested Reputation data does not exist.");
+            }
+
+            reputationUserV2.SeasonalReputation.TryGetValue(AssistApplication.EpisodeId, out var reputation);
+            if (reputation != null)
+            {
+                return new Bitmap(AssetLoader.Open(new Uri($@"avares://Assist/Resources/Game/Assist_EndorseLevel{reputation.Level}.png")));
+            }
+            
+            return new Bitmap(AssetLoader.Open(new Uri($@"avares://Assist/Resources/Game/Assist_EndorseLevel{reputation.Level}.png")));
         }
     }
 }

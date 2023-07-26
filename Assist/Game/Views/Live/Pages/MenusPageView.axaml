@@ -86,14 +86,14 @@
             <ItemsControl ItemsSource="{Binding CurrentUsers}">
 				<ItemsControl.Styles>
 					<Style Selector="live|LiveMenuPartyUser">
-                        <Setter Property="Width" Value="200"></Setter>
-                        <Setter Property="Height" Value="435"></Setter>
+                        <Setter Property="Width" Value="215"></Setter>
+                        <Setter Property="Height" Value="500"></Setter>
 
 					</Style>
 				</ItemsControl.Styles>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" Spacing="23"
+                        <StackPanel Orientation="Horizontal" Spacing="7"
                                     HorizontalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>

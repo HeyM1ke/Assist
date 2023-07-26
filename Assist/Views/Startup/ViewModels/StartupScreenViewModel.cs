@@ -48,7 +48,7 @@ namespace Assist.Views.Startup.ViewModels
         public async Task StartupSetup()
         {
             Log.Information("Checking for Update");
-            ImageLoader.AsyncImageLoader = new BaseWebImageLoader();
+            ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader();
             Message = "Checking for Updates...";
             var cont = await CheckForUpdates();
             if (!cont)
