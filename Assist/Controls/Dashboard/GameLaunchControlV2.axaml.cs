@@ -46,6 +46,11 @@ public partial class GameLaunchControlV2 : UserControl
         {
             _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_DisplayIcon.png";
         }
+
+        await _viewModel.CheckPatchlines();
+
+        var t = this.FindControl<ComboBox>("PatchlineSelectionBox");
+        t.SelectedIndex = 0;
     }
 
     private void PatchlineSelectionBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)

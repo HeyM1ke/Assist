@@ -63,8 +63,9 @@
                         Width="215"
                         SelectedIndex="0"
                         x:Name="PatchlineSelectionBox"
+                        ItemsSource="{Binding EntitledPatchlines}"
                         SelectionChanged="PatchlineSelectionBox_OnSelectionChanged">
-                  <ComboBoxItem Content="Live"></ComboBoxItem>
+                  
               </ComboBox>
           </StackPanel>
       </StackPanel>

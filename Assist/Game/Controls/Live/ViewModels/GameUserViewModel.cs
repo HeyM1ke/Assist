@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Models;
 using Assist.Game.Services;
+using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Settings;
 using Assist.ViewModels;
@@ -432,28 +433,21 @@ namespace Assist.Game.Controls.Live.ViewModels
         
         private async Task SetupReputation()
         {
-            var d = await AssistApplication.Current.AssistUser.Reputation.GetUserReputationV2(_playerId);
+            LiveViewViewModel.ReputationUserV2s.TryGetValue(_playerId, out var reputationUserV2);
 
-            if (d.Code != 200)
+            if (reputationUserV2 is null)
             {
-                Log.Error($"Unable to Locate reputation of player ID : {Player.Subject}");
-                Log.Error($"message from request: {d.Message}");
+                Log.Information("User requested Reputation data does not exist.");
                 return;
             }
 
-            var rep = JsonSerializer.Deserialize<AssistReputationUserV2>(d.Data.ToString());
-
-            var t = rep.SeasonalReputation.TryGetValue(AssistApplication.EpisodeId, out AssistSeasonalReputationV2 reputation);
-
-            if (!t)
+            reputationUserV2.SeasonalReputation.TryGetValue(AssistApplication.EpisodeId, out var reputation);
+            if (reputation != null)
             {
-                Log.Error($"Unable to find seasonal data for ID of {AssistApplication.EpisodeId}. For reputation of player ID : {Player.Subject}");
-                return;
+                var bitmap = new Bitmap(AssetLoader.Open(new Uri($@"avares://Assist/Resources/Game/Assist_EndorseLevel{reputation.Level}.png")));
+                PlayerReputationImage = bitmap;
             }
 
-            var bitmap = new Bitmap(AssetLoader.Open(new Uri($@"avares://Assist/Resources/Game/Assist_EndorseLevel{reputation.Level}.png")));
-            PlayerReputationImage = bitmap;
-            
             ReputationChecked = true;
         }
     }

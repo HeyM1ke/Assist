@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,13 @@ namespace Assist.Controls.Global.ViewModels
             get => AssistApplication.Current.CurrentProfile;
         }
 
+        private ObservableCollection<ComboBoxItem> _entitledPatchlines = new ObservableCollection<ComboBoxItem>();
+        public ObservableCollection<ComboBoxItem> EntitledPatchlines
+        {
+            get => _entitledPatchlines;
+            set => this.RaiseAndSetIfChanged(ref _entitledPatchlines, value);
+        }
+        
         private string _profilePlayercard;
         public string ProfilePlayercard
         {
@@ -88,6 +96,19 @@ namespace Assist.Controls.Global.ViewModels
             catch (Exception e)
             {
                 return null;
+            }
+        }
+
+        public async Task CheckPatchlines()
+        {
+            EntitledPatchlines.Clear();
+
+            foreach (var entitledLine in AssistApplication.Current.CurrentUser.Player.EntitledLines)
+            {
+                EntitledPatchlines.Add(new ComboBoxItem()
+                {
+                    Content = entitledLine.ToUpper()
+                });
             }
         }
     }
