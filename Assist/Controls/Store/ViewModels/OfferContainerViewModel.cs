@@ -79,7 +79,7 @@ namespace Assist.Controls.Store.ViewModels
             if (offerSec == 0)
             {
                 bundleTimer.Stop();
-                MainViewNavigationController.Change(new StoreView());
+                MainViewNavigationController.Change(new StoreViewV2());
 
             }
             else

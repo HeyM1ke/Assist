@@ -54,7 +54,7 @@ namespace Assist.Controls.Global.Navigation
             ClearSelected();
 
             if (MainViewNavigationController.CurrentPage != Page.STORE)
-                MainViewNavigationController.Change(new StoreView());
+                MainViewNavigationController.Change(new StoreViewV2());
 
             NavigationButtons[2].IsSelected = true;
         }

@@ -100,7 +100,7 @@ namespace Assist.Controls.Store.ViewModels
             if (Bundle.DurationRemainingInSeconds == 0)
             {
                 bundleTimer.Stop();
-                MainViewNavigationController.Change(new StoreView());
+                MainViewNavigationController.Change(new StoreViewV2());
                 
             }
             else

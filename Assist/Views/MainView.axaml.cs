@@ -35,10 +35,10 @@ namespace Assist.Views
                 switch (MainViewNavigationController.CurrentPage)
                 {
                     case Page.STORE:
-                        MainViewNavigationController.Change(new StoreView());
+                        MainViewNavigationController.Change(new StoreViewV2());
                         break;
                     case Page.MODULES:
-                        MainViewNavigationController.Change(new StoreView());
+                        MainViewNavigationController.Change(new StoreViewV2());
                         break;
                     case Page.DASHBOARD:
                         MainViewNavigationController.Change(new DashboardViewV2());
