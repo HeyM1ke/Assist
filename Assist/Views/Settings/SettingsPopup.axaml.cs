@@ -162,7 +162,7 @@ public partial class SettingsPopup : UserControl
         if (AssistApplication.Current.Mode != AssistMode.GAME)
         {
             await AssistApplication.Current.ShowNotification(new Notification(Properties.Resources.Global_Notification,
-                "Please link while you game is open."));
+                "Please link while your game is open."));
             return;
         }
         
