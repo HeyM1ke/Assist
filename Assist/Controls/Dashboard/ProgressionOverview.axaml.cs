@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Serilog;
 
 namespace Assist.Controls.Dashboard;
 
@@ -34,7 +35,14 @@ public partial class ProgressionOverview : UserControl
     private async void UpdateTicketData()
     {
         var t = new List<AssistDailyDiamondControl>() { DiamondControl1, DiamondControl2, DiamondControl3, DiamondControl4 };
-        
+
+        if (ProgressionOverviewViewModel.UserTicket is null)
+        {
+            Log.Error("Player failed to get the user ticket.");
+            return;
+        }
+
+
         for (int i = 0; i < ProgressionOverviewViewModel.UserTicket.DailyRewards.Milestones.Count; i++)
         {
             var currMilestone = ProgressionOverviewViewModel.UserTicket.DailyRewards.Milestones[i];

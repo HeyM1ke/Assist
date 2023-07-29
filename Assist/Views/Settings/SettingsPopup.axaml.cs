@@ -4,6 +4,7 @@ using System.Reflection;
 using Assist.Game.Views.Authentication;
 using Assist.Game.Views.LinkRiot;
 using Assist.Objects.Enums;
+using Assist.Objects.Helpers;
 using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Settings;
@@ -158,7 +159,7 @@ public partial class SettingsPopup : UserControl
 
     private async void LinkRiotAccBtn_Click(object? sender, RoutedEventArgs e)
     {
-        if (!AssistApplication.Current.GameModeEnabled)
+        if (AssistApplication.Current.Mode != AssistMode.GAME)
         {
             await AssistApplication.Current.ShowNotification(new Notification(Properties.Resources.Global_Notification,
                 "Please link while you game is open."));

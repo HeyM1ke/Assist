@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Objects.Helpers;
 using Assist.Services;
 using Assist.Services.Server;
 using Assist.Settings;
@@ -81,8 +82,7 @@ namespace Assist.Game.Views.Authentication.ViewModels
         private async void ConnectionHubOnRedirectCodeEvent(string obj)
         {
             Log.Information("Code Recieved by Client");
-            // On Redirect Code Received
-            _connectionHub.Disconnect();
+            
 
             try
             {
@@ -103,9 +103,8 @@ namespace Assist.Game.Views.Authentication.ViewModels
 
                 Dispatcher.UIThread.InvokeAsync(async () =>
                 {
-                    if (!AssistApplication.Current.GameModeEnabled)
+                    if (AssistApplication.Current.Mode != AssistMode.GAME)
                     {
-                        
                         MainWindowContentController.Change(new MainView());
                         return;
                     }
@@ -135,7 +134,7 @@ namespace Assist.Game.Views.Authentication.ViewModels
 
                 if (authResp)
                 {
-                    if (!AssistApplication.Current.GameModeEnabled)
+                    if (AssistApplication.Current.Mode != AssistMode.GAME)
                     {
                         MainWindowContentController.Change(new MainView());
                         return;

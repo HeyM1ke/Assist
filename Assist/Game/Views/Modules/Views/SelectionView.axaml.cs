@@ -1,4 +1,5 @@
 using Assist.Game.Services;
+using Assist.Objects.Helpers;
 using Assist.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -29,6 +30,6 @@ namespace Assist.Game.Views.Modules.Views
 
     public class SelectionViewVM : ViewModelBase
     {
-        public bool IsGameMode => AssistApplication.Current.GameModeEnabled;
+        public bool IsGameMode => AssistApplication.Current.Mode == AssistMode.GAME;
     }
 }

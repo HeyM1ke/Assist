@@ -9,6 +9,7 @@ using Assist.Game.Views;
 using Assist.Game.Views.Authentication;
 using Assist.Game.Views.Initial;
 using Assist.Objects.Enums;
+using Assist.Objects.Helpers;
 using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Services.Riot;
@@ -56,6 +57,7 @@ namespace Assist.ViewModels
         public ProfileSettings CurrentProfile;
         public ClientSettings ClientLaunchSettings = new ClientSettings();
         public RuntimePlatformInfo Platform;
+        public AssistMode Mode;
         public bool GameModeEnabled = false;
 
         public static ClassicDesktopStyleApplicationLifetime CurrentApplication = Application.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
@@ -85,7 +87,7 @@ namespace Assist.ViewModels
                 }
             }
 
-            GameModeEnabled = true;
+            
             Dispatcher.UIThread.InvokeAsync(() => MainWindowContentController.Change(new GameInitialView()));
         }
 
@@ -124,7 +126,7 @@ namespace Assist.ViewModels
                 mainRef.Close();
                 desktop.MainWindow = main;
 
-                if (AssistApplication.Current.GameModeEnabled)
+                if (Current.Mode == AssistMode.GAME)
                 {
                     MainWindowContentController.Change(new GameView());
                 }
@@ -247,10 +249,12 @@ namespace Assist.ViewModels
             ProfileSettings pS = new ProfileSettings();
 
             pS.SetupProfile(u);
-            await AssistSettings.Current.SaveProfile(pS);
+            
 
             pS.ConvertCookiesTo64(u.GetAuthClient().ClientCookies);
-
+            await AssistSettings.Current.SaveProfile(pS);
+            AssistSettings.Save();
+            
             AssistApplication.Current.CurrentUser  = u;
             AssistApplication.Current.CurrentProfile = pS;
             AssistApplication.Current.OpenMainView();

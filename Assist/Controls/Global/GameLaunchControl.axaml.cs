@@ -3,6 +3,7 @@ using Assist.Controls.Global.Popup;
 using Assist.Controls.Global.ViewModels;
 using Assist.Services.Popup;
 using Assist.Services.Riot;
+using Assist.Settings;
 using Assist.ViewModels;
 using AsyncImageLoader;
 using Avalonia;
@@ -41,6 +42,8 @@ namespace Assist.Controls.Global
             if (inv != null)
             {
                 _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_SmallArt.png";
+                AssistApplication.Current.CurrentProfile.PlayerCardId = inv.PlayerData.PlayerCardID;
+                AssistSettings.Save();
             }
         }
 

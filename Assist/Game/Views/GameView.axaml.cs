@@ -1,6 +1,7 @@
 using Assist.Game.Services;
 using Assist.Game.ViewModels;
 using Assist.Game.Views.Live;
+using Assist.Objects.Helpers;
 using Assist.Services;
 using Assist.ViewModels;
 using Assist.Views.Dashboard;
@@ -14,7 +15,7 @@ namespace Assist.Game.Views
 
         public GameView()
         {
-            AssistApplication.Current.GameModeEnabled = true;
+            AssistApplication.Current.Mode = AssistMode.GAME;
             DataContext = _viewModel = new GameViewViewModel();
             InitializeComponent();
             GameViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");

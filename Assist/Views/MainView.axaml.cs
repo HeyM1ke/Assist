@@ -1,4 +1,5 @@
 using System;
+using Assist.Objects.Helpers;
 using Assist.Services;
 using Assist.Services.Popup;
 using Assist.ViewModels;
@@ -19,6 +20,7 @@ namespace Assist.Views
      
         public MainView()
         {
+            AssistApplication.Current.Mode = AssistMode.LAUNCHER;
             DataContext = _viewModel = new MainViewViewModel();
             InitializeComponent();
             MainViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
@@ -27,6 +29,7 @@ namespace Assist.Views
         
         public MainView(UserControl popup)
         {
+            AssistApplication.Current.Mode = AssistMode.LAUNCHER;
             DataContext = _viewModel = new MainViewViewModel();
             InitializeComponent();
             MainViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");

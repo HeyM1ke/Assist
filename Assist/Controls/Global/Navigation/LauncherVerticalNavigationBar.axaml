@@ -8,7 +8,7 @@
              xmlns:global="clr-namespace:Assist.Controls.Global"
              mc:Ignorable="d" d:DesignWidth="65" d:DesignHeight="450"
              x:Class="Assist.Controls.Global.Navigation.LauncherVerticalNavigationBar"
-             Initialized="LauncherVertNavBar_Init">
+             Loaded="LauncherVertNavBar_Loaded">
     <Grid Background="{DynamicResource AssistPrimary}">
 
 		<Grid x:Name="CompressedView"

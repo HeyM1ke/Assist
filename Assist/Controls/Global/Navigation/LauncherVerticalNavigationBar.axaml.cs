@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Assist.Game.Controls.Navigation;
 using Assist.Game.Views.Modules;
 using Assist.Services;
 using Assist.Services.Popup;
+using Assist.Settings;
 using Assist.ViewModels;
 using Assist.Views.Dashboard;
 using Assist.Views.Settings;
@@ -80,6 +82,24 @@ public partial class LauncherVerticalNavigationBar : UserControl
         try
         {
             t.PlayercardImage = $"https://content.assistapp.dev/playercards/{AssistApplication.Current.CurrentProfile.PlayerCardId}_DisplayIcon.png";
+        }
+        catch (Exception exception)
+        {
+        }
+    }
+
+    private async void LauncherVertNavBar_Loaded(object? sender, RoutedEventArgs e)
+    {
+        if(Design.IsDesignMode)
+            return;
+        var t = this.FindControl<AccountManagementNavBtn>("AccountsBtn");
+
+        try
+        {
+            await Task.Delay(500);
+            var u = AssistSettings.Current.Profiles.Find(x =>
+                x.ProfileUuid == AssistApplication.Current.CurrentProfile.ProfileUuid);
+            t.PlayercardImage = $"https://content.assistapp.dev/playercards/{u.PlayerCardId}_DisplayIcon.png";
         }
         catch (Exception exception)
         {
