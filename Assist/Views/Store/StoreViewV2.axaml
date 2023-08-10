@@ -14,21 +14,39 @@
                 x:Name="ContentView"
                 HorizontalAlignment="Left">
             <Grid>
-                <pages:PlayerStorePageView/>
+                <TransitioningContentControl x:Name="StoreContentControl">
+                    <pages:PlayerStorePageView/>
+                </TransitioningContentControl>
             </Grid>
         </Border>
         
         <Grid Row="0" VerticalAlignment="Center"
               HorizontalAlignment="Right"
-              IsEnabled="False"
-              IsVisible="False"
+              IsEnabled="True"
+              IsVisible="True"
               Margin="10">
             <StackPanel Spacing="15">
                 <Button Width="66"
-                        Content="Store"
+                        Content="STORE"
+                        FontFamily="{StaticResource Inter}"
+                        FontWeight="Black"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="#C1ffffff"
+                        FontSize="12"
+                        Click="StoreNav_Click"
                         Height="66"></Button>
                 <Button Width="66"
-                        Content="Accessories"
+                        Content="NM"
+                        IsVisible="{Binding NightMarketEnabled}"
+                        IsEnabled="{Binding NightMarketEnabled}"
+                        FontFamily="{StaticResource Inter}"
+                        FontWeight="Black"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="20"
+                        Click="NMNav_Click"
+                        Foreground="#C1ffffff"
                         Height="66"></Button>
             </StackPanel>
         </Grid>

@@ -7,15 +7,15 @@ using Avalonia.Markup.Xaml;
 
 namespace Assist.Views.Store.Pages;
 
-public partial class PlayerStorePageView : UserControl
+public partial class PlayerBonusMarketView : UserControl
 {
     private readonly StoreViewModel _viewModel;
 
-    public PlayerStorePageView()
+    public PlayerBonusMarketView()
     {
-        StoreViewNavigationController.CurrentPage = StorePage.STORE;
-        DataContext = _viewModel = new StoreViewModel();
+        StoreViewNavigationController.CurrentPage = StorePage.NIGHTMARKET;
         InitializeComponent();
+        DataContext = _viewModel = new StoreViewModel();
     }
 
     private void InitializeComponent()
@@ -23,9 +23,8 @@ public partial class PlayerStorePageView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
-    private async void StorePage_Init(object? sender, EventArgs e)
+    private async void BonusMarket_Init(object? sender, EventArgs e)
     {
-        if (Design.IsDesignMode) return;
-        await _viewModel.Setup();
+        await _viewModel.NightMarketSetup();
     }
 }

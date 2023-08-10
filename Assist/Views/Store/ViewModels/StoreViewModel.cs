@@ -53,6 +53,14 @@ namespace Assist.Views.Store.ViewModels
             get => _skinOffers;
             set => this.RaiseAndSetIfChanged(ref _skinOffers, value);
         }
+        
+        private ObservableCollection<BonusMarketControl> _bonusSkinOffers = new ObservableCollection<BonusMarketControl>();
+
+        public ObservableCollection<BonusMarketControl> BonusSkinOffers
+        {
+            get => _bonusSkinOffers;
+            set => this.RaiseAndSetIfChanged(ref _bonusSkinOffers, value);
+        }
 
         private string _bundleName = "";
 
@@ -78,7 +86,7 @@ namespace Assist.Views.Store.ViewModels
             set => this.RaiseAndSetIfChanged(ref _bundleImage, value);
         }
         
-        static Dictionary<string, ValUserStore> _UserStores = new Dictionary<string, ValUserStore>();
+        public static Dictionary<string, ValUserStore> _UserStores = new Dictionary<string, ValUserStore>();
         public static Dictionary<string, ValWallet> _UserWallets = new Dictionary<string, ValWallet>();
         /// <summary>
         /// Get's the current RiotUser's Store
@@ -112,7 +120,7 @@ namespace Assist.Views.Store.ViewModels
             if (!_UserWallets.ContainsKey(AssistApplication.Current.CurrentUser.UserData.sub))
             {
                 var t = await AssistApplication.Current.CurrentUser.Store.GetPlayerWallet();
-                _UserWallets.Add(AssistApplication.Current.CurrentUser.UserData.sub,t);
+                _UserWallets.TryAdd(AssistApplication.Current.CurrentUser.UserData.sub,t);
             }
             
             
@@ -123,7 +131,7 @@ namespace Assist.Views.Store.ViewModels
                 AccountKC = $"{_UserWallets[AssistApplication.Current.CurrentUser.UserData.sub].Balances.KingdomCredits:n0}";    
             }
             
-            _UserStores.Add(AssistApplication.Current.CurrentUser.UserData.sub, r);
+            _UserStores.TryAdd(AssistApplication.Current.CurrentUser.UserData.sub, r);
 
             return r;
         }
@@ -232,6 +240,34 @@ namespace Assist.Views.Store.ViewModels
                 };
 
                SkinOffers.Add(skinOfferControl);
+            }
+        }
+
+        public async Task NightMarketSetup()
+        {
+            var store = await GetPlayerStore();
+            CreateNightMarketOfferControls(store);
+        }
+
+        private async void CreateNightMarketOfferControls(ValUserStore? store)
+        {
+            for (int i = 0; i < store.BonusStore.NightMarketOffers.Count; i++)
+            {
+                var offer = store.BonusStore.NightMarketOffers[i];
+                
+                var sData = await AssistApplication.ApiService.GetWeaponSkinAsync(offer.Offer.OfferID);
+                
+                var skinOfferControl = new BonusMarketControl()
+                {
+                    SkinId = offer.Offer.OfferID,
+                    SkinImage = sData.DisplayIcon,
+                    SkinName = sData.DisplayName,
+                    SkinCost = $"{offer.DiscountCosts.ValorantPointCost:n0}",
+                    SkinDiscountPercentage = $"{offer.DiscountPercent}%",
+                    SkinOriginalCost = $"{offer.Offer.Cost.ValorantPointCost:n0}"
+                };
+
+                BonusSkinOffers.Add(skinOfferControl);
             }
         }
     }

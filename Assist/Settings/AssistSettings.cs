@@ -122,11 +122,14 @@ namespace Assist.Settings
             {
                 Log.Information("New Profile Found, Adding profile to Profiles");
                 Profiles.Add(profile);
+                AssistSettings.Save();
                 return;
             }
 
             Log.Information("Previous Profile Found, Refreshing Profile");
             Profiles.Replace(possProfile, profile);
+            
+            AssistSettings.Save();
         }
 
         public static void Save()
