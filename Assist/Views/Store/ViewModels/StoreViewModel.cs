@@ -264,7 +264,7 @@ namespace Assist.Views.Store.ViewModels
                     SkinName = sData.DisplayName,
                     SkinCost = $"{offer.DiscountCosts.ValorantPointCost:n0}",
                     SkinDiscountPercentage = $"{offer.DiscountPercent}%",
-                    SkinOriginalCost = $"{offer.Offer.Cost.ValorantPointCost:n0}"
+                    SkinOriginalCost = $"{offer.Offer.Cost.ValorantPointCost:n0}",
                 };
 
                 BonusSkinOffers.Add(skinOfferControl);

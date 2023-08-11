@@ -51,7 +51,7 @@ public partial class LauncherVerticalNavigationBar : UserControl
         
         if (MainViewNavigationController.CurrentPage != Services.Page.STORE)
         MainViewNavigationController.Change(new StoreViewV2());
-
+        GC.Collect();
         (sender as NavButton).IsSelected = true;
     }
 

@@ -58,6 +58,8 @@ namespace Assist.Game.Controls.Navigation
             if (GameViewNavigationController.CurrentPage != Services.Page.LIVE)
                 GameViewNavigationController.Change(new LiveView());
 
+            GC.Collect();
+            
             (sender as NavButton).IsSelected = true;
         }
         private void ModulesBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -67,6 +69,8 @@ namespace Assist.Game.Controls.Navigation
             if (GameViewNavigationController.CurrentPage != Services.Page.MODULES)
                 GameViewNavigationController.Change(new ModulesView());
 
+            
+            GC.Collect();
             (sender as NavButton).IsSelected = true;
         }
         private void LobbiesBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -86,6 +90,8 @@ namespace Assist.Game.Controls.Navigation
             if (GameViewNavigationController.CurrentPage != Services.Page.LEAGUES)
                 GameViewNavigationController.Change(new LeagueMainPage());
 
+            GC.Collect();
+            
             (sender as NavButton).IsSelected = true;
         }
         

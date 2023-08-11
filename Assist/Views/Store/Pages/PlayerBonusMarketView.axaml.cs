@@ -25,6 +25,10 @@ public partial class PlayerBonusMarketView : UserControl
 
     private async void BonusMarket_Init(object? sender, EventArgs e)
     {
+        if (Design.IsDesignMode)
+        {
+            return;
+        }
         await _viewModel.NightMarketSetup();
     }
 }
