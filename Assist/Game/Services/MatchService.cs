@@ -60,7 +60,7 @@ public class MatchService
     
     public async Task<AssistMatch> GetCurrentMatch()
     {
-        var resp = await AssistApplication.Current.AssistUser.League.GetUserMatch();
+        var resp = await AssistApplication.Current.AssistUser.League.PREMATCH_GetUserMatch();
 
         if (resp.Code != 200)
         {
@@ -175,7 +175,7 @@ public class MatchService
             Log.Information("Settings the Custom Settings");
             var t = await AssistApplication.Current.CurrentUser.CustomGame.SetCustomGameSettings(data);
             Log.Information("Sending Server Details.");
-            await AssistApplication.Current.AssistUser.League.SetupMatch(CurrentMatchData.Id, t);
+            await AssistApplication.Current.AssistUser.League.PREMATCH_CaptainSetup(CurrentMatchData.Id, t);
         }
         catch(Exception e)
         {

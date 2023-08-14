@@ -17,14 +17,16 @@
                     Width="575"
                     Height="515">
                 <Grid Margin="10">
-                    <ItemsControl ItemsSource="{Binding MemberControls}"
-                                  Initialized="LeaderboardMemberControl_Initialize">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Spacing="10"></StackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                   <ScrollViewer>
+                       <ItemsControl ItemsSource="{Binding MemberControls}"
+                                     Initialized="LeaderboardMemberControl_Initialize">
+                           <ItemsControl.ItemsPanel>
+                               <ItemsPanelTemplate>
+                                   <StackPanel Spacing="10"></StackPanel>
+                               </ItemsPanelTemplate>
+                           </ItemsControl.ItemsPanel>
+                       </ItemsControl>
+                   </ScrollViewer>
                 </Grid>
             </Border>
         </Grid>

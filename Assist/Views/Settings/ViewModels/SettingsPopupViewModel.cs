@@ -69,6 +69,7 @@ public class SettingsPopupViewModel : ViewModelBase
         {
             Log.Error("Bad Request on Profile Get");
             Log.Error(resp.Message);
+            return;
         }
 
         ProfilePageViewModel.ProfileData = JsonSerializer.Deserialize<AssistProfile>(resp.Data.ToString());

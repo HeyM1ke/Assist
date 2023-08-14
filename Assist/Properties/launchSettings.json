@@ -6,6 +6,10 @@
     "Assist-Game": {
       "commandName": "Project",
       "commandLineArgs": "--forcegame"
+    },
+    "Assist-Game (LEAGUES)": {
+      "commandName": "Project",
+      "commandLineArgs": "--forcegame --leaguesenabled"
     }
   }
 }

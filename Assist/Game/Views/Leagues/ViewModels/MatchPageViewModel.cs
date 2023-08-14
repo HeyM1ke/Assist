@@ -215,12 +215,12 @@ public class MatchPageViewModel : ViewModelBase
             
         }
         
-        if (matchData.SpecialState.Equals("FORMING") || matchData.SpecialState.Equals("WAITING"))
+        if (matchData.SpecialState.Contains("FORMING") || matchData.SpecialState.Contains("WAITING") || matchData.SpecialState.Contains("GAMESTART"))
         {
             MapPickBanEnabled = false;
 
 
-            SetupMapNameAndServerName(matchData);
+            await SetupMapNameAndServerName(matchData);
             
             // Check if PregameDetails Contains a PartyID
             if (string.IsNullOrEmpty(matchData.PregameDetails.ValorantPartyId))
@@ -370,7 +370,7 @@ public class MatchPageViewModel : ViewModelBase
 
         try
         {
-            var resp = await AssistApplication.Current.AssistUser.League.ReadyInPreMatch(MatchService.Instance.CurrentMatchData
+            var resp = await AssistApplication.Current.AssistUser.League.PREMATCH_ReadyInPreMatch(MatchService.Instance.CurrentMatchData
                 .Id);
 
             if (resp.Code != 200)
@@ -441,12 +441,11 @@ public class MatchPageViewModel : ViewModelBase
         Log.Information("Player is in the right party.");
         if (!privatePlayerPres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
         {
-            Log.Fatal("Player is in a match while being in the right party.");
-            Log.Fatal("Checking Match data to see if the correct players are in the match.");
+            Log.Information("Player is in a match while being in the right party.");
+            Log.Information("Checking Match data to see if the correct players are in the match.");
 
             if (CurrentlyInMatch)
             {
-                
                 Log.Information("Already Determined if the player was in the match.");
                 await UpdateIngameData(privatePlayerPres);
                 return;

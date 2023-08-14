@@ -44,6 +44,9 @@ public class AssistGameServerConnection : HubClient
         _hubConnection.On<string?>("receiveMatchValorantPartyCreate", MatchValorantPartyCreateReceived);
         _hubConnection.On<string?>("requestValorantPartyInformation", PartyInformationRequested);
         
+        _hubConnection.On<string?>("receiveStartValorantMatch", StartValorantMatchReceived);
+        _hubConnection.On<string?>("receiveTransferValorantPartyOwnership", TransferValorantPartyOwnershipReceived);
+        
         _hubConnection.On<string?>("receiveEndorsementReceived", EndorsementRecievedMessageReceived);
         _hubConnection.On<string?>("receiveEndorsementLevelChanged", EndorsementLevelChangedMessageReceived);
         
