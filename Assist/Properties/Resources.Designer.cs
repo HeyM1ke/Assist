@@ -627,7 +627,7 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Announcement.
+        ///   Looks up a localized string similar to ANNOUNCEMENTS.
         /// </summary>
         public static string Leagues_Announcement {
             get {

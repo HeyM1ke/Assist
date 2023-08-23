@@ -129,9 +129,9 @@
         
         <TextBlock Text="IN DEVELOPMENT, SUBJECT TO CHANGE"
                    Opacity=".5"
-                   FontSize="32"
+                   FontSize="24"
                    FontFamily="{StaticResource Inter}"
-                   FontWeight="Bold"
+                   FontWeight="Medium"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Left"></TextBlock>
     </Grid>

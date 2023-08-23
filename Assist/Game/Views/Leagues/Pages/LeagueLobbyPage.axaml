@@ -9,24 +9,57 @@
     <Grid RowDefinitions="4*,6*">
         <Grid Row="0">
             <StackPanel Spacing="20">
-                <leagues:LeaguePartyControl Width="985"
-                                            Height="220"/>
+               <Grid>
+                   <leagues:LeaguePartyControl Width="985"
+                                               Height="220" HorizontalAlignment="Left"/>
+                   <Border Background="{DynamicResource AssistPrimary}"
+                           BorderBrush="{DynamicResource AssistOutline}"
+                           BorderThickness="1"
+                           CornerRadius="10"
+                           HorizontalAlignment="Right"
+                           Width="100">
+                       <StackPanel VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Spacing="10">
+                           <Button Classes="AssistBtn"
+                                   CornerRadius="100"
+                                   Width="60"
+                                   Height="60"
+                                   >
+                               <Image Source="/Resources/Game/Modules_Icon.png"
+                                      Margin="10"></Image>
+                           </Button>
+                           
+                           <Button Classes="AssistBtn"
+                                   CornerRadius="100"
+                                   Width="60"
+                                   Height="60"
+                           >
+                               <Image Source="/Resources/Game/ArrowLeft_Icon.png"
+                                      Margin="10"></Image>
+                           </Button>
+                       </StackPanel>
+                   </Border>
+               </Grid>
 
                 <Border Background="{DynamicResource AssistPrimary}"
                         BorderBrush="{DynamicResource AssistOutline}"
                         BorderThickness="2"
                         Width="985"
-                        Height="50">
+                        Height="50"
+                        IsVisible="False">
                     <Grid VerticalAlignment="Center" Margin="20,0">
                         <StackPanel Orientation="Horizontal" Spacing="20"
-                                    HorizontalAlignment="Center">
+                                    HorizontalAlignment="Center"
+                                    >
                             <TextBlock Text="DEVELOPER OVERRIDE"
                                        FontFamily="{StaticResource Inter}"
                                        FontWeight="SemiBold"
                                        VerticalAlignment="Center"
                                        FontSize="16"/>
                             <TextBox x:Name="PartyIDJoin"
-                                     Width="300"></TextBox>
+                                     Width="300"
+                                     ></TextBox>
                             <Button Classes="AssistBtn"
                                     Content="Join Party"
                                     Click="DevJoinBtn_Click"></Button>
@@ -39,9 +72,21 @@
             </StackPanel>
         </Grid>
         
-        <Grid Row="1" Margin="60,0">
-            <leagues:LeagueQueueControl HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom"></leagues:LeagueQueueControl>
+        <Grid Row="1">
+           <StackPanel Orientation="Vertical"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Spacing="10"
+                       >
+               <leagues:LeagueAnnouncementsControl HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   MaxWidth="365"
+                                                   MaxHeight="180"
+                                                   Margin="0,0,0,0"></leagues:LeagueAnnouncementsControl>
+               <leagues:LeagueQueueControl HorizontalAlignment="Right"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,10,0,0"></leagues:LeagueQueueControl>
+           </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

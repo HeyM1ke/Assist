@@ -406,7 +406,7 @@
     <value>Queue</value>
   </data>
   <data name="Leagues_Announcement" xml:space="preserve">
-    <value>Announcement</value>
+    <value>ANNOUNCEMENTS</value>
   </data>
   <data name="Leagues_Leaderboard" xml:space="preserve">
     <value>Leaderboard</value>

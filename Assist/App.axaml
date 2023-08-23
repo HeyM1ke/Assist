@@ -31,6 +31,11 @@
             <GradientStop Color="Transparent" Offset="1" />
         </LinearGradientBrush>
         
+        <LinearGradientBrush x:Key="AssistRedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#80F61E51" Offset="0" />
+            <GradientStop Color="#00F61E51" Offset="1" />
+        </LinearGradientBrush>
+        
         <LinearGradientBrush x:Key="AssistBlackGrad"  EndPoint="100%,0%" StartPoint="0%,0%">
             <GradientStop Color="#101115" Offset=".9" />
             <GradientStop Color="#00101115" Offset="1" />
@@ -235,6 +240,7 @@
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchPlayerControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchSelectionControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/MapPickControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueAnnouncementMemberControl.axaml"></StyleInclude>
         
         <StyleInclude Source="avares://Assist/Controls/Profile/ProfileLeagueShowcase.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Profile/ProfileBadgeShowcase.axaml"></StyleInclude>

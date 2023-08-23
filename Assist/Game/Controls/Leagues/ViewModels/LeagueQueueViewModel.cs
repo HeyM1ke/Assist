@@ -19,7 +19,7 @@ public class LeagueQueueViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _buttonText, value);
     }
     
-    private bool _buttonEnabled;
+    private bool _buttonEnabled = true;
 
     public bool ButtonEnabled
     {
