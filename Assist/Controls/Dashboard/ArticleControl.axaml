@@ -52,7 +52,7 @@
 					        Content="&lt;"
 					        Foreground="#66ffffff"
 					        HorizontalContentAlignment="Center"
-					        FontFamily="{StaticResource WorkSans}"
+					        FontFamily="{StaticResource Inter}"
 					        FontSize="13"
 					        Classes="AssistBtn"
 					        VerticalContentAlignment="Center"></Button>

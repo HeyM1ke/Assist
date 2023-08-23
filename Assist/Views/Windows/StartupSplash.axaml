@@ -39,7 +39,7 @@
 			  VerticalAlignment="Bottom">
 			
 			<Label Content="{Binding StatusMessage}"
-				   FontFamily="{StaticResource WorkSans}"
+				   FontFamily="{StaticResource Inter}"
 				   FontWeight="Regular"
 				   HorizontalAlignment="Center"
 				   Foreground="White"/>

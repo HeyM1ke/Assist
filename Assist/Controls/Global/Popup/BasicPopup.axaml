@@ -14,12 +14,12 @@
             <Grid>
                 <StackPanel VerticalAlignment="Center">
                     <Image Source="/Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="70" Margin="10"></Image>
-                    <Label FontFamily="{StaticResource WorkSans}" FontWeight="Bold" Content="{Binding Title}" Foreground="White" HorizontalAlignment="Center"></Label>
-                    <Label FontFamily="{StaticResource WorkSans}" FontWeight="Regular" Content="{Binding Description}" Foreground="White" HorizontalAlignment="Center" Padding="0"></Label>
+                    <Label FontFamily="{StaticResource Inter}" FontWeight="Bold" Content="{Binding Title}" Foreground="White" HorizontalAlignment="Center"></Label>
+                    <Label FontFamily="{StaticResource Inter}" FontWeight="Regular" Content="{Binding Description}" Foreground="White" HorizontalAlignment="Center" Padding="0"></Label>
                     <Label Content="Loading..."
-                           FontFamily="{StaticResource WorkSans}"
+                           FontFamily="{StaticResource Inter}"
                            VerticalAlignment="Bottom"
-                           HorizontalAlignment="Center"></Label>
+                           HorizontalAlignment="Center"/>
                 </StackPanel>
 
                 

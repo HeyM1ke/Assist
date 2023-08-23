@@ -13,7 +13,9 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
-                        BorderThickness="2"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Padding="5"
                         BorderBrush="{TemplateBinding BorderBrush}">
                    <Grid>
                        <TextBlock Text="{TemplateBinding LeagueName}"

@@ -26,7 +26,7 @@
                                            HorizontalAlignment="Left"
                                            Margin="75"
                                            VerticalAlignment="Center"
-                                           FontFamily="WorkSans"
+                                           FontFamily="{StaticResource Inter}"
                                            FontWeight="Thin"></TextBlock>
 
                                 <asyncImageLoader:AdvancedImage

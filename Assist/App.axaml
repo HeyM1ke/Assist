@@ -241,6 +241,7 @@
         <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchSelectionControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/MapPickControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueAnnouncementMemberControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/Settings/AssistSettingsNavigationButton.axaml"></StyleInclude>
         
         <StyleInclude Source="avares://Assist/Controls/Profile/ProfileLeagueShowcase.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Profile/ProfileBadgeShowcase.axaml"></StyleInclude>

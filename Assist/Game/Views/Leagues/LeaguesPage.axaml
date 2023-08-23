@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:Assist.Game.Views.Leagues.Pages"
-             mc:Ignorable="d" d:DesignWidth="1105" d:DesignHeight="470"
+             mc:Ignorable="d" d:DesignWidth="1105" d:DesignHeight="630"
              x:Class="Assist.Game.Views.Leagues.LeaguesPage"
              Initialized="LeaguesPage_Init">
     <Grid>
@@ -123,8 +123,11 @@
                          IsVisible="{Binding LeaderboardEnabled}">
                     <pages:LeagueLeaderboardPage/>
                 </TabItem>
-                <TabItem Header="Moderation"
-                         IsVisible="{Binding ModerationEnabled}"/>
+                <TabItem Header="Settings"
+                         >
+                    <pages:LeagueSettingsPage/>
+                </TabItem>
+                
             </TabControl>  
         
         <TextBlock Text="IN DEVELOPMENT, SUBJECT TO CHANGE"

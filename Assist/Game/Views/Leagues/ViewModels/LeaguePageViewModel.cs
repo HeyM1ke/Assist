@@ -26,7 +26,7 @@ public class LeaguePageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _leaderboardEnabled, value);
     }
     
-    private bool _moderationEnabled = false;
+    private bool _moderationEnabled = true;
 
     public bool ModerationEnabled
     {
