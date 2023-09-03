@@ -23,6 +23,7 @@ namespace Assist.Objects.Helpers
             {"690b3ed2-4dff-945b-8223-6da834e30d24","District"},
             {"12452a9d-48c3-0b02-e7eb-0381c3520404","Kasbah"},
             {"de28aa9b-4cbe-1003-320e-6cb3ec309557","Piazza"},
+            {"92584fbe-486a-b1b2-9faa-39b0f486b498","Sunset"},
         };
 
         public static Dictionary<string, string> MapsByPath = new Dictionary<string, string>
@@ -41,8 +42,10 @@ namespace Assist.Objects.Helpers
             {"/game/maps/hurm/hurm_alley/hurm_alley","District"},
             {"/game/maps/hurm/hurm_bowl/hurm_bowl","Kasbah"},
             {"/game/maps/hurm/hurm_yard/hurm_yard","Piazza"},
+            {"/game/maps/juliett/juliett","Sunset"},
             
         };
     }
 }
+
 

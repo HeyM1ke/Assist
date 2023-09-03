@@ -24,6 +24,8 @@ public class QueueNames
                 return "Snowball";
             case "lotus":
                 return "Lotus";
+            case "newmap":
+                return "Sunset";
             case "premier-seasonmatch":
                 return "Premier";
             case "hurm":

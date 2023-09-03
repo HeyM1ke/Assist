@@ -26,7 +26,12 @@
         <SolidColorBrush  x:Key="AssistOutline" Color="#212229"/>
         <SolidColorBrush  x:Key="AssistTextWhite" Color="#DEE3E8"/>
 
-		<LinearGradientBrush x:Key="RedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+		<LinearGradientBrush x:Key="QueueBtnHoverGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#f61e51" Offset="0" />
+            <GradientStop Color="#e2373f" Offset="1" />
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="RedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
             <GradientStop Color="#FF0000" Offset="0" />
             <GradientStop Color="Transparent" Offset="1" />
         </LinearGradientBrush>

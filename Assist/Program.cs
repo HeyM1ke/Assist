@@ -54,7 +54,7 @@ namespace Assist
                     DisableDefaultApplicationMenuItems = true,
                     DisableNativeMenus = true,
                     ShowInDock = true
-                })
+                }).With(new SkiaOptions { UseOpacitySaveLayer = true })
                 .UseReactiveUI();
 
     }

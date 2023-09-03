@@ -414,6 +414,9 @@
   <data name="Leagues_Swap" xml:space="preserve">
     <value>Select a League:</value>
   </data>
+  <data name="Leagues_Ready" xml:space="preserve">
+    <value>COMPETE</value>
+  </data>
   <data name="Assist_Chat" xml:space="preserve">
     <value>Chat</value>
   </data>

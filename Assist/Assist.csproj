@@ -44,6 +44,7 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.2" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.2" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.1" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.2" />
     <PackageReference Include="CliWrap" Version="3.6.4" />
     <PackageReference Include="Clowd.Squirrel" Version="3.0.210-g5f9f594" />

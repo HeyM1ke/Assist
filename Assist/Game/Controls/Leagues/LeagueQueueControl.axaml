@@ -23,13 +23,12 @@
                    Height="90">
                 <Button Classes="QueueBtn"
                         Width="362"
-                        Height="90"
-                        Content="READY"
+                        Height="70"
+                        Content="{x:Static p:Resources.Leagues_Ready}"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         IsEnabled="{Binding ButtonEnabled}"
-                        Click="QueueBtn_Click"
-                        FontSize="48"/>
+                        Click="QueueBtn_Click"/>
                 
             </Panel>
         </StackPanel>
@@ -46,26 +45,56 @@
         </Style>
         
         <Style  Selector="Button.QueueBtn">
-            <Setter Property="Background" Value="{DynamicResource AssistPrimary}"></Setter>
+            <Setter Property="Background" Value="{DynamicResource AssistRed}"></Setter>
             <Setter Property="BorderBrush" Value="{DynamicResource AssistOutline}"></Setter>
             <Setter Property="BorderThickness" Value="1"></Setter>
             <Setter Property="CornerRadius" Value="10"></Setter>
-        
         </Style>
+        
+        
     
     
         <Style Selector="Button.QueueBtn /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="TextBlock.FontFamily" Value="{StaticResource Inter}" />
-            <Setter Property="TextBlock.FontWeight" Value="Bold" />
+            <Setter Property="TextBlock.FontWeight" Value="SemiBold" />
+            <Setter Property="TextBlock.FontSize" Value="32" />
+            <Setter Property="TextBlock.Padding" Value="5" />
             <Setter Property="TextBlock.Foreground" Value="{DynamicResource AssistTextWhite}" />
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
         </Style>
     
         <Style Selector="Button.QueueBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource AssistRedGrad}" />
+            <Setter Property="Background" Value="{DynamicResource QueueBtnHoverGrad}"></Setter>
+            
             <Setter Property="BorderBrush" Value="{DynamicResource AssistOutline}" />
             <Setter Property="TextBlock.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}" />
             <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    
+                    <BrushTransition Property="Background" Duration="5:0:0.5" Easing="LinearEasing"/>
+                </Transitions>
+            </Setter>
+            <Style.Animations>
+            <Animation Duration="0:0:1"
+                       IterationCount="Infinite"
+                       PlaybackDirection="Alternate">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Background" Value="{DynamicResource AssistRed}">
+                        
+                    </Setter>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Background">
+                        <LinearGradientBrush StartPoint="100%,0%" EndPoint="0%,100%">
+                            <GradientStop Color="#f61e51" Offset="0" />
+                            <GradientStop Color="Black" Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter>
+                </KeyFrame>
+            </Animation>
+            </Style.Animations>
+            
         </Style>
         <Style Selector="Button.QueueBtn:pressed  /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource ButtonClickBackground}" />
@@ -82,3 +111,4 @@
         <Style></Style>
     </UserControl.Styles>
 </UserControl>
+

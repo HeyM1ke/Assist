@@ -30,13 +30,7 @@
 	                                                               VerticalAlignment="Center"
 	                                                               FontSize="32"
 	                                                    />
-	                                                    <Polygon Points="0,0 24,0 12,24,4 0,0"
-	                                                             Fill="Red"
-	                                                             Opacity="1"
-	                                                             Width="100"
-	                                                             Height="100"
-	                                                             IsVisible="True"
-	                                                    />
+	                                                    
                                                     </StackPanel>
                 								</Grid>
                 							</Border>

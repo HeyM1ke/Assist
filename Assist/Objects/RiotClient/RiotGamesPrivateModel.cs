@@ -25,6 +25,9 @@ namespace Assist.Objects.RiotClient
     
         [YamlMember(Alias = "session", ApplyNamingConventions = false)]
         public SessionSection Session;
+        
+        [YamlMember(Alias = "scopes", ApplyNamingConventions = false)]
+        public object Scopes;
     }
 
     public class SessionSection

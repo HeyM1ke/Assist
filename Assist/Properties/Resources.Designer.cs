@@ -672,6 +672,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to COMPETE.
+        /// </summary>
+        public static string Leagues_Ready {
+            get {
+                return ResourceManager.GetString("Leagues_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a League:.
         /// </summary>
         public static string Leagues_Swap {

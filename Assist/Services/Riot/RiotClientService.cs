@@ -137,7 +137,11 @@ namespace Assist.Services.Riot
                 {
                     RiotApplicationData.ValorantGameProcess = val;
                     RiotApplicationData.ValorantGameProcess.EnableRaisingEvents = true;
-                    RiotApplicationData.ValorantGameProcess.Exited += (o, args) => ClientOpened = false;
+                    RiotApplicationData.ValorantGameProcess.Exited += async (o, args) =>
+                    {
+                        ClientOpened = false;
+                        await CloseRiotRelatedPrograms();
+                    };
                     ClientOpened = true;
                     Log.Information("Found Valorant Process");
                     Log.Information($"Process ID: {val.Id}");
