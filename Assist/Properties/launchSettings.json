@@ -10,6 +10,10 @@
     "Assist-Game (LEAGUES)": {
       "commandName": "Project",
       "commandLineArgs": "--forcegame --leaguesenabled"
+    },
+    "Assist-Game (DEVELOPER_P_MODE)": {
+      "commandName": "Project",
+      "commandLineArgs": "--forcegame --developerPMode"
     }
   }
 }

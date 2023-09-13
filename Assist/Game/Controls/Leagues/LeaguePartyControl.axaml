@@ -40,7 +40,7 @@
                             Spacing="20"
                             VerticalAlignment="Top">
                     <StackPanel.Styles>
-                        <Style Selector="Button">
+                        <Style Selector="Button.LeavePty">
                             <Setter Property="Opacity" Value=".3"></Setter>
                             <Setter Property="Template">
                                 <ControlTemplate>
@@ -62,12 +62,34 @@
                             </Setter>
                         </Style>
                         
+                        <Style Selector="Button.Mail">
+                            <Setter Property="Opacity" Value=".3"></Setter>
+                            <Setter Property="Template">
+                                <ControlTemplate>
+                                    <Border>
+                                        <StackPanel Orientation="Horizontal" Spacing="5"
+                                                    VerticalAlignment="Center">
+                                            <Image Source="{SvgImage /Resources/Icons/inbox.svg}"
+                                                   VerticalAlignment="Center"
+                                            />
+                                            <TextBlock Text="{TemplateBinding Tag}"
+                                                       FontFamily="{StaticResource Inter}"
+                                                       FontWeight="Regular"
+                                                       VerticalAlignment="Center"
+                                                      
+                                                       HorizontalAlignment="Left"></TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter>
+                        </Style>
+                        
                         <Style Selector="Button:pointerover">
                             <Setter Property="Opacity" Value=".7"></Setter>
                         </Style>
                     </StackPanel.Styles>
-                    <Button Classes="TextBtn"  Tag="Messages"/>
-                    <Button Classes="TextBtn" Content="{SvgImage /Resources/Icons/LeavePty.svg}" Tag="Leave Party"/>
+                    <Button Classes="Mail"  Tag="Messages"/>
+                    <Button Classes="LeavePty" Content="{SvgImage /Resources/Icons/LeavePty.svg}" Tag="Leave Party"/>
                 </StackPanel>
                 
                 <Rectangle VerticalAlignment="Bottom"
