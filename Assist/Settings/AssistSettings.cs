@@ -165,6 +165,14 @@ namespace Assist.Settings
             set => this.SetProperty(ref _gameModeEnabled, value);
         }
         
+        private bool _showcaseAssistDetails = true;
+
+        public bool ShowcaseAssistDetails
+        {
+            get => _showcaseAssistDetails;
+            set => this.SetProperty(ref _showcaseAssistDetails, value);
+        }
+        
         private bool _eglEnabled = false;
 
         public bool EglEnabled

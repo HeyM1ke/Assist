@@ -14,10 +14,15 @@ using Assist.Game.Views.Profile.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
+using AssistUser.Lib.Profiles.Models;
+using AsyncImageLoader;
 using Avalonia.Collections;
+using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using DiscordRPC;
 using ReactiveUI;
 using Serilog;
 using ValNet.Objects.Exceptions;
@@ -120,21 +125,47 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     {
                         await LiveViewViewModel.GetUserReputations(new List<string>() { obj.puuid });
                     }
-
+                    var profileAlreadyHere = LiveViewViewModel.AssistProfiles.ContainsKey(obj.puuid);
+                    if (!profileAlreadyHere)
+                    {
+                        await LiveViewViewModel.GetUserProfile(obj.puuid);
+                    }
                     
                     if (CurrentUsers.Count == 0)
                     {
-                        AddUserToList(
-                    
-                            new LiveMenuPartyUser()
-                            {
-                                PlayerId = obj.puuid,
-                                PlayerName = $"{obj.game_name}",
-                                Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
-                                PlayerReady = true,
-                                PlayerReputationLevel = SetupReputation( obj.puuid)
-                            }
-                        );
+                        var pData = await GetPresenceData(obj);
+                        
+                        if (LiveViewViewModel.AssistProfiles.TryGetValue(obj.puuid, out var profileData))
+                        {
+                            var t = await GetUserBadges(profileData);
+                            AddUserToList(
+                                new LiveMenuPartyUser()
+                                {
+                                    PlayerId = obj.puuid,
+                                    PlayerName = string.IsNullOrEmpty(profileData.DisplayName) ? obj.game_name : profileData.DisplayName ,
+                                    ValorantName = !string.IsNullOrEmpty(profileData.DisplayName) ?  $"{obj.game_name}#{obj.game_tag}" : "", 
+                                    Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
+                                    PlayerReady = true,
+                                    BadgeObjects = t,
+                                    PlayerReputationLevel = SetupReputation(obj.puuid),
+                                    PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
+                                }
+                            );
+                        }
+                        else
+                        {
+                            AddUserToList(
+                                new LiveMenuPartyUser()
+                                {
+                                    PlayerId = obj.puuid,
+                                    PlayerName = $"{obj.game_name}",
+                                    Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
+                                    PlayerReady = true,
+                                    PlayerReputationLevel = SetupReputation(obj.puuid),
+                                    PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
+                                }
+                            );    
+                        }
                     }
 
                     if (data.partySize == 1)
@@ -160,9 +191,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             {
                 if(data.sessionLoopState != "MENUS")
                     return;
-
                 
-
                 CurrentPartyId = data.partyId;
                 UpdateGeneralPartyInformation(data,obj);
 
@@ -178,20 +207,46 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                         await LiveViewViewModel.GetUserReputations(new List<string>() { obj.data.presences[0].puuid });
                     }
                     
+                    var profileAlreadyHere = LiveViewViewModel.AssistProfiles.ContainsKey(obj.data.presences[0].puuid);
+                    if (!profileAlreadyHere)
+                    {
+                        await LiveViewViewModel.GetUserProfile(obj.data.presences[0].puuid);
+                    }
+                    
                     
                     if (CurrentUsers.Count == 0)
                     {
-                        AddUserToList(
-                    
-                            new LiveMenuPartyUser()
-                            {
-                                PlayerId = obj.data.presences[0].puuid,
-                                PlayerName = $"{obj.data.presences[0].game_name}",
-                                Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
-                                PlayerReady = true,
-                                PlayerReputationLevel = SetupReputation(obj.data.presences[0].puuid)
-                            }
-                        );
+                        if (LiveViewViewModel.AssistProfiles.TryGetValue(obj.data.presences[0].puuid, out var profileData))
+                        {
+                            var t = await GetUserBadges(profileData);
+                            AddUserToList(
+                                new LiveMenuPartyUser()
+                                {
+                                    PlayerId = obj.data.presences[0].puuid,
+                                    PlayerName = string.IsNullOrEmpty(profileData.DisplayName) ? obj.data.presences[0].game_name : profileData.DisplayName ,
+                                    ValorantName = !string.IsNullOrEmpty(profileData.DisplayName) ?  $"{obj.data.presences[0].game_name}#{obj.data.presences[0].game_tag}" : "", 
+                                    Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
+                                    PlayerReady = true,
+                                    BadgeObjects = t,
+                                    PlayerReputationLevel = SetupReputation(obj.data.presences[0].puuid),
+                                    PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
+                                }
+                            );
+                        }
+                        else
+                        {
+                            AddUserToList(
+                                new LiveMenuPartyUser()
+                                {
+                                    PlayerId = obj.data.presences[0].puuid,
+                                    PlayerName = $"{obj.data.presences[0].game_name}",
+                                    Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
+                                    PlayerReady = true,
+                                    PlayerReputationLevel = SetupReputation(obj.data.presences[0].puuid),
+                                    PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
+                                }
+                            );    
+                        }
                     }
 
                     if (data.partySize == 1)
@@ -278,18 +333,49 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                         var currentUserBtn = CurrentUsers.ToList().Find(member => member.PlayerId == partyData.Members[i].Subject);
                         var gameName = pres.presences.Find(pres => pres.puuid == member.Subject);
                         var p = await GetPresenceData(gameName);
+                        
+                        var profileAlreadyHere = LiveViewViewModel.AssistProfiles.ContainsKey(member.Subject);
+                        if (!profileAlreadyHere)
+                        {
+                            await LiveViewViewModel.GetUserProfile(member.Subject);
+                        }
                         if (currentUserBtn == null)
                         {
-                            Dispatcher.UIThread.InvokeAsync(() =>
+                            Dispatcher.UIThread.InvokeAsync(async () =>
                             {
-                                AddUserToList(new LiveMenuPartyUser()
+
+                                if (LiveViewViewModel.AssistProfiles.TryGetValue(member.Subject, out var profileData))
                                 {
-                                    PlayerName = $"{gameName.game_name}",
-                                    PlayerId = member.Subject,
-                                    Playercard = $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png",
-                                    PlayerReady = true,
-                                    PlayerReputationLevel = SetupReputation(member.Subject)
-                                });
+
+                                    var t = await GetUserBadges(profileData);
+                                    AddUserToList(new LiveMenuPartyUser()
+                                    {
+                                        PlayerName = string.IsNullOrEmpty(profileData.DisplayName) ? gameName.game_name : profileData.DisplayName ,
+                                        ValorantName = !string.IsNullOrEmpty(profileData.DisplayName) ?  $"{gameName.game_name}#{gameName.game_tag}" : "",
+                                        PlayerId = member.Subject,
+                                        Playercard =
+                                            $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png",
+                                        PlayerReady = true,
+                                        BadgeObjects = t,
+                                        PlayerReputationLevel = SetupReputation(member.Subject),
+                                        PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{p.competitiveTier}.png"
+                                    });
+                                }
+                                else
+                                {
+                                    AddUserToList(new LiveMenuPartyUser()
+                                    {
+                                        PlayerName = $"{gameName.game_name}",
+                                        PlayerId = member.Subject,
+                                        Playercard = $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png",
+                                        PlayerReady = true,
+                                        PlayerReputationLevel = SetupReputation(member.Subject),
+                                        PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{p.competitiveTier}.png"
+                                    });
+                                }
+                                
+                                
+                                
                             });
                             // This means this is a new Party Member
                             
@@ -350,8 +436,6 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 });
 
                 CurrentUsers = newTempList;
-
-
             });
         }
         
@@ -363,6 +447,28 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             string decodedString = Encoding.UTF8.GetString(stringData);
             return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
         }
+        
+        public async Task<List<AdvancedImage>> GetUserBadges(AssistProfile data)
+        {
+            if (data.FeaturedBadges.Count == 0)
+                return null;
+
+            List<AdvancedImage> t = new();
+            foreach (var badge in data.FeaturedBadges)
+            {
+                var imgObj = new AdvancedImage(new Uri($"https://content.assistapp.dev/badges/{badge.Id}.png"))
+                {
+                    Source = $"https://content.assistapp.dev/badges/{badge.Id}.png"
+                };
+                RenderOptions.SetBitmapInterpolationMode(imgObj, BitmapInterpolationMode.MediumQuality);
+                
+                t.Add(imgObj);
+            }
+
+            return t;
+
+        }
+
 
         public void UnsubscribeFromEvents()
         {

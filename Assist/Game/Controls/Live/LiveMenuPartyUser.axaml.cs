@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using AsyncImageLoader;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -18,6 +21,8 @@ namespace Assist.Game.Controls.Live
             get { return (string?)GetValue(PlayerNameProperty); }
             set { SetValue(PlayerNameProperty, value); }
         }
+        
+        
 
         public string? Playercard
         {
@@ -43,7 +48,29 @@ namespace Assist.Game.Controls.Live
             set { SetValue(PlayerReputationLevelProperty, value); }
         }
 
+        public string? PlayerRankIcon
+        {
+            get { return (string?)GetValue(PlayerRankIconProperty); }
+            set { SetValue(PlayerRankIconProperty, value); }
+        }
+
+        public string? ValorantName
+        {
+            get { return (string?)GetValue(ValorantNameProperty); }
+            set { SetValue(ValorantNameProperty, value); }
+        }
+
+        public List<AdvancedImage>? BadgeObjects
+        {
+            get { return (List<AdvancedImage>?)GetValue(BadgeObjectsProperty); }
+            set { SetValue(BadgeObjectsProperty, value); }
+        }
+
+
         public string? PlayerId;
         public static readonly StyledProperty<Bitmap?> PlayerReputationLevelProperty = AvaloniaProperty.Register<LiveMenuPartyUser, Bitmap?>("PlayerReputationLevel");
+        public static readonly StyledProperty<string?> PlayerRankIconProperty = AvaloniaProperty.Register<LiveMenuPartyUser, string?>("PlayerRankIcon");
+        public static readonly StyledProperty<string?> ValorantNameProperty = AvaloniaProperty.Register<LiveMenuPartyUser, string?>("ValorantName");
+        public static readonly StyledProperty<List<AdvancedImage>?> BadgeObjectsProperty = AvaloniaProperty.Register<LiveMenuPartyUser, List<AdvancedImage>?>("BadgeObjects", new List<AdvancedImage>());
     }
 }

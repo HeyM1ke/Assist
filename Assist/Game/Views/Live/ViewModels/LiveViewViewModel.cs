@@ -9,6 +9,7 @@ using Assist.Game.Services;
 using Assist.Game.Views.Live.Pages;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
+using AssistUser.Lib.Profiles.Models;
 using AssistUser.Lib.Reputations.Models;
 using Avalonia.Threading;
 using ReactiveUI;
@@ -29,6 +30,7 @@ namespace Assist.Game.Views.Live.ViewModels
         }
 
         public static Dictionary<string, AssistReputationUserV2> ReputationUserV2s = new Dictionary<string, AssistReputationUserV2>();
+        public static Dictionary<string, AssistProfile> AssistProfiles = new Dictionary<string, AssistProfile>();
 
         public async void DisplayWebsocketData()
         {
@@ -177,6 +179,58 @@ namespace Assist.Game.Views.Live.ViewModels
                }
             }
             
+        }
+        
+        public static async Task GetUserProfiles(List<string> ids)
+        {
+
+            foreach (var riotId in ids)
+            {
+                var resp = await AssistApplication.Current.AssistUser.Profile.GetProfileByRiotId(riotId);
+                if (resp.Code != 200)
+                {
+                    Log.Error("Riot ID requested is not a Valid Profile.");
+                    return;
+                }
+                var data = JsonSerializer.Deserialize<AssistProfile>(resp.Data.ToString());
+                
+                
+                if (AssistProfiles.TryGetValue(riotId, out AssistProfile? possibleStoredPlayer))
+                {
+                    Log.Information("Player Profile requested is old, updating player to storage.");
+                    AssistProfiles[riotId] = data;
+                }
+                else
+                {
+                    Log.Information("Player Profile requested is new, adding player to storage.");
+                    AssistProfiles.TryAdd(riotId, data);
+                }
+            }
+        }
+        
+        public static async Task<bool> GetUserProfile(string riotId)
+        {
+            var resp = await AssistApplication.Current.AssistUser.Profile.GetProfileByRiotId(riotId);
+            if (resp.Code != 200)
+            {
+                Log.Error("Riot ID requested is not a Valid Profile.");
+                return false;
+            }
+            var data = JsonSerializer.Deserialize<AssistProfile>(resp.Data.ToString());
+                
+                
+            if (AssistProfiles.TryGetValue(riotId, out AssistProfile? possibleStoredPlayer))
+            {
+                Log.Information("Player Profile requested is old, updating player to storage.");
+                AssistProfiles[riotId] = data;
+            }
+            else
+            {
+                Log.Information("Player Profile requested is new, adding player to storage.");
+                AssistProfiles.TryAdd(riotId, data);
+            }
+            
+            return true;
         }
     }
 }

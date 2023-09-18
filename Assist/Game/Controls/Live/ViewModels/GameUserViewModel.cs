@@ -13,7 +13,9 @@ using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Settings;
 using Assist.ViewModels;
+using AssistUser.Lib.Profiles.Models;
 using AssistUser.Lib.Reputations.Models;
+using AsyncImageLoader;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -38,6 +40,7 @@ namespace Assist.Game.Controls.Live.ViewModels
         }
 
         private string? _playerId;
+        private bool _usingAssistProfile = false;
 
         private PregameMatch.Player? _player;
         public PregameMatch.Player? Player { get => _player; set => this.RaiseAndSetIfChanged(ref _player, value); }
@@ -155,36 +158,21 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _reputationChecked, value);
         }
         
-        private string? _shotcallerReputation = "0";
-
-        public string? ShotcallerReputation
+        private bool _profileChecked = false;
+        public bool ProfileChecked
         {
-            get => _shotcallerReputation;
-            set => this.RaiseAndSetIfChanged(ref _shotcallerReputation, value);
+            get => _profileChecked;
+            set => this.RaiseAndSetIfChanged(ref _profileChecked, value);
         }
         
-        private string? _goodteammateReputation = "0";
+        private List<AdvancedImage>? _badgeObjects = new List<AdvancedImage>();
 
-        public string? GoodteammateReputation
+        public List<AdvancedImage>? BadgeObjects
         {
-            get => _goodteammateReputation;
-            set => this.RaiseAndSetIfChanged(ref _goodteammateReputation, value);
+            get => _badgeObjects;
+            set => this.RaiseAndSetIfChanged(ref _badgeObjects, value);
         }
         
-        private string? _calmReputation = "0";
-
-        public string? CalmReputation
-        {
-            get => _calmReputation;
-            set => this.RaiseAndSetIfChanged(ref _calmReputation, value);
-        }
-        
-        
-        public async Task Setup()
-        {
-            
-        }
-
         /// <summary>
         /// Updates the binded user control data with the PlayerData set in control's Player variable.
         /// </summary>
@@ -217,18 +205,21 @@ namespace Assist.Game.Controls.Live.ViewModels
                         }
                     }
                     
+                    _playerId = Player.Subject;
                     
                     if (!Player.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
                         {
-                            PlayerTag = $"#{data.game_tag}";
-                            PlayerName = data.game_name;
+                            if (!_usingAssistProfile)
+                            {
+                                PlayerTag = $"#{data.game_tag}";
+                                PlayerName = data.game_name;   
+                            }
                             PlayerIsHidden = false;
                             TrackerEnabled = true;
                             _playerId = data.puuid;
                         }
-                            
-
+                    
                     // Runs regardless if a player is hidden
                     if (data != null)
                     {
@@ -248,7 +239,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         // Set Agent Icon
                         PlayerAgentIcon = $"https://content.assistapp.dev/agents/{Player.CharacterID}_displayicon.png";
                         // Set Agent Name
-                        PlayerAgentName = AgentNames.AgentIdToNames?[Player.CharacterID.ToLower()];
+                        if (!_usingAssistProfile) PlayerAgentName = AgentNames.AgentIdToNames?[Player.CharacterID.ToLower()];
                     }
                     catch (Exception ex)
                     {
@@ -256,37 +247,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     }
                 }
 
-                // Check if user is on dodge list
-                // if so enable red border and icon popup.
-                var user = DodgeService.Current.UserList.Find(player => player.UserId == Player.Subject);
-                var checkGlobal =
-                    AssistApplication.Current.AssistUser.Dodge.GlobalDodgeUsers.Find(player => player.id == Player.Subject);
-                if (user != null)
-                {
-                    // This means the user was found on the dodge list.
-                    IsPlayerDodge = true;
-                    Dispatcher.UIThread.InvokeAsync(async () =>
-                    {
-                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
-                    });
-
-                }
-
-                if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
-                {
-                    // This means the user was found on the global dodge list.
-                    IsPlayerDodge = true;
-                    PlayerRankRating = checkGlobal.category.ToUpper();
-                    Dispatcher.UIThread.InvokeAsync(async () =>
-                    {
-                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
-                        GlobalDodgeBorder = new SolidColorBrush(new Color(255, 255, 255, 255));
-                    });
-
-                }
-
-                if (!ReputationChecked) SetupReputation();
-
+                SetupAssistFeatures(_playerId);
 
             }
         }
@@ -322,17 +283,21 @@ namespace Assist.Game.Controls.Live.ViewModels
                         }
                     }
 
+                    _playerId = CorePlayer.Subject;
+                    
                     if (!CorePlayer.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
                         {
-                            PlayerName = data.game_name;
-                            PlayerTag = $"#{data.game_tag}";
+                            if (!_usingAssistProfile)
+                            {
+                                PlayerName = data.game_name;
+                                PlayerTag = $"#{data.game_tag}";   
+                            }
                             PlayerIsHidden = false;
                             TrackerEnabled = true;
                             _playerId = data.puuid;
                             //CheckTracker();
                         }
-                            
                     
                     if (data != null)
                     {
@@ -351,7 +316,8 @@ namespace Assist.Game.Controls.Live.ViewModels
                         // Set Agent Icon
                         PlayerAgentIcon = $"https://content.assistapp.dev/agents/{CorePlayer.CharacterID.ToLower()}_displayicon.png";
                         // Set Agent Name
-                        PlayerAgentName = AgentNames.AgentIdToNames?[CorePlayer.CharacterID.ToLower()];
+                        if (!_usingAssistProfile)
+                            PlayerAgentName = AgentNames.AgentIdToNames?[CorePlayer.CharacterID.ToLower()];
                     }
                     catch (Exception ex)
                     {
@@ -359,40 +325,48 @@ namespace Assist.Game.Controls.Live.ViewModels
                     }
                 }
 
-                // Check if user is on dodge list
-                // if so enable red border and icon popup.
-                var user = DodgeService.Current.UserList.Find(player => player.UserId == CorePlayer.Subject);
-                var checkGlobal =
-                    AssistApplication.Current.AssistUser.Dodge.GlobalDodgeUsers.Find(player => player.id == CorePlayer.Subject);
-                if (user != null)
-                {
-                    // This means the user was found on the dodge list.
-                    IsPlayerDodge = true;
-                    Dispatcher.UIThread.InvokeAsync(async () =>
-                    {
-                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
-                    });
-
-                }
-
-                if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
-                {
-                    // This means the user was found on the global dodge list.
-                    IsPlayerDodge = true;
-                    PlayerRankRating = checkGlobal.category.ToUpper();
-                    Dispatcher.UIThread.InvokeAsync(async () =>
-                    {
-                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
-                        GlobalDodgeBorder = new SolidColorBrush(new Color(255, 255, 255, 255));
-                    });
-
-                }
-                
-                if (!ReputationChecked) SetupReputation();
-
+                SetupAssistFeatures(_playerId);
             }
         }
 
+
+        #region Private Methods
+        
+        private void SetupAssistFeatures(string userId)
+        {
+            // Check if user is on dodge list
+            // if so enable red border and icon popup.
+            var user = DodgeService.Current.UserList.Find(player => player.UserId == userId);
+            var checkGlobal =
+                AssistApplication.Current.AssistUser.Dodge.GlobalDodgeUsers.Find(player => player.id == userId);
+            if (user != null)
+            {
+                // This means the user was found on the dodge list.
+                IsPlayerDodge = true;
+                Dispatcher.UIThread.InvokeAsync(async () =>
+                {
+                    DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                });
+            }
+
+            if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
+            {
+                // This means the user was found on the global dodge list.
+                IsPlayerDodge = true;
+                PlayerRankRating = checkGlobal.category.ToUpper();
+                Dispatcher.UIThread.InvokeAsync(async () =>
+                {
+                    DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                    GlobalDodgeBorder = new SolidColorBrush(new Color(255, 255, 255, 255));
+                });
+            }
+
+            if (!ReputationChecked) SetupReputation();
+
+            if (!ProfileChecked) SetupProfile();
+
+        }
+        
         private async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
         {
             if (string.IsNullOrEmpty(data.Private))
@@ -419,6 +393,7 @@ namespace Assist.Game.Controls.Live.ViewModels
             }
         }
 
+        [Obsolete]
         private async Task CheckTracker()
         {
             var trackerName = PlayerName.Replace(" ", "%20");
@@ -450,5 +425,54 @@ namespace Assist.Game.Controls.Live.ViewModels
 
             ReputationChecked = true;
         }
+        
+        
+        /// <summary>
+        /// Checks for an Assist Profile and Showcases the Information.
+        /// </summary>
+        private async Task SetupProfile()
+        {
+            if (!AssistSettings.Current.ShowcaseAssistDetails)
+                return;
+            
+            if (LiveViewViewModel.AssistProfiles.TryGetValue(_playerId, out var profileUser))
+            {
+                if (!string.IsNullOrEmpty(profileUser.DisplayName))
+                {
+                    this.PlayerAgentName = $"{PlayerName}{PlayerTag}";
+                    this.PlayerName = profileUser.DisplayName;
+                    this.PlayerTag = "";
+                    _usingAssistProfile = true;
+                }
+
+                this.BadgeObjects = await GetUserBadges(profileUser);
+                ProfileChecked = true;
+                return;
+            }
+            if (await LiveViewViewModel.GetUserProfile(_playerId))
+            {
+                await SetupProfile();
+            }
+        }
+        
+        private async Task<List<AdvancedImage>> GetUserBadges(AssistProfile data)
+        {
+            if (data.FeaturedBadges.Count == 0)
+                return null;
+
+            List<AdvancedImage> t = new();
+            foreach (var badge in data.FeaturedBadges)
+            {
+                var imgObj = new AdvancedImage(new Uri($""))
+                {
+                    Source = $"https://content.assistapp.dev/badges/{badge.Id}.png"
+                };
+                RenderOptions.SetBitmapInterpolationMode(imgObj, BitmapInterpolationMode.MediumQuality);
+                t.Add(imgObj);
+            }
+            return t;
+
+        }
+        #endregion
     }
 }

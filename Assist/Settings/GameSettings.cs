@@ -46,6 +46,8 @@ namespace Assist.Settings
             get => _globalListEnabled;
             set { this.RaiseAndSetIfChanged(ref _globalListEnabled, value); }
         }
+        
+        
 
         public RichPresenceModel RichPresenceSettings { get; set; } = new RichPresenceModel();
 
