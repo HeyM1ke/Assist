@@ -180,6 +180,7 @@ public class RecentService
             DateOfMatch = DateTime.UnixEpoch.AddMilliseconds(matchDetails.MatchInformation.GameStartMillis),
             LengthOfMatchInSeconds = matchDetails.MatchInformation.GameLengthMillis / 1000,
             Gamemode = matchDetails.MatchInformation.GameMode,
+            QueueId = matchDetails.MatchInformation.QueueID,
             IsCompleted = matchDetails.MatchInformation.IsCompleted,
             MapId = matchDetails.MatchInformation.MapId
         };
@@ -189,6 +190,7 @@ public class RecentService
         
         // Determine Win & Score Conditions
         int indexOfLocalTeam = matchDetails.Teams.FindIndex(x => x.TeamId.Equals(localPlayerData.TeamId));
+        recentMatch.AllyTeamId = localPlayerData.TeamId;
         recentMatch.AllyTeamScore = matchDetails.Teams[indexOfLocalTeam].RoundsWon;
         recentMatch.Result = matchDetails.Teams[indexOfLocalTeam].Won
             ? RecentMatch.MatchResult.VICTORY
@@ -239,6 +241,12 @@ public class RecentService
             recentPlayerData.LastSeen = DateTime.UtcNow;
             recentPlayerData.LastSeenMatchId = matchDetails.MatchInformation.MatchId;
             recentPlayerData.Matches.Add(matchDetails.MatchInformation.MatchId);
+
+            int index = RecentPlayers.FindIndex(ply => ply.PlayerId.Equals(recentPlayerData.PlayerId));
+            if (index < 0)
+                RecentPlayers.Add(recentPlayerData);
+            else
+                RecentPlayers[index] = recentPlayerData;
         }
         
         

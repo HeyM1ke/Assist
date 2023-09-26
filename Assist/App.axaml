@@ -252,6 +252,9 @@
         <StyleInclude Source="avares://Assist/Controls/Profile/ProfileBadgeShowcase.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueSelectionDropdownButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Leagues/QueuePlayerPreview.axaml"></StyleInclude>
+        
+        <StyleInclude Source="avares://Assist/Game/Controls/Live/MatchReportTeamDisplayControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Live/MatchReportTeammateDisplayControl.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
 

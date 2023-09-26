@@ -28,6 +28,8 @@ public class QueueNames
                 return "Sunset";
             case "premier-seasonmatch":
                 return "Premier";
+            case "premier":
+                return "Premier";
             case "hurm":
                 return "Team Deathmatch";
             default:

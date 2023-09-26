@@ -10,15 +10,18 @@ public class RecentMatch
     public MatchResult Result { get; set; } = MatchResult.DEFAULT;
     public string MapId { get; set; } = String.Empty;
     public string Gamemode { get; set; } = String.Empty;
+    public string QueueId { get; set; } = string.Empty;
     public DateTime DateOfMatch { get; set; }
     public double LengthOfMatchInSeconds { get; set; }
     public double AllyTeamScore { get; set; } = 0;
     public double EnemyTeamScore { get; set; } = 0;
     public string AllyTeamName { get; set; } = String.Empty;
+    public string AllyTeamId { get; set; } = String.Empty;
     public string EnemyTeamName { get; set; } = String.Empty;
 
     public List<Player> Players { get; set; } = new List<Player>();
     
+
     public class Player
     {
         public string PlayerId { get; set; } = String.Empty;

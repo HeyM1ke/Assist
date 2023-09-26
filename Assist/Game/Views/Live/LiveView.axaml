@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:live="clr-namespace:Assist.Game.Controls.Live"
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="590"
@@ -13,5 +14,26 @@
                 <CrossFade Duration="0.20" />
             </TransitioningContentControl.PageTransition>
         </TransitioningContentControl>
+        <Border Width="300"
+                Padding="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Stretch"
+                Background="{DynamicResource AssistSecondary}">
+            <Grid>
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding MatchControls}"
+                                 >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Spacing="8"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Orientation="Vertical"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
