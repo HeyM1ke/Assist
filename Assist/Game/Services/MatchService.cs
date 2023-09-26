@@ -21,7 +21,7 @@ namespace Assist.Game.Services;
 
 public class MatchService
 {
-    public static MatchService Instance;
+    public static MatchService? Instance;
     public AssistMatch CurrentMatchData;
     private bool currentlyBinded = false;
 
@@ -64,7 +64,20 @@ public class MatchService
 
         if (resp.Code != 200)
         {
-            Log.Error("CANNOT GET MATCH DATA ON MATCHSERVICE");
+            Log.Error("CANNOT GET MATCH DATA ON MATCHSERVICE on PREMATCH");
+            Log.Error(resp.Message);
+        }
+        else
+        {
+            CurrentMatchData = JsonSerializer.Deserialize<AssistMatch>(resp.Data.ToString());
+            return CurrentMatchData; 
+        }
+        
+        resp = await AssistApplication.Current.AssistUser.League.MATCH_GetUserMatch();
+
+        if (resp.Code != 200)
+        {
+            Log.Error("CANNOT GET MATCH DATA ON MATCHSERVICE on MATCH");
             Log.Error(resp.Message);
             return new AssistMatch();
         }

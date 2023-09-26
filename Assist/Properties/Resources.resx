@@ -417,6 +417,12 @@
   <data name="Leagues_Ready" xml:space="preserve">
     <value>COMPETE</value>
   </data>
+  <data name="Leagues_ReadyUp" xml:space="preserve">
+    <value>READY</value>
+  </data>
+  <data name="Leagues_Waiting" xml:space="preserve">
+    <value>Waiting...</value>
+  </data>
   <data name="Assist_Chat" xml:space="preserve">
     <value>Chat</value>
   </data>

@@ -457,6 +457,7 @@ public class MatchPageViewModel : ViewModelBase
                     await HandlePregameMatchData();
                     break;
                 case "INGAME":
+                    await HandleIngameMatchData();
                     break;
             }
 
@@ -550,7 +551,7 @@ public class MatchPageViewModel : ViewModelBase
             }
 
 
-            if (teamMatesCorrect >= (MatchService.Instance.CurrentMatchData.TeamOne.Players.Count * .5))
+            if (teamMatesCorrect >= (MatchService.Instance.CurrentMatchData.TeamOne.Players.Count * .8))
             {
                 Log.Information("More than half of the teamMates are correct on the team.");
                 CurrentlyInMatch = true;

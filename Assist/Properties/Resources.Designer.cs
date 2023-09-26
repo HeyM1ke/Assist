@@ -681,11 +681,29 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to READY.
+        /// </summary>
+        public static string Leagues_ReadyUp {
+            get {
+                return ResourceManager.GetString("Leagues_ReadyUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a League:.
         /// </summary>
         public static string Leagues_Swap {
             get {
                 return ResourceManager.GetString("Leagues_Swap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting....
+        /// </summary>
+        public static string Leagues_Waiting {
+            get {
+                return ResourceManager.GetString("Leagues_Waiting", resourceCulture);
             }
         }
         

@@ -9,7 +9,7 @@ namespace Assist.Game.Controls.Match;
 public class MatchPlayerControl : TemplatedControl
 {
     public static readonly StyledProperty<string?> PlayerNameProperty = AvaloniaProperty.Register<MatchPlayerControl, string?>("PlayerName", "Player");
-    public static readonly StyledProperty<string?> LeaguePointTextProperty = AvaloniaProperty.Register<MatchPlayerControl, string?>("LeaguePointText", "LP: 0,000");
+    public static readonly StyledProperty<string?> LeaguePointTextProperty = AvaloniaProperty.Register<MatchPlayerControl, string?>("LeaguePointText", "0,000 LP");
     public static readonly StyledProperty<string?> ImageUrlProperty = AvaloniaProperty.Register<MatchPlayerControl, string?>("ImageUrl");
     public static readonly StyledProperty<bool?> IsReadyProperty = AvaloniaProperty.Register<MatchPlayerControl, bool?>("IsReady", false);
     public static readonly StyledProperty<IEnumerable> ContentProperty = AvaloniaProperty.Register<MatchPlayerControl, IEnumerable>("Content");

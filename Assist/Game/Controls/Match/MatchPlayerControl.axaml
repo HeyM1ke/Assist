@@ -63,7 +63,7 @@
                         
                         <StackPanel HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Orientation="Vertical"
+                                    Orientation="Horizontal"
                                     Spacing="8"
                                     Grid.Column="1">
                             <Image 
@@ -71,13 +71,16 @@
                                    HorizontalAlignment="Right"
                                    Stretch="Uniform"
                                    Source="/Resources/Icons/Crown_Icon.png"/>
-                            <TextBlock Text="{TemplateBinding LeaguePointText}"
-                                       FontFamily="{StaticResource Inter}"
-                                       FontWeight="Medium"
-                                       VerticalAlignment="Center"
-                                       Foreground="{StaticResource AssistTextWhite}"
-                                       FontSize="12"
-                            />
+                            <Border Padding="10,5"
+                                    Background="#40000000">
+                                <TextBlock Text="{TemplateBinding LeaguePointText}"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontWeight="Bold"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource AssistTextWhite}"
+                                           FontSize="12"
+                                />
+                            </Border>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -86,7 +89,7 @@
     </Style>
     
     <Style Selector="controls|MatchPlayerControl[IsReady=False] /template/ Border#PART_MainBorder">
-        <Setter Property="Background" Value="{StaticResource AssistPrimary}"/>
+        <Setter Property="Background" Value="#1E222A"/>
         <Setter Property="BorderBrush" Value="{StaticResource AssistOutline}"/>
     </Style>
     

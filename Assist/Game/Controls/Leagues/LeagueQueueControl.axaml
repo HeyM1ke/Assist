@@ -72,7 +72,7 @@
             <Setter Property="Transitions">
                 <Transitions>
                     
-                    <BrushTransition Property="Background" Duration="5:0:0.5" Easing="LinearEasing"/>
+                    <BrushTransition Property="Background" Duration="1:0:0.5" Easing="LinearEasing"/>
                 </Transitions>
             </Setter>
             <Style.Animations>

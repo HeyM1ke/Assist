@@ -276,7 +276,21 @@ public class LeagueSelectionViewModel : ViewModelBase
         }
         // Check if the player is Pregame or in-game, if so dont allow loading.
         var playerPres = await GetCurrentPlayerPres();
-
+        
+        // Request Match Endpoint to see if there is a match.
+        var p = await AssistApplication.Current.AssistUser.League.PREMATCH_GetUserMatch();
+        if (p.Code == 200)
+        {
+            GameViewNavigationController.Change(new MatchPage());
+            return true;
+        }
+        p = await AssistApplication.Current.AssistUser.League.MATCH_GetUserMatch();
+        if (p.Code == 200)
+        {
+            GameViewNavigationController.Change(new MatchPage());
+            return true;
+        }
+        
         if (!playerPres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
         {
             _errorMessage = "You are currently in a game, please leave your game to play leagues.";
