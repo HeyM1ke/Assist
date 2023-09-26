@@ -457,7 +457,8 @@ public class MatchPageViewModel : ViewModelBase
                     await HandlePregameMatchData();
                     break;
                 case "INGAME":
-                    await HandleIngameMatchData();
+                    //TODO : Handle Ingame Data.
+                    //await HandleIngameMatchData();
                     break;
             }
 

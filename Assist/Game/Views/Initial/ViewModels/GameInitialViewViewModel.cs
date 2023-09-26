@@ -54,6 +54,7 @@ namespace Assist.Game.Views.Initial.ViewModels
             await StartSocketConnection();
 
             new DodgeService();
+            new RecentService();
             
             // Introduce Authentication
             if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
