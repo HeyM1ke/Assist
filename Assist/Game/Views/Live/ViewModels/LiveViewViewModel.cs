@@ -23,16 +23,6 @@ namespace Assist.Game.Views.Live.ViewModels
 {
     internal class LiveViewViewModel : ViewModelBase
     {
-        private ObservableCollection<MatchReportDisplayControl> _matchControls = new ObservableCollection<MatchReportDisplayControl>(){};
-
-        public ObservableCollection<MatchReportDisplayControl> MatchControls
-        {
-            get => _matchControls;
-            set => this.RaiseAndSetIfChanged(ref _matchControls, value);
-        }
-        
-        
-        
         private string _output = "START: ";
 
         public string Output
@@ -80,7 +70,6 @@ namespace Assist.Game.Views.Live.ViewModels
             };
 
             await AttemptCurrentPage();
-            LoadMatches();
         }
 
         private async Task AttemptCurrentPage()
@@ -242,19 +231,6 @@ namespace Assist.Game.Views.Live.ViewModels
             }
             
             return true;
-        }
-
-        public async Task LoadMatches()
-        {
-            if (RecentService.Current.RecentMatches?.Count > 0)
-            {
-                for (int i = RecentService.Current.RecentMatches.Count-1; i >= 0; i--)
-                {
-                    var mat = new MatchReportDisplayControl(RecentService.Current.RecentMatches[i]);
-                    MatchControls.Add(mat);    
-                }
-                
-            }
         }
     }
 }

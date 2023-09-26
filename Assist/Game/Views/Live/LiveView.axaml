@@ -14,26 +14,8 @@
                 <CrossFade Duration="0.20" />
             </TransitioningContentControl.PageTransition>
         </TransitioningContentControl>
-        <Border Width="300"
-                Padding="10"
+        <live:MatchReportSlideout
                 HorizontalAlignment="Right"
-                VerticalAlignment="Stretch"
-                Background="{DynamicResource AssistSecondary}">
-            <Grid>
-                <ScrollViewer>
-                    <ItemsControl ItemsSource="{Binding MatchControls}"
-                                 >
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Spacing="8"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            Orientation="Vertical"></StackPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-        </Border>
+                VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>
