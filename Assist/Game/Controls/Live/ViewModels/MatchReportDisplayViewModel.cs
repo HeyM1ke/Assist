@@ -152,7 +152,7 @@ public class MatchReportDisplayViewModel : ViewModelBase
         }
 
         AllyScore = RecentMatchData.AllyTeamScore.ToString();
-        EnemyScore = RecentMatchData.AllyTeamScore.ToString();
+        EnemyScore = RecentMatchData.EnemyTeamScore.ToString();
         GameMode = QueueNames.DetermineQueueKey(RecentMatchData.QueueId.ToLower());
         
         var language = AssistSettings.Current.Language;
@@ -163,7 +163,6 @@ public class MatchReportDisplayViewModel : ViewModelBase
         RecentMatchData.Players = RecentMatchData.Players.OrderByDescending(x => x.Statistics.Kills).ToList();
         
         GenerateTeamObjects();
-
     }
 
     private void GenerateTeamObjects()
