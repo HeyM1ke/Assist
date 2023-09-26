@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Assist.Settings;
 using ReactiveUI;
@@ -14,6 +15,7 @@ namespace Assist.ViewModels.Windows
 {
     internal class StartupSplashViewModel : ViewModelBase
     {
+        private static Mutex _mutex = null;
         private string _statusMessage = "Loading";
         public string StatusMessage
         {
@@ -23,6 +25,16 @@ namespace Assist.ViewModels.Windows
         
         public async Task Startup()
         {
+            const string appName = "Assist";
+            bool createdNew;
+
+            _mutex = new Mutex(true, appName, out createdNew);
+
+            if (!createdNew)
+            {
+                //app is already running! Exiting the application
+                AssistApplication.CurrentApplication.Shutdown();
+            }
             Log.Information("Splash Startup Started");
             StatusMessage = "Loading..";
             // Look for Settings

@@ -34,9 +34,6 @@ namespace Assist
     
     public partial class App : Application
     {
-
-        
-
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -57,7 +54,7 @@ namespace Assist
                 
                 desktop.MainWindow = new StartupSplash();
             }
-
+            
             base.OnFrameworkInitializationCompleted();
         }
 
