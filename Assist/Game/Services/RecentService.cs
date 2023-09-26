@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -220,7 +221,6 @@ public class RecentService
 
         return recentMatch;
     }
-    
     private async void HandlePlayers(MatchDetailsObj matchDetails , RecentMatch recentMatch)
     {
         var players = matchDetails.Players;

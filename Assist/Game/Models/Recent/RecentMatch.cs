@@ -38,6 +38,7 @@ public class RecentMatch
             public int Assists { get; set; } = 0;
             public int Score { get; set; } = 0;
         }
+        
     }
     
     public enum MatchResult

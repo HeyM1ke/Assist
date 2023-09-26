@@ -132,10 +132,12 @@ public class MatchReportDisplayViewModel : ViewModelBase
         {
             case RecentMatch.MatchResult.VICTORY:
                 SpecialColor = VictoryGreen;
+                ScoreVisible = true;
                 StatusText = "VICTORY";
                 break;
             case RecentMatch.MatchResult.LOSS:
                 SpecialColor = LossRed;
+                ScoreVisible = true;
                 StatusText = "LOSS";
                 break;
             case RecentMatch.MatchResult.REMAKE:
@@ -144,6 +146,7 @@ public class MatchReportDisplayViewModel : ViewModelBase
                 break;
             default:
                 SpecialColor = DefaultWhite;
+                
                 StatusText = "In Progress";
                 break;
         }
@@ -155,8 +158,10 @@ public class MatchReportDisplayViewModel : ViewModelBase
         var language = AssistSettings.Current.Language;
         var attribute = language.GetAttribute<LanguageAttribute>();
         DateOfMatch = RecentMatchData.DateOfMatch.ToLocalTime().ToString("M/d/yy", new CultureInfo(attribute.Code));
-        LengthOfMatch = TimeSpan.FromSeconds(RecentMatchData.LengthOfMatchInSeconds).ToString("g",new CultureInfo(attribute.Code));
-
+        LengthOfMatch = TimeSpan.FromSeconds(RecentMatchData.LengthOfMatchInSeconds).ToString("hh\\:mm\\:ss",new CultureInfo(attribute.Code));
+        
+        RecentMatchData.Players = RecentMatchData.Players.OrderByDescending(x => x.Statistics.Kills).ToList();
+        
         GenerateTeamObjects();
 
     }
