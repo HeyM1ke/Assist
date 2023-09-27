@@ -8,6 +8,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
+using Assist.Game.Models.Recent;
+using Assist.Game.Services;
 using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
@@ -16,6 +18,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Threading;
 using DiscordRPC.Message;
+using DynamicData.Binding;
 using ReactiveUI;
 using Serilog;
 using ValNet.Objects.Coregame;
@@ -27,25 +30,25 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 {
     internal class IngameViewModel : ViewModelBase
     {
-        private ObservableCollection<GameUserControl> _allyTeamControls = new ObservableCollection<GameUserControl>();
+        private ObservableCollectionExtended<GameUserControl> _allyTeamControls = new ObservableCollectionExtended<GameUserControl>();
 
-        public ObservableCollection<GameUserControl> AllyTeamControls
+        public ObservableCollectionExtended<GameUserControl> AllyTeamControls
         {
             get => this._allyTeamControls;
             set => this.RaiseAndSetIfChanged(ref _allyTeamControls, value);
         }
         
-        private ObservableCollection<GameUserControl> _deathTeamControls = new ObservableCollection<GameUserControl>();
+        private ObservableCollectionExtended<GameUserControl> _deathTeamControls = new ObservableCollectionExtended<GameUserControl>();
 
-        public ObservableCollection<GameUserControl> DeathTeamControls
+        public ObservableCollectionExtended<GameUserControl> DeathTeamControls
         {
             get => this._deathTeamControls;
             set => this.RaiseAndSetIfChanged(ref _deathTeamControls, value);
         }
 
-        private ObservableCollection<GameUserControl> _enemyTeamControls = new ObservableCollection<GameUserControl>();
+        private ObservableCollectionExtended<GameUserControl> _enemyTeamControls = new ObservableCollectionExtended<GameUserControl>();
 
-        public ObservableCollection<GameUserControl> EnemyTeamControls
+        public ObservableCollectionExtended<GameUserControl> EnemyTeamControls
         {
             get => this._enemyTeamControls;
             set => this.RaiseAndSetIfChanged(ref _enemyTeamControls, value);
@@ -294,9 +297,10 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             
             // Update Map Data
             HandleMatchData(MatchResp, PresenceResp.presences.Find(p => p.puuid == AssistApplication.Current.CurrentUser.UserData.sub));
+            
+            HandleIngameMatchTracking(MatchResp, PresenceResp.presences.Find(p => p.puuid == AssistApplication.Current.CurrentUser.UserData.sub));
         }
-
-
+        
         private async Task<Dictionary<string, IBrush>> MarkPlayerSimilarParties(List<ChatV4PresenceObj.Presence> allTeamPresences)
         {
             // Create a dictionary that relates an id to a brush color.
@@ -571,7 +575,122 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
         }
 
+        private async Task HandleIngameMatchTracking(CoregameMatch matchResp, ChatV4PresenceObj.Presence? currentUser)
+        {
+
+            var existingMatch = RecentService.Current.RecentMatches?.Find(x => x.MatchId.Equals(matchResp.MatchID));
+            var pres = await GetPresenceData(currentUser);
+            
+            var recentM = new RecentMatch
+            {
+                MatchId = matchResp.MatchID,
+                AllyTeamId = matchResp.Players?.Find(x => x.Subject.Equals(AssistApplication.Current.CurrentUser.UserData.sub,
+                    StringComparison.OrdinalIgnoreCase))?.TeamID ?? "",
+                IsCompleted = false,
+                Result = RecentMatch.MatchResult.IN_PROGRESS,
+                MapId = matchResp.MapID,
+                QueueId = matchResp.MatchData.QueueID,
+                DateOfMatch = DateTime.UtcNow,
+                LengthOfMatchInSeconds = 0,
+                AllyTeamScore = pres.partyOwnerMatchScoreAllyTeam,
+                EnemyTeamScore = pres.partyOwnerMatchScoreEnemyTeam,
+                MatchTrack_LastState = "INGAME"
+            };
+
+            if (matchResp.Players?.Count == 0)
+                return;
+            
+            HandlePlayers(matchResp, recentM);
+            HandleRecentMatchPlayers(matchResp, recentM);
+            
+            if (RecentService.Current.RecentMatches.Exists(x => x.MatchId.Equals(recentM.MatchId)))
+            {
+                RecentService.Current.UpdateMatch(recentM);
+                return;
+            }
+            
+            RecentService.Current.AddMatch(recentM);
+        }
         
+        private async void HandlePlayers(CoregameMatch matchDetails , RecentMatch recentMatch)
+        {
+            var players = matchDetails.Players;
+
+            foreach (var playerObj in players)
+            {
+                var recentPlayerData = RecentService.Current.RecentPlayers?.Find(ply => ply.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+                if (recentPlayerData is null)
+                {
+                    recentPlayerData = new RecentPlayer()
+                    {
+                        FirstSeen = DateTime.UtcNow,
+                        PlayerId = playerObj.Subject
+                    };
+                }
+
+
+                recentPlayerData.LastSeen = DateTime.UtcNow;
+                recentPlayerData.LastSeenMatchId = matchDetails.MatchID;
+                recentPlayerData.Matches.Add(matchDetails.MatchID);
+
+                int index = RecentService.Current.RecentPlayers.FindIndex(ply => ply.PlayerId.Equals(recentPlayerData.PlayerId));
+                if (index < 0)
+                    RecentService.Current.RecentPlayers?.Add(recentPlayerData);
+                else
+                    RecentService.Current.RecentPlayers[index] = recentPlayerData;
+            }
+        
+        
+        }
+        
+        /// <summary>
+        /// Creates the Player for the RecentMatch Object.
+        /// </summary>
+        /// <param name="matchDetails"></param>
+        /// <param name="recentMatch"></param>
+        private async void HandleRecentMatchPlayers(CoregameMatch matchDetails, RecentMatch recentMatch)
+        {
+            var players = matchDetails.Players;
+
+            foreach (var playerObj in players)
+            {
+                GameUserControl? data = null;
+                if (IsDeathmatch)
+                {
+                    data = DeathTeamControls.ToList().Find(x =>
+                        x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+                }
+                else
+                {
+                    data = AllyTeamControls.ToList().Find(x =>
+                        x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+
+                    if (data is null)
+                    {
+                        data = EnemyTeamControls.ToList().Find(x =>
+                            x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+                    }
+                }
+
+                if (data is null)
+                {
+                    continue;
+                }
+
+                var nP = new RecentMatch.Player()
+                {
+                    PlayerId = playerObj.Subject,
+                    CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
+                    PlayerAgentId = playerObj.CharacterID,
+                    PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.PlayerAgentName.Split('#')[0],
+                    PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerTag : $"#{data._viewModel.PlayerAgentName.Split('#')[^1]}",
+                    TeamId = playerObj.TeamID,
+                    Statistics = null
+                };
+            
+                recentMatch.Players.Add(nP);
+            }
+        }
 
         public void UnsubscribeFromEvents()
         {

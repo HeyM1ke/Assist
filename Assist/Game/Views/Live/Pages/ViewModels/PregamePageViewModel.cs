@@ -229,7 +229,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             // Update Map Data
             HandleMapData(MatchResp);
             
-            await HandlePregameMatchTracking(MatchResp);
+            HandlePregameMatchTracking(MatchResp);
         }
 
         private async Task HandlePregameMatchTracking(PregameMatch pregameMatch)

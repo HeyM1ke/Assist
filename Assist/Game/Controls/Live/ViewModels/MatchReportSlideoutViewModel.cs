@@ -33,10 +33,16 @@ public class MatchReportSlideoutViewModel : ViewModelBase
     {
         if (RecentService.Current.RecentMatches?.Count > 0)
         {
+            int limiter = 0;
             for (int i = RecentService.Current.RecentMatches.Count-1; i >= 0; i--)
             {
                 var mat = new MatchReportDisplayControl(RecentService.Current.RecentMatches[i]);
-                MatchControls.Add(mat);    
+                MatchControls.Add(mat);
+                limiter++;
+                if (limiter == 5)
+                {
+                    i = 0;
+                }
             }
                 
         }
@@ -57,6 +63,7 @@ public class MatchReportSlideoutViewModel : ViewModelBase
     {
         if (RecentService.Current.RecentMatches?.Count > 0)
         {
+            int limiter = 0;
             if (RecentService.Current.RecentMatches.Count != MatchControls.Count || RecentService.Current.RecentMatches.Any(x => !x.IsCompleted))
             {
                 Log.Information("Refreshing Match Tracking Control.");
@@ -74,6 +81,11 @@ public class MatchReportSlideoutViewModel : ViewModelBase
                     else
                     {
                         possibleControl.UpdateData(RecentService.Current.RecentMatches[i]);
+                    }
+                    limiter++;
+                    if (limiter == 5)
+                    {
+                        i = 0;
                     }
                 }
             }

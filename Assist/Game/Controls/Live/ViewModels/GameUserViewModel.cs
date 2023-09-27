@@ -65,7 +65,7 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _playerLevel, value);
         }
         
-        private int? _playerCompetitiveTier;
+        private int? _playerCompetitiveTier = 0;
 
         public int? PlayerCompetitiveTier
         {
@@ -231,6 +231,8 @@ namespace Assist.Game.Controls.Live.ViewModels
                             TrackerEnabled = true;
                             _playerId = data.puuid;
                         }
+                    
+                    
                     
                     // Runs regardless if a player is hidden
                     if (data != null)

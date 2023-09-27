@@ -146,7 +146,7 @@ public class MatchReportDisplayViewModel : ViewModelBase
                 break;
             default:
                 SpecialColor = DefaultWhite;
-                
+                ScoreVisible = true;
                 StatusText = "In Progress";
                 break;
         }
@@ -254,7 +254,7 @@ public class MatchReportDisplayViewModel : ViewModelBase
                     {
                         AgentIcon =
                             $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
-                        TeammateName = $"{player.PlayerName}#{player.PlayerTag}",
+                        TeammateName = $"{player.PlayerName}{player.PlayerTag}",
                         RankIcon =
                             $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline =

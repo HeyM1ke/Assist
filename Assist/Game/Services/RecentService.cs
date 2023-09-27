@@ -315,7 +315,7 @@ public class RecentService
                 CompetitiveTier = oldP is null ? (int)playerObj.CompetitiveTier : oldP.CompetitiveTier,
                 PlayerAgentId = playerObj.CharacterId,
                 PlayerName = playerObj.GameName,
-                PlayerTag = playerObj.TagLine,
+                PlayerTag = playerObj.TagLine.Replace("#",""),
                 TeamId = playerObj.TeamId,
                 Statistics = new RecentMatch.Player.Stats()
                 {

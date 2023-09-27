@@ -11,7 +11,7 @@ public class QueueNames
             case "deathmatch":
                 return "Deathmatch";
             case "spikerush":
-                return "SpikeRush";
+                return "Spike Rush";
             case "competitive":
                 return "Competitive";
             case "unrated":

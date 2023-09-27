@@ -77,7 +77,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             {
                 RiotWebsocketServiceOnUserPresenceMessageEvent(start);
             }
-
+            CheckAndHandleRecentMatchTracking();
 
             if (ProfilePageViewModel.ProfileData is null)
             {
@@ -100,8 +100,6 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             }
             
             EndorseEnabled = true;
-
-            CheckAndHandleRecentMatchTracking();
         }
         
         public async Task SetupWithLocalPresence(ChatV4PresenceObj.Presence obj = null)
