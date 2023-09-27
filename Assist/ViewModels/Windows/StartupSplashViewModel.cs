@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Assist.Services.Utils;
 using Assist.Settings;
 using ReactiveUI;
 using Serilog;
@@ -33,8 +34,12 @@ namespace Assist.ViewModels.Windows
             if (!createdNew)
             {
                 //app is already running! Exiting the application
+                
+                WindowsUtils.ShowToFront(appName);
+                
                 AssistApplication.CurrentApplication.Shutdown();
             }
+            GC.KeepAlive(_mutex);
             Log.Information("Splash Startup Started");
             StatusMessage = "Loading..";
             // Look for Settings

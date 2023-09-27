@@ -345,6 +345,7 @@ namespace Assist.ViewModels
         public AssistGameServerConnection GameServerConnection = new AssistGameServerConnection();
 
         public static bool CurrentlyInAssistLeagueMatch = false;
+        public static bool RequestedClose = false;
 
         #endregion
 

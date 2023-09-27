@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
+using Assist.Services.Utils;
 using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Threading;
@@ -154,6 +155,14 @@ namespace Assist.Services.Riot
             }
         }
 
+        public static async void FocusValorant()
+        {
+            var rProcesses = await RiotClientService.GetCurrentRiotProcesses();
+            var vProcess = rProcesses.Where(_p => _p.ProcessName.Contains("VALORANT-Win64-Shipping")).FirstOrDefault();
+            WindowsUtils.SetForegroundWindow(vProcess.MainWindowHandle);
+            WindowsUtils.ShowWindow(vProcess.MainWindowHandle, 5); // 5 for Windowed Full Screen & Windowed, 3 for Full Screen.
+        }
+        
         private async void OnValorantGameLaunched()
         {
             Log.Information("Valorant Launched Taking Backup");
