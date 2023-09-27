@@ -29,7 +29,7 @@ using ValNet.Objects.Pregame;
 
 namespace Assist.Game.Controls.Live.ViewModels
 {
-    internal class GameUserViewModel : ViewModelBase
+    public class GameUserViewModel : ViewModelBase
     {
         private IBrush? _brush = null;
 
@@ -41,6 +41,12 @@ namespace Assist.Game.Controls.Live.ViewModels
 
         private string? _playerId;
         private bool _usingAssistProfile = false;
+
+        public bool UsingAssistProfile
+        {
+            get => _usingAssistProfile;
+            set => this.RaiseAndSetIfChanged(ref _usingAssistProfile, value);
+        }
 
         private PregameMatch.Player? _player;
         public PregameMatch.Player? Player { get => _player; set => this.RaiseAndSetIfChanged(ref _player, value); }
@@ -59,7 +65,13 @@ namespace Assist.Game.Controls.Live.ViewModels
             set => this.RaiseAndSetIfChanged(ref _playerLevel, value);
         }
         
-        
+        private int? _playerCompetitiveTier;
+
+        public int? PlayerCompetitiveTier
+        {
+            get => _playerCompetitiveTier;
+            set => this.RaiseAndSetIfChanged(ref _playerCompetitiveTier, value);
+        }
         
         private string? _playerRankIcon ;
 
@@ -224,6 +236,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     if (data != null)
                     {
                         var t = await GetPresenceData(data);
+                        PlayerCompetitiveTier = t.competitiveTier;
                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                         PlayerLevel = $"{t.accountLevel}";
                         _playerId = data.puuid;
@@ -239,7 +252,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         // Set Agent Icon
                         PlayerAgentIcon = $"https://content.assistapp.dev/agents/{Player.CharacterID}_displayicon.png";
                         // Set Agent Name
-                        if (!_usingAssistProfile) PlayerAgentName = AgentNames.AgentIdToNames?[Player.CharacterID.ToLower()];
+                        if (!UsingAssistProfile) PlayerAgentName = AgentNames.AgentIdToNames?[Player.CharacterID.ToLower()];
                     }
                     catch (Exception ex)
                     {
@@ -288,7 +301,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     if (!CorePlayer.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
                         {
-                            if (!_usingAssistProfile)
+                            if (!UsingAssistProfile)
                             {
                                 PlayerName = data.game_name;
                                 PlayerTag = $"#{data.game_tag}";   
@@ -303,6 +316,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                     {
                         var t = await GetPresenceData(data);
                         // Set rank icon
+                        PlayerCompetitiveTier = t.competitiveTier;
                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                         PlayerLevel = $"{t.accountLevel}";
                         _playerId = data.puuid;
@@ -316,7 +330,7 @@ namespace Assist.Game.Controls.Live.ViewModels
                         // Set Agent Icon
                         PlayerAgentIcon = $"https://content.assistapp.dev/agents/{CorePlayer.CharacterID.ToLower()}_displayicon.png";
                         // Set Agent Name
-                        if (!_usingAssistProfile)
+                        if (!UsingAssistProfile)
                             PlayerAgentName = AgentNames.AgentIdToNames?[CorePlayer.CharacterID.ToLower()];
                     }
                     catch (Exception ex)
@@ -437,12 +451,12 @@ namespace Assist.Game.Controls.Live.ViewModels
             
             if (LiveViewViewModel.AssistProfiles.TryGetValue(_playerId, out var profileUser))
             {
-                if (!string.IsNullOrEmpty(profileUser.DisplayName))
+                if (!string.IsNullOrEmpty(profileUser.DisplayName) && !UsingAssistProfile)
                 {
                     this.PlayerAgentName = $"{PlayerName}{PlayerTag}";
                     this.PlayerName = profileUser.DisplayName;
                     this.PlayerTag = "";
-                    _usingAssistProfile = true;
+                    UsingAssistProfile = true;
                 }
 
                 this.BadgeObjects = await GetUserBadges(profileUser);

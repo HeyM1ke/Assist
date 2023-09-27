@@ -12,7 +12,7 @@ namespace Assist.Game.Controls.Live;
 public partial class MatchReportDisplayControl : UserControl
 {
     private readonly MatchReportDisplayViewModel _viewModel;
-
+    public string MatchId { get; set; } = string.Empty;
     public MatchReportDisplayControl()
     {
         DataContext = _viewModel = new MatchReportDisplayViewModel();
@@ -23,6 +23,7 @@ public partial class MatchReportDisplayControl : UserControl
     {
         DataContext = _viewModel = new MatchReportDisplayViewModel();
         _viewModel.RecentMatchData = data;
+        MatchId = data.MatchId;
         InitializeComponent();
     }
     
@@ -30,5 +31,12 @@ public partial class MatchReportDisplayControl : UserControl
     {
         if (!Design.IsDesignMode)
             await _viewModel.SetupDisplay();
+    }
+
+    public async void UpdateData(RecentMatch data)
+    {
+        _viewModel.RecentMatchData = data;
+        MatchId = data.MatchId;
+        await _viewModel.SetupDisplay();
     }
 }

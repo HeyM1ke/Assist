@@ -17,7 +17,7 @@ namespace Assist.Game.Controls.Live
 {
     public partial class GameUserControl : UserControl
     {
-        private readonly GameUserViewModel _viewModel;
+        public readonly GameUserViewModel _viewModel;
         public string? PlayerId = null;
         public GameUserControl()
         {

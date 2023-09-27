@@ -81,7 +81,8 @@
                                            FontWeight="Light"
                                            FontSize="8"
                                            Foreground="{DynamicResource AssistTextWhite}"
-                                           TextAlignment="Left"/>
+                                           TextAlignment="Left"
+                                           IsVisible="{Binding ScoreVisible, FallbackValue='True'}"/>
                             </StackPanel>
                         </StackPanel>
                         

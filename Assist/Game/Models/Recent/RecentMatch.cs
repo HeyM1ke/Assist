@@ -18,6 +18,7 @@ public class RecentMatch
     public string AllyTeamName { get; set; } = String.Empty;
     public string AllyTeamId { get; set; } = String.Empty;
     public string EnemyTeamName { get; set; } = String.Empty;
+    public string MatchTrack_LastState { get; set; } = string.Empty;
 
     public List<Player> Players { get; set; } = new List<Player>();
     
@@ -28,7 +29,7 @@ public class RecentMatch
         public string PlayerName { get; set; } = "Player";
         public string PlayerTag { get; set; } = "NA1";
         public string PlayerAgentId { get; set; } = "0";
-        public Stats Statistics { get; set; } = new ();
+        public Stats? Statistics { get; set; } = new ();
         public int CompetitiveTier { get; set; } = 0;
         public string TeamId { get; set; } = string.Empty;
         public class Stats

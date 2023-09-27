@@ -20,6 +20,9 @@ public partial class MatchReportSlideout : UserControl
     {
         _viewModel.SlideOpen = !_viewModel.SlideOpen;
         (sender as Button).Content = _viewModel.SlideOpen ? ">" : "<";
+
+        /*if (_viewModel.SlideOpen)
+            _viewModel.RefreshList();*/
     }
 
     private void ReportSlideOut_Loaded(object? sender, RoutedEventArgs e)

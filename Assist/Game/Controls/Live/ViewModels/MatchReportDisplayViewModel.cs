@@ -160,7 +160,7 @@ public class MatchReportDisplayViewModel : ViewModelBase
         DateOfMatch = RecentMatchData.DateOfMatch.ToLocalTime().ToString("M/d/yy", new CultureInfo(attribute.Code));
         LengthOfMatch = TimeSpan.FromSeconds(RecentMatchData.LengthOfMatchInSeconds).ToString("hh\\:mm\\:ss",new CultureInfo(attribute.Code));
         
-        RecentMatchData.Players = RecentMatchData.Players.OrderByDescending(x => x.Statistics.Kills).ToList();
+        RecentMatchData.Players = RecentMatchData.Players.OrderByDescending(x => x.Statistics?.Kills).ToList();
         
         GenerateTeamObjects();
     }
@@ -179,25 +179,27 @@ public class MatchReportDisplayViewModel : ViewModelBase
                 TeammateControls = new ObservableCollection<MatchReportTeammateDisplayControl>()
             };
 
-            for (int i = 0; i < RecentMatchData.Players.Count; i++)
+            foreach (var player in RecentMatchData.Players)
             {
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     var teamMateObj = new MatchReportTeammateDisplayControl()
                     {
                         AgentIcon =
-                            $"https://content.assistapp.dev/agents/{RecentMatchData.Players[i].PlayerAgentId}_displayicon.png",
+                            $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
                         TeammateName =
-                            $"{RecentMatchData.Players[i].PlayerName}#{RecentMatchData.Players[i].PlayerTag}",
+                            $"{player.PlayerName}#{player.PlayerTag}",
                         RankIcon =
-                            $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{RecentMatchData.Players[i].CompetitiveTier}.png",
-                        Statline =
-                            $"{RecentMatchData.Players[i].Statistics.Kills} // {RecentMatchData.Players[i].Statistics.Deaths} // {RecentMatchData.Players[i].Statistics.Assists}"
+                            $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
+                        Statline = player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
 
                     teamObj.TeammateControls.Add(teamMateObj);
                 });
             }
+            
+            
+           
             
             TeamControls.Add(teamObj);
             return;
@@ -226,7 +228,7 @@ public class MatchReportDisplayViewModel : ViewModelBase
                         RankIcon =
                             $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline =
-                            $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}"
+                            player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
 
                     
@@ -256,7 +258,7 @@ public class MatchReportDisplayViewModel : ViewModelBase
                         RankIcon =
                             $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline =
-                            $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}"
+                            player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
                 
                     if (displayControls.TryGetValue(player.TeamId, out MatchReportTeamDisplayControl teamDisplayControl))

@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
+using Assist.Game.Models.Recent;
 using Assist.Game.Services;
 using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
@@ -174,7 +175,6 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             // Log MatchID to Log
             Log.Information($"PREGAME MATCH ID: {MatchResp.ID}");
             
-            
             // With the presences grab all team members presenses
 
             // get all ids from team
@@ -228,6 +228,102 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             // Update Map Data
             HandleMapData(MatchResp);
+            
+            await HandlePregameMatchTracking(MatchResp);
+        }
+
+        private async Task HandlePregameMatchTracking(PregameMatch pregameMatch)
+        {
+            var recentM = new RecentMatch
+            {
+                MatchId = pregameMatch.ID,
+                AllyTeamId = pregameMatch.AllyTeam.TeamID,
+                IsCompleted = false,
+                Result = RecentMatch.MatchResult.IN_PROGRESS,
+                MapId = pregameMatch.MapID,
+                QueueId = pregameMatch.QueueID,
+                DateOfMatch = DateTime.UtcNow,
+                LengthOfMatchInSeconds = 0,
+                AllyTeamScore = 0,
+                EnemyTeamScore = 0,
+                MatchTrack_LastState = "PREGAME"
+            };
+            
+            HandlePlayers(pregameMatch, recentM);
+            HandleRecentMatchPlayers(pregameMatch, recentM);
+            
+            if (RecentService.Current.RecentMatches.Exists(x => x.MatchId.Equals(recentM.MatchId)))
+            {
+                RecentService.Current.UpdateMatch(recentM);
+                return;
+            }
+            
+            RecentService.Current.AddMatch(recentM);
+        }
+        
+        private async void HandlePlayers(PregameMatch matchDetails , RecentMatch recentMatch)
+        {
+            var players = matchDetails.AllyTeam.Players;
+
+            foreach (var playerObj in players)
+            {
+                var recentPlayerData = RecentService.Current.RecentPlayers?.Find(ply => ply.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+                if (recentPlayerData is null)
+                {
+                    recentPlayerData = new RecentPlayer()
+                    {
+                        FirstSeen = DateTime.UtcNow,
+                        PlayerId = playerObj.Subject
+                    };
+                }
+
+
+                recentPlayerData.LastSeen = DateTime.UtcNow;
+                recentPlayerData.LastSeenMatchId = matchDetails.ID;
+                recentPlayerData.Matches.Add(matchDetails.ID);
+
+                int index = RecentService.Current.RecentPlayers.FindIndex(ply => ply.PlayerId.Equals(recentPlayerData.PlayerId));
+                if (index < 0)
+                    RecentService.Current.RecentPlayers?.Add(recentPlayerData);
+                else
+                    RecentService.Current.RecentPlayers[index] = recentPlayerData;
+            }
+        
+        
+        }
+        
+        /// <summary>
+        /// Creates the Player for the RecentMatch Object.
+        /// </summary>
+        /// <param name="matchDetails"></param>
+        /// <param name="recentMatch"></param>
+        private async void HandleRecentMatchPlayers(PregameMatch matchDetails, RecentMatch recentMatch)
+        {
+            var players = matchDetails.AllyTeam.Players;
+
+            foreach (var playerObj in players)
+            {
+                var data = UserControls.Find(x =>
+                    x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+
+                if (data is null)
+                {
+                    continue;
+                }
+                
+                var nP = new RecentMatch.Player()
+                {
+                    PlayerId = playerObj.Subject,
+                    CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
+                    PlayerAgentId = playerObj.CharacterID,
+                    PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.PlayerAgentName.Split('#')[0],
+                    PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerTag : data._viewModel.PlayerAgentName.Split('#')[^1],
+                    TeamId = matchDetails.AllyTeam.TeamID,
+                    Statistics = null
+                };
+            
+                recentMatch.Players.Add(nP);
+            }
         }
 
         private async Task<Dictionary<string, IBrush>> MarkPlayerSimilarParties(List<ChatV4PresenceObj.Presence> PlayerPresences)

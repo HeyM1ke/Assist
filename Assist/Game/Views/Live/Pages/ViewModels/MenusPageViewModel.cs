@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
+using Assist.Game.Models.Recent;
 using Assist.Game.Services;
 using Assist.Game.Views.Live.ViewModels;
 using Assist.Game.Views.Profile.ViewModels;
@@ -99,6 +100,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             }
             
             EndorseEnabled = true;
+
+            CheckAndHandleRecentMatchTracking();
         }
         
         public async Task SetupWithLocalPresence(ChatV4PresenceObj.Presence obj = null)
@@ -493,5 +496,33 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             
             return new Bitmap(AssetLoader.Open(new Uri($@"avares://Assist/Resources/Game/Assist_EndorseLevel{reputation.Level}.png")));
         }
+        
+        
+        private async void CheckAndHandleRecentMatchTracking()
+        {
+            var allUnfinished = RecentService.Current.RecentMatches.FindAll(x => !x.IsCompleted);
+
+            foreach (var unfinishedMatch in allUnfinished)
+            {
+                // This is ran in the menus, meaning this is assuming no game is currently going on within the current CLient.
+
+                if (unfinishedMatch.Result != RecentMatch.MatchResult.REMAKE)
+                {
+                    await RecentService.Current.UpdateMatch(unfinishedMatch.MatchId);
+
+                    var updatedMatch =
+                        RecentService.Current.RecentMatches.Find(x => x.MatchId.Equals(unfinishedMatch.MatchId));
+
+                    if (!updatedMatch.IsCompleted && updatedMatch.MatchTrack_LastState.Equals("PREGAME", StringComparison.OrdinalIgnoreCase))  // This means that the match is still not finished while the player is in the match.
+                    {
+                        Log.Information("Found match that is not valid. Marking as Remake");
+                        updatedMatch.MatchTrack_LastState = "MENUS";
+                        updatedMatch.Result = RecentMatch.MatchResult.REMAKE;
+                        RecentService.Current.UpdateMatch(updatedMatch);
+                    }
+                }
+            }
+        }
+
     }
 }

@@ -27,6 +27,8 @@ public class RecentService
     public static string RecentFolderPath = Path.Combine(AssistSettings.SettingsFolderPath, "Game", "Modules", "MatchTrack");
     public static string RecentMatchesPath = Path.Combine(RecentFolderPath, "RecentMatches.json");
     public static string RecentPlayersPath = Path.Combine(RecentFolderPath, "RecentPlayers.json");
+    
+    public Action RecentServiceUpdated;
     public RecentService()
     {
         if (Current is not null) return;
@@ -38,8 +40,20 @@ public class RecentService
     
     public static void SaveSettings()
     {
-        File.WriteAllText(RecentMatchesPath, JsonSerializer.Serialize(Current.RecentMatches, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
-        File.WriteAllText(RecentPlayersPath, JsonSerializer.Serialize(Current.RecentPlayers, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+        try
+        {
+            
+            File.WriteAllText(RecentMatchesPath,
+                JsonSerializer.Serialize(Current.RecentMatches, new JsonSerializerOptions() { WriteIndented = true }),
+                Encoding.UTF8);
+            File.WriteAllText(RecentPlayersPath,
+                JsonSerializer.Serialize(Current.RecentPlayers, new JsonSerializerOptions() { WriteIndented = true }),
+                Encoding.UTF8);
+        }
+        catch (Exception e)
+        {
+            Log.Error("Failed to Save Recent Matches & Player Settings");
+        }
     }
 
     public async Task AddMatch(string matchId)
@@ -54,6 +68,7 @@ public class RecentService
         
         RecentMatches.Add(data);
         SaveSettings();
+        RecentServiceUpdated?.Invoke();
     }
     
     public void AddMatch(RecentMatch? matchData)
@@ -66,6 +81,7 @@ public class RecentService
 
         RecentMatches.Add(matchData);
         SaveSettings();
+        RecentServiceUpdated?.Invoke();
     }
     
     public async Task UpdateMatch(string matchId)
@@ -85,6 +101,22 @@ public class RecentService
         
         RecentMatches.Replace(original, t);
         SaveSettings();
+        RecentServiceUpdated?.Invoke();
+    }
+    
+    public async void UpdateMatch(RecentMatch? matchData)
+    {
+        if (matchData is null)
+            return;
+        
+        if (!RecentMatches.Exists(mth => mth.MatchId.Equals(matchData.MatchId, StringComparison.OrdinalIgnoreCase)))
+            return;
+        
+        var original = RecentMatches.Find(x => x.MatchId.Equals(matchData.MatchId, StringComparison.OrdinalIgnoreCase));
+        
+        RecentMatches.Replace(original, matchData);
+        SaveSettings();
+        RecentServiceUpdated?.Invoke();
     }
     
     public void RemoveMatch(string matchId)
@@ -95,6 +127,7 @@ public class RecentService
         var mth = RecentMatches.Find(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
         RecentMatches.Remove(mth);
         SaveSettings();
+        RecentServiceUpdated?.Invoke();
     }
 
 
@@ -143,7 +176,7 @@ public class RecentService
         }
     }
 
-    private async Task<RecentMatch?> GetMatchData(string matchId)
+    private async Task<RecentMatch?> GetMatchData(string matchId, bool isUpdating = false)
     {
         if (string.IsNullOrEmpty(matchId))
             return null;
@@ -153,16 +186,22 @@ public class RecentService
         {
             matchDetailsObj = await AssistApplication.Current.CurrentUser.Player.GetMatchDetails(matchId);
         }
-        catch (RequestException e)
+        catch (Exception ex)
         {
-            Log.Fatal("FAILED MATCH DETAILS ERROR: " + e.StatusCode);
-            Log.Fatal("FAILED MATCH DETAILS ERROR: " + e.Content);
+            if (ex is RequestException)
+            {
+                RequestException e = ex as RequestException;
+                Log.Fatal("FAILED MATCH DETAILS ERROR: " + e.StatusCode);
+                Log.Fatal("FAILED MATCH DETAILS ERROR: " + e.Content);
             
-            if(e.StatusCode == HttpStatusCode.BadRequest){
-                Log.Fatal("Token Error while getting match details: ");
-                await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                return await GetMatchData(matchId);
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("Token Error while getting match details: ");
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    return await GetMatchData(matchId);
+                }
             }
+            Log.Fatal("FAILED to Get/Parse Match Details: " + ex.Message);
+            return null;
         }
 
         if (matchDetailsObj is null) return null;
@@ -252,6 +291,8 @@ public class RecentService
         
     }
     
+    
+    
     /// <summary>
     /// Creates the Player for the RecentMatch Object.
     /// </summary>
@@ -261,12 +302,17 @@ public class RecentService
     {
         var players = matchDetails.Players;
 
+        var oldMatch = RecentMatches?.Find(x => x.MatchId.Equals(recentMatch.MatchId));
+        
         foreach (var playerObj in players)
         {
+            var oldP = oldMatch?.Players.Find(x => x.PlayerId.Equals(playerObj.Subject));
+            
+            
             var nP = new RecentMatch.Player()
             {
                 PlayerId = playerObj.Subject,
-                CompetitiveTier = (int)playerObj.CompetitiveTier,
+                CompetitiveTier = oldP is null ? (int)playerObj.CompetitiveTier : oldP.CompetitiveTier,
                 PlayerAgentId = playerObj.CharacterId,
                 PlayerName = playerObj.GameName,
                 PlayerTag = playerObj.TagLine,
