@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Controls.Match;
@@ -153,7 +154,7 @@ public class MatchPageViewModel : ViewModelBase
         // Subscribe to Match Data Server
         await BindToEvents();
         
-            // Unready Valorant Client
+        // Unready Valorant Client
         await AssistApplication.Current.CurrentUser.Party.SetPartyReadiness(false);
 
         await UpdatePage(MatchData);
@@ -190,14 +191,15 @@ public class MatchPageViewModel : ViewModelBase
                 await SetupIngameState(matchData);
                 break;
             case "POSTGAME":
+                await SetupPostgameState();
                 break;
         }
         // If State is PREGAME
         
         await UpdatePlayerControls(matchData);
     }
-    
 
+    
     private async Task SetupPregameState(AssistMatch matchData)
     {
         // Check the special state to see where the game currently is.
@@ -250,6 +252,10 @@ public class MatchPageViewModel : ViewModelBase
 
     private async Task SetupIngameState(AssistMatch matchData)
     {
+        Log.Information("Match is in INGAME State on AssistMatch, Running");
+        CurrentlyInMatch = MatchService.Instance.CurrentlyIngame;
+        // Doesnt need anything else atm, Just needs to know what is going on to show screen.
+        
         
     }
     
@@ -257,15 +263,15 @@ public class MatchPageViewModel : ViewModelBase
     {
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived += MatchUpdateRecieved;
         AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += PlayerPresenceMessageReceived;
-        AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += PregameMessageReceived;
     }
+
     
+
 
     public async Task UnbindToEvents()
     {
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived -= MatchUpdateRecieved;
         AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= PlayerPresenceMessageReceived;
-        AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= PregameMessageReceived;
     }
     
     
@@ -385,8 +391,16 @@ public class MatchPageViewModel : ViewModelBase
             {
                 await AssistApplication.Current.CurrentUser.Party.SetPartyReadiness(true); // Set ready in party.
             }
-            catch (Exception e)
+            catch (RequestException e)
             {
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("MATCH READYFAILED TO PARTY READY TOKEN ERROR: ");
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    await JoinOrReadyInMatch();
+                    return;
+                }
+                
+                
                 Log.Error("We caught a bad exception when swapping ready status in the match.");
                 Log.Error("Exception Message: " + e.Message);
                 Log.Error("Exception Stack: " + e.StackTrace);
@@ -410,16 +424,6 @@ public class MatchPageViewModel : ViewModelBase
     }
     
     
-    
-    /// <summary>
-    /// Not Used.
-    /// </summary>
-    /// <param name="obj"></param>
-    private void PregameMessageReceived(object obj)
-    {
-        
-    }
-
     private async void PlayerPresenceMessageReceived(PresenceV4Message obj)
     {
         // Check if the player is in the party & is in a custom game.
@@ -454,11 +458,10 @@ public class MatchPageViewModel : ViewModelBase
             switch (privatePlayerPres.sessionLoopState)
             {
                 case "PREGAME":
-                    await HandlePregameMatchData();
+                    CurrentlyInMatch = MatchService.Instance.CurrentlyIngame;
                     break;
                 case "INGAME":
-                    //TODO : Handle Ingame Data.
-                    //await HandleIngameMatchData();
+                    CurrentlyInMatch = MatchService.Instance.CurrentlyIngame;
                     break;
             }
 
@@ -468,7 +471,7 @@ public class MatchPageViewModel : ViewModelBase
 
     private async Task UpdateIngameData(PlayerPresence privatePlayerPres)
     {
-            if (MatchService.Instance.CurrentMatchData.TeamOne.Players.Exists(x => x.ValorantId.Equals(AssistApplication.Current.CurrentUser.UserData.sub, StringComparison.OrdinalIgnoreCase)))
+        if (MatchService.Instance.CurrentMatchData.TeamOne.Players.Exists(x => x.ValorantId.Equals(AssistApplication.Current.CurrentUser.UserData.sub, StringComparison.OrdinalIgnoreCase)))
         {
             CurrentGameScoreTeamOne = $"{privatePlayerPres.partyOwnerMatchScoreAllyTeam}";
             CurrentGameScoreTeamTwo = $"{privatePlayerPres.partyOwnerMatchScoreEnemyTeam}";
@@ -478,8 +481,6 @@ public class MatchPageViewModel : ViewModelBase
             CurrentGameScoreTeamOne = $"{privatePlayerPres.partyOwnerMatchScoreEnemyTeam}";
             CurrentGameScoreTeamTwo = $"{privatePlayerPres.partyOwnerMatchScoreAllyTeam}";
         }
-        
-        //TODO: Send Assist the Match Data and Presence Data
     }
 
     private async Task HandlePregameMatchData()
@@ -510,53 +511,14 @@ public class MatchPageViewModel : ViewModelBase
                 
             if(e.StatusCode == HttpStatusCode.BadRequest){
                 Log.Fatal("PREGAME TOKEN ERROR: ");
-                AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                await HandlePregameMatchData();
             }
             return;
         }
 
         if(MatchResp.AllyTeam == null)
             return;
-        
-        
-            var teamIds = MatchResp.AllyTeam.Players.Select(p => p.Subject).ToList();
-
-            var allTeamPresences =
-                PresenceResp.presences.FindAll(pres =>
-                    teamIds.Contains(pres.puuid)); // Contains every presence from the team.
-            
-            Log.Information("Checking if all players on the team are on the Match Team");
-            var possPlayer = MatchService.Instance.CurrentMatchData.TeamOne.Players.Find(x =>
-                x.Id == AssistApplication.Current.AssistUser.Account.AccountInfo.id);
-            List<AssistMatchPlayer> teamMates = new List<AssistMatchPlayer>();
-            if (possPlayer is null)
-                teamMates = MatchService.Instance.CurrentMatchData.TeamTwo.Players;
-            else
-                teamMates = MatchService.Instance.CurrentMatchData.TeamOne.Players;
-
-
-            int teamMatesCorrect = 0;
-            foreach (var teamMate in teamMates)
-            {
-                if (teamIds.Contains(teamMate.ValorantId))
-                {
-                    Log.Information($"Team Contains Teammate: {teamMate.Username}");
-                    teamMatesCorrect += 1;
-                }
-                else
-                {
-                    Log.Information($"Teammate MISSING: {teamMate.Username}");
-                    Log.Information($"Teammate MISSING: {teamMate.Username}");
-                    Log.Information($"Teammate MISSING: {teamMate.Username}");
-                }
-            }
-
-
-            if (teamMatesCorrect >= (MatchService.Instance.CurrentMatchData.TeamOne.Players.Count * .8))
-            {
-                Log.Information("More than half of the teamMates are correct on the team.");
-                CurrentlyInMatch = true;
-            }
     }
 
     private async void GetMatchDetails()
@@ -590,6 +552,7 @@ public class MatchPageViewModel : ViewModelBase
         }
     }
 
+    
     public async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
     {
         if (string.IsNullOrEmpty(data.Private))
@@ -597,5 +560,17 @@ public class MatchPageViewModel : ViewModelBase
         byte[] stringData = Convert.FromBase64String(data.Private);
         string decodedString = Encoding.UTF8.GetString(stringData);
         return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+    }
+
+    private string ConvertTo64(object ob)
+    {
+        var json = JsonSerializer.Serialize(ob);
+        var byteA = Encoding.UTF8.GetBytes(json);
+        return Convert.ToBase64String(byteA);
+    }
+    
+    private async Task SetupPostgameState()
+    {
+        
     }
 }
