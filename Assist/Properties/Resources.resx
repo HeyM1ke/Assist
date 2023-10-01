@@ -423,6 +423,30 @@
   <data name="Leagues_Waiting" xml:space="preserve">
     <value>Waiting...</value>
   </data>
+  <data name="Leagues_ReportAnIssue" xml:space="preserve">
+    <value>Report an Issue</value>
+  </data>
+  <data name="Leagues_ICrashed" xml:space="preserve">
+    <value>I Crashed?</value>
+  </data>
+  <data name="Leagues_Match_MatchInProgress" xml:space="preserve">
+    <value>MATCH IN PROGRESS</value>
+  </data>
+  <data name="Leagues_Match_ReadyUp" xml:space="preserve">
+    <value>Ready Up!</value>
+  </data>
+  <data name="Leagues_Match_Loading" xml:space="preserve">
+    <value>Starting Match</value>
+  </data>
+  <data name="Leagues_Match_Remaining" xml:space="preserve">
+    <value>Remaining</value>
+  </data>
+  <data name="Leagues_Match_Defenders" xml:space="preserve">
+    <value>DEFENDERS</value>
+  </data>
+  <data name="Leagues_Match_Attackers" xml:space="preserve">
+    <value>ATTACKERS</value>
+  </data>
   <data name="Assist_Chat" xml:space="preserve">
     <value>Chat</value>
   </data>

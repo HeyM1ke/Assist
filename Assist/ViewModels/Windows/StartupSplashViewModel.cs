@@ -40,6 +40,7 @@ namespace Assist.ViewModels.Windows
                 AssistApplication.CurrentApplication.Shutdown();
             }
             GC.KeepAlive(_mutex);
+            
             Log.Information("Splash Startup Started");
             StatusMessage = "Loading..";
             // Look for Settings

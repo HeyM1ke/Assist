@@ -19,6 +19,9 @@ public class WindowsUtils
     [DllImport("User32.dll")]
     public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
     
+    [DllImport("kernel32")]
+    public static extern bool AllocConsole();
+    
     private const int WS_EX_APPWINDOW = 0x40000;
     private const int WS_EX_TOOLWINDOW = 0x0080;
     private const int GWL_EXSTYLE = -0x14;

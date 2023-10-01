@@ -41,14 +41,14 @@
                   Height="525"
                   Width="333">
                 
-                <TextBlock Text="DEFENDERS"
+                <TextBlock Text="{x:Static p:Resources.Leagues_Match_Defenders}"
                            FontFamily="{StaticResource Inter}"
                            FontSize="24"
                            FontWeight="Bold"
                            TextAlignment="Center"
                            VerticalAlignment="Top"
                            
-                           HorizontalAlignment="Center"></TextBlock>
+                           HorizontalAlignment="Center"/>
                 <Border Background="{DynamicResource AssistPrimary}"
                         CornerRadius="5"
                         VerticalAlignment="Bottom"
@@ -94,7 +94,7 @@
                  Height="525"
                   Width="333">
                 
-                <TextBlock Text="ATTACKERS"
+                <TextBlock Text="{x:Static p:Resources.Leagues_Match_Attackers}"
                            FontFamily="{StaticResource Inter}"
                            FontSize="24"
                            FontWeight="Bold"
@@ -156,7 +156,7 @@
                                Height="2"
                                Fill="{DynamicResource AssistRed}"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="00:23 Remaining"
+                    <TextBlock Text="{Binding TimerText}"
                                FontFamily="{StaticResource Inter}"
                                FontSize="20"
                                FontWeight="Medium"
@@ -338,6 +338,8 @@
                                            VerticalContentAlignment="Center"
                                            HorizontalContentAlignment="Center"
                                            VerticalAlignment="Center"
+                                           IsEnabled="{Binding ReadyLobbyButtonEnabled}"
+                                           IsVisible="{Binding ReadyLobbyButtonEnabled}"
                                            HorizontalAlignment="Stretch"
                                            FontSize="28"
                                            Height="75"/>
@@ -353,8 +355,8 @@
                                    BorderBrush="{DynamicResource AssistOutline}"
                                    BorderThickness="1"
                                    CornerRadius="5"
-                                   Width="400"
-                                   Height="300">
+                                   Width="366"
+                                   Height="479">
                               <Grid>
                                   <Panel>
                                       <TextBlock VerticalAlignment="Center"
@@ -377,11 +379,6 @@
                                       <StackPanel Orientation="Horizontal"
                                                   x:Name="ScoreDetailPanel"
                                                   Spacing="17">
-                                          <TextBlock Text="{Binding CurrentGameScoreTeamOne}"
-                                                     VerticalAlignment="Center"
-                                                     FontFamily="{StaticResource Inter}"
-                                                     FontWeight="Bold"
-                                                     FontSize="20"/>
                                           <StackPanel Orientation="Horizontal"
                                                       Spacing="3"
                                                       Margin="6">
@@ -399,33 +396,80 @@
                                                          TextAlignment="Right"
                                               />
                                           </StackPanel>
-                                          <TextBlock Text="{Binding CurrentGameScoreTeamTwo}"
-                                                     VerticalAlignment="Center"
-                                                     FontFamily="{StaticResource Inter}"
-                                                     FontWeight="Bold"
-                                                     FontSize="20"/>
                                       </StackPanel>
                                       
                                       <TextBlock Text="{Binding MatchMapName}"
                                                  FontFamily="{StaticResource Inter}"
                                                  FontWeight="Black"
-                                                 FontSize="38"
+                                                 FontSize="36"
                                                  VerticalAlignment="Center"
                                                  TextAlignment="Center"></TextBlock>
                                   </StackPanel>
                                   
-                                  <TextBlock Text="In Progress"
-                                             FontFamily="{StaticResource Inter}"
-                                             FontWeight="Medium"
-                                             FontSize="15"
-                                             VerticalAlignment="Bottom"
-                                             TextAlignment="Center"></TextBlock>
+                                  <Grid Margin="10"><Border Width="68"
+                                          Height="68"
+                                          Background="#181A1F"
+                                          BorderBrush="{DynamicResource AssistOutline}"
+                                          VerticalAlignment="Top"
+                                          HorizontalAlignment="Left"
+                                          BorderThickness="2"
+                                          CornerRadius="5">
+                                      <TextBlock Text="{Binding CurrentGameScoreTeamOne}"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                 TextAlignment="Center"
+                                                 FontFamily="{StaticResource Inter}"
+                                                 FontWeight="ExtraBold"
+                                                 FontSize="36"/>
+                                  </Border>
+                                  
+                                  
+                                  <Border Width="68"
+                                          Height="68"
+                                          Background="#181A1F"
+                                          BorderBrush="{DynamicResource AssistOutline}"
+                                          VerticalAlignment="Top"
+                                          HorizontalAlignment="Right"
+                                          BorderThickness="2"
+                                          CornerRadius="5">
+                                      <TextBlock Text="{Binding CurrentGameScoreTeamTwo}"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                 TextAlignment="Center"
+                                                 FontFamily="{StaticResource Inter}"
+                                                 FontWeight="ExtraBold"
+                                                 FontSize="36"/>
+                                  </Border></Grid>
                               </Grid>
                            </Border>
                        </Grid>
                    </StackPanel>
                 </Border>
                 </Grid>
+                
+            </Grid>
+        </Grid>
+        
+        <Grid Row="2"
+              IsVisible="{Binding CurrentlyInMatch}">
+            <Grid VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="26">
+                    <Button Width="161"
+                            Height="39"
+                            Classes="AssistBtn"
+                            Content="{x:Static p:Resources.Leagues_ReportAnIssue}"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            />
+                    <Button Width="161"
+                            Height="39"
+                            Classes="AssistBtn"
+                            Content="{x:Static p:Resources.Leagues_ICrashed}"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

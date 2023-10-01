@@ -231,12 +231,14 @@ public class LeagueSelectionViewModel : ViewModelBase
     private async Task<bool> CheckForLeagueErrors()
     {
         // Check if the player is currently have valorant open
+        Log.Information("Checking if VALORANT is open");
         if (!IsValorantRunning())
         {
             _errorMessage = "Valorant is not open. Please reopen Leagues, when VALORANT is open.";
             return false;
         }
 
+        Log.Information("Checking if Type is Local or Cloud");
         // Check if The Player is authenticated with a socket.
         if (AssistApplication.Current.CurrentUser.Authentication.AuthType != EAuthType.LOCAL)
         {
@@ -244,15 +246,22 @@ public class LeagueSelectionViewModel : ViewModelBase
             return false;
         }
         
-        
+        Log.Information("Checking for Game Server Connection");
+        Log.Information("Checking for Game Server Connection null");
+        if (AssistApplication.Current.GameServerConnection is null)
+        {
+            _errorMessage = "Please restart your Assist Client.";
+            return false;
+        }
         // Check if there is a connection to the GameServer
+        Log.Information("Checking for Game Server Connection is connected");
         if (!AssistApplication.Current.GameServerConnection.IsConnected)
         {
             _errorMessage = "Please restart your Assist Client.";
             return false;
         }
         
-        // Check if there is an Assist User Logged in
+        Log.Information("Checking if Assist account data is null"); // Check if there is an Assist User Logged in
         if (AssistApplication.Current.AssistUser.Account.AccountInfo is null)
         {
             _errorMessage = "You are not logged into an Assist Account.";

@@ -7,12 +7,14 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Assist.Game.Models;
+using Assist.Game.Views.Leagues;
 using Assist.Objects.AssistApi.Game;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
 using AssistUser.Lib.Leagues.Models;
 using AssistUser.Lib.Leagues.Models.Server;
 using AssistUser.Lib.Parties.Models;
+using Avalonia.Threading;
 using Serilog;
 using ValNet.Objects.Coregame;
 using ValNet.Objects.CustomGame;
@@ -26,7 +28,7 @@ public class MatchService
 {
     public static MatchService? Instance;
     public AssistMatch CurrentMatchData;
-    private bool currentlyBinded = false;
+    private bool _currentlyBinded = false;
 
     private bool _awaitingInvite = false;
     private bool _waitingForMatchToStart = false;
@@ -34,18 +36,25 @@ public class MatchService
     private bool _currentlyIngame = false;
     public bool CurrentlyIngame => _currentlyIngame;
     private bool _serverleftParty = false;
-    private string _localMatchId;
-    private string _lastRecordedSessionState;
+    private string _localMatchId ="";
+    private string _lastRecordedSessionState = "";
     public MatchService()
     {
-        if (Instance is null) Instance = this; else return;
+        if (Instance is not null)
+        {
+            Instance.UnbindToEvents();
+            Instance = null;
+        }
+        
+        if (Instance is null) 
+            Instance = this;
 
         BindToEvents();
     }
 
     private void BindToEvents()
     {
-        if (currentlyBinded)
+        if (_currentlyBinded)
             return;
         
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived += GameServerConnectionOnMATCH_MatchUpdateMessageReceived;
@@ -59,7 +68,7 @@ public class MatchService
         AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += PlayerPresenceMessageReceived;
         AssistApplication.Current.RiotWebsocketService.PregameMessageEvent += PregameMessageReceived;
         AssistApplication.Current.RiotWebsocketService.CoregameMessageEvent += CoregameMessageReceived;
-        currentlyBinded = !currentlyBinded;
+        _currentlyBinded = true;
     }
     
     public void UnbindToEvents()
@@ -67,10 +76,14 @@ public class MatchService
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived -= GameServerConnectionOnMATCH_MatchUpdateMessageReceived;
         AssistApplication.Current.GameServerConnection.MATCH_CustomGameSettingsReceived -= GameServerConnectionOnMATCH_CustomGameSettingsReceived;
         AssistApplication.Current.GameServerConnection.MATCH_PartyInformationRequested -= GameServerConnectionOnMATCH_PartyInformationRequested;
+        AssistApplication.Current.GameServerConnection.MATCH_StartValorantMatchReceived -= GameServerConnectionOnMATCH_StartValorantMatchReceived;
+        AssistApplication.Current.GameServerConnection.MATCH_ValorantPartyJoinMatchReceived -= GameServerConnectionOnMATCH_ValorantPartyJoinMatchReceived;
+        AssistApplication.Current.GameServerConnection.MATCH_MatchValorantPartyCreateReceived -= GameServerConnectionOnMATCH_MatchValorantPartyCreateReceived;
         
         AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= PlayerPresenceMessageReceived;
         AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= PregameMessageReceived;
         AssistApplication.Current.RiotWebsocketService.CoregameMessageEvent -= CoregameMessageReceived;
+        _currentlyBinded = false;
     }
     
     
@@ -102,28 +115,42 @@ public class MatchService
         return CurrentMatchData;
     }
     
-    public static async Task QuitIngameValorantMatch()
+    public static async Task QuitIngameValorantMatch(bool retry = false)
     {
         try
         {
             var resp = await AssistApplication.Current.CurrentUser.CoreGame.FetchPlayer();
             await AssistApplication.Current.CurrentUser.CoreGame.QuitMatch(resp.MatchID);
         }
-        catch (Exception e)
+        catch (RequestException e)
         {
             Console.WriteLine(e);
+            if(e.StatusCode == HttpStatusCode.BadRequest){
+                Log.Fatal("TOKEN ERROR: ");
+                await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                if (!retry)
+                    await QuitIngameValorantMatch();
+                return;
+            }
         }
     }
     
-    public static async Task UnreadyClient()
+    public static async Task UnreadyClient(bool retry = false)
     {
         try
         {
             await AssistApplication.Current.CurrentUser.Party.SetPartyReadiness(false);
         }
-        catch (Exception e)
+        catch (RequestException e)
         {
             Console.WriteLine(e);
+            if(e.StatusCode == HttpStatusCode.BadRequest){
+                Log.Fatal("TOKEN ERROR: ");
+                await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                if (!retry)
+                    await UnreadyClient(true);
+                return;
+            }
         }
     }
 
@@ -133,6 +160,12 @@ public class MatchService
         var playerPre = obj.data.presences.Find(x => x.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
         var privatePlayerPres = await GetPresenceData(playerPre);
 
+        if (string.IsNullOrEmpty(Instance?.CurrentMatchData.PregameDetails.ValorantPartyId))
+        {
+            _lastRecordedSessionState = privatePlayerPres.sessionLoopState;
+            return;
+        }
+        
         if (privatePlayerPres.partyId != Instance.CurrentMatchData.PregameDetails.ValorantPartyId && !_serverleftParty)
         {
             Log.Error("Player is currently in the wrong party than the specified match party");
@@ -140,6 +173,7 @@ public class MatchService
             {
                 Log.Fatal("Player is in a match while being in the wrong party. This is not supposed to happen.");
             }
+            _lastRecordedSessionState = privatePlayerPres.sessionLoopState;
             return;
         }
         
@@ -152,14 +186,38 @@ public class MatchService
             Log.Information("Player is in a match while being in the right party.");
             Log.Information("Checking Match data to see if the correct players are in the match.");
 
-            if (_currentlyIngame)
+            if (privatePlayerPres.sessionLoopState.Equals("INGAME") || MatchService.Instance.CurrentMatchData.SpecialState.Equals("REQUESTED_GAMESTART", StringComparison.OrdinalIgnoreCase))
             {
                 Log.Information("Already Determined if the player was in the match.");
+
+                switch (privatePlayerPres.sessionLoopState)
+                {
+                    case "INGAME":
+                        await HandleCoregameMatchData();
+                        break;
+                }
+                
+                _lastRecordedSessionState = privatePlayerPres.sessionLoopState;
                 return;
             }
             
 
            
+        }
+
+        if (privatePlayerPres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase) && CurrentMatchData.State.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
+        {
+            if (_lastRecordedSessionState.Equals("INGAME"))
+            {
+                Instance.UnbindToEvents();
+                AssistApplication.CurrentlyInAssistLeagueMatch = false;
+                Log.Information("Showing Results Page.");
+                // Move to results page and pass the matchID
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    GameViewNavigationController.Change(new PostMatchResultView(Instance.CurrentMatchData.Id));
+                });
+            }
         }
         
         
@@ -168,7 +226,7 @@ public class MatchService
         _lastRecordedSessionState = privatePlayerPres.sessionLoopState;
     }
 
-    private async void GetLocalPlayerMatchDetails()
+    private async void GetLocalPlayerMatchDetails_Pregame()
     {
         try
         {
@@ -194,17 +252,46 @@ public class MatchService
             if(e.StatusCode == HttpStatusCode.BadRequest){
                 Log.Fatal("TOKEN ERROR: ");
                 AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                GetLocalPlayerMatchDetails();
                 return;
             }
         }
     }
     
-    private async Task HandlePregameMatchData()
+    private async void GetLocalPlayerMatchDetails_Coregame()
+    {
+        try
+        {
+            var getPlayerResp = await AssistApplication.Current.CurrentUser.CoreGame.FetchPlayer();
+            if (getPlayerResp != null)
+            {
+                _localMatchId = getPlayerResp.MatchID;
+            }
+
+            if (string.IsNullOrEmpty(_localMatchId))
+            {
+                Log.Error("(MatchService) Failed to get MatchID");
+                return;
+            }
+        }
+        catch (RequestException e)
+        {
+            Log.Fatal("(MatchService) Error on getting player coregame fetching matchid");
+            Log.Fatal("(MatchService) COREGAME FETCH MATCHID ERROR: " + e.StatusCode);
+            Log.Fatal("(MatchService) COREGAME FETCH MATCHID ERROR: " + e.Content);
+            Log.Fatal("(MatchService) COREGAME FETCH MATCHID ERROR: " + e.Message);
+                
+            if(e.StatusCode == HttpStatusCode.BadRequest){
+                Log.Fatal("(MatchService) TOKEN ERROR: ");
+                return;
+            }
+        }
+    }
+    
+    private async Task HandlePregameMatchData(bool retry = false)
     {
         if (string.IsNullOrEmpty(_localMatchId))
         {
-            GetLocalPlayerMatchDetails();
+            GetLocalPlayerMatchDetails_Pregame();
         }
         
         PregameMatch MatchResp = new PregameMatch();
@@ -215,21 +302,21 @@ public class MatchService
             PresenceResp = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
             if (MatchResp == null || PresenceResp == null)
             {
-                Log.Error("Failed on getting update data. Match or Presence");
+                Log.Error("(MatchService) Failed on getting update data. Match or Presence");
                 return;
             }
         }
         catch (RequestException e)
         {
-            Log.Fatal("Error on getting player match or Pres");
-            Log.Fatal("PREGAME ERROR: " + e.StatusCode);
-            Log.Fatal("PREGAME ERROR: " + e.Content);
-            Log.Fatal("PREGAME ERROR: " + e.Message);
+            Log.Fatal("(MatchService) Error on getting player match or Pres");
+            Log.Fatal("(MatchService) PREGAME ERROR: " + e.StatusCode);
+            Log.Fatal("(MatchService) PREGAME ERROR: " + e.Content);
+            Log.Fatal("(MatchService) PREGAME ERROR: " + e.Message);
                 
             if(e.StatusCode == HttpStatusCode.BadRequest){
-                Log.Fatal("PREGAME TOKEN ERROR: ");
-                await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                await HandlePregameMatchData();
+                Log.Fatal("(MatchService) PREGAME TOKEN ERROR: ");
+                if (!retry)
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
             }
             return;
         }
@@ -248,7 +335,7 @@ public class MatchService
                 PresenceResp.presences.FindAll(pres =>
                     teamIds.Contains(pres.puuid)); // Contains every presence from the team.
             
-            Log.Information("Checking if all players on the team are on the Match Team");
+            Log.Information("(MatchService) Checking if all players on the team are on the Match Team");
             var possPlayer = MatchService.Instance.CurrentMatchData.TeamOne.Players.Find(x =>
                 x.Id == AssistApplication.Current.AssistUser.Account.AccountInfo.id);
             List<AssistMatchPlayer> teamMates = new List<AssistMatchPlayer>();
@@ -263,21 +350,21 @@ public class MatchService
             {
                 if (teamIds.Contains(teamMate.ValorantId))
                 {
-                    Log.Information($"Team Contains Teammate: {teamMate.Username}");
+                    Log.Information($"(MatchService) Team Contains Teammate: {teamMate.Username}");
                     teamMatesCorrect += 1;
                 }
                 else
                 {
-                    Log.Information($"Teammate MISSING: {teamMate.Username}");
-                    Log.Information($"Teammate MISSING: {teamMate.Username}");
-                    Log.Information($"Teammate MISSING: {teamMate.Username}");
+                    Log.Information($"(MatchService) Teammate MISSING: {teamMate.Username}");
+                    Log.Information($"(MatchService) Teammate MISSING: {teamMate.Username}");
+                    Log.Information($"(MatchService) Teammate MISSING: {teamMate.Username}");
                 }
             }
 
 
             if (teamMatesCorrect >= (MatchService.Instance.CurrentMatchData.TeamOne.Players.Count * .8))
             {
-                Log.Information("TeamMates are correct on the team.");
+                Log.Information("(MatchService) TeamMates are correct on the team.");
                 _currentlyIngame = true;
                 await SendUpdate(new AssistMatchUpdate()
                 {
@@ -290,21 +377,21 @@ public class MatchService
 
     private async void PregameMessageReceived(object obj)
     {
-        Log.Information("Client Received a Pregame Event Update on MatchService");
+        Log.Information("(MatchService) Client Received a Pregame Event Update on MatchService");
         await HandlePregameMatchData();
     }
 
     private async void CoregameMessageReceived(object obj)
     {
-        Log.Information("Client Received a CoreGame Event Update on MatchService");
+        Log.Information("(MatchService) Client Received a CoreGame Event Update on MatchService");
         await HandleCoregameMatchData();
     }
 
-    private async Task HandleCoregameMatchData()
+    private async Task HandleCoregameMatchData(bool retry = false)
     {
         if (string.IsNullOrEmpty(_localMatchId))
         {
-            GetLocalPlayerMatchDetails();
+            GetLocalPlayerMatchDetails_Coregame();
         }
         
         CoregameMatch MatchResp = new CoregameMatch();
@@ -315,21 +402,21 @@ public class MatchService
             PresenceResp = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
             if (MatchResp == null || PresenceResp == null)
             {
-                Log.Error("Failed on getting update data. Match or Presence");
+                Log.Error("(MatchService) Failed on getting update data. Match or Presence");
                 return;
             }
         }
         catch (RequestException e)
         {
-            Log.Fatal("Error on getting player match or Pres");
-            Log.Fatal("COREGAME ERROR: " + e.StatusCode);
-            Log.Fatal("COREGAME ERROR: " + e.Content);
-            Log.Fatal("COREGAME ERROR: " + e.Message);
+            Log.Fatal("(MatchService) Error on getting player match or Pres");
+            Log.Fatal("(MatchService) COREGAME ERROR: " + e.StatusCode);
+            Log.Fatal("(MatchService) COREGAME ERROR: " + e.Content);
+            Log.Fatal("(MatchService) COREGAME ERROR: " + e.Message);
                 
             if(e.StatusCode == HttpStatusCode.BadRequest){
-                Log.Fatal("COREGAME TOKEN ERROR: ");
+                Log.Fatal("(MatchService) COREGAME TOKEN ERROR: ");
                 await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                await HandleCoregameMatchData();
+                if (!retry) await HandleCoregameMatchData();
             }
             return;
         }
@@ -338,13 +425,15 @@ public class MatchService
             PresenceResp.presences.Find(pres =>
                 pres.puuid.Equals(AssistApplication.Current.CurrentUser.UserData.sub, StringComparison.OrdinalIgnoreCase));
 
-        if (Instance.CurrentMatchData.State == "INGAME")
+        var privatePlayerPres = await GetPresenceData(localPlayer);
+        
+        if (Instance.CurrentMatchData.State == "INGAME" || Instance.CurrentMatchData.SpecialState.Equals("REQUESTED_GAMESTART", StringComparison.OrdinalIgnoreCase) && privatePlayerPres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
         {
-            Log.Information("Match Current State is INGAME");
+            Log.Information("(MatchService) Match Current State is INGAME");
             await SendUpdate(new AssistMatchUpdate()
             {
                 UserData = localPlayer.Private,
-                PregameData = ConvertTo64(MatchResp)
+                MatchData = ConvertTo64(MatchResp)
             });
         }
         
@@ -361,9 +450,9 @@ public class MatchService
         }
         catch (Exception e)
         {
-            Log.Error("Failed to Parse Match Data from Server");
-            Log.Error($"Exception: {e.Message}");
-            Log.Error($"Stack: {e.StackTrace}");
+            Log.Error("(MatchService) Failed to Parse Match Data from Server");
+            Log.Error($"(MatchService) Exception: {e.Message}");
+            Log.Error($"(MatchService) Stack: {e.StackTrace}");
         }
     }
     
@@ -374,16 +463,23 @@ public class MatchService
 
     private async void GameServerConnectionOnMATCH_MatchValorantPartyCreateReceived(string? customGameSettings)
     {
-        Log.Information("Party Create has been received from the server.");
+        Log.Information("(MatchService) Party Create has been received from the server on Event Binding.");
+        Log.Information("(MatchService) Party Create settings : ." + customGameSettings);
+        await HandlePartyCreateReceived(customGameSettings);
+    }
+
+    private async Task HandlePartyCreateReceived(string? customGameSettings, bool retry = false)
+    {
+         Log.Information("(MatchService) Party Create has been received from the server.");
         
         // Check if the player is ingame.
         // If the player is INGAME, Leave the game. 
 
-        Log.Information("Attempting to get Presence from Local Socket");
+        Log.Information("(MatchService) Attempting to get Presence from Local Socket");
         var currPres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
         var clientPres = currPres.presences.Find(x => x.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
         var decodedPres = await GetPresenceData(clientPres);
-        Log.Information("Checking if player is inGAmE");
+        Log.Information("(MatchService) Checking if player is inGAmE");
         if (decodedPres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
         {
             try
@@ -413,7 +509,7 @@ public class MatchService
             var customData = JsonSerializer.Deserialize<AssistMatchValorantSettings>(customGameSettings);
             var data = new
             {
-                Map = customData.Map.ToString(),
+                Map = customData.Map,
                 Mode = customData.GameMode,
                 GamePod = customData.Server,
                 GameRules = new Dictionary<string, string>()
@@ -439,11 +535,23 @@ public class MatchService
                 var ex = e as RequestException;
                 Log.Error($"Exception: {ex.Content}");
                 Log.Error($"Stack: {ex.Message}");
+                if(ex.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("TOKEN ERROR: ");
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    if (!retry)
+                        await HandlePartyCreateReceived(customGameSettings, true);   
+                    return;
+                }
             }
         }
     }
 
     private async void GameServerConnectionOnMATCH_CustomGameSettingsReceived(string? customGamesSettings)
+    {
+        await HandleCustomgameSettingsReceived(customGamesSettings);
+    }
+
+    private async Task HandleCustomgameSettingsReceived(string? customGamesSettings, bool retry = false)
     {
         Log.Information("Custom Game Settings Received from the Server.");
         
@@ -470,13 +578,29 @@ public class MatchService
             Log.Error("Failed to set Custom Games Data");
             Log.Error($"Exception: {e.Message}");
             Log.Error($"Stack: {e.StackTrace}");
+            
+            var ex = e as RequestException;
+            if(ex.StatusCode == HttpStatusCode.BadRequest){
+                Log.Fatal("TOKEN ERROR: ");
+                await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                
+                if (!retry)
+                    await HandleCustomgameSettingsReceived(customGamesSettings, true);   
+                
+                return;
+            }
         }
-        
     }
+    
     
     private async void GameServerConnectionOnMATCH_StartValorantMatchReceived(string? startMatchReceiveData)
     {
-        var customData = JsonSerializer.Deserialize<AssistMatchValorantSettings>(startMatchReceiveData);
+        await HandleStartValorantMatchReceived(startMatchReceiveData);
+    }
+
+    private async Task HandleStartValorantMatchReceived(string? startMatchReceiveData, bool retry =false)
+    {
+         var customData = JsonSerializer.Deserialize<AssistMatchValorantSettings>(startMatchReceiveData);
         /*AssistApplication.Current.CurrentUser.CustomGame.
         // Start the custom game, Check players to make sure they are on the right team.
         for (int i = 0; i < CurrentMatchData.TeamOne.Players.Count; i++)
@@ -519,10 +643,20 @@ public class MatchService
             {
                 var d = e as RequestException;
                 Log.Error("Attempted to Start the game but failed. CONTENT: " + d.Content);
+                
+                if(d.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("TOKEN ERROR: ");
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    
+                    if (!retry)
+                        await HandleStartValorantMatchReceived(startMatchReceiveData, true);   
+                    
+                    return;
+                }
             }
         }
     }
-    
+
     private async void GameServerConnectionOnMATCH_ValorantPartyJoinMatchReceived(string? valPartyData)
     {
         Log.Information("Party Join Request recieved from the server.");
@@ -656,15 +790,19 @@ public class MatchService
     
     private async Task SendUpdate(AssistMatchUpdate updateObj)
     {
-        var resp = await AssistApplication.Current.AssistUser.League.MATCH_Update(MatchService.Instance.CurrentMatchData.Id,
+        while (isLocked);
+        isLocked = true;
+        var resp = await AssistApplication.Current.AssistUser.League.MATCH_Update(Instance.CurrentMatchData.Id,
             updateObj);
         
         Log.Information("Send Update Information to Match");
         Log.Information($"Send Update Information to Match : {resp.Code}");
         Log.Information($"Send Update Information to Match : {resp?.Message}");
-        
+        isLocked = false;
     }
-    
+
+    public bool isLocked { get; set; } = false;
+
     private string ConvertTo64(object ob)
     {
         var json = JsonSerializer.Serialize(ob);

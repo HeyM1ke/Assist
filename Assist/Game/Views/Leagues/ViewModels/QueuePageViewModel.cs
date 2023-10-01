@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Leagues;
+using Assist.Game.Controls.Navigation;
 using Assist.Game.Services;
 using Assist.Game.Services.Leagues;
 using Assist.Services;
@@ -47,6 +48,7 @@ public class QueuePageViewModel : ViewModelBase
         
         Log.Information("Left Queue");
         Log.Information(r.Message);
+        VerticalGameNavigation.Instance.EnableAll();
     }
 
     public async Task Setup()

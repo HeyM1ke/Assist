@@ -79,7 +79,10 @@ namespace Assist
             Directory.CreateDirectory(logsDirectory);
 
             var fileCount = Directory.GetFiles(logsDirectory, "*", SearchOption.TopDirectoryOnly).Length;
-
+#if DEBUG
+            WindowsUtils.AllocConsole();
+#endif
+            
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .MinimumLevel.Override("System", LogEventLevel.Warning)

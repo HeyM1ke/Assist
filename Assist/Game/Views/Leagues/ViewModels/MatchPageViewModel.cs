@@ -64,6 +64,13 @@ public class MatchPageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _matchHeaderTitle, value);
     }
     
+    private string _timerText = "";
+    public string TimerText
+    {
+        get => this._timerText;
+        set => this.RaiseAndSetIfChanged(ref _timerText, value);
+    }
+    
     private ObservableCollection<MatchSelectionControl> _mapControls = new ObservableCollection<MatchSelectionControl>();
     public ObservableCollection<MatchSelectionControl> MapControls
     {
@@ -139,6 +146,13 @@ public class MatchPageViewModel : ViewModelBase
         get => this._currentGameScoreTeamTwo;
         set => this.RaiseAndSetIfChanged(ref _currentGameScoreTeamTwo, value);
     }
+
+    private bool _alreadyReady = false;
+    private string _currentTimer;
+    private string _previousState = "";
+    private string _previousSpecialState = "";
+    private const int FORMINGSECONDS = 15;
+    private const int READYPLAYERSSECONDS = 40;
     #endregion
     
     public async Task SetupBasePage()
@@ -194,16 +208,42 @@ public class MatchPageViewModel : ViewModelBase
                 await SetupPostgameState();
                 break;
         }
-        // If State is PREGAME
-        
+        _previousState = matchData.State;
+        _previousSpecialState = matchData.SpecialState;
         await UpdatePlayerControls(matchData);
     }
 
     
     private async Task SetupPregameState(AssistMatch matchData)
     {
+        if (matchData.State.Equals("PREGAME"))
+        {
+            if (!matchData.SpecialState.Equals(_previousSpecialState))
+            {
+                switch (matchData.SpecialState)
+                {
+                    case "FORMING":
+                        MatchHeaderTitle = Properties.Resources.Leagues_Match_Loading;
+                        secondsRemaining = FORMINGSECONDS; 
+                        await StartCountdown();
+                        break;
+                    case "WAITINGFORLEADER":
+                        MatchHeaderTitle = Properties.Resources.Leagues_Match_Loading;
+                        secondsRemaining = FORMINGSECONDS; 
+                        await StartCountdown();
+                        break;
+                    case "WAITING_READYPLAYERS":
+                        MatchHeaderTitle = Properties.Resources.Leagues_Match_ReadyUp;
+                        secondsRemaining = READYPLAYERSSECONDS; 
+                        await StartCountdown();
+                        break;
+                }
+            }
+        }
+        
+        
         // Check the special state to see where the game currently is.
-        if (matchData.SpecialState.Equals("TEAM1BAN") || matchData.SpecialState.Equals("TEAM2BAN"))
+        if (matchData.State.Equals("PREGAME") && matchData.SpecialState.Equals("TEAM1BAN") || matchData.SpecialState.Equals("TEAM2BAN"))
         {
             MapPickBanEnabled = true;
             
@@ -217,7 +257,7 @@ public class MatchPageViewModel : ViewModelBase
             
         }
         
-        if (matchData.SpecialState.Contains("FORMING") || matchData.SpecialState.Contains("WAITING") || matchData.SpecialState.Contains("GAMESTART"))
+        if ( matchData.State.Equals("PREGAME") && matchData.SpecialState.Contains("FORMING") || matchData.SpecialState.Contains("WAITING") || matchData.SpecialState.Contains("GAMESTART"))
         {
             MapPickBanEnabled = false;
 
@@ -227,16 +267,18 @@ public class MatchPageViewModel : ViewModelBase
             // Check if PregameDetails Contains a PartyID
             if (string.IsNullOrEmpty(matchData.PregameDetails.ValorantPartyId))
             {
-                MatchHeaderTitle = "Waiting...";
-                JoinLobbyButtonEnabled = false;
+                ReadyLobbyButtonEnabled = false;
                 return;
             }
+
+            if (matchData.SpecialState.Equals("WAITING_READYPLAYERS", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!_alreadyReady)
+                {
+                    ReadyLobbyButtonEnabled = true;
+                }
+            }
             
-            
-            // If So Enable the Join Lobby button.
-            MatchHeaderTitle = "Ready Up!";
-            ReadyLobbyButtonEnabled = true;
-                
             // Once a player joins the lobby, unready them on valorant.
             // Bind to the Pres and Check on If they leave the party.
             // If they leave force them back, if they were kicked Report to server. DO THIS ALL IN THE MATCH SERVICE.
@@ -245,9 +287,6 @@ public class MatchPageViewModel : ViewModelBase
             
             
         }
-        
-        
-        
     }
 
     private async Task SetupIngameState(AssistMatch matchData)
@@ -256,6 +295,13 @@ public class MatchPageViewModel : ViewModelBase
         CurrentlyInMatch = MatchService.Instance.CurrentlyIngame;
         // Doesnt need anything else atm, Just needs to know what is going on to show screen.
         
+        if (matchData.State.Equals("INGAME"))
+        {
+            CurrentlyInMatch = true;
+            TimerText = Properties.Resources.Leagues_Ready;
+            MatchHeaderTitle = Properties.Resources.Leagues_Match_MatchInProgress;
+        }
+        await SetupMapNameAndServerName(matchData);
         
     }
     
@@ -264,10 +310,7 @@ public class MatchPageViewModel : ViewModelBase
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived += MatchUpdateRecieved;
         AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += PlayerPresenceMessageReceived;
     }
-
     
-
-
     public async Task UnbindToEvents()
     {
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived -= MatchUpdateRecieved;
@@ -409,6 +452,7 @@ public class MatchPageViewModel : ViewModelBase
             }
 
             ReadyLobbyButtonEnabled = false; // Disable the button to prevent multiple requests.
+            _alreadyReady = true;
         }
         catch (Exception e)
         {
@@ -434,19 +478,19 @@ public class MatchPageViewModel : ViewModelBase
 
         if (privatePlayerPres.partyId != MatchService.Instance.CurrentMatchData.PregameDetails.ValorantPartyId)
         {
-            Log.Error("Player is currently in the wrong party than the specified match party");
+            Log.Error("(MatchPageViewModel) Player is currently in the wrong party than the specified match party");
             if (privatePlayerPres.sessionLoopState.Equals("PREGAME", StringComparison.OrdinalIgnoreCase) || privatePlayerPres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
             {
-                Log.Fatal("Player is in a match while being in the wrong party. This is not supposed to happen.");
+                Log.Fatal("(MatchPageViewModel) Player is in a match while being in the wrong party. This is not supposed to happen.");
             }
             return;
         }
         
-        Log.Information("Player is in the right party.");
+        Log.Information("(MatchPageViewModel) Player is in the right party.");
         if (!privatePlayerPres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
         {
-            Log.Information("Player is in a match while being in the right party.");
-            Log.Information("Checking Match data to see if the correct players are in the match.");
+            Log.Information("(MatchPageViewModel) Player is in a match while being in the right party.");
+            Log.Information("(MatchPageViewModel) Checking Match data to see if the correct players are in the match.");
 
             if (CurrentlyInMatch)
             {
@@ -533,16 +577,16 @@ public class MatchPageViewModel : ViewModelBase
 
             if (string.IsNullOrEmpty(_matchId))
             {
-                Log.Error("Failed to get MatchID");
+                Log.Error("(MatchPageViewModel) Failed to get MatchID");
                 return;
             }
         }
         catch (RequestException e)
         {
-            Log.Fatal("Error on getting player pregame");
-            Log.Fatal("PREGAME ERROR: " + e.StatusCode);
-            Log.Fatal("PREGAME ERROR: " + e.Content);
-            Log.Fatal("PREGAME ERROR: " + e.Message);
+            Log.Fatal("(MatchPageViewModel) Error on getting player pregame");
+            Log.Fatal("(MatchPageViewModel) PREGAME ERROR: " + e.StatusCode);
+            Log.Fatal("(MatchPageViewModel) PREGAME ERROR: " + e.Content);
+            Log.Fatal("(MatchPageViewModel) PREGAME ERROR: " + e.Message);
                 
             if(e.StatusCode == HttpStatusCode.BadRequest){
                 Log.Fatal("TOKEN ERROR: ");
@@ -551,8 +595,6 @@ public class MatchPageViewModel : ViewModelBase
             }
         }
     }
-
-    
     public async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
     {
         if (string.IsNullOrEmpty(data.Private))
@@ -571,6 +613,44 @@ public class MatchPageViewModel : ViewModelBase
     
     private async Task SetupPostgameState()
     {
-        
+        await UnbindToEvents();
+        AssistApplication.CurrentlyInAssistLeagueMatch = false;
+        Log.Information("Showing Results Page.");
+        // Move to results page and pass the matchID
+        Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            GameViewNavigationController.Change(new PostMatchResultView(MatchService.Instance.CurrentMatchData.Id));
+        });
     }
+    
+    private DispatcherTimer bundleTimer;
+    private int secondsRemaining = 0;
+    private async Task StartCountdown ()
+    {
+        bundleTimer = new DispatcherTimer();
+        bundleTimer.Tick += TimerTick;
+        bundleTimer.Interval = TimeSpan.FromSeconds(1);
+        bundleTimer.Start();
+    }
+
+    private async Task StopTimer()
+    {
+        bundleTimer.Stop();
+    }
+    private void TimerTick(object? sender, EventArgs e)
+    {
+        if (secondsRemaining == 0)
+        {
+           Log.Information("Timer Hit 0, Do Something.");
+           bundleTimer.Stop();
+        }
+        else
+        {
+            secondsRemaining -= 1;
+        }
+        var t = TimeSpan.FromSeconds(secondsRemaining);
+        TimerText = $"{t.ToString(@"mm\:ss")} {Properties.Resources.Leagues_Match_Remaining}";
+
+    }
+    
 }

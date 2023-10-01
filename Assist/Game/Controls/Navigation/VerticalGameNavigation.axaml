@@ -66,8 +66,6 @@
 						                      Click="LeaguesBtn_OnClick"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
-						                      IsEnabled="False"
-						                      IsVisible="False"
 						                      IsSpecial="True"
 						                      Icon="/Resources/Icons/L_Icon.png"></navigation:NavButton>
 						
@@ -78,6 +76,7 @@
 						                      Click="LobbiesBtn_OnClick"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
+						                      IsVisible="False"
 						                      Icon="/Resources/Game/Lobbies_Icon.png"/>
 						
 						

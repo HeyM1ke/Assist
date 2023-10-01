@@ -24,6 +24,7 @@ public partial class QueuePage : UserControl
     {
         var btn = sender as Button;
         btn.IsEnabled = false;
+        
         await _viewModel.LeaveQueue();
         btn.IsEnabled = true;
     }
@@ -43,6 +44,5 @@ public partial class QueuePage : UserControl
 
     private void QueuePage_Unloaded(object? sender, RoutedEventArgs e)
     {
-        VerticalGameNavigation.Instance.EnableAll();
     }
 }

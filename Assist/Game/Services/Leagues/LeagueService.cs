@@ -26,7 +26,7 @@ public class LeagueService
     public LeagueNavigationController NavigationController = new LeagueNavigationController();
     public LeagueService()
     {
-        new MatchService();
+        //new MatchService();
         if (Instance is null) Instance = this; else return;
         BindToEvents();     
     }
@@ -47,11 +47,18 @@ public class LeagueService
     public async Task<AssistParty> GetCurrentPartyData()
     {
         var resp = await AssistApplication.Current.AssistUser.Party.GetParty();
+
+
+        if (resp is null)
+        {
+            return await CreateNewParty();
+        }
+        
         if (resp.Code != 200)
         {
             Log.Error("CANNOT GET PARTY DATA ON LEAGUESERVICE");
             Log.Error(resp.Message);
-            return new AssistParty();
+            return await CreateNewParty();
         }
 
         CurrentPartyInfo = JsonSerializer.Deserialize<AssistParty>(resp.Data.ToString());
@@ -158,6 +165,7 @@ public class LeagueService
     {
         Log.Error("Match has Been Joined Message has been recieved.");
         Log.Error("Switching UI to MatchPage.");
+        AssistApplication.CurrentlyInAssistLeagueMatch = true;
         AssistApplication.Current.PlaySound("https://content.assistapp.dev/audio/709fe49c-293b-4cd6-987d-848304f28eee/MemberJoined.mp3");
         Dispatcher.UIThread.InvokeAsync(async () =>
         {

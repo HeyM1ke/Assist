@@ -636,6 +636,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I Crashed?.
+        /// </summary>
+        public static string Leagues_ICrashed {
+            get {
+                return ResourceManager.GetString("Leagues_ICrashed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Join a League.
         /// </summary>
         public static string Leagues_Join {
@@ -663,6 +672,60 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ATTACKERS.
+        /// </summary>
+        public static string Leagues_Match_Attackers {
+            get {
+                return ResourceManager.GetString("Leagues_Match_Attackers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DEFENDERS.
+        /// </summary>
+        public static string Leagues_Match_Defenders {
+            get {
+                return ResourceManager.GetString("Leagues_Match_Defenders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Match.
+        /// </summary>
+        public static string Leagues_Match_Loading {
+            get {
+                return ResourceManager.GetString("Leagues_Match_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MATCH IN PROGRESS.
+        /// </summary>
+        public static string Leagues_Match_MatchInProgress {
+            get {
+                return ResourceManager.GetString("Leagues_Match_MatchInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready Up!.
+        /// </summary>
+        public static string Leagues_Match_ReadyUp {
+            get {
+                return ResourceManager.GetString("Leagues_Match_ReadyUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining.
+        /// </summary>
+        public static string Leagues_Match_Remaining {
+            get {
+                return ResourceManager.GetString("Leagues_Match_Remaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Queue.
         /// </summary>
         public static string Leagues_Queue {
@@ -686,6 +749,15 @@ namespace Assist.Properties {
         public static string Leagues_ReadyUp {
             get {
                 return ResourceManager.GetString("Leagues_ReadyUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report an Issue.
+        /// </summary>
+        public static string Leagues_ReportAnIssue {
+            get {
+                return ResourceManager.GetString("Leagues_ReportAnIssue", resourceCulture);
             }
         }
         

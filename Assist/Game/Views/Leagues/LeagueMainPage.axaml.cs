@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Leagues;
+using Assist.Game.Controls.Navigation;
 using Assist.Game.Services;
 using Assist.Game.Services.Leagues;
 using Assist.Game.Views.Leagues.Popup;
@@ -43,6 +44,8 @@ public partial class LeagueMainPage : UserControl
                 PopupSystem.SpawnCustomPopup(new WelcomeLeaguesView());
             }
         });
+        
+        VerticalGameNavigation.Instance.EnableAll();
         
         if (LeagueService.Instance is null)
             await InitialSetup();
