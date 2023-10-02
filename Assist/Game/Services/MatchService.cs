@@ -79,6 +79,7 @@ public class MatchService
         AssistApplication.Current.GameServerConnection.MATCH_StartValorantMatchReceived -= GameServerConnectionOnMATCH_StartValorantMatchReceived;
         AssistApplication.Current.GameServerConnection.MATCH_ValorantPartyJoinMatchReceived -= GameServerConnectionOnMATCH_ValorantPartyJoinMatchReceived;
         AssistApplication.Current.GameServerConnection.MATCH_MatchValorantPartyCreateReceived -= GameServerConnectionOnMATCH_MatchValorantPartyCreateReceived;
+        AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= WatchUserPresenceWhileWaiting;
         
         AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= PlayerPresenceMessageReceived;
         AssistApplication.Current.RiotWebsocketService.PregameMessageEvent -= PregameMessageReceived;
@@ -659,58 +660,107 @@ public class MatchService
 
     private async void GameServerConnectionOnMATCH_ValorantPartyJoinMatchReceived(string? valPartyData)
     {
-        Log.Information("Party Join Request recieved from the server.");
+        Log.Information("(MatchService) Received Valorant Party Join");
+        await HandleValorantJoinPartyMatch(valPartyData);
+    }
+
+    private async Task HandleValorantJoinPartyMatch(string? valPartyData, bool retry = false)
+    {
+        Log.Information("(MatchService)Party Join Request recieved from the server.");
         
         var partyData = JsonSerializer.Deserialize<JoinValorantParty>(valPartyData);
-        
-        // Check if the player is ingame.
-            // If the player is INGAME, Leave the game. 
 
         var currPres = await AssistApplication.Current.CurrentUser.Presence.GetPresences();
         var clientPres = currPres.presences.Find(x => x.puuid == AssistApplication.Current.CurrentUser.UserData.sub);
         var decodedPres = await GetPresenceData(clientPres);
-
-        if (decodedPres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
+        
+        if (AssistApplication.Current.CurrentUser.Party.CurrentParty is null)
         {
             try
             {
-                await QuitIngameValorantMatch();
+                await AssistApplication.Current.CurrentUser.Party.FetchParty();
             }
-            catch (Exception e)
+            catch (RequestException e)
             {
+                Log.Error("(MatchService) Failed to get Valorant Party data for Match.");
+                Log.Error("(MatchService) Failed to get Valorant Party data  for Match. MESSAGE " + e.Message);
+                Log.Error("(MatchService) Failed to get Valorant Party data  for Match. STACK " + e.StackTrace);
+                Log.Error("(MatchService) Failed to get Valorant Party data  for Match. CONTENT " + e.Content);
+
+                if (e.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    Log.Fatal("(MatchService) TOKEN ERROR on trying to get Valorant Party data. : ");
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    if (!retry)
+                    {
+                        await HandleValorantJoinPartyMatch(valPartyData, false);
+                    }
+                }
+            }   
+        }
+
+        if (AssistApplication.Current.CurrentUser.Party.CurrentParty.ID.Equals(partyData.ValorantPartyId))
+        {
+            Log.Information("(MatchService) Request to Join party has stopped due to player already being in the party. Continuing with ready statuses.");
+        }
+        else
+        {
+            Log.Information("(MatchService) Player is currently not in the right party.");
+            
+
+            if (decodedPres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    await QuitIngameValorantMatch();
+                }
+                catch (Exception e)
+                {
+                }
             }
+            
+            // Join the Party.
+
+            try
+            {
+                Log.Information("(MatchService) Attempting to Join Party of id " + partyData.ValorantPartyId);
+                await AssistApplication.Current.CurrentUser.Party.JoinParty(partyData.ValorantPartyId);
+            }
+            catch (RequestException e)
+            {
+                Log.Error("(MatchService) Failed to join Valorant Party for Match.");
+                Log.Error("(MatchService) Failed to join Valorant Party for Match. MESSAGE " + e.Message);
+                Log.Error("(MatchService) Failed to join Valorant Party for Match. STACK " + e.StackTrace);
+                Log.Error("(MatchService) Failed to join Valorant Party for Match. CONTENT " + e.Content);
+
+                if(e.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("(MatchService) TOKEN ERROR on trying to join a party.: ");
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    if (!retry)
+                    {
+                        await HandleValorantJoinPartyMatch(valPartyData, true);
+                    }
+                }
+                
+                // If party is denied. 
+                // Request separate invite from server. Return.
+                
+                // Report to server it was a failed join. With Username Data of current Client to receive invite.
+                _awaitingInvite = true;
+                // This is sent to the server which will confirm if the player id that request is apart of the match.
+                // if so then the player will get sent an invite.
+                var reqObj = new RequestPartyInviteMatch()
+                {
+                    CurrentGameName = clientPres.game_name,
+                    CurrentTag = clientPres.game_tag,
+                    MatchId = CurrentMatchData.Id
+                };
+                await AssistApplication.Current.GameServerConnection.RequestPartyInviteForMatch(reqObj);
+                return; 
+            } 
         }
         
-        // Join the Party.
-
-        try
-        {
-            Log.Information("Attempting to Join Party of id " + partyData.ValorantPartyId);
-            await AssistApplication.Current.CurrentUser.Party.JoinParty(partyData.ValorantPartyId);
-        }
-        catch (Exception e)
-        {
-            Log.Error("Failed to join Valorant Party for Match.");
-            Log.Error("Failed to join Valorant Party for Match. MESSAGE " + e.Message);
-            Log.Error("Failed to join Valorant Party for Match. STACK " + e.StackTrace);
-            
-            // If party is denied. 
-            // Request separate invite from server. Return.
-            
-            // Report to server it was a failed join. With Username Data of current Client to receive invite.
-            _awaitingInvite = true;
-            // This is sent to the server which will confirm if the player id that request is apart of the match.
-            // if so then the player will get sent an invite.
-            var reqObj = new RequestPartyInviteMatch()
-            {
-                CurrentGameName = clientPres.game_name,
-                CurrentTag = clientPres.game_tag,
-                MatchId = CurrentMatchData.Id
-            };
-            await AssistApplication.Current.GameServerConnection.RequestPartyInviteForMatch(reqObj);
-            return;
-        }
-
+        
         // If Party Join is successful, Unready user.
         await AssistApplication.Current.CurrentUser.Party.SetPartyReadiness(false);
         // Swap user to spectate, then to Team id sent.
@@ -740,7 +790,7 @@ public class MatchService
             }
             catch (Exception e)
             {
-                Log.Error("Error on Swapping Teams.");
+                Log.Error("(MatchService) Error on Swapping Teams.");
                 if (e is RequestException)
                 {
                     var ex = e as RequestException;
@@ -748,7 +798,7 @@ public class MatchService
                     Log.Error(ex.Content);
                 }
                 
-                await Task.Delay(3000);
+                await Task.Delay(2000);
             }
         }
         
@@ -792,8 +842,7 @@ public class MatchService
     {
         while (isLocked);
         isLocked = true;
-        var resp = await AssistApplication.Current.AssistUser.League.MATCH_Update(Instance.CurrentMatchData.Id,
-            updateObj);
+        var resp = await AssistApplication.Current.AssistUser.League.MATCH_Update(Instance.CurrentMatchData.Id, updateObj);
         
         Log.Information("Send Update Information to Match");
         Log.Information($"Send Update Information to Match : {resp.Code}");
