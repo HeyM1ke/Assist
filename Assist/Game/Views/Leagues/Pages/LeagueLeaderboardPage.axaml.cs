@@ -23,12 +23,7 @@ public partial class LeagueLeaderboardPage : UserControl
     {
         _viewModel.SetupLeaderboard();
     }
-
-    private void PlayerStats_Loaded(object? sender, RoutedEventArgs e)
-    {
-        _viewModel.SetupPlayerStats();
-    }
-
+    
     private void LeaderboardMemberControl_Initialize(object? sender, EventArgs e)
     {
         _viewModel.SetupLeaderboard();

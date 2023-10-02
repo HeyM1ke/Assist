@@ -9,6 +9,7 @@ public class LeagueLeaderboardMemberControl : TemplatedControl
     public static readonly StyledProperty<string?> PositionTextProperty = AvaloniaProperty.Register<LeagueLeaderboardMemberControl, string?>("PositionText");
     public static readonly StyledProperty<string?> PlayerTextProperty = AvaloniaProperty.Register<LeagueLeaderboardMemberControl, string?>("PlayerText");
     public static readonly StyledProperty<string?> LeaguePointTextProperty = AvaloniaProperty.Register<LeagueLeaderboardMemberControl, string?>("LeaguePointText");
+    public static readonly StyledProperty<string?> GamesPlayedProperty = AvaloniaProperty.Register<LeagueLeaderboardMemberControl, string?>("GamesPlayed");
 
     public string? PositionText
     {
@@ -26,5 +27,11 @@ public class LeagueLeaderboardMemberControl : TemplatedControl
     {
         get { return (string?)GetValue(LeaguePointTextProperty); }
         set { SetValue(LeaguePointTextProperty, value); }
+    }
+
+    public string? GamesPlayed
+    {
+        get { return (string?)GetValue(GamesPlayedProperty); }
+        set { SetValue(GamesPlayedProperty, value); }
     }
 }

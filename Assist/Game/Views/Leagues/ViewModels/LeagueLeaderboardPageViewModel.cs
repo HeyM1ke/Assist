@@ -10,6 +10,7 @@ using Assist.ViewModels;
 using AssistUser.Lib.Leagues.Models;
 using AssistUser.Lib.Profiles.Models;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using ReactiveUI;
 using Serilog;
 
@@ -27,6 +28,15 @@ public class LeagueLeaderboardPageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _memberControls, value);
     }
 
+    private ObservableCollection<LeagueLeaderboardMemberControl> _currentPlayerStats = new ObservableCollection<LeagueLeaderboardMemberControl>();
+
+    public ObservableCollection<LeagueLeaderboardMemberControl> CurrentPlayerStats
+    {
+        get => _currentPlayerStats;
+        set => this.RaiseAndSetIfChanged(ref _currentPlayerStats, value);
+    }
+    
+    
     private string _currentPlayerPoints;
 
     public string CurrentPlayerPoints
@@ -67,7 +77,8 @@ public class LeagueLeaderboardPageViewModel : ViewModelBase
                 return;
             }
 
-            _leaderboard = JsonSerializer.Deserialize<AssistLeaderboard>(r.Data.ToString());
+            var data = r.Data.ToString();
+            _leaderboard = JsonSerializer.Deserialize<AssistLeaderboard>(data);
             _currentLeagueId = LeagueService.Instance.CurrentLeagueId;
         }
 
@@ -75,40 +86,26 @@ public class LeagueLeaderboardPageViewModel : ViewModelBase
         {
             MemberControls.Add(new LeagueLeaderboardMemberControl()
             {
-                Width = 555,
-                Height = 40,
+                Height = 45,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
                 PositionText = $"#{_leaderboard.Members[i].Position:n0}",
                 PlayerText = _leaderboard.Members[i].Username,
-                LeaguePointText = $"{_leaderboard.Members[i].Points:n0} LP"
+                LeaguePointText = $"{_leaderboard.Members[i].Points:n0} LP",
+                GamesPlayed = $"{_leaderboard.Members[i].GamesPlayed} {Properties.Resources.Leagues_LeaderboardMatchesPlayed}"
             });
         }
-    }
 
-    public async Task SetupPlayerStats()
-    {
-        if (ProfilePageViewModel.ProfileData is null)
+        if (_leaderboard.CallerPosition is not null)
         {
-            var resp = await AssistApplication.Current.AssistUser.Profile.GetProfile();
-            if (resp.Code != 200)
+            CurrentPlayerStats.Add(new LeagueLeaderboardMemberControl()
             {
-                return;
-            }
-
-            ProfilePageViewModel.ProfileData = JsonSerializer.Deserialize<AssistProfile>(resp.Data.ToString());
+                Height = 70,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                PositionText = $"#{_leaderboard.CallerPosition.Position:n0}",
+                PlayerText = _leaderboard.CallerPosition.Username,
+                LeaguePointText = $"{_leaderboard.CallerPosition.Points:n0} LP",
+                GamesPlayed = $"{_leaderboard.CallerPosition.GamesPlayed} {Properties.Resources.Leagues_LeaderboardMatchesPlayed}"
+            });
         }
-        
-        var playerData =
-            ProfilePageViewModel.ProfileData.Leagues.Find(x => x.Id == LeagueService.Instance.CurrentLeagueId);
-
-        if (playerData is null)
-        {
-            CurrentGamesPlayed = "Failed";
-            CurrentPlayerPoints = "Failed";
-            return;
-        }
-        
-        CurrentGamesPlayed = $"{playerData.Matches.Count:n0} Games Played";
-        CurrentPlayerPoints = $"{playerData.CurrentLeaguePoints:n0} LP";
-        PlayerProfileImage = ProfilePageViewModel.ProfileData.ProfileImage;
     }
 }

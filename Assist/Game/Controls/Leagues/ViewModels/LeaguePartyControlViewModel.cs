@@ -186,4 +186,10 @@ public class LeaguePartyControlViewModel : ViewModelBase
             
         });
     }
+
+    public async Task LeaveParty()
+    {
+        await LeagueService.Instance.CreateNewParty();
+        await this.Initialize();
+    }
 }

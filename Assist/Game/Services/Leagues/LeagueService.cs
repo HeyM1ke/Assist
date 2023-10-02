@@ -83,7 +83,6 @@ public class LeagueService
         return CurrentPartyInfo;
     }
     
-    
     public void BindToEvents()
     {
         if (currentlyBinded)return;

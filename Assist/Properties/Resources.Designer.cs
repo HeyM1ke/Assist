@@ -663,6 +663,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Matches Played.
+        /// </summary>
+        public static string Leagues_LeaderboardMatchesPlayed {
+            get {
+                return ResourceManager.GetString("Leagues_LeaderboardMatchesPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Leave League.
         /// </summary>
         public static string Leagues_Leave {

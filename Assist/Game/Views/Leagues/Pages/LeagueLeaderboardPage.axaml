@@ -7,22 +7,21 @@
              d:DesignWidth="1105"
              d:DesignHeight="582"
              x:Class="Assist.Game.Views.Leagues.Pages.LeagueLeaderboardPage">
-    <Grid ColumnDefinitions="Auto, Auto">
-        <Grid Margin="15,17"
+    <Grid RowDefinitions="Auto, Auto">
+        <Grid 
               VerticalAlignment="Top">
             <Border Background="{DynamicResource AssistPrimary}"
                     BorderBrush="{DynamicResource AssistOutline}"
                     BorderThickness="1"
                     CornerRadius="5"
-                    Width="575"
-                    Height="515">
+                    Height="480">
                 <Grid Margin="10">
                    <ScrollViewer>
                        <ItemsControl ItemsSource="{Binding MemberControls}"
                                      Initialized="LeaderboardMemberControl_Initialize">
                            <ItemsControl.ItemsPanel>
                                <ItemsPanelTemplate>
-                                   <StackPanel Spacing="10"></StackPanel>
+                                   <StackPanel Spacing="5"></StackPanel>
                                </ItemsPanelTemplate>
                            </ItemsControl.ItemsPanel>
                        </ItemsControl>
@@ -30,51 +29,30 @@
                 </Grid>
             </Border>
         </Grid>
-        
-        <Grid Column="1" Margin="15,17"
-              VerticalAlignment="Top">
-            <Border Background="{DynamicResource AssistPrimary}"
-                    BorderBrush="{DynamicResource AssistOutline}"
-                    BorderThickness="1"
-                    CornerRadius="5"
-                    Width="335"
-                    MinHeight="155"
-                    Loaded="PlayerStats_Loaded">
-                <Grid Margin="10">
-                    <TextBlock Text="YOUR STATS"
-                               FontFamily="{DynamicResource Inter}"
-                               FontWeight="Bold"
-                               FontSize="24"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               TextAlignment="Left"/>
-                    
-                    <StackPanel HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom">
-                        <TextBlock Text="{Binding CurrentPlayerPoints, FallbackValue='Loading...'}"
-                                   FontFamily="{DynamicResource Inter}"
-                                   FontWeight="Bold"
-                                   FontSize="24"
-                                   TextAlignment="Left"/>
-                        <TextBlock Text="{Binding CurrentGamesPlayed, FallbackValue='Loading...'}"
-                                   FontFamily="{DynamicResource Inter}"
-                                   FontWeight="Medium"
-                                   FontSize="16"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   TextAlignment="Left"/>
-                    </StackPanel>
-                    
-                    <asyncImageLoader:AdvancedImage Height="130"
-                                                    CornerRadius="5"
-                                                    VerticalAlignment="Stretch"
-                                                    HorizontalAlignment="Right"
-                                                    Background="Transparent"
-                                                    Source="{Binding PlayerProfileImage}"
-                                                    BorderBrush="{DynamicResource AssistOutline}"
-                                                    BorderThickness="1"/>
-                </Grid>
-            </Border>
+        <Grid Row="1"
+              Margin="0,5,0,0">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Your Stats"
+                           FontFamily="{StaticResource Inter}"
+                           FontSize="18"
+                           FontWeight="SemiBold"></TextBlock>
+                
+                <Border Background="{DynamicResource AssistPrimary}"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Height="70"
+                        >
+                    <ItemsControl ItemsSource="{Binding CurrentPlayerStats}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Spacing="10"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>    
+                </Border>
+                
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

@@ -89,7 +89,8 @@
                         </Style>
                     </StackPanel.Styles>
                     <Button Classes="Mail"  Tag="Messages"/>
-                    <Button Classes="LeavePty" Content="{SvgImage /Resources/Icons/LeavePty.svg}" Tag="Leave Party"/>
+                    <Button Classes="LeavePty" Content="{SvgImage /Resources/Icons/LeavePty.svg}" Tag="Leave Party"
+                            Click="LeavePtyBtn_Click"/>
                 </StackPanel>
                 
                 <Rectangle VerticalAlignment="Bottom"

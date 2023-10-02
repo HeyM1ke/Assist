@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Game.Services.Leagues;
+using Assist.Settings;
 using Assist.ViewModels;
 using AssistUser.Lib.Leagues.Models;
 using ReactiveUI;
@@ -16,6 +17,11 @@ public class LeaguePageViewModel : ViewModelBase
     {
         get => _leagueId;
         set => this.RaiseAndSetIfChanged(ref _leagueId, value);
+    }
+    
+    public string VersionNumber
+    {
+        get => $"{AssistSettings.Current.ApplicationVersion} : In Development";
     }
 
     private bool _leaderboardEnabled = true;

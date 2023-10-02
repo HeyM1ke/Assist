@@ -32,4 +32,11 @@ public partial class LeaguePartyControl : UserControl
             return;
         await _viewModel.UnbindToEvents();
     }
+
+    private async void LeavePtyBtn_Click(object? sender, RoutedEventArgs e)
+    {
+        (sender as Button).IsEnabled = false;
+        await _viewModel.LeaveParty();
+        (sender as Button).IsEnabled = true;
+    }
 }

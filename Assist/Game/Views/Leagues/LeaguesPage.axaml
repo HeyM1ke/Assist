@@ -130,12 +130,12 @@
                 
             </TabControl>  
         
-        <TextBlock Text="IN DEVELOPMENT, SUBJECT TO CHANGE"
-                   Opacity=".5"
-                   FontSize="24"
+        <TextBlock Text="{Binding VersionNumber} "
+                   Opacity=".2"
+                   FontSize="15"
                    FontFamily="{StaticResource Inter}"
                    FontWeight="Medium"
-                   VerticalAlignment="Bottom"
-                   HorizontalAlignment="Left"></TextBlock>
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"></TextBlock>
     </Grid>
 </UserControl>

@@ -429,6 +429,9 @@
   <data name="Leagues_ICrashed" xml:space="preserve">
     <value>I Crashed?</value>
   </data>
+  <data name="Leagues_LeaderboardMatchesPlayed" xml:space="preserve">
+    <value>Matches Played</value>
+  </data>
   <data name="Leagues_Match_MatchInProgress" xml:space="preserve">
     <value>MATCH IN PROGRESS</value>
   </data>

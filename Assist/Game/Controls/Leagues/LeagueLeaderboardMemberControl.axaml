@@ -3,10 +3,11 @@
         xmlns:controls="using:Assist.Game.Controls.Leagues">
     <Design.PreviewWith>
         <controls:LeagueLeaderboardMemberControl Width="555"
-                                                 Height="40"
-                                                 PositionText=""
-                                                 PlayerText=""
-                                                 LeaguePointText=""/>
+                                                 Height="45"
+                                                 PositionText="1"
+                                                 PlayerText="ValroantPlayer"
+                                                 LeaguePointText="232 LP"
+                                                 GamesPlayed=""/>
     </Design.PreviewWith>
 
     <Style Selector="controls|LeagueLeaderboardMemberControl">
@@ -23,7 +24,7 @@
                             <TextBlock Text="{TemplateBinding PositionText}"
                                        FontFamily="{StaticResource Inter}"
                                        FontWeight="SemiBold"
-                                       FontSize="16"
+                                       FontSize="20"
                                        VerticalAlignment="Center"
                                        Width="67"
                                        TextAlignment="Center"></TextBlock>
@@ -32,17 +33,30 @@
                             <TextBlock Text="{TemplateBinding PlayerText}"
                                        FontFamily="{StaticResource Inter}"
                                        FontWeight="Medium"
-                                       FontSize="16"
+                                       FontSize="18"
                                        VerticalAlignment="Center"
                                        TextAlignment="Left"/>
                         </StackPanel>
-                        <TextBlock Text="{TemplateBinding LeaguePointText}"
-                                   FontFamily="{StaticResource Inter}"
-                                   FontWeight="SemiBold"
-                                   FontSize="16"
-                                   VerticalAlignment="Center"
+                       <StackPanel 
                                    HorizontalAlignment="Right"
-                                   TextAlignment="Right"></TextBlock>
+                                   Orientation="Horizontal" 
+                                   Spacing="12">
+                           <TextBlock Text="{TemplateBinding LeaguePointText}"
+                                      FontFamily="{StaticResource Inter}"
+                                      FontWeight="SemiBold"
+                                      FontSize="18"
+                                      VerticalAlignment="Center"
+                                      TextAlignment="Right"></TextBlock>
+                           <Rectangle Fill="{DynamicResource AssistRed}"
+                                      Width="2"/>
+                           <TextBlock Text="{TemplateBinding GamesPlayed}"
+                                      FontFamily="{StaticResource Inter}"
+                                      FontWeight="Light"
+                                      FontSize="14"
+                                      Opacity=".7"
+                                      VerticalAlignment="Center"
+                                      TextAlignment="Left"/>
+                       </StackPanel>
                     </Grid>
                 </Border>
             </ControlTemplate>
