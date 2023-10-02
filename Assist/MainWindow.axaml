@@ -19,7 +19,7 @@
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="30"
-        Icon="/Resources/Assist_DevIcon.ico"
+        Icon="/Resources/Assist_IconBlack.ico"
         Opened="MainWindow_Initialized"
         Background="{StaticResource AssistBlack}">
 
