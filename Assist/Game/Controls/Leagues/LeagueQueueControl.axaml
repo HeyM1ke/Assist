@@ -7,7 +7,7 @@
              Initialized="QueueControl_Init"
              x:Class="Assist.Game.Controls.Leagues.LeagueQueueControl">
     <Grid>
-       <Border Background="#1E222A"
+       <Border Background="{DynamicResource AssistPrimary}"
                BorderBrush="{DynamicResource AssistOutline}"
                BorderThickness="1"
                CornerRadius="10"
@@ -18,7 +18,8 @@
                           FontWeight="SemiBold"
                           HorizontalAlignment="Right"
                           FontSize="18"
-                          Padding="5,0"></TextBlock>
+                          Opacity=".7"
+                          Padding="5,4"></TextBlock>
                <Panel x:Name="ButtonPanel">
                    <Button Classes="QueueBtn"
                            Height="65"

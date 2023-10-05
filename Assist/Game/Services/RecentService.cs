@@ -94,7 +94,15 @@ public class RecentService
         var t = await GetMatchData(matchId);
 
         if (t is null)
+        {
+            var preMatch = RecentMatches.Find(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
+            if (preMatch is not null)
+            {
+                if (DateTime.Now.ToUniversalTime() > preMatch.DateOfMatch.ToUniversalTime().AddDays(1)) RecentService.Current.RemoveMatch(preMatch.MatchId);    
+            }
             return;
+        }
+            
         
         
         var original = RecentMatches.Find(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
@@ -222,14 +230,21 @@ public class RecentService
             Gamemode = matchDetails.MatchInformation.GameMode,
             QueueId = matchDetails.MatchInformation.QueueID,
             IsCompleted = matchDetails.MatchInformation.IsCompleted,
-            MapId = matchDetails.MatchInformation.MapId
+            MapId = matchDetails.MatchInformation.MapId,
+            OwningPlayer = AssistApplication.Current.CurrentUser.UserData.sub
         };
 
         // Get Local Player, Should always be valid due to the players history
         var localPlayerData = matchDetails.Players.Find(x => x.Subject.Equals(AssistApplication.Current.CurrentUser.UserData.sub, StringComparison.OrdinalIgnoreCase));
+
+        if (localPlayerData is null)
+        {
+            Log.Error("Failed to find local player data in RecentService.");
+            return recentMatch;
+        }
         
         // Determine Win & Score Conditions
-        int indexOfLocalTeam = matchDetails.Teams.FindIndex(x => x.TeamId.Equals(localPlayerData.TeamId));
+        int indexOfLocalTeam = matchDetails.Teams.FindIndex(x => x.TeamId.Equals(localPlayerData?.TeamId));
         recentMatch.AllyTeamId = localPlayerData.TeamId;
         recentMatch.AllyTeamScore = matchDetails.Teams[indexOfLocalTeam].RoundsWon;
         recentMatch.Result = matchDetails.Teams[indexOfLocalTeam].Won

@@ -14,7 +14,7 @@
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
                         BorderThickness="1"
-                        CornerRadius="10"
+                        CornerRadius="5"
                         Padding="5"
                         BorderBrush="{TemplateBinding BorderBrush}">
                    <Grid>
@@ -31,7 +31,8 @@
     
     <Style Selector="controls|LeagueSelectionDropdownButton:pointerover">
         <!-- Set Defaults -->
-        <Setter Property="Background" Value="{DynamicResource AssistGray}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource AssistLightBackground}"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource AssistRed}"></Setter>
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 </Styles>

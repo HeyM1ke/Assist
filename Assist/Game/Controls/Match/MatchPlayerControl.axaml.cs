@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AsyncImageLoader;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -13,6 +14,8 @@ public class MatchPlayerControl : TemplatedControl
     public static readonly StyledProperty<string?> ImageUrlProperty = AvaloniaProperty.Register<MatchPlayerControl, string?>("ImageUrl");
     public static readonly StyledProperty<bool?> IsReadyProperty = AvaloniaProperty.Register<MatchPlayerControl, bool?>("IsReady", false);
     public static readonly StyledProperty<IEnumerable> ContentProperty = AvaloniaProperty.Register<MatchPlayerControl, IEnumerable>("Content");
+    public static readonly StyledProperty<bool?> IsCaptainProperty = AvaloniaProperty.Register<MatchPlayerControl, bool?>("IsCaptain", false);
+    public static readonly StyledProperty<List<AdvancedImage>?> BadgeControlsProperty = AvaloniaProperty.Register<MatchPlayerControl, List<AdvancedImage>?>("BadgeControls");
 
     public string? PlayerName
     {
@@ -44,5 +47,17 @@ public class MatchPlayerControl : TemplatedControl
     {
         get { return (IEnumerable?)GetValue(ContentProperty); }
         set { SetValue(ContentProperty, value); }
+    }
+
+    public bool? IsCaptain
+    {
+        get { return (bool?)GetValue(IsCaptainProperty); }
+        set { SetValue(IsCaptainProperty, value); }
+    }
+
+    public List<AdvancedImage>? BadgeControls
+    {
+        get { return (List<AdvancedImage>?)GetValue(BadgeControlsProperty); }
+        set { SetValue(BadgeControlsProperty, value); }
     }
 }

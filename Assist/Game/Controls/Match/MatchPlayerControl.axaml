@@ -6,6 +6,8 @@
         <controls:MatchPlayerControl Width="323"
                                      Height="80"
                                      IsReady="False"
+                                     IsCaptain="False"
+                                     BadgeControls=""
         />
     </Design.PreviewWith>
 
@@ -70,6 +72,7 @@
                                    Height="14"
                                    HorizontalAlignment="Right"
                                    Stretch="Uniform"
+                                   IsVisible="{TemplateBinding IsCaptain}"
                                    Source="/Resources/Icons/Crown_Icon.png"/>
                             <Border Padding="10,5"
                                     Background="#40000000">

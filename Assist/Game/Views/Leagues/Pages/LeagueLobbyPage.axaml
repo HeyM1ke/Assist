@@ -10,7 +10,7 @@
         <Grid Row="0">
             <StackPanel Spacing="20">
                <Grid>
-                   <leagues:LeaguePartyControl Height="230" 
+                   <leagues:LeaguePartyControl Height="264" 
                                                HorizontalAlignment="Stretch"/>
                    
                </Grid>
@@ -56,9 +56,12 @@
                                                    VerticalAlignment="Center"
                                                    MaxWidth="365"
                                                    MaxHeight="180"
+                                                   IsVisible="False"
                                                    Margin="0,0,0,0"></leagues:LeagueAnnouncementsControl>
                <leagues:LeagueQueueControl HorizontalAlignment="Right"
                                            VerticalAlignment="Bottom"
+                                           Width="420"
+                                           Height="106"
                                            Margin="0,10,0,0"></leagues:LeagueQueueControl>
            </StackPanel>
         </Grid>

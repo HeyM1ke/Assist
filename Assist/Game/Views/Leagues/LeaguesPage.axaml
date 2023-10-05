@@ -124,7 +124,7 @@
                     <pages:LeagueLeaderboardPage/>
                 </TabItem>
                 <TabItem Header="Settings"
-                         >
+                         IsVisible="{Binding ModerationEnabled}">
                     <pages:LeagueSettingsPage/>
                 </TabItem>
                 

@@ -506,6 +506,12 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
                 if (unfinishedMatch.Result != RecentMatch.MatchResult.REMAKE)
                 {
+                    if (!unfinishedMatch.OwningPlayer.Equals(AssistApplication.Current.CurrentUser.UserData.sub))
+                    {
+                        if (DateTime.Now.ToUniversalTime() > unfinishedMatch.DateOfMatch.ToUniversalTime().AddDays(1)) RecentService.Current.RemoveMatch(unfinishedMatch.MatchId);
+                        return;    
+                    }
+                    
                     await RecentService.Current.UpdateMatch(unfinishedMatch.MatchId);
 
                     var updatedMatch =

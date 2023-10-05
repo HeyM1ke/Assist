@@ -19,6 +19,7 @@ public class RecentMatch
     public string AllyTeamId { get; set; } = String.Empty;
     public string EnemyTeamName { get; set; } = String.Empty;
     public string MatchTrack_LastState { get; set; } = string.Empty;
+    public string OwningPlayer { get; set; } = string.Empty;
 
     public List<Player> Players { get; set; } = new List<Player>();
     

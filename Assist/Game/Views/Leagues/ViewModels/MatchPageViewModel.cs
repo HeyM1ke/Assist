@@ -328,7 +328,8 @@ public class MatchPageViewModel : ViewModelBase
                 PlayerName = player.Username,
                 LeaguePointText = $"{player.Points:n0} LP",
                 ImageUrl = player.DisplayImage,
-                IsReady = matchData.PregameDetails.ReadyPlayers != null && matchData.PregameDetails.ReadyPlayers.Contains(player.Id)
+                IsReady = matchData.PregameDetails.ReadyPlayers != null && matchData.PregameDetails.ReadyPlayers.Contains(player.Id),
+                IsCaptain = player.IsCaptain
             };
             TeamAControls.Add(ctrl);
         }
@@ -341,7 +342,8 @@ public class MatchPageViewModel : ViewModelBase
                 PlayerName = player.Username,
                 LeaguePointText = $"{player.Points:n0} LP",
                 ImageUrl = player.DisplayImage,
-                IsReady = matchData.PregameDetails.ReadyPlayers != null && matchData.PregameDetails.ReadyPlayers.Contains(player.Id)
+                IsReady = matchData.PregameDetails.ReadyPlayers != null && matchData.PregameDetails.ReadyPlayers.Contains(player.Id),
+                IsCaptain = player.IsCaptain
             };
             TeamBControls.Add(ctrl);
         }

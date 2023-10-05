@@ -32,7 +32,7 @@ public class LeaguePageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _leaderboardEnabled, value);
     }
     
-    private bool _moderationEnabled = true;
+    private bool _moderationEnabled = false;
 
     public bool ModerationEnabled
     {
@@ -44,6 +44,11 @@ public class LeaguePageViewModel : ViewModelBase
     {
         Log.Information("Setting up LeaguePage");
         var l = await LeagueService.Instance.GetCurrentLeagueInformation();
+
+        if (l.OwnerId == AssistApplication.Current.AssistUser.Account.AccountInfo.id)
+        {
+            ModerationEnabled = true;
+        }
     }
 
 
