@@ -30,7 +30,7 @@
 	                                                               VerticalAlignment="Center"
 	                                                               FontSize="32"
 	                                                    />
-	                                                    
+	                                                    <Image Source="{SvgImage /Resources/Icons/TriangleDown.svg}"></Image>
                                                     </StackPanel>
                 								</Grid>
                 							</Border>
@@ -47,31 +47,38 @@
 		
 		    <Grid Name="LeagueSelectionPopup"
 		          IsVisible="{Binding PopupOpen}"
-		          Margin="0"
 		          Width="400"
+		          Margin="0,10,0,0"
 		          HorizontalAlignment="Left"
 		          PointerExited="LeagueSelectionPopup_OnPointerExited"
 		    >
 			    <Grid>
 				    <Border Opacity="1"
-				            CornerRadius="0,0,5,5"
-				    />
-				    <ScrollViewer>
-					    <ItemsControl ItemsSource="{Binding LeagueSelectionControls}" >
-						    <ItemsControl.ItemsPanel>
-							    <ItemsPanelTemplate>
-								    <StackPanel Orientation="Vertical" Spacing="3"
-								                VerticalAlignment="Top"
-								                HorizontalAlignment="Left">
+				            Background="{DynamicResource AssistPrimary}"
+				            BorderBrush="{DynamicResource AssistOutline}"
+				            BorderThickness="1"
+				            Padding="10"
+				            Width="400"
+				            CornerRadius="5"
+				    >
+					    <ScrollViewer HorizontalAlignment="Stretch">
+						    <ItemsControl ItemsSource="{Binding LeagueSelectionControls}" >
+							    <ItemsControl.ItemsPanel>
+								    <ItemsPanelTemplate>
+									    <StackPanel Orientation="Vertical" Spacing="3"
+									                VerticalAlignment="Top"
+									                HorizontalAlignment="Stretch">
                                     
-								    </StackPanel>
-							    </ItemsPanelTemplate>
-						    </ItemsControl.ItemsPanel>
+									    </StackPanel>
+								    </ItemsPanelTemplate>
+							    </ItemsControl.ItemsPanel>
 						    
 						    
 						    
-					    </ItemsControl>
-				    </ScrollViewer>
+						    </ItemsControl>
+					    </ScrollViewer>
+				    </Border>
+				    
 			    </Grid>
 		    </Grid>
 	    </ItemsControl>

@@ -27,7 +27,7 @@ public partial class LeagueSelectionControl : UserControl
 
     private void NameBtn_Click(object? sender, RoutedEventArgs e)
     {
-        _viewModel.PopupOpen = true;
+        _viewModel.PopupOpen = !_viewModel.PopupOpen;
     }
 
     private void LeagueSelectionPopup_OnPointerExited(object? sender, PointerEventArgs e)

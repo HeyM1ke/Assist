@@ -78,7 +78,7 @@ public class LinkRiotViewModel : ViewModelBase
             };
         }
         var resp = await AssistApplication.Current.AssistUser.Account.LinkRiotConnection(rtc);
-
+        Log.Information(AssistApplication.Current.AssistUser.userTokens.AccessToken);
         if (resp.Code != 200)
         {
             ErrorMessage = resp.Message;

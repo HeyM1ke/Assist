@@ -525,6 +525,9 @@ public class MatchPageViewModel : ViewModelBase
             CurrentGameScoreTeamOne = $"{privatePlayerPres.partyOwnerMatchScoreEnemyTeam}";
             CurrentGameScoreTeamTwo = $"{privatePlayerPres.partyOwnerMatchScoreAllyTeam}";
         }
+        TimerText = Properties.Resources.Leagues_Ready;
+        MatchHeaderTitle = Properties.Resources.Leagues_Match_MatchInProgress;
+        
     }
 
     private async Task HandlePregameMatchData()
@@ -642,7 +645,11 @@ public class MatchPageViewModel : ViewModelBase
         if (secondsRemaining == 0)
         {
            Log.Information("Timer Hit 0, Do Something.");
-           bundleTimer.Stop();
+           Dispatcher.UIThread.InvokeAsync(() =>
+           {
+               bundleTimer.Stop();
+           });
+           StopTimer();
         }
         else
         {

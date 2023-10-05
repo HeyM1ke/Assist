@@ -174,7 +174,15 @@ public partial class SettingsPopup : UserControl
     {
         
         var tb = sender as TextBlock;
-
         tb.Text = $"Version: {Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version}";
+    }
+
+    private async void UnlinkRiotAccBtn_Click(object? sender, RoutedEventArgs e)
+    { 
+        var r = await AssistApplication.Current.AssistUser.Account.UnlinkRiotConnection();
+        if (r.Code == 200)
+        {   
+            _viewModel.RiotAccountLinked = false;
+        }
     }
 }

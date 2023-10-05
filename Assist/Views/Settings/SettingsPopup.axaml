@@ -296,6 +296,12 @@
                                                                        Grid.Column="0"/>
                                                         </StackPanel>
                                                     </Border>
+                                                    <Button Classes="AssistBtn"
+                                                            Content="Unlink"
+                                                            HorizontalAlignment="Stretch"
+                                                            IsVisible="{Binding RiotAccountLinked}"
+                                                            HorizontalContentAlignment="Center"
+                                                            Click="UnlinkRiotAccBtn_Click"></Button>
                                                 </StackPanel>
                                             </Grid>
                                         </StackPanel>

@@ -3,35 +3,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
-             mc:Ignorable="d" d:DesignWidth="362" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="418" d:DesignHeight="106"
              Initialized="QueueControl_Init"
              x:Class="Assist.Game.Controls.Leagues.LeagueQueueControl">
     <Grid>
-        <StackPanel Spacing="10">
-            <Border CornerRadius="10"
-                    Background="{DynamicResource AssistSecondary}"
-                    BorderBrush="{DynamicResource AssistOutline}"
-                    BorderThickness="1"
-                    Padding="10">
-                <TextBlock Text="Players in Queue: 10"
-                           FontFamily="{StaticResource Inter}"
-                           FontWeight="Medium"
-                           HorizontalAlignment="Center"
-                           FontSize="18"></TextBlock>
-            </Border>
-            <Panel x:Name="ButtonPanel"
-                   Height="90">
-                <Button Classes="QueueBtn"
-                        Width="362"
-                        Height="70"
-                        Content="{x:Static p:Resources.Leagues_Ready}"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        IsEnabled="{Binding ButtonEnabled}"
-                        Click="QueueBtn_Click"/>
+       <Border Background="#1E222A"
+               BorderBrush="{DynamicResource AssistOutline}"
+               BorderThickness="1"
+               CornerRadius="10"
+               Padding="5">
+           <StackPanel Spacing="0">
+               <TextBlock Text="In Queue: 4"
+                          FontFamily="{StaticResource Inter}"
+                          FontWeight="SemiBold"
+                          HorizontalAlignment="Right"
+                          FontSize="18"
+                          Padding="5,0"></TextBlock>
+               <Panel x:Name="ButtonPanel">
+                   <Button Classes="QueueBtn"
+                           Height="65"
+                           Content="{x:Static p:Resources.Leagues_Ready}"
+                           HorizontalAlignment="Stretch"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           IsEnabled="{Binding ButtonEnabled}"
+                           Click="QueueBtn_Click"/>
                 
-            </Panel>
-        </StackPanel>
+               </Panel>
+           </StackPanel>
+       </Border>
     </Grid>
     
     <UserControl.Styles>

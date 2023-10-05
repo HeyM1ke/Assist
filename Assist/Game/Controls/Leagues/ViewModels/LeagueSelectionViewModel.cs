@@ -17,6 +17,7 @@ using AssistUser.Lib.Leagues.Models;
 using AssistUser.Lib.Profiles.Models;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using ReactiveUI;
 using Serilog;
 using ValNet.Enums;
@@ -178,7 +179,7 @@ public class LeagueSelectionViewModel : ViewModelBase
         {
             LeagueId = leagueId,
             LeagueName = leagueName,
-            Width = 400
+            HorizontalAlignment = HorizontalAlignment.Stretch
         };
 
         if (leagueId != "0")
