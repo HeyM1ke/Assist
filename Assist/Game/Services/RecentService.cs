@@ -25,7 +25,7 @@ public class RecentService
     
     public static RecentService Current;
     public static string RecentFolderPath = Path.Combine(AssistSettings.SettingsFolderPath, "Game", "Modules", "MatchTrack");
-    public static string RecentMatchesPath = Path.Combine(RecentFolderPath, "RecentMatches.json");
+    public static string RecentMatchesPath = Path.Combine(RecentFolderPath, AssistApplication.Current.CurrentUser.UserData.sub, "RecentMatches.json");
     public static string RecentPlayersPath = Path.Combine(RecentFolderPath, "RecentPlayers.json");
     
     public Action RecentServiceUpdated;

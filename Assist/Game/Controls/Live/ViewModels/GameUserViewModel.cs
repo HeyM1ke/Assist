@@ -8,7 +8,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Models;
+using Assist.Game.Models.Live;
 using Assist.Game.Services;
+using Assist.Game.ViewModels;
 using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Settings;
@@ -193,6 +195,7 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             if (Player != null)
             {
+                _playerId = Player.Subject;
                 // Get player name from Presence.
                 if (string.Equals(PlayerName, "Player") || string.IsNullOrEmpty(PlayerRankIcon))
                 {
@@ -211,38 +214,37 @@ namespace Assist.Game.Controls.Live.ViewModels
                     {
                         Log.Information("User pres could not be found? for ID of " + Player.Subject);
                         Log.Information("Very Weird Behavior Logging pres data");
-                        if (pres is not null)
-                        {
-                            pres.presences.ForEach(x => Log.Information($"Player in Pres: Gamename: {x.game_name} ID: {x.puuid} "));
-                        }
+
+                        await SetupPlayerContent();
                     }
+                    else
+                    {
+                        if (!Player.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
+                            if (data != null)
+                            {
+                                if (!_usingAssistProfile)
+                                {
+                                    PlayerTag = $"#{data.game_tag}";
+                                    PlayerName = data.game_name;   
+                                }
+                                PlayerIsHidden = false;
+                                TrackerEnabled = true;
+                                _playerId = data.puuid;
+                            }
                     
-                    _playerId = Player.Subject;
                     
-                    if (!Player.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
+                    
+                        // Runs regardless if a player is hidden
                         if (data != null)
                         {
-                            if (!_usingAssistProfile)
-                            {
-                                PlayerTag = $"#{data.game_tag}";
-                                PlayerName = data.game_name;   
-                            }
-                            PlayerIsHidden = false;
-                            TrackerEnabled = true;
+                            var t = await GetPresenceData(data);
+                            PlayerCompetitiveTier = t.competitiveTier;
+                            PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                            PlayerLevel = $"{t.accountLevel}";
                             _playerId = data.puuid;
-                        }
-                    
-                    
-                    
-                    // Runs regardless if a player is hidden
-                    if (data != null)
-                    {
-                        var t = await GetPresenceData(data);
-                        PlayerCompetitiveTier = t.competitiveTier;
-                        PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
-                        PlayerLevel = $"{t.accountLevel}";
-                        _playerId = data.puuid;
+                        }                        
                     }
+                    
                 }
                 
 
@@ -275,6 +277,7 @@ namespace Assist.Game.Controls.Live.ViewModels
         {
             if (CorePlayer != null)
             {
+                _playerId = CorePlayer.Subject;
                 Log.Information("This is Running in UpdateCorePlayerData");
                 if (string.Equals(PlayerName, "Player") || string.IsNullOrEmpty(PlayerRankIcon))
                 {
@@ -292,37 +295,37 @@ namespace Assist.Game.Controls.Live.ViewModels
                     {
                         Log.Information("UpdateCorePlayerData User pres could not be found? for ID of " + CorePlayer.Subject);
                         Log.Information("UpdateCorePlayerData Very Weird Behavior Logging pres data");
-                        if (pres is not null)
-                        {
-                            pres.presences.ForEach(x => Log.Information($"UpdateCorePlayerData Player in Pres: Gamename: {x.game_name} ID: {x.puuid} "));
-                        }
-                    }
 
-                    _playerId = CorePlayer.Subject;
+                        await SetupPlayerContent();
+                    }
+                    else
+                    {
+                        if (!CorePlayer.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
+                            if (data != null)
+                            {
+                                if (!UsingAssistProfile)
+                                {
+                                    PlayerName = data.game_name;
+                                    PlayerTag = $"#{data.game_tag}";   
+                                }
+                                PlayerIsHidden = false;
+                                TrackerEnabled = true;
+                                _playerId = data.puuid;
+                                //CheckTracker();
+                            }
                     
-                    if (!CorePlayer.PlayerIdentity.Incognito) // If Incognito is True, then streamer mode is enabled.
                         if (data != null)
                         {
-                            if (!UsingAssistProfile)
-                            {
-                                PlayerName = data.game_name;
-                                PlayerTag = $"#{data.game_tag}";   
-                            }
-                            PlayerIsHidden = false;
-                            TrackerEnabled = true;
+                            var t = await GetPresenceData(data);
+                            // Set rank icon
+                            PlayerCompetitiveTier = t.competitiveTier;
+                            PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                            PlayerLevel = $"{t.accountLevel}";
                             _playerId = data.puuid;
-                            //CheckTracker();
-                        }
-                    
-                    if (data != null)
-                    {
-                        var t = await GetPresenceData(data);
-                        // Set rank icon
-                        PlayerCompetitiveTier = t.competitiveTier;
-                        PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
-                        PlayerLevel = $"{t.accountLevel}";
-                        _playerId = data.puuid;
+                        } 
                     }
+                    
+                    
                 }
 
                 if (!string.IsNullOrEmpty(CorePlayer.CharacterID))
@@ -345,6 +348,72 @@ namespace Assist.Game.Controls.Live.ViewModels
             }
         }
 
+        private async Task SetupPlayerContent()
+        {
+            // First Check if the player's data already exists.
+            if (LiveViewViewModel.ValorantPlayers.TryGetValue(_playerId, out var possiblePlayerData))
+            {
+                if (!possiblePlayerData.IsOld())
+                {
+                    await ApplyPlayerContent(possiblePlayerData);
+                }
+                else
+                {
+                    await possiblePlayerData.Setup();
+                    await ApplyPlayerContent(possiblePlayerData);
+                }
+                
+                return;
+            }
+
+            // If it doesnt exist create and set, and add to dictionary.
+            var ply = new ValorantPlayerStorage(_playerId);
+            await ply.Setup();
+            await ApplyPlayerContent(ply);
+            LiveViewViewModel.ValorantPlayers.TryAdd(_playerId, ply);
+
+        }
+
+        private async Task ApplyPlayerContent(ValorantPlayerStorage playerStorage)
+        {
+            if (Player != null)
+            {
+                if (!Player.PlayerIdentity.Incognito)
+                {
+                    if (!_usingAssistProfile)
+                    {
+                        PlayerTag = $"#{playerStorage.Tagline}";
+                        PlayerName = playerStorage.GameName;   
+                    }
+                    PlayerIsHidden = false;
+                    TrackerEnabled = true;
+                }
+                
+                
+                PlayerCompetitiveTier = playerStorage.CompetitiveTier;
+                PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{playerStorage.CompetitiveTier}.png";
+                PlayerLevel = $"{_player.PlayerIdentity.AccountLevel}";
+            }
+            
+            if (CorePlayer != null)
+            {
+                if (!CorePlayer.PlayerIdentity.Incognito)
+                {
+                    if (!_usingAssistProfile)
+                    {
+                        PlayerTag = $"#{playerStorage.Tagline}";
+                        PlayerName = playerStorage.GameName;   
+                    }
+                    PlayerIsHidden = false;
+                    TrackerEnabled = true;
+                }
+                
+                
+                PlayerCompetitiveTier = playerStorage.CompetitiveTier;
+                PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{playerStorage.CompetitiveTier}.png";
+                PlayerLevel = $"{CorePlayer.PlayerIdentity.AccountLevel}";
+            }
+        }
 
         #region Private Methods
         

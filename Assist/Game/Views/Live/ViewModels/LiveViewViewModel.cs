@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
+using Assist.Game.Models.Live;
 using Assist.Game.Services;
 using Assist.Game.Views.Live.Pages;
 using Assist.Objects.RiotSocket;
@@ -33,7 +34,8 @@ namespace Assist.Game.Views.Live.ViewModels
 
         public static Dictionary<string, AssistReputationUserV2> ReputationUserV2s = new Dictionary<string, AssistReputationUserV2>();
         public static Dictionary<string, AssistProfile> AssistProfiles = new Dictionary<string, AssistProfile>();
-
+        public static Dictionary<string, ValorantPlayerStorage> ValorantPlayers = new Dictionary<string, ValorantPlayerStorage>();
+    
         public async void DisplayWebsocketData()
         {
             AssistApplication.Current.RiotWebsocketService.RecieveMessageEvent += delegate(object o)
