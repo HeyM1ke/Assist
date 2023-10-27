@@ -33,6 +33,7 @@ namespace Assist.Objects.Helpers
             {"bb2a4828-46eb-8cd1-e765-15848195d751", "Neon"},
             {"e370fa57-4757-3604-3648-499e1f642d3f", "Gekko"},
             {"cc8b64c8-4b25-4ff9-6e7f-37b4da43d235", "Deadlock"},
+            {"0e38b510-41a8-5780-5e8f-568b2a4f2d6c", "Iso"},
         };
     }
 }
