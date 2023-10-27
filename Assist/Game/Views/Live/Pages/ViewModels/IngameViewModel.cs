@@ -594,8 +594,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 LengthOfMatchInSeconds = 0,
                 AllyTeamScore = pres.partyOwnerMatchScoreAllyTeam,
                 EnemyTeamScore = pres.partyOwnerMatchScoreEnemyTeam,
-                MatchTrack_LastState = "INGAME"
+                MatchTrack_LastState = "INGAME",
+                OwningPlayer = AssistApplication.Current.CurrentUser.UserData.sub
             };
+
+            if (existingMatch is not null)
+            {
+                recentM = existingMatch;
+            }
 
             if (matchResp.Players?.Count == 0)
                 return;
@@ -633,6 +639,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 recentPlayerData.LastSeenMatchId = matchDetails.MatchID;
                 recentPlayerData.Matches.Add(matchDetails.MatchID);
 
+                if (!recentPlayerData.TimesSeen.TryAdd(matchDetails.MatchID, recentPlayerData.LastSeen))
+                {
+                    recentPlayerData.TimesSeen[matchDetails.MatchID] = recentPlayerData.LastSeen;
+                }
+                
                 int index = RecentService.Current.RecentPlayers.FindIndex(ply => ply.PlayerId.Equals(recentPlayerData.PlayerId));
                 if (index < 0)
                     RecentService.Current.RecentPlayers?.Add(recentPlayerData);
@@ -652,6 +663,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
             var players = matchDetails.Players;
 
+            if (players.Count == 0)
+            {
+                return;
+            }
+            
             foreach (var playerObj in players)
             {
                 GameUserControl? data = null;
@@ -677,14 +693,20 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     continue;
                 }
 
+                if (recentMatch.Players.Exists(x => x.PlayerId.Equals(playerObj.Subject)))
+                {
+                    continue;
+                }
+                
                 var nP = new RecentMatch.Player()
                 {
                     PlayerId = playerObj.Subject,
                     CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
                     PlayerAgentId = playerObj.CharacterID,
                     PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.PlayerAgentName.Split('#')[0],
-                    PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerTag : $"#{data._viewModel.PlayerAgentName.Split('#')[^1]}",
+                    PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerTag : $"{data._viewModel.PlayerAgentName.Split('#')[^1]}",
                     TeamId = playerObj.TeamID,
+                    PlayerRealName = data._viewModel.PlayerRealName,
                     Statistics = null
                 };
             

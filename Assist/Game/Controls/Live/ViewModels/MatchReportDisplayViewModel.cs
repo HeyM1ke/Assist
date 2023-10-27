@@ -183,17 +183,27 @@ public class MatchReportDisplayViewModel : ViewModelBase
             {
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
+                    
+                    string name = $"{player.PlayerName}#{player.PlayerTag}";
+                    if (RecentMatchData.Result == RecentMatch.MatchResult.IN_PROGRESS)
+                    {
+                        name = $"{player.PlayerName}#{player.PlayerTag}";
+                    }
+                    else if (!string.IsNullOrEmpty(player.PlayerRealName) && RecentMatchData.Result != RecentMatch.MatchResult.IN_PROGRESS)
+                    {
+                        name = player.PlayerRealName;
+                    }
                     var teamMateObj = new MatchReportTeammateDisplayControl()
                     {
                         AgentIcon =
                             $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
-                        TeammateName =
-                            $"{player.PlayerName}#{player.PlayerTag}",
+                        TeammateName = name,
                         RankIcon =
                             $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline = player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
 
+                   
                     teamObj.TeammateControls.Add(teamMateObj);
                 });
             }
@@ -220,17 +230,29 @@ public class MatchReportDisplayViewModel : ViewModelBase
             {
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
+                    string name = $"{player.PlayerName}#{player.PlayerTag}";
+                    if (RecentMatchData.Result == RecentMatch.MatchResult.IN_PROGRESS)
+                    {
+                        name = $"{player.PlayerName}#{player.PlayerTag}";
+                    }
+                    else if (!string.IsNullOrEmpty(player.PlayerRealName) && RecentMatchData.Result != RecentMatch.MatchResult.IN_PROGRESS)
+                    {
+                        name = player.PlayerRealName;
+                    }
+                    
                     var teamMateObj = new MatchReportTeammateDisplayControl()
                     {
                         AgentIcon =
                             $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
-                        TeammateName = $"{player.PlayerName}#{player.PlayerTag}",
+                        TeammateName = name,
                         RankIcon =
                             $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline =
                             player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
 
+                    
+                    
                     
                     teamObj.TeammateControls.Add(teamMateObj);
                 });
@@ -250,16 +272,29 @@ public class MatchReportDisplayViewModel : ViewModelBase
             {
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
+                    string name = $"{player.PlayerName}#{player.PlayerTag}";
+                    if (RecentMatchData.Result == RecentMatch.MatchResult.IN_PROGRESS)
+                    {
+                        name = $"{player.PlayerName}#{player.PlayerTag}";
+                    }
+                    else if (!string.IsNullOrEmpty(player.PlayerRealName) && RecentMatchData.Result != RecentMatch.MatchResult.IN_PROGRESS)
+                    {
+                        name = player.PlayerRealName;
+                    }
+                    
                     var teamMateObj = new MatchReportTeammateDisplayControl()
                     {
                         AgentIcon =
                             $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
-                        TeammateName = $"{player.PlayerName}{player.PlayerTag}",
+                        TeammateName = name,
                         RankIcon =
                             $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline =
                             player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
+
+                   
+                    
                 
                     if (displayControls.TryGetValue(player.TeamId, out MatchReportTeamDisplayControl teamDisplayControl))
                     {

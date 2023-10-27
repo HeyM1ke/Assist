@@ -246,7 +246,8 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 LengthOfMatchInSeconds = 0,
                 AllyTeamScore = 0,
                 EnemyTeamScore = 0,
-                MatchTrack_LastState = "PREGAME"
+                MatchTrack_LastState = "PREGAME",
+                OwningPlayer = AssistApplication.Current.CurrentUser.UserData.sub
             };
             
             HandlePlayers(pregameMatch, recentM);
@@ -282,6 +283,11 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 recentPlayerData.LastSeenMatchId = matchDetails.ID;
                 recentPlayerData.Matches.Add(matchDetails.ID);
 
+                if (!recentPlayerData.TimesSeen.TryAdd(matchDetails.ID, recentPlayerData.LastSeen))
+                {
+                    recentPlayerData.TimesSeen[matchDetails.ID] = recentPlayerData.LastSeen;
+                }
+                
                 int index = RecentService.Current.RecentPlayers.FindIndex(ply => ply.PlayerId.Equals(recentPlayerData.PlayerId));
                 if (index < 0)
                     RecentService.Current.RecentPlayers?.Add(recentPlayerData);
@@ -310,14 +316,20 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 {
                     continue;
                 }
+
+                if (recentMatch.Players.Exists(x => x.PlayerId.Equals(playerObj.Subject)))
+                {
+                    continue;
+                }
                 
                 var nP = new RecentMatch.Player()
                 {
                     PlayerId = playerObj.Subject,
                     CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
                     PlayerAgentId = playerObj.CharacterID,
+                    PlayerRealName = data._viewModel.PlayerRealName,
                     PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.PlayerAgentName.Split('#')[0],
-                    PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerTag : data._viewModel.PlayerAgentName.Split('#')[^1],
+                    PlayerTag = !data._viewModel.UsingAssistProfile ? $"{data._viewModel.PlayerTag}" : data._viewModel.PlayerAgentName.Split('#')[^1],
                     TeamId = matchDetails.AllyTeam.TeamID,
                     Statistics = null
                 };

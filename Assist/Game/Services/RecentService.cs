@@ -25,6 +25,9 @@ public class RecentService
     
     public static RecentService Current;
     public static string RecentFolderPath = Path.Combine(AssistSettings.SettingsFolderPath, "Game", "Modules", "MatchTrack");
+
+    public static string RecentMatchesFolderPath =
+        Path.Combine(RecentFolderPath, AssistApplication.Current.CurrentUser.UserData.sub);
     public static string RecentMatchesPath = Path.Combine(RecentFolderPath, AssistApplication.Current.CurrentUser.UserData.sub, "RecentMatches.json");
     public static string RecentPlayersPath = Path.Combine(RecentFolderPath, "RecentPlayers.json");
     
@@ -35,6 +38,7 @@ public class RecentService
 
         Current = this;
         Directory.CreateDirectory(RecentFolderPath);
+        Directory.CreateDirectory(RecentMatchesFolderPath);
         LoadRecentLists();
     }
     
@@ -42,7 +46,6 @@ public class RecentService
     {
         try
         {
-            
             File.WriteAllText(RecentMatchesPath,
                 JsonSerializer.Serialize(Current.RecentMatches, new JsonSerializerOptions() { WriteIndented = true }),
                 Encoding.UTF8);
@@ -53,6 +56,7 @@ public class RecentService
         catch (Exception e)
         {
             Log.Error("Failed to Save Recent Matches & Player Settings");
+            Directory.CreateDirectory(RecentMatchesFolderPath);
         }
     }
 
@@ -296,6 +300,11 @@ public class RecentService
             recentPlayerData.LastSeenMatchId = matchDetails.MatchInformation.MatchId;
             recentPlayerData.Matches.Add(matchDetails.MatchInformation.MatchId);
 
+            if (!recentPlayerData.TimesSeen.TryAdd(matchDetails.MatchInformation.MatchId, recentPlayerData.LastSeen))
+            {
+                recentPlayerData.TimesSeen[matchDetails.MatchInformation.MatchId] = recentPlayerData.LastSeen;
+            }
+            
             int index = RecentPlayers.FindIndex(ply => ply.PlayerId.Equals(recentPlayerData.PlayerId));
             if (index < 0)
                 RecentPlayers.Add(recentPlayerData);
@@ -330,7 +339,7 @@ public class RecentService
                 CompetitiveTier = oldP is null ? (int)playerObj.CompetitiveTier : oldP.CompetitiveTier,
                 PlayerAgentId = playerObj.CharacterId,
                 PlayerName = playerObj.GameName,
-                PlayerTag = playerObj.TagLine.Replace("#",""),
+                PlayerTag = playerObj.TagLine,
                 TeamId = playerObj.TeamId,
                 Statistics = new RecentMatch.Player.Stats()
                 {

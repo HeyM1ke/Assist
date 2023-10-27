@@ -41,7 +41,7 @@ namespace Assist.Game.Controls.Navigation
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));
             NavigationButtons[1].IsSelected = true;
 
-            if (AssistApplication.CurrentApplication.Args.Contains("--leaguesenabled"))
+            if (AssistApplication.Current.AssistUser.Authentication.Roles.Contains("LeagueTester"))
             {
                 var lBtn = this.FindControl<NavButton>("LeaguesBtn");
                 lBtn.IsEnabled = true;

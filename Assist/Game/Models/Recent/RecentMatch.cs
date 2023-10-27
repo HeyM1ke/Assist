@@ -29,6 +29,7 @@ public class RecentMatch
         public string PlayerId { get; set; } = String.Empty;
         public string PlayerName { get; set; } = "Player";
         public string PlayerTag { get; set; } = "NA1";
+        public string PlayerRealName { get; set; } = string.Empty;
         public string PlayerAgentId { get; set; } = "0";
         public Stats? Statistics { get; set; } = new ();
         public int CompetitiveTier { get; set; } = 0;

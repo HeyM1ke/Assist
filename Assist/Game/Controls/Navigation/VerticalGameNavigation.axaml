@@ -66,6 +66,7 @@
 						                      Click="LeaguesBtn_OnClick"
 						                      IsCompressed="True"
 						                      IsFullSize="False"
+						                      IsVisible="False"
 						                      IsSpecial="True"
 						                      Icon="/Resources/Icons/L_Icon.png"></navigation:NavButton>
 						
