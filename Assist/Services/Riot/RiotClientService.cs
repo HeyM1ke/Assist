@@ -26,6 +26,7 @@ namespace Assist.Services.Riot
         public static bool ClientOpened = false;
         private BackgroundWorker _worker;
         public RiotApplicationData RiotApplicationData = new RiotApplicationData();
+        public string AdditionalRiotClientArguments = string.Empty;
 
         private const string bgVidUrl = "https://cdn.rumblemike.com/Static/live/assistBackVideo_dev.mp4";
         public RiotClientService()
@@ -50,7 +51,16 @@ namespace Assist.Services.Riot
             await CreateAuthenticationFile();
 
             Log.Information("Attempting to Launch Client");
-            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline.ToLower()} --insecure")
+
+            string argumentString =
+                $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline.ToLower()} --insecure";
+
+            if (!string.IsNullOrEmpty(AdditionalRiotClientArguments))
+            {
+                argumentString += $" {AdditionalRiotClientArguments}";
+            }
+            
+            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, argumentString)
             {
                 UseShellExecute = true
             };
@@ -64,9 +74,12 @@ namespace Assist.Services.Riot
 
         public async Task CreateAuthenticationFile()
         {
-            string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
-            string pSettingsPathBackup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
-            string pClientSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config", "RiotClientSettings.yaml");
+            string baseRiotClientFolder =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client");
+            
+            string pSettingsPath = Path.Combine(baseRiotClientFolder, "Data", "RiotGamesPrivateSettings.yaml");
+            string pSettingsPathBackup = Path.Combine(baseRiotClientFolder, "Data", "RiotClientPrivateSettings.yaml");
+            string pClientSettingsPath = Path.Combine(baseRiotClientFolder, "Config", "RiotClientSettings.yaml");
 
             string riotClient = await AssistSettings.Current.FindRiotClient();
             var fileInfo = FileVersionInfo.GetVersionInfo(riotClient);
@@ -88,6 +101,27 @@ namespace Assist.Services.Riot
                     cSettings.CreateGameModelWRegion().Save(writer, false);
                 }
 
+                if (Path.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta")))
+                {
+                    var baseBetaPass =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta");
+                    var pBetaSettingsPath = Path.Combine(baseBetaPass, "Data", "RiotGamesPrivateSettings.yaml");
+                    var pBetaSettingsPathBackup = Path.Combine(baseBetaPass, "Data", "RiotClientPrivateSettings.yaml");
+                    var pBetaClientSettingsPath = Path.Combine(baseBetaPass, "Config", "RiotClientSettings.yaml");
+                    
+                    
+                    using (TextWriter writer = File.CreateText(pBetaClientSettingsPath))
+                    {
+                        cSettings.CreateSettingsModel().Save(writer, false);
+                    }
+
+                    // Create RiotClientPrivateSettings.yaml
+                    using (TextWriter writer = File.CreateText(pBetaSettingsPath))
+                    {
+                        cSettings.CreateGameModelWRegion().Save(writer, false);
+                    }
+                    
+                }
+                
             }
             else
             {
