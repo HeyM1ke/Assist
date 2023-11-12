@@ -60,6 +60,18 @@
                             <CheckBox HorizontalAlignment="Right"
                                       x:Name="GameModeEnable"></CheckBox>
 						</Grid>
+					
+					<Grid>
+						<TextBlock Text="Additional Client Args (EXPERIMENTAL)"
+						           FontFamily="{StaticResource WorkSans}"
+						           VerticalAlignment="Center"
+						           FontWeight="Normal"
+						           FontSize="16"
+						           HorizontalAlignment="Left"></TextBlock>
+						<TextBox HorizontalAlignment="Right"
+						         MinWidth="130"
+						          x:Name="RiotClientAdditionalArgs"></TextBox>
+					</Grid>
 
                     
                     

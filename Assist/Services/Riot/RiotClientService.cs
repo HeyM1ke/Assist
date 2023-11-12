@@ -55,9 +55,9 @@ namespace Assist.Services.Riot
             string argumentString =
                 $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline.ToLower()} --insecure";
 
-            if (!string.IsNullOrEmpty(AdditionalRiotClientArguments))
+            if (!string.IsNullOrEmpty(AssistSettings.Current.AdditionalArgs))
             {
-                argumentString += $" {AdditionalRiotClientArguments}";
+                argumentString += $" {AssistSettings.Current.AdditionalArgs}";
             }
             
             ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, argumentString)

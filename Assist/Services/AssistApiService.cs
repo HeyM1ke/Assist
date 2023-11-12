@@ -38,7 +38,7 @@ namespace Assist.Services
             var request = new RestRequest($"/valorant/skins/{uuid}");
             var response = await _client.ExecuteAsync<WeaponSkin>(request);
 
-            return response.Data!;
+            return response.Data;
         }
 
         public async Task<string> GetWeaponSkinPriceAsync(string uuid)

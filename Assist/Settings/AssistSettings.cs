@@ -32,7 +32,7 @@ namespace Assist.Settings
         public const int maxAccountCount = 5;
         public static AssistSettings Current { get; set; } = new AssistSettings();
         public string RiotClientInstallPath { get; set; }
-
+        
         private bool _languageSelected = false;
 
         public bool LanguageSelected
@@ -164,6 +164,8 @@ namespace Assist.Settings
             get => _gameModeEnabled;
             set => this.SetProperty(ref _gameModeEnabled, value);
         }
+
+        internal string AdditionalArgs = string.Empty;
         
         private bool _showcaseAssistDetails = true;
 

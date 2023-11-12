@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Controls.Store;
+using Assist.Objects.AssistApi.Valorant.Skin;
 using Assist.ViewModels;
 using ReactiveUI;
 using ValNet.Core.Store;
@@ -230,6 +231,16 @@ namespace Assist.Views.Store.ViewModels
             {
                 var OfferId = store.SkinsPanelLayout.SingleItemOffers[i];
                 var sData = await AssistApplication.ApiService.GetWeaponSkinAsync(OfferId);
+
+                if (sData is null)
+                {
+                    sData = new WeaponSkin()
+                    {
+                        DisplayName = "Error",
+                        DisplayIcon = ""
+                    };
+                }
+                
                 var price = await AssistApplication.ApiService.GetWeaponSkinPriceAsync(OfferId);
                 var skinOfferControl = new SkinStoreOfferV2()
                 {
