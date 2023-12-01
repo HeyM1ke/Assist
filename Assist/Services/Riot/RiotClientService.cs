@@ -98,9 +98,9 @@ namespace Assist.Services.Riot
                 // Create RiotClientPrivateSettings.yaml
                 using (TextWriter writer = File.CreateText(pSettingsPath))
                 {
-                    cSettings.CreateGameModelWRegion().Save(writer, false);
+                    cSettings.CreateGameModelWRegionMicro().Save(writer, false);
                 }
-
+                
                 if (Path.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta")))
                 {
                     var baseBetaPass =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta");
@@ -117,7 +117,7 @@ namespace Assist.Services.Riot
                     // Create RiotClientPrivateSettings.yaml
                     using (TextWriter writer = File.CreateText(pBetaSettingsPath))
                     {
-                        cSettings.CreateGameModelWRegion().Save(writer, false);
+                        cSettings.CreateGameModelWRegionMicro().Save(writer, false);
                     }
                     
                 }
@@ -132,14 +132,13 @@ namespace Assist.Services.Riot
                     cSettings.CreateGameModel().Save(writer, false);
                 }
 
-
                 using (TextWriter writer = File.CreateText(pSettingsPathBackup))
                 {
                     cSettings.CreateClientPrivateModel().Save(writer, false);
                 }
             }
         }
-
+        
         private void StartWorker()
         {
             Log.Information("Background Worker Started");
@@ -200,11 +199,25 @@ namespace Assist.Services.Riot
         private async void OnValorantGameLaunched()
         {
             Log.Information("Valorant Launched Taking Backup");
+
+            var DataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Riot Games", "Riot Client", "Data");
+            var ConfigFolderPath =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games",
+                    "Riot Client", "Config");
+
+            if (Path.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta")))
+            {
+                var baseBetaPass =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta");
+                DataFolderPath = Path.Combine(baseBetaPass, "Data");
+                ConfigFolderPath = Path.Combine(baseBetaPass, "Config");  
+            }
+            
             BackupsSettings.SaveBackup(new BackupModel()
             {
                 PlayerUuid = AssistApplication.Current.CurrentUser.UserData.sub,
-                DataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data"),
-                ConfigFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config"),
+                DataFolderPath = DataFolderPath,
+                ConfigFolderPath = ConfigFolderPath
             });
 
 

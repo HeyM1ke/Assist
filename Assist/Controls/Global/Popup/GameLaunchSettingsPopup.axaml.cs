@@ -33,6 +33,7 @@ namespace Assist.Controls.Global.Popup
             gameModeEnabled = this.FindControl<CheckBox>("GameModeEnable");
             riotClientAdditionalArgs = this.FindControl<TextBox>("RiotClientAdditionalArgs");
             gameModeEnabled.IsChecked = AssistSettings.Current.GameModeEnabled;
+            riotClientAdditionalArgs.Text = AssistSettings.Current.AdditionalArgs;
         }
     }
 }
