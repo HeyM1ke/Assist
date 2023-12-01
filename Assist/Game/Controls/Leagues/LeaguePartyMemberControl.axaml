@@ -27,7 +27,7 @@
                  </ItemsControl>
                  <StackPanel Spacing="8"
                              Margin="5"
-                             VerticalAlignment="Top"
+                             VerticalAlignment="Center"
                              HorizontalAlignment="Center">
                      <Panel> 
                          <Ellipse Fill="#232323"
@@ -36,14 +36,15 @@
                          </Ellipse>
                      
                          <asyncImageLoader:AdvancedImage CornerRadius="999"
-                                                         Width="82"
-                                                         Height="82"
+                                                         Width="95"
+                                                         Height="95"
+                                                         RenderOptions.BitmapInterpolationMode="HighQuality"
                                                          Source="{Binding PlayerImage}"/>
                      </Panel>
                      <TextBlock Text="{Binding PlayerName}"
                                 FontFamily="{StaticResource WorkSans}"
                                 FontWeight="Regular"
-                                FontSize="14"
+                                FontSize="15"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"></TextBlock>
                      
@@ -58,7 +59,7 @@
                                         Text="{Binding PlayerRanking}"
                                         FontFamily="{StaticResource Inter}"
                                         FontWeight="SemiBold"
-                                        FontSize="10"
+                                        FontSize="12"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>
                          </Grid>

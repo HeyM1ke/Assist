@@ -165,7 +165,13 @@ namespace Assist.Settings
             set => this.SetProperty(ref _gameModeEnabled, value);
         }
 
-        internal string AdditionalArgs = string.Empty;
+        private string _additionalArgs = string.Empty;
+
+        public string AdditionalArgs
+        {
+            get => _additionalArgs;
+            set => this.SetProperty(ref _additionalArgs, value);
+        }
         
         private bool _showcaseAssistDetails = true;
 

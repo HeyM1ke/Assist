@@ -468,5 +468,163 @@ return false;
             Log.Information("No Profiles were able to be logged into, Going to Auth View");
             MainWindowContentController.Change(new AuthenticationView());
         }
+        
+        
+        public async Task ExperimentalAuthWBackupDetection()
+        {
+            // Checks there is a Default Profile Profile
+            if (!string.IsNullOrEmpty(AssistSettings.Current.DefaultAccount))
+            {
+                Log.Information("Default Profile Found, using attempting Default.");
+
+                var p = AssistSettings.Current.Profiles.Find(
+                    x => x.ProfileUuid == AssistSettings.Current.DefaultAccount);
+
+                if (p != null)
+                {
+                    Message = $"Logging into Default: {p.Gamename}";
+
+
+                    var isLastLoggedIn = await BackupsSettings.IsLastLoggedIn(p.ProfileUuid);
+                    var backupExcists = await BackupsSettings.CheckIfBackupExistsForId(p.ProfileUuid);
+
+                    if (isLastLoggedIn)
+                    {
+                        
+                    }
+                    
+                    // Backup Auth
+                    if (backupExcists)
+                    {
+                        // This is ran if the folder is found.
+                        ProfileSettings backupSettings = null;
+                        try
+                        {
+                            // Data is read
+                            var data = await BackupsSettings.ReadBackupFromId(p.ProfileUuid);
+
+                            if (data != null)
+                            {
+                                backupSettings = data;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error(e.Message);
+                        }
+
+                        // Attempt to Authenticate with BackupSettings
+                        if (backupSettings != null)
+                        {
+                            Log.Information("Logging in with BackupData");
+                            try
+                            {
+                                await AuthProfile(backupSettings);
+                                return;
+                            }
+                            catch (ValNetException ex)
+                            {
+                                Message = $"Backup is expired.";
+                            }
+                        }
+                    }
+
+                    // Cookie Auth
+                    try
+                    {
+                        Log.Information("Logging in with Cookie AUth");
+                        await AuthProfile(p);
+                        return;
+                    }
+                    catch (Exception ex2)
+                    {
+                        p.isExpired = true; // Set the Profile to expired.
+
+                        if (p.isExpired)
+                            Log.Fatal("Profile is Expired:" + p.Gamename);
+
+                        Message = $"{p.Gamename} is expired.";
+                    }
+                }
+                else
+                {
+                    AssistSettings.Current.DefaultAccount = "";
+                }
+            }
+
+            // Go through Each Profile
+            for (int i = 0; i < AssistSettings.Current.Profiles.Count; i++)
+            {
+                var p = AssistSettings.Current.Profiles[i];
+                Message = $"Logging into: {p.Gamename}";
+                if (!p.isExpired)
+                {
+
+                    // Backup Auth
+                    if (await BackupsSettings.CheckIfBackupExistsForId(p.ProfileUuid))
+                    {
+                        // This is ran if the folder is found.
+                        ProfileSettings backupSettings = null;
+                        try
+                        {
+                            // Data is read
+                            var data = await BackupsSettings.ReadBackupFromId(p.ProfileUuid);
+
+                            if (data != null)
+                            {
+                                backupSettings = data;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error(e.Message);
+                        }
+
+                        // Attempt to Authenticate with BackupSettings
+                        if (backupSettings != null)
+                        {
+                            Log.Information("Logging in with BackupData");
+                            try
+                            {
+                                await AuthProfile(backupSettings);
+                                return;
+                            }
+                            catch (ValNetException ex)
+                            {
+                                Message = $"Backup is expired.";
+                            }
+                        }
+                    }
+
+                    // Cookie Auth
+                    try
+                    {
+                        Log.Information("Logging in with Cookie data");
+                        await AuthProfile(p);
+                        return;
+                    }
+                    catch (Exception ex2)
+                    {
+                        p.isExpired = true; // Set the Profile to expired.
+
+                        if (p.isExpired)
+                            Log.Fatal("Profile is Expired:" + p.Gamename);
+
+                        Message = $"{p.Gamename} is expired.";
+
+                        if (ex2 is RequestException e)
+                        {
+                            Log.Error("Status Code: " + e.StatusCode);
+                            // Add Auth Retry on Status Code 0
+                            Log.Error("Content: " + e.Content);
+                        }
+                    }
+                }
+            }
+
+            // After Everything, if no profiles or users are logged into. Send to Auth Page.
+            Log.Information("No Profiles were able to be logged into, Going to Auth View");
+            MainWindowContentController.Change(new AuthenticationView());
+        }
     }
 }

@@ -647,11 +647,14 @@ public class MatchPageViewModel : ViewModelBase
         if (secondsRemaining == 0)
         {
            Log.Information("Timer Hit 0, Do Something.");
+            
            Dispatcher.UIThread.InvokeAsync(() =>
            {
                bundleTimer.Stop();
            });
-           StopTimer();
+           bundleTimer.Stop();
+           bundleTimer.Tick -= TimerTick;
+           
         }
         else
         {

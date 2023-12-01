@@ -56,6 +56,8 @@ public class MatchService
     {
         if (_currentlyBinded)
             return;
+
+        UnbindToEvents();
         
         AssistApplication.Current.GameServerConnection.MATCH_MatchUpdateMessageReceived += GameServerConnectionOnMATCH_MatchUpdateMessageReceived;
         AssistApplication.Current.GameServerConnection.MATCH_CustomGameSettingsReceived += GameServerConnectionOnMATCH_CustomGameSettingsReceived;

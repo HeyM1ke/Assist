@@ -46,5 +46,6 @@ namespace Assist.Objects.RiotClient
         public bool persistent;
         public bool secureOnly;
         public string value;
+        public long? expiryTime;
     }
 }
