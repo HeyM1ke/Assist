@@ -111,9 +111,9 @@ namespace Assist.Settings
                 throw new Exception("Backup has been used.");
             }
 
-
-
-            var filePath = Directory.GetFiles(settingsFile.BackupModelSettings.DataFolderPath).Single(file => file.Contains("RiotGamesPrivateSettings"));
+            CheckForTemp(settingsFile.BackupModelSettings.DataFolderPath);
+            
+            var filePath = Directory.GetFiles(settingsFile.BackupModelSettings.DataFolderPath).Single(file => file.Equals("RiotGamesPrivateSettings"));
             var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .Build();
@@ -140,6 +140,18 @@ namespace Assist.Settings
             File.WriteAllText(Path.Combine(f, "Settings.json"), JsonSerializer.Serialize(settingsFile)); // Apply change to file.
 
             return pSettings;
+        }
+
+        private static void CheckForTemp(string dataLocation)
+        {
+            var files = Directory.GetFiles(dataLocation);
+            foreach (var file in files)
+            {
+                if (file.Contains("temp", StringComparison.OrdinalIgnoreCase))
+                {
+                    File.Delete(file);
+                }
+            }
         }
 
         public static void LoadBackupConfigFromId(string id)
@@ -186,6 +198,42 @@ namespace Assist.Settings
             }
 
             return false;
+        }
+
+
+        /// <summary>
+        /// Returns True if this user was the last to login to the client
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<bool> IsLastLoggedIn(string id)
+        {
+            // Checks the Riot Client Data Folder. For recent login.
+
+            string baseRiotClientFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client","Data", "RiotGamesPrivateSettings.yaml");
+            
+            if (Path.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta")))
+            {
+                baseRiotClientFolder =
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "Riot Games", "Beta", "Data", "RiotGamesPrivateSettings.yaml");
+                
+                
+                
+            }
+
+            var data = File.ReadAllText(baseRiotClientFolder);
+
+            if (data.Contains($"value: \"{id}\"", StringComparison.OrdinalIgnoreCase))
+            {
+                Log.Information($"Last Riot Client Login was ID: {id}");
+                return true;
+            }
+
+            return false;
+
+
+
         }
     }
 
