@@ -29,6 +29,8 @@ namespace Assist.Views.Authentication.Sections.ViewModels
         // Log into account to verify if it works, Show Username to Confirm if they want to Add the Account
         // Delete Data in the Config
         private static readonly string defaultConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data");
+        private static readonly string defaultBetaConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta", "Data");
+        private static readonly string defaultBetaConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta", "Data", "RiotGamesPrivateSettings.yaml");
         private static readonly string defaultConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
         private Process _riotClientProcess;
         private FileSystemWatcher _authFileWatcher;
@@ -58,11 +60,13 @@ namespace Assist.Views.Authentication.Sections.ViewModels
             }
 
             string clientLocation = await AssistSettings.Current.FindRiotClient();
+            
             if (clientLocation == null)
-            {
                 Log.Error("DID NOT FIND CLIENT");
-            }
-            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline}")
+
+            
+            
+            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline}")
             {
                 UseShellExecute = true
             };
@@ -90,6 +94,26 @@ namespace Assist.Views.Authentication.Sections.ViewModels
 
         public async Task StartWatcher()
         {
+            if (Path.Exists(defaultBetaConfigLocation))
+            {
+                _authFileWatcher = new FileSystemWatcher(defaultBetaConfigLocation, "RiotGamesPrivateSettings.yaml");
+
+                _authFileWatcher.NotifyFilter = NotifyFilters.Attributes
+                                                | NotifyFilters.CreationTime
+                                                | NotifyFilters.DirectoryName
+                                                | NotifyFilters.FileName
+                                                | NotifyFilters.LastAccess
+                                                | NotifyFilters.LastWrite
+                                                | NotifyFilters.Security
+                                                | NotifyFilters.Size;
+
+                _authFileWatcher.Changed += AuthFileWatcherOnChanged;
+
+                _authFileWatcher.EnableRaisingEvents = true;
+                return;
+            }
+            
+            
             _authFileWatcher = new FileSystemWatcher(defaultConfigLocation, "RiotGamesPrivateSettings.yaml");
 
             _authFileWatcher.NotifyFilter = NotifyFilters.Attributes
