@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
@@ -270,6 +271,47 @@ namespace Assist.Services.Riot
             Log.Information("Completed download of BG Video");
         }
 
+        internal async Task<string> FindRiotClient()
+        {
+            if (!OperatingSystem.IsWindows())
+                return null;
+
+            List<string> clients = new List<string>();
+
+            string riotInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "Riot Games/RiotClientInstalls.json"); ;
+
+            if (!File.Exists(riotInstallPath)) return null;
+
+            JsonDocument config;
+            try
+            {
+                config = JsonDocument.Parse(File.ReadAllText(riotInstallPath));
+            }
+            catch (Exception e)
+            {
+                Log.Error("Riot Client Check: Could not properly parse json file");
+                return null;
+            }
+
+
+
+            
+            if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive)) { clients.Add(rcLive.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta)) { clients.Add(rcBeta.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_esports", out JsonElement rcEsports)) { clients.Add(rcEsports.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault)) { clients.Add(rcDefault.GetString()); }
+
+            foreach (var clientPath in clients)
+            {
+                if (File.Exists(clientPath))
+                    return clientPath;
+            }
+
+            return null;
+        }
+
+        
         private static async Task ReplaceValorantBackground()
         {
             var filePath = Path.Combine(AssistSettings.ResourcesFolderPath, "assistBg.mp4");

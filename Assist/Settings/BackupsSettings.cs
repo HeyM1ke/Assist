@@ -81,6 +81,9 @@ namespace Assist.Settings
 
         public static async Task<ProfileSettings> ReadBackupFromId(string id)
         {
+          
+            
+            
             string[] folders = System.IO.Directory.GetDirectories(BackupsFolderPath, "*", System.IO.SearchOption.TopDirectoryOnly);
             
             if (folders is null || folders.Length == 0)
@@ -113,7 +116,7 @@ namespace Assist.Settings
 
             CheckForTemp(settingsFile.BackupModelSettings.DataFolderPath);
             
-            var filePath = Directory.GetFiles(settingsFile.BackupModelSettings.DataFolderPath).Single(file => file.Equals("RiotGamesPrivateSettings"));
+            var filePath = Directory.GetFiles(settingsFile.BackupModelSettings.DataFolderPath).Single(file => file.Contains("RiotGamesPrivateSettings"));
             var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .Build();
@@ -131,9 +134,10 @@ namespace Assist.Settings
             Log.Information("Backup is read and is good to go");
             var pSettings = new ProfileSettings();
             pSettings.ConvertCookiesTo64(dic);
+            
+            
 
-
-            settingsFile.IsUsed = true;
+            settingsFile.IsUsed = false; // Testing
 
 
 

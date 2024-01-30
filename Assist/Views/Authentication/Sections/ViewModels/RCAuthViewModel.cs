@@ -213,6 +213,11 @@ namespace Assist.Views.Authentication.Sections.ViewModels
             var cook = settings.RiotLogin.Persist.Session.Cookies;
             foreach (var cookie in cook)
             {
+                if (!cookie.name.Equals("ssid", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+                
                 cookies.Add(cookie.name, new Cookie()
                 {
                     Name = cookie.name,

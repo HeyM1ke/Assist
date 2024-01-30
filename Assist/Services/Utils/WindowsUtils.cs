@@ -22,6 +22,9 @@ public class WindowsUtils
     [DllImport("kernel32")]
     public static extern bool AllocConsole();
     
+    [DllImport("kernel32")]
+    public static extern bool AttachConsole(int dwProcessId);
+    
     private const int WS_EX_APPWINDOW = 0x40000;
     private const int WS_EX_TOOLWINDOW = 0x0080;
     private const int GWL_EXSTYLE = -0x14;
