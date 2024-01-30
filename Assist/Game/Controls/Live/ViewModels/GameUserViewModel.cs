@@ -570,9 +570,9 @@ namespace Assist.Game.Controls.Live.ViewModels
                 }
             }
 
-            if (!ReputationChecked) SetupReputation();
+            //if (!ReputationChecked) SetupReputation();
 
-            if (!ProfileChecked) SetupProfile();
+            //if (!ProfileChecked) SetupProfile();
 
         }
 

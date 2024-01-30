@@ -178,7 +178,7 @@
                                     </Panel>
                                 </StackPanel> </TabItem>
                             <TabItem Classes="Assist"
-                                     IsVisible="True"
+                                     IsVisible="False"
                                      Header="{x:Static p:Resources.Settings_AssistAccount}">
                                 <Grid Margin="-10,5">
                                     <Grid VerticalAlignment="Center"

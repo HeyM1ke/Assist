@@ -65,7 +65,7 @@ namespace Assist.Game.Views.Initial.ViewModels
 
             Message = "Logging into Assist";
             // Authenticate User with Code
-            try
+            /*try
             {
                 if (AssistApplication.Current.AssistUser.Account.AccountInfo is null)
                 {
@@ -82,7 +82,7 @@ namespace Assist.Game.Views.Initial.ViewModels
                 Log.Fatal("Opening Auth View");
                 AssistApplication.Current.OpenAssistAuthenticationView();
                 return;
-            }
+            }*/
 
             if (GameSettings.Current.DiscordPresenceEnabled)
             {
@@ -90,7 +90,7 @@ namespace Assist.Game.Views.Initial.ViewModels
             }
             
             //Connect to Assist Game Server.
-            try
+            /*try
             {
                 Message = "Connecting to Assist";
                 Log.Information("Attempting To Connect to Game Server");
@@ -100,7 +100,7 @@ namespace Assist.Game.Views.Initial.ViewModels
             {
                 Log.Fatal("Failed to Connect to Game Server");
                 return;
-            }
+            }*/
             new LobbyService();
             AssistApplication.Current.OpenGameView();
         }

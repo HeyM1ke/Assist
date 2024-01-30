@@ -95,7 +95,8 @@
 					</Style>
 				</StackPanel.Styles>
 				<assist:UserPreview Height="42"
-				                    Width="42"></assist:UserPreview>
+				                    Width="42"
+				                    IsVisible="False"></assist:UserPreview>
 				
 				<StackPanel Orientation="Horizontal"
 				            HorizontalAlignment="Center"

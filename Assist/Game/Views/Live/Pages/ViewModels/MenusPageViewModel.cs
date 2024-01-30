@@ -99,7 +99,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 return;
             }
             
-            EndorseEnabled = true;
+            //EndorseEnabled = true;
         }
         
         public async Task SetupWithLocalPresence(ChatV4PresenceObj.Presence obj = null)
@@ -121,7 +121,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 }
                 else
                 {
-                    var alreadyHere = LiveViewViewModel.ReputationUserV2s.ContainsKey(obj.puuid);
+                    /*var alreadyHere = LiveViewViewModel.ReputationUserV2s.ContainsKey(obj.puuid);
                     if (!alreadyHere)
                     {
                         await LiveViewViewModel.GetUserReputations(new List<string>() { obj.puuid });
@@ -130,7 +130,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     if (!profileAlreadyHere)
                     {
                         await LiveViewViewModel.GetUserProfile(obj.puuid);
-                    }
+                    }*/
                     
                     if (CurrentUsers.Count == 0)
                     {
@@ -148,7 +148,6 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                                     Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
                                     PlayerReady = true,
                                     BadgeObjects = t,
-                                    PlayerReputationLevel = SetupReputation(obj.puuid),
                                     PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
                                 }
                             );
@@ -162,7 +161,6 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                                     PlayerName = $"{obj.game_name}",
                                     Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
                                     PlayerReady = true,
-                                    PlayerReputationLevel = SetupReputation(obj.puuid),
                                     PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
                                 }
                             );    
@@ -202,7 +200,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 }
                 else
                 {
-                    var alreadyHere = LiveViewViewModel.ReputationUserV2s.ContainsKey(obj.data.presences[0].puuid);
+                    /*var alreadyHere = LiveViewViewModel.ReputationUserV2s.ContainsKey(obj.data.presences[0].puuid);
                     if (!alreadyHere)
                     {
                         await LiveViewViewModel.GetUserReputations(new List<string>() { obj.data.presences[0].puuid });
@@ -212,7 +210,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                     if (!profileAlreadyHere)
                     {
                         await LiveViewViewModel.GetUserProfile(obj.data.presences[0].puuid);
-                    }
+                    }*/
                     
                     
                     if (CurrentUsers.Count == 0)
@@ -229,7 +227,6 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                                     Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
                                     PlayerReady = true,
                                     BadgeObjects = t,
-                                    PlayerReputationLevel = SetupReputation(obj.data.presences[0].puuid),
                                     PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
                                 }
                             );
@@ -243,7 +240,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                                     PlayerName = $"{obj.data.presences[0].game_name}",
                                     Playercard = $"https://content.assistapp.dev/playercards/{data.playerCardId}_LargeArt.png",
                                     PlayerReady = true,
-                                    PlayerReputationLevel = SetupReputation(obj.data.presences[0].puuid),
+                                    //PlayerReputationLevel = SetupReputation(obj.data.presences[0].puuid),
                                     PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
                                 }
                             );    
@@ -325,7 +322,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
                     var allIds = partyData.Members.Select(x => x.Subject).ToList();
 
-                    await LiveViewViewModel.GetUserReputations(allIds);
+                   // await LiveViewViewModel.GetUserReputations(allIds);
 
                     for (int i = 0; i < partyData.Members.Count; i++)
                     {
@@ -358,7 +355,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                                             $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png",
                                         PlayerReady = true,
                                         BadgeObjects = t,
-                                        PlayerReputationLevel = SetupReputation(member.Subject),
+                                        //PlayerReputationLevel = SetupReputation(member.Subject),
                                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{p.competitiveTier}.png"
                                     });
                                 }
@@ -370,7 +367,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                                         PlayerId = member.Subject,
                                         Playercard = $"https://content.assistapp.dev/playercards/{p.playerCardId}_LargeArt.png",
                                         PlayerReady = true,
-                                        PlayerReputationLevel = SetupReputation(member.Subject),
+                                        //PlayerReputationLevel = SetupReputation(member.Subject),
                                         PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{p.competitiveTier}.png"
                                     });
                                 }
