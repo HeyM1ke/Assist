@@ -57,11 +57,11 @@ namespace Assist.Game.Views.Initial.ViewModels
             new RecentService();
             
             // Introduce Authentication
-            if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
+            /*if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
             {
                 AssistApplication.Current.OpenAssistAuthenticationView();
                 return;
-            }
+            }*/
 
             Message = "Logging into Assist";
             // Authenticate User with Code

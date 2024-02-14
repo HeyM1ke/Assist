@@ -105,14 +105,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 }
             }
 
-            try
+            /*try
             {
                 await AssistApplication.Current.AssistUser.Dodge.GetGlobalDodgeList();
             }
             catch (Exception e)
             {
                 
-            }
+            }*/
 
 
             if (setupSucc == false)
