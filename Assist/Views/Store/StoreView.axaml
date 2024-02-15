@@ -19,7 +19,8 @@
         <Grid Row="1"
               IsVisible="{Binding !LoadingStore}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Spacing="5">
                 <store:MenuSelectionOption Icon="{SvgImage /Assets/Icons/RegStore_Icon.svg}"
                                            IsChecked="True"
                                            Content="{x:Static lang:Resources.Store_Store}"></store:MenuSelectionOption>
@@ -62,7 +63,7 @@
                            Width="10"
                            Height="2"
                            Opacity=".3"
-                           IsVisible="{Binding AccessoriesActive}"></Rectangle>
+                           ></Rectangle>
                 <StackPanel Orientation="Horizontal"
                             Spacing="8">
                     <Image Source="/Assets/Extras/RP_Icon.png"
@@ -79,7 +80,7 @@
                            Width="10"
                            Height="2"
                            Opacity=".3"
-                           IsVisible="{Binding NightMarketActive}"></Rectangle>
+                           ></Rectangle>
                 <StackPanel Orientation="Horizontal"
                             Spacing="8">
                     <Image Source="/Assets/Extras/KC_Icon.png"
