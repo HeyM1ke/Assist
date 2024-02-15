@@ -1,0 +1,74 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:Assist.Controls.Navigation"
+             xmlns:launcher="clr-namespace:Assist.Controls.Assist.Launcher"
+             mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="49"
+             x:Class="Assist.Controls.Infobars.Titlebar">
+    <Grid ColumnDefinitions="*, *"
+          Background="{DynamicResource AssistSecondaryBackground}"
+          PointerPressed="InputElement_OnPointerPressed">
+       <navigation:NavigationContainer></navigation:NavigationContainer>
+        
+        
+        
+        
+        <Grid Column="2" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal"
+                        Spacing="13"
+                        Margin="9,0">
+                <launcher:AccountProfileSwap Grid.Column="1"
+                                             HorizontalAlignment="Right"
+                                             Height="40"
+                                             ProfileIcon="{Binding AccountProfilePic}"
+                                             ProfileName="{Binding AccountName}"
+                                             IsVisible="{Binding AccountSwapVisible}"
+                                             SwapButtonCommand="{Binding OpenProfileSwapPageCommand}"
+                                             SwapEnabled="{Binding AccountSwapEnabled}"/>
+                
+                <Button Width="19"
+                        Height="19"
+                        Background="Transparent"
+                        Command="{Binding OpenSettingsPageCommand}"
+                        VerticalContentAlignment="Center"
+                        IsVisible="{Binding SettingsEnabled}"
+                        HorizontalContentAlignment="Center">
+                    <Button.Content>
+                        <Image Source="{SvgImage /Assets/Navigation/Settings_Icon.svg}"
+                               Width="12"
+                               Height="12"
+                        ></Image>
+                    </Button.Content>
+                </Button>
+                
+                
+                <Button Width="19"
+                        Height="19"
+                        Click="MinimizeBtn_Click"
+                        Background="Transparent">
+                    <Button.Content>
+                        <Image Source="{SvgImage /Assets/Navigation/Minimize.svg}"
+                               Width="10"
+                               
+                               Height="10"></Image>
+                    </Button.Content>
+                </Button>
+                
+                <Button Width="19"
+                        Height="19"
+                        Background="Transparent"
+                        Click="ExitBtn_Click">
+                    <Button.Content>
+                        <Image Source="{SvgImage /Assets/Navigation/Close.svg}"
+                               Width="10"
+                               
+                               Height="10"
+                        ></Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            
+        </Grid>
+    </Grid>
+</UserControl>

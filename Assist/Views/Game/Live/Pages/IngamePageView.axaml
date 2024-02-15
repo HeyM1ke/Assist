@@ -1,0 +1,133 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:live="clr-namespace:Assist.Controls.Game.Live"
+             mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="661"
+             x:Class="Assist.Views.Game.Live.Pages.IngamePageView"
+             Initialized="IngamePage_Init"
+             Unloaded="IngamePage_Unloaded">
+    <Grid ColumnDefinitions="*, 250, *">
+        
+        <ItemsControl Grid.Column="0"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding AllyTeamControls}"
+                      >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"
+                                Spacing="20"></StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            
+            <ItemsControl.Styles>
+                <Style Selector="live|LivePlayerPreviewControl">
+                    <Setter Property="Width" Value="431"/>
+                    <Setter Property="Height" Value="114"/>
+                </Style>
+            </ItemsControl.Styles>
+        </ItemsControl>
+        <Border CornerRadius="10"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Center"
+                Width="250"
+                BorderBrush="{DynamicResource AssistControlOutline}"
+                BorderThickness="1.4"
+                Margin="20,0,20,0"
+                Grid.Column="1">
+            <Grid>
+                <asyncImageLoader:AdvancedImage VerticalAlignment="Stretch"
+                                                HorizontalAlignment="Stretch"
+                                                Stretch="UniformToFill"
+                                                CornerRadius="5"
+                                                ClipToBounds="True"
+                                                Source="{Binding MapImage}">
+                    <asyncImageLoader:AdvancedImage.Effect>
+                        <BlurEffect Radius="5"></BlurEffect>
+                        
+                    </asyncImageLoader:AdvancedImage.Effect>
+                </asyncImageLoader:AdvancedImage>
+                
+                <Border VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Background="Black"
+                        Opacity=".2"
+                        ClipToBounds="True"/>
+                
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <Grid ColumnDefinitions="95,60,95">
+                        <TextBlock Text="{Binding AllyScore}"
+                                   FontWeight="Bold"
+                                   TextAlignment="Right"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="48"
+                                   Padding="0,0,10,0"
+                                   Grid.Column="0"
+                                   Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                        
+                        <asyncImageLoader:AdvancedImage Width="60"
+                                                        Height="60"
+                                                        Grid.Column="1"
+                                                        HorizontalAlignment="Center"
+                                                        RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                        Source="https://static.wikia.nocookie.net/valorant/images/9/98/Swiftplay.png"/>
+                        <TextBlock Text="{Binding EnemyScore}"
+                                   FontWeight="Bold"
+                                   Grid.Column="2"
+                                   Padding="10,0,0,0"
+                                   TextAlignment="Left"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="48"
+                                   Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                    </Grid>
+                    
+                    <TextBlock Text="{Binding QueueName}"
+                               FontWeight="Medium"
+                               TextAlignment="Center"
+                               FontSize="13"
+                               Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                    
+                    <TextBlock Text="{Binding MapName}"
+                               FontWeight="Black"
+                               TextAlignment="Center"
+                               FontSize="40"
+                               Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                    
+                    <TextBlock Text="{Binding ServerName}"
+                               FontWeight="Medium"
+                               TextAlignment="Center"
+                               FontSize="13"
+                               Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <ItemsControl Grid.Column="2"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Right"
+                      ItemsSource="{Binding EnemyTeamControls}"
+        >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"
+                                Spacing="20"
+                                ></StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            
+            <ItemsControl.Styles>
+                <Style Selector="live|LivePlayerPreviewControl">
+                    <Setter Property="Width" Value="431"/>
+                    <Setter Property="Height" Value="114"/>
+                    
+                </Style>
+            </ItemsControl.Styles>
+            
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -1,64 +1,34 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
-             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-             xmlns:global="clr-namespace:Assist.Controls.Global"
-             xmlns:rpp="clr-namespace:Assist.Controls.Global.RPP"
-             xmlns:progression="clr-namespace:Assist.Controls.Progression"
-             xmlns:p="clr-namespace:Assist.Properties"
-             mc:Ignorable="d"
-             d:DesignWidth="1125"
-             d:DesignHeight="690"
+             mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="690"
              x:Class="Assist.Views.Dashboard.DashboardView">
-
     <Grid>
-        <Grid Margin="15" ColumnDefinitions="Auto, *">
-
-            <!--Column 1 (Article / Recent Matches)-->
-            <Grid RowDefinitions="315,*">
-					<dashboard:ArticleControl
-                        
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                    </dashboard:ArticleControl>
-
-                <Grid Row="1" HorizontalAlignment="Left"
-                              VerticalAlignment="Top">
-                    <dashboard:RecentMatchesView Width="520"
-                                                 Height="197"
-                                                 Initialized="RecentMatchesView_Init"></dashboard:RecentMatchesView>
+        <ScrollViewer>
+            <Grid x:Name="MainDashboardGrid"
+                  ColumnDefinitions="*,Auto">
+                
+                <StackPanel Orientation="Vertical"
+                            Spacing="30"
+                            Grid.Column="1"
+                            VerticalAlignment="Stretch">
+                    <dashboard:GameLaunchControl Width="400"
+                                                 Height="180"
+                                                 
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Top"/>
                     
-                </Grid>
-            </Grid> 
-
-            <!--Column 2 (Missions / Rank Progression)-->
-			<Grid Column="1">
-                <StackPanel Spacing="12" VerticalAlignment="Top"
-                            HorizontalAlignment="Right">
-                    <progression:MissionsView 
-                        Width="278"
-                        Height="185"
-                        Title="{x:Static p:Resources.Progression_WeeklyMissions}"
-                        Initialized="WeeklyMissions_Init"/>
-                    <progression:MissionsView
-                        Width="278"
-                        Height="135"
-                        Title="{x:Static p:Resources.Progression_DailyMissions}"
-                        Initialized="DailyMissions_Init"
-                        />
-                    <dashboard:RankPreviewControl Width="278"
-                                                  Height="135"
-                                                  Initialized="RankPreviewControl_Init"></dashboard:RankPreviewControl>
+                    <Border HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" Background="Tan"></Border>
+                
+                   
                 </StackPanel>
+                
+                
+                
             </Grid>
-            
-            <!--ColumnSpan ALL (GameLaunchControl)-->
-            <Grid ColumnSpan="2">
-                <dashboard:GameLaunchControlV2 VerticalAlignment="Bottom"
-                                               HorizontalAlignment="Right"></dashboard:GameLaunchControlV2>
-            </Grid>
-        </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

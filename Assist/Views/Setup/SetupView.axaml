@@ -1,0 +1,39 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:setup="clr-namespace:Assist.Controls.Setup"
+             xmlns:vm="clr-namespace:Assist.ViewModels.Setup"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.Setup.SetupView">
+    
+    <Design.DataContext>
+        <vm:SetupViewModel/>
+    </Design.DataContext>
+    
+    <!--This setup is be EXTREMELY LINEAR!-->
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TransitioningContentControl HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         MinWidth="410"
+                                         MinHeight="220"
+                                         Content="{Binding CurrentContent}">
+                
+                <TransitioningContentControl.PageTransition>
+                    <CrossFade Duration="0.25" />
+                </TransitioningContentControl.PageTransition>
+            </TransitioningContentControl>
+            <Button Content="Back"
+                    Command="{Binding BackButtonCommandCommand}"
+                    IsVisible="{Binding BackButtonEnabled}"></Button>
+        </StackPanel>
+        
+        <Grid.Styles>
+            <Style Selector="setup|WelcomeSetupControl /template/ Button#NextButton">
+                <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"/>
+            </Style>
+        </Grid.Styles>
+    </Grid>
+</UserControl>

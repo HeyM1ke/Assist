@@ -60,61 +60,52 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chat.
+        ///   Looks up a localized string similar to Already have an Account?.
         /// </summary>
-        public static string Assist_Chat {
+        public static string AssistAccount_AlreadyHaveAccount {
             get {
-                return ResourceManager.GetString("Assist_Chat", resourceCulture);
+                return ResourceManager.GetString("AssistAccount_AlreadyHaveAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking For Updates....
+        ///   Looks up a localized string similar to Create an Account.
         /// </summary>
-        public static string Assist_CheckingForUpdates {
+        public static string AssistAccount_CreateAccount {
             get {
-                return ResourceManager.GetString("Assist_CheckingForUpdates", resourceCulture);
+                return ResourceManager.GetString("AssistAccount_CreateAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Message...
+        ///   Looks up a localized string similar to Don&apos;t have an Account?.
         /// </summary>
-        public static string Assist_EnterMessage {
+        public static string AssistAccount_DontHaveAccount {
             get {
-                return ResourceManager.GetString("Assist_EnterMessage", resourceCulture);
+                return ResourceManager.GetString("AssistAccount_DontHaveAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updating....
+        ///   Looks up a localized string similar to Web Login.
         /// </summary>
-        public static string Assist_Updating {
+        public static string Authentication_CloudLogin {
             get {
-                return ResourceManager.GetString("Assist_Updating", resourceCulture);
+                return ResourceManager.GetString("Authentication_CloudLogin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Users Online.
+        ///   Looks up a localized string similar to Recommended w/2FA: Web Login, Without 2FA: Username/Password.
         /// </summary>
-        public static string Assist_UsersOnline {
+        public static string Authentication_Description {
             get {
-                return ResourceManager.GetString("Assist_UsersOnline", resourceCulture);
+                return ResourceManager.GetString("Authentication_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assist.
-        /// </summary>
-        public static string AssistTitle {
-            get {
-                return ResourceManager.GetString("AssistTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LOGIN.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Authentication_LoginText {
             get {
@@ -177,15 +168,6 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login with your Riot Games Username and Password. Recommended.
-        /// </summary>
-        public static string Authentication_UsernamePasswordDescription {
-            get {
-                return ResourceManager.GetString("Authentication_UsernamePasswordDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Username/Password.
         /// </summary>
         public static string Authentication_UsernamePasswordTitle {
@@ -204,705 +186,335 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ADD PLAYER.
-        /// </summary>
-        public static string Dodge_AddPlayer {
-            get {
-                return ResourceManager.GetString("Dodge_AddPlayer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to If a player changes their name after you add them. They will continue being on the list even after a name switch..
-        /// </summary>
-        public static string Dodge_AddPlayerDesc {
-            get {
-                return ResourceManager.GetString("Dodge_AddPlayerDesc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Game Name (USERNAME#TAG):.
-        /// </summary>
-        public static string Dodge_AddTextOption {
-            get {
-                return ResourceManager.GetString("Dodge_AddTextOption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ex: AssistUser#GMEUE.
-        /// </summary>
-        public static string Dodge_AddTextOptionExample {
-            get {
-                return ResourceManager.GetString("Dodge_AddTextOptionExample", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Note (Optional):.
-        /// </summary>
-        public static string Dodge_NoteTextOption {
-            get {
-                return ResourceManager.GetString("Dodge_NoteTextOption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ex: User is Toxic.
-        /// </summary>
-        public static string Dodge_NoteTextOptionExample {
-            get {
-                return ResourceManager.GetString("Dodge_NoteTextOptionExample", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Back to party.
-        /// </summary>
-        public static string Endorse_BackToParty {
-            get {
-                return ResourceManager.GetString("Endorse_BackToParty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Calm &amp; Collected, your teammate was composed throughtout the match. .
-        /// </summary>
-        public static string Endorse_CalmCollected_Tooltip {
-            get {
-                return ResourceManager.GetString("Endorse_CalmCollected_Tooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You received a thumbs up from.
-        /// </summary>
-        public static string Endorse_NotificationText {
-            get {
-                return ResourceManager.GetString("Endorse_NotificationText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ENDORSE PLAYERS.
-        /// </summary>
-        public static string Endorse_PageTitle {
-            get {
-                return ResourceManager.GetString("Endorse_PageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shotcaller, your teammate was a leader and helped your team push through. .
-        /// </summary>
-        public static string Endorse_Shotcaller_Tooltip {
-            get {
-                return ResourceManager.GetString("Endorse_Shotcaller_Tooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PLAY.
-        /// </summary>
-        public static string GameLaunch_PlayText {
-            get {
-                return ResourceManager.GetString("GameLaunch_PlayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Selected Patchline:.
-        /// </summary>
-        public static string GameLaunch_SelectedPatchlineText {
-            get {
-                return ResourceManager.GetString("GameLaunch_SelectedPatchlineText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ALLY.
-        /// </summary>
-        public static string GameMode_AllyTeam {
-            get {
-                return ResourceManager.GetString("GameMode_AllyTeam", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dashboard.
-        /// </summary>
-        public static string GameMode_Dashboard {
-            get {
-                return ResourceManager.GetString("GameMode_Dashboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DODGE.
-        /// </summary>
-        public static string GameMode_Dodge {
-            get {
-                return ResourceManager.GetString("GameMode_Dodge", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assist Dodge Warning System. Gives you a heads up when a player you marked is on your team..
-        /// </summary>
-        public static string GameMode_Dodge_ModuleText {
-            get {
-                return ResourceManager.GetString("GameMode_Dodge_ModuleText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A List of Verified Players who are classified as players who Throw Matches, Wintrade, Betting, and more..
-        /// </summary>
-        public static string GameMode_EnableGlobalDetailText {
-            get {
-                return ResourceManager.GetString("GameMode_EnableGlobalDetailText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable Global List.
-        /// </summary>
-        public static string GameMode_EnableGlobalText {
-            get {
-                return ResourceManager.GetString("GameMode_EnableGlobalText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ENEMY.
-        /// </summary>
-        public static string GameMode_EnemyTeam {
-            get {
-                return ResourceManager.GetString("GameMode_EnemyTeam", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leagues.
-        /// </summary>
-        public static string GameMode_Leagues {
-            get {
-                return ResourceManager.GetString("GameMode_Leagues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LIVE.
-        /// </summary>
-        public static string GameMode_Live {
-            get {
-                return ResourceManager.GetString("GameMode_Live", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Lobbies.
-        /// </summary>
-        public static string GameMode_Lobbies {
-            get {
-                return ResourceManager.GetString("GameMode_Lobbies", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Modules.
-        /// </summary>
-        public static string GameMode_Modules {
-            get {
-                return ResourceManager.GetString("GameMode_Modules", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PARTY.
-        /// </summary>
-        public static string GameMode_PartyText {
-            get {
-                return ResourceManager.GetString("GameMode_PartyText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rich Presence.
-        /// </summary>
-        public static string GameMode_RichPres {
-            get {
-                return ResourceManager.GetString("GameMode_RichPres", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assist Rich Presence. Gives your Discord profile a live status of your current VALORANT Game..
-        /// </summary>
-        public static string GameMode_RichPres_ModuleText {
-            get {
-                return ResourceManager.GetString("GameMode_RichPres_ModuleText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Waiting for VALORANT Update....
-        /// </summary>
-        public static string GameMode_UpdateText {
-            get {
-                return ResourceManager.GetString("GameMode_UpdateText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
-        public static string Global_Add {
+        public static string Common_Add {
             get {
-                return ResourceManager.GetString("Global_Add", resourceCulture);
+                return ResourceManager.GetString("Common_Add", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
-        public static string Global_Apply {
+        public static string Common_Apply {
             get {
-                return ResourceManager.GetString("Global_Apply", resourceCulture);
+                return ResourceManager.GetString("Common_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist.
+        /// </summary>
+        public static string Common_Assist {
+            get {
+                return ResourceManager.GetString("Common_Assist", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
-        public static string Global_BackText {
+        public static string Common_BackText {
             get {
-                return ResourceManager.GetString("Global_BackText", resourceCulture);
+                return ResourceManager.GetString("Common_BackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string Common_Chat {
+            get {
+                return ResourceManager.GetString("Common_Chat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking For Updates....
+        /// </summary>
+        public static string Common_CheckingForUpdate {
+            get {
+                return ResourceManager.GetString("Common_CheckingForUpdate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
-        public static string Global_Clear {
+        public static string Common_Clear {
             get {
-                return ResourceManager.GetString("Global_Clear", resourceCulture);
+                return ResourceManager.GetString("Common_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string Common_ConfirmPassword {
+            get {
+                return ResourceManager.GetString("Common_ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Common_Details {
+            get {
+                return ResourceManager.GetString("Common_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Common_Email {
+            get {
+                return ResourceManager.GetString("Common_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Message...
+        /// </summary>
+        public static string Common_EnterMessage {
+            get {
+                return ResourceManager.GetString("Common_EnterMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
-        public static string Global_Error {
+        public static string Common_Error {
             get {
-                return ResourceManager.GetString("Global_Error", resourceCulture);
+                return ResourceManager.GetString("Common_Error", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Expired.
         /// </summary>
-        public static string Global_Expired {
+        public static string Common_Expired {
             get {
-                return ResourceManager.GetString("Global_Expired", resourceCulture);
+                return ResourceManager.GetString("Common_Expired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
-        public static string Global_Information {
+        public static string Common_Information {
             get {
-                return ResourceManager.GetString("Global_Information", resourceCulture);
+                return ResourceManager.GetString("Common_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launch.
+        /// </summary>
+        public static string Common_Launch {
+            get {
+                return ResourceManager.GetString("Common_Launch", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
-        public static string Global_Loading {
+        public static string Common_Loading {
             get {
-                return ResourceManager.GetString("Global_Loading", resourceCulture);
+                return ResourceManager.GetString("Common_Loading", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Member Since.
         /// </summary>
-        public static string Global_MemberSince {
+        public static string Common_MemberSince {
             get {
-                return ResourceManager.GetString("Global_MemberSince", resourceCulture);
+                return ResourceManager.GetString("Common_MemberSince", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        public static string Global_No {
+        public static string Common_No {
             get {
-                return ResourceManager.GetString("Global_No", resourceCulture);
+                return ResourceManager.GetString("Common_No", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Notification.
         /// </summary>
-        public static string Global_Notification {
+        public static string Common_Notification {
             get {
-                return ResourceManager.GetString("Global_Notification", resourceCulture);
+                return ResourceManager.GetString("Common_Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party.
+        /// </summary>
+        public static string Common_Party {
+            get {
+                return ResourceManager.GetString("Common_Party", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PARTY.
+        /// </summary>
+        public static string Common_Party_Caps {
+            get {
+                return ResourceManager.GetString("Common_Party_Caps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Common_Password {
+            get {
+                return ResourceManager.GetString("Common_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play.
+        /// </summary>
+        public static string Common_Play {
+            get {
+                return ResourceManager.GetString("Common_Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Region.
+        /// </summary>
+        public static string Common_Region {
+            get {
+                return ResourceManager.GetString("Common_Region", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Common_Register {
+            get {
+                return ResourceManager.GetString("Common_Register", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
-        public static string Global_Remove {
+        public static string Common_Remove {
             get {
-                return ResourceManager.GetString("Global_Remove", resourceCulture);
+                return ResourceManager.GetString("Common_Remove", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        public static string Global_Save {
+        public static string Common_Save {
             get {
-                return ResourceManager.GetString("Global_Save", resourceCulture);
+                return ResourceManager.GetString("Common_Save", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Send.
         /// </summary>
-        public static string Global_Send {
+        public static string Common_Send {
             get {
-                return ResourceManager.GetString("Global_Send", resourceCulture);
+                return ResourceManager.GetString("Common_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Common_Settings {
+            get {
+                return ResourceManager.GetString("Common_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign In.
+        /// </summary>
+        public static string Common_SignIn {
+            get {
+                return ResourceManager.GetString("Common_SignIn", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Support.
         /// </summary>
-        public static string Global_Support {
+        public static string Common_Support {
             get {
-                return ResourceManager.GetString("Global_Support", resourceCulture);
+                return ResourceManager.GetString("Common_Support", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Supporter.
         /// </summary>
-        public static string Global_Supporter {
+        public static string Common_Supporter {
             get {
-                return ResourceManager.GetString("Global_Supporter", resourceCulture);
+                return ResourceManager.GetString("Common_Supporter", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Supporter Pro.
         /// </summary>
-        public static string Global_SupporterPro {
+        public static string Common_SupporterPro {
             get {
-                return ResourceManager.GetString("Global_SupporterPro", resourceCulture);
+                return ResourceManager.GetString("Common_SupporterPro", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Switch.
         /// </summary>
-        public static string Global_Switch {
+        public static string Common_Switch {
             get {
-                return ResourceManager.GetString("Global_Switch", resourceCulture);
+                return ResourceManager.GetString("Common_Switch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating....
+        /// </summary>
+        public static string Common_Updating {
+            get {
+                return ResourceManager.GetString("Common_Updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        public static string Common_Username {
+            get {
+                return ResourceManager.GetString("Common_Username", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        public static string Global_Yes {
+        public static string Common_Yes {
             get {
-                return ResourceManager.GetString("Global_Yes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ANNOUNCEMENTS.
-        /// </summary>
-        public static string Leagues_Announcement {
-            get {
-                return ResourceManager.GetString("Leagues_Announcement", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to I Crashed?.
-        /// </summary>
-        public static string Leagues_ICrashed {
-            get {
-                return ResourceManager.GetString("Leagues_ICrashed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Join a League.
-        /// </summary>
-        public static string Leagues_Join {
-            get {
-                return ResourceManager.GetString("Leagues_Join", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leaderboard.
-        /// </summary>
-        public static string Leagues_Leaderboard {
-            get {
-                return ResourceManager.GetString("Leagues_Leaderboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Matches Played.
-        /// </summary>
-        public static string Leagues_LeaderboardMatchesPlayed {
-            get {
-                return ResourceManager.GetString("Leagues_LeaderboardMatchesPlayed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leave League.
-        /// </summary>
-        public static string Leagues_Leave {
-            get {
-                return ResourceManager.GetString("Leagues_Leave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ATTACKERS.
-        /// </summary>
-        public static string Leagues_Match_Attackers {
-            get {
-                return ResourceManager.GetString("Leagues_Match_Attackers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DEFENDERS.
-        /// </summary>
-        public static string Leagues_Match_Defenders {
-            get {
-                return ResourceManager.GetString("Leagues_Match_Defenders", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Starting Match.
-        /// </summary>
-        public static string Leagues_Match_Loading {
-            get {
-                return ResourceManager.GetString("Leagues_Match_Loading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MATCH IN PROGRESS.
-        /// </summary>
-        public static string Leagues_Match_MatchInProgress {
-            get {
-                return ResourceManager.GetString("Leagues_Match_MatchInProgress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ready Up!.
-        /// </summary>
-        public static string Leagues_Match_ReadyUp {
-            get {
-                return ResourceManager.GetString("Leagues_Match_ReadyUp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remaining.
-        /// </summary>
-        public static string Leagues_Match_Remaining {
-            get {
-                return ResourceManager.GetString("Leagues_Match_Remaining", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Queue.
-        /// </summary>
-        public static string Leagues_Queue {
-            get {
-                return ResourceManager.GetString("Leagues_Queue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to COMPETE.
-        /// </summary>
-        public static string Leagues_Ready {
-            get {
-                return ResourceManager.GetString("Leagues_Ready", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to READY.
-        /// </summary>
-        public static string Leagues_ReadyUp {
-            get {
-                return ResourceManager.GetString("Leagues_ReadyUp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Report an Issue.
-        /// </summary>
-        public static string Leagues_ReportAnIssue {
-            get {
-                return ResourceManager.GetString("Leagues_ReportAnIssue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select a League:.
-        /// </summary>
-        public static string Leagues_Swap {
-            get {
-                return ResourceManager.GetString("Leagues_Swap", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Waiting....
-        /// </summary>
-        public static string Leagues_Waiting {
-            get {
-                return ResourceManager.GetString("Leagues_Waiting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Back.
-        /// </summary>
-        public static string Navigation_BackText {
-            get {
-                return ResourceManager.GetString("Navigation_BackText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dashboard.
-        /// </summary>
-        public static string NavigationBar_Dashboard {
-            get {
-                return ResourceManager.GetString("NavigationBar_Dashboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Progression.
-        /// </summary>
-        public static string NavigationBar_Progression {
-            get {
-                return ResourceManager.GetString("NavigationBar_Progression", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Store.
-        /// </summary>
-        public static string NavigationBar_Store {
-            get {
-                return ResourceManager.GetString("NavigationBar_Store", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VALORANT is currently open. 
-        /// Would you like to open Game Mode?.
-        /// </summary>
-        public static string Popup_GameModeWarning {
-            get {
-                return ResourceManager.GetString("Popup_GameModeWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Earned at:.
-        /// </summary>
-        public static string Profile_Badge_EarnedAt {
-            get {
-                return ResourceManager.GetString("Profile_Badge_EarnedAt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove Featured Badge.
-        /// </summary>
-        public static string Profile_Badge_RemoveFeatured {
-            get {
-                return ResourceManager.GetString("Profile_Badge_RemoveFeatured", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set Featured Badge.
-        /// </summary>
-        public static string Profile_Badge_SetFeatured {
-            get {
-                return ResourceManager.GetString("Profile_Badge_SetFeatured", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Badges.
-        /// </summary>
-        public static string Profile_BadgeHeader {
-            get {
-                return ResourceManager.GetString("Profile_BadgeHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leagues.
-        /// </summary>
-        public static string Profile_LeagueHeader {
-            get {
-                return ResourceManager.GetString("Profile_LeagueHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LOSS.
-        /// </summary>
-        public static string Profile_LossText {
-            get {
-                return ResourceManager.GetString("Profile_LossText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Profile.
-        /// </summary>
-        public static string Profile_ProfileHeader {
-            get {
-                return ResourceManager.GetString("Profile_ProfileHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WON.
-        /// </summary>
-        public static string Profile_WonText {
-            get {
-                return ResourceManager.GetString("Profile_WonText", resourceCulture);
+                return ResourceManager.GetString("Common_Yes", resourceCulture);
             }
         }
         
@@ -916,16 +528,61 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logout.
+        ///   Looks up a localized string similar to Create Shortcut.
         /// </summary>
-        public static string ProfileManager_LogoutText {
+        public static string ProfileManager_CreateShortcut {
             get {
-                return ResourceManager.GetString("ProfileManager_LogoutText", resourceCulture);
+                return ResourceManager.GetString("ProfileManager_CreateShortcut", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage Account.
+        ///   Looks up a localized string similar to Creating a shortcut allows you to boot into an account with ease. Select a Patchline and an icon will showup on your desktop..
+        /// </summary>
+        public static string ProfileManager_CreateShortcutDescription {
+            get {
+                return ResourceManager.GetString("ProfileManager_CreateShortcutDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a Shortcut.
+        /// </summary>
+        public static string ProfileManager_CreateShortcutTitle {
+            get {
+                return ResourceManager.GetString("ProfileManager_CreateShortcutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expired.
+        /// </summary>
+        public static string ProfileManager_Expired {
+            get {
+                return ResourceManager.GetString("ProfileManager_Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Launch.
+        /// </summary>
+        public static string ProfileManager_GameLaunch {
+            get {
+                return ResourceManager.GetString("ProfileManager_GameLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Game Launching.
+        /// </summary>
+        public static string ProfileManager_GameLaunchTitle {
+            get {
+                return ResourceManager.GetString("ProfileManager_GameLaunchTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage.
         /// </summary>
         public static string ProfileManager_ManageAccountText {
             get {
@@ -934,29 +591,11 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Daily Missions.
+        ///   Looks up a localized string similar to Remove.
         /// </summary>
-        public static string Progression_DailyMissions {
+        public static string ProfileManager_Remove {
             get {
-                return ResourceManager.GetString("Progression_DailyMissions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Weekly Missions.
-        /// </summary>
-        public static string Progression_WeeklyMissions {
-            get {
-                return ResourceManager.GetString("Progression_WeeklyMissions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Details.
-        /// </summary>
-        public static string RichPres_Details {
-            get {
-                return ResourceManager.GetString("RichPres_Details", resourceCulture);
+                return ResourceManager.GetString("ProfileManager_Remove", resourceCulture);
             }
         }
         
@@ -979,20 +618,11 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PRIVACY SETTINGS.
+        ///   Looks up a localized string similar to Privacy Settings.
         /// </summary>
         public static string RichPres_Privacy {
             get {
                 return ResourceManager.GetString("RichPres_Privacy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SETTINGS.
-        /// </summary>
-        public static string RichPres_Settings {
-            get {
-                return ResourceManager.GetString("RichPres_Settings", resourceCulture);
             }
         }
         
@@ -1038,15 +668,6 @@ namespace Assist.Properties {
         public static string RichPres_SmallImage {
             get {
                 return ResourceManager.GetString("RichPres_SmallImage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Accounts.
-        /// </summary>
-        public static string Settings_Accounts {
-            get {
-                return ResourceManager.GetString("Settings_Accounts", resourceCulture);
             }
         }
         
@@ -1132,6 +753,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Riot Accounts.
+        /// </summary>
+        public static string Settings_RiotAccounts {
+            get {
+                return ResourceManager.GetString("Settings_RiotAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings_Settings {
@@ -1150,38 +780,182 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Featured.
+        ///   Looks up a localized string similar to Create an Assist Account.
         /// </summary>
-        public static string Store_FeaturedText {
+        public static string Setup_CreateAssistAccount {
             get {
-                return ResourceManager.GetString("Store_FeaturedText", resourceCulture);
+                return ResourceManager.GetString("Setup_CreateAssistAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Offers.
+        ///   Looks up a localized string similar to Using an Assist Account allows you to unlock the full suite of tools that assist offers..
         /// </summary>
-        public static string Store_OffersText {
+        public static string Setup_CreateAssistAccountDescription {
             get {
-                return ResourceManager.GetString("Store_OffersText", resourceCulture);
+                return ResourceManager.GetString("Setup_CreateAssistAccountDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Help keep the project alive! There are many different ways to help assist. Listed below there are a few options..
+        ///   Looks up a localized string similar to Game Mode Only.
         /// </summary>
-        public static string Support_SupportAssistDesc {
+        public static string Setup_GameEnabled {
             get {
-                return ResourceManager.GetString("Support_SupportAssistDesc", resourceCulture);
+                return ResourceManager.GetString("Setup_GameEnabled", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Support Assist.
+        ///   Looks up a localized string similar to Assist will only use Game Mode. All Launcher Features are disabled..
         /// </summary>
-        public static string Support_SupportAssistText {
+        public static string Setup_GameEnabledDescription {
             get {
-                return ResourceManager.GetString("Support_SupportAssistText", resourceCulture);
+                return ResourceManager.GetString("Setup_GameEnabledDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a language.
+        /// </summary>
+        public static string Setup_LanguageSelection {
+            get {
+                return ResourceManager.GetString("Setup_LanguageSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launcher Mode Only.
+        /// </summary>
+        public static string Setup_LauncherEnabled {
+            get {
+                return ResourceManager.GetString("Setup_LauncherEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist will only act as a launcher. Game Mode will be turned off..
+        /// </summary>
+        public static string Setup_LauncherEnabledDescription {
+            get {
+                return ResourceManager.GetString("Setup_LauncherEnabledDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Suite of tools are at your disposal..
+        /// </summary>
+        public static string Setup_LauncherGameDescription {
+            get {
+                return ResourceManager.GetString("Setup_LauncherGameDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launcher &amp; Game Mode Enabled.
+        /// </summary>
+        public static string Setup_LauncherGameEnabled {
+            get {
+                return ResourceManager.GetString("Setup_LauncherGameEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: This can be changed in the settings later..
+        /// </summary>
+        public static string Setup_NoteCanBeChanged {
+            get {
+                return ResourceManager.GetString("Setup_NoteCanBeChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip Assist Account.
+        /// </summary>
+        public static string Setup_SkipAssistAccount {
+            get {
+                return ResourceManager.GetString("Setup_SkipAssistAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip creating an Assist Account and receive only basic features..
+        /// </summary>
+        public static string Setup_SkipAssistAccountDescription {
+            get {
+                return ResourceManager.GetString("Setup_SkipAssistAccountDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will be a quick setup to setup your client the way you want to..
+        /// </summary>
+        public static string Setup_WelcomeDescription {
+            get {
+                return ResourceManager.GetString("Setup_WelcomeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to Assist.
+        /// </summary>
+        public static string Setup_WelcomeText {
+            get {
+                return ResourceManager.GetString("Setup_WelcomeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discord.
+        /// </summary>
+        public static string Social_Discord {
+            get {
+                return ResourceManager.GetString("Social_Discord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login with Discord.
+        /// </summary>
+        public static string Social_DiscordLogin {
+            get {
+                return ResourceManager.GetString("Social_DiscordLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch.
+        /// </summary>
+        public static string Social_Twitch {
+            get {
+                return ResourceManager.GetString("Social_Twitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X.
+        /// </summary>
+        public static string Social_X {
+            get {
+                return ResourceManager.GetString("Social_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempting to login....
+        /// </summary>
+        public static string Startup_AttemptingToLogin {
+            get {
+                return ResourceManager.GetString("Startup_AttemptingToLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swap Account.
+        /// </summary>
+        public static string Startup_SwapAccount {
+            get {
+                return ResourceManager.GetString("Startup_SwapAccount", resourceCulture);
             }
         }
     }

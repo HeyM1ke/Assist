@@ -28,10 +28,15 @@ Well, why not? Assist was created from the culmination of different ideas from m
   * Dashboard
     - Taking from the original dashboard we have revamped it. Now it gives you a bit of an insight into your day in VALORANT at a glance. Containing your Missions, your recent stats, and the latest news.
   * Account Switcher
-    - Allows you to add up to 5 accounts to assist, allowing you to hotswap between accounts and launch Valorant without having to login everytime.
+    - Allows you to add accounts to assist, allowing you to hotswap between accounts and launch Valorant without having to login everytime.
   * Store
     - You can now check your store without having to load up the game now, simply click on the store tab and look at your store!
-  * ALOT More to come in the future!
+  * LIVE
+    - LIVE allows you to view your Live Game and all of it's details.
+  * Modules
+    - Modules are smaller programs/features that can be enabled/disabled depending on if you want to use it. Including Discord Rich Presense and a Dodge List 0_0
+  * Much More!
+    - We are always adding new features to make this the best program possible.
 
 
 ## Disclaimer

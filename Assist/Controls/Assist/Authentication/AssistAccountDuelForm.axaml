@@ -1,0 +1,208 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:authentication="clr-namespace:Assist.Controls.Assist.Authentication"
+             xmlns:assist="clr-namespace:Assist.ViewModels.Assist"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="1000"
+             x:Class="Assist.Controls.Assist.Authentication.AssistAccountDuelForm">
+    
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <assist:AssistAccountDuelFormViewModel/>
+    </Design.DataContext>
+    
+    
+    <Border HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderThickness="1"
+            CornerRadius="10"
+            Padding="10">
+        <Grid>
+            <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Orientation="Vertical"
+                    Spacing="8">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Image Width="100"
+                       HorizontalAlignment="Left"
+                       Source="/Assets/Default/AssistText_Temp.png"
+                       RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                <TextBlock Text="{x:Static lang:Resources.Common_Register}"
+                           FontWeight="SemiBold"
+                           FontSize="23"
+                           Opacity=".3"
+                           HorizontalAlignment="Left"
+                           TextAlignment="Center"/>
+            </StackPanel>
+            
+            <Rectangle Height="1"
+                       HorizontalAlignment="Stretch"
+                       Fill="{DynamicResource AssistControlOutline}"
+                       IsVisible="True"/>
+            <authentication:OAuthMethodButton HorizontalAlignment="Stretch"
+                                              Margin="2,0"
+                                                  Height="35"
+                                              
+                                              HorizontalContentAlignment="Right"
+                                              Background="{DynamicResource DiscordBlurple75}"
+                                              BorderBrush="{DynamicResource DiscordBlurple}"
+                                              Icon="{SvgImage /Assets/Extras/Discord_White.svg}"
+                                              CornerRadius="2"
+                                              Command="{Binding DiscordOAuthCommandCommand}"
+                                              Content="{x:Static lang:Resources.Social_DiscordLogin}"
+            />
+            <StackPanel  
+                         Height="35"
+                         Margin="0"
+                         Orientation="Horizontal"
+                         HorizontalAlignment="Center"
+                         IsVisible="False"
+            >
+                <authentication:OAuthMethodButton HorizontalAlignment="Stretch"
+                                                  Margin="2,0"
+                                                  Width="125"
+                                                  Background="{DynamicResource DiscordBlurple75}"
+                                                  BorderBrush="{DynamicResource DiscordBlurple}"
+                                                  Icon="{SvgImage /Assets/Extras/Discord_White.svg}"
+                                                  CornerRadius="2"
+                                                  
+                                                  Content="{x:Static lang:Resources.Social_Discord}"
+                />
+                <authentication:OAuthMethodButton HorizontalAlignment="Stretch"
+                                                  Margin="2,0"
+                                                  Width="145"
+                                                  IsVisible="False"
+                                                  Background="{DynamicResource TwitchPurple75}"
+                                                  BorderBrush="{DynamicResource TwitchPurple}"
+                                                  Icon="{SvgImage /Assets/Extras/Twitch_White.svg}"
+                                                  CornerRadius="2"
+                                                  Content="{x:Static lang:Resources.Social_Twitch}"/>
+                
+            </StackPanel>
+            
+            <Rectangle Height="1"
+                       HorizontalAlignment="Stretch"
+                       Fill="{DynamicResource AssistControlOutline}"/>
+            
+            <StackPanel MinWidth="293"
+                        Spacing="4">
+                
+                <StackPanel.Styles>
+                    <Style Selector="TextBox">
+                        <Setter Property="AcceptsReturn" Value="False"/>
+                        <Setter Property="AcceptsTab" Value="False"/>
+                        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+                        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+                    </Style>
+                </StackPanel.Styles>
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="{x:Static lang:Resources.Common_Email}"
+                               FontWeight="Light"
+                               FontSize="13"
+                               HorizontalAlignment="Left"/>
+                    <TextBox Watermark="Enter your Email"
+                             x:Name="EmailBox"
+                             Text="{Binding EmailText}"></TextBox>
+                </StackPanel>
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="{x:Static lang:Resources.Common_Username}"
+                               FontWeight="Light"
+                               FontSize="13"
+                               HorizontalAlignment="Left"/>
+                    <TextBox Watermark="Enter your Username"
+                             x:Name="UsernameBox"
+                             Text="{Binding UsernameText}"></TextBox>
+                </StackPanel>
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="{x:Static lang:Resources.Common_Password}"
+                               FontWeight="Light"
+                               FontSize="13"
+                               HorizontalAlignment="Left"/>
+                    <TextBox PasswordChar="*" 
+                             Watermark="Enter your password"
+                             x:Name="PasswordBox"
+                             Text="{Binding PasswordText}"/>
+                </StackPanel>
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="{x:Static lang:Resources.Common_ConfirmPassword}"
+                               FontWeight="Light"
+                               FontSize="13"
+                               HorizontalAlignment="Left"/>
+                    <TextBox PasswordChar="*" 
+                             Watermark="Confirm your password"
+                             x:Name="PasswordConfirmBox"
+                             Text="{Binding ConfirmationPasswordText}"></TextBox>
+                </StackPanel>
+                
+                <TextBlock Text="{Binding ErrorMessage}"
+                           FontWeight="Light"
+                           IsVisible="{Binding ErrorMessageVisible}"
+                           FontSize="13"
+                           Foreground="{DynamicResource AssistPrimaryColor}"
+                           HorizontalAlignment="Center"/>
+                
+                <Button Content="{x:Static lang:Resources.Common_Register}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,5,0,0"
+                        Classes="default"
+                        BorderThickness="1"
+                        Command="{Binding RegisterAccountCommandCommand}"
+                        ></Button>
+                
+            </StackPanel>
+            
+            
+            <Rectangle Height="1"
+                       HorizontalAlignment="Stretch"
+                       Fill="{DynamicResource AssistControlOutline}"/>
+            
+            <TextBlock Text="{x:Static lang:Resources.AssistAccount_AlreadyHaveAccount}"
+                       FontWeight="SemiBold"
+                       FontSize="13"
+                       HorizontalAlignment="Center"/>
+            
+            <Button Content="{x:Static lang:Resources.Common_SignIn}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Classes="default"
+                    BorderThickness="1"
+                    Command="{Binding LoginSelectionCommand}"
+                    />
+        </StackPanel>
+            
+            <Border Background="{DynamicResource AssistControlBackground}"
+                    Margin="-10"
+                    CornerRadius="10"
+                    IsVisible="{Binding IsProcessing}">
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Orientation="Vertical"
+                            Spacing="8">
+                    <Image Width="65"
+                           Height="65"
+                           Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                    <TextBlock Text="{x:Static lang:Resources.Common_Loading}"
+                               FontWeight="SemiBold"
+                               FontSize="16"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        
+        
+    </Border>
+</UserControl>

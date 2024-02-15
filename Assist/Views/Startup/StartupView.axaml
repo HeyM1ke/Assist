@@ -1,0 +1,23 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:startup="clr-namespace:Assist.Controls.Startup"
+             xmlns:startup1="clr-namespace:Assist.ViewModels.Startup"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.Startup.StartupView"
+             Loaded="Startup_Loaded">
+    
+    <Design.DataContext>
+        <startup1:StartupViewModel/>
+    </Design.DataContext>
+    
+    <Grid>
+        <TransitioningContentControl HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     MinWidth="332"
+                                     MinHeight="190"
+                                     Content="{Binding CurrentContent}">
+        </TransitioningContentControl>
+    </Grid>
+</UserControl>

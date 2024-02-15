@@ -117,11 +117,208 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AssistTitle" xml:space="preserve">
+  <data name="Common_Assist" xml:space="preserve">
     <value>Assist</value>
+    <comment>Common Assist Name</comment>
+  </data>
+  <data name="Common_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Common_Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="Common_CheckingForUpdate" xml:space="preserve">
+    <value>Checking For Updates...</value>
+  </data>
+  <data name="Common_EnterMessage" xml:space="preserve">
+    <value>Enter Message..</value>
+  </data>
+  <data name="Common_Updating" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="Common_Launch" xml:space="preserve">
+    <value>Launch</value>
+  </data>
+  <data name="Common_Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="Common_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Common_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Common_BackText" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Common_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Common_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Common_Expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="Common_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Common_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Common_MemberSince" xml:space="preserve">
+    <value>Member Since</value>
+  </data>
+  <data name="Common_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Common_Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Common_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Common_Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Common_Supporter" xml:space="preserve">
+    <value>Supporter</value>
+  </data>
+  <data name="Common_SupporterPro" xml:space="preserve">
+    <value>Supporter Pro</value>
+  </data>
+  <data name="Common_Switch" xml:space="preserve">
+    <value>Switch</value>
+  </data>
+  <data name="Common_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="Common_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Common_Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Common_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Common_Party" xml:space="preserve">
+    <value>Party</value>
+  </data>
+  <data name="Common_Party_Caps" xml:space="preserve">
+    <value>PARTY</value>
+  </data>
+  <data name="Common_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Common_ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="Common_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Common_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="ProfileManager_AddAccountText" xml:space="preserve">
+    <value>Add Account</value>
+  </data>
+  <data name="ProfileManager_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ProfileManager_ManageAccountText" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="ProfileManager_GameLaunch" xml:space="preserve">
+    <value>Game Launch</value>
+  </data>
+  <data name="ProfileManager_Expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="ProfileManager_GameLaunchTitle" xml:space="preserve">
+    <value>Enable Game Launching</value>
+  </data>
+  <data name="ProfileManager_CreateShortcut" xml:space="preserve">
+    <value>Create Shortcut</value>
+  </data>
+  <data name="ProfileManager_CreateShortcutTitle" xml:space="preserve">
+    <value>Create a Shortcut</value>
+  </data>
+  
+  <data name="ProfileManager_CreateShortcutDescription" xml:space="preserve">
+    <value>Creating a shortcut allows you to boot into an account with ease. Select a Patchline and an icon will showup on your desktop.</value>
+  </data>
+  <data name="Common_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="RichPres_Enable" xml:space="preserve">
+    <value>Enable Discord Rich Presence</value>
+  </data>
+  <data name="RichPres_LargeImage" xml:space="preserve">
+    <value>Large Image</value>
+  </data>
+  <data name="RichPres_Privacy" xml:space="preserve">
+    <value>Privacy Settings</value>
+  </data>
+  <data name="RichPres_ShowGamemode" xml:space="preserve">
+    <value>Show Gamemode</value>
+  </data>
+  <data name="RichPres_ShowParty" xml:space="preserve">
+    <value>Show Party Size</value>
+  </data>
+  <data name="RichPres_ShowRank" xml:space="preserve">
+    <value>Show Rank</value>
+  </data>
+  <data name="RichPres_ShowScore" xml:space="preserve">
+    <value>Show Score</value>
+  </data>
+  <data name="RichPres_SmallImage" xml:space="preserve">
+    <value>Small Image</value>
+  </data>
+  <data name="Settings_RiotAccounts" xml:space="preserve">
+    <value>Riot Accounts</value>
+  </data>
+  <data name="Settings_AssistAccount" xml:space="preserve">
+    <value>Assist Account</value>
+  </data>
+  <data name="Settings_EnableGameMode" xml:space="preserve">
+    <value>Enable Game Mode:</value>
+  </data>
+  <data name="Settings_EnableGpu" xml:space="preserve">
+    <value>Enable GPU:</value>
+  </data>
+  <data name="Settings_EnableGpuWarning" xml:space="preserve">
+    <value>Enabling GPU will allow Assist to Perform better, but at the cost of using more resources.</value>
+  </data>
+  <data name="Settings_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Change Language:</value>
+  </data>
+  <data name="Settings_Launch" xml:space="preserve">
+    <value>Launch Settings</value>
+  </data>
+  <data name="Settings_Resolution" xml:space="preserve">
+    <value>Resolution:</value>
+  </data>
+  <data name="Settings_RestartReq" xml:space="preserve">
+    <value>Restart Required for Settings to Apply.</value>
+  </data>
+  <data name="Settings_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_Sound" xml:space="preserve">
+    <value>Sound</value>
   </data>
   <data name="Authentication_LoginText" xml:space="preserve">
-    <value>LOGIN</value>
+    <value>Login</value>
   </data>
   <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
     <value>Code</value>
@@ -141,355 +338,85 @@
   <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
     <value>Login with the Riot Client! When you login please make sure you have ”Remember Me” Enabled. Select all remember me options when logining in or it will not be valid. Click Login when you are ready!</value>
   </data>
-  <data name="Authentication_UsernamePasswordDescription" xml:space="preserve">
-    <value>Login with your Riot Games Username and Password. Recommended</value>
-  </data>
   <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
     <value>Username/Password</value>
+  </data>
+  <data name="Authentication_CloudLogin" xml:space="preserve">
+    <value>Web Login</value>
+  </data>
+  <data name="Authentication_Description" xml:space="preserve">
+    <value>Recommended w/2FA: Web Login, Without 2FA: Username/Password</value>
   </data>
   <data name="Authentication_UsernameText" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="GameLaunch_PlayText" xml:space="preserve">
-    <value>PLAY</value>
+  <data name="Setup_WelcomeText" xml:space="preserve">
+    <value>Welcome to Assist</value>
   </data>
-  <data name="GameLaunch_SelectedPatchlineText" xml:space="preserve">
-    <value>Selected Patchline:</value>
+  <data name="Setup_WelcomeDescription" xml:space="preserve">
+    <value>This will be a quick setup to setup your client the way you want to.</value>
   </data>
-  <data name="NavigationBar_Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="Setup_LanguageSelection" xml:space="preserve">
+    <value>Please select a language</value>
   </data>
-  <data name="NavigationBar_Progression" xml:space="preserve">
-    <value>Progression</value>
+  <data name="Setup_LauncherGameEnabled" xml:space="preserve">
+    <value>Launcher &amp; Game Mode Enabled</value>
   </data>
-  <data name="NavigationBar_Store" xml:space="preserve">
-    <value>Store</value>
+  <data name="Setup_GameEnabled" xml:space="preserve">
+    <value>Game Mode Only</value>
   </data>
-  <data name="Navigation_BackText" xml:space="preserve">
-    <value>Back</value>
+  <data name="Setup_LauncherEnabled" xml:space="preserve">
+    <value>Launcher Mode Only</value>
   </data>
-  <data name="ProfileManager_AddAccountText" xml:space="preserve">
-    <value>Add Account</value>
+  <data name="Setup_LauncherGameDescription" xml:space="preserve">
+    <value>Full Suite of tools are at your disposal.</value>
   </data>
-  <data name="ProfileManager_LogoutText" xml:space="preserve">
-    <value>Logout</value>
+  <data name="Setup_GameEnabledDescription" xml:space="preserve">
+    <value>Assist will only use Game Mode. All Launcher Features are disabled.</value>
   </data>
-  <data name="ProfileManager_ManageAccountText" xml:space="preserve">
-    <value>Manage Account</value>
+  <data name="Setup_LauncherEnabledDescription" xml:space="preserve">
+    <value>Assist will only act as a launcher. Game Mode will be turned off.</value>
   </data>
-  <data name="Profile_LossText" xml:space="preserve">
-    <value>LOSS</value>
+  <data name="Setup_NoteCanBeChanged" xml:space="preserve">
+    <value>Note: This can be changed in the settings later.</value>
   </data>
-  <data name="Profile_WonText" xml:space="preserve">
-    <value>WON</value>
+  <data name="Setup_CreateAssistAccount" xml:space="preserve">
+    <value>Create an Assist Account</value>
   </data>
-  <data name="Progression_DailyMissions" xml:space="preserve">
-    <value>Daily Missions</value>
+  <data name="Setup_SkipAssistAccount" xml:space="preserve">
+    <value>Skip Assist Account</value>
   </data>
-  <data name="Progression_WeeklyMissions" xml:space="preserve">
-    <value>Weekly Missions</value>
+  <data name="Setup_CreateAssistAccountDescription" xml:space="preserve">
+    <value>Using an Assist Account allows you to unlock the full suite of tools that assist offers.</value>
   </data>
-  <data name="Store_FeaturedText" xml:space="preserve">
-    <value>Featured</value>
+  <data name="Setup_SkipAssistAccountDescription" xml:space="preserve">
+    <value>Skip creating an Assist Account and receive only basic features.</value>
   </data>
-  <data name="Store_OffersText" xml:space="preserve">
-    <value>Offers</value>
+  <data name="Startup_AttemptingToLogin" xml:space="preserve">
+    <value>Attempting to login...</value>
   </data>
-  <data name="GameMode_Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="Startup_SwapAccount" xml:space="preserve">
+    <value>Swap Account</value>
   </data>
-  <data name="GameMode_Live" xml:space="preserve">
-    <value>LIVE</value>
+  <data name="AssistAccount_CreateAccount" xml:space="preserve">
+    <value>Create an Account</value>
   </data>
-  <data name="GameMode_Modules" xml:space="preserve">
-    <value>Modules</value>
+  <data name="AssistAccount_AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an Account?</value>
   </data>
-  <data name="GameMode_Lobbies" xml:space="preserve">
-    <value>Lobbies</value>
+  <data name="AssistAccount_DontHaveAccount" xml:space="preserve">
+    <value>Don't have an Account?</value>
   </data>
-  <data name="GameMode_Leagues" xml:space="preserve">
-    <value>Leagues</value>
+  <data name="Social_Discord" xml:space="preserve">
+    <value>Discord</value>
   </data>
-  <data name="GameMode_Dodge" xml:space="preserve">
-    <value>DODGE</value>
+  <data name="Social_DiscordLogin" xml:space="preserve">
+    <value>Login with Discord</value>
   </data>
-  <data name="GameMode_RichPres" xml:space="preserve">
-    <value>Rich Presence</value>
+  <data name="Social_Twitch" xml:space="preserve">
+    <value>Twitch</value>
   </data>
-  <data name="GameMode_Dodge_ModuleText" xml:space="preserve">
-    <value>Assist Dodge Warning System. Gives you a heads up when a player you marked is on your team.</value>
-  </data>
-  <data name="GameMode_RichPres_ModuleText" xml:space="preserve">
-    <value>Assist Rich Presence. Gives your Discord profile a live status of your current VALORANT Game.</value>
-  </data>
-  <data name="GameMode_AllyTeam" xml:space="preserve">
-    <value>ALLY</value>
-  </data>
-  <data name="GameMode_EnemyTeam" xml:space="preserve">
-    <value>ENEMY</value>
-  </data>
-  <data name="GameMode_EnableGlobalText" xml:space="preserve">
-    <value>Enable Global List</value>
-  </data>
-  <data name="GameMode_EnableGlobalDetailText" xml:space="preserve">
-    <value>A List of Verified Players who are classified as players who Throw Matches, Wintrade, Betting, and more.</value>
-  </data>
-  <data name="Global_BackText" xml:space="preserve">
-    <value>Back</value>
-  </data>
-  <data name="Global_Yes" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="Global_Switch" xml:space="preserve">
-    <value>Switch</value>
-  </data>
-  <data name="Global_Remove" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="Global_No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="Global_Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Global_Apply" xml:space="preserve">
-    <value>Apply</value>
-  </data>
-  <data name="Global_Supporter" xml:space="preserve">
-    <value>Supporter</value>
-  </data>
-  <data name="Global_MemberSince" xml:space="preserve">
-    <value>Member Since</value>
-  </data>
-  <data name="Global_SupporterPro" xml:space="preserve">
-    <value>Supporter Pro</value>
-  </data>
-  <data name="Global_Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="Global_Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="Global_Loading" xml:space="preserve">
-    <value>Loading...</value>
-  </data>
-  <data name="Global_Expired" xml:space="preserve">
-    <value>Expired</value>
-  </data>
-  <data name="Global_Notification" xml:space="preserve">
-    <value>Notification</value>
-  </data>
-  <data name="Global_Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="Global_Information" xml:space="preserve">
-    <value>Information</value>
-  </data>
-  <data name="Global_Support" xml:space="preserve">
-    <value>Support</value>
-  </data>
-  <data name="Dodge_AddPlayer" xml:space="preserve">
-    <value>ADD PLAYER</value>
-  </data>
-  <data name="Dodge_AddPlayerDesc" xml:space="preserve">
-    <value>If a player changes their name after you add them. They will continue being on the list even after a name switch.</value>
-  </data>
-  <data name="Dodge_AddTextOption" xml:space="preserve">
-    <value>Game Name (USERNAME#TAG):</value>
-  </data>
-  <data name="Dodge_AddTextOptionExample" xml:space="preserve">
-    <value>Ex: AssistUser#GMEUE</value>
-  </data>
-  <data name="Dodge_NoteTextOption" xml:space="preserve">
-    <value>Note (Optional):</value>
-  </data>
-  <data name="Dodge_NoteTextOptionExample" xml:space="preserve">
-    <value>Ex: User is Toxic</value>
-  </data>
-  <data name="RichPres_Settings" xml:space="preserve">
-    <value>SETTINGS</value>
-  </data>
-  <data name="RichPres_Privacy" xml:space="preserve">
-    <value>PRIVACY SETTINGS</value>
-  </data>
-  <data name="RichPres_Enable" xml:space="preserve">
-    <value>Enable Discord Rich Presence</value>
-  </data>
-  <data name="RichPres_Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="RichPres_LargeImage" xml:space="preserve">
-    <value>Large Image</value>
-  </data>
-  <data name="RichPres_SmallImage" xml:space="preserve">
-    <value>Small Image</value>
-  </data>
-  <data name="RichPres_ShowParty" xml:space="preserve">
-    <value>Show Party Size</value>
-  </data>
-  <data name="RichPres_ShowScore" xml:space="preserve">
-    <value>Show Score</value>
-  </data>
-  <data name="RichPres_ShowRank" xml:space="preserve">
-    <value>Show Rank</value>
-  </data>
-  <data name="RichPres_ShowGamemode" xml:space="preserve">
-    <value>Show Gamemode</value>
-  </data>
-  <data name="GameMode_UpdateText" xml:space="preserve">
-    <value>Waiting for VALORANT Update...</value>
-  </data>
-  <data name="GameMode_PartyText" xml:space="preserve">
-    <value>PARTY</value>
-  </data>
-  <data name="Support_SupportAssistText" xml:space="preserve">
-    <value>Support Assist</value>
-  </data>
-  <data name="Support_SupportAssistDesc" xml:space="preserve">
-    <value>Help keep the project alive! There are many different ways to help assist. Listed below there are a few options.</value>
-  </data>
-  <data name="Popup_GameModeWarning" xml:space="preserve">
-    <value>VALORANT is currently open. &#x0a; Would you like to open Game Mode?</value>
-  </data>
-  <data name="Settings_General" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="Settings_Accounts" xml:space="preserve">
-    <value>Accounts</value>
-  </data>
-  <data name="Settings_AssistAccount" xml:space="preserve">
-    <value>Assist Account</value>
-  </data>
-  <data name="Settings_Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="Settings_Resolution" xml:space="preserve">
-    <value>Resolution:</value>
-  </data>
-  <data name="Settings_Language" xml:space="preserve">
-    <value>Change Language:</value>
-  </data>
-  <data name="Settings_Sound" xml:space="preserve">
-    <value>Sound</value>
-  </data>
-  <data name="Settings_EnableGpu" xml:space="preserve">
-    <value>Enable GPU:</value>
-  </data>
-  <data name="Settings_EnableGpuWarning" xml:space="preserve">
-    <value>Enabling GPU will allow Assist to Perform better, but at the cost of using more resources.</value>
-  </data>
-  <data name="Settings_RestartReq" xml:space="preserve">
-    <value>Restart Required for Settings to Apply.</value>
-  </data>
-  <data name="Settings_Launch" xml:space="preserve">
-    <value>Launch Settings</value>
-  </data>
-  <data name="Settings_EnableGameMode" xml:space="preserve">
-    <value>Enable Game Mode:</value>
-  </data>
-  <data name="Assist_UsersOnline" xml:space="preserve">
-    <value>Users Online</value>
-  </data>
-  <data name="Assist_CheckingForUpdates" xml:space="preserve">
-    <value>Checking For Updates...</value>
-  </data>
-  <data name="Assist_Updating" xml:space="preserve">
-    <value>Updating...</value>
-  </data>
-  <data name="Leagues_Join" xml:space="preserve">
-    <value>Join a League</value>
-  </data>
-  <data name="Leagues_Leave" xml:space="preserve">
-    <value>Leave League</value>
-  </data>
-  <data name="Leagues_Queue" xml:space="preserve">
-    <value>Queue</value>
-  </data>
-  <data name="Leagues_Announcement" xml:space="preserve">
-    <value>ANNOUNCEMENTS</value>
-  </data>
-  <data name="Leagues_Leaderboard" xml:space="preserve">
-    <value>Leaderboard</value>
-  </data>
-  <data name="Leagues_Swap" xml:space="preserve">
-    <value>Select a League:</value>
-  </data>
-  <data name="Leagues_Ready" xml:space="preserve">
-    <value>COMPETE</value>
-  </data>
-  <data name="Leagues_ReadyUp" xml:space="preserve">
-    <value>READY</value>
-  </data>
-  <data name="Leagues_Waiting" xml:space="preserve">
-    <value>Waiting...</value>
-  </data>
-  <data name="Leagues_ReportAnIssue" xml:space="preserve">
-    <value>Report an Issue</value>
-  </data>
-  <data name="Leagues_ICrashed" xml:space="preserve">
-    <value>I Crashed?</value>
-  </data>
-  <data name="Leagues_LeaderboardMatchesPlayed" xml:space="preserve">
-    <value>Matches Played</value>
-  </data>
-  <data name="Leagues_Match_MatchInProgress" xml:space="preserve">
-    <value>MATCH IN PROGRESS</value>
-  </data>
-  <data name="Leagues_Match_ReadyUp" xml:space="preserve">
-    <value>Ready Up!</value>
-  </data>
-  <data name="Leagues_Match_Loading" xml:space="preserve">
-    <value>Starting Match</value>
-  </data>
-  <data name="Leagues_Match_Remaining" xml:space="preserve">
-    <value>Remaining</value>
-  </data>
-  <data name="Leagues_Match_Defenders" xml:space="preserve">
-    <value>DEFENDERS</value>
-  </data>
-  <data name="Leagues_Match_Attackers" xml:space="preserve">
-    <value>ATTACKERS</value>
-  </data>
-  <data name="Assist_Chat" xml:space="preserve">
-    <value>Chat</value>
-  </data>
-  <data name="Assist_EnterMessage" xml:space="preserve">
-    <value>Enter Message..</value>
-  </data>
-  <data name="Global_Send" xml:space="preserve">
-    <value>Send</value>
-  </data>
-  <data name="Profile_ProfileHeader" xml:space="preserve">
-    <value>Profile</value>
-  </data>
-  <data name="Profile_BadgeHeader" xml:space="preserve">
-    <value>Badges</value>
-  </data>
-  <data name="Profile_LeagueHeader" xml:space="preserve">
-    <value>Leagues</value>
-  </data>
-  <data name="Profile_Badge_SetFeatured" xml:space="preserve">
-    <value>Set Featured Badge</value>
-  </data>
-  <data name="Profile_Badge_RemoveFeatured" xml:space="preserve">
-    <value>Remove Featured Badge</value>
-  </data>
-  <data name="Profile_Badge_EarnedAt" xml:space="preserve">
-    <value>Earned at:</value>
-  </data>
-  <data name="Endorse_CalmCollected_Tooltip" xml:space="preserve">
-    <value>Calm &amp; Collected, your teammate was composed throughtout the match. </value>
-  </data>
-  <data name="Endorse_Shotcaller_Tooltip" xml:space="preserve">
-    <value>Shotcaller, your teammate was a leader and helped your team push through. </value>
-  </data>
-  <data name="Endorse_NotificationText" xml:space="preserve">
-    <value>You received a thumbs up from</value>
-  </data>
-  <data name="Endorse_PageTitle" xml:space="preserve">
-    <value>ENDORSE PLAYERS</value>
-  </data>
-  <data name="Endorse_BackToParty" xml:space="preserve">
-    <value>Back to party</value>
+  <data name="Social_X" xml:space="preserve">
+    <value>X</value>
   </data>
 </root>

@@ -1,0 +1,73 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Setup"
+        xmlns:general="clr-namespace:Assist.Controls.General">
+    <Design.PreviewWith>
+        <controls:ModeSelectionControl />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ModeSelectionControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistControlBackground}"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Padding="12"
+                >
+                
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="8">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="Select a Mode"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"
+                                   FontSize="24"/>
+                        <ScrollViewer>
+                            <StackPanel Orientation="Vertical"
+                                        Spacing="5">
+                                <general:TwoTextButton Width="310"
+                                                       Height="90"
+                                                       HeaderText="Launcher &amp; Game Mode Enabled"
+                                                       BodyText="Full Suite of tools are at your disposal."
+                                                       Command="{TemplateBinding ModeSelectionCommand}"
+                                                       CommandParameter="0"></general:TwoTextButton>
+                                
+                                <general:TwoTextButton Width="310"
+                                                       Height="90"
+                                                       HeaderText="Game Mode Only"
+                                                       BodyText="Assist will only use Game Mode. All Launcher Features are disabled."
+                                                       Command="{TemplateBinding ModeSelectionCommand}"
+                                                       CommandParameter="1"></general:TwoTextButton>
+                                
+                                <general:TwoTextButton Width="310"
+                                        Height="90"
+                                        HeaderText="Launcher Mode Only"
+                                        BodyText="Assist will only act as a launcher. Game Mode will be turned off."
+                                        Command="{TemplateBinding ModeSelectionCommand}"
+                                        CommandParameter="2"></general:TwoTextButton>
+                            </StackPanel>
+                        </ScrollViewer>
+                        
+                        
+                        <TextBlock Text="Note: This can be changed in the settings later."
+                                FontSize="11"
+                                Opacity=".4"
+                                HorizontalAlignment="Center"
+                        />
+                    </StackPanel>
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

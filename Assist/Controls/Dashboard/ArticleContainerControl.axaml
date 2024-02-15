@@ -1,0 +1,38 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Dashboard.ArticleContainerControl">
+    <Border Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            CornerRadius="10"
+            BorderThickness="1"
+            ClipToBounds="True">
+        <Grid ColumnDefinitions="*,200">
+            <Grid Column="0"
+                  x:Name="CoreGrid"
+                  VerticalAlignment="Center">
+            <asyncImageLoader:AdvancedImage Source="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt05b6f34806210a43/65a9be2b7fc0001446223f49/Val_Ep7_PatchNotes_8.1.jpg"
+                                            Stretch="UniformToFill"/>
+            </Grid>
+            
+            <Grid Column="1"
+                  x:Name="ContainerGrid"
+                  VerticalAlignment="Stretch">
+            <UniformGrid Rows="3"
+                         Columns="1"
+                         VerticalAlignment="Stretch"
+                         
+                         ClipToBounds="True">
+                <dashboard:ArticleContainerButton VerticalAlignment="Stretch"
+                                                  />
+                <dashboard:ArticleContainerButton VerticalAlignment="Stretch"/>
+                <dashboard:ArticleContainerButton VerticalAlignment="Stretch"/>
+            </UniformGrid>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

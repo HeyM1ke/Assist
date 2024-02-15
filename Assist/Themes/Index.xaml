@@ -1,0 +1,149 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+
+    <FluentTheme/>
+    <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
+    <StyleInclude Source="avares://Assist/Controls/General/TwoTextButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/Authentication/OAuthMethodButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/Launcher/AccountProfileSwap.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/LargeImageButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/MenuSelectorButton.axaml"/>
+
+    <StyleInclude Source="avares://Assist/Controls/Navigation/NavigationButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Startup/BasicStartupControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Startup/AccountPreviewStartupControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Setup/WelcomeSetupControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Setup/LangSetupControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Setup/ModeSelectionControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Setup/AssistAccountSelectionControl.axaml"/>
+    
+    <StyleInclude Source="avares://Assist/Controls/Dashboard/ArticleContainerButton.axaml"/>
+    
+    <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountMethodSelectionControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountSecondarySelectionControl.axaml"/>
+
+    <StyleInclude Source="avares://Assist/Controls/ProfileSwap/AccProfilePreviewControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/ProfileSwap/AccProfileAddControl.axaml"/>
+    
+    <StyleInclude Source="avares://Assist/Controls/Store/SkinOfferControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Store/BundleOfferControl.axaml"/>
+    
+    <StyleInclude Source="avares://Assist/Controls/Game/Live/MenuPartyPlayerControl.axaml"/>
+    
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+    </Style>
+    
+    <Style Selector="Button">
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+    
+    <Style Selector="Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="Button:pressed">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+    </Style>
+    
+    <Style Selector="Button:disabled">
+        <Setter Property="Background" Value="{DynamicResource AssistDisabledControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistDisabledControlOutline}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AssistDisabledForeground}"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+    
+    <Style Selector="Button.default">
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="10">
+                    <Grid>
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   FontWeight="{TemplateBinding FontWeight}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></TextBlock>
+                        
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button.default:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AssistHover}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="Button.default:pressed">
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlPressed}"></Setter>
+    </Style>
+    
+    <Style Selector="Button.default:disabled">
+        <Setter Property="Background" Value="{DynamicResource AssistDisabledControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistDisabledControlOutline}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AssistDisabledForeground}"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+    
+    
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox:pressed">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox:disabled">
+        <Setter Property="Background" Value="{DynamicResource AssistDisabledControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistDisabledControlOutline}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AssistDisabledForeground}"></Setter>
+    </Style>
+    
+    
+    
+    <Styles.Resources>
+        
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceInclude Source="Dark.axaml" x:Key="Default"/>
+                <ResourceInclude Source="Dark.axaml" x:Key="Dark"/>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+        
+    </Styles.Resources>
+</Styles>

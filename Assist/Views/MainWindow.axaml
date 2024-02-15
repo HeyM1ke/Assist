@@ -1,0 +1,41 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Assist.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:navigation="clr-namespace:Assist.Controls.Navigation"
+        xmlns:titlebar="clr-namespace:Assist.Controls.Infobars"
+        xmlns:dashboard="clr-namespace:Assist.Views.Dashboard"
+        xmlns:startup="clr-namespace:Assist.Views.Startup"
+        mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="720"
+        Width="1190"
+        Height="720"
+        x:Class="Assist.Views.MainWindow"
+        Icon="/Assets/Assist_IconBlack.ico"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="49"
+        Title="Assist"
+        Opened="MainWindow_OnOpened">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid Background="{DynamicResource AssistBackground}"
+          RowDefinitions="49, *">
+        
+        <titlebar:Titlebar Grid.Row="0"/>
+        
+        <TransitioningContentControl Grid.Row="1" Content="{Binding CurrentView}"
+                                     Padding="10"/>
+        <TransitioningContentControl Grid.Row="1" Content="{Binding CurrentPopup}"/>
+        
+        
+    </Grid>
+
+</Window>

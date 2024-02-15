@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Models.Enums;
 using Assist.Objects.AssistApi;
 using Assist.Objects.AssistApi.Valorant;
 using Assist.Objects.AssistApi.Valorant.Battlepass;
 using Assist.Objects.AssistApi.Valorant.Offer;
 using Assist.Objects.AssistApi.Valorant.Skin;
-using Assist.Objects.Enums;
-using Assist.Services.Utils;
-using Assist.Settings;
-using RestSharp;
+using Assist.Shared.Services.Utils;
+using Assist.Shared.Settings;
 using Serilog;
 
 namespace Assist.Services
 {
-    internal class AssistApiService
+    public class AssistApiService
     {
         public const string BaseUrl = "https://api.assistapp.dev";
         public const string BattlepassId = "2b3a941d-4b85-a0df-5beb-8897224d290a";
@@ -24,74 +25,49 @@ namespace Assist.Services
         private const int MaintenanceTimeoutInSeconds = 5;
 
         //private readonly ILogger _logger;
-        private readonly RestClient _client;
+        private readonly HttpClient _client;
 
         public AssistApiService()
         {
             //_logger = Log.ForContext<AssistApiService>();
-            _client = new RestClient(BaseUrl);
+            _client = new HttpClient()
+            {
+              BaseAddress   = new Uri(BaseUrl)
+            };
         }
 
         // todo: handle unsuccessful response
-        public async Task<WeaponSkin> GetWeaponSkinAsync(string uuid)
+        public async Task<WeaponSkin?> GetWeaponSkinAsync(string uuid)
         {
-            var request = new RestRequest($"/valorant/skins/{uuid}");
-            var response = await _client.ExecuteAsync<WeaponSkin>(request);
+            
+            
+            var response = await _client.GetAsync($"/valorant/skins/{uuid}");
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<WeaponSkin>(data);
+            }
 
-            return response.Data;
+            return null;
         }
 
         public async Task<string> GetWeaponSkinPriceAsync(string uuid)
         {
-            var request = new RestRequest($"/valorant/offers/{uuid}");
-            var response = await _client.ExecuteAsync<StoreOffer>(request);
-            var isSuccess = response.IsSuccessful;
+            
+            var response = await _client.GetAsync($"/valorant/offers/{uuid}");
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                var obj =  JsonSerializer.Deserialize<StoreOffer>(data);
 
-            var offer = response.Data;
-            var cost = isSuccess ? offer!.Cost.Cost : 99999;
+                return $"{obj!.Cost.Cost:n0}";
+            }
 
-            return $"{cost:n0}";
+            return $"";
+            
+           
         }
-
-        public async Task<Battlepass> GetBattlepassAsync()
-        {
-            var request = new RestRequest($"/valorant/battlepass/{BattlepassId}");
-            var response = await _client.ExecuteAsync<Battlepass>(request);
-            if (!response.IsSuccessful)
-                return null;
-
-            return response.Data;
-        }
-        public async Task<Battlepass> GetBattlepassAsync(string bpId)
-        {
-            var request = new RestRequest($"/valorant/battlepass/{bpId}");
-            var response = await _client.ExecuteAsync<Battlepass>(request);
-            if (!response.IsSuccessful)
-                return null;
-
-            return response.Data;
-        }
-
-        public async Task<NewsArticle[]> GetNewsAsync()
-        {
-            var request = new RestRequest("/valorant/news");
-            var response = await _client.ExecuteAsync<NewsArticle[]>(request);
-            if (!response.IsSuccessful)
-                return new[] { CreateFailedNewsTab() };
-
-            return response.Data;
-        }
-
-        public async Task<NewsArticle[]> GetNewsAsyncByRegion()
-        {
-            var request = new RestRequest($"/valorant/news/{AssistSettings.Current.Language.GetAttribute<LanguageAttribute>().Code.ToLower()}");
-            var response = await _client.ExecuteAsync<NewsArticle[]>(request);
-            if (!response.IsSuccessful)
-                return new[] { CreateFailedNewsTab() };
-
-            return response.Data;
-        }
-
+        
         private static NewsArticle CreateFailedNewsTab()
         {
             return new NewsArticle
@@ -105,12 +81,12 @@ namespace Assist.Services
 
         public async Task<Bundle> GetBundleAsync(string id)
         {
-            var request = new RestRequest($"/valorant/bundles/{id}");
-            var response = await _client.ExecuteAsync<Bundle>(request);
-            if (!response.IsSuccessful)
+            var response = await _client.GetAsync($"/valorant/bundles/{id}");
+            if (!response.IsSuccessStatusCode)
                 return CreateFailedBundle();
-
-            return response.Data;
+            
+            var data = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Bundle>(data);
         }
 
         private static Bundle CreateFailedBundle()
@@ -122,99 +98,6 @@ namespace Assist.Services
                 DisplayIcon = "https://cdn.rumblemike.com/Bundles/2116a38e-4b71-f169-0d16-ce9289af4bfa_DisplayIcon.png"
             };
         }
-
-        public async Task<AssistMaintenance> GetMaintenanceStatus()
-        {
-            Log.Information("Checking for Maintenance");
-
-            var client = new RestClient(new RestClientOptions
-            {
-                BaseUrl = new Uri(BaseUrl),
-                ThrowOnAnyError = false,
-                ThrowOnDeserializationError = false,
-                Timeout = MaintenanceTimeoutInSeconds * 1000
-            });
-
-            var request = new RestRequest("/data/status/maintenance");
-            var response = await client.ExecuteAsync<AssistMaintenance>(request);
-
-            if (!response.IsSuccessful)
-            {
-                Log.Information("Failed to request the maintenance status.");
-                return CreateDefaultMaintenanceMessage();
-            }
-
-            return response.Data;
-        }
-
-        public async Task<AssistAgent> GetAgent()
-        {
-            Log.Information("Getting Agent");
-
-            var client = new RestClient(new RestClientOptions
-            {
-                BaseUrl = new Uri(BaseUrl),
-                ThrowOnAnyError = false,
-                ThrowOnDeserializationError = false,
-                Timeout = 5000
-            });
-
-            var request = new RestRequest("/data/agent");
-            var response = await client.ExecuteAsync<AssistAgent>(request);
-
-            if (!response.IsSuccessful)
-            {
-                Log.Information("Failed to request agent.");
-                return new AssistAgent()
-                {
-                    Agent = string.Empty
-                };
-            }
-
-            return response.Data;
-        }
-
-        private static AssistMaintenance CreateDefaultMaintenanceMessage()
-        {
-            return new AssistMaintenance
-            {
-                DownForMaintenance = false,
-                DownForMaintenanceMessage =
-                    "Assist is currently down for Maintenance. Please come back later. Check out the discord for information regarding the Maintenance."
-            };
-        }
-
-        public async Task<Mission> GetMission(string id)
-        {
-            var request = new RestRequest($"/valorant/missions/{id}");
-            var response = await _client.ExecuteAsync<Mission>(request);
-            if (!response.IsSuccessful)
-                return CreateFailedMission();
-
-            return response.Data;
-        }
-
-        public async Task<List<Mission>> GetAllMissions()
-        {
-            var request = new RestRequest($"/valorant/missions");
-            var response = await _client.ExecuteAsync<List<Mission>>(request);
-            if (!response.IsSuccessful)
-                return new List<Mission>()
-                {
-                    CreateFailedMission()
-                };
-
-            return response.Data;
-        }
-
-        private static Mission CreateFailedMission()
-        {
-            return new Mission
-            {
-                Title = "Error",
-                ProgressToComplete = 1,
-                XpGrant = 1,
-            };
-        }
+        
     }
 }

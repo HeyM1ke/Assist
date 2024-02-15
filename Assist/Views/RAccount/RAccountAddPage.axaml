@@ -1,0 +1,28 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rAccount="clr-namespace:Assist.ViewModels.RAccount"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.RAccount.RAccountAddPage">
+    
+    <Design.DataContext>
+        <rAccount:RAccountAddViewModel/>
+    </Design.DataContext>
+    
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TransitioningContentControl HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         MinWidth="410"
+                                         MinHeight="220"
+                                         Content="{Binding CurrentContent}">
+                
+                <TransitioningContentControl.PageTransition>
+                    <CrossFade Duration="0.25" />
+                </TransitioningContentControl.PageTransition>
+            </TransitioningContentControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

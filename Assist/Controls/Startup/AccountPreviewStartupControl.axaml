@@ -1,0 +1,72 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Startup"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:AccountPreviewStartupControl/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|AccountPreviewStartupControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistControlBackground}"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Padding="40"
+                >
+            
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="18">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        <Rectangle Height="1"
+                                   HorizontalAlignment="Stretch"
+                                   Fill="{DynamicResource AssistControlOutline}"/>
+                        
+                        <Grid>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="15">
+                              <Border CornerRadius="10">
+                                  <asyncImageLoader:AdvancedImage Height="96"
+                                         Width="96"
+                                         ClipToBounds="True"
+                                         Source="{TemplateBinding Icon}"/>
+                              </Border>
+                                
+                                <StackPanel Orientation="Vertical"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="{TemplateBinding AccountName}"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               TextAlignment="Left"/>
+                                    <TextBlock Text="{TemplateBinding AccountRegion}"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               Opacity=".6"
+                                               TextAlignment="Left"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <Rectangle Height="1"
+                                   HorizontalAlignment="Stretch"
+                                   Fill="{DynamicResource AssistControlOutline}"/>
+                        
+                        <TextBlock Text="Attempting to Login..."
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   TextAlignment="Center"/>
+                        
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

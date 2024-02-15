@@ -1,157 +1,170 @@
-using Assist.ViewModels;
+
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Threading;
+using Assist.Models.Enums;
+using Assist.Services.Navigation;
+using Assist.Shared.Services.Utils;
+using Assist.Shared.Settings;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Assist.Views.Windows;
-using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
-using System;
-using System.IO;
-
-using System.Globalization;
-using System.Net;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Markup;
-using System.Runtime.InteropServices;
-using Assist.Objects.Enums;
-using Assist.Services.Utils;
-using Assist.Settings;
-using Avalonia;
-using Avalonia.Platform;
-using Assist.ViewModels.Windows;
+using Assist.ViewModels;
+using Assist.Views;
+using Assist.Views.Startup;
+using AsyncImageLoader;
+using AsyncImageLoader.Loaders;
 using Avalonia.Controls;
+using Avalonia.Styling;
 using Avalonia.Threading;
-using Squirrel;
-using NuGet.Versioning;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
-namespace Assist
+namespace Assist;
+
+public partial class App : Application
 {
     
     
-    public partial class App : Application
+    public override void Initialize()
     {
-        public override void Initialize()
+        OnStartup();   
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    public override void RegisterServices()
+    {
+        base.RegisterServices();
+    }
+
+    public override void OnFrameworkInitializationCompleted()
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            AvaloniaXamlLoader.Load(this);
-            SetupLogger();
-            SetupUpdator();
-            ReadSettings();
-            Log.Information("Starting application");
-            Log.Information($"Getting Platform... WINDOWS: {OperatingSystem.IsWindows()} |  MACOS: {OperatingSystem.IsMacOS()} | LINUX: {OperatingSystem.IsLinux()} ");
+            desktop.Exit += OnExit;
+            desktop.MainWindow = new MainWindow();
         }
+        
+        base.OnFrameworkInitializationCompleted();
+    }
+    
+    private void OnExit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
+    {
+        Log.Information("Exiting");
+        AssistSettings.Save();
+    }
 
-        public override void OnFrameworkInitializationCompleted()
-        {
-            Log.Debug("Initialization Complete/");
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                // Initial Window Opened at launch.
-                desktop.Exit += OnExit;
-                
-                desktop.MainWindow = new StartupSplash();
-            }
-            
-            base.OnFrameworkInitializationCompleted();
-        }
+    private void OnShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
+    {
+        Log.Information("Shutting Down");
+        AssistSettings.Save();
+    }
+    private void OnStartup()
+    {
+        CreateLogger();
+        CreateDirectories();
+        CheckForSettings();
+        ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader();
+    }
 
-        private void OnExit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
-        {
-            Log.Information("Exiting");
-            AssistSettings.Save();
-            GameSettings.Save();
-        }
+    
 
-        private static void SetupLogger()
-        {
+    private void CreateDirectories()
+    {
+        Directory.CreateDirectory(GetApplicationDataFolder());
+        Directory.CreateDirectory(Path.Combine(GetApplicationDataFolder(), "Logs"));
+        Directory.CreateDirectory(Path.Combine(GetApplicationDataFolder(), "Deps"));
+        Directory.CreateDirectory(Path.Combine(GetApplicationDataFolder(), "Accounts"));
+    }
 
-#if DEBUG 
-
-            //if(OperatingSystem.IsWindows()) AllocConsole();
-            
-#endif
-
-            var directory = GetApplicationDataFolder();
-            var logsDirectory = Path.Combine(directory, "logs");
-            Directory.CreateDirectory(logsDirectory);
-
-            var fileCount = Directory.GetFiles(logsDirectory, "*", SearchOption.TopDirectoryOnly).Length;
+    private void CreateLogger()
+    {
+        var fileCount = Directory.GetFiles(Path.Combine(GetApplicationDataFolder(), "Logs"), "*", SearchOption.TopDirectoryOnly).Length;
 #if DEBUG
-            WindowsUtils.AllocConsole();
+        WindowsUtils.AllocConsole();
+        Log.Logger = new LoggerConfiguration().WriteTo.Console(theme: AnsiConsoleTheme.Literate).CreateLogger();
+#else
+        Log.Logger = new LoggerConfiguration().WriteTo.Console(theme: AnsiConsoleTheme.Literate).WriteTo.File(
+            Path.Combine(GetApplicationDataFolder(), "Logs", $"Assist-{DateTime.Now:yyyy-MM-dd}-{fileCount}.txt"),
+            outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [Assist] {Message:lj}{NewLine}{Exception}").CreateLogger();
 #endif
+        
+        // ty fmodel boys <3 - Mike
+        Log.Information("Version {Version}", Process.GetCurrentProcess().MainModule.FileVersionInfo.FileVersion);
+        Log.Information("{OS}", GetOperatingSystemProductName());
+        Log.Information("System Culture {SysLang}", CultureInfo.CurrentCulture);
+    }
+
+    
+    
+    private static void CheckForSettings()
+    {
+        try
+        {
+            AssistSettings.Default =
+                JsonSerializer.Deserialize<AssistSettings>(File.ReadAllText(AssistSettings.FilePath));
+        }
+        catch
+        {
+            AssistSettings.Default = new AssistSettings();
             
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .MinimumLevel.Override("System", LogEventLevel.Warning)
-                .Enrich.FromLogContext()
-#if DEBUG
-                .WriteTo.Console(
-                    theme: AnsiConsoleTheme.Code,
-                    outputTemplate: "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine}")
-#endif
-            .WriteTo.File(
-                    path: Path.Combine(logsDirectory, $"Log_{++fileCount}.txt"),
-                    rollingInterval: RollingInterval.Day,
-                    outputTemplate:
-                    "[{Timestamp:G}] [{Level:u3}] {Message:l}{NewLine:1}{Properties:1j}{NewLine:1}{Exception:1}")
-                .CreateLogger();
-
-            Log.Information("ASSIST LOG LIVE: " + AssistSettings.Current.ApplicationVersion);
-        }
-
-        private static string GetApplicationDataFolder()
-        {
-            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var directory = Path.Combine(appdata, "AssistX");
-
-            return directory;
-        }
-
-        public static void ChangeLanguage()
-        {
-            Log.Information("Changing Language");
-            var language = AssistSettings.Current.Language;
-            var attribute = language.GetAttribute<LanguageAttribute>();
-            Log.Information(attribute.Code);
-            var culture = new CultureInfo(attribute.Code, true);
-
+            // If Settings are new Attempt to set the culture to the system.
             Dispatcher.UIThread.InvokeAsync(() =>
             {
-                Thread.CurrentThread.CurrentCulture = culture;
-                Thread.CurrentThread.CurrentUICulture = culture;
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentCulture;
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.CurrentCulture;
             });
+            
         }
-
-        public static void ReadSettings()
-        {
-            try
-            {
-                var settingsContent = File.ReadAllText(AssistSettings.SettingsFilePath);
-                AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(settingsContent);
-            }
-            catch (Exception e)
-            {
-                Log.Fatal("Failed to Read Settings, Acting like Fresh Install.");
-            }
-        }
-
-        public static void SetupUpdator()
-        {
-            Log.Information("Starting Updator");
-            SquirrelAwareApp.HandleEvents(onInitialInstall: OnAppInstall, onAppUninstall: OnAppUninstall);
-        }
-
-        private static void OnAppInstall(SemanticVersion version, IAppTools tools)
-        {
-            tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
-        }
-
-        private static void OnAppUninstall(SemanticVersion version, IAppTools tools)
-        {
-            tools.RemoveShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
-        }
+        
+        AssistSettings.Save();
+        
     }
+    
+    
+    private string GetOperatingSystemProductName()
+    {
+        // Shoutout to Fmodel for this <3
+        // Added some other things cause other Platforms
+
+        if (!OperatingSystem.IsWindows())
+            return "Not Fucking Windows";
+        
+        var productName = string.Empty;
+        try
+        {
+            productName = WindowsUtils.BrandingFormatString("%WINDOWS_LONG%");
+        }
+        catch
+        {
+            // ignored
+        }
+
+        if (string.IsNullOrEmpty(productName))
+            productName = Environment.OSVersion.VersionString;
+
+        return $"{productName} ({(Environment.Is64BitOperatingSystem ? "64" : "32")}-bit)";
+    }
+    
+    public static void ChangeLanguage()
+    {
+        Log.Information("Changing Language");
+        var language = AssistSettings.Default.Language;
+        var attribute = language.GetAttribute<LanguageAttribute>();
+        Log.Information(attribute.Code);
+        var culture = new CultureInfo(attribute.Code, true);
+
+        Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+        });
+    }
+    
+    private static string GetApplicationDataFolder() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AssistData");
 }

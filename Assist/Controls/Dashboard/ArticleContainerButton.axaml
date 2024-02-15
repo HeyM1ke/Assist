@@ -1,0 +1,64 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Dashboard">
+    <Design.PreviewWith>
+        <controls:ArticleContainerButton Width="200"
+                                         Height="100"
+                                         />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ArticleContainerButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border BorderBrush="{DynamicResource AssistControlOutline}"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="0,0,0,2"
+                        Padding="10">
+                   <StackPanel VerticalAlignment="Center"
+                               HorizontalAlignment="Right">
+                       <StackPanel Orientation="Horizontal"
+                                   Spacing="8"
+                                   HorizontalAlignment="Right">
+                           <Image Source="/Assets/Default/Assist_Logo_White.png"
+                                  Width="16"
+                                  Height="16"
+                                  RenderOptions.BitmapInterpolationMode="MediumQuality"></Image>
+                           <TextBlock Text="NEWS"
+                                      TextWrapping="WrapWithOverflow"
+                                      HorizontalAlignment="Left"
+                                      TextAlignment="Left"
+                                      
+                                      FontWeight="Bold"></TextBlock>
+                       </StackPanel>
+                       <TextBlock Text="PATCH NOTES 8.0"
+                                  TextWrapping="WrapWithOverflow"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  TextAlignment="Left"
+                                  FontSize="17"
+                                  FontWeight="Medium"></TextBlock>
+                   </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|ArticleContainerButton:pointerover">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistControlOutline}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="controls|ArticleContainerButton[IsChecked=True]">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"/>
+        
+    </Style>
+    
+    <Style Selector="controls|ArticleContainerButton[IsEnabled=False]">
+        <!-- Set Defaults -->
+        
+    </Style>
+</Styles>

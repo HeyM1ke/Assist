@@ -1,0 +1,183 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rAccount="clr-namespace:Assist.ViewModels.RAccount"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.RAccount.RAccountUsernameLoginFormControl">
+    
+    <Border Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderThickness="1"
+            CornerRadius="20"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Padding="20">
+            <Grid>
+                <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                IsVisible="{Binding !MultiFactorEnabled}"
+                                Spacing="8">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="Sign In"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"
+                                   FontSize="24"/>
+                        
+                        
+                          <StackPanel MinWidth="293"
+                        Spacing="4">
+                
+                <StackPanel.Styles>
+                    <Style Selector="TextBox">
+                        <Setter Property="AcceptsReturn" Value="False"/>
+                        <Setter Property="AcceptsTab" Value="False"/>
+                        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+                        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+                    </Style>
+                </StackPanel.Styles>
+
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Username"
+                               FontWeight="Light"
+                               FontSize="13"
+                               HorizontalAlignment="Left"
+                               />
+                    <TextBox Watermark="Enter your Username"
+                             x:Name="UsernameBox"
+                             Height="35"
+                             Text="{Binding UsernameText}"
+                             />
+                </StackPanel>
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Password"
+                               FontWeight="Light"
+                               FontSize="13"
+                               HorizontalAlignment="Left"/>
+                    <TextBox PasswordChar="*" 
+                             Watermark="Enter your password"
+                             x:Name="PasswordBox"
+                             Height="35"
+                             Text="{Binding PasswordText}"
+                             />
+                </StackPanel>
+                
+                
+                <TextBlock FontWeight="Light"
+                           FontSize="13"
+                           Foreground="{DynamicResource AssistPrimaryColor}"
+                           HorizontalAlignment="Center"
+                           Text="{Binding ErrorMessage}"
+                           IsVisible="{Binding ErrorMessageVisible}"/>
+                
+                <Button Content="Login"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,5,0,0"
+                        Command="{Binding LoginButtonPressedCommand}"
+                        />
+                </StackPanel>
+            </StackPanel>
+                 <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                IsVisible="{Binding MultiFactorEnabled}"
+                                Spacing="8">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="Multifactor Code"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"
+                                   FontSize="24"
+                                   />
+                        
+                        
+                          <StackPanel MinWidth="293"
+                        Spacing="4">
+                
+                <StackPanel.Styles>
+                    <Style Selector="TextBox">
+                        <Setter Property="AcceptsReturn" Value="False"/>
+                        <Setter Property="AcceptsTab" Value="False"/>
+                        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+                        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+                    </Style>
+                </StackPanel.Styles>
+
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Your Account has Multi-factor Enabled. Please enter your code."
+                               MaxWidth="250"
+                               TextWrapping="WrapWithOverflow"
+                               TextAlignment="Center"
+                               FontWeight="Regular"
+                               FontSize="13"
+                               HorizontalAlignment="Center"
+                               />
+                    <TextBox Watermark="_ _ _ _ _ _"
+                             x:Name="MultiFactorBox"
+                             MaxLength="6"
+                             TextAlignment="Center"
+                             FontSize="70"
+                             Height="100"
+                             
+                             Text="{Binding MultifactorText}"
+                             />
+                </StackPanel>
+                              
+                
+                
+                <TextBlock FontWeight="Light"
+                           FontSize="13"
+                           Foreground="{DynamicResource AssistPrimaryColor}"
+                           HorizontalAlignment="Center"
+                           Text="{Binding ErrorMessage}"
+                           IsVisible="{Binding ErrorMessageVisible}"/>
+                
+                <Button Content="Submit"
+                        Height="50"
+                        Width="100"
+                        
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Margin="0,5,0,0"
+                        Command="{Binding SubmitButtonPressedCommand}"
+                        />
+                </StackPanel>
+            </StackPanel>
+        
+        <Border Background="{DynamicResource AssistControlBackground}"
+                Margin="-10"
+                CornerRadius="10"
+                IsVisible="{Binding IsProcessing}">
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Orientation="Vertical"
+                        Spacing="8">
+                <Image Width="65"
+                       Height="65"
+                       Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                       RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                <TextBlock Text="Processing..."
+                           FontWeight="SemiBold"
+                           FontSize="16"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+            </Grid>
+    </Border>
+</UserControl>

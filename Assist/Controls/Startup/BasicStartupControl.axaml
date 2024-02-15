@@ -1,0 +1,38 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Startup">
+    <Design.PreviewWith>
+        <controls:BasicStartupControl Width="332"
+                                      Height="190"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|BasicStartupControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistControlBackground}"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        >
+            
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="18">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="{TemplateBinding Message}"
+                                   FontWeight="SemiBold"
+                                   FontSize="16"/>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

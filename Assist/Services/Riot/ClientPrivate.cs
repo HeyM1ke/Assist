@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using DiscordRPC;
 using ValNet;
 using YamlDotNet.RepresentationModel;
 

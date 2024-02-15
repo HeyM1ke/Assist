@@ -1,0 +1,48 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:properties="clr-namespace:Assist.Properties"
+             xmlns:profileSwap="clr-namespace:Assist.Controls.ProfileSwap"
+             mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="670"
+             x:Class="Assist.Views.ProfileSwap.ProfileSwapView"
+             Initialized="ProfileSwapView_Init"
+             Unloaded="ProfileSwapView_Unload"
+             Background="{DynamicResource AssistBackground}">
+    <Grid RowDefinitions="*,50"
+          Margin="10">
+        
+        <ItemsControl VerticalAlignment="Center"
+                      HorizontalAlignment="Center"
+                      ItemsSource="{Binding ProfileControls}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"
+                                 Rows="3"></UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            
+            <ItemsControl.Styles>
+                <Style Selector="profileSwap|AccProfilePreviewControl">
+                    <Setter Property="Width" Value="320"/>
+                    <Setter Property="Height" Value="180"/>
+                    <Setter Property="Margin" Value="10,10"></Setter>
+                    
+                </Style>
+                
+                <Style Selector="profileSwap|AccProfileAddControl">
+                    <Setter Property="Width" Value="320"/>
+                    <Setter Property="Height" Value="180"/>
+                    <Setter Property="Margin" Value="10,10"></Setter>
+                </Style>
+            </ItemsControl.Styles>
+            
+        </ItemsControl>
+        
+        <Button Grid.Row="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="{x:Static properties:Resources.Common_BackText}"
+                Command="{Binding CloseViewCommand}"></Button>
+    </Grid>
+</UserControl>

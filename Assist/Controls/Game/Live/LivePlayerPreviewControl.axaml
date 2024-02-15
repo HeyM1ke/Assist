@@ -1,0 +1,114 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:game="clr-namespace:Assist.ViewModels.Game"
+             mc:Ignorable="d" d:DesignWidth="431" d:DesignHeight="114"
+             x:Class="Assist.Controls.Game.Live.LivePlayerPreviewControl"
+             Initialized="LivePlayerPreview_Init">
+    
+    <Design.DataContext>
+        <game:LivePlayerPreviewViewModel/>
+    </Design.DataContext>
+    
+    <Border Background="{DynamicResource AssistControlBackground}"
+            CornerRadius="12"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderThickness="1.2"
+            Padding="10">
+        <Grid ColumnDefinitions="Auto,*">
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal">
+                <Grid x:Name="LevelAndIconGrid">
+                    <asyncImageLoader:AdvancedImage Width="84"
+                                                    Height="84"
+                                                    Stretch="UniformToFill"
+                                                    Source="{Binding AgentIconUrl}"
+                                                    RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                    <Border Background="{DynamicResource AssistSecondaryBackground}"
+                            BorderBrush="{DynamicResource AssistControlOutline}"
+                            BorderThickness="1"
+                            CornerRadius="5"
+                            Height="16"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            >
+                        <TextBlock Text="{Binding LevelText}"
+                                   Margin="10,0"
+                                   FontSize="10"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   FontWeight="Bold"></TextBlock>
+                    </Border>
+                </Grid>
+                <StackPanel Orientation="Vertical" Spacing="-1"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding DodgeText}"
+                               FontSize="12"
+                               FontWeight="ExtraBold"
+                               IsVisible="{Binding DodgeVisible}"
+                               Foreground="{DynamicResource AssistPrimaryColor}"
+                               TextAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding PlayerName}"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource AssistForeground}"
+                                   TextAlignment="Left"></TextBlock>
+                        <TextBlock Text="{Binding TagLineText}"
+                                   IsVisible="{Binding TagLineVisible}"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource AssistForeground}"
+                                   TextAlignment="Left"
+                                   Opacity=".5"
+                                   VerticalAlignment="Bottom"
+                                   Margin="0,0,0,2"></TextBlock>
+                    </StackPanel>
+                    <TextBlock Text="{Binding SecondaryText}"
+                               FontSize="13"
+                               FontWeight="Regular"
+                               Foreground="{DynamicResource AssistForeground}"
+                               TextAlignment="Left"
+                               Opacity=".5"
+                               VerticalAlignment="Bottom"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical"
+                        Spacing="7"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <StackPanel.Styles>
+                    <Style Selector="asyncImageLoader|AdvancedImage">
+                        <Setter Property="Width" Value="32"/>
+                        <Setter Property="Height" Value="32"/>
+                        <Setter Property="Stretch" Value="UniformToFill"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                    </Style>
+                </StackPanel.Styles>
+                <asyncImageLoader:AdvancedImage Source="{Binding PathToReputation}"/>
+                <asyncImageLoader:AdvancedImage Source="{Binding RankIcon}"/>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="2"
+                            IsVisible="{Binding LastSeenVisible}">
+                    <Image Source="{SvgImage /Assets/Default/Clock_Icon.svg}"
+                           Stretch="UniformToFill"
+                           Width="13"
+                           Height="13"
+                           />
+                    <TextBlock Text="{Binding LastSeenText}"
+                               TextAlignment="Left"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               Opacity=".7"
+                    ></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

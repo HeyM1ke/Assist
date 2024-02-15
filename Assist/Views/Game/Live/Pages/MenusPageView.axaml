@@ -1,0 +1,107 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:live="clr-namespace:Assist.Controls.Game.Live"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.Game.Live.Pages.MenusPageView"
+             Initialized="MenuPage_Init"
+             Unloaded="MenuPageControl_OnUnloaded"
+             >
+    <Grid RowDefinitions="55,*">
+        <Grid Row="0"
+              VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Spacing="15"
+                        Orientation="Horizontal">
+                <TextBlock Text="{x:Static p:Resources.Common_Party_Caps}"
+                           FontWeight="Black"
+                           FontSize="44"
+                           VerticalAlignment="Center"
+                           TextAlignment="Left"
+                ></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding QueueName}"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Opacity=".5"
+                               VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text=" - " 
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Opacity=".5"
+                               VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{Binding PartySize}"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Opacity=".5"
+                               VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Spacing="8"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                
+                <StackPanel.Styles>
+                    <Style Selector="Button">
+                        <Setter Property="Width" Value="125"></Setter>
+                        <Setter Property="Height" Value="35"></Setter>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+                    </Style>
+                </StackPanel.Styles>
+                
+                <Button Classes="default"
+                        VerticalAlignment="Center"
+                        Content="Party Settings"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"></Button>
+                <Button Classes="default"
+                        VerticalAlignment="Center"
+                        Content="Recent Matches"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"></Button>
+            </StackPanel>
+            
+            <Rectangle VerticalAlignment="Bottom"
+                       
+                       HorizontalAlignment="Stretch"
+                       Height="1"
+                       Opacity=".3">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="100%,0%" StartPoint="0%,100%">
+                        <GradientStop Color="Transparent" Offset="0" />
+                        <GradientStop Color="{DynamicResource AssistPrimaryColor}" Offset=".02" />
+                        <GradientStop Color="{DynamicResource AssistPrimaryColor}" Offset=".5" />
+                        <GradientStop Color="{DynamicResource AssistPrimaryColor}" Offset=".98" />
+                        <GradientStop Color="Transparent" Offset="1" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+        
+        <Grid Row="1">
+            <ItemsControl ItemsSource="{Binding CurrentUsers}"
+                          VerticalAlignment="Center">
+                <ItemsControl.Styles>
+                    <Style Selector="live|MenuPartyPlayerControl">
+                        <Setter Property="Width" Value="226"></Setter>
+                        <Setter Property="Height" Value="575"></Setter>
+
+                    </Style>
+                </ItemsControl.Styles>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="7"
+                                    HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>
+
