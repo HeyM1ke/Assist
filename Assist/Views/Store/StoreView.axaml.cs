@@ -1,4 +1,5 @@
-﻿using Assist.ViewModels.Store;
+﻿using System;
+using Assist.ViewModels.Store;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -23,5 +24,13 @@ public partial class StoreView : UserControl
         if (Design.IsDesignMode) return;
 
         await _viewModel.SetupStoreView();
+    }
+
+    private async void Store_Init(object? sender, EventArgs e)
+    {
+        Log.Information("StoreOnloaded Event");
+        if (Design.IsDesignMode) return;
+
+        await _viewModel.Initialize();
     }
 }

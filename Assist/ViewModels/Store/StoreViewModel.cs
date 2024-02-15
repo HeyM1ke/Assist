@@ -5,7 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assist.Controls.Store;
 using Assist.Services;
+using Assist.Views.Game.Live.Pages;
+using Assist.Views.Store.Pages;
 using Avalonia;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Serilog;
 using ValNet.Objects.Exceptions;
@@ -16,14 +19,30 @@ namespace Assist.ViewModels.Store;
 public partial class StoreViewModel : ViewModelBase
 {
     static Dictionary<string, StoreStorageModel> PlayerStoreDictionary = new Dictionary<string, StoreStorageModel>();
+    static Dictionary<string, ValWallet> PlayerWalletDictionary = new Dictionary<string, ValWallet>();
     private static string lastProfileLoaded = string.Empty;
     private static ValOffers _offers;
     [ObservableProperty]private bool _loadingStore = true;
+    [ObservableProperty]private bool _nightMarketActive = false;
+    [ObservableProperty]private bool _accessoriesActive = false;
     [ObservableProperty] private string _offerTimerText;
+    [ObservableProperty] private string _vpText;
+    [ObservableProperty] private string _rpText;
+    [ObservableProperty] private string _kcText;
     [ObservableProperty] private List<string> _bundleTimerTexts = new List<string>();
     [ObservableProperty] private ObservableCollection<SkinOfferControl> _offerControls = new ObservableCollection<SkinOfferControl>();
     [ObservableProperty] private ObservableCollection<BundleOfferControl> _bundleControls = new ObservableCollection<BundleOfferControl>();
+
+    [ObservableProperty] private Control _currentContent;
     
+    public async Task Initialize()
+    {
+        CurrentContent = new MainStorePageView()
+        {
+            BundleControls = this.BundleControls,
+            OfferControls = OfferControls
+        };
+    }
     
     public async Task SetupStoreView()
     {
@@ -37,11 +56,57 @@ public partial class StoreViewModel : ViewModelBase
         if (store.Store.BonusStore is not null)
         {
             Log.Information("Night market is Active, Loading Night Market Tab");
+            NightMarketActive = true;
         }
-
+        
+        var wallet = await GetCurrentUserWallet();
+        HandleUserWallet(wallet);
+        
         LoadingStore = false;
     }
+
+    private async Task<ValWallet> GetCurrentUserWallet()
+    {
+        if (PlayerWalletDictionary.ContainsKey(AssistApplication.ActiveUser.UserData.sub))
+            return PlayerWalletDictionary[AssistApplication.ActiveUser.UserData.sub];
+        
+        
+        Log.Information("Wallet does not exist. Getting Wallet Data");
+        try
+        {
+            var wallet = await AssistApplication.ActiveUser.Store.GetPlayerWallet();
+            if (PlayerWalletDictionary.ContainsKey(AssistApplication.ActiveUser.UserData.sub)) PlayerWalletDictionary[AssistApplication.ActiveUser.UserData.sub] = wallet;
+            else PlayerWalletDictionary.TryAdd(AssistApplication.ActiveUser.UserData.sub, wallet);
+
+            return wallet;
+
+        }
+        catch (Exception e)
+        {
+            Log.Error("StorePageView -----");
+            Log.Error(e.Message);
+            Log.Error(e.StackTrace);
+
+            if (e is RequestException)
+            {
+                var exception = (RequestException)e;
+                Log.Error(exception.Content);
+            }
+            // Show failed to get store control.
+            return null;
+        }
+    }
     
+    private async void HandleUserWallet(ValWallet _wallet)
+    {
+        if (_wallet is null)
+            return;
+
+        VpText = $"{_wallet.Balances.ValorantPoints:n0}";
+        RpText = $"{_wallet.Balances.RadianitePoints:n0}";
+        KcText = $"{_wallet.Balances.KingdomCredits:n0}";
+    }
+
     public async Task<StoreStorageModel> GetCurrentUserStore()
     {
         if (PlayerStoreDictionary.ContainsKey(AssistApplication.ActiveUser.UserData.sub))
@@ -170,4 +235,6 @@ public partial class StoreViewModel : ViewModelBase
         public ValUserStore Store;
         public DateTime ResetTime;
     }
+
+    
 }

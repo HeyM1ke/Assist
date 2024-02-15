@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assist", "Assist.csproj", "{EAB15ED8-08F7-4E95-BF1C-852BB26CAEB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assist.Shared", "..\Assist.Shared\Assist.Shared\Assist.Shared.csproj", "{F9926DC5-0A5D-46F2-9E02-99F7FA7A4232}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assist.Shared", "..\..\Assist.Shared\Assist.Shared\Assist.Shared.csproj", "{87822688-AA35-467C-987C-1A41FA997E2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{EAB15ED8-08F7-4E95-BF1C-852BB26CAEB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAB15ED8-08F7-4E95-BF1C-852BB26CAEB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAB15ED8-08F7-4E95-BF1C-852BB26CAEB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9926DC5-0A5D-46F2-9E02-99F7FA7A4232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9926DC5-0A5D-46F2-9E02-99F7FA7A4232}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9926DC5-0A5D-46F2-9E02-99F7FA7A4232}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9926DC5-0A5D-46F2-9E02-99F7FA7A4232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87822688-AA35-467C-987C-1A41FA997E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87822688-AA35-467C-987C-1A41FA997E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87822688-AA35-467C-987C-1A41FA997E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87822688-AA35-467C-987C-1A41FA997E2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,54 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Store"
+        xmlns:lang="clr-namespace:Assist.Properties">
+    <Design.PreviewWith>
+        <controls:MenuSelectionOption Height="35"
+                                      Icon="{SvgImage /Assets/Icons/NM_Icon.svg}"
+                                      Content="{x:Static lang:Resources.Store_NightMarket}"
+                                      />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MenuSelectionOption">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Opacity" Value=".5"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="5"
+                        Padding="5,0,10,0">
+                    <StackPanel Spacing="1"
+                                Orientation="Horizontal">
+                        <Image Stretch="Uniform"
+                               Margin="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Source="{TemplateBinding Icon}"></Image>
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"></TextBlock>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|MenuSelectionOption:pointerover">
+        <Setter Property="Background" Value="#30E8E8E8"/>
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="controls|MenuSelectionOption[IsChecked=True]">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="#20E8E8E8"/>
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+    
+    <Style Selector="controls|MenuSelectionOption:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)" />
+    </Style>
+</Styles>
+

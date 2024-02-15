@@ -392,6 +392,27 @@
   <data name="Setup_SkipAssistAccountDescription" xml:space="preserve">
     <value>Skip creating an Assist Account and receive only basic features.</value>
   </data>
+  <data name="Store_Store" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="Store_Accessories" xml:space="preserve">
+    <value>Accessories</value>
+  </data>
+  <data name="Store_NightMarket" xml:space="preserve">
+    <value>Night Market</value>
+  </data>
+  <data name="Store_FeaturedBundles" xml:space="preserve">
+    <value>Featured Bundles</value>
+  </data>
+  <data name="Store_DailyOffers" xml:space="preserve">
+    <value>Daily Offers</value>
+  </data>
+  <data name="Store_BundleOverlook" xml:space="preserve">
+    <value>Bundle Overlook</value>
+  </data>
+  <data name="Store_BundleItemsContains" xml:space="preserve">
+    <value>Bundle Items</value>
+  </data>
   <data name="Startup_AttemptingToLogin" xml:space="preserve">
     <value>Attempting to login...</value>
   </data>

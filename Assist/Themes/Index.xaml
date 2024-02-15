@@ -28,6 +28,8 @@
     
     <StyleInclude Source="avares://Assist/Controls/Store/SkinOfferControl.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Store/BundleOfferControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Views/Store/Pages/MainStorePageView.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Store/MenuSelectionOption.axaml"/>
     
     <StyleInclude Source="avares://Assist/Controls/Game/Live/MenuPartyPlayerControl.axaml"/>
     

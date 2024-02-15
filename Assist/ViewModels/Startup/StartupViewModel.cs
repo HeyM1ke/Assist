@@ -67,6 +67,7 @@ public partial class StartupViewModel : ViewModelBase
             return;
         }
 
+        Log.Information("Checking for Assist Account Login");
         if (!string.IsNullOrEmpty(AssistSettings.Default.AssistUserCode))
         {
             Log.Information("Settings is Reading that an Assist Account exists. Attempting to login");
@@ -75,6 +76,10 @@ public partial class StartupViewModel : ViewModelBase
                 var t = await AssistApplication.AssistUser.Authentication.AuthenticateWithRefreshToken(AssistSettings
                     .Default
                     .GetAssistUserCode());
+                
+                Log.Information("Assist Account Login Successful");
+                Log.Information("Saving Account Code...");
+                AssistSettings.Default.SaveAssistUserCode(AssistApplication.AssistUser.userTokens.RefreshToken);
             }
             catch (Exception e)
             {
@@ -84,10 +89,6 @@ public partial class StartupViewModel : ViewModelBase
                 //AssistSettings.Default.AssistUserCode = "";
                 
             }
-            
-            Log.Information("Assist Account Login Successful");
-            Log.Information("Saving Account Code...");
-            AssistSettings.Default.SaveAssistUserCode(AssistApplication.AssistUser.userTokens.RefreshToken);
         }
         
         switch (AssistSettings.Default.AppType)

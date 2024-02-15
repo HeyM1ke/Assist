@@ -958,5 +958,68 @@ namespace Assist.Properties {
                 return ResourceManager.GetString("Startup_SwapAccount", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accessories.
+        /// </summary>
+        public static string Store_Accessories {
+            get {
+                return ResourceManager.GetString("Store_Accessories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bundle Items.
+        /// </summary>
+        public static string Store_BundleItemsContains {
+            get {
+                return ResourceManager.GetString("Store_BundleItemsContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bundle Overlook.
+        /// </summary>
+        public static string Store_BundleOverlook {
+            get {
+                return ResourceManager.GetString("Store_BundleOverlook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily Offers.
+        /// </summary>
+        public static string Store_DailyOffers {
+            get {
+                return ResourceManager.GetString("Store_DailyOffers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Featured Bundles.
+        /// </summary>
+        public static string Store_FeaturedBundles {
+            get {
+                return ResourceManager.GetString("Store_FeaturedBundles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Night Market.
+        /// </summary>
+        public static string Store_NightMarket {
+            get {
+                return ResourceManager.GetString("Store_NightMarket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Store.
+        /// </summary>
+        public static string Store_Store {
+            get {
+                return ResourceManager.GetString("Store_Store", resourceCulture);
+            }
+        }
     }
 }

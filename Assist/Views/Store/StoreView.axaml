@@ -4,43 +4,96 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:store="clr-namespace:Assist.Controls.Store"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:pages="clr-namespace:Assist.Views.Store.Pages"
+             xmlns:lang="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="652"
              x:Class="Assist.Views.Store.StoreView"
-             Loaded="Store_OnLoaded">
+             Loaded="Store_OnLoaded"
+             Initialized="Store_Init">
     <Grid RowDefinitions="*,35">
-        <Grid  ColumnDefinitions="780,*">
+        <TransitioningContentControl Grid.Row="0"
+                                     Content="{Binding CurrentContent}">
             
-            <ItemsControl Grid.Column="0"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          ItemsSource="{Binding BundleControls}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="1"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+        </TransitioningContentControl>
+        
+        <Grid Row="1"
+              IsVisible="{Binding !LoadingStore}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                <store:MenuSelectionOption Icon="{SvgImage /Assets/Icons/RegStore_Icon.svg}"
+                                           IsChecked="True"
+                                           Content="{x:Static lang:Resources.Store_Store}"></store:MenuSelectionOption>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           IsVisible="{Binding AccessoriesActive}"></Rectangle>
+                <store:MenuSelectionOption Icon="{SvgImage /Assets/Icons/Accessories_Icon.svg}"
+                                           Content="{x:Static lang:Resources.Store_Accessories}"
+                                           IsVisible="{Binding AccessoriesActive}"></store:MenuSelectionOption>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           IsVisible="{Binding NightMarketActive}"></Rectangle>
+                <store:MenuSelectionOption Icon="{SvgImage /Assets/Icons/NM_Icon.svg}"
+                                           Content="{x:Static lang:Resources.Store_NightMarket}"
+                                           IsVisible="{Binding NightMarketActive}"></store:MenuSelectionOption>
+                
+            </StackPanel>
             
-            <ItemsControl Grid.Column="1" VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          ItemsSource="{Binding OfferControls}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Spacing="8"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Styles>
-                    <Style Selector="store|SkinOfferControl">
-                        <Setter Property="Width"
-                                Value="365"
-                                />
-                        <Setter Property="Height"
-                                Value="144"
-                        />
-                    </Style>
-                </ItemsControl.Styles>
-            </ItemsControl>
-            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Spacing="10"
+                        Margin="0,0,0,0">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+                    <Image Source="/Assets/Extras/VP_Icon.png"
+                           Width="16"
+                           Height="16"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                    <TextBlock Text="{Binding VpText}"
+                               TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontWeight="Regular"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           IsVisible="{Binding AccessoriesActive}"></Rectangle>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+                    <Image Source="/Assets/Extras/RP_Icon.png"
+                           Width="16"
+                           Height="16"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                    <TextBlock Text="{Binding RpText}"
+                               TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontWeight="Regular"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           IsVisible="{Binding NightMarketActive}"></Rectangle>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+                    <Image Source="/Assets/Extras/KC_Icon.png"
+                           Width="16"
+                           Height="16"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                    <TextBlock Text="{Binding KcText}"
+                               TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontWeight="Regular"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                
+            </StackPanel>
         </Grid>
         
         <Panel Grid.RowSpan="2"
@@ -49,7 +102,8 @@
                HorizontalAlignment="Stretch"
                Background="#50000000"
                Margin="-10"
-               IsVisible="{Binding LoadingStore}">
+               IsVisible="{Binding LoadingStore}"
+               >
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom" Spacing="20">

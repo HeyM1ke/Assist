@@ -31,7 +31,7 @@ class Program
         
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .UseSkia()
+            .UseSkia().With(new SkiaOptions { UseOpacitySaveLayer = true })
             .LogToTrace();
     }
 }
