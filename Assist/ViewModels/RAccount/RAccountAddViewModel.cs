@@ -112,6 +112,8 @@ public partial class RAccountAddViewModel : ViewModelBase
        {
            Log.Information("There are no Riot Client Installs Detected.");
            Log.Information("There are no Riot Client Installs Detected.");
+           NoSecondaryLoginCommandCommand.Execute(null);
+           return;
        }
        
        Log.Information("There exists a Riot Client on the computer");

@@ -32,7 +32,8 @@
                    <TextBlock Text="You are currently not logged in."
                               HorizontalAlignment="Left"></TextBlock>
                    <Button Content="{x:Static lang:Resources.Authentication_LoginText}"
-                           HorizontalAlignment="Right"></Button>
+                           HorizontalAlignment="Right"
+                           Command="{Binding OpenAssistLoginPopupCommand}"></Button>
                </Grid>
             </Grid>
             

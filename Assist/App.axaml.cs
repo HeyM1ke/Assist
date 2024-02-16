@@ -66,8 +66,8 @@ public partial class App : Application
     }
     private void OnStartup()
     {
-        CreateLogger();
         CreateDirectories();
+        CreateLogger();
         CheckForSettings();
         ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader();
     }
