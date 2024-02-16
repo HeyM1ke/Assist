@@ -23,6 +23,7 @@ using AssistUser.Lib;
 using AssistUser.Lib.V2;
 using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
+using Velopack;
 
 namespace Assist.ViewModels;
 
@@ -224,5 +225,50 @@ public static class AssistApplication
             desktop.MainWindow = main;
             
         }
+    }
+    
+    public static async Task<bool> CheckForUpdates()
+    {
+#if (!DEBUG)
+
+            if (OperatingSystem.IsWindows())
+            {
+                try
+                {
+                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/beta/win/");
+                    var newVer = await mgr.CheckForUpdatesAsync();
+                    if (newVer == null)
+                        return false;
+                    
+                   return true;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
+
+            if (OperatingSystem.IsMacOS())
+            {
+                try
+                {
+                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/beta/mac/");
+                    var newVer = await mgr.CheckForUpdatesAsync();
+                    if (newVer == null)
+                        return false;
+                    
+                    return true;
+
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
+            
+#endif
+
+        return false;
+
     }
 }

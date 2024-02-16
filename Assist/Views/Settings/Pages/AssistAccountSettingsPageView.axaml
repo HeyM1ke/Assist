@@ -2,9 +2,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Assist.Views.Settings.Pages.AssistAccountSettingsPageView">
+             x:Class="Assist.Views.Settings.Pages.AssistAccountSettingsPageView"
+             >
     <Grid>
-        <TextBlock Text="Assist Settings"></TextBlock>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Image Width="100"
+                       HorizontalAlignment="Left"
+                       Source="/Assets/Default/AssistText_Temp.png"
+                       RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                <TextBlock Text="{x:Static lang:Resources.Common_Account}"
+                           FontWeight="SemiBold"
+                           FontSize="23"
+                           Opacity=".3"
+                           HorizontalAlignment="Left"
+                           TextAlignment="Center"/>
+            </StackPanel>
+            <Rectangle Height="1"
+                       HorizontalAlignment="Stretch"
+                       Fill="{DynamicResource AssistControlOutline}"
+                       IsVisible="True"
+                       Margin="0,0,0,10"/>
+            <Grid x:Name="LoggedOutGrid"
+                  IsVisible="{Binding !CurrentlyLoggedIn}">
+               <Grid>
+                   <TextBlock Text="You are currently not logged in."
+                              HorizontalAlignment="Left"></TextBlock>
+                   <Button Content="{x:Static lang:Resources.Authentication_LoginText}"
+                           HorizontalAlignment="Right"></Button>
+               </Grid>
+            </Grid>
+            
+            <Grid x:Name="LoggedInGrid"
+                  IsVisible="{Binding CurrentlyLoggedIn}">
+                <Grid>
+                    <TextBlock Text="You are currently logged in."
+                               HorizontalAlignment="Left"></TextBlock>
+                </Grid>
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>

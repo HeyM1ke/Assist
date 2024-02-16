@@ -289,6 +289,10 @@ public class ValorantHelper
         
         public static async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
         {
+            if (data is null)
+                return new PlayerPresence();
+            
+            
             if (string.IsNullOrEmpty(data.Private))
                 return new PlayerPresence();
             byte[] stringData = Convert.FromBase64String(data.Private);

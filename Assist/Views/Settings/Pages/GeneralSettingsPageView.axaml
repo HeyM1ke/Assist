@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Views.Settings.Pages.GeneralSettingsPageView">
     <StackPanel Spacing="8">
-        <Grid>
+        <Grid IsVisible="False">
             <TextBlock Text="Change Resolution"
                        VerticalAlignment="Center"/>
             <ComboBox HorizontalAlignment="Right"
@@ -16,14 +16,15 @@
             </ComboBox>
         </Grid>
                             
-        <Grid>
-            <TextBlock Text="Language"
-                       VerticalAlignment="Center"/>
+        <Grid IsVisible="False">
+            <TextBlock Text="Assist Mode"
+                       VerticalAlignment="Center"
+                       />
             <ComboBox HorizontalAlignment="Right"
                       VerticalAlignment="Center">
-                <ComboBoxItem Content="English"></ComboBoxItem>
-                <ComboBoxItem Content="Spanish"></ComboBoxItem>
-                <ComboBoxItem Content="French"></ComboBoxItem>
+                <ComboBoxItem Content="Launcher Only"></ComboBoxItem>
+                <ComboBoxItem Content="Game Only"></ComboBoxItem>
+                <ComboBoxItem Content="Complete Suite"></ComboBoxItem>
             </ComboBox>
         </Grid>
                             

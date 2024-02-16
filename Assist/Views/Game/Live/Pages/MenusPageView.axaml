@@ -44,7 +44,8 @@
             <StackPanel Orientation="Horizontal"
                         Spacing="8"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        IsVisible="False">
                 
                 <StackPanel.Styles>
                     <Style Selector="Button">

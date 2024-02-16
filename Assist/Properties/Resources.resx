@@ -184,6 +184,9 @@
   <data name="Common_Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="Common_Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
   <data name="Common_Support" xml:space="preserve">
     <value>Support</value>
   </data>

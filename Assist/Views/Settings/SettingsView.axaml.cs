@@ -17,5 +17,19 @@ public partial class SettingsView : UserControl
         DataContext = _viewModel = new SettingsViewModel();
         InitializeComponent();
     }
-    
+
+    private async void SettingsView_Loaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+            return;
+        _viewModel.SwitchToGeneral();
+    }
+
+    private void SettingsView_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+            return;
+
+        _viewModel.SetUnknown();
+    }
 }

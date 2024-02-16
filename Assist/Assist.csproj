@@ -44,7 +44,7 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.0" />
         <PackageReference Include="System.Management" Version="8.0.0" />
         <PackageReference Include="System.Text.Json" Version="8.0.1" />
-        <PackageReference Include="Velopack" Version="0.0.320" />
+        <PackageReference Include="Velopack" Version="0.0.327" />
         <PackageReference Include="websocketsharp.core" Version="1.0.0" />
         <PackageReference Include="YamlDotNet" Version="15.1.0" />
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1185.39" />

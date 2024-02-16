@@ -8,6 +8,8 @@
              xmlns:pages="clr-namespace:Assist.Views.Settings.Pages"
              mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="590"
              x:Class="Assist.Views.Settings.SettingsView"
+             Loaded="SettingsView_Loaded"
+             Unloaded="SettingsView_Unloaded"
              >
     
     <Design.DataContext>
@@ -60,9 +62,11 @@
                         </StackPanel.Styles>
                         
                         <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_General}"
-                                                   IsChecked="True"></assist:MenuSelectorButton>
+                                                   IsChecked="{Binding GeneralChecked}"
+                                                   Command="{Binding SwitchToGeneralCommand}"></assist:MenuSelectorButton>
                         <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_Sound}"
-                                                   Command="{Binding SwitchToSoundCommand}"></assist:MenuSelectorButton>
+                                                   Command="{Binding SwitchToSoundCommand}"
+                                                   IsVisible="False"></assist:MenuSelectorButton>
                         <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_AssistAccount}"
                                                    Command="{Binding SwitchToAssistAccountCommand}"></assist:MenuSelectorButton>
                         <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_RiotAccounts}"
@@ -74,7 +78,7 @@
                             VerticalAlignment="Bottom"
                             VerticalContentAlignment="Center"
                             Classes="default"
-                            Height="29"
+                            Height="32"
                             Width="50"
                             Padding="0"
                             Command="{Binding ReturnToPreviousPageCommand}"></Button>

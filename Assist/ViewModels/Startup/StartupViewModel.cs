@@ -49,7 +49,7 @@ public partial class StartupViewModel : ViewModelBase
         NavigationContainer.ViewModel.HideAllButtons();
         // Check for Dependency
         await DependencyUtils.CheckDepends();
-        var newVersion = await CheckForUpdates();
+        var newVersion = await AssistApplication.CheckForUpdates();
         
         if(newVersion)
         {
@@ -287,48 +287,4 @@ public partial class StartupViewModel : ViewModelBase
         Log.Information("Finished Setting up Riot Account as the Main User & To the settings.");
     }
     
-    public async Task<bool> CheckForUpdates()
-        {
-#if (!DEBUG)
-
-            if (OperatingSystem.IsWindows())
-            {
-                try
-                {
-                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/beta/win/");
-                    var newVer = await mgr.CheckForUpdatesAsync();
-                    if (newVer == null)
-                        return false;
-                    
-                   return true;
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e.Message);
-                }
-            }
-
-            if (OperatingSystem.IsMacOS())
-            {
-                try
-                {
-                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/live/mac/");
-                    var newVer = await mgr.CheckForUpdatesAsync();
-                    if (newVer == null)
-                        return false;
-                    
-                    return true;
-
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e.Message);
-                }
-            }
-            
-#endif
-
-            return false;
-
-        }
 }

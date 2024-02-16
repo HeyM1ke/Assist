@@ -83,7 +83,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 {
                     Log.Information("Player Presence was found.");
                     
-                    if (!Player.PlayerIdentity.Incognito || AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-developer-testing") || true) // If Incognito is True, then streamer mode is enabled.
+                    if (!Player.PlayerIdentity.Incognito || AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-developer-testing")) // If Incognito is True, then streamer mode is enabled.
                         if (pData != null)
                         {
                             if (!_usingAssistProfile)
@@ -253,7 +253,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
         {
             if (Player != null)
             {
-                if (!Player.PlayerIdentity.Incognito || AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-developer-testing") || true)
+                if (!Player.PlayerIdentity.Incognito || AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-developer-testing"))
                 {
                     if (!_usingAssistProfile)
                     {
@@ -276,7 +276,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
 
             if (CorePlayer != null)
             {
-                if (!CorePlayer.PlayerIdentity.Incognito || AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-developer-testing") || true)
+                if (!CorePlayer.PlayerIdentity.Incognito || AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-developer-testing"))
                 {
                     if (!_usingAssistProfile)
                     {

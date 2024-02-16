@@ -102,7 +102,7 @@
                VerticalAlignment="Stretch"
                HorizontalAlignment="Stretch"
                Background="#50000000"
-               Margin="-10"
+               Margin="0"
                IsVisible="{Binding LoadingStore}"
                >
             <StackPanel Orientation="Horizontal"

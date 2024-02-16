@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Assist.Controls.Game.Live;
 using Assist.Core.Helpers;
 using Assist.Models.Socket;
+using Assist.Services.Assist;
+using Assist.Shared.Models.Assist;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Serilog;
@@ -33,7 +35,7 @@ public partial class MenusPageViewModel : ViewModelBase
             RiotWebsocketServiceOnUserPresenceMessageEvent(start);
         }
         
-            
+        CheckAndHandleRecentMatchTracking();
         //EndorseEnabled = true;
     }
 
@@ -328,4 +330,43 @@ public partial class MenusPageViewModel : ViewModelBase
             Log.Information("Page is Unloaded, Unsubbing from Events from MenusPageView");
             AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
         }
+        
+        private async void CheckAndHandleRecentMatchTracking()
+        {
+            var allUnfinished = RecentService.Current.RecentMatches.FindAll(x => !x.IsCompleted);
+
+            foreach (var unfinishedMatch in allUnfinished)
+            {
+                // This is ran in the menus, meaning this is assuming no game is currently going on within the current CLient.
+
+                if (unfinishedMatch.Result != RecentMatch.MatchResult.REMAKE)
+                {
+                    /*if (!unfinishedMatch.OwningPlayer.Equals(AssistApplication.Current.CurrentUser.UserData.sub))
+                    {
+                        if (DateTime.Now.ToUniversalTime() > unfinishedMatch.DateOfMatch.ToUniversalTime().AddMinutes(5)) RecentService.Current.RemoveMatch(unfinishedMatch.MatchId);
+                        return;
+                    }*/
+
+                    if (unfinishedMatch.Players.Count == 1 && string.IsNullOrEmpty(unfinishedMatch.Gamemode)){
+                        Log.Information("Deleted Faulty Custom Game Match");
+                        RecentService.Current.RemoveMatch(unfinishedMatch.MatchId);
+                        continue;
+                    }
+                    
+                    await RecentService.Current.UpdateMatch(unfinishedMatch.MatchId);
+                    
+                    var updatedMatch =
+                        RecentService.Current.RecentMatches.Find(x => x.MatchId.Equals(unfinishedMatch.MatchId));
+
+                    if (!updatedMatch.IsCompleted && updatedMatch.MatchTrack_LastState.Equals("PREGAME", StringComparison.OrdinalIgnoreCase))  // This means that the match is still not finished while the player is in the match.
+                    {
+                        Log.Information("Found match that is not valid. Marking as Remake");
+                        updatedMatch.MatchTrack_LastState = "MENUS";
+                        updatedMatch.Result = RecentMatch.MatchResult.REMAKE;
+                        RecentService.Current.UpdateMatch(updatedMatch);
+                    }
+                }
+            }
+        }
+        
 }
