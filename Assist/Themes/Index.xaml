@@ -35,6 +35,8 @@
     <StyleInclude Source="avares://Assist/Controls/Store/MenuSelectionOption.axaml"/>
     
     <StyleInclude Source="avares://Assist/Controls/Game/Live/MenuPartyPlayerControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Game/MatchTrack/MatchTrackTeammateDisplayControl.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Game/MatchTrack/MatchTrackTeamShowcaseControl.axaml"/>
     
     <Style Selector="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>

@@ -121,7 +121,11 @@ public partial class RAccountAddViewModel : ViewModelBase
            
            AssistApplication.ActiveAccountProfile.CanLauncherBoot = true;
            await AccountSettings.Default.UpdateAccount(AssistApplication.ActiveAccountProfile);
-           NoSecondaryLoginCommandCommand?.Execute(null);
+           _sequenceControls.Clear();
+           _sequenceHistory.Clear();
+           GC.Collect();
+        
+           await AssistApplication.SetupComplete_Launcher();
            return;
        }
        

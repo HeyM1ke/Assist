@@ -1,0 +1,46 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Game.MatchTrack"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:MatchTrackTeammateDisplayControl />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MatchTrackTeammateDisplayControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="152, *, Auto">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="3">
+                        <asyncImageLoader:AdvancedImage Width="24"
+                                                        Height="24"
+                                                        Source="{TemplateBinding AgentIcon}"/>
+                        <TextBlock Text="{TemplateBinding TeammateName}"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontWeight="Regular"
+                                   FontSize="13"
+                                   TextAlignment="Left"
+                                   MaxWidth="150"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource AssistForeground}"/>
+                    </StackPanel>
+                    
+                    <asyncImageLoader:AdvancedImage Source="{TemplateBinding RankIcon}"
+                                                    Margin="3"
+                                                    Grid.Column="1"/>
+                    
+                    <TextBlock Text="{TemplateBinding Statline}"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Regular"
+                               FontSize="13"
+                               MinWidth="70"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Grid.Column="2"
+                               Foreground="{DynamicResource AssistForeground}"/>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
