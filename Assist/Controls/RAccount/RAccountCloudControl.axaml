@@ -20,14 +20,14 @@
                                                                              Height="650"
                                                                              Content="{Binding CurrentContent}"
                                                                              IsVisible="{Binding WebviewVisible}"/>
-            <TextBlock HorizontalAlignment="Center"
-                       VerticalAlignment="Bottom"
-                       Text="{x:Static lang:Resources.Authentication_CloudLoginInstructions}"
-                       FontWeight="SemiBold"
-                       Opacity=".7"
-                       IsVisible="{Binding WebviewVisible}"/>
+           
         </StackPanel>
-        
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Text="{x:Static lang:Resources.Authentication_CloudLoginInstructions}"
+                   FontWeight="Medium"
+                   Opacity=".7"
+                   IsVisible="{Binding WebviewVisible}"/>
         <TextBlock HorizontalAlignment="Center"
                  VerticalAlignment="Center"
                  Text="{x:Static lang:Resources.Common_Loading}"
