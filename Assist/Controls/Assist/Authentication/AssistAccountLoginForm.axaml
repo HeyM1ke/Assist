@@ -178,10 +178,13 @@
                            Source="/Assets/Default/Assist_Logo_SweetRed.png"
                            RenderOptions.BitmapInterpolationMode="MediumQuality"/>
                         
-                    <TextBlock Text="{Binding IsProcessing}"
+                    <TextBlock Text="{x:Static lang:Resources.Common_Loading}"
                                FontWeight="SemiBold"
                                FontSize="16"
                                HorizontalAlignment="Center"/>
+                    
+                    <Button Content="{x:Static lang:Resources.Common_BackText}"
+                            Command="{Binding CancelOAuthCommand}"></Button>
                 </StackPanel>
             </Border>
         </Grid>

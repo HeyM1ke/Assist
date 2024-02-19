@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rAccount="clr-namespace:Assist.ViewModels.RAccount"
+             xmlns:lang="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Controls.RAccount.RAccountSecondaryClientLoginControl">
     
@@ -32,18 +33,18 @@
                                RenderOptions.BitmapInterpolationMode="MediumQuality"/>
                         
                         <TextBlock Text="Sign In with Riot Client"
-                                   FontWeight="ExtraBold"
+                                   FontWeight="SemiBold"
                                    TextAlignment="Center"
                                    FontSize="24"/>
                         
-                        <TextBlock FontWeight="Light"
+                        <TextBlock FontWeight="Regular"
                                    FontSize="13"
-                                   
+                                   Foreground="{DynamicResource AssistPrimaryColor}"
                                    HorizontalAlignment="Center"
                                    TextWrapping="WrapWithOverflow"
                                    Width="300"
                                    TextAlignment="Center"
-                                   Text="When you login please enable ”Remember Me” on all options available."
+                                   Text="{x:Static lang:Resources.Authentication_RiotClientTitleInstructions}"
                                    />
                 
                         <Button Content="Launch Client"
@@ -74,7 +75,8 @@
                         
                         <Button Content="Cancel"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"></Button>
+                                VerticalAlignment="Center"
+                                Command="{Binding CancelRiotClientCommand}"></Button>
                     </StackPanel>
                 </Border>
             </Grid>

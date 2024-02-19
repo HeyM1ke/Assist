@@ -199,6 +199,11 @@
                                FontWeight="SemiBold"
                                FontSize="16"
                                HorizontalAlignment="Center"/>
+                    <Button Content="{x:Static lang:Resources.Common_BackText}"
+                            HorizontalAlignment="Center"
+                            Classes="default"
+                            Width="50"
+                            Command="{Binding CancelOAuthCommand}"/>
                 </StackPanel>
             </Border>
         </Grid>

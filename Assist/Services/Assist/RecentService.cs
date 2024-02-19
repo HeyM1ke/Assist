@@ -159,7 +159,7 @@ public class RecentService
             if (e.StatusCode == HttpStatusCode.BadRequest)
             {
                 Log.Fatal("Token Error while getting match histoy: ");
-                //await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
                 await FillMatches();
                 return;
             }
@@ -206,7 +206,7 @@ public class RecentService
             
                 if(e.StatusCode == HttpStatusCode.BadRequest){
                     Log.Fatal("Token Error while getting match details: ");
-                    //await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
                     return await GetMatchData(matchId);
                 }
             }

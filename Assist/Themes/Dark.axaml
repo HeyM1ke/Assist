@@ -30,6 +30,11 @@
     <Color x:Key="TwitchPurple">#9046ff</Color>
     <Color x:Key="TwitchPurple75">#4B9046ff</Color>
     
+    <LinearGradientBrush x:Key="AssistGrad"  EndPoint="25%,0%" StartPoint="25%,100%">
+        <GradientStop Color="#F71D51" Offset="0" />
+        <GradientStop Color="#00F71D51" Offset="1" />
+    </LinearGradientBrush>
+    
     <LinearGradientBrush x:Key="SelectGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
         <GradientStop Color="#00A3FF" Offset="0" />
         <GradientStop Color="Transparent" Offset="1" />

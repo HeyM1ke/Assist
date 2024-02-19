@@ -3,16 +3,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Assist.Views.Settings.Pages.GeneralSettingsPageView">
+             x:Class="Assist.Views.Settings.Pages.GeneralSettingsPageView"
+             Initialized="General_Init">
     <StackPanel Spacing="8">
-        <Grid IsVisible="False">
+        <Grid IsVisible="True">
             <TextBlock Text="Change Resolution"
                        VerticalAlignment="Center"/>
+            
             <ComboBox HorizontalAlignment="Right"
-                      VerticalAlignment="Center">
-                <ComboBoxItem Content="Small"></ComboBoxItem>
-                <ComboBoxItem Content="Regular"></ComboBoxItem>
-                <ComboBoxItem Content="Big"></ComboBoxItem>
+                      VerticalAlignment="Center"
+                      SelectionChanged="ResolutionControl_Changed"
+                      ItemsSource="{Binding ResolutionItems}"
+                      SelectedIndex="{Binding ResolutionIndex}">
+                
             </ComboBox>
         </Grid>
                             

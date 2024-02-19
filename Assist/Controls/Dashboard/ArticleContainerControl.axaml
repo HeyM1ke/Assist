@@ -4,35 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
+             xmlns:dashboard1="clr-namespace:Assist.ViewModels.Dashboard"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Assist.Controls.Dashboard.ArticleContainerControl">
+             x:Class="Assist.Controls.Dashboard.ArticleContainerControl"
+             Initialized="ArticleContainer_Init">
+    
+    <Design.DataContext>
+        <dashboard1:ArticleContainerViewModel/>
+    </Design.DataContext>
+    
     <Border Background="{DynamicResource AssistControlBackground}"
             BorderBrush="{DynamicResource AssistControlOutline}"
             CornerRadius="10"
             BorderThickness="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
             ClipToBounds="True">
-        <Grid ColumnDefinitions="*,200">
-            <Grid Column="0"
-                  x:Name="CoreGrid"
-                  VerticalAlignment="Center">
-            <asyncImageLoader:AdvancedImage Source="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt05b6f34806210a43/65a9be2b7fc0001446223f49/Val_Ep7_PatchNotes_8.1.jpg"
-                                            Stretch="UniformToFill"/>
-            </Grid>
+        <Grid>
+            <TransitioningContentControl HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch" Content="{Binding FeaturedArticle}">
             
-            <Grid Column="1"
-                  x:Name="ContainerGrid"
-                  VerticalAlignment="Stretch">
-            <UniformGrid Rows="3"
-                         Columns="1"
-                         VerticalAlignment="Stretch"
-                         
-                         ClipToBounds="True">
-                <dashboard:ArticleContainerButton VerticalAlignment="Stretch"
-                                                  />
-                <dashboard:ArticleContainerButton VerticalAlignment="Stretch"/>
-                <dashboard:ArticleContainerButton VerticalAlignment="Stretch"/>
-            </UniformGrid>
-            </Grid>
+        </TransitioningContentControl>
+        
+        <ItemsControl ItemsSource="{Binding ArticleButtons}"
+                      Margin="10">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                ClipToBounds="True"
+                                Spacing="10"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+                    
+            <ItemsControl.Styles>
+                <Style Selector="dashboard|ArticleContainerButton">
+                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                    <Setter Property="Width" Value="30"></Setter>
+                    <Setter Property="Height" Value="30"></Setter>
+                </Style>
+            </ItemsControl.Styles>
+                    
+        </ItemsControl>
         </Grid>
     </Border>
 </UserControl>

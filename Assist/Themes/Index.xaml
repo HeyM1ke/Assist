@@ -19,6 +19,9 @@
     <StyleInclude Source="avares://Assist/Controls/Setup/AssistAccountSelectionControl.axaml"/>
     
     <StyleInclude Source="avares://Assist/Controls/Dashboard/ArticleContainerButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Dashboard/FeaturedArticleControl.axaml"/>
+    
+    <StyleInclude Source="avares://Assist/Controls/Progression/DailyTicketDiamond.axaml"/>
     
     <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountMethodSelectionControl.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountSecondarySelectionControl.axaml"/>

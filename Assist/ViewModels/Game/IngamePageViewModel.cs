@@ -73,8 +73,8 @@ public partial class IngamePageViewModel : ViewModelBase
             if (e.StatusCode == HttpStatusCode.BadRequest)
             {
                 Log.Fatal("TOKEN ERROR: " + e.Message);
-                //await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                //await this.PageSetup();
+                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+                await this.PageSetup();
                 return;
             }
         }
@@ -127,7 +127,7 @@ public partial class IngamePageViewModel : ViewModelBase
             if (e.StatusCode == HttpStatusCode.BadRequest)
             {
                 Log.Fatal("PREGAME TOKEN ERROR: ");
-                //AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
             }
 
             return;

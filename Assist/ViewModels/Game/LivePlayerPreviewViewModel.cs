@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assist.Core.Helpers;
 using Assist.Models.Game;
+using Assist.Properties;
 using Assist.Services.Assist;
 using Avalonia.Media;
 using Avalonia.Threading;
@@ -16,16 +17,15 @@ namespace Assist.ViewModels.Game;
 public partial class LivePlayerPreviewViewModel : ViewModelBase
 {
     private const string DefaultPlayerName = "Player";
-    [ObservableProperty] private string _agentIconUrl;
+    [ObservableProperty] private string _agentIconUrl = $"https://cdn.assistval.com/agents/unknown_displayicon.png";
     [ObservableProperty] private string _levelText;
     
     [ObservableProperty] private string _playerName = DefaultPlayerName;
     [ObservableProperty] private string _tagLineText = "";
     [ObservableProperty] private bool _tagLineVisible = false;
-    [ObservableProperty] private string _secondaryText = ""; // Agent Text or Player Name
+    [ObservableProperty] private string _secondaryText = Resources.Common_Selecting; // Agent Text or Player Name
     [ObservableProperty] private string _dodgeText = "";
     [ObservableProperty] private bool _dodgeVisible = false;
-    
     // Right Hand Details
     [ObservableProperty] private string _lastSeenText= "";
     [ObservableProperty] private bool _lastSeenVisible = false;
@@ -192,7 +192,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                         var t = await ValorantHelper.GetPresenceData(pData);
                         PlayerCompetitiveTier = t.competitiveTier;
                         RankIcon =
-                            $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                            $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                         LevelText = $"{t.accountLevel:N0}";
                         _playerId = pData.puuid;
                         _playerRealName = $"{pData.game_name}#{pData.game_tag}";
@@ -209,7 +209,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 try
                 {
                     // Set Agent Icon
-                    AgentIconUrl = $"https://content.assistapp.dev/agents/{CorePlayer.CharacterID}_displayicon.png";
+                    AgentIconUrl = $"https://cdn.assistval.com/agents/{CorePlayer.CharacterID}_displayicon.png";
                     // Set Agent Name
                     if (!UsingAssistProfile)
                         SecondaryText = ValorantHelper.AgentIdToNames?[CorePlayer.CharacterID.ToLower()];
@@ -269,7 +269,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
 
                 PlayerCompetitiveTier = playerStorage.CompetitiveTier;
                 RankIcon =
-                    $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{playerStorage.CompetitiveTier}.png";
+                    $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{playerStorage.CompetitiveTier}.png";
                 LevelText = $"{_player.PlayerIdentity.AccountLevel:N0}";
                 _playerRealName = $"{playerStorage.GameName}#{playerStorage.Tagline}";
             }
@@ -292,7 +292,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
 
                 PlayerCompetitiveTier = playerStorage.CompetitiveTier;
                 RankIcon =
-                    $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{playerStorage.CompetitiveTier}.png";
+                    $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{playerStorage.CompetitiveTier}.png";
                 LevelText = $"{CorePlayer.PlayerIdentity.AccountLevel:N0}";
                 _playerRealName = $"{playerStorage.GameName}#{playerStorage.Tagline}";
             }

@@ -9,15 +9,24 @@
              Initialized="CloudWebview_Init">
     <Grid HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
-        <TransitioningContentControl Padding="20"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"
-                                     Width="1000"
-                                     Height="650"
-                                     Content="{Binding CurrentContent}"
-                                     IsVisible="{Binding WebviewVisible}">
-        
-        </TransitioningContentControl>
+        <StackPanel HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    IsVisible="{Binding WebviewVisible}"
+                    >
+            <TransitioningContentControl Padding="20"
+                                                                             HorizontalAlignment="Stretch"
+                                                                             VerticalAlignment="Stretch"
+                                                                             Width="1000"
+                                                                             Height="650"
+                                                                             Content="{Binding CurrentContent}"
+                                                                             IsVisible="{Binding WebviewVisible}"/>
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Text="{x:Static lang:Resources.Authentication_CloudLoginInstructions}"
+                       FontWeight="SemiBold"
+                       Opacity=".7"
+                       IsVisible="{Binding WebviewVisible}"/>
+        </StackPanel>
         
         <TextBlock HorizontalAlignment="Center"
                  VerticalAlignment="Center"

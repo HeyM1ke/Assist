@@ -96,6 +96,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select all ”Remember Me” options to successfully login..
+        /// </summary>
+        public static string Authentication_CloudLoginInstructions {
+            get {
+                return ResourceManager.GetString("Authentication_CloudLoginInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recommended w/2FA: Web Login, Without 2FA: Username/Password.
         /// </summary>
         public static string Authentication_Description {
@@ -159,7 +168,7 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login with the Riot Client! When you login please make sure you have ”Remember Me” Enabled. Select all remember me options when logining in or it will not be valid. Click Login when you are ready!.
+        ///   Looks up a localized string similar to When you login select all ”Remember Me” options to successfully login..
         /// </summary>
         public static string Authentication_RiotClientTitleInstructions {
             get {
@@ -434,6 +443,15 @@ namespace Assist.Properties {
         public static string Common_Save {
             get {
                 return ResourceManager.GetString("Common_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecting....
+        /// </summary>
+        public static string Common_Selecting {
+            get {
+                return ResourceManager.GetString("Common_Selecting", resourceCulture);
             }
         }
         
@@ -789,7 +807,7 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create an Assist Account.
+        ///   Looks up a localized string similar to Use an Assist Account.
         /// </summary>
         public static string Setup_CreateAssistAccount {
             get {

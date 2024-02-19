@@ -44,6 +44,7 @@ public static class AssistApplication
     public static bool CurrentlyInAssistLeagueMatch = false;
     public static bool RequestedClose = false;
     public static ValorantWebsocketClient RiotWebsocketService { get; set; } = new ValorantWebsocketClient();
+    public static RiotUserTokenRefreshService RefreshService { get; set; } = new RiotUserTokenRefreshService();
 
     public static void ChangeMainWindowResolution(EResolution res)
     {
@@ -60,6 +61,7 @@ public static class AssistApplication
     
     public static void ChangeMainWindowView(UserControl NewView)
     {
+        CurrentApplication = Application.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
         if (CurrentApplication.MainWindow is MainWindow)
         {
             var w = (MainWindow)CurrentApplication.MainWindow;
@@ -270,5 +272,31 @@ public static class AssistApplication
 
         return false;
 
+    }
+
+    public static void OpenMainWindowToSettings()
+    {
+        
+            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                Window mainRef = desktop.MainWindow;
+
+                mainRef.Hide();
+
+                // Initial Window Opened at launch.
+
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    var main = new MainWindow();
+
+                    main.Show();
+
+                    mainRef.Close();
+                    desktop.MainWindow = main;
+                });
+                //NavigationContainer.ViewModel.ChangePage(AssistPage.SETTINGS);
+
+
+            }
     }
 }

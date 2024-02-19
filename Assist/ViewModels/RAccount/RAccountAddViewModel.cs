@@ -115,6 +115,15 @@ public partial class RAccountAddViewModel : ViewModelBase
            NoSecondaryLoginCommandCommand.Execute(null);
            return;
        }
+
+       if (File.Exists(AssistApplication.ActiveAccountProfile.BackupZipPath))
+       {
+           
+           AssistApplication.ActiveAccountProfile.CanLauncherBoot = true;
+           await AccountSettings.Default.UpdateAccount(AssistApplication.ActiveAccountProfile);
+           NoSecondaryLoginCommandCommand?.Execute(null);
+           return;
+       }
        
        Log.Information("There exists a Riot Client on the computer");
        Log.Information("Showing Options for Launch Options");

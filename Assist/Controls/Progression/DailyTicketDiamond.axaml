@@ -1,0 +1,69 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Progression">
+    <Design.PreviewWith>
+        <controls:DailyTicketDiamond Width="90"
+                                     Height="90"
+                                     IsCompleted="True"
+                                     IsCurrent="False"
+                                     ProgressText="1/2"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|DailyTicketDiamond">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="18"
+                            Margin="10"
+                            Orientation="Vertical">
+                    <Border Width="43"
+                            Height="43"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1">
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="45"></RotateTransform>
+                        </Border.RenderTransform>
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding DiamondNumber}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontSize="24"
+                                       Foreground="{DynamicResource AssistForeground}"
+                                       FontWeight="Black"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center">
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform Angle="-45"></RotateTransform>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <TextBlock Text="{TemplateBinding ProgressText}"
+                               FontSize="12"
+                               Foreground="{DynamicResource AssistForeground}"
+                               FontWeight="SemiBold"
+                               IsVisible="{TemplateBinding IsCurrent}"
+                               TextAlignment="Center">
+                                    
+                    </TextBlock>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|DailyTicketDiamond[IsCompleted=True]">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"/>
+    </Style>
+    <Style Selector="controls|DailyTicketDiamond[IsCompleted=False]">
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"/>
+    </Style>
+    <Style Selector="controls|DailyTicketDiamond[IsCurrent=False]">
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistButtonControlBackground}"/>
+    </Style>
+    <Style Selector="controls|DailyTicketDiamond[IsCurrent=True]">
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryColor}"/>
+    </Style>
+</Styles>

@@ -8,8 +8,8 @@
         xmlns:dashboard="clr-namespace:Assist.Views.Dashboard"
         xmlns:startup="clr-namespace:Assist.Views.Startup"
         mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="720"
-        Width="1190"
-        Height="720"
+        Height="{Binding Height}"
+        Width="{Binding Width}"
         x:Class="Assist.Views.MainWindow"
         Icon="/Assets/Assist_IconBlack.ico"
         CanResize="False"
@@ -31,11 +31,20 @@
         
         <titlebar:Titlebar Grid.Row="0"/>
         
-        <TransitioningContentControl Grid.Row="1" Content="{Binding CurrentView}"
-                                     Padding="10"/>
-        <TransitioningContentControl Grid.Row="1" Content="{Binding CurrentPopup}"/>
         
-        
+        <LayoutTransformControl Grid.Row="1" x:Name="LayoutControl">
+            <LayoutTransformControl.LayoutTransform>
+                <ScaleTransform ScaleY="{Binding ScaleRate}"
+                                ScaleX="{Binding ScaleRate}"></ScaleTransform>
+            </LayoutTransformControl.LayoutTransform>
+            <!--Content View-->
+            <Grid>
+                <TransitioningContentControl Content="{Binding CurrentView}"
+                                             Padding="10"/>
+                <TransitioningContentControl Content="{Binding CurrentPopup}"/>
+            </Grid>
+        </LayoutTransformControl>
+
     </Grid>
 
 </Window>

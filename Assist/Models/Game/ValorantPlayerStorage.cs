@@ -46,7 +46,7 @@ public class ValorantPlayerStorage
         {
             if(e.StatusCode == HttpStatusCode.BadRequest){
                 Log.Fatal("(ValorantPlayerStorage) FetchPlayer Names Expired.: ");
-                //await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
             }
         }
         
@@ -64,7 +64,7 @@ public class ValorantPlayerStorage
         {
             if(e.StatusCode == HttpStatusCode.BadRequest){
                 Log.Fatal("(ValorantPlayerStorage) FetchPlayer Names Expired.: ");
-                //await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
             }
         }
         

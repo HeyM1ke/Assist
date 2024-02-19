@@ -166,6 +166,9 @@
   <data name="Common_Loading" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="Common_Selecting" xml:space="preserve">
+    <value>Selecting...</value>
+  </data>
   <data name="Common_MemberSince" xml:space="preserve">
     <value>Member Since</value>
   </data>
@@ -339,13 +342,16 @@
     <value>Login with your Riot Games Client.</value>
   </data>
   <data name="Authentication_RiotClientTitleInstructions" xml:space="preserve">
-    <value>Login with the Riot Client! When you login please make sure you have ”Remember Me” Enabled. Select all remember me options when logining in or it will not be valid. Click Login when you are ready!</value>
+    <value>When you login select all ”Remember Me” options to successfully login.</value>
   </data>
   <data name="Authentication_UsernamePasswordTitle" xml:space="preserve">
     <value>Username/Password</value>
   </data>
   <data name="Authentication_CloudLogin" xml:space="preserve">
     <value>Web Login</value>
+  </data>
+  <data name="Authentication_CloudLoginInstructions" xml:space="preserve">
+    <value>Select all ”Remember Me” options to successfully login.</value>
   </data>
   <data name="Authentication_Description" xml:space="preserve">
     <value>Recommended w/2FA: Web Login, Without 2FA: Username/Password</value>
@@ -384,7 +390,7 @@
     <value>Note: This can be changed in the settings later.</value>
   </data>
   <data name="Setup_CreateAssistAccount" xml:space="preserve">
-    <value>Create an Assist Account</value>
+    <value>Use an Assist Account</value>
   </data>
   <data name="Setup_SkipAssistAccount" xml:space="preserve">
     <value>Skip Assist Account</value>

@@ -10,18 +10,24 @@
             <Grid x:Name="MainDashboardGrid"
                   ColumnDefinitions="*,Auto">
                 
+                <dashboard:ArticleContainerControl Width="740"
+                                                   Height="455"
+                                                   VerticalAlignment="Top"
+                                                   HorizontalAlignment="Left"/>
+                
                 <StackPanel Orientation="Vertical"
                             Spacing="30"
                             Grid.Column="1"
-                            VerticalAlignment="Stretch">
+                            VerticalAlignment="Top">
                     <dashboard:GameLaunchControl Width="400"
                                                  Height="180"
                                                  
                                                  HorizontalAlignment="Right"
                                                  VerticalAlignment="Top"/>
                     
-                    <Border HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch" Background="Tan"></Border>
+                    <dashboard:ProgressionPreviewControl HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            IsVisible="False"></dashboard:ProgressionPreviewControl>
                 
                    
                 </StackPanel>

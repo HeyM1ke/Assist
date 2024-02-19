@@ -94,7 +94,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         // Allows only 1 instance of Assist to run at the same time.
         AssistApplication.CreateInstance();
-        
+        DetermineScaleRate();
         Log.Information("Main Window Loaded.");
         Log.Information("Switching to StartupPage");
         AssistApplication.ChangeMainWindowView(new Views.Startup.StartupView());

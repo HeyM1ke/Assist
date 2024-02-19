@@ -25,6 +25,7 @@ public partial class AssistAccountDuelFormViewModel : ViewModelBase
     [ObservableProperty] private string _emailText = "";
     [ObservableProperty] private ICommand? _loginSelectionCommand;
     [ObservableProperty] private ICommand? _accountCompleteCommand;
+    [ObservableProperty] private bool _requestedCancel = false;
 
     private const string _discordAuthUrl =
         "https://discord.com/oauth2/authorize?client_id=984912187837526038&response_type=code&redirect_uri=https%3A%2F%2Fassistval.com%2Fapi%2Foauth%2Fdiscord%2Fredirect&scope=guilds.join+email+connections+identify&state={0}";
@@ -53,6 +54,12 @@ public partial class AssistAccountDuelFormViewModel : ViewModelBase
         OpenDiscordOAuth(state);
 
         await CheckForClientUpdate(state);
+    }
+
+    [RelayCommand]
+    public void CancelOAuth()
+    {
+        RequestedCancel = true;
     }
     
     [RelayCommand]
@@ -129,6 +136,13 @@ public partial class AssistAccountDuelFormViewModel : ViewModelBase
         AssistTokens? tokens = null; 
         for (int i = 0; i < 20; i++)
         {
+            if (RequestedCancel)
+            {
+                RequestedCancel = false;
+                IsProcessing = false;
+                break;
+            }
+            
             try
             {
                 tokens = await AssistApplication.AssistUser.Authentication.AuthenticateWithClient(stateCode);
@@ -154,4 +168,5 @@ public partial class AssistAccountDuelFormViewModel : ViewModelBase
         
         AccountCompleteCommand?.Execute(null);
     }
+    
 }

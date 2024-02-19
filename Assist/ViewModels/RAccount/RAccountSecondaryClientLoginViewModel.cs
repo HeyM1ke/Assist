@@ -101,6 +101,15 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
 
         }
 
+        [RelayCommand]
+        public void CancelRiotClient()
+        {
+            _authFileWatcher.EnableRaisingEvents = false;
+            _authFileWatcher.Dispose();
+
+            IsProcessing = false;
+        }
+
 
         public async Task StartWatcher()
         {
