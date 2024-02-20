@@ -35,13 +35,13 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            Window mainRef = desktop.MainWindow;
+            /*Window mainRef = desktop.MainWindow;
 
-            if (mainRef.Screens.Primary.WorkingArea.Height <= 1080 && (int)Res >= 2 )
+            if (.Screens.Primary.WorkingArea.Height <= 1080 && (int)Res >= 2 )
             {
                 AssistSettings.Default.SelectedResolution = EResolution.R900;
                 Res = AssistSettings.Default.SelectedResolution;
-            }
+            }*/
 
             switch (Res)
             {
@@ -94,7 +94,6 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         // Allows only 1 instance of Assist to run at the same time.
         AssistApplication.CreateInstance();
-        DetermineScaleRate();
         Log.Information("Main Window Loaded.");
         Log.Information("Switching to StartupPage");
         AssistApplication.ChangeMainWindowView(new Views.Startup.StartupView());
