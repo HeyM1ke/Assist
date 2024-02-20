@@ -382,22 +382,22 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
 
             _ => timeSpan.TotalMinutes switch
             {
-                <= 1 => "A minute ago",
-                < 60 => $"{timeSpan.Minutes} Minutes",
+                <= 1 => $"{timeSpan.Minutes} {Resources.Common_Minute}",
+                < 60 => $"{timeSpan.Minutes} {Resources.Common_Minute_Plural}",
                 _ => timeSpan.TotalHours switch
                 {
-                    <= 1 => "1 Hour",
-                    < 24 => $"{timeSpan.Hours} Hours",
+                    <= 1 => $"1 {Resources.Common_Hour}",
+                    < 24 => $"{timeSpan.Hours} {Resources.Common_Hour_Plural}",
                     _ => timeSpan.TotalDays switch
                     {
-                        <= 1 => "Yesterday",
-                        <= 30 => $"{timeSpan.Days} Days",
+                        <= 1 => $"1 {Resources.Common_Day}",
+                        <= 30 => $"{timeSpan.Days} {Resources.Common_Day_Plural}",
 
-                        <= 60 => "1 Month",
-                        < 365 => $"{timeSpan.Days / 30} Months",
+                        <= 60 => $"1 {Resources.Common_Month}",
+                        < 365 => $"{timeSpan.Days / 30} {Resources.Common_Month_Plural}",
 
-                        <= 365 * 2 => "1 Year ago",
-                        _ => $"{timeSpan.Days / 365} years"
+                        <= 365 * 2 => $"1 {Resources.Common_Year}",
+                        _ => $"{timeSpan.Days / 365} {Resources.Common_Years_Plural}"
                     }
                 }
             }

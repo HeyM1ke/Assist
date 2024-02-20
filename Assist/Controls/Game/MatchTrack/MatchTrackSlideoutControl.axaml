@@ -30,6 +30,7 @@
         <Button Grid.Column="0"
                 Classes="default"
                 Height="50"
+                Margin="0,0,0,0"
                 Content="{Binding SlideButtonText}"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Right"
@@ -42,20 +43,22 @@
                 BorderBrush="{DynamicResource AssistControlOutline}"
                 CornerRadius="10"
                 BorderThickness="1"
-                Padding="5">
+                Padding="5"
+                Margin="10,0,10,0">
             <Grid RowDefinitions="40, *">
                 <StackPanel Spacing="5">
                 
                     <StackPanel Orientation="Horizontal" Spacing="10">
-                        <TextBlock Text="MatchTrack"
+                        <TextBlock Text="Recent Matches"
                                    FontWeight="SemiBold"
                                    FontSize="23"
-                                   Opacity=".7"
+                                   Opacity="1"
                                    HorizontalAlignment="Left"
                                    TextAlignment="Center"
                                    VerticalAlignment="Center"/>
                         <Button Content="Sort By: Most Recent"
-                                Classes="default"></Button>
+                                Classes="default"
+                                IsVisible="False"></Button>
                     </StackPanel>
             
                     <Rectangle Height="1"

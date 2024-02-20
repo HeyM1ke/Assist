@@ -31,13 +31,14 @@
                             BorderThickness="1"
                             CornerRadius="5"
                             Height="16"
+                            Margin="0,95,0,0"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Center"
                             >
                         <TextBlock Text="{Binding LevelText}"
-                                   Margin="10,0"
+                                   Margin="10,0,10,0"
                                    FontSize="10"
-                                   VerticalAlignment="Center"
+                                   VerticalAlignment="Bottom"
                                    HorizontalAlignment="Center"
                                    TextAlignment="Center"
                                    FontWeight="Bold"></TextBlock>
@@ -91,7 +92,8 @@
                         <Setter Property="HorizontalAlignment" Value="Right"/>
                     </Style>
                 </StackPanel.Styles>
-                <asyncImageLoader:AdvancedImage Source="{Binding PathToReputation}"/>
+                <asyncImageLoader:AdvancedImage Source="{Binding PathToReputation}"
+                                                IsVisible="False"/>
                 <asyncImageLoader:AdvancedImage Source="{Binding RankIcon}"/>
                 <StackPanel Orientation="Horizontal"
                             Spacing="2"

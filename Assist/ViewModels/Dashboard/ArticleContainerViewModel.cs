@@ -44,6 +44,16 @@ public partial class ArticleContainerViewModel : ViewModelBase
             SwapArticle(_articles[0].RedirectUrl);
     }
 
+    public void Refresh()
+    {
+        if (!_articles.IsNullOrEmpty())
+        {
+            ArticleButtons[0].IsChecked = true;
+            SwapArticle(_articles[0].RedirectUrl);
+        }
+            
+    }
+
     private async Task GetArticles()
     {
         var resp = await AssistApplication.AssistUser.Config.GetAllNewsNodes();
@@ -112,6 +122,7 @@ public partial class ArticleContainerViewModel : ViewModelBase
     
     private void ChangeFeaturedArticle(Control data)
     {
+        FeaturedArticle = null;
         FeaturedArticle = data;
     }
 }

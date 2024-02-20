@@ -276,6 +276,24 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string Common_Day {
+            get {
+                return ResourceManager.GetString("Common_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days.
+        /// </summary>
+        public static string Common_Day_Plural {
+            get {
+                return ResourceManager.GetString("Common_Day_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string Common_Details {
@@ -321,6 +339,24 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hour.
+        /// </summary>
+        public static string Common_Hour {
+            get {
+                return ResourceManager.GetString("Common_Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hours.
+        /// </summary>
+        public static string Common_Hour_Plural {
+            get {
+                return ResourceManager.GetString("Common_Hour_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string Common_Information {
@@ -353,6 +389,42 @@ namespace Assist.Properties {
         public static string Common_MemberSince {
             get {
                 return ResourceManager.GetString("Common_MemberSince", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minute.
+        /// </summary>
+        public static string Common_Minute {
+            get {
+                return ResourceManager.GetString("Common_Minute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes.
+        /// </summary>
+        public static string Common_Minute_Plural {
+            get {
+                return ResourceManager.GetString("Common_Minute_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string Common_Month {
+            get {
+                return ResourceManager.GetString("Common_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Months.
+        /// </summary>
+        public static string Common_Month_Plural {
+            get {
+                return ResourceManager.GetString("Common_Month_Plural", resourceCulture);
             }
         }
         
@@ -533,6 +605,24 @@ namespace Assist.Properties {
         public static string Common_Username {
             get {
                 return ResourceManager.GetString("Common_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string Common_Year {
+            get {
+                return ResourceManager.GetString("Common_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Years.
+        /// </summary>
+        public static string Common_Years_Plural {
+            get {
+                return ResourceManager.GetString("Common_Years_Plural", resourceCulture);
             }
         }
         

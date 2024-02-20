@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Assist.ViewModels.Dashboard;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 namespace Assist.Controls.Dashboard;
@@ -22,5 +23,12 @@ public partial class ArticleContainerControl : UserControl
         if (Design.IsDesignMode)
             return; 
         _viewModel.Setup();
+    }
+
+    private void ArticleContainer_Loaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+            return; 
+        _viewModel.Refresh();
     }
 }

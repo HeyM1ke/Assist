@@ -11,10 +11,7 @@ public partial class MatchTrackMatchControl : UserControl
 {
     private readonly MatchTrackMatchViewModel _viewModel;
     public string MatchId;
-    public MatchTrackMatchControl()
-    {
-        InitializeComponent();
-    }
+
     
     public MatchTrackMatchControl(RecentMatch? data)
     {
