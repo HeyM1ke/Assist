@@ -17,7 +17,7 @@ namespace Assist.Services
 {
     public class AssistApiService
     {
-        public const string BaseUrl = "https://api.assistapp.dev";
+        public const string BaseUrl = "https://assistval.com";
         public const string BattlepassId = "2b3a941d-4b85-a0df-5beb-8897224d290a";
 
         private const string FailedNewsArticleImageUrl =
@@ -41,7 +41,7 @@ namespace Assist.Services
         {
             
             
-            var response = await _client.GetAsync($"/valorant/skins/{uuid}");
+            var response = await _client.GetAsync($"/api/valorant/skins/{uuid}/");
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
@@ -54,7 +54,7 @@ namespace Assist.Services
         public async Task<string> GetWeaponSkinPriceAsync(string uuid)
         {
             
-            var response = await _client.GetAsync($"/valorant/offers/{uuid}");
+            var response = await _client.GetAsync($"/api/valorant/offers/{uuid}/");
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
@@ -81,7 +81,7 @@ namespace Assist.Services
 
         public async Task<Bundle> GetBundleAsync(string id)
         {
-            var response = await _client.GetAsync($"/valorant/bundles/{id}");
+            var response = await _client.GetAsync($"/api/valorant/bundles/{id}/");
             if (!response.IsSuccessStatusCode)
                 return CreateFailedBundle();
             
