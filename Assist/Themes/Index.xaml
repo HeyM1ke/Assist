@@ -5,6 +5,7 @@
     <FluentTheme/>
     <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
     <StyleInclude Source="avares://Assist/Controls/General/TwoTextButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/SmallImageButton.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Assist/Authentication/OAuthMethodButton.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Assist/Launcher/AccountProfileSwap.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Assist/LargeImageButton.axaml"/>

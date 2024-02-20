@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:Assist.Controls.Navigation"
              xmlns:launcher="clr-namespace:Assist.Controls.Assist.Launcher"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
              mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="49"
              x:Class="Assist.Controls.Infobars.Titlebar">
     <Grid ColumnDefinitions="*, *"
@@ -27,46 +28,31 @@
                                              SwapButtonCommand="{Binding OpenProfileSwapPageCommand}"
                                              SwapEnabled="{Binding AccountSwapEnabled}"/>
                 
-                <Button Width="19"
+                <assist:SmallImageButton Width="19"
                         Height="19"
-                        Background="Transparent"
+                        Padding="2"
                         Command="{Binding OpenSettingsPageCommand}"
                         VerticalContentAlignment="Center"
                         IsVisible="{Binding SettingsEnabled}"
-                        HorizontalContentAlignment="Center">
-                    <Button.Content>
-                        <Image Source="{SvgImage /Assets/Navigation/Settings_Icon.svg}"
-                               Width="12"
-                               Height="12"
-                        ></Image>
-                    </Button.Content>
-                </Button>
+                        Icon="{SvgImage /Assets/Navigation/Settings_Icon.svg}"
+                        HorizontalContentAlignment="Center"/>
                 
                 
-                <Button Width="19"
+                <assist:SmallImageButton Width="19"
                         Height="19"
                         Click="MinimizeBtn_Click"
-                        Background="Transparent">
-                    <Button.Content>
-                        <Image Source="{SvgImage /Assets/Navigation/Minimize.svg}"
-                               Width="10"
-                               
-                               Height="10"></Image>
-                    </Button.Content>
-                </Button>
+                        Background="Transparent"
+                        Padding="2"
+                        Icon="{SvgImage /Assets/Navigation/Minimize.svg}"/>
                 
-                <Button Width="19"
+                <assist:SmallImageButton Width="19"
                         Height="19"
                         Background="Transparent"
-                        Click="ExitBtn_Click">
-                    <Button.Content>
-                        <Image Source="{SvgImage /Assets/Navigation/Close.svg}"
-                               Width="10"
-                               
-                               Height="10"
-                        ></Image>
-                    </Button.Content>
-                </Button>
+                        Click="ExitBtn_Click"
+                        Padding="2"
+                        Icon="{SvgImage /Assets/Navigation/Close.svg}">
+                    "{SvgImage /Assets/Navigation/Close.svg}"
+                </assist:SmallImageButton>
             </StackPanel>
             
         </Grid>

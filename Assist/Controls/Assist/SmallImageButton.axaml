@@ -1,0 +1,35 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Assist">
+    <Design.PreviewWith>
+        <controls:SmallImageButton Icon="{SvgImage /Assets/Navigation/Close.svg}"
+                                   Width="100"
+                                   Height="100"
+                                   Padding="5"
+                                   />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|SmallImageButton">
+        <!-- Set Defaults -->
+        <Setter Property="Opacity" Value=".6"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="Transparent">
+                    <Image Source="{TemplateBinding Icon}"
+                           Margin="{TemplateBinding Padding}"
+                           Opacity="{TemplateBinding Opacity}"></Image>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|SmallImageButton:pointerover">
+        <!-- Set Defaults -->
+        <Setter Property="Opacity" Value="1"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="controls|SmallImageButton:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)" />
+    </Style>
+</Styles>
