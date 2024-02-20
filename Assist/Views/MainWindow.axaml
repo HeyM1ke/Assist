@@ -25,26 +25,24 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <Grid Background="{DynamicResource AssistBackground}"
-          RowDefinitions="49, *">
+    
+    <LayoutTransformControl Grid.Row="1" x:Name="LayoutControl">
+        <LayoutTransformControl.LayoutTransform>
+            <ScaleTransform ScaleY="{Binding ScaleRate}"
+                            ScaleX="{Binding ScaleRate}"></ScaleTransform>
+        </LayoutTransformControl.LayoutTransform>
+        <!--Content View-->
+        <Grid Background="{DynamicResource AssistBackground}"
+              RowDefinitions="49, *">
         
-        <titlebar:Titlebar Grid.Row="0"/>
-        
-        
-        <LayoutTransformControl Grid.Row="1" x:Name="LayoutControl">
-            <LayoutTransformControl.LayoutTransform>
-                <ScaleTransform ScaleY="{Binding ScaleRate}"
-                                ScaleX="{Binding ScaleRate}"></ScaleTransform>
-            </LayoutTransformControl.LayoutTransform>
-            <!--Content View-->
-            <Grid>
+            <titlebar:Titlebar Grid.Row="0"/>
+            
+            <Grid Row="1">
                 <TransitioningContentControl Content="{Binding CurrentView}"
                                              Padding="10"/>
                 <TransitioningContentControl Content="{Binding CurrentPopup}"/>
             </Grid>
-        </LayoutTransformControl>
-
-    </Grid>
+        </Grid>
+    </LayoutTransformControl>
 
 </Window>

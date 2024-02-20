@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Assist.Controls.Infobars;
+using Assist.Controls.Navigation;
 using Assist.Controls.RAccount;
+using Assist.Services.Navigation;
 using Assist.Services.Riot;
 using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings.Accounts;
@@ -33,6 +36,8 @@ public partial class RAccountAddViewModel : ViewModelBase
 
     public RAccountAddViewModel()
     {
+        Titlebar.ViewModel.SettingsEnabled = false;
+        NavigationContainer.ViewModel.ChangePage(AssistPage.UNKNOWN);
         CreateControls();
         
         _sequenceHistory.Add(nameof(RAccountMethodSelectionControl));

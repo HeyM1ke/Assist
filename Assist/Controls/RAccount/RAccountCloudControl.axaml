@@ -4,29 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="using:Assist.Shared.Controls"
              xmlns:lang="clr-namespace:Assist.Properties"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="690"
              x:Class="Assist.Controls.RAccount.RAccountCloudControl"
              Initialized="CloudWebview_Init">
-    <Grid HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch">
-        <StackPanel HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    IsVisible="{Binding WebviewVisible}"
-                    >
-            <TransitioningContentControl Padding="20"
-                                                                             HorizontalAlignment="Stretch"
-                                                                             VerticalAlignment="Stretch"
-                                                                             Width="1000"
-                                                                             Height="650"
-                                                                             Content="{Binding CurrentContent}"
-                                                                             IsVisible="{Binding WebviewVisible}"/>
-           
-        </StackPanel>
+    <Grid 
+          RowDefinitions="650, Auto">
+        <TransitioningContentControl Padding="20"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Width="1000"
+                                     Height="650"
+                                     Grid.Row="0"
+                                     Content="{Binding CurrentContent}"
+                                     IsVisible="{Binding WebviewVisible}"/>
         <TextBlock HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
                    Text="{x:Static lang:Resources.Authentication_CloudLoginInstructions}"
                    FontWeight="Medium"
                    Opacity=".7"
+                   Grid.Row="1"
                    IsVisible="{Binding WebviewVisible}"/>
         <TextBlock HorizontalAlignment="Center"
                  VerticalAlignment="Center"

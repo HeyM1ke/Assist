@@ -174,9 +174,11 @@ public static class AssistApplication
             Titlebar.ViewModel.AccountSwapVisible = true;
             Titlebar.ViewModel.AccountSwapEnabled = true;
             Titlebar.ViewModel.SettingsEnabled = true;
-            NavigationContainer.ViewModel.ChangePage(AssistPage.DASHBOARD);
             EnableDefaultLauncherButtons();
+            NavigationContainer.ViewModel.ChangePage(AssistPage.DASHBOARD);
         });
+        
+        
     }
     
     /// <summary>

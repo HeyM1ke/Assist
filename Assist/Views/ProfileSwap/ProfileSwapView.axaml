@@ -44,5 +44,10 @@
                 HorizontalAlignment="Center"
                 Content="{x:Static properties:Resources.Common_BackText}"
                 Command="{Binding CloseViewCommand}"></Button>
+        
+        
+        <TransitioningContentControl Grid.Row="0" Grid.RowSpan="2" Content="{Binding ActivePopupControl}"/>
     </Grid>
+    
+    
 </UserControl>

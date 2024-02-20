@@ -1,0 +1,128 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="610"
+             x:Class="Assist.Views.Extras.ProfileManagementControl"
+             Initialized="ProfileManage_Int"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Background="{DynamicResource AssistBackground}">
+    <Border Padding="10"
+            Background="{DynamicResource AssistControlBackground}"
+            CornerRadius="10"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderThickness="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            MinWidth="520">
+       <Grid RowDefinitions="*,Auto">
+           <StackPanel Orientation="Horizontal"
+                       Spacing="10"
+                       Margin="0,0,0,10">
+               <asyncImageLoader:AdvancedImage Source="{Binding ProfilePlayercard}"
+                                               Stretch="UniformToFill"
+                                               Height="70"
+                                               Width="70"/>
+               
+               <StackPanel Orientation="Vertical">
+                   <TextBlock Text="Account Management"
+                              FontWeight="Medium"
+                              FontSize="23"
+                              Opacity=".4"></TextBlock>
+                   <TextBlock Text="{Binding ProfileRiotName}"
+                              FontWeight="SemiBold"
+                              FontSize="36"></TextBlock>
+               </StackPanel>
+           </StackPanel>
+           <Rectangle Fill="{DynamicResource AssistControlOutline}"
+                      Height="1"
+                      VerticalAlignment="Bottom"
+                      ></Rectangle>
+           
+           <Grid Row="1"
+                 Margin="0,10,0,0">
+              <StackPanel Spacing="5">
+                 
+                  <Grid IsVisible="{Binding !AccountExpired}">
+                      <StackPanel Orientation="Horizontal">
+                          
+                          <TextBlock Text="Game Launching"
+                                     FontSize="16"
+                                     VerticalAlignment="Center"
+                                     FontWeight="Regular"
+                                     Opacity=".9"></TextBlock>
+                          <Image 
+                              Height="20"
+                              IsVisible="{Binding GameLaunchEnabled}"
+                              Source="{SvgImage /Assets/Default/Check_Icon.svg}"></Image>
+                          
+                          <Image 
+                              Height="20"
+                              IsVisible="{Binding !GameLaunchEnabled}"
+                              Source="{SvgImage /Assets/Default/X_Icon.svg}"></Image>
+                      </StackPanel>
+                      
+                      <Button Classes="default"
+                              Content="Enable"
+                              IsVisible="{Binding !GameLaunchEnabled}"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center"></Button>
+                  </Grid>
+                  
+                  <Grid IsVisible="{Binding !AccountExpired}">
+                      <StackPanel Orientation="Horizontal">
+                          
+                          <TextBlock Text="Assist Launching"
+                                     FontSize="16"
+                                     VerticalAlignment="Center"
+                                     FontWeight="Regular"
+                                     Opacity=".9"></TextBlock>
+                          <Image 
+                              Height="20"
+                              IsVisible="{Binding AssistEnabled}"
+                              Source="{SvgImage /Assets/Default/Check_Icon.svg}"></Image>
+                          
+                          <Image 
+                              Height="20"
+                              IsVisible="{Binding !AssistEnabled}"
+                              Source="{SvgImage /Assets/Default/X_Icon.svg}"></Image>
+                      </StackPanel>
+                      
+                      <Button Classes="default"
+                              Content="Enable"
+                              IsVisible="{Binding !AssistEnabled}"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center"></Button>
+                  </Grid>
+                  <Grid IsVisible="{Binding AccountExpired}">
+                      <StackPanel Orientation="Horizontal">
+                          
+                          <TextBlock Text="Refresh Account"
+                                     FontSize="16"
+                                     VerticalAlignment="Center"
+                                     FontWeight="Regular"
+                                     Opacity=".9"></TextBlock>
+                      </StackPanel>
+                      
+                      <Button Classes="default"
+                              Content="Refresh"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center"></Button>
+                  </Grid>
+                  <Rectangle Fill="{DynamicResource AssistControlOutline}"
+                             Height="1"
+                             VerticalAlignment="Bottom"/>
+                  
+                  <Button Content="Close"
+                          Classes="default"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Command="{Binding ClosePopup}"></Button>
+              </StackPanel>
+           </Grid>
+       </Grid> 
+    </Border>
+</UserControl>

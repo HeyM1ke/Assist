@@ -76,6 +76,9 @@ public partial class StartupViewModel : ViewModelBase
                 var t = await AssistApplication.AssistUser.Authentication.AuthenticateWithRefreshToken(AssistSettings
                     .Default
                     .GetAssistUserCode());
+#if DEBUG
+                Log.Information($"Assist Access: {t.AccessToken}");
+#endif
                 
                 Log.Information("Assist Account Login Successful");
                 Log.Information("Saving Account Code...");

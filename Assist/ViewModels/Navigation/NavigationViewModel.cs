@@ -129,7 +129,12 @@ public partial class NavigationViewModel : ViewModelBase
 
     public static void SetActivePage(AssistPage _page)
     {
+       
+        
         CurrentPage = _page;
+        
+        if (_page == AssistPage.UNKNOWN)
+            return;
         
         Dispatcher.UIThread.Invoke(() =>
         {
@@ -180,6 +185,9 @@ public partial class NavigationViewModel : ViewModelBase
     
     private void SwapToPage()
     {
+        if (CurrentPage == AssistPage.UNKNOWN)
+            return;
+        
         _pages.TryGetValue(CurrentPage, out var newPage);
         
         if (newPage is null)

@@ -35,7 +35,12 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
-                        
+                        <asyncImageLoader:AdvancedImage Width="50"
+                                                        Height="50"
+                                                        Source="{TemplateBinding PlayerRankIcon}"
+                                                        RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                        VerticalAlignment="Top"
+                                                        Margin="10"></asyncImageLoader:AdvancedImage>
                         <StackPanel VerticalAlignment="Bottom"
                                     Margin="10,0,10,130"
                                     >
@@ -72,7 +77,8 @@
                                 <TextBlock Text="{TemplateBinding PlayerTitle}"
                                            TextAlignment="Center"
                                            VerticalAlignment="Center"
-                                           FontWeight="SemiLight"
+                                           FontWeight="Regular"
+                                           Opacity=".5"
                                            FontSize="12"
                                            Foreground="{DynamicResource AssistForeground}"></TextBlock>
                             </Border>

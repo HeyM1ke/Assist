@@ -122,7 +122,9 @@
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         BorderBrush="{DynamicResource AssistControlOutline}"
-                                        BorderThickness="1"></Button>
+                                        BorderThickness="1"
+                                        CommandParameter="{TemplateBinding AccountId}"
+                                        Command="{TemplateBinding ManageCommand}"></Button>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

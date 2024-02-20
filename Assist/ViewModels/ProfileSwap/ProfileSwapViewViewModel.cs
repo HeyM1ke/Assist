@@ -8,6 +8,7 @@ using Assist.Controls.Store;
 using Assist.Models.Enums;
 using Assist.Shared.Settings.Accounts;
 using Assist.Views.Dashboard;
+using Assist.Views.Extras;
 using Assist.Views.ProfileSwap;
 using Assist.Views.RAccount;
 using Avalonia.Controls;
@@ -22,6 +23,7 @@ public partial class ProfileSwapViewViewModel : ViewModelBase
 {
     
     [ObservableProperty] private ObservableCollection<Control> _profileControls = new ObservableCollection<Control>();
+    [ObservableProperty] private Control _activePopupControl;
     
     public async Task Setup()
     {
@@ -40,7 +42,8 @@ public partial class ProfileSwapViewViewModel : ViewModelBase
                 GameLaunchEnabled = AccountSettings.Default.Accounts[i].CanLauncherBoot && !AccountSettings.Default.Accounts[i].IsExpired,
                 IsExpired = AccountSettings.Default.Accounts[i].IsExpired,
                 IsCurrent = AccountSettings.Default.Accounts[i].Id == AssistApplication.ActiveAccountProfile.Id && AccountSettings.Default.Accounts[i].CanAssistBoot,
-                SwitchCommand = SwapAccountCommand
+                SwitchCommand = SwapAccountCommand,
+                ManageCommand = ManageAccountCommand
             };
 
             if (ctr.AssistEnabled == false)
@@ -85,6 +88,21 @@ public partial class ProfileSwapViewViewModel : ViewModelBase
         });
         AssistApplication.ChangeMainWindowView(new RAccountAddPage());
         
+    }
+    
+    [RelayCommand]
+    public async Task ManageAccount(string code)
+    {
+        Log.Information("Player wants to manage an account, opening menu.");
+
+        ActivePopupControl = new ProfileManagementControl(code, ClosePopupCommand);
+    }
+    
+    [RelayCommand]
+    private void ClosePopup()
+    {
+        Log.Information("Player wants to close profile management popup");
+        ActivePopupControl = null;
     }
 
     [RelayCommand]
