@@ -12,32 +12,36 @@
     <Grid RowDefinitions="*,50"
           Margin="10">
         
-        <ItemsControl VerticalAlignment="Center"
+        <ScrollViewer VerticalAlignment="Center"
                       HorizontalAlignment="Center"
-                      ItemsSource="{Binding ProfileControls}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3"
-                                 Rows="3"></UniformGrid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl 
+                          ItemsSource="{Binding ProfileControls}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"
+                                     Rows="3"></UniformGrid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
             
-            <ItemsControl.Styles>
-                <Style Selector="profileSwap|AccProfilePreviewControl">
-                    <Setter Property="Width" Value="320"/>
-                    <Setter Property="Height" Value="180"/>
-                    <Setter Property="Margin" Value="10,10"></Setter>
+                <ItemsControl.Styles>
+                    <Style Selector="profileSwap|AccProfilePreviewControl">
+                        <Setter Property="Width" Value="320"/>
+                        <Setter Property="Height" Value="180"/>
+                        <Setter Property="Margin" Value="10,10"></Setter>
                     
-                </Style>
+                    </Style>
                 
-                <Style Selector="profileSwap|AccProfileAddControl">
-                    <Setter Property="Width" Value="320"/>
-                    <Setter Property="Height" Value="180"/>
-                    <Setter Property="Margin" Value="10,10"></Setter>
-                </Style>
-            </ItemsControl.Styles>
+                    <Style Selector="profileSwap|AccProfileAddControl">
+                        <Setter Property="Width" Value="320"/>
+                        <Setter Property="Height" Value="180"/>
+                        <Setter Property="Margin" Value="10,10"></Setter>
+                    </Style>
+                </ItemsControl.Styles>
             
-        </ItemsControl>
+            </ItemsControl>
+        </ScrollViewer>
         
         <Button Grid.Row="1"
                 VerticalAlignment="Center"
