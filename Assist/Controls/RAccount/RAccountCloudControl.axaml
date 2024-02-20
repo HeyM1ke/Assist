@@ -4,17 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="using:Assist.Shared.Controls"
              xmlns:lang="clr-namespace:Assist.Properties"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="690"
+             mc:Ignorable="d" 
              x:Class="Assist.Controls.RAccount.RAccountCloudControl"
              Initialized="CloudWebview_Init">
     <Grid 
           RowDefinitions="650, Auto">
         <TransitioningContentControl Padding="20"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Center"
-                                     Width="1000"
-                                     Height="650"
                                      Grid.Row="0"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
                                      Content="{Binding CurrentContent}"
                                      IsVisible="{Binding WebviewVisible}"/>
         <TextBlock HorizontalAlignment="Center"

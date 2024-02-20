@@ -9,6 +9,7 @@ using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings;
 using Assist.Shared.Settings.Accounts;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Web.WebView2.Core;

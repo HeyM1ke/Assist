@@ -1,5 +1,6 @@
 using System;
 using Assist.Models.Enums;
+using Assist.Shared.Settings;
 using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -15,6 +16,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         DataContext = _viewModel = new MainWindowViewModel();
+        _viewModel.ChangeResolution(AssistSettings.Default.SelectedResolution);
         InitializeComponent();
         
     }
