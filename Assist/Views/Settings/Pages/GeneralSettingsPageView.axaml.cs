@@ -31,7 +31,11 @@ public partial class GeneralSettingsPageView : UserControl
             return;
 
 
-        var num = Convert.ToInt32(_viewModel.ResolutionItems[_viewModel.ResolutionIndex].Tag);
+        if (_viewModel.SetupOngoing)return;
+
+        var cb = sender as ComboBox;
+        var item = cb.Items[_viewModel.ResolutionIndex] as ComboBoxItem;
+        var num = Int32.Parse(item.Tag.ToString());
         _viewModel.SetResolution((EResolution)num);
     }
 }

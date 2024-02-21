@@ -13,8 +13,24 @@
             <ComboBox HorizontalAlignment="Right"
                       VerticalAlignment="Center"
                       SelectionChanged="ResolutionControl_Changed"
-                      ItemsSource="{Binding ResolutionItems}"
                       SelectedIndex="{Binding ResolutionIndex}">
+                <ComboBoxItem Content="595x375"
+                              Tag="-2"></ComboBoxItem>
+                
+                <ComboBoxItem Content="893x550"
+                              Tag="-1"></ComboBoxItem>
+                
+                <ComboBoxItem Content="1190x720"
+                              Tag="0"></ComboBoxItem>
+                
+                <ComboBoxItem Content="1488x890"
+                              Tag="1"></ComboBoxItem>
+                
+                <ComboBoxItem Content="1785x1060"
+                              Tag="2"></ComboBoxItem>
+                
+                <ComboBoxItem Content="2083x1240"
+                              Tag="3"></ComboBoxItem>
                 
             </ComboBox>
         </Grid>

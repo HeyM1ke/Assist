@@ -17,7 +17,7 @@ public partial class GeneralSettingsPageViewModel : ViewModelBase
     
     [ObservableProperty] private int _resolutionIndex = 0;
 
-    private bool _setup = true;
+    [ObservableProperty]private bool _setupOngoing = true;
     public async Task Setup()
     {
         LoadResolutions();
@@ -26,30 +26,13 @@ public partial class GeneralSettingsPageViewModel : ViewModelBase
     public void LoadResolutions()
     {
 
-        var names = Enum.GetNames(typeof(EResolution));
-
-        for (int i = 0; i < names.Length; i++)
-        {
-            
-            
-            ResolutionItems.Add(new ComboBoxItem()
-            {
-                Content = $"{names[i].Replace("R","")}P",
-                Tag = i-2,
-            });
-
-            if (i-2 == (int)AssistSettings.Default.SelectedResolution)
-            {
-                ResolutionIndex = i;
-            }
-        }
-
-        _setup = !_setup;
+        ResolutionIndex = (int)AssistSettings.Default.SelectedResolution + 2;
+        SetupOngoing = !SetupOngoing;
     }
 
     public void SetResolution(EResolution resolution)
     {
-        if (_setup)return;
+        if (SetupOngoing)return;
         
         if (AssistSettings.Default.SelectedResolution != resolution)
         {
