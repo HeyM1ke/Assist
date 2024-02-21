@@ -18,7 +18,7 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"
-                                Spacing="20"></StackPanel>
+                                Spacing="17"></StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             
@@ -115,13 +115,13 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"
-                                Spacing="20"
+                                Spacing="17"
                                 ></StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             
             <ItemsControl.Styles>
-                <Style Selector="live|LivePlayerPreviewControl">
+                <Style Selector="live|LiveEnemyPlayerPreviewControl">
                     <Setter Property="Width" Value="431"/>
                     <Setter Property="Height" Value="114"/>
                     

@@ -12,7 +12,7 @@
     </Design.DataContext>
     
     <!--This setup is be EXTREMELY LINEAR!-->
-    <Grid>
+    <Grid Margin="10">
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TransitioningContentControl HorizontalAlignment="Center"

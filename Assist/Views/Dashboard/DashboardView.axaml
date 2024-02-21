@@ -5,7 +5,7 @@
              xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
              mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="690"
              x:Class="Assist.Views.Dashboard.DashboardView">
-    <Grid>
+    <Grid Margin="10">
         <ScrollViewer>
             <Grid x:Name="MainDashboardGrid"
                   ColumnDefinitions="*,Auto">

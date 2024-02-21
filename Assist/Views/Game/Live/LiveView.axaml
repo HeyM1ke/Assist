@@ -8,15 +8,17 @@
              Initialized="LivePage_Init"
              Loaded="LivePage_Loaded"
              Unloaded="LivePage_Unloaded">
-    <Grid>
+    <Grid Margin="0">
         
-        <TransitioningContentControl Content="{Binding CurrentView}">
+        <TransitioningContentControl Content="{Binding CurrentView}"
+                                     Padding="10">
             <TransitioningContentControl.PageTransition>
                 <CrossFade Duration="0.20" />
             </TransitioningContentControl.PageTransition>
         </TransitioningContentControl>
         
         <matchTrack:MatchTrackSlideoutControl HorizontalAlignment="Right"
-                                              VerticalAlignment="Stretch"/>
+                                              VerticalAlignment="Stretch"
+                                              Margin="0,0,00,0"/>
     </Grid>
 </UserControl>

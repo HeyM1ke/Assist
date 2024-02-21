@@ -39,7 +39,7 @@
             
             <Grid Row="1">
                 <TransitioningContentControl Content="{Binding CurrentView}"
-                                             Padding="10"/>
+                                             Padding="0"/>
                 <TransitioningContentControl Content="{Binding CurrentPopup}"/>
             </Grid>
         </Grid>

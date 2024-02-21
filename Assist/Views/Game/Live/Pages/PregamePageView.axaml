@@ -76,7 +76,7 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"
-                                Spacing="20"></StackPanel>
+                                Spacing="17"></StackPanel>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             

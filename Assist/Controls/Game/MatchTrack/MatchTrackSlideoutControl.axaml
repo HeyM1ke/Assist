@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              Loaded="MatchTrackSlideout_Loaded"
              x:Class="Assist.Controls.Game.MatchTrack.MatchTrackSlideoutControl">
-    <Grid ColumnDefinitions="35, Auto"
+    <Grid ColumnDefinitions="15, Auto"
           Background="Transparent"
           ZIndex="4">
         <Grid.Styles>
@@ -32,7 +32,12 @@
                 Height="50"
                 Margin="0,0,0,0"
                 Content="{Binding SlideButtonText}"
+                Padding="2"
+                
+                BorderThickness="1,1,0,1"
+                CornerRadius="0"
                 VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left"
                 HorizontalAlignment="Right"
                 Command="{Binding OpenCloseSlidePanelCommand}"></Button>
         
@@ -41,10 +46,10 @@
                 Classes.open="{Binding SlideOpen}"
                 Background="{DynamicResource AssistControlBackground}"
                 BorderBrush="{DynamicResource AssistControlOutline}"
-                CornerRadius="10"
+                CornerRadius="0"
                 BorderThickness="1"
                 Padding="5"
-                Margin="10,0,10,0">
+                Margin="{Binding ThisAnnoyingPieceOfCrap}">
             <Grid RowDefinitions="40, *">
                 <StackPanel Spacing="5">
                 

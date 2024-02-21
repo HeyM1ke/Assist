@@ -10,7 +10,8 @@
              x:Class="Assist.Views.Store.StoreView"
              Loaded="Store_OnLoaded"
              Initialized="Store_Init">
-    <Grid RowDefinitions="*,35">
+    <Grid RowDefinitions="*,35"
+          Margin="10">
         <TransitioningContentControl Grid.Row="0"
                                      Content="{Binding CurrentContent}">
             

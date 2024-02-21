@@ -25,8 +25,8 @@ public partial class IngamePageViewModel : ViewModelBase
         new ObservableCollection<LivePlayerPreviewControl>();
 
     [ObservableProperty]
-    private ObservableCollection<LivePlayerPreviewControl> _enemyTeamControls =
-        new ObservableCollection<LivePlayerPreviewControl>();
+    private ObservableCollection<LiveEnemyPlayerPreviewControl> _enemyTeamControls =
+        new ObservableCollection<LiveEnemyPlayerPreviewControl>();
     
     [ObservableProperty]
     private ObservableCollection<LivePlayerPreviewControl> _deathMatchControls =
@@ -85,6 +85,7 @@ public partial class IngamePageViewModel : ViewModelBase
             // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
             await UpdateData(); // Do inital Pregame Check
 
+            AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
             AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
 
             _setupFlag = true;
@@ -335,7 +336,7 @@ public partial class IngamePageViewModel : ViewModelBase
             dic.TryGetValue(Player.Subject, out IBrush? color);
 
 
-        Dispatcher.UIThread.InvokeAsync(async () => { EnemyTeamControls.Add(new LivePlayerPreviewControl(Player)); });
+        Dispatcher.UIThread.InvokeAsync(async () => { EnemyTeamControls.Add(new LiveEnemyPlayerPreviewControl(Player)); });
     }
 
     private async Task UpdateUserInEnemyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic = null)
@@ -456,6 +457,7 @@ public partial class IngamePageViewModel : ViewModelBase
             foreach (var playerObj in players)
             {
                 LivePlayerPreviewControl? data = null;
+                LiveEnemyPlayerPreviewControl? dataEnemy = null;
                 if (IsDeathmatch)
                 {
                     data = DeathMatchControls.ToList().Find(x =>
@@ -468,12 +470,12 @@ public partial class IngamePageViewModel : ViewModelBase
 
                     if (data is null)
                     {
-                        data = EnemyTeamControls.ToList().Find(x =>
+                        dataEnemy = EnemyTeamControls.ToList().Find(x =>
                             x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
                     }
                 }
 
-                if (data is null)
+                if (data is null && dataEnemy is null)
                 {
                     continue;
                 }
@@ -482,20 +484,43 @@ public partial class IngamePageViewModel : ViewModelBase
                 {
                     continue;
                 }
-                
-                var nP = new RecentMatch.Player()
+
+                RecentMatch.Player p = null;
+
+                if (data is null && dataEnemy is not null)
                 {
-                    PlayerId = playerObj.Subject,
-                    CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
-                    PlayerAgentId = playerObj.CharacterID,
-                    PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.SecondaryText.Split('#')[0],
-                    PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.TagLineText : $"{data._viewModel.SecondaryText.Split('#')[^1]}",
-                    TeamId = playerObj.TeamID,
-                    PlayerRealName = data._viewModel.PlayerRealName,
-                    Statistics = null
-                };
+                    var nP = new RecentMatch.Player()
+                    {
+                        PlayerId = playerObj.Subject,
+                        CompetitiveTier = (int)dataEnemy._viewModel.PlayerCompetitiveTier,
+                        PlayerAgentId = playerObj.CharacterID,
+                        PlayerName = !dataEnemy._viewModel.UsingAssistProfile ? dataEnemy._viewModel.PlayerName : dataEnemy._viewModel.SecondaryText.Split('#')[0],
+                        PlayerTag = !dataEnemy._viewModel.UsingAssistProfile ? dataEnemy._viewModel.TagLineText : $"{dataEnemy._viewModel.SecondaryText.Split('#')[^1]}",
+                        TeamId = playerObj.TeamID,
+                        PlayerRealName = dataEnemy._viewModel.PlayerRealName,
+                        Statistics = null
+                    };
+                }
+
+                if (data is not null && dataEnemy is null)
+                {
+                    var nP = new RecentMatch.Player()
+                    {
+                        PlayerId = playerObj.Subject,
+                        CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
+                        PlayerAgentId = playerObj.CharacterID,
+                        PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.SecondaryText.Split('#')[0],
+                        PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.TagLineText : $"{data._viewModel.SecondaryText.Split('#')[^1]}",
+                        TeamId = playerObj.TeamID,
+                        PlayerRealName = data._viewModel.PlayerRealName,
+                        Statistics = null
+                    };
+                }
+
+                if (p is null)
+                    continue;
             
-                recentMatch.Players.Add(nP);
+                recentMatch.Players.Add(p);
             }
         }
 

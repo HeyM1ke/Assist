@@ -12,7 +12,7 @@
         <startup1:StartupViewModel/>
     </Design.DataContext>
     
-    <Grid>
+    <Grid Margin="10">
         <TransitioningContentControl HorizontalAlignment="Center"
                                      VerticalAlignment="Center"
                                      MinWidth="332"

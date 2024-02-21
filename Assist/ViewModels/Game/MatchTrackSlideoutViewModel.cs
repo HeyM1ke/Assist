@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Assist.Controls.Game.MatchTrack;
 using Assist.Services.Assist;
 using Assist.Shared.Models.Assist;
+using Avalonia;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -16,7 +17,7 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
     [ObservableProperty] private ObservableCollection<MatchTrackMatchControl> _matchControls = new ObservableCollection<MatchTrackMatchControl>();
     [ObservableProperty] private bool _slideOpen = false;
     [ObservableProperty] private string _slideButtonText = "<";
-    
+    [ObservableProperty] private Thickness _thisAnnoyingPieceOfCrap;
     private bool _binded = false;
 
     [RelayCommand]
@@ -24,6 +25,7 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
     {
         SlideOpen = !SlideOpen;
         SlideButtonText = SlideOpen ? ">" : "<";
+        ThisAnnoyingPieceOfCrap = SlideOpen ? new Thickness(0, 0, 5, 0) : new Thickness(0, 0, 0, 0);
     }
     
     public async Task LoadMatches()
