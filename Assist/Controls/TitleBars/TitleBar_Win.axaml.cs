@@ -1,3 +1,5 @@
+using Assist.Services.Riot;
+using Assist.Services.Utils;
 using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -16,10 +18,7 @@ namespace Assist.Controls.TitleBars
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private void MinimizeBtn_Click(object? sender, RoutedEventArgs e)
         {
@@ -31,6 +30,18 @@ namespace Assist.Controls.TitleBars
 
         private void ExitBtn_Click(object? sender, RoutedEventArgs e)
         {
+            AssistApplication.RequestedClose = true;
+
+            if (AssistApplication.CurrentlyInAssistLeagueMatch)
+            {
+                if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    Log.Information("Program is currently in League match. Hiding Program then closing it after match is completed.");
+                    WindowsUtils.HideWindow("Assist");
+                    return;
+                }
+            }
+            
             AssistApplication.CurrentApplication.Shutdown();
         }
 

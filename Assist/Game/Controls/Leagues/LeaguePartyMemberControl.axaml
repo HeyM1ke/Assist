@@ -1,0 +1,94 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="190" d:DesignHeight="180"
+             x:Class="Assist.Game.Controls.Leagues.LeaguePartyMemberControl"
+             Initialized="PartyMemberControl_Init">
+    <Grid Background="{StaticResource AssistPrimary}">
+        
+         <Border BorderBrush="{StaticResource AssistOutline}"
+                 BorderThickness="1"
+                 CornerRadius="5">
+             
+             <Grid Margin="5">
+                 <ItemsControl HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Margin="5"
+                               ItemsSource="{Binding BadgeImages}">
+                     <ItemsControl.ItemsPanel >
+                         <ItemsPanelTemplate>
+                             <StackPanel Spacing="5"
+                                         Orientation="Vertical">
+                             </StackPanel>
+                         </ItemsPanelTemplate>
+                     </ItemsControl.ItemsPanel>
+                 </ItemsControl>
+                 <StackPanel Spacing="8"
+                             Margin="5"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center">
+                     <Panel> 
+                         <Ellipse Fill="#232323"
+                                  Width="82"
+                                  Height="82">
+                         </Ellipse>
+                     
+                         <asyncImageLoader:AdvancedImage CornerRadius="999"
+                                                         Width="95"
+                                                         Height="95"
+                                                         RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                         Source="{Binding PlayerImage}"/>
+                     </Panel>
+                     <TextBlock Text="{Binding PlayerName}"
+                                FontFamily="{StaticResource WorkSans}"
+                                FontWeight="Regular"
+                                FontSize="15"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"></TextBlock>
+                     
+                     <Border BorderBrush="{StaticResource AssistOutline}"
+                             Background="{StaticResource AssistSecondary}"
+                             BorderThickness="1"
+                             Width="150"
+                             Height="20"
+                             CornerRadius="5">
+                         <Grid Margin="10,4">
+                             <TextBlock Grid.Column="1"
+                                        Text="{Binding PlayerRanking}"
+                                        FontFamily="{StaticResource Inter}"
+                                        FontWeight="SemiBold"
+                                        FontSize="12"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                         </Grid>
+                     </Border>
+                     
+                     <Panel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                         <TextBlock Text="READY"
+                                    FontFamily="{StaticResource WorkSans}"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"
+                                    IsVisible="{Binding IsReady}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Foreground="#5CFFB1"></TextBlock>
+                         
+                         <TextBlock Text="NOT READY"
+                                    FontFamily="{StaticResource WorkSans}"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"
+                                    IsVisible="{Binding !IsReady}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Foreground="{DynamicResource AssistRed}"></TextBlock>
+                     </Panel>
+                 </StackPanel>
+             </Grid>
+             
+         </Border>
+        
+    </Grid>
+</UserControl>

@@ -15,8 +15,8 @@ namespace Assist.Controls.Dashboard
 
         public string? ArticleTitle
         {
-            get { return (string?)GetValue(ArticleTitleProperty); }
-            set { SetValue(ArticleTitleProperty, value); }
+            get { return (string?)GetValue(ArticleTitleProperty).ToUpper(); }
+            set { SetValue(ArticleTitleProperty, value.ToUpper()); }
         }
 
         public string? ArticleDescription

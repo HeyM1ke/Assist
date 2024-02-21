@@ -4,10 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
-             Width="1125"
+             Width="1190"
              Height="690"
              x:Class="Assist.Controls.Global.Popup.GameLaunchSettingsPopup"
              Initialized="GameLaunch_Init">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/AssistStyles.axaml" />
+	</UserControl.Styles>
 	<Grid Background="#3D000000">
         <Grid.Styles>
             <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
@@ -57,52 +60,32 @@
                             <CheckBox HorizontalAlignment="Right"
                                       x:Name="GameModeEnable"></CheckBox>
 						</Grid>
+					
+					<Grid>
+						<TextBlock Text="Additional Client Args (EXPERIMENTAL)"
+						           FontFamily="{StaticResource WorkSans}"
+						           VerticalAlignment="Center"
+						           FontWeight="Normal"
+						           FontSize="16"
+						           HorizontalAlignment="Left"></TextBlock>
+						<TextBox HorizontalAlignment="Right"
+						         MinWidth="130"
+						          x:Name="RiotClientAdditionalArgs"></TextBox>
+					</Grid>
 
-                    <Grid>
-                        <TextBlock Text="{x:Static p:Resources.GameLaunch_SelectedPatchlineText}"
-                                   FontFamily="{StaticResource WorkSans}"
-                                   VerticalAlignment="Center"
-                                   FontWeight="Normal"
-                                   FontSize="16"
-                                   HorizontalAlignment="Left"></TextBlock>
-                        <ComboBox HorizontalAlignment="Right"
-                                  SelectedIndex="0"
-                                  Width="200"
-                                  x:Name="PatchLineCheckbox">
-                            <ComboBoxItem Content="Live"></ComboBoxItem>
-                            
-                        </ComboBox>
-                    </Grid>
+                    
                     
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2"
                             Spacing="10"
                             VerticalAlignment="Bottom"
-                            HorizontalAlignment="Center">
-                    <StackPanel.Styles>
-                        <Style Selector="Button">
-                            <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            <Setter Property="VerticalContentAlignment" Value="Center"/>
-                            <Setter Property="FontFamily" Value="{StaticResource WorkSans}"></Setter>
-                            <Setter Property="FontWeight"  Value="SemiBold"></Setter>
-                            <Setter Property="FontSize" Value="11"></Setter>
-                            <Setter Property="BorderThickness" Value="1"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
-                        </Style>
-
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
-                            <Setter Property="Button.Foreground" Value="{DynamicResource ButtonText}" />
-                            <Setter Property="BorderThickness" Value="1"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource ButtonHoverBorder}"/>
-                            <Setter Property="Cursor" Value="Hand"></Setter>
-                        </Style>
-                    </StackPanel.Styles>
+                            HorizontalAlignment="Right">
+                    
 
                     <Button Content="{x:Static p:Resources.Global_Apply}"
-                            Width="100"
+                            Classes="AssistBtn"
+                            HorizontalContentAlignment="Center"
                             Click="Apply_Click"></Button>
                 </StackPanel>
 			</Grid>

@@ -1,0 +1,59 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             mc:Ignorable="d"
+             d:DesignWidth="1125"
+             d:DesignHeight="590"
+             Loaded="QueuePage_Loaded"
+             Unloaded="QueuePage_Unloaded"
+             x:Class="Assist.Game.Views.Leagues.QueuePage"
+             Initialized="QueuePage_Init"
+             Background="{DynamicResource AssistBackground}">
+    <Grid>
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="20">
+            
+            <TextBlock Text="{Binding Timer}"
+                       FontFamily="{StaticResource Inter}"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Foreground="#FFFFFF"
+                       FontSize="32"></TextBlock> 
+            <TextBlock Text="LOOKING FOR MATCH"
+                       FontFamily="{StaticResource Inter}"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       Foreground="#FFFFFF"
+                       FontSize="32"></TextBlock>
+            <ItemsControl ItemsSource="{Binding PlayerControls}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Margin="10"
+                                    Columns="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Styles>
+                    <Style Selector="leagues|QueuePlayerPreview">
+                        <Setter Property="Margin" Value="18,5"></Setter>
+                    </Style>
+                </ItemsControl.Styles>
+               
+            </ItemsControl>
+            
+            <Button Classes="AssistBtn"
+                    Width="135"
+                    Height="30"
+                    Content="Cancel"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Center"
+                    FontSize="12"
+                    Click="CancelQueue_Click"/>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

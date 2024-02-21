@@ -1,0 +1,63 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Leagues.Settings"
+        xmlns:p="clr-namespace:Assist.Properties">
+    <Design.PreviewWith>
+        <controls:AssistSettingsNavigationButton Width="300"
+                                                 Height="500"
+                                                 Icon=""
+                                                 />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|AssistSettingsNavigationButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="#10F61E51"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistRed}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                    <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Margin="0,30">
+                        <StackPanel.Styles>
+                            <Style Selector="TextBlock">
+                                <Setter Property="Margin" Value="10,0"></Setter>
+                            </Style>
+                        </StackPanel.Styles>
+                        <Image Source="{TemplateBinding Icon}"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"
+                               Height="96"
+                               Width="96"
+                               HorizontalAlignment="Left"
+                               Stretch="UniformToFill"/>
+                        
+                        <TextBlock Text="{TemplateBinding TitleText}"
+                                   FontFamily="{StaticResource Inter}"
+                                   HorizontalAlignment="Left"
+                                   FontSize="36"
+                                   TextWrapping="WrapWithOverflow"
+                                   FontWeight="Black"></TextBlock>
+                        
+                        <TextBlock Text="{TemplateBinding MessageText}"
+                                   FontFamily="{StaticResource Inter}"
+                                   HorizontalAlignment="Left"
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="15"
+                                   FontWeight="Medium"></TextBlock>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+     <Style Selector="controls|AssistSettingsNavigationButton:pointerover">
+         <Setter Property="Background" Value="{DynamicResource AssistRedGrad}"></Setter>
+
+     </Style>
+</Styles>

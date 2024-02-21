@@ -1,0 +1,122 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="280" d:DesignHeight="355"
+             Initialized="ReportDisplay_Initialized"
+             x:Class="Assist.Game.Controls.Live.MatchReportDisplayControl">
+    <Border Background="{DynamicResource AssistSecondary}"
+            BorderBrush="{DynamicResource AssistOutline}"
+            CornerRadius="10"
+            BorderThickness="1">
+        <Grid RowDefinitions="50, *">
+        
+            <Panel Grid.Row="0"
+                   x:Name="DataPanel">
+                <asyncImageLoader:AdvancedImage Source="{Binding MapImage}"
+                                                Stretch="UniformToFill"
+                                                CornerRadius="10,10,0,0"/>
+                
+                <Grid Margin="3">
+                    <Border Padding="6,5"
+                            CornerRadius="5"
+                            Height="44"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource AssistPrimary}">
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding StatusText, FallbackValue='REMAKE'}"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontWeight="ExtraBold"
+                                           FontSize="20"
+                                           TextAlignment="Left"
+                                           Foreground="{Binding SpecialColor, FallbackValue='White'}"/>
+                                
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            IsVisible="{Binding ScoreVisible, FallbackValue='True'}">
+                                    <TextBlock Text="{Binding AllyScore, FallbackValue='0'}"
+                                               FontFamily="{StaticResource Inter}"
+                                               FontWeight="ExtraBold"
+                                               FontSize="20"
+                                               TextAlignment="Left"
+                                               Foreground="{Binding SpecialColor, FallbackValue='White'}"
+                                               />
+                                    <TextBlock Text=" // "
+                                               FontFamily="{StaticResource Inter}"
+                                               FontWeight="ExtraBold"
+                                               FontSize="20"
+                                               TextAlignment="Left"
+                                               Padding="-4,0,0,0"/>
+                                    <TextBlock Text="{Binding EnemyScore, FallbackValue='0'}"
+                                               FontFamily="{StaticResource Inter}"
+                                               FontWeight="ExtraBold"
+                                               FontSize="20"
+                                               TextAlignment="Left"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding GameMode, FallbackValue='UNRATED'}"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontWeight="Light"
+                                           FontSize="8"
+                                           Foreground="{DynamicResource AssistTextWhite}"
+                                           TextAlignment="Left"/>
+                                <TextBlock Text="{Binding DateOfMatch, FallbackValue='00/00/00'}"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontWeight="Light"
+                                           FontSize="8"
+                                           Foreground="{DynamicResource AssistTextWhite}"
+                                           TextAlignment="Left"/>
+                                <TextBlock Text="{Binding LengthOfMatch, FallbackValue='00:00:00'}"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontWeight="Light"
+                                           FontSize="8"
+                                           Foreground="{DynamicResource AssistTextWhite}"
+                                           TextAlignment="Left"
+                                           IsVisible="{Binding ScoreVisible, FallbackValue='True'}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        
+                    </Border>
+                   
+                </Grid>
+                
+                <asyncImageLoader:AdvancedImage Width="24"
+                                                Height="24"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Margin="10,0"
+                                                Source="{Binding GameModeIcon}"/>
+            </Panel>
+            <Panel Grid.Row="1"
+                   x:Name="StatPanel"
+                   Margin="10">
+                <ItemsControl ItemsSource="{Binding TeamControls}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Spacing="5"
+                                        Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Panel>
+            
+        </Grid>
+        
+        
+        
+        
+        
+       
+    </Border>
+</UserControl>

@@ -21,10 +21,7 @@ namespace Assist.Controls.Store
             _carousel = this.FindControl<Carousel>("BundleCarousel");
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void BundleControl_Initialized(object? sender, EventArgs e)
         {

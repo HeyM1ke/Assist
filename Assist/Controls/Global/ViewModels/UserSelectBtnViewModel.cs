@@ -10,9 +10,11 @@ namespace Assist.Controls.Global.ViewModels
     {
         public string ProfilePicture
         {
-            get => $"https://cdn.assistapp.dev/PlayerCards/{Profile.PlayerCardId}_DisplayIcon.png";
+            get => $"https://content.assistapp.dev/playercards/{Profile.PlayerCardId}_DisplayIcon.png";
         }
         public bool isExpired => _profile.isExpired;
+        public bool IsDefault => false;
+        public string LastUsed => $"Last Used: {_profile.LastUsed.ToShortDateString()}";
         public string Username => _profile.RiotId;
 #pragma warning disable CS8603 // Possible null reference return.
         public string Region => Enum.GetName(typeof(RiotRegion), _profile.Region);

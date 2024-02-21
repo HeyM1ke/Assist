@@ -21,7 +21,7 @@
 						 HorizontalAlignment="Center"
 						 Margin="75"
 						 VerticalAlignment="Center"
-						 FontFamily="WorkSans"
+						 FontFamily="{StaticResource Inter}"
 						 FontWeight="Thin"></TextBlock>
 
 			  <asyncImageLoader:AdvancedImage
@@ -32,23 +32,26 @@
                                 ></asyncImageLoader:AdvancedImage>
 			  <Border BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="10">
-                  <Rectangle Height="108" VerticalAlignment="Bottom" Fill="{DynamicResource ArticleItemDefaultGrad}"
-                             x:Name="PART_Rectangle"></Rectangle>
+                  <Border Height="143"
+                          VerticalAlignment="Bottom" Background="{DynamicResource ArticleItemDefaultGrad}"
+                             x:Name="PART_Rectangle"
+                             CornerRadius="10"
+                             Margin="-1"></Border>
 			  </Border>
 			  
-			  <StackPanel VerticalAlignment="Bottom" Margin="5,3">
+			  <StackPanel VerticalAlignment="Bottom" Margin="5,5">
 				  <TextBlock Text="{TemplateBinding ArticleTitle}"
 							 TextWrapping="WrapWithOverflow"
 							 FontWeight="Bold"
-							 FontFamily="{StaticResource WorkSans}"
+							 FontFamily="{StaticResource Inter}"
 							 Padding="0"
-							 FontSize="22"
+							 FontSize="36"
 							 Foreground="{DynamicResource ArticleItemForeground}"
 							 VerticalAlignment="Bottom"/>
 				  <TextBlock Text="{TemplateBinding ArticleDescription}"
 							 TextWrapping="WrapWithOverflow"
 							 FontWeight="Regular"
-							 FontFamily="{StaticResource WorkSans}"
+							 FontFamily="{StaticResource Inter}"
 							 Padding="0"
 							 FontSize="12"
 							 Foreground="{DynamicResource ArticleItemForeground}"
@@ -60,8 +63,8 @@
     </Setter>
   </Style>
 
-	<Style Selector="controls|ArticleNodeItem:pointerover /template/ Rectangle#PART_Rectangle">
-		<Setter Property="Fill" Value="{DynamicResource ArticleItemHoverGrad}"></Setter>
+	<Style Selector="controls|ArticleNodeItem:pointerover /template/ Border#PART_Rectangle">
+		<Setter Property="Background" Value="{DynamicResource ArticleItemHoverGrad}"></Setter>
         <Setter Property="Cursor" Value="Hand"></Setter>
     </Style>
 </Styles>

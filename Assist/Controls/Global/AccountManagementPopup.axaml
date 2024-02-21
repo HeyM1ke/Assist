@@ -1,0 +1,63 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:global="clr-namespace:Assist.Controls.Global"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="1125" d:DesignHeight="690"
+             x:Class="Assist.Controls.Global.AccountManagementPopup"
+             Initialized="AccountManagementPopup_Init">
+     <Grid Background="#3D000000">
+        <Border VerticalAlignment="Center"
+                Opacity="1"
+                CornerRadius="10"
+                HorizontalAlignment="Center"
+                Background="{StaticResource AssistPrimary}"
+                BorderThickness="2"
+                BorderBrush="{StaticResource AssistPrimaryLight}"
+                Width="600" Height="550">
+            <Grid RowDefinitions="9*,1*"
+                  Margin="25">
+                <Grid Row="0" >
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="ACCOUNT MANAGEMENT"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontWeight="SemiBold"
+                                   FontSize="24"
+                                   TextAlignment="Center"></TextBlock>
+                        <Rectangle Height="1"
+                                   Fill="{DynamicResource AssistRed}"/>
+                        
+                        <ScrollViewer VerticalScrollBarVisibility="Visible"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      Height="400">
+                            <ItemsControl ItemsSource="{Binding AccountItems}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Spacing="6">
+                                            
+                                        </StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                
+                                
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Grid>
+                
+                
+                
+                <Grid Row="1">
+                    <Button Content="{x:Static p:Resources.Global_BackText}"
+                            Classes="AssistBtn"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Click="BackBtn_Click"
+                            ></Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

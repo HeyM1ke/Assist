@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Services.Riot;
 using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Controls;
@@ -29,11 +31,23 @@ namespace Assist.Controls.Global.ViewModels
             get => AssistApplication.Current.CurrentProfile;
         }
 
+        private ObservableCollection<ComboBoxItem> _entitledPatchlines = new ObservableCollection<ComboBoxItem>();
+        public ObservableCollection<ComboBoxItem> EntitledPatchlines
+        {
+            get => _entitledPatchlines;
+            set => this.RaiseAndSetIfChanged(ref _entitledPatchlines, value);
+        }
+        
         private string _profilePlayercard;
         public string ProfilePlayercard
         {
             get => _profilePlayercard;
             set => this.RaiseAndSetIfChanged(ref _profilePlayercard, value);
+        }
+        
+        public string SelectedPatchLine
+        {
+            get => AssistApplication.Current.ClientLaunchSettings.Patchline.ToUpper();
         }
 
         public string ProfileUsername
@@ -45,6 +59,11 @@ namespace Assist.Controls.Global.ViewModels
         {
             get => Profile.Tagline;
         }
+
+        public string ProfileGamename
+        {
+            get => Profile.RiotId;
+        }
         public void CheckEnable()
         {
             if (Design.IsDesignMode)
@@ -54,8 +73,8 @@ namespace Assist.Controls.Global.ViewModels
             }
                 
             var p = AssistApplication.Current.Platform;
-
-            IsEnabled = p.OperatingSystem == OperatingSystemType.WinNT ? true : false;
+            
+            IsEnabled = OperatingSystem.IsWindows() && !RiotClientService.ClientOpened;
         }
 
         public async Task<PlayerInventory> SetPlayercard()
@@ -77,6 +96,19 @@ namespace Assist.Controls.Global.ViewModels
             catch (Exception e)
             {
                 return null;
+            }
+        }
+
+        public async Task CheckPatchlines()
+        {
+            EntitledPatchlines.Clear();
+
+            foreach (var entitledLine in AssistApplication.Current.CurrentUser.Player.EntitledLines)
+            {
+                EntitledPatchlines.Add(new ComboBoxItem()
+                {
+                    Content = entitledLine.ToUpper()
+                });
             }
         }
     }

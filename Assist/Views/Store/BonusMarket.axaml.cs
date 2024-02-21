@@ -38,7 +38,7 @@ namespace Assist.Views.Store
 
         private void BackBtn_Click(object? sender, RoutedEventArgs e)
         {
-            MainViewNavigationController.Change(new StoreView());
+            MainViewNavigationController.Change(new StoreViewV2());
         }
     }
 }

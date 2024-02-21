@@ -21,8 +21,6 @@ namespace Assist
         {
             try
             {
-                var settingsContent = File.ReadAllText(AssistSettings.SettingsFilePath);
-                AssistSettings.Current = JsonSerializer.Deserialize<AssistSettings>(settingsContent);
                 BuildAvaloniaApp()
                     .StartWithClassicDesktopLifetime(args);
             }
@@ -32,7 +30,7 @@ namespace Assist
                 Log.Fatal(e.Message);
                 Log.Fatal("Fatal Error STACK == ");
                 Log.Fatal(e.StackTrace);
-                
+                Log.CloseAndFlush();
             }
             finally
             {
@@ -49,10 +47,14 @@ namespace Assist
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
-                .UsePlatformDetect().With(new Win32PlatformOptions
+                .UsePlatformDetect().With(new Win32PlatformOptions()
                 {
-                    AllowEglInitialization = AssistSettings.Current.EglEnabled
-                })
+                }).With(new MacOSPlatformOptions()
+                {
+                    DisableDefaultApplicationMenuItems = true,
+                    DisableNativeMenus = true,
+                    ShowInDock = true
+                }).With(new SkiaOptions { UseOpacitySaveLayer = true })
                 .UseReactiveUI();
 
     }

@@ -16,10 +16,11 @@
       <ControlTemplate>
         <Border x:Name="PART_Border"
                 BorderThickness="1"
-                CornerRadius="5"
-                Background="{DynamicResource AssistBlack}">
+                BorderBrush="{TemplateBinding BorderBrush}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                Background="{DynamicResource AssistPrimary}">
             <Grid>
-                <Image Margin="10"
+                <Image Margin="5"
                        Source="{TemplateBinding Source}"></Image>
             </Grid>
         </Border>

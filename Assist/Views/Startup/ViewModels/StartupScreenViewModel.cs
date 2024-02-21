@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.Controls.Global.Popup;
+using Assist.Game.Services;
 using Assist.Game.Views;
 using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
@@ -15,6 +16,8 @@ using Assist.Settings;
 using Assist.ViewModels;
 using Assist.Views.Authentication;
 using Assist.Views.Authentication.Sections.ViewModels;
+using AsyncImageLoader;
+using AsyncImageLoader.Loaders;
 using Avalonia;
 using Avalonia.Platform;
 using ReactiveUI;
@@ -40,13 +43,24 @@ namespace Assist.Views.Startup.ViewModels
             get => _message;
             set => this.RaiseAndSetIfChanged(ref _message, value);
         }
+
+        private static bool _checkedForGamemode = false;
         public async Task StartupSetup()
         {
             Log.Information("Checking for Update");
+            ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader();
             Message = "Checking for Updates...";
-            await CheckForUpdates();
+            var cont = await CheckForUpdates();
+            if (!cont)
+            {
+                // Means update is found and needs to stop.
+            }
 
-
+            if (DiscordPresenceController.ControllerInstance.BDiscordPresenceActive)
+            {
+                await DiscordPresenceController.ControllerInstance.Shutdown();
+            }
+            
             Log.Information("Running Setup");
 
             if (!AssistSettings.Current.LanguageSelected)
@@ -58,8 +72,9 @@ namespace Assist.Views.Startup.ViewModels
             Log.Information("Connecting to GENERAL SERVER");
             await AssistApplication.Current.ConnectToServerHub();
             // Check Args
-            if (AssistApplication.CurrentApplication.Args.Contains("--forcegame"))
+            if (AssistApplication.CurrentApplication.Args.Contains("--forcegame") && !_checkedForGamemode)
             {
+                _checkedForGamemode = true;
                 MainWindowContentController.Change(new GameInitialView());
                 return;
             }
@@ -68,13 +83,17 @@ namespace Assist.Views.Startup.ViewModels
 
             if (IsValorantRunning())
             {
-                var menuPopup = new GamemodeWarningPopup();
-                menuPopup.WarningClosing += GamemodePopupClose;
-                PopupSystem.SpawnCustomPopup(menuPopup);
+                //TODO THIS IS BROKEN
+                
+                /*PopupSystem.SpawnCustomPopup(new GamemodeWarningPopup()
+                {
+                    WarningClosing = GamemodePopupClose
+                });*/
+                
+                
+                MainWindowContentController.Change(new GameInitialView());
                 return;
             }
-
-
             
             await StartStartupAuthentication();
         }
@@ -87,6 +106,26 @@ namespace Assist.Views.Startup.ViewModels
 
         private async Task StartStartupAuthentication()
         {
+            if (!string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
+            {
+                Log.Information("Logging into Assist Account");
+                try
+                {
+                    if (AssistApplication.Current.AssistUser.Account.AccountInfo is null)
+                    {
+                        var authResp = await AssistApplication.Current.AssistUser.Authentication.AuthenticateWithRefreshToken(AssistSettings.Current
+                            .AssistUserCode);
+                        AssistSettings.Current.AssistUserCode = authResp.RefreshToken;
+                        AssistSettings.Save();
+                        await AssistApplication.Current.AssistUser.Account.GetUserInfo();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Fatal("Account Token is not Valid");
+                }
+            }
+            
             if (AssistSettings.Current.Profiles.Count == 0)
             {
                 Log.Information("No Profiles Found, Going to Auth View");
@@ -203,11 +242,11 @@ namespace Assist.Views.Startup.ViewModels
             return processlist.Any();
         }
 
-        public async Task CheckForUpdates()
+        public async Task<bool> CheckForUpdates()
         {
 #if (!DEBUG)
 
-            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.WinNT)
+            if (OperatingSystem.IsWindows())
             {
                 try
                 {
@@ -218,11 +257,12 @@ namespace Assist.Views.Startup.ViewModels
                         var newVersion = await mgr.UpdateApp();
                         // You must restart to complete the update. 
                         // This can be done later / at any time.
+                        //return false;
                         if (newVersion != null)
                             UpdateManager.RestartApp();
                     }
 
-                    return;
+                   return true;
                 }
                 catch (Exception e)
                 {
@@ -230,7 +270,7 @@ namespace Assist.Views.Startup.ViewModels
                 }
             }
 
-            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.OSX)
+            if (OperatingSystem.IsMacOS())
             {
                 try
                 {
@@ -239,10 +279,12 @@ namespace Assist.Views.Startup.ViewModels
 
                     // You must restart to complete the update. 
                     // This can be done later / at any time.
+return false;
                     if (newVersion != null)
                         UpdateManager.RestartApp();
 
-                    return;
+                    return true;
+
                 }
                 catch (Exception e)
                 {
@@ -250,7 +292,7 @@ namespace Assist.Views.Startup.ViewModels
                 }
             }
 
-            if (AssistApplication.Current.Platform.OperatingSystem == OperatingSystemType.Linux)
+            if (OperatingSystem.IsLinux())
             {
                 try
                 {
@@ -259,10 +301,12 @@ namespace Assist.Views.Startup.ViewModels
 
                     // You must restart to complete the update. 
                     // This can be done later / at any time.
+return false;
                     if (newVersion != null)
                         UpdateManager.RestartApp();
 
-                    return;
+                    return true;
+
                 }
                 catch (Exception e)
                 {
@@ -271,7 +315,7 @@ namespace Assist.Views.Startup.ViewModels
             }
 #endif
 
-
+            return true;
 
         }
 
@@ -291,6 +335,164 @@ namespace Assist.Views.Startup.ViewModels
 
                     var backupExcists = await BackupsSettings.CheckIfBackupExistsForId(p.ProfileUuid);
 
+                    // Backup Auth
+                    if (backupExcists)
+                    {
+                        // This is ran if the folder is found.
+                        ProfileSettings backupSettings = null;
+                        try
+                        {
+                            // Data is read
+                            var data = await BackupsSettings.ReadBackupFromId(p.ProfileUuid);
+
+                            if (data != null)
+                            {
+                                backupSettings = data;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error(e.Message);
+                        }
+
+                        // Attempt to Authenticate with BackupSettings
+                        if (backupSettings != null)
+                        {
+                            Log.Information("Logging in with BackupData");
+                            try
+                            {
+                                await AuthProfile(backupSettings);
+                                return;
+                            }
+                            catch (ValNetException ex)
+                            {
+                                Message = $"Backup is expired.";
+                            }
+                        }
+                    }
+
+                    // Cookie Auth
+                    try
+                    {
+                        Log.Information("Logging in with Cookie AUth");
+                        await AuthProfile(p);
+                        return;
+                    }
+                    catch (Exception ex2)
+                    {
+                        p.isExpired = true; // Set the Profile to expired.
+
+                        if (p.isExpired)
+                            Log.Fatal("Profile is Expired:" + p.Gamename);
+
+                        Message = $"{p.Gamename} is expired.";
+                    }
+                }
+                else
+                {
+                    AssistSettings.Current.DefaultAccount = "";
+                }
+            }
+
+            // Go through Each Profile
+            for (int i = 0; i < AssistSettings.Current.Profiles.Count; i++)
+            {
+                var p = AssistSettings.Current.Profiles[i];
+                Message = $"Logging into: {p.Gamename}";
+                if (!p.isExpired)
+                {
+
+                    // Backup Auth
+                    if (await BackupsSettings.CheckIfBackupExistsForId(p.ProfileUuid))
+                    {
+                        // This is ran if the folder is found.
+                        ProfileSettings backupSettings = null;
+                        try
+                        {
+                            // Data is read
+                            var data = await BackupsSettings.ReadBackupFromId(p.ProfileUuid);
+
+                            if (data != null)
+                            {
+                                backupSettings = data;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error(e.Message);
+                        }
+
+                        // Attempt to Authenticate with BackupSettings
+                        if (backupSettings != null)
+                        {
+                            Log.Information("Logging in with BackupData");
+                            try
+                            {
+                                await AuthProfile(backupSettings);
+                                return;
+                            }
+                            catch (ValNetException ex)
+                            {
+                                Message = $"Backup is expired.";
+                            }
+                        }
+                    }
+
+                    // Cookie Auth
+                    try
+                    {
+                        Log.Information("Logging in with Cookie data");
+                        await AuthProfile(p);
+                        return;
+                    }
+                    catch (Exception ex2)
+                    {
+                        p.isExpired = true; // Set the Profile to expired.
+
+                        if (p.isExpired)
+                            Log.Fatal("Profile is Expired:" + p.Gamename);
+
+                        Message = $"{p.Gamename} is expired.";
+
+                        if (ex2 is RequestException e)
+                        {
+                            Log.Error("Status Code: " + e.StatusCode);
+                            // Add Auth Retry on Status Code 0
+                            Log.Error("Content: " + e.Content);
+                        }
+                    }
+                }
+            }
+
+            // After Everything, if no profiles or users are logged into. Send to Auth Page.
+            Log.Information("No Profiles were able to be logged into, Going to Auth View");
+            MainWindowContentController.Change(new AuthenticationView());
+        }
+        
+        
+        public async Task ExperimentalAuthWBackupDetection()
+        {
+            // Checks there is a Default Profile Profile
+            if (!string.IsNullOrEmpty(AssistSettings.Current.DefaultAccount))
+            {
+                Log.Information("Default Profile Found, using attempting Default.");
+
+                var p = AssistSettings.Current.Profiles.Find(
+                    x => x.ProfileUuid == AssistSettings.Current.DefaultAccount);
+
+                if (p != null)
+                {
+                    Message = $"Logging into Default: {p.Gamename}";
+
+
+                    var isLastLoggedIn = await BackupsSettings.IsLastLoggedIn(p.ProfileUuid);
+                    var backupExcists = await BackupsSettings.CheckIfBackupExistsForId(p.ProfileUuid);
+
+                    if (isLastLoggedIn)
+                    {
+                        
+                    }
+                    
                     // Backup Auth
                     if (backupExcists)
                     {

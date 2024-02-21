@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="790" d:DesignHeight="225"
+             mc:Ignorable="d" d:DesignWidth="935" d:DesignHeight="300"
              x:Class="Assist.Controls.Dashboard.ArticleControl"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
@@ -12,6 +12,8 @@
 		<Border x:Name="Backing"
                 HorizontalAlignment="Left"
                 CornerRadius="10"
+                BorderBrush="{DynamicResource AssistOutline}"
+                BorderThickness="1"
                 >
 
 			<Grid>
@@ -30,42 +32,45 @@
 							
 						</StackPanel>
 					</ItemsControl>
-				<Carousel Width="790" x:Name="ArticleCarousel" HorizontalAlignment="Left">
+				<Carousel x:Name="ArticleCarousel" HorizontalAlignment="Left">
 					<Carousel.PageTransition>
 						<CrossFade Duration=".1"></CrossFade>
 					</Carousel.PageTransition>
                 </Carousel>
-				<Button Name="GoBackBtn"
-				        Click="GoBackBtn_OnClick"
-				        Width="50"
-				        Height="85"
-				        VerticalAlignment="Center"
-				        HorizontalAlignment="Left"
-				        Background="#33ffffff"
-				        Opacity="1"
-				        CornerRadius="10,0,0,10"
-				        Margin="5"
-				        Content="&lt;"
-				        Foreground="#66ffffff"
-				        FontFamily="{StaticResource WorkSans}"
-				        FontSize="42"
-				        VerticalContentAlignment="Center"></Button>
 				
-				<Button Name="GoNextBtn"
-				        Click="GoNextBtn_OnClick"
-						Width="50"
-				        Height="85"
-				        VerticalAlignment="Center"
-				        HorizontalAlignment="Right"
-				        Background="#33ffffff"
-				        Opacity="1"
-				        CornerRadius="0,10,10,0"
-				        Margin="5"
-				        Content="&gt;"
-				        Foreground="#66ffffff"
-				        FontFamily="{StaticResource WorkSans}"
-				        FontSize="42"
-				        VerticalContentAlignment="Center"></Button>
+				<StackPanel Orientation="Horizontal"
+				            Spacing="5"
+				            VerticalAlignment="Bottom"
+				            HorizontalAlignment="Right"
+				            Margin="5">
+					<Button Name="GoBackBtn"
+					        Click="GoBackBtn_OnClick"
+					        Width="35"
+					        Height="30"
+					        
+					        CornerRadius="5"
+					        Content="&lt;"
+					        Foreground="#66ffffff"
+					        HorizontalContentAlignment="Center"
+					        FontFamily="{StaticResource Inter}"
+					        FontSize="13"
+					        Classes="AssistBtn"
+					        VerticalContentAlignment="Center"></Button>
+				
+					<Button Name="GoNextBtn"
+					        Click="GoNextBtn_OnClick"
+					        Width="35"
+					        Height="30"
+					        CornerRadius="5"
+					        
+					        Content="&gt;"
+					        Foreground="#66ffffff"
+					        HorizontalContentAlignment="Center"
+					        FontFamily="{StaticResource WorkSans}"
+					        FontSize="13"
+					        Classes="AssistBtn"
+					        VerticalContentAlignment="Center"></Button>
+				</StackPanel>
             </Grid>
 
 

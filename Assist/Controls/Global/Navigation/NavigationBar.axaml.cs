@@ -27,11 +27,7 @@ namespace Assist.Controls.Global.Navigation
             Instance.SetSelected(3); // TEMP FIX
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            
-        }
+
 
 
         private void DashboardBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -58,7 +54,7 @@ namespace Assist.Controls.Global.Navigation
             ClearSelected();
 
             if (MainViewNavigationController.CurrentPage != Page.STORE)
-                MainViewNavigationController.Change(new StoreView());
+                MainViewNavigationController.Change(new StoreViewV2());
 
             NavigationButtons[2].IsSelected = true;
         }

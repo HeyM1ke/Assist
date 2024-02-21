@@ -8,6 +8,7 @@ using Assist.Views;
 using Assist.Views.Authentication;
 using Assist.Views.Dashboard;
 using Assist.Views.Startup;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
@@ -20,11 +21,11 @@ namespace Assist
         
         private readonly MainWindowViewModel _viewModel;
         private int number = 0;
-        WindowNotificationManager notificationManager;
+        public WindowNotificationManager notificationManager;
         public MainWindow()
         {
             DataContext = _viewModel = new MainWindowViewModel();
-            notificationManager = new WindowNotificationManager(this);
+            
             _viewModel.DetermineScaleRate();
             InitializeComponent();
         }
@@ -32,7 +33,15 @@ namespace Assist
         private void MainWindow_Initialized(object? sender, EventArgs e)
         {
             MainWindowContentController.ContentControl = this.FindControl<TransitioningContentControl>("ContentView");
-            PopupSystem.PopupController = this.FindControl<PopupMaster>("PopupMaster");
+            
+            PopupSystem.PopupController = this.FindControl<PopupMaster>("PopupMasterController");
+            
+            notificationManager = new WindowNotificationManager(this)
+            {
+                Position = NotificationPosition.TopRight,
+                MaxItems = 5,
+                Margin = OperatingSystem.IsWindows() ? new Thickness(0, 30, 0, 0) : new Thickness(0),
+            };
         }
 
         public void ChangeResolution(EResolution res)
@@ -42,7 +51,13 @@ namespace Assist
 
         public void ChangeGameResolution(EResolution res)
         {
-            _viewModel.ChangeGameModeResolution(res);
+            _viewModel.ChangeResolution(res);
+        }
+
+        private void PopupMaster_OnLoaded(object? sender, RoutedEventArgs e)
+        {
+            PopupSystem.ContentControl = sender as TransitioningContentControl;
+            
         }
     }
 }

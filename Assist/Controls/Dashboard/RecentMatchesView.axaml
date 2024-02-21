@@ -1,0 +1,49 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Dashboard">
+    <Design.PreviewWith>
+        <controls:RecentMatchesView />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|RecentMatchesView">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistPrimary}">
+                    <Grid Margin="10">
+                        <DockPanel Dock="Top">
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="Recent Matches"
+                                           FontFamily="{StaticResource Inter}"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource MissionsText}"
+                                           FontWeight="Bold"
+                                           DockPanel.Dock="Top"
+                                           Padding="0,0,0,3"></TextBlock>
+                                <Rectangle Fill="{DynamicResource AssistRed}"
+                                           Height="1"
+                                />
+                        
+                        
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  Margin="6"/>
+                        
+                            </StackPanel>
+                        </DockPanel>
+                        <Grid IsVisible="{TemplateBinding isLoading}"
+                              Background="{DynamicResource AssistPrimary}">
+                            
+                            <Label Content="Loading..."
+                                   Foreground="White"
+                                   FontFamily="{StaticResource Inter}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"></Label>
+                        </Grid>
+                    </Grid>
+                    
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

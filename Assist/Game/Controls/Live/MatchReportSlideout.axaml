@@ -1,0 +1,87 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             HorizontalAlignment="Right"
+             Loaded="ReportSlideOut_Loaded"
+             x:Class="Assist.Game.Controls.Live.MatchReportSlideout"
+             Background="Transparent">
+    <Grid ColumnDefinitions="35, Auto"
+          Background="Transparent"
+          ZIndex="4">
+        <Grid.Styles>
+            <Style Selector="Border.slidePanel">
+                <Setter Property="Width" Value="0"/>
+                <Setter Property="Opacity" Value="0"></Setter>
+                <Setter Property="Transitions">
+                    <Transitions>
+                        <DoubleTransition Property="Width" Duration="0:0:0.17" Easing="QuarticEaseIn"/>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.30" Easing="QuarticEaseIn"/>
+                    </Transitions>
+                </Setter>
+                
+            </Style>
+            
+            <Style Selector="Border.slidePanel.open">
+                <Setter Property="Width" Value="300"></Setter>
+                <Setter Property="Opacity" Value="1"></Setter>
+            </Style>
+        </Grid.Styles>
+        <Button Grid.Column="0"
+                Classes="AssistBtn"
+                Height="50"
+                Content="&lt;"
+                Click="SlideBtn_Click"
+                VerticalContentAlignment="Center"
+                HorizontalAlignment="Right"></Button>
+        
+        <Border Grid.Column="1"
+                Classes="slidePanel"
+                Classes.open="{Binding SlideOpen}"
+                Background="{DynamicResource AssistSecondary}"
+                BorderBrush="{DynamicResource AssistOutline}"
+                BorderThickness="1"
+                Padding="5">
+            <Grid RowDefinitions="40, *">
+                <StackPanel Spacing="5">
+                
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="LATEST MATCHES"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="Left"/>
+                        <TextBlock Text="BETA"
+                                   FontFamily="{StaticResource Inter}"
+                                   FontSize="8"
+                                   FontWeight="Black"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="Center"
+                                   Opacity=".5"/>
+                    </StackPanel>
+                    <Rectangle Fill="{DynamicResource AssistRed}"
+                               Height="2"></Rectangle>
+                
+                </StackPanel>
+                
+                <ScrollViewer Grid.Row="1"
+                              Focusable="False"
+                              VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding MatchControls}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Spacing="8"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            
+        </Border>
+    </Grid>
+</UserControl>

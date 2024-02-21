@@ -14,10 +14,7 @@ namespace Assist.Controls.Global
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private void Button_OnClick(object? sender, RoutedEventArgs e)
         {

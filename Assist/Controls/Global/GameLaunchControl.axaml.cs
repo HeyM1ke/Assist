@@ -3,6 +3,7 @@ using Assist.Controls.Global.Popup;
 using Assist.Controls.Global.ViewModels;
 using Assist.Services.Popup;
 using Assist.Services.Riot;
+using Assist.Settings;
 using Assist.ViewModels;
 using AsyncImageLoader;
 using Avalonia;
@@ -22,11 +23,6 @@ namespace Assist.Controls.Global
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            _viewModel.CheckEnable();
-        }
 
         private async void LaunchBtn_Click(object? sender, RoutedEventArgs e)
         {
@@ -45,7 +41,9 @@ namespace Assist.Controls.Global
 
             if (inv != null)
             {
-                _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_LargeArt.png";
+                _viewModel.ProfilePlayercard = $"https://content.assistapp.dev/playercards/{inv.PlayerData.PlayerCardID}_SmallArt.png";
+                AssistApplication.Current.CurrentProfile.PlayerCardId = inv.PlayerData.PlayerCardID;
+                AssistSettings.Save();
             }
         }
 

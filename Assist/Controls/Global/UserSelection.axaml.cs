@@ -26,10 +26,6 @@ namespace Assist.Controls.Global
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
 
         private void UserSelection_OnInitialized(object? sender, EventArgs e)
         {

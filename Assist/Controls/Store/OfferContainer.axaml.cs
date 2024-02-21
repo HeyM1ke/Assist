@@ -22,10 +22,7 @@ namespace Assist.Controls.Store
             _offerGrid = this.FindControl<UniformGrid>("OffersGrid");
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
 
         private async void OfferContainer_OnInitialized(object? sender, EventArgs e)

@@ -5,29 +5,73 @@
              xmlns:store="clr-namespace:Assist.Controls.Store"
              mc:Ignorable="d"
              d:DesignWidth="1125"
-             d:DesignHeight="610"
+             d:DesignHeight="690"
              x:Class="Assist.Views.Store.StoreView">
-	<Grid RowDefinitions="*,180" Margin="10">
+	<Grid  RowDefinitions="Auto,180, Auto" Margin="10"
+           >
 
-        <Grid Row="0">
+        <Grid Row="0"
+              Margin="0,0,0,20">
 
-            <store:BundleContainer Width="810"
-                                   Height="395"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   isLoading="True"
-                                   Initialized="BundleContainer_Init"></store:BundleContainer>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <store:BundleContainer Width="810"
+                                       Height="395"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       isLoading="True"
+                                       Initialized="BundleContainer_Init"></store:BundleContainer>
 
-            <store:NightMarketButtonControl HorizontalAlignment="Right"
-                                            VerticalAlignment="Top"
-                                            Margin="10,0"
-                                            Width="250"
-                                            Height="395"
-                                            IsVisible="False"/>
+                <store:NightMarketButtonControl HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Margin="10,0"
+                                                Width="250"
+                                                Height="395"
+                                                IsVisible="{Binding NightMarketEnabled}"/>
+            </StackPanel>
         </Grid>
 
 
-        <store:OfferContainer Grid.Row="1"></store:OfferContainer>
         
+        <Panel Grid.Row="1">
+            <store:OfferContainer Grid.Row="1"></store:OfferContainer>
+            
+        </Panel>
+        <Panel Grid.Row="2" HorizontalAlignment="Left"
+               Height="30"
+               Margin="10,30,0,0"
+               VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" Spacing="20">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5"
+                            HorizontalAlignment="Center">
+                    <Image Source="/Resources/Icons/VP_Icon.png"
+                           Height="18"
+                           Stretch="Uniform"
+                           VerticalAlignment="Center"></Image>
+                    <TextBlock Text="{Binding AccountVP, FallbackValue='0 VP'}"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Medium"
+                               FontSize="16"
+                               VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+                    
+                <Rectangle Width="2"
+                           Fill="{DynamicResource AssistRed}"></Rectangle>
+                    
+                <StackPanel Orientation="Horizontal"
+                            Spacing="5"
+                            HorizontalAlignment="Center">
+                    <Image Source="/Resources/Icons/RP_Icon.png"
+                           Height="18"
+                           Stretch="Uniform"
+                           VerticalAlignment="Center"></Image>
+                    <TextBlock Text="{Binding AccountRP, FallbackValue='0 RP'}"
+                               FontFamily="{StaticResource Inter}"
+                               FontWeight="Medium"
+                               FontSize="16"
+                               VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Panel>
     </Grid>
 </UserControl>

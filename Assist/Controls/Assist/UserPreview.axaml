@@ -2,41 +2,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="43"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="54" d:DesignHeight="54"
              x:Class="Assist.Controls.Assist.UserPreview"
              Initialized="UserPreview_Initialized">
-  <Grid Background="#20101115"
-		VerticalAlignment="Top">
-	  <StackPanel Orientation="Horizontal"
-                  Spacing="10"
-                  VerticalAlignment="Center"
-                  Margin="4,0">
-		  <Panel>
-			  <Rectangle Fill="#0F0F0F"
-                       Width="34"
-                       Height="34"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center">
-
-              </Rectangle>
-			  <Image Source="/Resources/Icons/Assist_Logo_White.png"
-                     Width="24"
-					 Height="24"></Image>
-		  </Panel>
-          <StackPanel
-              VerticalAlignment="Center">
-              <TextBlock FontFamily="{StaticResource WorkSans}"
-                         Text="{Binding AssistUserName}"
-                         FontWeight="Medium"
-                         FontSize="12"
-                         Opacity="1"/>
-			  <!-- For the Future -->
-              <TextBlock FontFamily="{StaticResource WorkSans}"
-                         Text="Playing VALORANT"
-                         FontWeight="Light"
-                         FontSize="10"
-                         Opacity=".5"/>
-          </StackPanel>
-	  </StackPanel>
-  </Grid>
+	
+	<UserControl.Styles>
+		<Style Selector="Border">
+			<Setter Property="BorderBrush" Value="{DynamicResource AssistOutline}"></Setter>
+		</Style>
+		
+		<Style Selector="Border:pointerover">
+			<Setter Property="BorderBrush" Value="{DynamicResource AssistRed}"></Setter>
+			<Setter Property="Cursor" Value="Hand"></Setter>
+		</Style>
+	</UserControl.Styles>
+	
+	<Border 
+	        BorderThickness="1"
+	        CornerRadius="300"
+	        VerticalAlignment="Stretch"
+	        Background="Transparent"
+	        MinHeight="30"
+	        MinWidth="30"
+	        
+	        PointerReleased="GridClicked">
+		 <Grid>
+			 <asyncImageLoader:AdvancedImage Source="{Binding AssistDisplayImage}"
+			                                 CornerRadius="300"
+			                                 RenderOptions.BitmapInterpolationMode="MediumQuality"
+			                                 Stretch="Uniform"></asyncImageLoader:AdvancedImage>
+			 <Panel VerticalAlignment="Bottom"
+			        HorizontalAlignment="Right"
+			        Margin="2,0">
+		  
+		  
+		  
+				 <Ellipse Width="12"
+				          Height="12"
+				          Fill="{DynamicResource AssistOnlineBorderColor}"/>
+				 <Ellipse Width="10"
+				          Height="10"
+				          Fill="{DynamicResource AssistOnlineColor}"/>
+			 </Panel>
+		 </Grid>
+	 </Border>
+	
+	
 </UserControl>

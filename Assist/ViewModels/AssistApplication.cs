@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Assist.Game.Services;
 using Assist.Game.Views;
 using Assist.Game.Views.Authentication;
 using Assist.Game.Views.Initial;
 using Assist.Objects.Enums;
+using Assist.Objects.Helpers;
 using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Services.Riot;
@@ -18,6 +20,7 @@ using Assist.Views.Authentication;
 using Assist.Views.Settings;
 using Assist.Views.Startup;
 using Assist.Views.Windows;
+using AssistUser.Lib;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -28,6 +31,9 @@ using ValNet;
 using ValNet.Enums;
 using ValNet.Objects;
 using ValNet.Objects.Exceptions;
+using AssistUser.Lib;
+using Avalonia.Controls.Notifications;
+using NAudio.Wave;
 
 namespace Assist.ViewModels
 {
@@ -36,25 +42,25 @@ namespace Assist.ViewModels
         #region Static Data
 
         public const string CurrentBattlepassId = "2b3a941d-4b85-a0df-5beb-8897224d290a";
-
+        public const string EpisodeId = "1a2fc1de-4f58-4a89-49d0-f28b720ff76f";
         #endregion
 
-
+        public AssistApplication()
+        {
+            AudioOutputDevice = new WaveOutEvent();
+        }
+        
         public static AssistApplication Current = new AssistApplication();
         public static AssistApiService ApiService = new AssistApiService();
         public RiotUser CurrentUser;
         public ProfileSettings CurrentProfile;
         public ClientSettings ClientLaunchSettings = new ClientSettings();
         public RuntimePlatformInfo Platform;
+        public AssistMode Mode;
         public bool GameModeEnabled = false;
 
         public static ClassicDesktopStyleApplicationLifetime CurrentApplication = Application.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
-        public RuntimePlatformInfo GetCurrentPlatform()
-        {
-            Platform = AvaloniaLocator.Current.GetService<IRuntimePlatform>().GetRuntimeInfo();
-            return Platform;
-        }
-
+        
         public void ChangeMainWindowResolution(EResolution res)
         {
             if (CurrentApplication.MainWindow is MainWindow)
@@ -80,7 +86,7 @@ namespace Assist.ViewModels
                 }
             }
 
-            GameModeEnabled = true;
+            
             Dispatcher.UIThread.InvokeAsync(() => MainWindowContentController.Change(new GameInitialView()));
         }
 
@@ -118,7 +124,17 @@ namespace Assist.ViewModels
 
                 mainRef.Close();
                 desktop.MainWindow = main;
-                MainWindowContentController.Change(new MainView(new SettingsView()));
+
+                if (Current.Mode == AssistMode.GAME)
+                {
+                    MainWindowContentController.Change(new GameView());
+                }
+                else
+                {
+                    MainWindowContentController.Change(new MainView(new SettingsPopup()));
+                }
+                
+                
             }
         }
 
@@ -232,17 +248,20 @@ namespace Assist.ViewModels
             ProfileSettings pS = new ProfileSettings();
 
             pS.SetupProfile(u);
-            await AssistSettings.Current.SaveProfile(pS);
+            
 
             pS.ConvertCookiesTo64(u.GetAuthClient().ClientCookies);
-
+            await AssistSettings.Current.SaveProfile(pS);
+            AssistSettings.Save();
+            
             AssistApplication.Current.CurrentUser  = u;
             AssistApplication.Current.CurrentProfile = pS;
             AssistApplication.Current.OpenMainView();
         }
 
         #region Experimental
-
+        
+        public WaveOutEvent AudioOutputDevice;
         public ServerHub ServerHub;
         public RiotUserTokenRefreshService RefreshService;
         public async Task ConnectToServerHub()
@@ -253,13 +272,80 @@ namespace Assist.ViewModels
             ServerHub.Connect();
         }
 
+        public async Task PlaySound(string url)
+        {
+            using(var mf = new MediaFoundationReader(url))
+            using(var wo = new WasapiOut())
+            {
+                wo.Init(mf);
+                wo.Play();
+                while (wo.PlaybackState == PlaybackState.Playing)
+                {
+                    Thread.Sleep(1000);
+                }
+            }
+            
+        }
+        
+        public async Task Pause()
+        {
+            AudioOutputDevice.Pause();
+        }
+        
+        public async Task SetVolume(int num)
+        {
+            AudioOutputDevice.Volume = num;
+        }
+
+        public async Task ShowNotification(INotification noti)
+        {
+            if (AssistApplication.CurrentApplication.MainWindow is MainWindow)
+            {
+                var w = (MainWindow)AssistApplication.CurrentApplication.MainWindow;
+
+                if (w != null)
+                {
+                    w.notificationManager.Show(noti);
+                }
+            }
+        }
+        
+        public async Task ShowNotification(string title, string description, NotificationType type, TimeSpan? duration = null)
+        {
+            if (AssistApplication.CurrentApplication.MainWindow is MainWindow)
+            {
+                var w = (MainWindow)AssistApplication.CurrentApplication.MainWindow;
+
+                if (w != null)
+                {
+                    w.notificationManager.Show(new Notification(title,description, type, duration));
+                }
+            }
+        }
+        
+        public async Task ShowNotification(string title, string description)
+        {
+            if (AssistApplication.CurrentApplication.MainWindow is MainWindow)
+            {
+                var w = (MainWindow)AssistApplication.CurrentApplication.MainWindow;
+
+                if (w != null)
+                {
+                    w.notificationManager.Show(new Notification(title,description));
+                }
+            }
+        }
+
         #endregion
 
         #region Gamemode
 
-        public AssistApiUser AssistUser = new AssistApiUser();
+        public AssistUser.Lib.AssistUser AssistUser = new AssistUserBuilder().Build();
         public RiotWebsocketService RiotWebsocketService = new RiotWebsocketService();
         public AssistGameServerConnection GameServerConnection = new AssistGameServerConnection();
+
+        public static bool CurrentlyInAssistLeagueMatch = false;
+        public static bool RequestedClose = false;
 
         #endregion
 

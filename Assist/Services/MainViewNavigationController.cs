@@ -20,6 +20,7 @@ namespace Assist.Services
         DASHBOARD,
         PROGRESS,
         PROFILE,
+        MODULES,
         STORE,
         SETTINGS
     }

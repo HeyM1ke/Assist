@@ -1,4 +1,4 @@
-﻿namespace Assist.Objects.AssistApi.Game;
+namespace Assist.Objects.AssistApi.Game;
 
 public class RequestPartyJoin
 {

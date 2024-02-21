@@ -9,6 +9,7 @@ using Assist.Game.Services;
 using Assist.Services;
 using Assist.Services.Popup;
 using Assist.ViewModels;
+using AssistUser.Lib.Dodge.Models;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using ReactiveUI;
@@ -68,7 +69,7 @@ namespace Assist.Game.Controls.Modules.Dodge.Popup
 
                     var selected = categoryBox.SelectedItem as ComboBoxItem;
 
-                   var r = await AssistApplication.Current.AssistUser.AddGlobalDodgeList(new GlobalDodgeUser()
+                   var r = await AssistApplication.Current.AssistUser.Dodge.AddGlobalDodgeList(new GlobalDodgeUser()
                     {
                         id = data.data.puuid,
                         category = selected.Content.ToString()

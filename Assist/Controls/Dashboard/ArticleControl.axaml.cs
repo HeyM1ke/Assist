@@ -26,11 +26,7 @@ namespace Assist.Controls.Dashboard
             _carousel = this.FindControl<Carousel>("ArticleCarousel");
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-        
+
         private async void StyledElement_OnInitialized(object? sender, EventArgs e)
         {
             var randomNullArt = new ArticleNodeItem()
@@ -51,26 +47,26 @@ namespace Assist.Controls.Dashboard
                         ArticleTitle = "node1",
                         ImageUrl = 
                             "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt41138834252a9cbb/62d73ea33d042036dcb4d48e/1920x1080-KEY-ART-pearl_opt.jpg",
-                        Width=790, 
-                        Height=225
+                        Width=747, 
+                        Height=300
                     }
                 };
 
-                _carousel.Items = n;
+                _carousel.ItemsSource = n;
                 return;
             }
             
             // what the hell is this FIX LMFAOOO
             List<ArticleNodeItem> AI = articles.Select(x => new ArticleNodeItem(){
-                Width=790,
-                Height=225,
+                Width=747,
+                Height=300,
                 ArticleTitle = x.title,
                 ArticleDescription = x.description,
                 ImageUrl = x.imageUrl,
                 Url = x.nodeUrl,
             }).ToList();
             AI.Insert(0, randomNullArt);
-            _carousel.Items = (AI);
+            _carousel.ItemsSource = (AI);
             // To Fix Carousell not loading right
             _carousel.Next();
         }

@@ -21,10 +21,7 @@ namespace Assist.Views.Store
             MainViewNavigationController.CurrentPage = Page.STORE;
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void BundleContainer_Init(object? sender, EventArgs e)
         {

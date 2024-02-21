@@ -16,10 +16,7 @@ namespace Assist.Controls.Progression
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void ConcurrentControl_Initialized(object? sender, EventArgs e)
         {

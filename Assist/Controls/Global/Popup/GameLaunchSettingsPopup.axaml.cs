@@ -11,6 +11,7 @@ namespace Assist.Controls.Global.Popup
     {
         private ComboBox patchLineBox;
         private CheckBox gameModeEnabled;
+        private TextBox riotClientAdditionalArgs;
         public GameLaunchSettingsPopup()
         {
             InitializeComponent();
@@ -18,24 +19,21 @@ namespace Assist.Controls.Global.Popup
 
         private async void Apply_Click(object? sender, RoutedEventArgs e)
         {
-            AssistApplication.Current.ClientLaunchSettings.Patchline =
-                (patchLineBox.SelectedItem as ComboBoxItem).Content.ToString();
-
+            if(Design.IsDesignMode)return;
+            
             AssistSettings.Current.GameModeEnabled = (bool)gameModeEnabled.IsChecked;
 
+            AssistSettings.Current.AdditionalArgs = riotClientAdditionalArgs.Text ?? string.Empty;
+            
             PopupSystem.KillPopups();
         }
 
         private async void GameLaunch_Init(object? sender, EventArgs e)
         {
-            patchLineBox = this.FindControl<ComboBox>("PatchLineCheckbox");
             gameModeEnabled = this.FindControl<CheckBox>("GameModeEnable");
-
+            riotClientAdditionalArgs = this.FindControl<TextBox>("RiotClientAdditionalArgs");
             gameModeEnabled.IsChecked = AssistSettings.Current.GameModeEnabled;
-
-            //TEMP
-            if (AssistApplication.Current.ClientLaunchSettings.Patchline == "PBE")
-                patchLineBox.SelectedIndex = 1;
+            riotClientAdditionalArgs.Text = AssistSettings.Current.AdditionalArgs;
         }
     }
 }

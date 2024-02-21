@@ -20,6 +20,11 @@ namespace Assist.Objects.Helpers
             {"9c91a445-4f78-1baa-a3ea-8f8aadf4914d","Lotus"},
             {"ee613ee9-28b7-4beb-9666-08db13bb2244","The Range"},
             {"2bee0dc9-4ffe-519b-1cbd-7fbe763a6047","Haven"},
+            {"690b3ed2-4dff-945b-8223-6da834e30d24","District"},
+            {"12452a9d-48c3-0b02-e7eb-0381c3520404","Kasbah"},
+            {"de28aa9b-4cbe-1003-320e-6cb3ec309557","Piazza"},
+            {"92584fbe-486a-b1b2-9faa-39b0f486b498","Sunset"},
+            {"2c09d728-42d5-30d8-43dc-96a05cc7ee9d","Drift"},
         };
 
         public static Dictionary<string, string> MapsByPath = new Dictionary<string, string>
@@ -35,7 +40,14 @@ namespace Assist.Objects.Helpers
             {"/game/maps/poveglia/range","The Range"},
             {"/game/maps/triad/triad","Haven"},
             {"/game/maps/jam/jam","Lotus"},
+            {"/game/maps/hurm/hurm_alley/hurm_alley","District"},
+            {"/game/maps/hurm/hurm_bowl/hurm_bowl","Kasbah"},
+            {"/game/maps/hurm/hurm_yard/hurm_yard","Piazza"},
+            {"/game/maps/juliett/juliett","Sunset"},
+            {"/game/maps/hurm/hurm_helix/hurm_helix","Drift"},
+            
         };
     }
 }
+
 

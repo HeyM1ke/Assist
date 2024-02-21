@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -7,6 +8,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Controls.Live;
 using Assist.Game.Models;
+using Assist.Game.Models.Recent;
+using Assist.Game.Services;
+using Assist.Game.Views.Live.ViewModels;
 using Assist.Objects.Helpers;
 using Assist.Objects.RiotSocket;
 using Assist.ViewModels;
@@ -14,6 +18,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Threading;
 using DiscordRPC.Message;
+using DynamicData.Binding;
 using ReactiveUI;
 using Serilog;
 using ValNet.Objects.Coregame;
@@ -25,17 +30,25 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 {
     internal class IngameViewModel : ViewModelBase
     {
-        private List<GameUserControl> _allyTeamControls = new List<GameUserControl>();
+        private ObservableCollectionExtended<GameUserControl> _allyTeamControls = new ObservableCollectionExtended<GameUserControl>();
 
-        public List<GameUserControl> AllyTeamControls
+        public ObservableCollectionExtended<GameUserControl> AllyTeamControls
         {
             get => this._allyTeamControls;
             set => this.RaiseAndSetIfChanged(ref _allyTeamControls, value);
         }
+        
+        private ObservableCollectionExtended<GameUserControl> _deathTeamControls = new ObservableCollectionExtended<GameUserControl>();
 
-        private List<GameUserControl> _enemyTeamControls = new List<GameUserControl>();
+        public ObservableCollectionExtended<GameUserControl> DeathTeamControls
+        {
+            get => this._deathTeamControls;
+            set => this.RaiseAndSetIfChanged(ref _deathTeamControls, value);
+        }
 
-        public List<GameUserControl> EnemyTeamControls
+        private ObservableCollectionExtended<GameUserControl> _enemyTeamControls = new ObservableCollectionExtended<GameUserControl>();
+
+        public ObservableCollectionExtended<GameUserControl> EnemyTeamControls
         {
             get => this._enemyTeamControls;
             set => this.RaiseAndSetIfChanged(ref _enemyTeamControls, value);
@@ -65,6 +78,14 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             set => this.RaiseAndSetIfChanged(ref _mapName, value);
         }
 
+        private string? _serverName = "Loading...";
+
+        public string? ServerName
+        {
+            get => _serverName;
+            set => this.RaiseAndSetIfChanged(ref _serverName, value);
+        }
+        
         private string _mapImage;
 
         public string MapImage
@@ -90,6 +111,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             get => _errorMessage;
             set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
         }
+        
+        private bool _isDeathmatch = false;
+
+        public bool IsDeathmatch
+        {
+            get => _isDeathmatch;
+            set => this.RaiseAndSetIfChanged(ref _isDeathmatch, value);
+        }
+        
 
         private bool setupSucc = false;
 
@@ -121,18 +151,21 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 if (e.StatusCode == HttpStatusCode.BadRequest)
                 {
                     Log.Fatal("TOKEN ERROR: " + e.Content);
-                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    await this.Setup();
+                    return;
                 }
+                Log.Fatal("Failed to Reauth" );
             }
 
-            try
+            /*try
             {
-                await AssistApplication.Current.AssistUser.GetGlobalDodgeList();
+                await AssistApplication.Current.AssistUser.Dodge.GetGlobalDodgeList();
             }
             catch (Exception e)
             {
 
-            }
+            }*/
 
             if (setupSucc == false)
             {
@@ -184,10 +217,9 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 
                 if(e.StatusCode == HttpStatusCode.BadRequest){
                     Log.Fatal("TOKEN ERROR: ");
-                    AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
-                    
+                    await AssistApplication.Current.RefreshService.CurrentUserOnTokensExpired();
+                    return;
                 }
-                return;
             }
 
             
@@ -196,19 +228,32 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             if (MatchResp.Players == null || MatchResp.Players.Count == 0)
                 return;
             
-
+            Log.Information($"COREGAME MATCH ID: {MatchResp.MatchID}");
+            
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 var allyTeam = await GetAllyTeam(MatchResp.Players);
                 var enemyTeam = await GetEnemyTeam(MatchResp.Players);
                 var allMatchPlayerIds = MatchResp.Players.Select(p => p.Subject).ToList();
 
+                
+                await LiveViewViewModel.GetUserReputations(allMatchPlayerIds);
+                
                 var allTeamPresences =
                     PresenceResp.presences.FindAll(pres =>
                         allMatchPlayerIds.Contains(pres.puuid));
 
-
-                var parties = await MarkPlayerSimilarParties(allTeamPresences);
+                Dictionary<string, IBrush> parties = new Dictionary<string, IBrush>();
+                try
+                {
+                    parties = await MarkPlayerSimilarParties(allTeamPresences);
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                    Log.Error(e.StackTrace);
+                    parties.Clear();
+                }
 
                 
                 if (AllyTeamControls.Count == 0) 
@@ -252,9 +297,10 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             
             // Update Map Data
             HandleMatchData(MatchResp, PresenceResp.presences.Find(p => p.puuid == AssistApplication.Current.CurrentUser.UserData.sub));
+            
+            HandleIngameMatchTracking(MatchResp, PresenceResp.presences.Find(p => p.puuid == AssistApplication.Current.CurrentUser.UserData.sub));
         }
-
-
+        
         private async Task<Dictionary<string, IBrush>> MarkPlayerSimilarParties(List<ChatV4PresenceObj.Presence> allTeamPresences)
         {
             // Create a dictionary that relates an id to a brush color.
@@ -310,43 +356,43 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                         // Assign Color to each party, as there are 5 different partys just have 5 diff cases
                         case 0:
                             assignedColor = new SolidColorBrush(new Color(255, 0, 255, 127));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 1:
                             assignedColor = new SolidColorBrush(new Color(255, 255, 215, 0));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 2:
                             assignedColor = new SolidColorBrush(new Color(255, 32, 178, 170));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 3:
                             assignedColor = new SolidColorBrush(new Color(255, 148, 0, 211));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 4:
                             assignedColor = new SolidColorBrush(new Color(255, 112, 128, 144));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 5:
                             assignedColor = new SolidColorBrush(new Color(255, 0, 128, 128));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 6:
                             assignedColor = new SolidColorBrush(new Color(255, 221, 160, 221));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 7:
                             assignedColor = new SolidColorBrush(new Color(255, 210, 105, 30));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         case 8:
                             assignedColor = new SolidColorBrush(new Color(255, 128, 128, 0));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                         default:
                             assignedColor = new SolidColorBrush(new Color(255, 220, 20, 60));
-                            party.Value.ForEach(playerInParty => partyRelations.Add(playerInParty, assignedColor));
+                            party.Value.ForEach(playerInParty => partyRelations.TryAdd(playerInParty, assignedColor));
                             break;
                     }
 
@@ -389,8 +435,21 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
             {
                 Log.Information("Getting queue data for ID of: " + Match.MatchData.QueueID.ToLower());
 
-                var queueName = await DetermineQueueKey(Match.MatchData.QueueID.ToLower());
+                var queueName =  QueueNames.DetermineQueueKey(Match.MatchData.QueueID.ToLower());
+                
+                // Check if the Queue is Deathmatch.
+                IsDeathmatch = Match.MatchData.QueueID.ToLower() == "deathmatch";
+                
                 QueueName = queueName.ToUpper();
+
+                try
+                {
+                    ServerName = ServerNames.ValorantServers[Match.GamePodID];
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Failed to get Gamepod Server Name from Dictionary");
+                }
             }
 
             if (Match.ProvisioningFlow == "CustomGame")
@@ -398,6 +457,15 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
                 Log.Information("Getting ProvisioningFlow data for ID of: " + Match.ProvisioningFlow);
 
                 QueueName = "CUSTOM GAME";
+                
+                try
+                {
+                    ServerName = ServerNames.ValorantServers[Match.GamePodID];
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Failed to get Gamepod Server Name from Dictionary");
+                }
             }
 
             if (currentUser != null)
@@ -426,7 +494,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         private async Task AddUserToAllyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic)
         {
             var checkForExcisting =
-                AllyTeamControls.Find(control => control.PlayerId == Player.Subject);
+                AllyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
             if (checkForExcisting != null)
                 return;
 
@@ -435,15 +503,22 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                var temp = new List<GameUserControl>();
-                temp.Add(new GameUserControl(Player, color));
-                AllyTeamControls = AllyTeamControls.Concat(temp).ToList();
+                if (IsDeathmatch)
+                    DeathTeamControls.Add(new GameUserControl(Player, color));
+                else
+                    AllyTeamControls.Add(new GameUserControl(Player, color));
             });
         }
 
         private async Task UpdateUserInAllyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic)
         {
-            var control = AllyTeamControls.Find(control => control.PlayerId == Player.Subject);
+            GameUserControl control;
+            
+            if (IsDeathmatch)
+                control = DeathTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
+            else
+                control = AllyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
+            
             dic.TryGetValue(Player.Subject, out IBrush? color);
             if (control != null)
             {
@@ -466,7 +541,7 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
         {
 
             var checkForExcisting =
-                EnemyTeamControls.Find(control => control.PlayerId == Player.Subject);
+                EnemyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
             if (checkForExcisting != null)
                 return;
 
@@ -475,15 +550,13 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                var temp = new List<GameUserControl>();
-                temp.Add(new GameUserControl(Player, color));
-                EnemyTeamControls = EnemyTeamControls.Concat(temp).ToList();
+                EnemyTeamControls.Add(new GameUserControl(Player, color));
             });
         }
 
         private async Task UpdateUserInEnemyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic)
         {
-            var control = EnemyTeamControls.Find(control => control.PlayerId == Player.Subject);
+            var control = EnemyTeamControls.ToList().Find(control => control.PlayerId == Player.Subject);
             dic.TryGetValue(Player.Subject, out IBrush? color);
             if (control != null)
             {
@@ -502,37 +575,152 @@ namespace Assist.Game.Views.Live.Pages.ViewModels
 
         }
 
-        private async Task<string> DetermineQueueKey(string queueId)
+        private async Task HandleIngameMatchTracking(CoregameMatch matchResp, ChatV4PresenceObj.Presence? currentUser)
         {
-            switch (queueId)
+
+            var existingMatch = RecentService.Current.RecentMatches?.Find(x => x.MatchId.Equals(matchResp.MatchID));
+            var pres = await GetPresenceData(currentUser);
+            
+            var recentM = new RecentMatch
             {
-                case "ggteam":
-                    return "Escalation";
-                case "deathmatch":
-                    return "Deathmatch";
-                case "spikerush":
-                    return "SpikeRush";
-                case "competitive":
-                    return "Competitive";
-                case "unrated":
-                    return "Unrated";
-                case "onefa":
-                    return "Replication";
-                case "swiftplay":
-                    return "Swiftplay";
-                case "snowball":
-                    return "Snowball";
-                case "lotus":
-                    return "Lotus";
-                default:
-                    return "VALORANT";
+                MatchId = matchResp.MatchID,
+                AllyTeamId = matchResp.Players?.Find(x => x.Subject.Equals(AssistApplication.Current.CurrentUser.UserData.sub,
+                    StringComparison.OrdinalIgnoreCase))?.TeamID ?? "",
+                IsCompleted = false,
+                Result = RecentMatch.MatchResult.IN_PROGRESS,
+                MapId = matchResp.MapID,
+                QueueId = matchResp.MatchData.QueueID,
+                DateOfMatch = DateTime.UtcNow,
+                LengthOfMatchInSeconds = 0,
+                AllyTeamScore = pres.partyOwnerMatchScoreAllyTeam,
+                EnemyTeamScore = pres.partyOwnerMatchScoreEnemyTeam,
+                MatchTrack_LastState = "INGAME",
+                OwningPlayer = AssistApplication.Current.CurrentUser.UserData.sub
+            };
+
+            if (existingMatch is not null)
+            {
+                recentM = existingMatch;
             }
 
+            if (matchResp.Players?.Count == 0)
+                return;
+            
+            HandlePlayers(matchResp, recentM);
+            HandleRecentMatchPlayers(matchResp, recentM);
+            
+            if (RecentService.Current.RecentMatches.Exists(x => x.MatchId.Equals(recentM.MatchId)))
+            {
+                RecentService.Current.UpdateMatch(recentM);
+                return;
+            }
+            
+            RecentService.Current.AddMatch(recentM);
+        }
+        
+        private async void HandlePlayers(CoregameMatch matchDetails , RecentMatch recentMatch)
+        {
+            var players = matchDetails.Players;
+
+            foreach (var playerObj in players)
+            {
+                var recentPlayerData = RecentService.Current.RecentPlayers?.Find(ply => ply.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+                if (recentPlayerData is null)
+                {
+                    recentPlayerData = new RecentPlayer()
+                    {
+                        FirstSeen = DateTime.UtcNow,
+                        PlayerId = playerObj.Subject
+                    };
+                }
+
+
+                recentPlayerData.LastSeen = DateTime.UtcNow;
+                recentPlayerData.LastSeenMatchId = matchDetails.MatchID;
+                recentPlayerData.Matches.Add(matchDetails.MatchID);
+
+                if (!recentPlayerData.TimesSeen.TryAdd(matchDetails.MatchID, recentPlayerData.LastSeen))
+                {
+                    recentPlayerData.TimesSeen[matchDetails.MatchID] = recentPlayerData.LastSeen;
+                }
+                
+                int index = RecentService.Current.RecentPlayers.FindIndex(ply => ply.PlayerId.Equals(recentPlayerData.PlayerId));
+                if (index < 0)
+                    RecentService.Current.RecentPlayers?.Add(recentPlayerData);
+                else
+                    RecentService.Current.RecentPlayers[index] = recentPlayerData;
+            }
+        
+        
+        }
+        
+        /// <summary>
+        /// Creates the Player for the RecentMatch Object.
+        /// </summary>
+        /// <param name="matchDetails"></param>
+        /// <param name="recentMatch"></param>
+        private async void HandleRecentMatchPlayers(CoregameMatch matchDetails, RecentMatch recentMatch)
+        {
+            var players = matchDetails.Players;
+
+            if (players.Count == 0)
+            {
+                return;
+            }
+            
+            foreach (var playerObj in players)
+            {
+                GameUserControl? data = null;
+                if (IsDeathmatch)
+                {
+                    data = DeathTeamControls.ToList().Find(x =>
+                        x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+                }
+                else
+                {
+                    data = AllyTeamControls.ToList().Find(x =>
+                        x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+
+                    if (data is null)
+                    {
+                        data = EnemyTeamControls.ToList().Find(x =>
+                            x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
+                    }
+                }
+
+                if (data is null)
+                {
+                    continue;
+                }
+
+                if (recentMatch.Players.Exists(x => x.PlayerId.Equals(playerObj.Subject)))
+                {
+                    continue;
+                }
+                
+                var nP = new RecentMatch.Player()
+                {
+                    PlayerId = playerObj.Subject,
+                    CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
+                    PlayerAgentId = playerObj.CharacterID,
+                    PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.PlayerAgentName.Split('#')[0],
+                    PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerTag : $"{data._viewModel.PlayerAgentName.Split('#')[^1]}",
+                    TeamId = playerObj.TeamID,
+                    PlayerRealName = data._viewModel.PlayerRealName,
+                    Statistics = null
+                };
+            
+                recentMatch.Players.Add(nP);
+            }
         }
 
         public void UnsubscribeFromEvents()
         {
             Log.Information("Page is Unloaded, Unsubbing from Events from IngameView");
+            AllyTeamControls.Clear();
+            EnemyTeamControls.Clear();
+            DeathTeamControls.Clear();
+            
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
         }
     }

@@ -14,6 +14,7 @@ using Assist.Game.Models;
 using Assist.Game.Views.Live.Pages;
 using Assist.Objects.Helpers;
 using Assist.Settings;
+using ValNet.Objects.Local;
 using YamlDotNet.Core;
 
 namespace Assist.Game.Services
@@ -30,7 +31,7 @@ namespace Assist.Game.Services
 
         public static Button[] clientButtons =
         {
-            new Button() { Label = "Download Assist", Url = "https://github.com/HeyM1ke/Assist/" }
+            new Button() { Label = "Download Assist", Url = "https://assistval.com/" }
         };
 
         public DiscordPresenceController()
@@ -72,6 +73,9 @@ namespace Assist.Game.Services
 
             Client.SetPresence(_currentPresence);
 
+           
+            
+            
             try
             {
                 Client.Initialize();
@@ -83,7 +87,7 @@ namespace Assist.Game.Services
                 Log.Error("Unhandled Ex StackTrace: " + e.StackTrace);
                 Log.Error("Unhandled Ex Message: " + e.Message);
             }
-
+            
             AssistApplication.Current.RiotWebsocketService.UserPresenceMessageEvent += UpdateDiscordRpcWithDataFromPresence;
         }
 
@@ -91,6 +95,34 @@ namespace Assist.Game.Services
         {
             // Decode Pres
             var pres = await GetPresenceData(obj.data.presences[0]);
+
+            RichPresence newPresence = new RichPresence()
+            {
+                Buttons = clientButtons
+            };
+
+            switch (pres.sessionLoopState)
+            {
+                case "MENUS":
+                    DetermineMenusPresence(newPresence, pres);
+                    break;
+                case "INGAME":
+                    DetermineIngamePresence(newPresence, pres);
+                    break;
+                case "PREGAME":
+                    DeterminePregamePresence(newPresence, pres);
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+        
+        private async void UpdateDiscordRpcWithDataFromPresence(ChatV4PresenceObj.Presence obj)
+        {
+            // Decode Pres
+            var pres = await GetPresenceData(obj);
 
             RichPresence newPresence = new RichPresence()
             {
@@ -400,7 +432,7 @@ namespace Assist.Game.Services
         }
 
 
-        private async Task<PlayerPresence> GetPresenceData(PresenceV4Message.Presence data)
+        private async Task<PlayerPresence> GetPresenceData(ChatV4PresenceObj.Presence data)
         {
             if (string.IsNullOrEmpty(data.Private))
                 return new PlayerPresence();
@@ -411,29 +443,7 @@ namespace Assist.Game.Services
 
         private async Task<string> DetermineQueueKey(PlayerPresence playerPres)
         {
-            switch (playerPres.queueId)
-            {
-                case "ggteam":
-                    return "Escalation";
-                case "deathmatch":
-                    return "Deathmatch";
-                case "spikerush":
-                    return "SpikeRush";
-                case "competitive":
-                    return "Competitive";
-                case "unrated":
-                    return "Unrated";
-                case "onefa":
-                    return "Replication";
-                case "swiftplay":
-                    return "Swiftplay";
-                case "snowball":
-                    return "Snowball";
-                case "lotus":
-                    return "Lotus";
-                default:
-                    return "VALORANT";
-            }
+            return QueueNames.DetermineQueueKey(playerPres.queueId);
 
         }
     }

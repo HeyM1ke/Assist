@@ -4,10 +4,13 @@
         xmlns:global="clr-namespace:Assist.Controls.Global"
         xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
   <Design.PreviewWith>
-    <controls:LiveMenuPartyUser Width="200"
-                                Height="435"
+    <controls:LiveMenuPartyUser Width="215"
+                                Height="500"
+                                PlayerName="VALORANTPLAYERWO"
                                 PlayerReady="True"
-                                />
+                                PlayerRankIcon=""
+                                ValorantName=""
+    />
   </Design.PreviewWith>
 
   <Style Selector="controls|LiveMenuPartyUser">
@@ -15,7 +18,8 @@
     <Setter Property="Template">
       <ControlTemplate>
 		  <Border BorderBrush="{DynamicResource AssistRed}"
-                  BorderThickness="2">
+                  BorderThickness="2"
+                  CornerRadius="10">
 
               <Border.Styles>
                   <Style Selector="ContextMenu /template/ Border">
@@ -25,12 +29,14 @@
                   
               </Border.Styles>
               <Grid>
-				  <asyncImageLoader:AdvancedImage Source="{TemplateBinding Playercard}"
-                                                  Stretch="UniformToFill"/>
+                  <asyncImageLoader:AdvancedImage Source="{TemplateBinding Playercard}"
+                                                  Stretch="UniformToFill"
+                                                  RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                  CornerRadius="10"/>
 				  <asyncImageLoader:AdvancedImage Source="{TemplateBinding AgentImage}"
                                                   Stretch="UniformToFill"
                                                   IsVisible="False"
-                                                  
+                                                  CornerRadius="10"
                                                   Height="500">
                       <asyncImageLoader:AdvancedImage.OpacityMask>
                           <LinearGradientBrush EndPoint="0%,100%" StartPoint="0%,0%">
@@ -51,34 +57,98 @@
 
                   <StackPanel VerticalAlignment="Bottom"
                               HorizontalAlignment="Center"
-                              
                               Margin="0,50">
+                      <ItemsControl ItemsSource="{TemplateBinding BadgeObjects}">
+                          <ItemsControl.ItemsPanel>
+                              <ItemsPanelTemplate>
+                                  <StackPanel Orientation="Horizontal"
+                                              Spacing="1"
+                                              VerticalAlignment="Top"
+                                              HorizontalAlignment="Center">
+                                      
+                                  </StackPanel>
+                              </ItemsPanelTemplate>
+                          </ItemsControl.ItemsPanel>
+                          
+                          <ItemsControl.Styles>
+                              <Style Selector="asyncImageLoader|AdvancedImage">
+                                  <Setter Property="Width" Value="24" />
+                                  <Setter Property="Height" Value="24" />
+                                  <Setter Property="Margin" Value="5"></Setter>
+                              </Style>
+                          </ItemsControl.Styles>
+                          
+                      </ItemsControl>
+                      <StackPanel Orientation="Horizontal"
+                                  Spacing="1"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Center">
+                          
+                      </StackPanel>
                       <TextBlock Text="{TemplateBinding PlayerName}"
                                  FontFamily="{StaticResource WorkSans}"
-                                 FontWeight="Medium"
+                                 FontWeight="SemiBold"
                                  HorizontalAlignment="Center"
-                                 FontSize="16"
-                                 ></TextBlock>
-
-                      <TextBlock x:Name="NotReadyText"
-                                 FontFamily="{StaticResource WorkSans}"
-                                 FontWeight="Medium"
-                                 Text="Not Ready"
-                                 FontSize="14"
-                                 Foreground="Red"
-                                 HorizontalAlignment="Center"
+                                 FontSize="19"
                       ></TextBlock>
 
-					  <TextBlock x:Name="ReadyText"
-                                 FontFamily="{StaticResource WorkSans}"
-                                 FontWeight="Medium"
-                                 Text="Ready"
-                                 FontSize="14"
-                                 Foreground="LightGreen"
-                                 IsVisible="False"
-                                 HorizontalAlignment="Center"
-                      ></TextBlock>
+                      <StackPanel Orientation="Horizontal"
+                                  HorizontalAlignment="Center"
+                                  Spacing="5">
+                          <TextBlock x:Name="AssistUsername"
+                                     FontFamily="{StaticResource WorkSans}"
+                                     FontWeight="Medium"
+                                     Text="{TemplateBinding ValorantName}"
+                                     FontSize="14"
+                                     Foreground="{DynamicResource AssistTextWhite}"
+                                     HorizontalAlignment="Center"
+                                     Opacity=".9"
+                          ></TextBlock>
+                          
+                          <TextBlock x:Name="NotReadyText"
+                                     FontFamily="{StaticResource WorkSans}"
+                                     FontWeight="Medium"
+                                     Text="Not Ready"
+                                     FontSize="14"
+                                     Foreground="Red"
+                                     HorizontalAlignment="Center"
+                          ></TextBlock>
+
+                          <TextBlock x:Name="ReadyText"
+                                     FontFamily="{StaticResource WorkSans}"
+                                     FontWeight="Medium"
+                                     Text="Ready"
+                                     FontSize="14"
+                                     Foreground="LightGreen"
+                                     IsVisible="False"
+                                     HorizontalAlignment="Center"
+                          ></TextBlock>
+                      </StackPanel>
                   </StackPanel>
+                  
+                  <Image Source="{TemplateBinding PlayerReputationLevel}"
+                         Width="50"
+                         Height="50"
+                             
+                         RenderOptions.BitmapInterpolationMode="HighQuality"
+                         VerticalAlignment="Top"
+                         HorizontalAlignment="Left"
+                         Margin="5">
+                      <Image.Effect>
+                          <DropShadowDirectionEffect Direction="180" BlurRadius="30"></DropShadowDirectionEffect>
+                      </Image.Effect>
+                  </Image>
+                  <asyncImageLoader:AdvancedImage Source="{TemplateBinding PlayerRankIcon}"
+                                                  Width="50"
+                                                  Height="50"
+                                                  VerticalAlignment="Top"
+                                                  HorizontalAlignment="Right"
+                                                  RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                  Margin="5">
+                      <asyncImageLoader:AdvancedImage.Effect>
+                          <DropShadowDirectionEffect Direction="180" BlurRadius="30"></DropShadowDirectionEffect>
+                      </asyncImageLoader:AdvancedImage.Effect>
+                  </asyncImageLoader:AdvancedImage>
               </Grid>
           </Border>
       </ControlTemplate>

@@ -2,11 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:Assist.Game.Controls.Navigation">
   <Design.PreviewWith>
-    <controls:NavButton Width="179"
-                        Height="36"
+    <controls:NavButton Width="54"
+                        Height="54"
                         CornerRadius="5"
                         Background="#191919"
                         IsSpecial="True"
+                        IsCompressed="True"
+                        IsFullSize="False"
     />
   </Design.PreviewWith>
 
@@ -19,30 +21,64 @@
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 x:Name="PART_Border">
-            <DockPanel HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="5,11,0,11">
-                <Image Source="{TemplateBinding Icon}"
-                       Width="14"
-                       Height="14"></Image>
-                <TextBlock Text="{TemplateBinding Text}"
-                           FontFamily="{StaticResource WorkSans}"
-                           FontSize="12"
-                           FontWeight="Medium"
-                           Margin="7,0,5,0"></TextBlock>
-                <TextBlock Text="BETA"
-                           FontFamily="{StaticResource WorkSans}"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center"
-                           Foreground="{DynamicResource AssistRed}"
-                           FontWeight="SemiBold"
-                           FontSize="10"
-                           Height="7"
-                           Padding="0"
+           <Grid>
+             
+             <DockPanel VerticalAlignment="Center"
+                        IsVisible="{TemplateBinding IsCompressed}">
+               <StackPanel>
+                 <Image Source="{TemplateBinding Icon}"
+                        Width="24"
+                        Height="24"
+                        x:Name="PART_Icon"/>
+                 <TextBlock Text="{TemplateBinding Text}"
+                            FontFamily="{StaticResource WorkSans}"
+                            FontSize="10"
+                            x:Name="PART_Text"
+                            FontWeight="Regular"
+                            HorizontalAlignment="Center"
+                            TextAlignment="Center"/>
+                 <TextBlock Text="BETA"
+                            x:Name="PART_TextBeta"
+                            FontFamily="{StaticResource WorkSans}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            TextAlignment="Center"
+                            Foreground="{DynamicResource AssistRed}"
+                            FontWeight="SemiBold"
+                            FontSize="6"
+                            Height="7"
+                            Padding="0"
+                            IsVisible="{TemplateBinding IsSpecial}"
+                 ></TextBlock>
+               </StackPanel>
+             </DockPanel>
+             
+             <DockPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="5,11,0,11"
+                        IsVisible="{TemplateBinding IsFullSize}">
+               <Image Source="{TemplateBinding Icon}"
+                      Width="14"
+                      Height="14"></Image>
+               <TextBlock Text="{TemplateBinding Text}"
+                          FontFamily="{StaticResource WorkSans}"
+                          FontSize="12"
+                          FontWeight="Medium"
+                          Margin="7,0,5,0"></TextBlock>
+               <TextBlock Text="BETA"
+                          FontFamily="{StaticResource WorkSans}"
+                          VerticalAlignment="Center"
+                          TextAlignment="Center"
+                          Foreground="{DynamicResource AssistRed}"
+                          FontWeight="SemiBold"
+                          FontSize="10"
+                          Height="7"
+                          Padding="0"
                            
-                           IsVisible="{TemplateBinding IsSpecial}"
-                           ></TextBlock>
-            </DockPanel>
+                          IsVisible="{TemplateBinding IsSpecial}"
+               ></TextBlock>
+             </DockPanel>
+           </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -56,4 +92,26 @@
     <Style Selector="controls|NavButton[IsSelected=True] /template/ Border#PART_Border">
         <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightColor}"></Setter>
     </Style>
+  
+  
+  <Style Selector="controls|NavButton[IsEnabled=True] /template/ Image#PART_Icon">
+    <Setter Property="Opacity" Value="1"></Setter>
+  </Style>
+  <Style Selector="controls|NavButton[IsEnabled=False] /template/ Image#PART_Icon">
+    <Setter Property="Opacity" Value=".2"></Setter>
+  </Style>
+  
+  <Style Selector="controls|NavButton[IsEnabled=True] /template/ TextBlock#PART_Text">
+    <Setter Property="Opacity" Value="1"></Setter>
+  </Style>
+  <Style Selector="controls|NavButton[IsEnabled=False] /template/ TextBlock#PART_Text">
+    <Setter Property="Opacity" Value=".2"></Setter>
+  </Style>
+  
+  <Style Selector="controls|NavButton[IsEnabled=True] /template/ TextBlock#PART_TextBeta">
+    <Setter Property="Opacity" Value="1"></Setter>
+  </Style>
+  <Style Selector="controls|NavButton[IsEnabled=False] /template/ TextBlock#PART_TextBeta">
+    <Setter Property="Opacity" Value=".2"></Setter>
+  </Style>
 </Styles>

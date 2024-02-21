@@ -20,10 +20,7 @@ public partial class BrowserView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+ 
 
     public async void ReloadBrowser()
     {

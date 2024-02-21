@@ -28,10 +28,6 @@ namespace Assist.Views.Authentication.Sections
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
 
         private void BackBtn_OnClick(object? sender, RoutedEventArgs e)
         {

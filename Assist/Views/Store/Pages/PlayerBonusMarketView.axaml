@@ -1,0 +1,58 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:properties="clr-namespace:Assist.Properties"
+             xmlns:store="clr-namespace:Assist.Controls.Store"
+             mc:Ignorable="d" d:DesignWidth="1026" d:DesignHeight="617"
+             Initialized="BonusMarket_Init"
+             x:Class="Assist.Views.Store.Pages.PlayerBonusMarketView">
+    <Grid RowDefinitions="Auto,*">
+        <Grid Row="0">
+            <StackPanel Orientation="Vertical"
+                        Spacing="5"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="NIGHT MARKET"
+                           
+                           FontFamily="{StaticResource Inter}"
+                           FontWeight="Black"
+                           FontSize="48"/>
+                <Rectangle Height="1"
+                           HorizontalAlignment="Stretch"
+                           Fill="{DynamicResource AssistRed}"/>
+                <StackPanel HorizontalAlignment="Center"
+                            Orientation="Horizontal"
+                            Spacing="5">
+                    <Rectangle Height="1"
+                               HorizontalAlignment="Stretch"
+                               Fill="{DynamicResource AssistRed}"/>
+                    
+                    
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Row="1">
+            <ItemsControl ItemsSource="{Binding BonusSkinOffers}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="2"
+                                     Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                
+                <ItemsControl.Styles>
+                    <Style Selector="store|BonusMarketControl">
+                        <Setter Property="Width" Value="325"/>
+                        <Setter Property="Height" Value="200"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistSecondary}"/>
+                        <Setter Property="SkinName" Value="200"/>
+                        <Setter Property="CornerRadius" Value="10"></Setter>
+                    </Style>
+                </ItemsControl.Styles>
+            </ItemsControl>
+            
+        </Grid>
+    </Grid>
+</UserControl>

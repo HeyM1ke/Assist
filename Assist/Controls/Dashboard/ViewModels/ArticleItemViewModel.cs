@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assist.ViewModels;
-using JetBrains.Annotations;
 using ReactiveUI;
 
 namespace Assist.Controls.Dashboard.ViewModels
@@ -15,7 +14,7 @@ namespace Assist.Controls.Dashboard.ViewModels
         private string _articleTitle = "Valorant Patch Notes 5.01";
         public string ArticleTitle
         {
-            get => _articleTitle;
+            get => _articleTitle.ToUpper();
             set => this.RaiseAndSetIfChanged(ref _articleTitle, value);
         }
 

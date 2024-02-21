@@ -1,0 +1,69 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:leagues="clr-namespace:Assist.Game.Controls.Leagues"
+             xmlns:p="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="1105" d:DesignHeight="582"
+             x:Class="Assist.Game.Views.Leagues.Pages.LeagueLobbyPage">
+    <Grid RowDefinitions="*,Auto">
+        <Grid Row="0">
+            <StackPanel Spacing="20">
+               <Grid>
+                   <leagues:LeaguePartyControl Height="264" 
+                                               HorizontalAlignment="Stretch"/>
+                   
+               </Grid>
+
+                <Border Background="{DynamicResource AssistPrimary}"
+                        BorderBrush="{DynamicResource AssistOutline}"
+                        BorderThickness="2"
+                        Width="985"
+                        Height="50"
+                        IsVisible="False">
+                    <Grid VerticalAlignment="Center" Margin="20,0">
+                        <StackPanel Orientation="Horizontal" Spacing="20"
+                                    HorizontalAlignment="Center"
+                                    >
+                            <TextBlock Text="DEVELOPER OVERRIDE"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"/>
+                            <TextBox x:Name="PartyIDJoin"
+                                     Width="300"
+                                     ></TextBox>
+                            <Button Classes="AssistBtn"
+                                    Content="Join Party"
+                                    Click="DevJoinBtn_Click"></Button>
+                            <Button Classes="AssistBtn"
+                                    Content="Open MatchPage"
+                                    Click="MatchPageBtn_Click"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Row="1">
+           <StackPanel Orientation="Vertical"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Spacing="10"
+                       Margin="0,10,0,0"
+                       >
+               <leagues:LeagueAnnouncementsControl HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   MaxWidth="365"
+                                                   MaxHeight="180"
+                                                   IsVisible="False"
+                                                   Margin="0,0,0,0"></leagues:LeagueAnnouncementsControl>
+               <leagues:LeagueQueueControl HorizontalAlignment="Right"
+                                           VerticalAlignment="Bottom"
+                                           Width="420"
+                                           Height="106"
+                                           Margin="0,10,0,0"></leagues:LeagueQueueControl>
+           </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -19,7 +19,7 @@
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="30"
-        Icon="/Resources/Assist_DevIcon.ico"
+        Icon="/Resources/Assist_IconBlack.ico"
         Opened="MainWindow_Initialized"
         Background="{StaticResource AssistBlack}">
 
@@ -45,17 +45,21 @@
 			<Grid>
                 <Grid x:Name="MainContentView"
                       Height="690"
-                      VerticalAlignment="Center"
+                      VerticalAlignment="Stretch"
                       Background="{StaticResource AssistGray}">
                     <TransitioningContentControl x:Name="ContentView" >
                         <TransitioningContentControl.PageTransition>
-                            <CrossFade Duration="0:00:00.250"/>
+                            <CrossFade Duration="0.25" />
                         </TransitioningContentControl.PageTransition>
                     </TransitioningContentControl>
                 </Grid>
-<StackPanel></StackPanel>
-                <popup:PopupMaster x:Name="PopupMaster" 
-                                   Height="690"/>
+				
+                <TransitioningContentControl x:Name="PopupMaster"
+                                             Height="690"
+                                             Loaded="PopupMaster_OnLoaded"
+                                             VerticalAlignment="Stretch">
+	                
+                </TransitioningContentControl>
 			</Grid>
 		</LayoutTransformControl>
         

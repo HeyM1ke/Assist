@@ -13,6 +13,7 @@ namespace Assist.Game.Views.Live.Pages
     {
         private readonly MenusPageViewModel _viewModel;
         private readonly PresenceV4Message initalMessage;
+        private readonly ChatV4PresenceObj.Presence? _initalMessage = null;
         public MenusPageView()
         {
             DataContext = _viewModel = new MenusPageViewModel();
@@ -27,15 +28,33 @@ namespace Assist.Game.Views.Live.Pages
             InitializeComponent();
             this.initalMessage = playerPresence;
         }
+        
+        public MenusPageView(ChatV4PresenceObj.Presence playerPresence)
+        {
+            DataContext = _viewModel = new MenusPageViewModel();
+            LiveViewNavigationController.CurrentPage = LivePage.MENUS;
+            InitializeComponent();
+            this._initalMessage = playerPresence;
+        }
 
         private async void MenuPage_Init(object? sender, EventArgs e)
         {
-            _viewModel.Setup(initalMessage!);
+            if (_initalMessage is not null)
+            {
+                _viewModel.SetupWithLocalPresence(_initalMessage);
+                return;
+            }
+            _viewModel.Setup(initalMessage);
         }
 
         private void MenuPageControl_OnUnloaded(object? sender, RoutedEventArgs e)
         {
             _viewModel.UnsubscribeFromEvents();
+        }
+
+        private void AttemptToOpenEndorse_Click(object? sender, RoutedEventArgs e)
+        {
+            GameViewNavigationController.Change(new EndorsePageView());
         }
     }
 }

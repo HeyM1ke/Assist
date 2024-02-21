@@ -20,10 +20,7 @@ namespace Assist.Views.Startup
             _languageComboBox.SelectedIndex = 0;
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private void ApplyBtn_OnClick(object? sender, RoutedEventArgs e)
         {

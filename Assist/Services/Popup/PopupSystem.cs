@@ -15,50 +15,53 @@ namespace Assist.Services.Popup
     public class PopupSystem
     {
         public static PopupMaster PopupController;
-
+        public static TransitioningContentControl ContentControl = new TransitioningContentControl();
         public static void SpawnPopup(PopupSettings settings)
         {
             var popup = new BasicPopup();
 
-            if (PopupController != null)
+            if (ContentControl != null)
             {
                 Log.Information("Spawning popup on Main Window");
-                PopupController.Children.Add(popup);
+                ContentControl.Content = (popup);
             }
         }
 
-        public static void KillPopups()
+        public static async void KillPopups()
         {
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 if (PopupController != null)
                 {
-                    Log.Information("Killing popup on Main Window");
+                    Log.Information("Killing popups on popupcontrioller on Main Window");
                     PopupController.Children.Clear();
+                }
+                
+                
+                if (ContentControl != null)
+                {
+                    Log.Information("Killing popup on Main Window");
+                    ContentControl.Content = null;
                 }
             });
 
         }
-
-        public static void ModifyCurrentPopup(PopupSettings settings)
-        {
-            
-        }
-
-        public static void SpawnCustomPopup(UserControl control)
+        public static void cha(UserControl control)
         {
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
+                control.BeginInit();
                 PopupController.Children.Add(control);
             });
         }
+        
+        public static void SpawnCustomPopup(UserControl c) => ContentControl.Content = c;
     }
 
     public class PopupSettings
     {
         public string PopupTitle { get; set; }
         public string PopupDescription { get; set; }
-
         public PopupType PopupType { get; set; }
     }
 

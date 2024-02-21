@@ -32,7 +32,7 @@ namespace Assist.Settings
         public const int maxAccountCount = 5;
         public static AssistSettings Current { get; set; } = new AssistSettings();
         public string RiotClientInstallPath { get; set; }
-
+        
         private bool _languageSelected = false;
 
         public bool LanguageSelected
@@ -76,7 +76,7 @@ namespace Assist.Settings
 
         internal async Task<string> FindRiotClient()
         {
-            if (AssistApplication.Current.Platform.OperatingSystem != OperatingSystemType.WinNT)
+            if (!OperatingSystem.IsWindows())
                 return null;
 
             List<string> clients = new List<string>();
@@ -122,11 +122,14 @@ namespace Assist.Settings
             {
                 Log.Information("New Profile Found, Adding profile to Profiles");
                 Profiles.Add(profile);
+                AssistSettings.Save();
                 return;
             }
 
             Log.Information("Previous Profile Found, Refreshing Profile");
             Profiles.Replace(possProfile, profile);
+            
+            AssistSettings.Save();
         }
 
         public static void Save()
@@ -161,6 +164,22 @@ namespace Assist.Settings
             get => _gameModeEnabled;
             set => this.SetProperty(ref _gameModeEnabled, value);
         }
+
+        private string _additionalArgs = string.Empty;
+
+        public string AdditionalArgs
+        {
+            get => _additionalArgs;
+            set => this.SetProperty(ref _additionalArgs, value);
+        }
+        
+        private bool _showcaseAssistDetails = true;
+
+        public bool ShowcaseAssistDetails
+        {
+            get => _showcaseAssistDetails;
+            set => this.SetProperty(ref _showcaseAssistDetails, value);
+        }
         
         private bool _eglEnabled = false;
 
@@ -170,5 +189,14 @@ namespace Assist.Settings
             set => this.SetProperty(ref _eglEnabled, value);
         }
         public BackupsSettings Backups = new BackupsSettings();
+
+        public bool SeenLeaguesNP { get; set; }= false;
+        
+        private SoundSettings _soundSettings = new SoundSettings();
+        public SoundSettings SoundSettings
+        {
+            get => _soundSettings;
+            set => this.SetProperty(ref _soundSettings, value);
+        }
     }
 }

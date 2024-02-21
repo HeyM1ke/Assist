@@ -25,6 +25,9 @@ namespace Assist.Objects.RiotClient
     
         [YamlMember(Alias = "session", ApplyNamingConventions = false)]
         public SessionSection Session;
+        
+        [YamlMember(Alias = "scopes", ApplyNamingConventions = false)]
+        public object Scopes;
     }
 
     public class SessionSection
@@ -43,5 +46,6 @@ namespace Assist.Objects.RiotClient
         public bool persistent;
         public bool secureOnly;
         public string value;
+        public long? expiryTime;
     }
 }

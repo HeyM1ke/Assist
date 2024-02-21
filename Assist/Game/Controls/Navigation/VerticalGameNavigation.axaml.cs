@@ -1,15 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using Assist.Controls.Global;
 using Assist.Game.Services;
 using Assist.Game.Views.Live;
 using Assist.Game.Views.GDashboard;
+using Assist.Game.Views.Leagues;
 using Assist.Game.Views.Live.Pages;
 using Assist.Game.Views.Lobbies;
 using Assist.Game.Views.Modules;
 using Assist.Properties;
+using Assist.Services.Popup;
 using Assist.ViewModels;
+using Assist.Views.Settings;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using ReactiveUI;
 
 namespace Assist.Game.Controls.Navigation
@@ -26,11 +33,20 @@ namespace Assist.Game.Controls.Navigation
             DataContext = _viewModel = new VertGameNavVM();
             Instance = this;
             InitializeComponent();
-            //NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
+            
+            NavigationButtons.Add(this.FindControl<NavButton>("DashboardBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LiveBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("ModulesBtn"));
+            NavigationButtons.Add(this.FindControl<NavButton>("LeaguesBtn"));
             NavigationButtons.Add(this.FindControl<NavButton>("LobbiesBtn"));
-            NavigationButtons[0].IsSelected = true;
+            NavigationButtons[1].IsSelected = true;
+
+            if (AssistApplication.Current.AssistUser.Authentication.Roles.Contains("LeagueTester"))
+            {
+                var lBtn = this.FindControl<NavButton>("LeaguesBtn");
+                lBtn.IsEnabled = true;
+                lBtn.IsVisible = true;
+            }
         }
 
         private void DashboardBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -49,6 +65,8 @@ namespace Assist.Game.Controls.Navigation
             if (GameViewNavigationController.CurrentPage != Services.Page.LIVE)
                 GameViewNavigationController.Change(new LiveView());
 
+            GC.Collect();
+            
             (sender as NavButton).IsSelected = true;
         }
         private void ModulesBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -58,6 +76,8 @@ namespace Assist.Game.Controls.Navigation
             if (GameViewNavigationController.CurrentPage != Services.Page.MODULES)
                 GameViewNavigationController.Change(new ModulesView());
 
+            
+            GC.Collect();
             (sender as NavButton).IsSelected = true;
         }
         private void LobbiesBtn_OnClick(object? sender, RoutedEventArgs e)
@@ -69,11 +89,28 @@ namespace Assist.Game.Controls.Navigation
 
             (sender as NavButton).IsSelected = true;
         }
+        
+        private void LeaguesBtn_OnClick(object? sender, RoutedEventArgs e)
+        {
+            ClearSelected();
+
+            if (GameViewNavigationController.CurrentPage != Services.Page.LEAGUES)
+                GameViewNavigationController.Change(new LeagueMainPage());
+
+            GC.Collect();
+            
+            (sender as NavButton).IsSelected = true;
+        }
+        
         private void ClearSelected()
         {
             NavigationButtons.ForEach(btn => btn.IsSelected = false);
         }
 
+        public void DisableAll()
+        {
+            NavigationButtons.ForEach(btn => btn.IsEnabled = false);
+        }
 
         private void SupportBtn_Click(object? sender, RoutedEventArgs e)
         {
@@ -82,7 +119,36 @@ namespace Assist.Game.Controls.Navigation
 
         private void VerticalGameNav_Init(object? sender, EventArgs e)
         {
+            if (Design.IsDesignMode) return;
+            
             _viewModel.SetupUserCount();
+        }
+
+
+        private void SettingsBtn_OnClick(object? sender, RoutedEventArgs e)
+        {
+            if (Design.IsDesignMode) return;
+            
+            PopupSystem.SpawnCustomPopup(new SettingsPopup());
+        }
+
+        private void SocialBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            var btn = sender as SocialButton;
+        
+            if (btn.LinkTo == null)
+                return;
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = btn.LinkTo,
+                UseShellExecute = true
+            });
+        }
+
+        public void EnableAll()
+        {
+            NavigationButtons.ForEach(btn => btn.IsEnabled = true);
         }
     }
 

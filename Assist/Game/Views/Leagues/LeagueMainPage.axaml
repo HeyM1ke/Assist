@@ -1,0 +1,25 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:leagues="clr-namespace:Assist.Game.Views.Leagues"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:leagues1="clr-namespace:Assist.Game.Controls.Leagues"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Game.Views.Leagues.LeagueMainPage"
+             Initialized="LeagueMain_Init"
+             Unloaded="LeagueMain_Unloaded">
+    <Grid Margin="10">
+        
+        <leagues1:LeagueSelectionControl  ZIndex="999"
+                                          x:Name="LeagueSelection"/>    
+        
+        <TransitioningContentControl Margin="0,30,0,0"
+                                     Grid.Row="1"
+                                     x:Name="LeagueContentControl">
+            <TransitioningContentControl.PageTransition>
+                <CrossFade Duration="0.15" />
+            </TransitioningContentControl.PageTransition>
+        </TransitioningContentControl>
+    </Grid>
+</UserControl>

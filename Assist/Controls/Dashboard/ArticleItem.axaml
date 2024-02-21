@@ -26,29 +26,34 @@
                                            HorizontalAlignment="Left"
                                            Margin="75"
                                            VerticalAlignment="Center"
-                                           FontFamily="WorkSans"
+                                           FontFamily="{StaticResource Inter}"
                                            FontWeight="Thin"></TextBlock>
 
                                 <asyncImageLoader:AdvancedImage
+                                    CornerRadius="10"
                                     Source="{Binding ArticleImageUrl}"
                                     Stretch="UniformToFill"
                                 ></asyncImageLoader:AdvancedImage>
                             <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                    Height="143" 
+                                    VerticalAlignment="Bottom" Background="{TemplateBinding BorderBrush}"
+                                    CornerRadius="10"
+                                    Margin="-1"
                                     ></Border>
-                            <Rectangle Height="108" VerticalAlignment="Bottom" Fill="{TemplateBinding BorderBrush}"></Rectangle>
-                                <StackPanel VerticalAlignment="Bottom" Margin="5,3">
+                            
+                                <StackPanel VerticalAlignment="Bottom" Margin="6,3">
                                     <TextBlock Text="{Binding ArticleTitle}"
                                                TextWrapping="WrapWithOverflow"
                                                FontWeight="Bold"
-                                               FontFamily="{StaticResource WorkSans}"
+                                               FontFamily="{StaticResource Inter}"
                                                Padding="0"
-                                               FontSize="22"
+                                               FontSize="36"
                                                Foreground="{DynamicResource ArticleItemForeground}"
                                                VerticalAlignment="Bottom"/>
                                     <TextBlock Text="{Binding ArticleDescription}"
                                                TextWrapping="WrapWithOverflow"
                                                FontWeight="Regular"
-                                               FontFamily="{StaticResource WorkSans}"
+                                               FontFamily="{StaticResource Inter}"
                                                Padding="0"
                                                FontSize="12"
                                                Foreground="{DynamicResource ArticleItemForeground}"

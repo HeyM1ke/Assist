@@ -1,29 +1,44 @@
-<Application xmlns="https://github.com/avaloniaui"
+<Application x:Class="Assist.App"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:Assist"
-             x:Class="Assist.App">
+             RequestedThemeVariant="Dark"
+>
+    
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
-
     
-
-	<Application.Resources>
+    <Application.Resources>
 		<!-- Color Resources -->
 
         <SolidColorBrush x:Key="AssistBackground" Color="#0F0F0F"></SolidColorBrush>
         <SolidColorBrush x:Key="AssistLightBackground" Color="#191919"></SolidColorBrush>
 
-
-
-
-		<SolidColorBrush  x:Key="AssistRed" Color="#F61E51"/>
+        <SolidColorBrush  x:Key="AssistRed" Color="#F61E51"/>
 		<SolidColorBrush  x:Key="AssistGray" Color="#17181D"/>
 		<SolidColorBrush  x:Key="AssistBlack" Color="#101115"/>
+        <SolidColorBrush x:Key="AssistSupporter" Color="#2ecc71"/>
+        
+        <SolidColorBrush  x:Key="AssistPrimary" Color="#0B0C0E"/>
+        <SolidColorBrush  x:Key="AssistPrimaryLight" Color="#131518"/>
+        <SolidColorBrush  x:Key="AssistSecondary" Color="#030303"/>
+        <SolidColorBrush  x:Key="AssistOutline" Color="#212229"/>
+        <SolidColorBrush  x:Key="AssistTextWhite" Color="#DEE3E8"/>
 
-		<LinearGradientBrush x:Key="RedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+		<LinearGradientBrush x:Key="QueueBtnHoverGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#f61e51" Offset="0" />
+            <GradientStop Color="#e2373f" Offset="1" />
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="RedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
             <GradientStop Color="#FF0000" Offset="0" />
             <GradientStop Color="Transparent" Offset="1" />
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="AssistRedGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#80F61E51" Offset="0" />
+            <GradientStop Color="#00F61E51" Offset="1" />
         </LinearGradientBrush>
         
         <LinearGradientBrush x:Key="AssistBlackGrad"  EndPoint="100%,0%" StartPoint="0%,0%">
@@ -56,14 +71,21 @@
             <GradientStop Color="Transparent" Offset="1" />
         </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="ValorantRedLoss" StartPoint="0%,100%">
-            <GradientStop Color="#00FF5C5C" Offset="0.2" />
+        <LinearGradientBrush x:Key="ValorantRedLoss" EndPoint="0%,0%" StartPoint="0%,100%">
             <GradientStop Color="#FF5C5C" Offset="1" />
+            <GradientStop Color="#00FF5C5C" Offset="0.2" />
+            
         </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="ValorantGreenWin" StartPoint="0%,100%">
-			<GradientStop Color="#005CFFB1" Offset="0.2" />
-            <GradientStop Color="#5CFFB1" Offset="1" />
+        <LinearGradientBrush x:Key="ValorantGreenWin" EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#5CFFB1" Offset=".2" />
+            <GradientStop Color="#005CFFB1" Offset="1" />
+            
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="LeagueMapOverlayGradient"  EndPoint="0%,0%" StartPoint="0%,100%">
+            <GradientStop Color="#F61E51" Offset="0" />
+            <GradientStop Color="#66000000" Offset="1" />
         </LinearGradientBrush>
 
         <SolidColorBrush  x:Key="ValorantIron" Color="#4f514f"/>
@@ -77,7 +99,8 @@
         <SolidColorBrush  x:Key="ValorantRadiant" Color="#ffffaa"/>
 
 		<FontFamily x:Key="WorkSans">avares://Assist/Resources/Fonts#Work Sans</FontFamily>
-        
+        <FontFamily x:Key="Inter">avares://Assist/Resources/Fonts#Inter</FontFamily>
+        <FontFamily x:Key="WhiteNt">avares://Assist/Resources/Fonts#WhiteNT</FontFamily>
         
         <!-- Button Styles -->
         <SolidColorBrush  x:Key="ButtonHoverBorder" Color="#F61E51"/>
@@ -143,9 +166,13 @@
         <SolidColorBrush x:Key="MissionsText" Color="#FFFFFF"/>
 
 
+        <SolidColorBrush x:Key="TwitchPurple" Color="#9146FF"></SolidColorBrush>
+        <SolidColorBrush x:Key="TwitchDarkPurple" Color="#772CE8"></SolidColorBrush>
+        <SolidColorBrush x:Key="TwitchBlack" Color="#000000"></SolidColorBrush>
+        
         <!--Missions Control Styles-->
         <SolidColorBrush x:Key="MissionsFillBarColor" Color="#F61E51"/>
-        <SolidColorBrush x:Key="MissionsBackgroundBarColor" Color="#101115"/>
+        <SolidColorBrush x:Key="MissionsBackgroundBarColor" Color="#030303"/>
         <SolidColorBrush x:Key="MissionsTextColor" Color="#FFFFFF"/>
         <SolidColorBrush x:Key="MissionsLineColor" Color="#F61E51"/>
         
@@ -158,19 +185,24 @@
 
 
 		<!--Assist ComboBox -->
-        <SolidColorBrush  x:Key="AssistComboBoxBackground" Color="#101115"/>
+        <SolidColorBrush  x:Key="AssistComboBoxBackground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxForeground" Color="#FFFFFF"/>
         <SolidColorBrush  x:Key="AssistComboBoxHoverForeground" Color="#F61E51"/>
         <SolidColorBrush  x:Key="AssistComboBoxBorderHoverColor" Color="#F61E51"/>
-        <SolidColorBrush  x:Key="AssistComboBoxHoverBackground" Color="#101115"/>
+        <SolidColorBrush  x:Key="AssistComboBoxHoverBackground" Color="#17181D"/>
 
-        <SolidColorBrush  x:Key="AssistComboBoxItemBackground" Color="#101115"/>
+        <SolidColorBrush  x:Key="AssistComboBoxItemBackground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemForeground" Color="#FFFFFF"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverForeground" Color="#17181D"/>
         <SolidColorBrush  x:Key="AssistComboBoxItemHoverBackground" Color="#F61E51"/>
+        
+        <SolidColorBrush x:Key="AssistOnlineColor" Color="#5CFFB1"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistOnlineBorderColor" Color="#558D72"></SolidColorBrush>
 	</Application.Resources>
     <Application.Styles>
-        <FluentTheme Mode="Dark"/>
+        <FluentTheme/>
+        <StyleInclude Source="avares://Assist/Styles/NotificationCardStyle.axaml"/>
+        <StyleInclude Source="avares://Assist/Styles/AssistStyles.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Global/Navigation/NavigationButton.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Progression/MissionControl.axaml" />
         <StyleInclude Source="avares://Assist/Controls/Progression/MissionsView.axaml" />
@@ -184,8 +216,18 @@
         <StyleInclude Source="avares://Assist/Controls/Global/SocialButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Store/NightMarketButtonControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Controls/Global/Popup/PopupMaster.axaml"></StyleInclude>
-        <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
-
+        
+        <StyleInclude Source="avares://Assist/Controls/Profile/MatchPreviewControlV2.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/RecentMatchesView.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/RankPreviewControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Global/AccountManagementNavBtn.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Global/AccountManagementAddButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/FeaturedArticleControlV2.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Dashboard/ArticleControlV2.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Progression/AssistDailyDiamondControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Store/SkinStoreOfferV2.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Store/BundleStoreOfferV2.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Store/BonusMarketControl.axaml"></StyleInclude>
 		<!--GameMode-->
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/GameNavigationButton.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Navigation/NavButton.axaml"></StyleInclude>
@@ -196,6 +238,24 @@
         <StyleInclude Source="avares://Assist/Game/Controls/Modules/ModuleSelectionControl.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/Live/LiveMenuPartyUser.axaml"></StyleInclude>
         <StyleInclude Source="avares://Assist/Game/Controls/GDashboard/GlobalChatMessageControl.axaml"></StyleInclude>
+        
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueFinderShowcaseButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueLeaderboardMemberControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeaguePartyInviteControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchPlayerControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Match/MatchSelectionControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/MapPickControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueAnnouncementMemberControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/Settings/AssistSettingsNavigationButton.axaml"></StyleInclude>
+        
+        <StyleInclude Source="avares://Assist/Controls/Profile/ProfileLeagueShowcase.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Controls/Profile/ProfileBadgeShowcase.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/LeagueSelectionDropdownButton.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Leagues/QueuePlayerPreview.axaml"></StyleInclude>
+        
+        <StyleInclude Source="avares://Assist/Game/Controls/Live/MatchReportTeamDisplayControl.axaml"></StyleInclude>
+        <StyleInclude Source="avares://Assist/Game/Controls/Live/MatchReportTeammateDisplayControl.axaml"></StyleInclude>
     </Application.Styles>
 </Application>
+
 

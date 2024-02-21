@@ -13,9 +13,6 @@ namespace Assist.Views.Progression
             MainViewNavigationController.CurrentPage = Page.PROGRESS;
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
     }
 }

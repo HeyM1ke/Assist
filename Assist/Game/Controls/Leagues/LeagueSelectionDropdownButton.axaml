@@ -1,0 +1,38 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Game.Controls.Leagues">
+    <Design.PreviewWith>
+        <controls:LeagueSelectionDropdownButton LeagueName="Poggers!"
+                                                LeagueId=""/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|LeagueSelectionDropdownButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistSecondary}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryLight}"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Padding="5"
+                        BorderBrush="{TemplateBinding BorderBrush}">
+                   <Grid>
+                       <TextBlock Text="{TemplateBinding LeagueName}"
+                                  Margin="5"
+                                  FontFamily="{StaticResource Inter}"
+                                  FontWeight="Medium"
+                                  FontSize="16"></TextBlock>
+                   </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|LeagueSelectionDropdownButton:pointerover">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistLightBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistRed}"></Setter>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+</Styles>

@@ -25,10 +25,7 @@ namespace Assist.Controls.Global
             _viewModel.Profile = pro;
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private void Button_OnClick(object? sender, RoutedEventArgs e)
         {

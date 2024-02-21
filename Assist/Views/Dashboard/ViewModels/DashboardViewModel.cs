@@ -11,9 +11,12 @@ using Assist.Controls.Profile;
 using Assist.Controls.Progression;
 using Assist.Objects.AssistApi.Valorant;
 using Assist.Objects.Helpers;
+using Assist.Properties;
+using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Serilog;
 using ValNet.Objects.Contracts;
 using ValNet.Objects.Exceptions;
@@ -160,6 +163,48 @@ namespace Assist.Views.Dashboard.ViewModels
                 Log.Error(e.Message);
             }
         }
+        
+        public async Task SetupCompetitiveDetails(RankPreviewControl rankPreviewControl)
+        {
+            try
+            {
+                var playerMmr = await AssistApplication.Current.CurrentUser.Player.GetPlayerMmr();
+
+                int currentRankTier = 0;
+                int currentRR = 0;
+                var currentSeasonId = playerMmr.LatestCompetitiveUpdate.SeasonID;
+                if (playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID != null)
+                {
+                    currentRankTier = playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID[currentSeasonId].CompetitiveTier;
+                    currentRR = playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID[currentSeasonId].RankedRating;
+                    rankPreviewControl.SeasonWins =
+                        $"{playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID[currentSeasonId].NumberOfWins} Wins";
+                }
+
+                if (currentRankTier >= 24) rankPreviewControl.PlayerRR = $"{currentRR}RR";
+                else rankPreviewControl.PlayerRR = $"{currentRR}/100 RR";
+                rankPreviewControl.PlayerRankIcon = $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{currentRankTier}.png";
+                var t = AssistSettings.Current.Profiles.Find(pfp =>
+                    pfp.ProfileUuid == AssistApplication.Current.CurrentProfile.ProfileUuid);
+
+                t.ValRankTier = currentRankTier;
+                
+                if (currentRankTier != null)
+                    rankPreviewControl.RankName = CompetitiveNames.RankNames[currentRankTier].ToUpper();
+                
+                
+            }
+            catch (Exception e)
+            {
+                if (e is RequestException)
+                {
+                    var t =e as RequestException;
+                    Log.Error(t.Content);
+                    Log.Error($"{t.StatusCode}");
+                }
+                Log.Error(e.Message);
+            }
+        }
 
         public async Task<string> GetMostCommonAgent(List<MatchDetailsObj> details)
         {
@@ -204,7 +249,7 @@ namespace Assist.Views.Dashboard.ViewModels
             }
 
             var matches = new List<History>();
-            for (int i = 0; i < matchHistory.History.Count && i < 4; i++) // Get up to the first 4 matches
+            for (int i = 0; i < matchHistory.History.Count && i < 5; i++) // Get up to the first 5 matches WAS 4 for Old RECENTMATCHESVIEW
             {
                 matches.Add(matchHistory.History[i]);
             }
@@ -243,7 +288,76 @@ namespace Assist.Views.Dashboard.ViewModels
 
             foreach (var match in details)
             {
-                var control = new MatchPreviewControl();
+                var control = new MatchPreviewControl() { };
+                var currentP = match.Players.Find(player => player.Subject == AssistApplication.Current.CurrentUser.UserData.sub);
+                var theSetWeAreRepping = currentP.TeamId;
+
+
+                if (currentP != null)
+                {
+                    control.PlayerAgent =
+                        $"https://content.assistapp.dev/agents/{currentP.CharacterId}_displayicon.png";
+
+                    control.ExtraData = $"{currentP.Stats.Kills} / {currentP.Stats.Deaths} / {currentP.Stats.Assists}";
+                }
+
+                var ourTeam = match.Teams.Find(team => team.TeamId == theSetWeAreRepping);
+                var notOurTeam = match.Teams.Find(team => team.TeamId != ourTeam.TeamId);
+                if (ourTeam != null)
+                {
+                    // Determine if our team won
+                        // if not 
+                        if (ourTeam.Won)
+                        {
+                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
+                            control.MatchScore =
+                                mode.ToLower().Equals("deathmatch")  // check for mode --Shiick
+                                ? $"{currentP.Stats.Kills} - {currentP.Stats.Kills}" // mode is deathmatch, show score --Shiick
+                                : $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}"; // regular game --Shiick
+                            control.ResultText = Properties.Resources.Profile_WonText;
+                            control.MatchWin = true;
+                        }
+                        else
+                        {
+                            var mode = match.MatchInformation.QueueID; // get gamemode --Shiick
+                            control.MatchScore = 
+                                mode.ToLower().Equals("deathmatch") // check for mode --Shiick
+                                ? $"{currentP.Stats.Kills} - {match.Players.Max(player => player.Stats.Kills)}" // mode is deathmatch, show score. second one is MVP --Shiick
+                                : $"{ourTeam.RoundsWon} - {notOurTeam.RoundsWon}"; // regular game --Shiick
+                            control.ResultText = Properties.Resources.Profile_LossText;
+                            control.MatchWin = false;
+                        }
+                }
+
+                if (match.MatchInformation != null)
+                {
+                    control.MatchMap = MapNames.MapsByPath?[match.MatchInformation.MapId.ToLower()].ToUpper();
+                    control.MatchMapImage =
+                        $"https://content.assistapp.dev/maps/{MapNames.MapsByPath?[match.MatchInformation.MapId.ToLower()]}_BWlistview.png";
+                }
+                
+                
+                controls.Add(control);
+            }
+
+            return controls;
+        }
+
+
+        public async Task<IEnumerable<Control>> CreateMatchControlsV2(List<MatchDetailsObj> details)
+        {
+            List<MatchPreviewControlV2> controls = new List<MatchPreviewControlV2>();
+
+            if (details.Count == 0)
+                return controls;
+
+            foreach (var match in details)
+            {
+                var control = new MatchPreviewControlV2()
+                {
+                    Width = 94,
+                    Height = 146
+                };
                 var currentP = match.Players.Find(player => player.Subject == AssistApplication.Current.CurrentUser.UserData.sub);
                 var theSetWeAreRepping = currentP.TeamId;
 
@@ -296,8 +410,6 @@ namespace Assist.Views.Dashboard.ViewModels
 
             return controls;
         }
-
-
         
     }
 }

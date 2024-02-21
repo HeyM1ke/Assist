@@ -10,52 +10,55 @@
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
              d:DesignWidth="1125"
-             d:DesignHeight="590"
+             d:DesignHeight="690"
              x:Class="Assist.Views.Dashboard.DashboardView">
 
     <Grid>
-        <Grid Margin="23,0" ColumnDefinitions="790, *">
+        <Grid Margin="15" ColumnDefinitions="Auto, *">
 
-            <Grid RowDefinitions="235,*">
+            <!--Column 1 (Article / Recent Matches)-->
+            <Grid RowDefinitions="315,*">
 					<dashboard:ArticleControl
+                        
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
                     </dashboard:ArticleControl>
 
-                <Grid Row="1" >
-                    <StackPanel Spacing="19"
-                                HorizontalAlignment="Left" 
-                                Orientation="Horizontal">
-						<StackPanel Spacing="12" >
-                            <progression:MissionsView 
-                                    Width="225"
-                                    Height="150"
-                                    Title="{x:Static p:Resources.Progression_WeeklyMissions}"
-                                    Initialized="WeeklyMissions_Init"/>
-                            <progression:MissionsView
-                                Width="225"
-                                Height="110"
-                                Title="{x:Static p:Resources.Progression_DailyMissions}"
-                                Initialized="DailyMissions_Init"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <dashboard:PlayerStatisticsView Width="545"
-                                                            Height="347"
-                                                            HorizontalAlignment="Left"
-                                                            Initialized="Stats_Init"
-                                                            ></dashboard:PlayerStatisticsView>
-                        </StackPanel>
-                        </StackPanel>
+                <Grid Row="1" HorizontalAlignment="Left"
+                              VerticalAlignment="Top">
+                    <dashboard:RecentMatchesView Width="520"
+                                                 Height="197"
+                                                 Initialized="RecentMatchesView_Init"></dashboard:RecentMatchesView>
                     
                 </Grid>
-            </Grid>
+            </Grid> 
 
-			<Grid Column="1" VerticalAlignment="Top">
-				<global:GameLaunchControl
-                    Width="245"
-                    Height="582"
-                    HorizontalAlignment="Right"/>
-			</Grid>
+            <!--Column 2 (Missions / Rank Progression)-->
+			<Grid Column="1">
+                <StackPanel Spacing="12" VerticalAlignment="Top"
+                            HorizontalAlignment="Right">
+                    <progression:MissionsView 
+                        Width="278"
+                        Height="185"
+                        Title="{x:Static p:Resources.Progression_WeeklyMissions}"
+                        Initialized="WeeklyMissions_Init"/>
+                    <progression:MissionsView
+                        Width="278"
+                        Height="135"
+                        Title="{x:Static p:Resources.Progression_DailyMissions}"
+                        Initialized="DailyMissions_Init"
+                        />
+                    <dashboard:RankPreviewControl Width="278"
+                                                  Height="135"
+                                                  Initialized="RankPreviewControl_Init"></dashboard:RankPreviewControl>
+                </StackPanel>
+            </Grid>
+            
+            <!--ColumnSpan ALL (GameLaunchControl)-->
+            <Grid ColumnSpan="2">
+                <dashboard:GameLaunchControlV2 VerticalAlignment="Bottom"
+                                               HorizontalAlignment="Right"></dashboard:GameLaunchControlV2>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

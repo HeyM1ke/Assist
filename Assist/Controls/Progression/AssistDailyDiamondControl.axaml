@@ -1,0 +1,67 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Progression">
+    <Design.PreviewWith>
+        <controls:AssistDailyDiamondControl IsCompleted="False"
+                                            IsCurrent="False"
+                                            ProgressText="1/4"
+                                            DiamondNumber="12"
+        />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|AssistDailyDiamondControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Spacing="18"
+                            Margin="10"
+                            Orientation="Vertical">
+                    <Border Width="43"
+                            Height="43"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1">
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="45"></RotateTransform>
+                        </Border.RenderTransform>
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding DiamondNumber}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontSize="24"
+                                       Foreground="{DynamicResource MissionsText}"
+                                       FontWeight="Black"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center">
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform Angle="-45"></RotateTransform>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <TextBlock Text="{TemplateBinding ProgressText}"
+                               FontFamily="{StaticResource Inter}"
+                               FontSize="12"
+                               Foreground="{DynamicResource MissionsText}"
+                               FontWeight="SemiBold"
+                               IsVisible="{TemplateBinding IsCurrent}"
+                               TextAlignment="Center">
+                                    
+                    </TextBlock>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="controls|AssistDailyDiamondControl[IsCompleted=True]">
+        <Setter Property="Background" Value="{DynamicResource AssistRed}"/>
+    </Style>
+    <Style Selector="controls|AssistDailyDiamondControl[IsCompleted=False]">
+        <Setter Property="Background" Value="{DynamicResource AssistLightBackground}"/>
+    </Style>
+    <Style Selector="controls|AssistDailyDiamondControl[IsCurrent=False]">
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistLightBackground}"/>
+    </Style>
+    <Style Selector="controls|AssistDailyDiamondControl[IsCurrent=True]">
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistRed}"/>
+    </Style>
+    
+</Styles>

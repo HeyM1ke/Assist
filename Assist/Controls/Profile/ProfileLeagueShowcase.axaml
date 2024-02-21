@@ -1,0 +1,39 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Profile">
+    <Design.PreviewWith>
+        <controls:ProfileLeagueShowcase Width="184"
+                                        Height="60"
+                                        LeagueName=""
+                                        LeagueStatText=""/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ProfileLeagueShowcase">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistPrimary}"
+                        BorderBrush="{DynamicResource AssistPrimaryLight}"
+                        BorderThickness="2"
+                        CornerRadius="10">
+                    <Grid Margin="5">
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="{TemplateBinding LeagueName}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontWeight="SemiBold"
+                                       FontSize="11"
+                                       TextAlignment="Right"></TextBlock>
+                            <TextBlock Text="{TemplateBinding LeagueStatText}"
+                                       FontFamily="{StaticResource Inter}"
+                                       FontWeight="Light"
+                                       FontSize="8"
+                                       TextAlignment="Right"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

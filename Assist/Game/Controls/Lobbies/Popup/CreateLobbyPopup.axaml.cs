@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Assist.Objects.AssistApi.Game;
 using Assist.Services.Popup;
 using Assist.ViewModels;
+using AssistUser.Lib.Lobbies.Models;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -29,10 +30,6 @@ public partial class CreateLobbyPopup : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
 
     private void CreateLobbyPopup_Init(object? sender, EventArgs e)
     {

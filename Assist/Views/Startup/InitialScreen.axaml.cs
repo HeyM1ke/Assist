@@ -2,6 +2,7 @@ using System;
 using Assist.Views.Startup.ViewModels;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Serilog;
 
@@ -17,16 +18,21 @@ namespace Assist.Views.Startup
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+
 
         private async void StyledElement_OnInitialized(object? sender, EventArgs e)
         {
 
             Log.Information("Initial Screen Initialized");
 
+            /*if(Design.IsDesignMode)
+                return;
+
+            await _viewModel.StartupSetup();*/
+        }
+
+        private async void InitialScreen_Loaded(object? sender, RoutedEventArgs e)
+        {
             if(Design.IsDesignMode)
                 return;
 

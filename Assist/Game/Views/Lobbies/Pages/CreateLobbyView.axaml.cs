@@ -2,6 +2,7 @@
 using Assist.Game.Services;
 using Assist.Objects.AssistApi.Game;
 using Assist.ViewModels;
+using AssistUser.Lib.Lobbies.Models;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -21,10 +22,7 @@ public partial class CreateLobbyView : UserControl
         InitializeComponent();
     }
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+
 
     private async void CreateLobby_Click(object? sender, RoutedEventArgs e)
     {

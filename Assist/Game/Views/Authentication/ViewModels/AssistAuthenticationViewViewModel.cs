@@ -4,10 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assist.Objects.Helpers;
 using Assist.Services;
 using Assist.Services.Server;
 using Assist.Settings;
 using Assist.ViewModels;
+using Assist.Views;
+using AssistUser.Lib.Account.Models;
 using Avalonia.Threading;
 using ReactiveUI;
 using Serilog;
@@ -79,18 +82,17 @@ namespace Assist.Game.Views.Authentication.ViewModels
         private async void ConnectionHubOnRedirectCodeEvent(string obj)
         {
             Log.Information("Code Recieved by Client");
-            // On Redirect Code Received
-            _connectionHub.Disconnect();
+            
 
             try
             {
-                var authResp = await AssistApplication.Current.AssistUser.AuthenticateWithRedirectCode(obj);
+                var authResp = await AssistApplication.Current.AssistUser.Authentication.AuthenticateWithRedirectCode(obj);
 
                 //Temp Location for Refresh token, save settings
                 AssistSettings.Current.AssistUserCode = authResp.RefreshToken;
                 AssistSettings.Save();
 
-                var userInfo = await AssistApplication.Current.AssistUser.GetUserInfo();
+                var userInfo = await AssistApplication.Current.AssistUser.Account.GetUserInfo();
 
                 if (string.IsNullOrEmpty(userInfo.username))
                 {
@@ -101,6 +103,14 @@ namespace Assist.Game.Views.Authentication.ViewModels
 
                 Dispatcher.UIThread.InvokeAsync(async () =>
                 {
+                    if (AssistApplication.Current.Mode != AssistMode.GAME)
+                    {
+                        MainWindowContentController.Change(new MainView());
+                        return;
+                    }
+                    Log.Information("Attempting To Connect to Game Server");
+                    await AssistApplication.Current.GameServerConnection.Connect();
+
                     AssistApplication.Current.OpenGameView();
                 });
             }
@@ -117,13 +127,18 @@ namespace Assist.Game.Views.Authentication.ViewModels
         {
             try
             {
-                var authResp = await AssistApplication.Current.AssistUser.ChangeUsername(new AssistChangeUsernameModel()
+                var authResp = await AssistApplication.Current.AssistUser.Account.ChangeUsername(new AssistChangeUsernameModel()
                 {
                     username = userName
                 });
 
                 if (authResp)
                 {
+                    if (AssistApplication.Current.Mode != AssistMode.GAME)
+                    {
+                        MainWindowContentController.Change(new MainView());
+                        return;
+                    }
                     AssistApplication.Current.OpenGameView();
                 }
                 else

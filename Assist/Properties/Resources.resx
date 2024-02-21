@@ -255,6 +255,15 @@
   <data name="Global_Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="Global_Supporter" xml:space="preserve">
+    <value>Supporter</value>
+  </data>
+  <data name="Global_MemberSince" xml:space="preserve">
+    <value>Member Since</value>
+  </data>
+  <data name="Global_SupporterPro" xml:space="preserve">
+    <value>Supporter Pro</value>
+  </data>
   <data name="Global_Add" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -266,6 +275,12 @@
   </data>
   <data name="Global_Expired" xml:space="preserve">
     <value>Expired</value>
+  </data>
+  <data name="Global_Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Global_Error" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="Global_Information" xml:space="preserve">
     <value>Information</value>
@@ -345,11 +360,17 @@
   <data name="Settings_AssistAccount" xml:space="preserve">
     <value>Assist Account</value>
   </data>
+  <data name="Settings_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Settings_Resolution" xml:space="preserve">
     <value>Resolution:</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
     <value>Change Language:</value>
+  </data>
+  <data name="Settings_Sound" xml:space="preserve">
+    <value>Sound</value>
   </data>
   <data name="Settings_EnableGpu" xml:space="preserve">
     <value>Enable GPU:</value>
@@ -385,13 +406,49 @@
     <value>Queue</value>
   </data>
   <data name="Leagues_Announcement" xml:space="preserve">
-    <value>Announcement</value>
+    <value>ANNOUNCEMENTS</value>
   </data>
   <data name="Leagues_Leaderboard" xml:space="preserve">
     <value>Leaderboard</value>
   </data>
   <data name="Leagues_Swap" xml:space="preserve">
     <value>Select a League:</value>
+  </data>
+  <data name="Leagues_Ready" xml:space="preserve">
+    <value>COMPETE</value>
+  </data>
+  <data name="Leagues_ReadyUp" xml:space="preserve">
+    <value>READY</value>
+  </data>
+  <data name="Leagues_Waiting" xml:space="preserve">
+    <value>Waiting...</value>
+  </data>
+  <data name="Leagues_ReportAnIssue" xml:space="preserve">
+    <value>Report an Issue</value>
+  </data>
+  <data name="Leagues_ICrashed" xml:space="preserve">
+    <value>I Crashed?</value>
+  </data>
+  <data name="Leagues_LeaderboardMatchesPlayed" xml:space="preserve">
+    <value>Matches Played</value>
+  </data>
+  <data name="Leagues_Match_MatchInProgress" xml:space="preserve">
+    <value>MATCH IN PROGRESS</value>
+  </data>
+  <data name="Leagues_Match_ReadyUp" xml:space="preserve">
+    <value>Ready Up!</value>
+  </data>
+  <data name="Leagues_Match_Loading" xml:space="preserve">
+    <value>Starting Match</value>
+  </data>
+  <data name="Leagues_Match_Remaining" xml:space="preserve">
+    <value>Remaining</value>
+  </data>
+  <data name="Leagues_Match_Defenders" xml:space="preserve">
+    <value>DEFENDERS</value>
+  </data>
+  <data name="Leagues_Match_Attackers" xml:space="preserve">
+    <value>ATTACKERS</value>
   </data>
   <data name="Assist_Chat" xml:space="preserve">
     <value>Chat</value>
@@ -402,5 +459,37 @@
   <data name="Global_Send" xml:space="preserve">
     <value>Send</value>
   </data>
-  
+  <data name="Profile_ProfileHeader" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Profile_BadgeHeader" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="Profile_LeagueHeader" xml:space="preserve">
+    <value>Leagues</value>
+  </data>
+  <data name="Profile_Badge_SetFeatured" xml:space="preserve">
+    <value>Set Featured Badge</value>
+  </data>
+  <data name="Profile_Badge_RemoveFeatured" xml:space="preserve">
+    <value>Remove Featured Badge</value>
+  </data>
+  <data name="Profile_Badge_EarnedAt" xml:space="preserve">
+    <value>Earned at:</value>
+  </data>
+  <data name="Endorse_CalmCollected_Tooltip" xml:space="preserve">
+    <value>Calm &amp; Collected, your teammate was composed throughtout the match. </value>
+  </data>
+  <data name="Endorse_Shotcaller_Tooltip" xml:space="preserve">
+    <value>Shotcaller, your teammate was a leader and helped your team push through. </value>
+  </data>
+  <data name="Endorse_NotificationText" xml:space="preserve">
+    <value>You received a thumbs up from</value>
+  </data>
+  <data name="Endorse_PageTitle" xml:space="preserve">
+    <value>ENDORSE PLAYERS</value>
+  </data>
+  <data name="Endorse_BackToParty" xml:space="preserve">
+    <value>Back to party</value>
+  </data>
 </root>

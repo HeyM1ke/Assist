@@ -4,9 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:Assist.Properties"
              mc:Ignorable="d"
-             Width="1125"
+             Width="1190"
              Height="690"
+             Opacity="1"
              x:Class="Assist.Controls.Global.Popup.GamemodeWarningPopup">
+    
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/AssistStyles.axaml" />
+    </UserControl.Styles>
+    
     <Grid Background="#3D000000">
         <Border VerticalAlignment="Center"
                 HorizontalAlignment="Center"

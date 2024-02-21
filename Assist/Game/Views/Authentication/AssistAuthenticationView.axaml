@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Assist.Game.Controls"
-             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             
              mc:Ignorable="d"
              d:DesignWidth="1125"
              d:DesignHeight="690"
@@ -12,8 +12,10 @@
         <Image Source="/Resources/EOY_Background.png" Stretch="UniformToFill"/>
         <Rectangle Fill="black" Opacity=".9"></Rectangle>
 
-        <Border Background="#101115"
-                CornerRadius="5"
+        <Border Background="{DynamicResource AssistPrimary}"
+                BorderBrush="{DynamicResource AssistOutline}"
+                BorderThickness="1"
+                CornerRadius="10"
                 Width="350"
                 Height="250">
             <Grid>
@@ -39,12 +41,7 @@
                                            FontFamily="{StaticResource WorkSans}"
                                            VerticalAlignment="Center"
                                 ></TextBlock>
-                                <avaloniaProgressRing:ProgressRing Width="25"
-                                                                   Height="25"
-                                                                   IsActive="True"
-                                                                   HorizontalAlignment="Center"
-                                                                   VerticalAlignment="Center"
-                                                                   Foreground="White"/>
+                               
                             </StackPanel>
 
 						</StackPanel>

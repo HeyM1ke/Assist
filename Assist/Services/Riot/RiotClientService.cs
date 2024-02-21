@@ -6,9 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Game.Views.Initial;
 using Assist.Objects.RiotClient;
+using Assist.Services.Utils;
 using Assist.Settings;
 using Assist.ViewModels;
 using Avalonia.Threading;
@@ -24,7 +26,8 @@ namespace Assist.Services.Riot
         private string RiotClientLocation;
         public static bool ClientOpened = false;
         private BackgroundWorker _worker;
-        public static RiotApplicationData RiotApplicationData = new RiotApplicationData();
+        public RiotApplicationData RiotApplicationData = new RiotApplicationData();
+        public string AdditionalRiotClientArguments = string.Empty;
 
         private const string bgVidUrl = "https://cdn.rumblemike.com/Static/live/assistBackVideo_dev.mp4";
         public RiotClientService()
@@ -49,7 +52,16 @@ namespace Assist.Services.Riot
             await CreateAuthenticationFile();
 
             Log.Information("Attempting to Launch Client");
-            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline.ToLower()} --insecure")
+
+            string argumentString =
+                $"--launch-product=valorant --launch-patchline={AssistApplication.Current.ClientLaunchSettings.Patchline.ToLower()} --insecure";
+
+            if (!string.IsNullOrEmpty(AssistSettings.Current.AdditionalArgs))
+            {
+                argumentString += $" {AssistSettings.Current.AdditionalArgs}";
+            }
+            
+            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, argumentString)
             {
                 UseShellExecute = true
             };
@@ -63,9 +75,12 @@ namespace Assist.Services.Riot
 
         public async Task CreateAuthenticationFile()
         {
-            string pSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
-            string pSettingsPathBackup = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
-            string pClientSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config", "RiotClientSettings.yaml");
+            string baseRiotClientFolder =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client");
+            
+            string pSettingsPath = Path.Combine(baseRiotClientFolder, "Data", "RiotGamesPrivateSettings.yaml");
+            string pSettingsPathBackup = Path.Combine(baseRiotClientFolder, "Data", "RiotClientPrivateSettings.yaml");
+            string pClientSettingsPath = Path.Combine(baseRiotClientFolder, "Config", "RiotClientSettings.yaml");
 
             string riotClient = await AssistSettings.Current.FindRiotClient();
             var fileInfo = FileVersionInfo.GetVersionInfo(riotClient);
@@ -84,9 +99,30 @@ namespace Assist.Services.Riot
                 // Create RiotClientPrivateSettings.yaml
                 using (TextWriter writer = File.CreateText(pSettingsPath))
                 {
-                    cSettings.CreateGameModelWRegion().Save(writer, false);
+                    cSettings.CreateGameModelWRegionMicro().Save(writer, false);
                 }
+                
+                if (Path.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta")))
+                {
+                    var baseBetaPass =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta");
+                    var pBetaSettingsPath = Path.Combine(baseBetaPass, "Data", "RiotGamesPrivateSettings.yaml");
+                    var pBetaSettingsPathBackup = Path.Combine(baseBetaPass, "Data", "RiotClientPrivateSettings.yaml");
+                    var pBetaClientSettingsPath = Path.Combine(baseBetaPass, "Config", "RiotClientSettings.yaml");
+                    
+                    
+                    using (TextWriter writer = File.CreateText(pBetaClientSettingsPath))
+                    {
+                        cSettings.CreateSettingsModel().Save(writer, false);
+                    }
 
+                    // Create RiotClientPrivateSettings.yaml
+                    using (TextWriter writer = File.CreateText(pBetaSettingsPath))
+                    {
+                        cSettings.CreateGameModelWRegionMicro().Save(writer, false);
+                    }
+                    
+                }
+                
             }
             else
             {
@@ -97,14 +133,13 @@ namespace Assist.Services.Riot
                     cSettings.CreateGameModel().Save(writer, false);
                 }
 
-
                 using (TextWriter writer = File.CreateText(pSettingsPathBackup))
                 {
                     cSettings.CreateClientPrivateModel().Save(writer, false);
                 }
             }
         }
-
+        
         private void StartWorker()
         {
             Log.Information("Background Worker Started");
@@ -137,7 +172,11 @@ namespace Assist.Services.Riot
                 {
                     RiotApplicationData.ValorantGameProcess = val;
                     RiotApplicationData.ValorantGameProcess.EnableRaisingEvents = true;
-                    RiotApplicationData.ValorantGameProcess.Exited += (o, args) => ClientOpened = false;
+                    RiotApplicationData.ValorantGameProcess.Exited += async (o, args) =>
+                    {
+                        ClientOpened = false;
+                        await CloseRiotRelatedPrograms();
+                    };
                     ClientOpened = true;
                     Log.Information("Found Valorant Process");
                     Log.Information($"Process ID: {val.Id}");
@@ -150,14 +189,36 @@ namespace Assist.Services.Riot
             }
         }
 
+        public static async void FocusValorant()
+        {
+            var rProcesses = await RiotClientService.GetCurrentRiotProcesses();
+            var vProcess = rProcesses.Where(_p => _p.ProcessName.Contains("VALORANT-Win64-Shipping")).FirstOrDefault();
+            WindowsUtils.SetForegroundWindow(vProcess.MainWindowHandle);
+            WindowsUtils.ShowWindow(vProcess.MainWindowHandle, 5); // 5 for Windowed Full Screen & Windowed, 3 for Full Screen.
+        }
+        
         private async void OnValorantGameLaunched()
         {
             Log.Information("Valorant Launched Taking Backup");
+
+            var DataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Riot Games", "Riot Client", "Data");
+            var ConfigFolderPath =
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games",
+                    "Riot Client", "Config");
+
+            if (Path.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta")))
+            {
+                var baseBetaPass =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta");
+                DataFolderPath = Path.Combine(baseBetaPass, "Data");
+                ConfigFolderPath = Path.Combine(baseBetaPass, "Config");  
+            }
+            
             BackupsSettings.SaveBackup(new BackupModel()
             {
                 PlayerUuid = AssistApplication.Current.CurrentUser.UserData.sub,
-                DataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data"),
-                ConfigFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config"),
+                DataFolderPath = DataFolderPath,
+                ConfigFolderPath = ConfigFolderPath
             });
 
 
@@ -210,6 +271,47 @@ namespace Assist.Services.Riot
             Log.Information("Completed download of BG Video");
         }
 
+        internal async Task<string> FindRiotClient()
+        {
+            if (!OperatingSystem.IsWindows())
+                return null;
+
+            List<string> clients = new List<string>();
+
+            string riotInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "Riot Games/RiotClientInstalls.json"); ;
+
+            if (!File.Exists(riotInstallPath)) return null;
+
+            JsonDocument config;
+            try
+            {
+                config = JsonDocument.Parse(File.ReadAllText(riotInstallPath));
+            }
+            catch (Exception e)
+            {
+                Log.Error("Riot Client Check: Could not properly parse json file");
+                return null;
+            }
+
+
+
+            
+            if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive)) { clients.Add(rcLive.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta)) { clients.Add(rcBeta.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_esports", out JsonElement rcEsports)) { clients.Add(rcEsports.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault)) { clients.Add(rcDefault.GetString()); }
+
+            foreach (var clientPath in clients)
+            {
+                if (File.Exists(clientPath))
+                    return clientPath;
+            }
+
+            return null;
+        }
+
+        
         private static async Task ReplaceValorantBackground()
         {
             var filePath = Path.Combine(AssistSettings.ResourcesFolderPath, "assistBg.mp4");

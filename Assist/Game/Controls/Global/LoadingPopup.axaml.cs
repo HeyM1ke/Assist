@@ -11,9 +11,5 @@ public partial class LoadingPopup : UserControl
         InitializeComponent();
     }
     
-
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+    
 }

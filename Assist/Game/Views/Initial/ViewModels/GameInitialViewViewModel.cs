@@ -7,6 +7,7 @@ using Assist.Services;
 using Assist.Services.Popup;
 using Assist.Settings;
 using Assist.ViewModels;
+using Assist.Views.Startup;
 using Avalonia.Controls;
 using ReactiveUI;
 using Serilog;
@@ -33,46 +34,47 @@ namespace Assist.Game.Views.Initial.ViewModels
             if (Design.IsDesignMode)
                 return;
 
-            if (!AssistApplication.Current.GameModeEnabled)
-            {
-                AssistApplication.Current.ChangeToGameModeResolution(AssistSettings.Current.SelectedResolution);
-                return;
-            }
-                
-
             PopupSystem.KillPopups();
             // Start Setup
 
             while (!IsValorantRunning())
             {
-                Message = "Please Run Assist, When Valorant is Open. Checking in 5 seconds.";
+                Message = "Valorant is not Running, Heading Back to the Launcher.";
                 await Task.Delay(5000);
-            }
-
-            // Connect to Valorant Websocket Through Socket Service.
-            Message = "Connecting to Game...";
-            await ConnectToGame();
-            Message = "Connecting to Live Data Socket...";
-            await StartSocketConnection();
-            
-            new DodgeService();
-            
-            // Introduce Authentication
-            if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
-            {
-                AssistApplication.Current.OpenAssistAuthenticationView();
+                MainWindowContentController.Change(new InitialScreen());
                 return;
             }
 
+            // Connect to Valorant Websocket Through Socket Service.
+
+             Message = "Connecting to Game...";
+            await ConnectToGame();
+
+            Message = "Connecting to Live Data Socket...";
+            await StartSocketConnection();
+
+            new DodgeService();
+            new RecentService();
+            
+            // Introduce Authentication
+            /*if (string.IsNullOrEmpty(AssistSettings.Current.AssistUserCode))
+            {
+                AssistApplication.Current.OpenAssistAuthenticationView();
+                return;
+            }*/
+
             Message = "Logging into Assist";
             // Authenticate User with Code
-            try
+            /*try
             {
-                var authResp = await AssistApplication.Current.AssistUser.AuthenticateWithRefreshToken(AssistSettings.Current
-                    .AssistUserCode);
-                AssistSettings.Current.AssistUserCode = authResp.RefreshToken;
-                AssistSettings.Save();
-                await AssistApplication.Current.AssistUser.GetUserInfo();
+                if (AssistApplication.Current.AssistUser.Account.AccountInfo is null)
+                {
+                    var authResp = await AssistApplication.Current.AssistUser.Authentication.AuthenticateWithRefreshToken(AssistSettings.Current
+                        .AssistUserCode);
+                    AssistSettings.Current.AssistUserCode = authResp.RefreshToken;
+                    AssistSettings.Save();
+                    await AssistApplication.Current.AssistUser.Account.GetUserInfo();
+                }
             }
             catch (Exception e)
             {
@@ -80,7 +82,7 @@ namespace Assist.Game.Views.Initial.ViewModels
                 Log.Fatal("Opening Auth View");
                 AssistApplication.Current.OpenAssistAuthenticationView();
                 return;
-            }
+            }*/
 
             if (GameSettings.Current.DiscordPresenceEnabled)
             {
@@ -88,7 +90,7 @@ namespace Assist.Game.Views.Initial.ViewModels
             }
             
             //Connect to Assist Game Server.
-            try
+            /*try
             {
                 Message = "Connecting to Assist";
                 Log.Information("Attempting To Connect to Game Server");
@@ -98,7 +100,7 @@ namespace Assist.Game.Views.Initial.ViewModels
             {
                 Log.Fatal("Failed to Connect to Game Server");
                 return;
-            }
+            }*/
             new LobbyService();
             AssistApplication.Current.OpenGameView();
         }

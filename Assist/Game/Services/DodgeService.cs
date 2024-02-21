@@ -25,6 +25,9 @@ namespace Assist.Game.Services
         public Action<DodgeUser> DodgeUserRemovedFromList;
         public DodgeService()
         {
+            if (Current is not null)
+                return; 
+            
             Current = this;
             Directory.CreateDirectory(DodgeFolderPath);
             LoadDodgeList();
@@ -47,6 +50,11 @@ namespace Assist.Game.Services
 
         public void AddUser(DodgeUser user)
         {
+            if (UserList.Exists(usr => user.UserId == usr.UserId))
+            {
+                return;
+            }
+            
             UserList.Add(user);
             DodgeUserAddedToList?.Invoke(user);
             SaveSettings();
