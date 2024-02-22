@@ -8,6 +8,7 @@ using Assist.Models.Enums;
 using Assist.Services.Navigation;
 using Assist.Views.Dashboard;
 using Assist.Views.Game.Live;
+using Assist.Views.Modules;
 using Assist.Views.ProfileSwap;
 using Assist.Views.Settings;
 using Assist.Views.Store;
@@ -121,12 +122,6 @@ public partial class NavigationViewModel : ViewModelBase
         }
     }
     
-    private void CreatePages()
-    {
-        _pages.Add(AssistPage.DASHBOARD, new DashboardView());
-        
-    }
-
     public static void SetActivePage(AssistPage _page)
     {
        
@@ -205,6 +200,9 @@ public partial class NavigationViewModel : ViewModelBase
                     break;
                 case AssistPage.SETTINGS:
                     newPage = new SettingsView();
+                    break;
+                case AssistPage.MODULES:
+                    newPage = new ModulesView();
                     break;
                 default:
                     Log.Error("Tried swapping to a page which is not supported. EP01");
