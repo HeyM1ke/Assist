@@ -56,7 +56,11 @@
                                                     Height="84"
                                                     Stretch="UniformToFill"
                                                     Source="{Binding AgentIconUrl}"
-                                                    RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                                                    RenderOptions.BitmapInterpolationMode="MediumQuality">
+                        <asyncImageLoader:AdvancedImage.RenderTransform>
+                            <ScaleTransform ScaleX="-1" />
+                        </asyncImageLoader:AdvancedImage.RenderTransform>
+                    </asyncImageLoader:AdvancedImage>
                     <Border Background="{DynamicResource AssistSecondaryBackground}"
                             BorderBrush="{DynamicResource AssistControlOutline}"
                             BorderThickness="1"
