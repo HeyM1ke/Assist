@@ -339,6 +339,12 @@ public partial class MenusPageViewModel : ViewModelBase
             {
                 // This is ran in the menus, meaning this is assuming no game is currently going on within the current CLient.
 
+                if (unfinishedMatch.Players.Count <= 1 && string.IsNullOrEmpty(unfinishedMatch.Gamemode)){
+                    Log.Information("Deleted Faulty Custom Game Match");
+                    RecentService.Current.RemoveMatch(unfinishedMatch.MatchId);
+                    continue;
+                }
+                
                 if (unfinishedMatch.Result != RecentMatch.MatchResult.REMAKE)
                 {
                     /*if (!unfinishedMatch.OwningPlayer.Equals(AssistApplication.Current.CurrentUser.UserData.sub))
@@ -347,11 +353,7 @@ public partial class MenusPageViewModel : ViewModelBase
                         return;
                     }*/
 
-                    if (unfinishedMatch.Players.Count == 1 && string.IsNullOrEmpty(unfinishedMatch.Gamemode)){
-                        Log.Information("Deleted Faulty Custom Game Match");
-                        RecentService.Current.RemoveMatch(unfinishedMatch.MatchId);
-                        continue;
-                    }
+                   
                     
                     await RecentService.Current.UpdateMatch(unfinishedMatch.MatchId);
                     
