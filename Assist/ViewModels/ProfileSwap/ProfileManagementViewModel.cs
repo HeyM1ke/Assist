@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using Assist.Shared.Settings.Accounts;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -17,6 +18,7 @@ public partial class ProfileManagementViewModel : ViewModelBase
     [ObservableProperty] private bool _assistEnabled;
     [ObservableProperty] private bool _gameLaunchEnabled;
     [ObservableProperty] private bool _accountExpired;
+    [ObservableProperty] private bool _defaultAccount;
     public void Setup()
     {
         var profile = AccountSettings.Default.Accounts.FirstOrDefault(x => x.Id == ProfileId);
@@ -26,5 +28,12 @@ public partial class ProfileManagementViewModel : ViewModelBase
         GameLaunchEnabled = profile.CanLauncherBoot;
         AssistEnabled = profile.CanAssistBoot;
         AccountExpired = profile.IsExpired;
+        DefaultAccount = AccountSettings.Default.DefaultAccount.Equals(ProfileId, StringComparison.OrdinalIgnoreCase);
+    }
+
+    public void MakeAccountDefault()
+    {
+        AccountSettings.Default.DefaultAccount = ProfileId;
+        AccountSettings.Save();
     }
 }

@@ -45,7 +45,24 @@
            <Grid Row="1"
                  Margin="0,10,0,0">
               <StackPanel Spacing="5">
-                 
+                  <Grid IsVisible="{Binding !AccountExpired}">
+                      <StackPanel Orientation="Horizontal">
+                          
+                          <TextBlock Text="Default Account"
+                                     FontSize="16"
+                                     VerticalAlignment="Center"
+                                     FontWeight="Regular"
+                                     Opacity=".9"></TextBlock>
+                      </StackPanel>
+                      
+                      <CheckBox IsCheckedChanged="DefaultAccountCheckBox_Changed"
+                              HorizontalAlignment="Right"
+                              IsEnabled="{Binding !DefaultAccount}"
+                              IsChecked="{Binding DefaultAccount}"
+                              VerticalAlignment="Center"></CheckBox>
+                  </Grid>
+                  
+                  
                   <Grid IsVisible="{Binding !AccountExpired}">
                       <StackPanel Orientation="Horizontal">
                           

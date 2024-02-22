@@ -2,6 +2,7 @@
 using Assist.ViewModels.ProfileSwap;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.Input;
 
@@ -31,5 +32,11 @@ public partial class ProfileManagementControl : UserControl
     {
         if (Design.IsDesignMode)return;
         _viewModel.Setup();
+    }
+
+    private void DefaultAccountCheckBox_Changed(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)return;
+        _viewModel.MakeAccountDefault();
     }
 }
