@@ -91,7 +91,14 @@ public class ValorantWebsocketClient
     {
         Log.Information("Client Socket has Closed, Moving back to Launcher");
         await RiotClientService.CloseRiotRelatedPrograms();
-        Dispatcher.UIThread.InvokeAsync(() => AssistApplication.ChangeMainWindowView(new StartupView()));
+
+        if (AssistApplication.ActiveUser is null)
+        {
+            Dispatcher.UIThread.InvokeAsync(() => AssistApplication.ChangeMainWindowView(new StartupView()));
+            return;
+        }
+        
+        Dispatcher.UIThread.InvokeAsync(() => AssistApplication.ChangeMainWindowView(new StartupView(AssistApplication.ActiveUser.UserData.sub)));
     }
 
     private void ClientSocketOnOnError(object? sender, ErrorEventArgs e)

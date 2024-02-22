@@ -16,6 +16,13 @@ public partial class StartupView : UserControl
         DataContext = _viewModel = new StartupViewModel();
         InitializeComponent();
     }
+    
+    public StartupView(string passedId)
+    {
+        DataContext = _viewModel = new StartupViewModel();
+        InitializeComponent();
+        _viewModel.AttemptProfileId = passedId;
+    }
 
     private async void Startup_Loaded(object? sender, RoutedEventArgs e)
     {

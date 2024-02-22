@@ -43,6 +43,7 @@ public partial class StartupViewModel : ViewModelBase
     [ObservableProperty]
     private Control _currentContent = new BasicStartupControl();
 
+    [ObservableProperty] private string _attemptProfileId = String.Empty;
 
     public async Task Startup()
     {  
@@ -152,6 +153,30 @@ public partial class StartupViewModel : ViewModelBase
 
     private async Task AttemptAuthentication()
     {
+
+        if (!string.IsNullOrEmpty(AttemptProfileId))
+        {
+            Log.Information("Attempt Profile ID Passed In, Attempting to Login");
+            var passedProfile = AccountSettings.Default.Accounts.Find(x => x.Id == AttemptProfileId);
+            Log.Information("Create UI Preview");
+
+            if (passedProfile is not null)
+            {
+                await CreateUiAccountPreview(passedProfile);
+                try
+                {
+                    await AuthenticateProfile(passedProfile); // This method handles the navigation to the Dashboard View.
+                    return;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
+           
+        }
+        
+        
         Log.Information("Checking for Default Account");
         var defaultAccount = AccountSettings.Default.Accounts.Find(x => x.Id == AccountSettings.Default.DefaultAccount);
 
