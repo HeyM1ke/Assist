@@ -195,7 +195,6 @@
     
     
     <Style Selector="CheckBox /template/ Border#NormalRectangle">
-        
         <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}" />
     </Style>
     <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
@@ -204,7 +203,7 @@
     </Style>
 
     <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
-        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}" />
+        <Setter Property="Background" Value="#b3153b" />
         <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}" />
     </Style>
     

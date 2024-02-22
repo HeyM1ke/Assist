@@ -44,12 +44,12 @@
            
            <Grid Row="1"
                  Margin="0,10,0,0">
-              <StackPanel Spacing="5">
+              <StackPanel Spacing="10">
                   <Grid IsVisible="{Binding !AccountExpired}">
                       <StackPanel Orientation="Horizontal">
                           
                           <TextBlock Text="Default Account"
-                                     FontSize="16"
+                                     FontSize="18"
                                      VerticalAlignment="Center"
                                      FontWeight="Regular"
                                      Opacity=".9"></TextBlock>
@@ -67,7 +67,7 @@
                       <StackPanel Orientation="Horizontal">
                           
                           <TextBlock Text="Game Launching"
-                                     FontSize="16"
+                                     FontSize="18"
                                      VerticalAlignment="Center"
                                      FontWeight="Regular"
                                      Opacity=".9"></TextBlock>
@@ -95,7 +95,7 @@
                       <StackPanel Orientation="Horizontal">
                           
                           <TextBlock Text="Assist Launching"
-                                     FontSize="16"
+                                     FontSize="18"
                                      VerticalAlignment="Center"
                                      FontWeight="Regular"
                                      Opacity=".9"></TextBlock>
@@ -121,7 +121,7 @@
                       <StackPanel Orientation="Horizontal">
                           
                           <TextBlock Text="Refresh Account"
-                                     FontSize="16"
+                                     FontSize="18"
                                      VerticalAlignment="Center"
                                      FontWeight="Regular"
                                      Opacity=".9"></TextBlock>
@@ -129,6 +129,7 @@
                       
                       <Button Classes="default"
                               Content="Refresh"
+                              Command="{Binding OpenAssistNormalLoginWindowCommand}"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Center"></Button>
                   </Grid>
@@ -140,6 +141,7 @@
                           Classes="default"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
+                          
                           Command="{Binding ClosePopup}"></Button>
               </StackPanel>
            </Grid>
