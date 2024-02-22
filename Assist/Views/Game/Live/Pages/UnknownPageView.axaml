@@ -2,14 +2,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Views.Game.Live.Pages.UnknownPageView">
     <Grid>
-        <TextBlock Text="UNKNOWN"
-                   FontWeight="Black"
-                   FontSize="84"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Foreground="White"></TextBlock>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="10">
+            <asyncImageLoader:AdvancedImage Stretch="UniformToFill"
+                                            Source="https://cdn.assistval.com/valorant/sprays/Shhh_Spray.png"
+                                            Width="100"
+                                            Height="100"
+                                            RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+            <TextBlock Text="Waiting for a Valorant Update"
+                       FontWeight="Medium"
+                       FontSize="16"
+                       Opacity=".7"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="White"></TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>
