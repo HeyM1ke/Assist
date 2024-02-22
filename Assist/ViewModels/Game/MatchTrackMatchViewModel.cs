@@ -103,7 +103,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
 
         if (localUserData != null)
         {
-            LocalPlayerAgentIcon = $"https://content.assistapp.dev/agents/{localUserData.PlayerAgentId}_displayicon.png";
+            LocalPlayerAgentIcon = $"https://content.assistapp.dev/agents/{localUserData.PlayerAgentId.ToLower()}_displayicon.png";
             LocalPlayerStats = localUserData.Statistics is not null
                 ? $"{localUserData.Statistics.Kills} / {localUserData.Statistics.Deaths} / {localUserData.Statistics.Assists}"
                 : "";
