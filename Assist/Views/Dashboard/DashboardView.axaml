@@ -16,7 +16,7 @@
                                                    HorizontalAlignment="Left"/>
                 
                 <StackPanel Orientation="Vertical"
-                            Spacing="30"
+                            Spacing="20"
                             Grid.Column="1"
                             VerticalAlignment="Top">
                     <dashboard:GameLaunchControl Width="400"
@@ -25,9 +25,11 @@
                                                  HorizontalAlignment="Right"
                                                  VerticalAlignment="Top"/>
                     
-                    <dashboard:ProgressionPreviewControl HorizontalAlignment="Stretch"
+                    <dashboard:ProgressionPreviewControl HorizontalAlignment="Right"
+                                                         
+                                                         Width="400"
                             VerticalAlignment="Stretch"
-                            IsVisible="False"></dashboard:ProgressionPreviewControl>
+                            IsVisible="True"/>
                 
                    
                 </StackPanel>

@@ -1,4 +1,5 @@
-﻿using Assist.ViewModels.Dashboard;
+﻿using System;
+using Assist.ViewModels.Dashboard;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -13,5 +14,10 @@ public partial class ProgressionPreviewControl : UserControl
     {
         DataContext = _viewModel = new ProgressionPreviewViewModel();
         InitializeComponent();
+    }
+
+    private async void ProgressionPreview_Init(object? sender, EventArgs e)
+    {
+        if (!Design.IsDesignMode) await _viewModel.Setup();
     }
 }

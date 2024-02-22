@@ -89,6 +89,23 @@ namespace Assist.Services
             return JsonSerializer.Deserialize<Bundle>(data);
         }
 
+        public async Task<List<Mission>> GetAllMissions()
+        {
+            var response = await _client.GetAsync($"/api/valorant/missions");
+            
+            if (!response.IsSuccessStatusCode)
+                return new List<Mission>()
+                {
+                    new Mission
+                    {
+                        Title = "Error",
+                        ProgressToComplete = 1,
+                        XpGrant = 1,
+                    }
+                };
+            var data = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<Mission>>(data);
+        }
         private static Bundle CreateFailedBundle()
         {
             return new Bundle
