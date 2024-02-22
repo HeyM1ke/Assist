@@ -71,7 +71,9 @@ public partial class GameInitalStartupViewModel : ViewModelBase
             Log.Fatal("Failed to Connect to Game Server");
             return;
         }
-        
+
+        // TODO: Start Module Service which will then active these in turn if they are enabled.
+        new DodgeService();
         new RecentService();
         Message = "Welcome to Assist";
         await AssistApplication.SetupComplete_Game();

@@ -54,7 +54,7 @@ public class DodgeService
 
             DodgeList = JsonSerializer.Deserialize<PlayerDodgeList>(resp.Data.ToString());
             
-            Log.Information("Successfully read the Dodge settings file");
+            Log.Information("Successfully Read Dodge data from Server");
         }
         catch
         {
@@ -64,7 +64,25 @@ public class DodgeService
 
     public async Task<UserDodgePlayer> AddPlayerToUserDodgeList(AddUserToDodgeListModel data)
     {
-        var resp = await AssistApplication.AssistUser.DodgeList.AddPlayerToDodgeList(data);
+       
+        
+        var resp = await AssistApplication.AssistUser.DodgeList.AddPlayerToPlayerDodgeList(data);
+
+        if (resp.Code != 200)
+            throw new Exception(resp.Message);
+
+        var newUser = JsonSerializer.Deserialize<UserDodgePlayer>(resp.Data.ToString());
+        
+        DodgeList.Players.Add(newUser); // This updates the list locally without having to pull from the server.
+        
+        DodgeUserAddedToList?.Invoke(newUser); // Alerts that there is a new user added
+        
+        return newUser;
+    }
+    
+    public async Task<UserDodgePlayer> AddPlayerToUserDodgeList(string userIdToRemove)
+    {
+        var resp = await AssistApplication.AssistUser.DodgeList.RemovePlayerFromPlayerDodgeList(userIdToRemove);
 
         if (resp.Code != 200)
             throw new Exception(resp.Message);
