@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Assist.Controls.Assist.Authentication;
+using Assist.Controls.Navigation;
 using Assist.Controls.Setup;
 using Assist.Models.Enums;
+using Assist.Services.Navigation;
 using Assist.Views.Startup;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -53,6 +55,7 @@ public partial class AssistAuthenticationViewModel : ViewModelBase
         _sequenceControls.Clear();
         GC.Collect();
 
+        NavigationContainer.ViewModel.ChangePage(AssistPage.UNKNOWN);
         if (AssistApplication.CurrentMode == EAssistMode.LAUNCHER)
             await AssistApplication.SetupComplete_Launcher();
         else 
