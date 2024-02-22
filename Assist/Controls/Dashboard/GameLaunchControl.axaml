@@ -28,7 +28,7 @@
                 HorizontalAlignment="Center"
                 FontSize="12"
                 FontWeight="Medium"
-                IsVisible="{Binding LaunchBtnEnabled}"
+                IsVisible="False"
                 FontFamily="{StaticResource Inter}"></Button>
         
         <Border Background="Black"
