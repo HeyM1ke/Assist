@@ -54,18 +54,23 @@ public partial class PregamePageViewModel : ViewModelBase
                 return;
             }
         }
-        catch (RequestException e)
+        catch (Exception e)
         {
-            Log.Fatal("Error on getting player pregame");
-            Log.Fatal("PREGAME ERROR: " + e.StatusCode);
-            Log.Fatal("PREGAME ERROR: " + e.Content);
-            Log.Fatal("PREGAME ERROR: " + e.Message);
+            if (e is ValNet.Objects.Exceptions.RequestException)
+            {
+                var ex = e as ValNet.Objects.Exceptions.RequestException;
+                Log.Fatal("Error on getting player match or Pres");
+                Log.Fatal("PREGAME ERROR: " + ex.StatusCode);
+                Log.Fatal("PREGAME ERROR: " + ex.Content);
+                Log.Fatal("PREGAME ERROR: " + ex.Message);
                 
-            if(e.StatusCode == HttpStatusCode.BadRequest){
-                Log.Fatal("TOKEN ERROR: " + e.Message);
-                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
-                await this.PageSetup();
+                if(ex.StatusCode == HttpStatusCode.BadRequest){
+                    Log.Fatal("PREGAME TOKEN ERROR: ");
+                    await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+                }
             }
+                
+            return;
         }
 
 
@@ -106,19 +111,25 @@ public partial class PregamePageViewModel : ViewModelBase
                     return;
                 }
             }
-            catch (RequestException e)
+            catch (Exception e)
             {
-                Log.Fatal("Error on getting player match or Pres");
-                Log.Fatal("PREGAME ERROR: " + e.StatusCode);
-                Log.Fatal("PREGAME ERROR: " + e.Content);
-                Log.Fatal("PREGAME ERROR: " + e.Message);
+                if (e is ValNet.Objects.Exceptions.RequestException)
+                {
+                    var ex = e as ValNet.Objects.Exceptions.RequestException;
+                    Log.Fatal("Error on getting player match or Pres");
+                    Log.Fatal("PREGAME ERROR: " + ex.StatusCode);
+                    Log.Fatal("PREGAME ERROR: " + ex.Content);
+                    Log.Fatal("PREGAME ERROR: " + ex.Message);
                 
-                if(e.StatusCode == HttpStatusCode.BadRequest){
-                    Log.Fatal("PREGAME TOKEN ERROR: ");
-                    await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+                    if(ex.StatusCode == HttpStatusCode.BadRequest){
+                        Log.Fatal("PREGAME TOKEN ERROR: ");
+                        await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+                    }
                 }
+                
                 return;
             }
+            
 
             if(MatchResp.AllyTeam == null)
                 return;
