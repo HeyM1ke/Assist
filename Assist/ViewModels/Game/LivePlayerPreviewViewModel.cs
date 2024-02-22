@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Assist.Core.Helpers;
@@ -8,6 +9,7 @@ using Assist.Services.Assist;
 using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Serilog;
 using ValNet.Objects.Coregame;
 using ValNet.Objects.Pregame;
@@ -120,7 +122,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 try
                 {
                     // Set Agent Icon
-                    AgentIconUrl = $"https://content.assistapp.dev/agents/{Player.CharacterID}_displayicon.png";
+                    AgentIconUrl = $"https://content.assistapp.dev/agents/{Player.CharacterID.ToLower()}_displayicon.png";
                     // Set Agent Name
                     if (!UsingAssistProfile)
                         SecondaryText = ValorantHelper.AgentIdToNames?[Player.CharacterID.ToLower()];
@@ -209,7 +211,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 try
                 {
                     // Set Agent Icon
-                    AgentIconUrl = $"https://cdn.assistval.com/agents/{CorePlayer.CharacterID}_displayicon.png";
+                    AgentIconUrl = $"https://cdn.assistval.com/agents/{CorePlayer.CharacterID.ToLower()}_displayicon.png";
                     // Set Agent Name
                     if (!UsingAssistProfile)
                         SecondaryText = ValorantHelper.AgentIdToNames?[CorePlayer.CharacterID.ToLower()];
@@ -404,5 +406,20 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
         };
     }
 
-     
+    [RelayCommand]
+    public async Task OpenTracker()
+    {
+        if (!PlayerIsHidden)
+        {
+            var names = PlayerRealName.Split("#");
+            var trackerName = names[0].Replace(" ", "%20");
+            string url = $"https://tracker.gg/valorant/profile/riot/{trackerName}%23{names[1]}/overview";
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
+    }
 }

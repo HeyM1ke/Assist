@@ -115,4 +115,49 @@
             </StackPanel>
         </Grid>
     </Border>
+    
+      <UserControl.ContextMenu >
+        <ContextMenu Background="{DynamicResource AssistBackground}"
+                     CornerRadius="10"
+                     BorderBrush="{DynamicResource AssistControlOutline}"
+                     BorderThickness="1"
+                     Padding="10"
+                     IsVisible="{Binding !PlayerIsHidden}">
+            <ContextMenu.Styles>
+                <Style Selector="MenuItem /template/ ContentPresenter#PART_HeaderPresenter">
+
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    
+                    
+                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                </Style>
+
+                <Style Selector="MenuItem /template/ Viewbox#PART_IconPresenter">
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="Height" Value="100"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                </Style>
+
+                <Style Selector="MenuItem:pointerover /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Style>
+
+            </ContextMenu.Styles>
+            <MenuItem Header="Open TrackerGG"
+                      FontWeight="Medium"
+                      IsEnabled="{Binding TrackerEnabled}"
+                      IsVisible="{Binding !PlayerIsHidden}"
+                      Command="{Binding OpenTrackerCommand}"
+            >
+                <MenuItem.Icon>
+                    <Image Source="{SvgImage /Assets/Default/Cloud_Icon.svg}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Stretch="UniformToFill"
+                    />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.ContextMenu>
 </UserControl>
