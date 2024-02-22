@@ -119,6 +119,55 @@
         <Setter Property="FontSize" Value="12"></Setter>
     </Style>
     
+    <Style Selector="Button.defaultslideout">
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid>
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   FontWeight="{TemplateBinding FontWeight}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></TextBlock>
+                        
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button.defaultslideout:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AssistHover}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="Button.defaultslideout:pressed">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+    </Style>
+    
+    <Style Selector="Button.defaultslideout:disabled">
+        <Setter Property="Background" Value="{DynamicResource AssistDisabledControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistDisabledControlOutline}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AssistDisabledForeground}"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+    
     
     <Style Selector="TextBox">
         <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>

@@ -26,11 +26,14 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
     private static IBrush AllyBlue = new SolidColorBrush(new Color(255, 75, 169, 255));
     private static IBrush EnemyRed = new SolidColorBrush(new Color(255, 246, 30, 81));
     private static IBrush DefaultWhite = new SolidColorBrush(new Color(255, 222, 227, 232));
-
+    
+    [ObservableProperty] private string _localPlayerStats;    
+    [ObservableProperty] private string _localPlayerAgentIcon;
     [ObservableProperty] private string _mapImage;
     [ObservableProperty]private string _statusText;
     [ObservableProperty]private IBrush? _specialColor = DefaultWhite;
     [ObservableProperty]private bool _scoreVisible = false;
+    [ObservableProperty]private bool _inProgress = false;
     [ObservableProperty]private string _allyScore = "0";
     [ObservableProperty]private string _enemyScore = "0";
     [ObservableProperty]private string _dateOfMatch = "00/00/00";
@@ -52,36 +55,59 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
             case RecentMatch.MatchResult.VICTORY:
                 SpecialColor = VictoryGreen;
                 ScoreVisible = true;
+                InProgress = false;
                 StatusText = "VICTORY";
                 break;
             case RecentMatch.MatchResult.LOSS:
                 SpecialColor = LossRed;
                 ScoreVisible = true;
+                InProgress = false;
                 StatusText = "LOSS";
                 break;
             case RecentMatch.MatchResult.REMAKE:
                 SpecialColor = RemakeYellow;
                 StatusText = "REMAKE";
+                InProgress = false;
                 break;
             default:
                 SpecialColor = DefaultWhite;
                 ScoreVisible = true;
+                InProgress = true;
                 StatusText = "In Progress";
                 break;
         }
 
         AllyScore = RecentMatchData.AllyTeamScore.ToString();
         EnemyScore = RecentMatchData.EnemyTeamScore.ToString();
+
+        if (RecentMatchData.QueueId.Equals("hurm") || RecentMatchData.QueueId.Equals("deathmatch"))
+            ScoreVisible = false;
+        
         GameMode = ValorantHelper.DetermineQueueKey(RecentMatchData.QueueId.ToLower());
         
         var language = AssistSettings.Default.Language;
         var attribute = language.GetAttribute<LanguageAttribute>();
         DateOfMatch = RecentMatchData.DateOfMatch.ToLocalTime().ToString("M/d/yy");
         LengthOfMatch = TimeSpan.FromSeconds(RecentMatchData.LengthOfMatchInSeconds).ToString("hh\\:mm\\:ss",new CultureInfo(attribute.Code));
-        
+
+        SetupLocalUserData();
+
         RecentMatchData.Players = RecentMatchData.Players.OrderByDescending(x => x.Statistics?.Kills).ToList();
         
         GenerateTeamObjects();
+    }
+
+    private void SetupLocalUserData()
+    {
+        var localUserData = RecentMatchData.Players.Find(x => x.PlayerId == AssistApplication.ActiveUser.UserData.sub); // Find Local Player to display stats on top.
+
+        if (localUserData != null)
+        {
+            LocalPlayerAgentIcon = $"https://content.assistapp.dev/agents/{localUserData.PlayerAgentId}_displayicon.png";
+            LocalPlayerStats = localUserData.Statistics is not null
+                ? $"{localUserData.Statistics.Kills} / {localUserData.Statistics.Deaths} / {localUserData.Statistics.Assists}"
+                : "";
+        }
     }
 
     private void GenerateTeamObjects()

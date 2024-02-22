@@ -3,14 +3,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:game="clr-namespace:Assist.ViewModels.Game"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Controls.Game.MatchTrack.MatchTrackMatchControl"
              Initialized="MatchTrackMatch_Init">
+             
+    <Design.DataContext>
+        <game:MatchTrackMatchViewModel/>
+    </Design.DataContext>
+             
      <Border Background="{DynamicResource AssistControlBackground}"
             BorderBrush="{DynamicResource AssistControlOutline}"
             CornerRadius="10"
             BorderThickness="1">
-        <Grid RowDefinitions="50, *">
+        <Grid RowDefinitions="65, *, *">
         
             <Panel Grid.Row="0"
                    x:Name="DataPanel">
@@ -18,21 +24,35 @@
                                                 Stretch="UniformToFill"
                                                 CornerRadius="10,10,0,0"/>
                 
-                <Grid Margin="3">
-                    <Border Padding="6,5"
+                <StackPanel Orientation="Horizontal">
+                    <asyncImageLoader:AdvancedImage Width="50"
+                                                    Height="50"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10,0"
+                                                    RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                    Source="{Binding LocalPlayerAgentIcon}"/>
+                    
+                    <Grid Margin="3">
+                    <Border Padding="10"
                             CornerRadius="5"
-                            Height="44"
-                            HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Background="{DynamicResource AssistBackground}">
                         <StackPanel Orientation="Vertical"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
+                            
+                            <TextBlock Text="{Binding LocalPlayerStats}"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       Opacity=".7"
+                                       Foreground="{DynamicResource AssistForeground}"
+                                       TextAlignment="Left"/>
+                            
                             <StackPanel Orientation="Horizontal"
                                         Spacing="8"
                                         VerticalAlignment="Center">
                                 <TextBlock Text="{Binding StatusText, FallbackValue='REMAKE'}"
-                                           FontFamily="{StaticResource Inter}"
                                            FontWeight="ExtraBold"
                                            FontSize="20"
                                            TextAlignment="Left"
@@ -53,7 +73,7 @@
                                                FontWeight="ExtraBold"
                                                FontSize="20"
                                                TextAlignment="Left"
-                                               Padding="-4,0,0,0"/>
+                                               Padding="0,0,0,0"/>
                                     <TextBlock Text="{Binding EnemyScore, FallbackValue='0'}"
                                                FontFamily="{StaticResource Inter}"
                                                FontWeight="ExtraBold"
@@ -61,35 +81,13 @@
                                                TextAlignment="Left"/>
                                 </StackPanel>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal"
-                                        Spacing="8"
-                                        VerticalAlignment="Center">
-                                <TextBlock Text="{Binding GameMode, FallbackValue='UNRATED'}"
-                                           FontFamily="{StaticResource Inter}"
-                                           FontWeight="Light"
-                                           FontSize="8"
-                                           Foreground="{DynamicResource AssistForeground}"
-                                           TextAlignment="Left"/>
-                                <TextBlock Text="{Binding DateOfMatch, FallbackValue='00/00/00'}"
-                                           FontFamily="{StaticResource Inter}"
-                                           FontWeight="Light"
-                                           FontSize="8"
-                                           Foreground="{DynamicResource AssistForeground}"
-                                           TextAlignment="Left"/>
-                                <TextBlock Text="{Binding LengthOfMatch, FallbackValue='00:00:00'}"
-                                           FontFamily="{StaticResource Inter}"
-                                           FontWeight="Light"
-                                           FontSize="8"
-                                           Foreground="{DynamicResource AssistForeground}"
-                                           TextAlignment="Left"
-                                           IsVisible="{Binding ScoreVisible, FallbackValue='True'}"/>
-                            </StackPanel>
                         </StackPanel>
                         
                         
                     </Border>
                    
                 </Grid>
+                </StackPanel>
                 
                 <asyncImageLoader:AdvancedImage Width="24"
                                                 Height="24"
@@ -110,6 +108,33 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </Panel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Spacing="8"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Opacity=".5"
+                        Margin="0,0,0,5"
+                        Grid.Row="2">
+                <TextBlock Text="{Binding GameMode, FallbackValue='UNRATED'}"
+                           FontFamily="{StaticResource Inter}"
+                           FontWeight="Light"
+                           FontSize="11"
+                           Foreground="{DynamicResource AssistForeground}"
+                           TextAlignment="Left"/>
+                <TextBlock Text="{Binding DateOfMatch, FallbackValue='00/00/00'}"
+                           FontFamily="{StaticResource Inter}"
+                           FontWeight="Light"
+                           FontSize="11"
+                           Foreground="{DynamicResource AssistForeground}"
+                           TextAlignment="Left"/>
+                <TextBlock Text="{Binding LengthOfMatch, FallbackValue='00:00:00'}"
+                           FontFamily="{StaticResource Inter}"
+                           FontWeight="Light"
+                           FontSize="11"
+                           Foreground="{DynamicResource AssistForeground}"
+                           TextAlignment="Left"/>
+            </StackPanel>
             
         </Grid>
         

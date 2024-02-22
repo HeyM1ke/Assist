@@ -10,7 +10,7 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid ColumnDefinitions="152, *, Auto">
+                <Grid ColumnDefinitions="200, 25, *">
                     <StackPanel Orientation="Horizontal"
                                 Spacing="3">
                         <asyncImageLoader:AdvancedImage Width="24"
@@ -19,21 +19,22 @@
                         <TextBlock Text="{TemplateBinding TeammateName}"
                                    FontFamily="{StaticResource Inter}"
                                    FontWeight="Regular"
-                                   FontSize="13"
+                                   FontSize="14"
                                    TextAlignment="Left"
-                                   MaxWidth="150"
+                                   MaxWidth="180"
                                    VerticalAlignment="Center"
                                    Foreground="{DynamicResource AssistForeground}"/>
                     </StackPanel>
                     
                     <asyncImageLoader:AdvancedImage Source="{TemplateBinding RankIcon}"
-                                                    Margin="3"
-                                                    Grid.Column="1"/>
+                                                    Margin="2"
+                                                    Grid.Column="1"
+                                                    RenderOptions.BitmapInterpolationMode="MediumQuality"/>
                     
                     <TextBlock Text="{TemplateBinding Statline}"
                                FontFamily="{StaticResource Inter}"
                                FontWeight="Regular"
-                               FontSize="13"
+                               FontSize="14"
                                MinWidth="70"
                                TextAlignment="Right"
                                VerticalAlignment="Center"

@@ -21,4 +21,10 @@ public partial class MatchTrackSlideoutControl : UserControl
         if (!Design.IsDesignMode)
             _viewModel.LoadMatches();
     }
+
+    private void MatchTrackSlideout_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        if (!Design.IsDesignMode)
+            _viewModel.UnloadPage();
+    }
 }
