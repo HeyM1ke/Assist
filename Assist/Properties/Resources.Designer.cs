@@ -312,6 +312,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable.
+        /// </summary>
+        public static string Common_Enable {
+            get {
+                return ResourceManager.GetString("Common_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Message...
         /// </summary>
         public static string Common_EnterMessage {
@@ -704,6 +713,15 @@ namespace Assist.Properties {
         public static string ProfileManager_ManageAccountText {
             get {
                 return ResourceManager.GetString("ProfileManager_ManageAccountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Riot Client Found.
+        /// </summary>
+        public static string ProfileManager_NoRiotClient {
+            get {
+                return ResourceManager.GetString("ProfileManager_NoRiotClient", resourceCulture);
             }
         }
         

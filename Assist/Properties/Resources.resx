@@ -286,12 +286,20 @@
   <data name="ProfileManager_CreateShortcutTitle" xml:space="preserve">
     <value>Create a Shortcut</value>
   </data>
-  
+  <data name="ProfileManager_NoRiotClient" xml:space="preserve">
+    <value>No Riot Client Found</value>
+  </data>
   <data name="ProfileManager_CreateShortcutDescription" xml:space="preserve">
     <value>Creating a shortcut allows you to boot into an account with ease. Select a Patchline and an icon will showup on your desktop.</value>
   </data>
   <data name="Common_Details" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="Common_Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="Common_Enable" xml:space="preserve">
+    <value>Enable</value>
   </data>
   <data name="RichPres_Enable" xml:space="preserve">
     <value>Enable Discord Rich Presence</value>

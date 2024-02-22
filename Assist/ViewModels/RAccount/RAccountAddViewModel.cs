@@ -47,9 +47,22 @@ public partial class RAccountAddViewModel : ViewModelBase
     public RAccountAddViewModel(string username)
     {
         CreateControls();
+        NavigationContainer.ViewModel.ChangePage(AssistPage.UNKNOWN);
         var ctr = _sequenceControls[nameof(RAccountUsernameLoginFormControl)] as RAccountUsernameLoginFormControl;
         ctr.UpdateUsernameFieldExternal(username);
         CurrentContent = ctr;
+    }
+    
+    public RAccountAddViewModel(bool skipInital)
+    {
+        CreateControls();
+        if (skipInital)
+        {
+            NavigationContainer.ViewModel.ChangePage(AssistPage.UNKNOWN);
+            var ctr = _sequenceControls[nameof(RAccountSecondaryClientLoginControl)] as RAccountSecondaryClientLoginControl;
+            CurrentContent = ctr;
+        }
+        
     }
     
     

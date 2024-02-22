@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Input;
+using Assist.Controls.Infobars;
+using Assist.Controls.Navigation;
+using Assist.Properties;
+using Assist.Services.Riot;
 using Assist.Shared.Settings.Accounts;
+using Assist.Views.RAccount;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -17,18 +23,58 @@ public partial class ProfileManagementViewModel : ViewModelBase
     
     [ObservableProperty] private bool _assistEnabled;
     [ObservableProperty] private bool _gameLaunchEnabled;
+    [ObservableProperty] private bool _gameLaunchButtonEnabled = true;
+    [ObservableProperty] private string _gameLaunchButtonText = Resources.Common_Enable;
     [ObservableProperty] private bool _accountExpired;
     [ObservableProperty] private bool _defaultAccount;
-    public void Setup()
+    public async void Setup()
     {
         var profile = AccountSettings.Default.Accounts.FirstOrDefault(x => x.Id == ProfileId);
 
         ProfileRiotName = profile.Personalization.RiotId;
         ProfilePlayercard =  $"https://content.assistapp.dev/playercards/{profile.Personalization.PlayerCardId}_DisplayIcon.png";
+        
         GameLaunchEnabled = profile.CanLauncherBoot;
         AssistEnabled = profile.CanAssistBoot;
         AccountExpired = profile.IsExpired;
         DefaultAccount = AccountSettings.Default.DefaultAccount.Equals(ProfileId, StringComparison.OrdinalIgnoreCase);
+
+        if (!profile.CanLauncherBoot)
+        {
+            var riotPath = await RiotClientService.FindRiotClient();
+            if (string.IsNullOrEmpty(riotPath))
+            {
+                GameLaunchButtonEnabled = false;
+                GameLaunchButtonText = Resources.ProfileManager_NoRiotClient;
+            }
+            
+        }
+    }
+
+    [RelayCommand]
+    public void OpenGameLaunchWindow()
+    {
+        AssistApplication.ChangeMainWindowPopupView(null);
+        
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            Titlebar.ViewModel.AccountSwapVisible = false;
+            NavigationContainer.ViewModel.HideAllButtons();
+        });
+        AssistApplication.ChangeMainWindowView(new RAccountAddPage(true));
+    }
+    
+    [RelayCommand]
+    public void OpenAssistNormalLoginWindow()
+    {
+        AssistApplication.ChangeMainWindowPopupView(null);
+        
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            Titlebar.ViewModel.AccountSwapVisible = false;
+            NavigationContainer.ViewModel.HideAllButtons();
+        });
+        AssistApplication.ChangeMainWindowView(new RAccountAddPage());
     }
 
     public void MakeAccountDefault()

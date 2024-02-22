@@ -83,8 +83,10 @@
                       </StackPanel>
                       
                       <Button Classes="default"
-                              Content="Enable"
+                              Command="{Binding OpenGameLaunchWindowCommand}"
+                              Content="{Binding GameLaunchButtonText}"
                               IsVisible="{Binding !GameLaunchEnabled}"
+                              IsEnabled="{Binding GameLaunchButtonEnabled}"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Center"></Button>
                   </Grid>
@@ -110,6 +112,7 @@
                       
                       <Button Classes="default"
                               Content="Enable"
+                              Command="{Binding OpenAssistNormalLoginWindowCommand}"
                               IsVisible="{Binding !AssistEnabled}"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Center"></Button>

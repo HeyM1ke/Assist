@@ -21,4 +21,11 @@ public partial class RAccountAddPage : UserControl
         InitializeComponent();
         
     }
+    
+    public RAccountAddPage(bool skipInital)
+    {
+        DataContext = _viewModel = new RAccountAddViewModel(skipInital);
+        InitializeComponent();
+        
+    }
 }
