@@ -172,8 +172,7 @@ public partial class RAccountUsernameLoginViewModel : ViewModelBase
         AssistApplication.ActiveUser = usr;
         AssistApplication.ActiveAccountProfile = profile;
 
-        AccountSettings.Default.DefaultAccount =
-            string.IsNullOrEmpty(AccountSettings.Default.DefaultAccount) ? profile.Id : "";
+        AccountSettings.Default.DefaultAccount = string.IsNullOrEmpty(AccountSettings.Default.DefaultAccount) ? profile.Id : AccountSettings.Default.DefaultAccount;
         await AccountSettings.Default.UpdateAccount(profile);
         AccountSettings.Save();
         
