@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rAccount="clr-namespace:Assist.ViewModels.RAccount"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Assist.Controls.RAccount.RAccountUsernameLoginFormControl">
+             x:Class="Assist.Controls.RAccount.RAccountUsernameLoginFormControl"
+             Loaded="UsernameLoginForm_Loaded">
     
     <Border Background="{DynamicResource AssistControlBackground}"
             BorderBrush="{DynamicResource AssistControlOutline}"
@@ -66,6 +67,7 @@
                              Watermark="Enter your password"
                              x:Name="PasswordBox"
                              Height="35"
+                             KeyDown="PasswordBox_OnKeyDown"
                              Text="{Binding PasswordText}"
                              />
                 </StackPanel>
@@ -79,6 +81,7 @@
                            IsVisible="{Binding ErrorMessageVisible}"/>
                 
                 <Button Content="Login"
+                        Classes="default"
                         HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Center"
                         Margin="0,5,0,0"
