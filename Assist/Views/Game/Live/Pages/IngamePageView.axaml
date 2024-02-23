@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:live="clr-namespace:Assist.Controls.Game.Live"
+             xmlns:lang="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="661"
              x:Class="Assist.Views.Game.Live.Pages.IngamePageView"
              Initialized="IngamePage_Init"
@@ -145,7 +146,7 @@
                 
                 <StackPanel Orientation="Vertical"
                             VerticalAlignment="Center">
-                    <TextBlock Text="TRAINING"
+                    <TextBlock Text="{x:Static lang:Resources.Common_Training}"
                                FontWeight="Medium"
                                FontSize="26"
                                Opacity=".7"

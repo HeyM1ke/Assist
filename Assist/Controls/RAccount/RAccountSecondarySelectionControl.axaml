@@ -1,7 +1,8 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:Assist.Controls.RAccount"
-        xmlns:authentication="clr-namespace:Assist.Controls.Assist.Authentication">
+        xmlns:authentication="clr-namespace:Assist.Controls.Assist.Authentication"
+        xmlns:lang="clr-namespace:Assist.Properties">
     <Design.PreviewWith>
         <controls:RAccountSecondarySelectionControl/>
     </Design.PreviewWith>
@@ -28,12 +29,12 @@
                                Source="/Assets/Default/Assist_Logo_SweetRed.png"
                                RenderOptions.BitmapInterpolationMode="MediumQuality"/>
                         
-                        <TextBlock Text="Would you like to enable Launching?"
+                        <TextBlock Text="{x:Static lang:Resources.Authentication_SelectionTitle}"
                                    FontWeight="ExtraBold"
                                    TextAlignment="Center"
                                    FontSize="24"/>
                         
-                        <TextBlock Text="To Enable the launching of VALORANT, please select yes. This will ask you to login once again."
+                        <TextBlock Text="{x:Static lang:Resources.Authentication_SelectionDescription}"
                                    FontWeight="Medium"
                                    Width="286"
                                    TextWrapping="WrapWithOverflow"
@@ -45,24 +46,25 @@
                                     HorizontalAlignment="Center"
                                     Spacing="10"
                                     >
-                            <authentication:OAuthMethodButton Content="Yes"
-                                                              Height="40"
-                                                              Width="100"
-                                                              HorizontalAlignment="Stretch"
-                                                              Background="{DynamicResource AssistControlBackground}"
-                                                              BorderBrush="{DynamicResource AssistPrimaryColor}"
-                                                              Icon="/Assets/Default/Assist_Logo_White.png"
-                                                              CornerRadius="2"
-                                                              Command="{TemplateBinding YesSelectionCommand}"/>
-                            <authentication:OAuthMethodButton Content="No"
-                                                              HorizontalAlignment="Stretch"
-                                                              Background="{DynamicResource AssistControlBackground}"
-                                                              BorderBrush="{DynamicResource AssistPrimaryColor}"
-                                                              Icon="/Assets/Default/Assist_Logo_White.png"
-                                                              CornerRadius="2"
-                                                              Height="40"
-                                                              Width="100"
-                                                              Command="{TemplateBinding NoSelectionCommand}"
+                            <Button Classes="default"
+                                    Content="{x:Static lang:Resources.Common_Yes}"
+                                    Height="40"
+                                    Width="100"
+                                    HorizontalAlignment="Stretch"
+                                    Background="{DynamicResource AssistControlBackground}"
+                                    BorderBrush="{DynamicResource AssistPrimaryColor}"
+                                    CornerRadius="2"
+                                    Command="{TemplateBinding YesSelectionCommand}"></Button>
+                            
+                            <Button  Content="{x:Static lang:Resources.Common_No}"
+                                     Classes="default"
+                                     HorizontalAlignment="Stretch"
+                                     Background="{DynamicResource AssistControlBackground}"
+                                     BorderBrush="{DynamicResource AssistPrimaryColor}"
+                                     CornerRadius="2"
+                                     Height="40"
+                                     Width="100"
+                                     Command="{TemplateBinding NoSelectionCommand}"
                             />
                         </StackPanel>
                         

@@ -114,11 +114,29 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Launch Riot Client.
+        /// </summary>
+        public static string Authentication_LaunchRiotClient {
+            get {
+                return ResourceManager.GetString("Authentication_LaunchRiotClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Authentication_LoginText {
             get {
                 return ResourceManager.GetString("Authentication_LoginText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login with Riot Client.
+        /// </summary>
+        public static string Authentication_LoginWithRiotClient {
+            get {
+                return ResourceManager.GetString("Authentication_LoginWithRiotClient", resourceCulture);
             }
         }
         
@@ -177,6 +195,24 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To Enable the launching of VALORANT, please select yes. This will ask you to login once again..
+        /// </summary>
+        public static string Authentication_SelectionDescription {
+            get {
+                return ResourceManager.GetString("Authentication_SelectionDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to enable Launching?.
+        /// </summary>
+        public static string Authentication_SelectionTitle {
+            get {
+                return ResourceManager.GetString("Authentication_SelectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username/Password.
         /// </summary>
         public static string Authentication_UsernamePasswordTitle {
@@ -191,6 +227,15 @@ namespace Assist.Properties {
         public static string Authentication_UsernameText {
             get {
                 return ResourceManager.GetString("Authentication_UsernameText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for Login....
+        /// </summary>
+        public static string Authentication_WaitingForLogin {
+            get {
+                return ResourceManager.GetString("Authentication_WaitingForLogin", resourceCulture);
             }
         }
         
@@ -236,6 +281,15 @@ namespace Assist.Properties {
         public static string Common_BackText {
             get {
                 return ResourceManager.GetString("Common_BackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Common_Cancel {
+            get {
+                return ResourceManager.GetString("Common_Cancel", resourceCulture);
             }
         }
         
@@ -596,6 +650,15 @@ namespace Assist.Properties {
         public static string Common_Switch {
             get {
                 return ResourceManager.GetString("Common_Switch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training.
+        /// </summary>
+        public static string Common_Training {
+            get {
+                return ResourceManager.GetString("Common_Training", resourceCulture);
             }
         }
         

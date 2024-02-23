@@ -262,6 +262,9 @@
   <data name="Common_Years_Plural" xml:space="preserve">
     <value>Years</value>
   </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="ProfileManager_AddAccountText" xml:space="preserve">
     <value>Add Account</value>
   </data>
@@ -297,6 +300,9 @@
   </data>
   <data name="Common_Enable" xml:space="preserve">
     <value>Enable</value>
+  </data>
+  <data name="Common_Training" xml:space="preserve">
+    <value>Training</value>
   </data>
   <data name="Common_Enable" xml:space="preserve">
     <value>Enable</value>
@@ -375,6 +381,21 @@
   </data>
   <data name="Authentication_RiotClientTitle" xml:space="preserve">
     <value>Riot Client</value>
+  </data>
+  <data name="Authentication_WaitingForLogin" xml:space="preserve">
+    <value>Waiting for Login...</value>
+  </data>
+  <data name="Authentication_SelectionDescription" xml:space="preserve">
+    <value>To Enable the launching of VALORANT, please select yes. This will ask you to login once again.</value>
+  </data>
+  <data name="Authentication_SelectionTitle" xml:space="preserve">
+    <value>Would you like to enable Launching?</value>
+  </data>
+  <data name="Authentication_LoginWithRiotClient" xml:space="preserve">
+    <value>Login with Riot Client</value>
+  </data>
+  <data name="Authentication_LaunchRiotClient" xml:space="preserve">
+    <value>Launch Riot Client</value>
   </data>
   <data name="Authentication_RiotClientTitleDescription" xml:space="preserve">
     <value>Login with your Riot Games Client.</value>

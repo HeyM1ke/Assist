@@ -36,34 +36,28 @@
                         <ScrollViewer MaxHeight="228">
                             <StackPanel Orientation="Vertical"
                                         Spacing="3">
+                                
                             
                                 <Button HorizontalAlignment="Stretch"
                                         Content="English"
                                         CommandParameter="0"
+                                        Classes="default"
                                         Command="{TemplateBinding LangButtonCommand}"
-                                        />
+                                />
                                 
                                 <Button HorizontalAlignment="Stretch"
                                         Content="Spanish"
+                                        IsVisible="False"
                                         CommandParameter="1"
+                                        Classes="default"
                                         Command="{TemplateBinding LangButtonCommand}"
                                 />
                                 
                                 <Button HorizontalAlignment="Stretch"
                                         Content="French"
+                                        IsVisible="False"
                                         CommandParameter="2"
-                                        Command="{TemplateBinding LangButtonCommand}"
-                                />
-                                
-                                <Button HorizontalAlignment="Stretch"
-                                        Content="Portuguese"
-                                        CommandParameter="3"
-                                        Command="{TemplateBinding LangButtonCommand}"
-                                />
-                                
-                                <Button HorizontalAlignment="Stretch"
-                                        Content="Japanese"
-                                        CommandParameter="4"
+                                        Classes="default"
                                         Command="{TemplateBinding LangButtonCommand}"
                                 />
                                 

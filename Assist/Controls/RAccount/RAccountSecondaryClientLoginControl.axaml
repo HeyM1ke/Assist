@@ -32,7 +32,7 @@
                                Source="/Assets/Default/Assist_Logo_SweetRed.png"
                                RenderOptions.BitmapInterpolationMode="MediumQuality"/>
                         
-                        <TextBlock Text="Sign In with Riot Client"
+                        <TextBlock Text="{x:Static lang:Resources.Authentication_LoginWithRiotClient}"
                                    FontWeight="SemiBold"
                                    TextAlignment="Center"
                                    FontSize="24"/>
@@ -47,7 +47,7 @@
                                    Text="{x:Static lang:Resources.Authentication_RiotClientTitleInstructions}"
                                    />
                 
-                        <Button Content="Launch Client"
+                        <Button Content="{x:Static lang:Resources.Authentication_LaunchRiotClient}"
                                 HorizontalAlignment="Stretch"
                                 HorizontalContentAlignment="Center"
                                 Margin="0,5,0,0"
@@ -68,12 +68,13 @@
                                Source="/Assets/Default/Assist_Logo_SweetRed.png"
                                RenderOptions.BitmapInterpolationMode="MediumQuality"/>
                                 
-                        <TextBlock Text="Waiting for Login..."
+                        <TextBlock Text="{x:Static lang:Resources.Authentication_WaitingForLogin}"
                                    FontWeight="SemiBold"
                                    FontSize="16"
                                    HorizontalAlignment="Center"/>
                         
-                        <Button Content="Cancel"
+                        <Button Content="{x:Static lang:Resources.Common_Cancel}"
+                                Classes="default"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Command="{Binding CancelRiotClientCommand}"></Button>
