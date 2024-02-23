@@ -20,7 +20,7 @@
                                      VerticalAlignment="Center"
                                      MinWidth="332"
                                      MinHeight="190">
-            <startup:BasicStartupControl Message="Connecting to VALORANT"/>
+            <startup:BasicStartupControl Message="{Binding Message}"/>
         </TransitioningContentControl>
         
         

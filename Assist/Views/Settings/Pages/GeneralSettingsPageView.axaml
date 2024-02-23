@@ -35,15 +35,30 @@
             </ComboBox>
         </Grid>
                             
-        <Grid IsVisible="False">
-            <TextBlock Text="Assist Mode"
-                       VerticalAlignment="Center"
-                       />
+        <Grid IsVisible="True">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Assist Mode"
+                           VerticalAlignment="Center"
+                />
+                <TextBlock Text="Changes will be applied after relaunch"
+                           Opacity=".5"
+                           FontWeight="SemiLight"
+                           FontSize="13"
+                           VerticalAlignment="Center"
+                />
+            </StackPanel>
             <ComboBox HorizontalAlignment="Right"
-                      VerticalAlignment="Center">
-                <ComboBoxItem Content="Launcher Only"></ComboBoxItem>
-                <ComboBoxItem Content="Game Only"></ComboBoxItem>
-                <ComboBoxItem Content="Complete Suite"></ComboBoxItem>
+                      VerticalAlignment="Center"
+                      SelectionChanged="ModeControl_Changed"
+                      SelectedIndex="{Binding ModeIndex}"
+                      >
+                <ComboBoxItem Content="Complete"
+                              Tag="0"></ComboBoxItem>
+                <ComboBoxItem Content="Launcher Only"
+                              Tag="1"></ComboBoxItem>
+                <ComboBoxItem Content="Game Only"
+                              Tag="2"></ComboBoxItem>
+                
             </ComboBox>
         </Grid>
                             

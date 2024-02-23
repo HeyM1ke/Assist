@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Assist.Core.Settings.Options;
 using Assist.Models.Enums;
 using Assist.Shared.Settings;
 using Avalonia.Controls;
@@ -16,6 +17,7 @@ public partial class GeneralSettingsPageViewModel : ViewModelBase
     private ObservableCollection<ComboBoxItem> _resolutionItems = new ObservableCollection<ComboBoxItem>();
     
     [ObservableProperty] private int _resolutionIndex = 0;
+    [ObservableProperty] private int _modeIndex = 0;
 
     [ObservableProperty]private bool _setupOngoing = true;
     public async Task Setup()
@@ -27,6 +29,7 @@ public partial class GeneralSettingsPageViewModel : ViewModelBase
     {
 
         ResolutionIndex = (int)AssistSettings.Default.SelectedResolution + 2;
+        ModeIndex = (int)AssistSettings.Default.AppType;
         SetupOngoing = !SetupOngoing;
     }
 
@@ -40,6 +43,17 @@ public partial class GeneralSettingsPageViewModel : ViewModelBase
             AssistSettings.Default.SelectedResolution = resolution;
             AssistSettings.Save();
             //AssistApplication.OpenMainWindowToSettings();
+        }
+    }
+    
+    public void SetMode(AssistApplicationType appType)
+    {
+        if (SetupOngoing)return;
+        
+        if (AssistSettings.Default.AppType != appType)
+        {
+            AssistSettings.Default.AppType = appType;
+            AssistSettings.Save();
         }
     }
     

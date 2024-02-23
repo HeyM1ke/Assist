@@ -20,6 +20,7 @@ public partial class SettingsViewModel : ViewModelBase
     private Control _currentContent = new Control();
 
     [ObservableProperty] private bool _generalChecked = true;
+    [ObservableProperty] private bool _isGameMode = AssistApplication.CurrentMode == EAssistMode.GAME;
     [ObservableProperty]private SettingsPage _currentPage = SettingsPage.UNKNOWN;
     public SettingsViewModel()
     {

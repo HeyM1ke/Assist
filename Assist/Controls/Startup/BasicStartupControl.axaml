@@ -14,6 +14,7 @@
                         BorderBrush="{DynamicResource AssistControlOutline}"
                         BorderThickness="1"
                         CornerRadius="20"
+                        Padding="10"
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
                         >

@@ -30,9 +30,9 @@ public partial class GameInitalStartupViewModel : ViewModelBase
         await AssistApplication.SwapAssistMode(EAssistMode.GAME);
         while (!IsValorantRunning())
         {
-            Message = "Valorant is not Running, trying again in 5 seconds.";
+            // wait this is really funny hold on.
+            Message = "Valorant is not Running. Refreshing in 5 seconds";
             await Task.Delay(5000);
-            return;
         }
 
         // Connect to Valorant Websocket Through Socket Service.

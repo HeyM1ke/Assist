@@ -1,4 +1,5 @@
 ﻿using System;
+using Assist.Core.Settings.Options;
 using Assist.Models.Enums;
 using Assist.ViewModels.Settings;
 using Avalonia;
@@ -37,5 +38,17 @@ public partial class GeneralSettingsPageView : UserControl
         var item = cb.Items[_viewModel.ResolutionIndex] as ComboBoxItem;
         var num = Int32.Parse(item.Tag.ToString());
         _viewModel.SetResolution((EResolution)num);
+    }
+    
+    private void ModeControl_Changed(object? sender, SelectionChangedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+            return;
+        if (_viewModel.SetupOngoing)return;
+
+        var cb = sender as ComboBox;
+        var item = cb.Items[_viewModel.ModeIndex] as ComboBoxItem;
+        var num = Int32.Parse(item.Tag.ToString());
+        _viewModel.SetMode((AssistApplicationType)num);
     }
 }

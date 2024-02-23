@@ -18,7 +18,7 @@
     
     <Grid Background="{DynamicResource AssistBackground}">
         <Border CornerRadius="20"
-                Width="620"
+                Width="650"
                 Height="490" Padding="5"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
@@ -71,6 +71,7 @@
                                                    Command="{Binding SwitchToAssistAccountCommand}"></assist:MenuSelectorButton>
                         <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_RiotAccounts}"
                                                    Command="{Binding OpenRiotAccountCommand}"
+                                                   IsVisible="{Binding !IsGameMode}"
                                                    IsExternal="True"></assist:MenuSelectorButton>
                     </StackPanel>
                     
