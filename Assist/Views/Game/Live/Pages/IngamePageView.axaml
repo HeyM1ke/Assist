@@ -36,6 +36,7 @@
                 BorderBrush="{DynamicResource AssistControlOutline}"
                 BorderThickness="1.4"
                 Margin="20,0,20,0"
+                IsVisible="{Binding !IsRange}"
                 Grid.Column="1">
             <Grid>
                 <asyncImageLoader:AdvancedImage VerticalAlignment="Stretch"
@@ -106,7 +107,6 @@
                 </StackPanel>
             </Grid>
         </Border>
-        
         <ItemsControl Grid.Column="2"
                       VerticalAlignment="Center"
                       HorizontalAlignment="Right"
@@ -129,5 +129,36 @@
             </ItemsControl.Styles>
             
         </ItemsControl>
+        
+        <Grid Background="{DynamicResource AssistBackground}"
+              IsVisible="{Binding IsRange}"
+              ColumnSpan="3">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Spacing="10">
+                <asyncImageLoader:AdvancedImage Stretch="UniformToFill"
+                                                Source="https://cdn.assistval.com/valorant/sprays/Outlaw_Spray.png"
+                                                Width="250"
+                                                Height="250"
+                                                RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="TRAINING"
+                               FontWeight="Medium"
+                               FontSize="26"
+                               Opacity=".7"
+                               VerticalAlignment="Center"
+                               
+                               Foreground="White"></TextBlock>
+                    <TextBlock Text="{Binding MapName}"
+                               FontWeight="Black"
+                               TextAlignment="Left"
+                               FontSize="55"
+                               Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

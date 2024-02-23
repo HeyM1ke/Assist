@@ -33,6 +33,7 @@ public partial class IngamePageViewModel : ViewModelBase
         new ObservableCollection<LivePlayerPreviewControl>();
 
     [ObservableProperty] private bool _isDeathmatch;
+    [ObservableProperty] private bool _isRange = false;
 
     [ObservableProperty] private string _allyScore;
     [ObservableProperty] private string _enemyScore;
@@ -156,6 +157,10 @@ public partial class IngamePageViewModel : ViewModelBase
                 PresenceResp.presences.FindAll(pres =>
                     allMatchPlayerIds.Contains(pres.puuid));
 
+            // Update Map Data
+            HandleMatchData(MatchResp,
+                PresenceResp.presences.Find(p => p.puuid == AssistApplication.ActiveUser.UserData.sub));
+            
             if (AllyTeamControls.Count == 0)
             {
                 foreach (var allyPlayer in allyTeam)
@@ -192,11 +197,7 @@ public partial class IngamePageViewModel : ViewModelBase
                 }
             }
         });
-
-        // Update Map Data
-        HandleMatchData(MatchResp,
-            PresenceResp.presences.Find(p => p.puuid == AssistApplication.ActiveUser.UserData.sub));
-
+        
         HandleIngameMatchTracking(MatchResp, PresenceResp.presences.Find(p => p.puuid == AssistApplication.ActiveUser.UserData.sub));
     }
 
@@ -224,10 +225,17 @@ public partial class IngamePageViewModel : ViewModelBase
     {
         if (Match.MapID != null)
         {
+            
+            
             Log.Information("Getting map data for ID of: " + Match.MapID.ToLower());
             MapName = ValorantHelper.MapsByPath?[Match.MapID.ToLower()].ToUpper();
-            MapImage =
-                $"https://cdn.assistval.com/maps/{ValorantHelper.MapsByPath?[Match.MapID.ToLower()]}_Featured.png";
+            if (Match.MapID.Equals("/game/maps/poveglia/range", StringComparison.OrdinalIgnoreCase))
+                IsRange = true;
+            else
+                MapImage = $"https://cdn.assistval.com/maps/{ValorantHelper.MapsByPath?[Match.MapID.ToLower()]}_Featured.png";
+            
+            
+            
         }
 
         if (Match.MatchData != null)
@@ -239,6 +247,7 @@ public partial class IngamePageViewModel : ViewModelBase
             // Check if the Queue is Deathmatch.
             IsDeathmatch = Match.MatchData.QueueID.ToLower() == "deathmatch";
 
+            IsRange = Match.MapID.Equals("/game/maps/poveglia/range"); // this is dumb but works.
             QueueName = queueName.ToUpper();
 
             try
@@ -267,6 +276,8 @@ public partial class IngamePageViewModel : ViewModelBase
             }
         }
 
+        
+
         if (currentUser != null)
         {
             var pres = await ValorantHelper.GetPresenceData(currentUser);
@@ -290,6 +301,8 @@ public partial class IngamePageViewModel : ViewModelBase
         if (dic != null)
             dic.TryGetValue(Player.Subject, out IBrush? color);
 
+        if (IsRange)
+            return;
 
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
@@ -303,6 +316,8 @@ public partial class IngamePageViewModel : ViewModelBase
     private async Task UpdateUserInAllyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic = null)
     {
         LivePlayerPreviewControl? control = null;
+        if (IsRange)
+            return;
         
         if (IsDeathmatch)
             control = DeathMatchControls.FirstOrDefault(control => control.PlayerId == Player.Subject);
