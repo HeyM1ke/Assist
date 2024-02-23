@@ -6,10 +6,12 @@ using Assist.Controls.Navigation;
 using Assist.Properties;
 using Assist.Services.Riot;
 using Assist.Shared.Settings.Accounts;
+using Assist.Views.ProfileSwap;
 using Assist.Views.RAccount;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Serilog;
 
 namespace Assist.ViewModels.ProfileSwap;
 
@@ -62,6 +64,56 @@ public partial class ProfileManagementViewModel : ViewModelBase
             NavigationContainer.ViewModel.HideAllButtons();
         });
         AssistApplication.ChangeMainWindowView(new RAccountAddPage(true));
+    }
+    
+    [RelayCommand]
+    public void RemoveProfile()
+    {
+        
+        var profile = AccountSettings.Default.Accounts.FirstOrDefault(x => x.Id == ProfileId);
+
+        var t = AccountSettings.Default.Accounts.Remove(profile);
+
+        if (t)
+        {
+            Log.Information("Successfully removed profile");
+            AccountSettings.Save();
+        }
+
+        if (AssistApplication.ActiveAccountProfile.Id.Equals(ProfileId))
+        {
+            Log.Information("The profile removed was the currently logged in profile.");
+
+            if (AccountSettings.Default.Accounts.Count == 0)
+            {
+                Log.Information("No more profiles available. Going to Add Page");
+                AssistApplication.ChangeMainWindowPopupView(null);
+        
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    Titlebar.ViewModel.AccountSwapVisible = false;
+                    NavigationContainer.ViewModel.HideAllButtons();
+                });
+                AssistApplication.ChangeMainWindowView(new RAccountAddPage());
+                return;
+            }
+
+            var acc = AccountSettings.Default.Accounts.FirstOrDefault(x => x.CanAssistBoot);
+            AssistApplication.ChangeMainWindowPopupView(null);
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                Titlebar.ViewModel.AccountSwapVisible = false;
+                Titlebar.ViewModel.SettingsEnabled = false;
+                NavigationContainer.ViewModel.HideAllButtons();
+            
+            });
+        
+            AssistApplication.ChangeMainWindowView(new SwapPage(acc.Id));
+            
+            return;
+        }
+        
+        AssistApplication.ChangeMainWindowPopupView(new ProfileSwapView());
     }
     
     [RelayCommand]

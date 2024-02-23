@@ -10,11 +10,16 @@
     </Design.PreviewWith>
 
     <Style Selector="controls|SmallImageButton">
-        <!-- Set Defaults -->
+        
+        <Setter Property="Background" Value="Transparent"></Setter><!-- Set Defaults -->
         <Setter Property="Opacity" Value=".6"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
-                <Border Background="Transparent">
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        >
                     <Image Source="{TemplateBinding Icon}"
                            Margin="{TemplateBinding Padding}"
                            Opacity="{TemplateBinding Opacity}"></Image>

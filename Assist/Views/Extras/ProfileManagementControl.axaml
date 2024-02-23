@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:p="clr-namespace:Assist.Properties"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
              mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="610"
              x:Class="Assist.Views.Extras.ProfileManagementControl"
              Initialized="ProfileManage_Int"
@@ -36,6 +37,17 @@
                               FontWeight="SemiBold"
                               FontSize="36"></TextBlock>
                </StackPanel>
+               <Rectangle Fill="{DynamicResource AssistControlOutline}"
+                          Width="1"></Rectangle>
+               <assist:SmallImageButton Icon="{SvgImage /Assets/Icons/Trash_Icon.svg}"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Height="40"
+                                        Padding="5"
+                                        CornerRadius="5"
+                                        BorderBrush="{DynamicResource AssistControlOutline}"
+                                        BorderThickness="1"
+                                        Command="{Binding RemoveProfileCommand}"/>
            </StackPanel>
            <Rectangle Fill="{DynamicResource AssistControlOutline}"
                       Height="1"
