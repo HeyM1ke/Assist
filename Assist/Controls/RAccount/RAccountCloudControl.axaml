@@ -11,8 +11,8 @@
           RowDefinitions="650, Auto">
         <TransitioningContentControl Padding="20"
                                      Grid.Row="0"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Center"
+                                     Height="600"
+                                     Width="1000"
                                      Content="{Binding CurrentContent}"
                                      IsVisible="{Binding WebviewVisible}"/>
         <TextBlock HorizontalAlignment="Center"

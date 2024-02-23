@@ -20,35 +20,49 @@
             HorizontalAlignment="Center"
             MinWidth="520">
        <Grid RowDefinitions="*,Auto">
-           <StackPanel Orientation="Horizontal"
-                       Spacing="10"
-                       Margin="0,0,0,10">
-               <asyncImageLoader:AdvancedImage Source="{Binding ProfilePlayercard}"
-                                               Stretch="UniformToFill"
-                                               Height="70"
-                                               Width="70"/>
+           <Grid ColumnDefinitions="*,Auto">
+               <StackPanel Orientation="Horizontal"
+                           HorizontalAlignment="Stretch"
+                           Spacing="10"
+                           Margin="0,0,0,10">
+                   <asyncImageLoader:AdvancedImage Source="{Binding ProfilePlayercard}"
+                                                   Stretch="UniformToFill"
+                                                   Height="70"
+                                                   Width="70"/>
                
-               <StackPanel Orientation="Vertical">
-                   <TextBlock Text="Account Management"
-                              FontWeight="Medium"
-                              FontSize="23"
-                              Opacity=".4"></TextBlock>
-                   <TextBlock Text="{Binding ProfileRiotName}"
-                              FontWeight="SemiBold"
-                              FontSize="36"></TextBlock>
+                   <StackPanel Orientation="Vertical">
+                       <TextBlock Text="Account Management"
+                                  FontWeight="Medium"
+                                  FontSize="23"
+                                  Opacity=".4"></TextBlock>
+                       <TextBlock Text="{Binding ProfileRiotName}"
+                                  FontWeight="SemiBold"
+                                  FontSize="36"></TextBlock>
+                   </StackPanel>
+               
                </StackPanel>
-               <Rectangle Fill="{DynamicResource AssistControlOutline}"
-                          Width="1"></Rectangle>
-               <assist:SmallImageButton Icon="{SvgImage /Assets/Icons/Trash_Icon.svg}"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Height="40"
-                                        Padding="5"
-                                        CornerRadius="5"
-                                        BorderBrush="{DynamicResource AssistControlOutline}"
-                                        BorderThickness="1"
-                                        Command="{Binding RemoveProfileCommand}"/>
-           </StackPanel>
+               
+               <StackPanel Orientation="Horizontal"
+                           Grid.Column="1"
+                           Spacing="10"
+                           >
+                   <Rectangle Fill="{DynamicResource AssistControlOutline}"
+                              Width="1"
+                              Margin="0,0,0,10"></Rectangle>
+                   <assist:SmallImageButton Icon="{SvgImage /Assets/Icons/Trash_Icon.svg}"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Height="40"
+                                            Padding="5"
+                                            Margin="0,0,0,10"
+                                            CornerRadius="5"
+                                            BorderBrush="{DynamicResource AssistControlOutline}"
+                                            BorderThickness="1"
+                                            Command="{Binding RemoveProfileCommand}"/>
+               </StackPanel>
+           </Grid>
+          
+           
            <Rectangle Fill="{DynamicResource AssistControlOutline}"
                       Height="1"
                       VerticalAlignment="Bottom"
