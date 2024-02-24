@@ -708,6 +708,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Tracker Profile.
+        /// </summary>
+        public static string Live_OpenTracker {
+            get {
+                return ResourceManager.GetString("Live_OpenTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Account.
         /// </summary>
         public static string ProfileManager_AddAccountText {

@@ -508,4 +508,7 @@
   <data name="Social_X" xml:space="preserve">
     <value>X</value>
   </data>
+  <data name="Live_OpenTracker" xml:space="preserve">
+    <value>Open Tracker Profile</value>
+  </data>
 </root>

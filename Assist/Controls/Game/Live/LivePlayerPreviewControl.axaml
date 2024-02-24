@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              xmlns:game="clr-namespace:Assist.ViewModels.Game"
+             xmlns:lang="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="431" d:DesignHeight="114"
              x:Class="Assist.Controls.Game.Live.LivePlayerPreviewControl"
              Initialized="LivePlayerPreview_Init">
@@ -142,7 +143,7 @@
                 </Style>
 
             </ContextMenu.Styles>
-            <MenuItem Header="Open TrackerGG"
+            <MenuItem Header="{x:Static lang:Resources.Live_OpenTracker}"
                       FontWeight="Medium"
                       IsEnabled="{Binding TrackerEnabled}"
                       IsVisible="{Binding !PlayerIsHidden}"
