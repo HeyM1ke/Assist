@@ -208,7 +208,7 @@ public static class AssistApplication
     public static void EnableDefaultGameButtons()
     {
         NavigationContainer.ViewModel.EnableButton(AssistPage.LIVE);
-        NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES);
+        //NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES); not yet lmao
         NavigationContainer.ViewModel.EnableAllButtons();
     }
     

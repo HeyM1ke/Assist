@@ -67,7 +67,7 @@
                     <Grid>
                         <asyncImageLoader:AdvancedImage Stretch="Uniform"
                                                         Source="{TemplateBinding SkinImage}"
-                                                        Margin="20"
+                                                        Margin="25"
                                                         Classes="skinhover"
                                                         Classes.hovered="{TemplateBinding HoveredOver}">
                             

@@ -214,7 +214,7 @@ public partial class StoreViewModel : ViewModelBase
                 BundleImage = bData.DisplayIcon,
                 BundlePrice = $"{price:n0}",
                 BundleId = bundleData.DataAssetID,
-                Margin = value.Store.FeaturedBundle.Bundles.Count > 1 ? new Thickness(0,5) : new Thickness(0)
+                Margin = value.Store.FeaturedBundle.Bundles.Count > 1 ? new Thickness(0,5) : new Thickness(0,0,0,5)
             });
             
             
