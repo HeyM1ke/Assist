@@ -55,6 +55,7 @@ public partial class AssistAuthenticationViewModel : ViewModelBase
         _sequenceControls.Clear();
         GC.Collect();
 
+        AssistApplication.ChangeMainWindowPopupView(null);
         NavigationContainer.ViewModel.ChangePage(AssistPage.UNKNOWN);
         if (AssistApplication.CurrentMode == EAssistMode.LAUNCHER)
             await AssistApplication.SetupComplete_Launcher();
