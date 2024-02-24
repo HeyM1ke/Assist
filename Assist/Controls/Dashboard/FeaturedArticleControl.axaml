@@ -1,0 +1,80 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Dashboard"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:FeaturedArticleControl Width="1000"
+                                         Height="500"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|FeaturedArticleControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                  <Grid HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <asyncImageLoader:AdvancedImage Source="{TemplateBinding ArticleImage}"
+                                            Stretch="UniformToFill"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"/>
+            
+            <Border Background="{TemplateBinding Background}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"></Border>
+            
+            
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="10">
+                
+                <Border Padding="10,0"
+                        Background="{DynamicResource AssistPrimaryColor}"
+                        CornerRadius="5"
+                        MaxWidth="160"
+                        HorizontalAlignment="Left">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="4"
+                                          Opacity=".25"></DropShadowEffect>
+                    </Border.Effect>
+                    <TextBlock Text="GAME UPDATE"
+                               TextAlignment="Center"
+                               FontSize="12"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontWeight="SemiBold"></TextBlock>
+                </Border>
+                
+                <TextBlock Text="{TemplateBinding ArticleTitle}"
+                           FontFamily="{StaticResource Inter}"
+                           FontSize="36"
+                           FontWeight="Black"
+                           
+                           HorizontalAlignment="Center"
+                >
+                    <TextBlock.Effect>
+                        <DropShadowDirectionEffect Direction="-10"
+                                                   BlurRadius="19"
+                                                   Opacity=".25"></DropShadowDirectionEffect>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|FeaturedArticleControl:pointerover">
+        <Setter Property="Background" >
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0%,0%" StartPoint="100%,60%">
+                    <GradientStop Color="#00F71D51" Offset="0" />
+                    <GradientStop Color="#80F71D51" Offset=".5" />
+                    <GradientStop Color="#00F71D51" Offset="1" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+</Styles>

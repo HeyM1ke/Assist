@@ -1,0 +1,54 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Setup">
+    <Design.PreviewWith>
+        <controls:WelcomeSetupControl Width="410"
+                                      Height="220"
+                                      />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|WelcomeSetupControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistControlBackground}"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                >
+                
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="8">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="Welcome to Assist"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"
+                                   FontSize="24"/>
+                        
+                        <TextBlock Text="This will be a quick setup to setup your client the way you want to."
+                                   FontWeight="Medium"
+                                   Width="286"
+                                   TextWrapping="WrapWithOverflow"
+                                   TextAlignment="Center"
+                                   FontSize="11"/>
+                        
+                        <Button Content="Begin Setup"
+                                HorizontalAlignment="Center"
+                                x:Name="NextButton"
+                                Command="{TemplateBinding NextButtonCommand}"
+                                />
+                    </StackPanel>
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

@@ -1,0 +1,67 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Navigation">
+    <Design.PreviewWith>
+        <Grid>
+            <controls:NavigationButton MinWidth="50"
+                                       Height="50"
+                                       Icon="{SvgImage /Assets/Navigation/Store_Icon.svg}"
+                                       NavigationText="Store"
+                                       IsEnabled="True"
+                                       />
+        </Grid>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|NavigationButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistSecondaryBackground}"/>
+        <Setter Property="TextVisible" Value="False"/>
+        <Setter Property="Disabled" Value="False"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" Spacing="2">
+                            <Image Margin="10"
+                                   Source="{TemplateBinding Icon}"></Image>
+                            <TextBlock Text="{TemplateBinding NavigationText}"
+                                       TextAlignment="Left"
+                                       IsVisible="{TemplateBinding TextVisible}"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,12,0"
+                                       FontFamily="{StaticResource Inter}"></TextBlock>
+                        </StackPanel>
+                        <Rectangle Fill="Black"
+                                   Opacity=".8"
+                                   HorizontalAlignment="Stretch"
+                                   IsVisible="{TemplateBinding Disabled}"
+                                   VerticalAlignment="Stretch"></Rectangle>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|NavigationButton:pointerover">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistHover}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="controls|NavigationButton[IsChecked=True]">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"/>
+        <Setter Property="TextVisible" Value="False"></Setter>
+    </Style>
+    
+    <Style Selector="controls|NavigationButton[IsEnabled=False]">
+        <!-- Set Defaults -->
+        <Setter Property="TextVisible" Value="False"></Setter>
+        <Setter Property="Disabled" Value="True"/>
+    </Style>
+    <Style Selector="controls|NavigationButton:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)" />
+    </Style>
+</Styles>

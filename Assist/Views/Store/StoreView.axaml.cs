@@ -1,46 +1,36 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Assist.Controls.Store;
+﻿using System;
+using Assist.ViewModels.Store;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Assist.Services;
-using Assist.Views.Store.ViewModels;
+using Serilog;
 
-namespace Assist.Views.Store
+namespace Assist.Views.Store;
+
+public partial class StoreView : UserControl
 {
-    public partial class StoreView : UserControl
+    private readonly StoreViewModel _viewModel;
+
+    public StoreView()
     {
-        private StoreViewModel _viewModel;
+        DataContext = _viewModel = new StoreViewModel();
+        InitializeComponent();
+    }
 
-        public StoreView()
-        {
-            DataContext = _viewModel = new StoreViewModel();
-            InitializeComponent();
-            MainViewNavigationController.CurrentPage = Page.STORE;
-        }
+    private async void Store_OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        Log.Information("StoreOnloaded Event");
+        if (Design.IsDesignMode) return;
 
+        await _viewModel.SetupStoreView();
+    }
 
+    private async void Store_Init(object? sender, EventArgs e)
+    {
+        Log.Information("StoreOnloaded Event");
+        if (Design.IsDesignMode) return;
 
-        private async void BundleContainer_Init(object? sender, EventArgs e)
-        {
-            if (Design.IsDesignMode)
-                return;
-
-            var container = sender as BundleContainer;
-            if (container != null)
-            {
-                var r = await _viewModel.GetPlayerStore();
-
-                if (r == null)
-                    return;
-
-                var controls = await _viewModel.CreateBundleControls(r);
-
-                container.Bundles = controls;
-                container.isLoading = false;
-            }
-        }
+        await _viewModel.Initialize();
     }
 }

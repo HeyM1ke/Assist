@@ -1,0 +1,79 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.RAccount"
+        xmlns:authentication="clr-namespace:Assist.Controls.Assist.Authentication"
+        xmlns:lang="clr-namespace:Assist.Properties">
+    <Design.PreviewWith>
+        <controls:RAccountSecondarySelectionControl/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|RAccountSecondarySelectionControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                  <Border Background="{DynamicResource AssistControlBackground}"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Padding="20"
+                >
+                
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="8">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="{x:Static lang:Resources.Authentication_SelectionTitle}"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"
+                                   FontSize="24"/>
+                        
+                        <TextBlock Text="{x:Static lang:Resources.Authentication_SelectionDescription}"
+                                   FontWeight="Medium"
+                                   Width="286"
+                                   TextWrapping="WrapWithOverflow"
+                                   TextAlignment="Center"
+                                   FontSize="11"
+                                   Opacity=".75"/>
+                        
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Spacing="10"
+                                    >
+                            <Button Classes="default"
+                                    Content="{x:Static lang:Resources.Common_Yes}"
+                                    Height="40"
+                                    Width="100"
+                                    HorizontalAlignment="Stretch"
+                                    Background="{DynamicResource AssistControlBackground}"
+                                    BorderBrush="{DynamicResource AssistPrimaryColor}"
+                                    CornerRadius="2"
+                                    Command="{TemplateBinding YesSelectionCommand}"></Button>
+                            
+                            <Button  Content="{x:Static lang:Resources.Common_No}"
+                                     Classes="default"
+                                     HorizontalAlignment="Stretch"
+                                     Background="{DynamicResource AssistControlBackground}"
+                                     BorderBrush="{DynamicResource AssistPrimaryColor}"
+                                     CornerRadius="2"
+                                     Height="40"
+                                     Width="100"
+                                     Command="{TemplateBinding NoSelectionCommand}"
+                            />
+                        </StackPanel>
+                        
+                        
+                       
+                    </StackPanel>
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

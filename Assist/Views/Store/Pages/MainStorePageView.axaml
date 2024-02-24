@@ -1,0 +1,50 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Views.Store.Pages"
+        xmlns:store="clr-namespace:Assist.Controls.Store">
+    <Design.PreviewWith>
+        <controls:MainStorePageView/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MainStorePageView">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid  ColumnDefinitions="780,*">
+            
+                    <ItemsControl Grid.Column="0"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  ItemsSource="{TemplateBinding BundleControls}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="1"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+            
+                    <ItemsControl Grid.Column="1" VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  ItemsSource="{TemplateBinding OfferControls}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Spacing="8"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Styles>
+                            <Style Selector="store|SkinOfferControl">
+                                <Setter Property="Width"
+                                        Value="365"
+                                />
+                                <Setter Property="Height"
+                                        Value="144"
+                                />
+                            </Style>
+                        </ItemsControl.Styles>
+                    </ItemsControl>
+            
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

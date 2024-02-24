@@ -1,0 +1,58 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Progression">
+    <Design.PreviewWith>
+        <controls:PreviewMissionControl/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|PreviewMissionControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+		  <Border>
+              <Grid RowDefinitions="*,*">
+
+                  <Grid>
+                      <TextBlock Text="{TemplateBinding Title}"
+                                 FontFamily="{StaticResource Inter}"
+                                 FontSize="{TemplateBinding TitleFontSize}"
+                                 FontWeight="Regular"
+                                 HorizontalAlignment="Left"
+                                 TextWrapping="WrapWithOverflow"
+                                 Foreground="{DynamicResource AssistForeground}"/>
+
+                      <TextBlock Text="{TemplateBinding XpGrantAmount}"
+                                 FontFamily="{StaticResource Inter}"
+                                 FontSize="12"
+                                 FontWeight="SemiLight"
+                                 HorizontalAlignment="Right"
+                                 Foreground="{DynamicResource AssistForeground}"/>
+                  </Grid>
+
+                  <Grid Row="1"
+                        Margin="0,5,0,0">
+                      
+					  <ProgressBar Value="{TemplateBinding CurrentProgress}"
+                                   Foreground="{DynamicResource AssistPrimaryColor}"
+                                   Background="{DynamicResource AssistButtonControlBackground}"
+                                   Padding="0"
+                                   VerticalAlignment="Stretch"
+                                   CornerRadius="4"
+                                   Maximum="{TemplateBinding MaxProgress}"
+                      >
+                      </ProgressBar>
+
+                      <TextBlock Text="{TemplateBinding PreviewText}"
+                                 FontFamily="{StaticResource Inter}"
+                                 FontSize="10"
+                                 FontWeight="Light"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Foreground="{DynamicResource AssistForeground}"/>
+                  </Grid>
+              </Grid>
+          </Border>
+      </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

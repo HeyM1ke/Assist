@@ -1,0 +1,78 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Setup">
+    <Design.PreviewWith>
+        <controls:LangSetupControl Width="332"
+                                   Height="393"
+                                   />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|LangSetupControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistControlBackground}"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Padding="12"
+                >
+                
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="8">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="Select a Language"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"
+                                   FontSize="24"/>
+                        <ScrollViewer MaxHeight="228">
+                            <StackPanel Orientation="Vertical"
+                                        Spacing="3">
+                                
+                            
+                                <Button HorizontalAlignment="Stretch"
+                                        Content="English"
+                                        CommandParameter="0"
+                                        Classes="default"
+                                        Command="{TemplateBinding LangButtonCommand}"
+                                />
+                                
+                                <Button HorizontalAlignment="Stretch"
+                                        Content="Spanish"
+                                        IsVisible="False"
+                                        CommandParameter="1"
+                                        Classes="default"
+                                        Command="{TemplateBinding LangButtonCommand}"
+                                />
+                                
+                                <Button HorizontalAlignment="Stretch"
+                                        Content="French"
+                                        IsVisible="False"
+                                        CommandParameter="2"
+                                        Classes="default"
+                                        Command="{TemplateBinding LangButtonCommand}"
+                                />
+                                
+                            </StackPanel>
+                        </ScrollViewer>
+                        
+                        
+                        <TextBlock Text="Note: This can be changed in the settings later."
+                                FontSize="11"
+                                Opacity=".4"
+                        />
+                    </StackPanel>
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

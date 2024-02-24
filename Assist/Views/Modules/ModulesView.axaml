@@ -1,0 +1,115 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.Modules.ModulesView">
+    <Grid>
+         <Grid.Styles>
+                <Style Selector="TabItem">
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Margin" Value="-10,0,0,0"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Template">
+                        <ControlTemplate>
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Margin="0,0,0,0"
+                                Name="PART_LayoutRootn"
+                                Padding="{TemplateBinding Padding}">
+                                <Panel>
+
+                                    <ContentPresenter
+                                        Content="{TemplateBinding Header}"
+                                        ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        Name="PART_ContentPresenter"
+                                        TextBlock.FontFamily="{TemplateBinding FontFamily}"
+                                        TextBlock.FontSize="{TemplateBinding FontSize}"
+                                        TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <ContentPresenter.Transitions>
+                                            <Transitions>
+                                                <DoubleTransition Duration="0:0:0.5" Property="Opacity" />
+                                            </Transitions>
+                                        </ContentPresenter.Transitions>
+                                    </ContentPresenter>
+                                    <Border
+                                        Background="{DynamicResource AssistPrimaryColor}"
+                                        CornerRadius="10"
+                                        Height="3"
+                                        Name="PART_SelectedPipe">
+                                        <Border.Transitions>
+                                            <Transitions>
+                                                <DoubleTransition Duration="0:0:0.3" Property="Opacity"/>
+                                            </Transitions>
+                                        </Border.Transitions>
+                                    </Border>
+                                </Panel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter>
+                    
+                    
+                </Style>
+                <Style Selector="TabItem /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{Binding $parent[TabItem].Background}" />
+                </Style>
+                
+                <Style Selector="TabItem /template/ Border#PART_SelectedPipe">
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+                </Style>
+                
+                <!--  Selected state  -->
+                <!--  We don't use selector to PART_LayoutRootn, so developer can override selected item background with TabStripItem.Background  -->
+                <Style Selector="TabItem:selected">
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundSelected}" />
+                    <Setter Property="TextBlock.FontWeight" Value="SemiBold" />
+                </Style>
+
+                <Style Selector="TabItem:pointerover">
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundSelected}" />
+                </Style>
+                <Style Selector="TabItem:selected /template/ Border#PART_SelectedPipe">
+                    <Setter Property="Opacity" Value="1" />
+                </Style>
+                <Style Selector="TabItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Opacity" Value="1" />
+                </Style>
+                <Style Selector="TabItem:selected /template/ Border#PART_SelectedPipe">
+                    <Setter Property="IsVisible" Value="True" />
+                </Style>
+
+
+
+                <!--  Pressed state  -->
+                <Style Selector="TabItem:pressed /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundUnselectedPressed}" />
+                    <!--   <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundUnselectedPressed}" /> -->
+                </Style>
+
+                <!--  Selected Pressed state  -->
+                <Style Selector="TabItem:selected:pressed /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundSelectedPressed}" />
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundSelectedPressed}" />
+                </Style>
+
+                <!--  Disabled state  -->
+                <Style Selector="TabItem:disabled /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource TabItemHeaderBackgroundDisabled}" />
+                    <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundDisabled}" />
+                </Style>
+            </Grid.Styles>
+        <TabControl>
+            <TabItem Header="Current Modules">
+                
+            </TabItem>
+            <TabItem Header="Available Modules"></TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

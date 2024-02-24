@@ -1,84 +1,35 @@
-using System;
-using System.Collections.Generic;
-using Assist.Controls.Global.Navigation;
-using Assist.Controls.Settings;
-using Assist.Services;
-using Assist.Views.Dashboard;
-using Assist.Views.Settings.Pages;
+﻿using Assist.Services.Navigation;
+using Assist.ViewModels.Navigation;
+using Assist.ViewModels.Settings;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
-namespace Assist.Views.Settings
+namespace Assist.Views.Settings;
+
+public partial class SettingsView : UserControl
 {
-    public partial class SettingsView : UserControl
+    private readonly SettingsViewModel _viewModel;
+
+    public SettingsView()
     {
+        DataContext = _viewModel = new SettingsViewModel();
+        InitializeComponent();
+    }
 
-        List<SettingsNavigationButton> navigationButtons = new List<SettingsNavigationButton>();
+    private async void SettingsView_Loaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+            return;
+        _viewModel.SwitchToGeneral();
+    }
 
-        public SettingsView()
-        {
-            MainViewNavigationController.CurrentPage = Page.SETTINGS;
-            InitializeComponent();
-            SettingsViewNavigationController.ContentControl = this.FindControl<TransitioningContentControl>("ContentControl");
-            SetupButtons();
-        }
+    private void SettingsView_Unloaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)
+            return;
 
- 
-        private void SetupButtons()
-        {
-            navigationButtons.Add(this.FindControl<SettingsNavigationButton>("GeneralSettingsBtn"));
-            navigationButtons.Add(this.FindControl<SettingsNavigationButton>("AccountSettingsBtn"));
-            navigationButtons.Add(this.FindControl<SettingsNavigationButton>("AssistSettingsBtn"));
-            navigationButtons.Add(this.FindControl<SettingsNavigationButton>("InfoSettingsBtn"));
-
-            navigationButtons[0].IsSelected = true;
-            NavigationBar.Instance.SetSelected(3);
-        }
-
-        private void DeselectAllButtons(SettingsNavigationButton toSkip = null)
-        {
-            foreach (var button in navigationButtons)
-            {
-                if(button != toSkip)
-                    button.IsSelected = false;
-            }
-        }
-
-        private void GeneralSettingsBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)
-        {
-            DeselectAllButtons(sender as SettingsNavigationButton);
-
-            if (SettingsViewNavigationController.CurrentPage != SettingsPages.GENERAL)
-                SettingsViewNavigationController.Change(new GeneralSettingsPage());
-        }
-
-        private void AccountSettingsBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)
-        {
-            DeselectAllButtons(sender as SettingsNavigationButton);
-
-            if (SettingsViewNavigationController.CurrentPage != SettingsPages.ACCOUNTS)
-                SettingsViewNavigationController.Change(new AccountsSettingsPage());
-        }
-
-        private void AssistSettingsBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)
-        {
-            DeselectAllButtons(sender as SettingsNavigationButton);
-            if (SettingsViewNavigationController.CurrentPage != SettingsPages.ASSISTSET)
-                SettingsViewNavigationController.Change(new AssistSettingsPage());
-        }
-
-        private void InfoSettingsBtn_OnPointerPressed(object? sender, PointerPressedEventArgs e)
-        {
-            DeselectAllButtons(sender as SettingsNavigationButton);
-            if (SettingsViewNavigationController.CurrentPage != SettingsPages.INFORMATION)
-                SettingsViewNavigationController.Change(new InformationSettingsPage());
-        }
-
-        private void SettingsView_OnInitialized(object? sender, EventArgs e)
-        {
-            SettingsViewNavigationController.Change(new GeneralSettingsPage());
-        }
+        _viewModel.SetUnknown();
     }
 }

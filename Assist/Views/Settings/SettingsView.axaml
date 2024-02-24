@@ -1,65 +1,103 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:settings="clr-namespace:Assist.Controls.Settings"
-             mc:Ignorable="d"
-             d:DesignWidth="1125"
-             d:DesignHeight="590"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:settings="clr-namespace:Assist.ViewModels.Settings"
+             xmlns:pages="clr-namespace:Assist.Views.Settings.Pages"
+             mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="590"
              x:Class="Assist.Views.Settings.SettingsView"
-             Initialized="SettingsView_OnInitialized">
-    <Grid Margin="10">
-        <Grid Background="{DynamicResource AssistGray}" 
-              Margin="65,40"
-              ColumnDefinitions="230, *">
-            
-            <Grid x:Name="SettingsButtonGrid"
-                  Background="{DynamicResource SettingsNavBackground}">
-                <StackPanel Margin="10" Spacing="7">
-                    <StackPanel.Styles>
-                        <Style Selector="settings|SettingsNavigationButton">
-                            <Setter Property="Height" Value="45"></Setter>
-                        </Style>
+             Loaded="SettingsView_Loaded"
+             Unloaded="SettingsView_Unloaded"
+             >
+    
+    <Design.DataContext>
+        <settings:SettingsViewModel/>
+    </Design.DataContext>
+    
+    <Grid Background="{DynamicResource AssistBackground}">
+        <Border CornerRadius="20"
+                Width="650"
+                Height="490" Padding="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="{DynamicResource AssistControlBackground}"
+                BorderBrush="{DynamicResource AssistControlOutline}"
+                BorderThickness="1">
+            <Grid RowDefinitions="Auto, *" Margin="5">
+                <Grid Row="0">
+                    <TextBlock Text="{x:Static lang:Resources.Settings_Settings}"
+                               FontWeight="Bold"
+                               FontSize="20"
+                               Margin="0,0,0,7"></TextBlock>
+                    
+                    <TextBlock Text="{Binding AssistVersion}"
+                               FontWeight="Light"
+                               FontSize="14"
+                               HorizontalAlignment="Right"
+                               TextAlignment="Right"
+                               VerticalAlignment="Center"
+                               Opacity=".3"
+                               Margin="0,0,0,7"></TextBlock>
+                    
+                    <Rectangle VerticalAlignment="Bottom"
+                               Height="1"
+                               HorizontalAlignment="Stretch"
+                               Fill="{DynamicResource AssistControlOutline}"></Rectangle>
+                </Grid>
+                <Grid Row="1" ColumnDefinitions="Auto,*">
+                <Grid Column="0">
+                    
+                    <StackPanel Orientation="Vertical"
+                                Spacing="3"
+                                Margin="0,10,10,0">
+                        <StackPanel.Styles>
+                            <Style Selector="assist|MenuSelectorButton">
+                                <Setter Property="Width" Value="200"/>
+                                <Setter Property="Height" Value="35"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </StackPanel.Styles>
                         
-                    </StackPanel.Styles>
-                    <settings:SettingsNavigationButton x:Name="GeneralSettingsBtn" 
-                                                       Source="../../Resources/Icons/Settings_Icon.png"
-                                                       Title="General"
-                                                       PointerPressed="GeneralSettingsBtn_OnPointerPressed"/>
-
-                    <settings:SettingsNavigationButton x:Name="AccountSettingsBtn"
-                                                       Source="../../Resources/Icons/User_Icon.png"
-                                                       Title="Accounts"
-                                                       PointerPressed="AccountSettingsBtn_OnPointerPressed"/>
-
-                    <settings:SettingsNavigationButton x:Name="AssistSettingsBtn"
-                                                       Source="../../Resources/Icons/Assist_Logo_White.png"
-                                                       Title="Assist Account"
-                                                       IsVisible="False"
-                                                       PointerPressed="AssistSettingsBtn_OnPointerPressed"/>
-
-                    <settings:SettingsNavigationButton x:Name="InfoSettingsBtn"
-                                                       Source="../../Resources/Icons/Fist_Icon.png"
-                                                       Title="Information"
-                                                       IsVisible="False"
-                                                       PointerPressed="InfoSettingsBtn_OnPointerPressed"/>
-                </StackPanel>
-
-				<TextBlock Text="Version 1.2.6"
-                           Margin="10"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Bottom"
-                           FontFamily="{StaticResource WorkSans}"
-                           FontWeight="Medium"
-                           FontSize="12"
-                           Opacity=".5"
-                           Foreground="white"/>
+                        <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_General}"
+                                                   IsChecked="{Binding GeneralChecked}"
+                                                   Command="{Binding SwitchToGeneralCommand}"></assist:MenuSelectorButton>
+                        <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_Sound}"
+                                                   Command="{Binding SwitchToSoundCommand}"
+                                                   IsVisible="False"></assist:MenuSelectorButton>
+                        <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_AssistAccount}"
+                                                   Command="{Binding SwitchToAssistAccountCommand}"></assist:MenuSelectorButton>
+                        <assist:MenuSelectorButton Content="{x:Static lang:Resources.Settings_RiotAccounts}"
+                                                   Command="{Binding OpenRiotAccountCommand}"
+                                                   IsVisible="{Binding !IsGameMode}"
+                                                   IsExternal="True"></assist:MenuSelectorButton>
+                    </StackPanel>
+                    
+                    <Button Content="{x:Static lang:Resources.Common_BackText}"
+                            VerticalAlignment="Bottom"
+                            VerticalContentAlignment="Center"
+                            Classes="default"
+                            Height="32"
+                            Width="50"
+                            Padding="0"
+                            Command="{Binding ReturnToPreviousPageCommand}"></Button>
+                    
+                    <Rectangle VerticalAlignment="Stretch"
+                               Width="1"
+                               HorizontalAlignment="Right"
+                               Fill="{DynamicResource AssistControlOutline}"></Rectangle>
+                </Grid>
+                
+                <Grid Column="1">
+                    <TransitioningContentControl Padding="10"
+                                                 Content="{Binding CurrentContent}">
+                        
+                    </TransitioningContentControl>
+                </Grid>
             </Grid>
-
-			<Grid Grid.Column="1">
-				<TransitioningContentControl x:Name="ContentControl"></TransitioningContentControl>
             </Grid>
-            
-        </Grid>
+        </Border>
     </Grid>
 </UserControl>

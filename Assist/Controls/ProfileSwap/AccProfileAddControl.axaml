@@ -1,0 +1,51 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.ProfileSwap">
+    <Design.PreviewWith>
+        <controls:AccProfileAddControl Width="200"
+                                       Height="100"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|AccProfileAddControl">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                  <Border CornerRadius="10"
+                        Padding="10"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <Image Source="{SvgImage /Assets/Default/X_Icon.svg}"
+                                   Height="40"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="45"></RotateTransform>
+                                </Image.RenderTransform>
+                            </Image>
+                            
+                            <TextBlock Text="Add Account"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|AccProfileAddControl:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="controls|AccProfileAddControl:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)" />
+    </Style>
+</Styles>

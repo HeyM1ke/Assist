@@ -1,0 +1,74 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Views.Settings.Pages.GeneralSettingsPageView"
+             Initialized="General_Init">
+    <StackPanel Spacing="8">
+        <Grid IsVisible="True">
+            <TextBlock Text="Change Resolution"
+                       VerticalAlignment="Center"/>
+            
+            <ComboBox HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      SelectionChanged="ResolutionControl_Changed"
+                      SelectedIndex="{Binding ResolutionIndex}">
+                <ComboBoxItem Content="595x375"
+                              Tag="-2"></ComboBoxItem>
+                
+                <ComboBoxItem Content="893x550"
+                              Tag="-1"></ComboBoxItem>
+                
+                <ComboBoxItem Content="1190x720"
+                              Tag="0"></ComboBoxItem>
+                
+                <ComboBoxItem Content="1488x890"
+                              Tag="1"></ComboBoxItem>
+                
+                <ComboBoxItem Content="1785x1060"
+                              Tag="2"></ComboBoxItem>
+                
+                <ComboBoxItem Content="2083x1240"
+                              Tag="3"></ComboBoxItem>
+                
+            </ComboBox>
+        </Grid>
+                            
+        <Grid IsVisible="True">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Assist Mode"
+                           VerticalAlignment="Center"
+                />
+                <TextBlock Text="Changes will be applied after relaunch"
+                           Opacity=".5"
+                           FontWeight="SemiLight"
+                           FontSize="13"
+                           VerticalAlignment="Center"
+                />
+            </StackPanel>
+            <ComboBox HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      SelectionChanged="ModeControl_Changed"
+                      SelectedIndex="{Binding ModeIndex}"
+                      >
+                <ComboBoxItem Content="Complete"
+                              Tag="0"></ComboBoxItem>
+                <ComboBoxItem Content="Launcher Only"
+                              Tag="1"></ComboBoxItem>
+                <ComboBoxItem Content="Game Only"
+                              Tag="2"></ComboBoxItem>
+                
+            </ComboBox>
+        </Grid>
+                            
+        <Grid>
+            <TextBlock Text="Check for Updates"
+                       VerticalAlignment="Center"/>
+            <Button Content="Update"
+                    Classes="default"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"></Button>
+        </Grid>
+    </StackPanel>
+</UserControl>

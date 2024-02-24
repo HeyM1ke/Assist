@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <!-- Add Resources Here -->
+    <Color x:Key="AssistPrimaryColor">#F71D51</Color>
+
+    <Color x:Key="AssistBackground">#0C0F0D</Color>
+    <Color x:Key="AssistSecondaryBackground">#15171A</Color>
+    
+    <Color x:Key="AssistControlBackground">#121514</Color>
+    <Color x:Key="AssistControlOutline">#232633</Color>
+    <!--414342old color-->
+    <Color x:Key="AssistForeground">#FFF</Color>
+    
+    
+    <Color x:Key="AssistButtonControlBackground">#151719</Color>
+    <Color x:Key="AssistButtonControlPressed">#bfF71D51</Color>
+    <Color x:Key="AssistDisabledControlBackground">#08090A</Color>
+    <Color x:Key="AssistDisabledControlOutline">#161617</Color>
+    <Color x:Key="AssistDisabledForeground">#484848</Color>
+    
+    <FontFamily x:Key="Inter">avares://Assist/Assets/Fonts#Inter</FontFamily>
+    
+    
+    <Color x:Key="AssistHover">#212326</Color>
+    
+    
+    <Color x:Key="DiscordBlurple">#5865F2</Color>
+    <Color x:Key="DiscordBlurple75">#4B5865F2</Color>
+    <Color x:Key="TwitchPurple">#9046ff</Color>
+    <Color x:Key="TwitchPurple75">#4B9046ff</Color>
+    
+    <LinearGradientBrush x:Key="AssistGrad"  EndPoint="25%,0%" StartPoint="25%,100%">
+        <GradientStop Color="#F71D51" Offset="0" />
+        <GradientStop Color="#00F71D51" Offset="1" />
+    </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="SelectGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+        <GradientStop Color="#00A3FF" Offset="0" />
+        <GradientStop Color="Transparent" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DeluxeGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+        <GradientStop Color="#00FFD5" Offset="0" />
+        <GradientStop Color="Transparent" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PremiumGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+        <GradientStop Color="#D1548D" Offset="0" />
+        <GradientStop Color="Transparent" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="UltraGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+        <GradientStop Color="#F9D762" Offset="0" />
+        <GradientStop Color="Transparent" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ExclusiveGrad"  EndPoint="0%,0%" StartPoint="0%,100%">
+        <GradientStop Color="#FF5B00" Offset="0" />
+        <GradientStop Color="#10FF5B00" Offset="1" />
+    </LinearGradientBrush>
+    
+    <system:Boolean x:Key="IsDark">True</system:Boolean>
+    <system:Boolean x:Key="IsLight">False</system:Boolean>
+</ResourceDictionary>

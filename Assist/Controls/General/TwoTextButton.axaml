@@ -1,0 +1,60 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.General">
+    <Design.PreviewWith>
+        <controls:TwoTextButton BodyText="This is a Test for the Body"
+                                HeaderText="Header Test!"
+                                Width="310"
+                                Height="130"
+                                />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|TwoTextButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="10,0,0,0">
+                    
+                    <StackPanel Orientation="Vertical"
+                                Spacing="3"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                MaxWidth="237">
+                        <TextBlock Text="{TemplateBinding HeaderText}"
+                                   FontSize="15"
+                                   FontWeight="Bold"></TextBlock>
+                        
+                        <TextBlock Text="{TemplateBinding BodyText}"
+                                   FontSize="12"
+                                   FontWeight="Medium"
+                                   TextWrapping="WrapWithOverflow"></TextBlock>
+                    </StackPanel>
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|TwoTextButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="controls|TwoTextButton:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)" />
+    </Style>
+</Styles>

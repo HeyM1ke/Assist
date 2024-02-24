@@ -1,0 +1,52 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Assist">
+    <Design.PreviewWith>
+        <controls:MenuSelectorButton Width="150"
+                                     Height="30"
+                                     />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MenuSelectorButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderBrush}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="10">
+                    <Grid>
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   FontWeight="Regular"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"></TextBlock>
+                    
+                        <Image IsVisible="{TemplateBinding IsExternal}"
+                               Source="{SvgImage /Assets/Navigation/External.svg}"
+                               HorizontalAlignment="Right">
+                        </Image>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|MenuSelectorButton:pointerover">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistHover}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+    <Style Selector="controls|MenuSelectorButton[IsChecked=True]">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="#bfF71D51"/>
+        <Setter Property="Opacity" Value="1"/>
+    </Style>
+    
+    <Style Selector="controls|MenuSelectorButton:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)" />
+    </Style>
+</Styles>

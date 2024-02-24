@@ -1,0 +1,25 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:Assist.Controls.Navigation"
+             xmlns:navigation1="clr-namespace:Assist.ViewModels.Navigation"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Navigation.NavigationContainer">
+    
+    <Design.DataContext>
+        <navigation1:NavigationViewModel/>
+    </Design.DataContext>
+    
+    <ItemsControl ItemsSource="{Binding NavigationButtons}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="0"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        
+    </ItemsControl>
+    
+   
+</UserControl>

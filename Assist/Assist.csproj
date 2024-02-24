@@ -1,93 +1,85 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
-    <TrimMode>full</TrimMode>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationIcon>Resources\Assist_IconBlack.ico</ApplicationIcon>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <PackageIcon>Assist_Logo_SweetRed.png</PackageIcon>
-    <SignAssembly>False</SignAssembly>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-	  <AvaloniaResource Include="Resources\**" />
-    <None Remove=".gitignore" />
-    <None Remove="Resources\Dev\ProgressionDev.png" />
-    <None Remove="Resources\Icons\Assist_Logo_SweetRed_LQ.png" />
-    <None Remove="Resources\Icons\Assist_Logo_White.png" />
-    <None Remove="Resources\Icons\Dashboard_Icon.png" />
-    <None Remove="Resources\Icons\Settings_Icon.png" />
-    <None Remove="Resources\Icons\Store_Icon.png" />
-    <None Remove="Resources\Icons\Twitter_Icon.png" />
-    <None Remove="Resources\Icons\VP_Icon.png" />
-    <None Remove="Resources\nightmarket.png" />
-    <AvaloniaXaml Remove="Styles\AssistStyles.axaml" />
-    <AvaloniaResource Include="Styles\AssistStyles.axaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Assist_Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <!--This helps with theme dll-s trimming.
-	If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme Default theme will be trimmed from the output and vice versa.
-	https://github.com/AvaloniaUI/Avalonia/issues/5593 -->
-    <TrimmableAssembly Include="Avalonia.Themes.Fluent" />
-    <TrimmableAssembly Include="Avalonia.Themes.Default" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.2.1" />
-    <PackageReference Include="Avalonia" Version="11.0.5" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.5" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5" />
-    <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.3" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5" />
-    <PackageReference Include="CliWrap" Version="3.6.4" />
-    <PackageReference Include="Clowd.Squirrel" Version="3.0.210-g5f9f594" />
-    <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
-    <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.13" />
-    <PackageReference Include="NAudio" Version="2.2.1" />
-    <PackageReference Include="RestSharp" Version="108.0.1" />
-    <PackageReference Include="Serilog" Version="3.1.1" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
-    <PackageReference Include="websocketsharp.core" Version="1.0.0" />
-    <PackageReference Include="YamlDotNet" Version="12.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Controls\TitleBars\TitleBar_Win.axaml.cs">
-      <DependentUpon>TitleBar_Win.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="AssistUser.Lib">
-      <HintPath>Library\AssistUser.Lib.dll</HintPath>
-    </Reference>
-    <Reference Include="ValNet">
-      <HintPath>Library\ValNet.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Resources\Icons\Assist_Logo_SweetRed.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <StartupObject></StartupObject>
+        <UseWindowsForms>true</UseWindowsForms>
+        <SignAssembly>False</SignAssembly>
+        <ApplicationIcon>./Assets/Assist_IconBlack.ico</ApplicationIcon>
+        <Company>Mike Creations LLC</Company>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**" />
+        <None Remove=".gitignore" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <TrimmerRootDescriptor Include="Roots.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.2.1" />
+        <PackageReference Include="Avalonia" Version="11.0.9" />
+        <PackageReference Include="Avalonia.Browser" Version="11.0.9" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.9" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.9" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.9" />
+        <PackageReference Include="Avalonia.Skia" Version="11.0.9" />
+        <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.13" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.9" />
+        <PackageReference Include="CliWrap" Version="3.6.6" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.5" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Serilog" Version="3.1.1" />
+        <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.0" />
+        <PackageReference Include="System.Management" Version="8.0.0" />
+        <PackageReference Include="System.Text.Json" Version="8.0.1" />
+        <PackageReference Include="Velopack" Version="0.0.327" />
+        <PackageReference Include="websocketsharp.core" Version="1.0.0" />
+        <PackageReference Include="YamlDotNet" Version="15.1.0" />
+        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1185.39" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Themes\Index.xaml" />
+      <AvaloniaXaml Include="Themes\Index.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="AssistUser.Lib">
+        <HintPath>Library\AssistUser.Lib.dll</HintPath>
+      </Reference>
+      <Reference Include="Valnet">
+        <HintPath>Library\Valnet.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Assist.Shared\Assist.Shared\Assist.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Properties\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Properties\Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
 </Project>

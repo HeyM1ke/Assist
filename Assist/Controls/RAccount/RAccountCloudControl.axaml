@@ -1,0 +1,30 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:Assist.Shared.Controls"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" 
+             x:Class="Assist.Controls.RAccount.RAccountCloudControl"
+             Initialized="CloudWebview_Init">
+    <Grid 
+          RowDefinitions="650, Auto">
+        <TransitioningContentControl Padding="20"
+                                     Grid.Row="0"
+                                     Height="600"
+                                     Width="1000"
+                                     Content="{Binding CurrentContent}"
+                                     IsVisible="{Binding WebviewVisible}"/>
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Text="{x:Static lang:Resources.Authentication_CloudLoginInstructions}"
+                   FontWeight="Medium"
+                   Opacity=".7"
+                   Grid.Row="1"
+                   IsVisible="{Binding WebviewVisible}"/>
+        <TextBlock HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Text="{x:Static lang:Resources.Common_Loading}"
+                 FontWeight="SemiBold"></TextBlock>
+    </Grid>
+</UserControl>

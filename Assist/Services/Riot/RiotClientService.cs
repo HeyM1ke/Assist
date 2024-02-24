@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Assist.Game.Views.Initial;
-using Assist.Objects.RiotClient;
-using Assist.Services.Utils;
-using Assist.Settings;
+using Assist.Core.Settings.Options;
+using Assist.Models.Riot;
+using Assist.Shared.Services.Utils;
+using Assist.Shared.Settings;
+using Assist.Shared.Settings.Accounts;
 using Assist.ViewModels;
+using Assist.Views.Game;
 using Avalonia.Threading;
 using Serilog;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Assist.Services.Riot
 {
@@ -30,12 +34,8 @@ namespace Assist.Services.Riot
         public string AdditionalRiotClientArguments = string.Empty;
 
         private const string bgVidUrl = "https://cdn.rumblemike.com/Static/live/assistBackVideo_dev.mp4";
-        public RiotClientService()
-        {
-            
-        }
-
-        public async Task<bool> LaunchClient()
+        
+        /*public async Task<bool> LaunchClient()
         {
             Log.Information("Attempting to Start Client");
 
@@ -43,7 +43,7 @@ namespace Assist.Services.Riot
             await CloseRiotRelatedPrograms();
 
             Log.Information("Trying to find client location");
-            string clientLocation = await AssistSettings.Current.FindRiotClient();
+            string clientLocation = await FindRiotClient();
             if (clientLocation == null){
                 Log.Error("NOT FOUND");
                 return false;
@@ -71,7 +71,7 @@ namespace Assist.Services.Riot
             StartWorker();
 
             return true;
-        }
+        }*/
 
         public async Task CreateAuthenticationFile()
         {
@@ -82,9 +82,9 @@ namespace Assist.Services.Riot
             string pSettingsPathBackup = Path.Combine(baseRiotClientFolder, "Data", "RiotClientPrivateSettings.yaml");
             string pClientSettingsPath = Path.Combine(baseRiotClientFolder, "Config", "RiotClientSettings.yaml");
 
-            string riotClient = await AssistSettings.Current.FindRiotClient();
+            string riotClient = await FindRiotClient();
             var fileInfo = FileVersionInfo.GetVersionInfo(riotClient);
-            var cSettings = new ClientPrivate(AssistApplication.Current.CurrentUser);
+            var cSettings = new ClientPrivate(AssistApplication.ActiveUser);
 
             if (fileInfo.FileMajorPart >= 46)
             {
@@ -140,7 +140,7 @@ namespace Assist.Services.Riot
             }
         }
         
-        private void StartWorker()
+        public void StartWorker()
         {
             Log.Information("Background Worker Started");
             _worker = new BackgroundWorker();
@@ -201,47 +201,24 @@ namespace Assist.Services.Riot
         {
             Log.Information("Valorant Launched Taking Backup");
 
-            var DataFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Riot Games", "Riot Client", "Data");
-            var ConfigFolderPath =
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games",
-                    "Riot Client", "Config");
-
-            if (Path.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta")))
-            {
-                var baseBetaPass =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta");
-                DataFolderPath = Path.Combine(baseBetaPass, "Data");
-                ConfigFolderPath = Path.Combine(baseBetaPass, "Config");  
-            }
+            await CreateBackupFile();
             
-            BackupsSettings.SaveBackup(new BackupModel()
+            Log.Information("Checking if Gamemode is Enabled");
+            if (AssistSettings.Default.AppType != AssistApplicationType.LAUNCHER_ONLY)
             {
-                PlayerUuid = AssistApplication.Current.CurrentUser.UserData.sub,
-                DataFolderPath = DataFolderPath,
-                ConfigFolderPath = ConfigFolderPath
-            });
-
-
-            //EXPERIMENTAL EXPERIMENTAL EXPERIMENTAL DO NOT TOUCH
-            /*var t = await DownloadAssistBackgroundVideo();
-            if(t)
-                OnValorantGameLaunched();*/
-            //await ReplaceValorantBackground();
-
-
-            
-
-            if (AssistSettings.Current.GameModeEnabled)
-            {
-                Dispatcher.UIThread.InvokeAsync(() => { MainWindowContentController.Change(new GameInitialView()); });
+                Log.Information("Swapping over to Game View as Mode is allowed");
+                Dispatcher.UIThread.Invoke(() => {
+                    AssistApplication.ChangeMainWindowPopupView(null);
+                    AssistApplication.ChangeMainWindowView(new GameInitialStartupView());
+                });
                 return;
             }
 
             // Automatically Closes Valorant After Launch
             Dispatcher.UIThread.InvokeAsync(() =>
-                {
-                    AssistApplication.CurrentApplication.Shutdown();
-                });
+            {
+                AssistApplication.CurrentApplication.Shutdown();
+            });
             
         }
 
@@ -253,7 +230,7 @@ namespace Assist.Services.Riot
             return processlist;
         }
 
-        private static async Task<bool> DownloadAssistBackgroundVideo()
+        /*private static async Task<bool> DownloadAssistBackgroundVideo()
         {
             var filePath = Path.Combine(AssistSettings.ResourcesFolderPath, "assistBg.mp4");
             if (File.Exists(filePath))
@@ -264,14 +241,14 @@ namespace Assist.Services.Riot
             wBClient.DownloadFileCompleted += WBClientOnDownloadFileCompleted;
             await wBClient.DownloadFileTaskAsync(bgVidUrl, filePath);
             return true;
-        }
+        }*/
 
         private static void WBClientOnDownloadFileCompleted(object? sender, AsyncCompletedEventArgs e)
         {
             Log.Information("Completed download of BG Video");
         }
 
-        internal async Task<string> FindRiotClient()
+        internal static async Task<string> FindRiotClient()
         {
             if (!OperatingSystem.IsWindows())
                 return null;
@@ -293,12 +270,9 @@ namespace Assist.Services.Riot
                 Log.Error("Riot Client Check: Could not properly parse json file");
                 return null;
             }
-
-
-
             
-            if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive)) { clients.Add(rcLive.GetString()); }
             if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta)) { clients.Add(rcBeta.GetString()); }
+            if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive)) { clients.Add(rcLive.GetString()); }
             if (config.RootElement.TryGetProperty("rc_esports", out JsonElement rcEsports)) { clients.Add(rcEsports.GetString()); }
             if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault)) { clients.Add(rcDefault.GetString()); }
 
@@ -312,31 +286,8 @@ namespace Assist.Services.Riot
         }
 
         
-        private static async Task ReplaceValorantBackground()
-        {
-            var filePath = Path.Combine(AssistSettings.ResourcesFolderPath, "assistBg.mp4");
-            if (!File.Exists(filePath))
-                return;
 
-            var TEMPPATHLOCATION = @"C:\Riot Games\VALORANT\live\ShooterGame\Content\Movies\Menu";
-            var vid = Path.Combine(TEMPPATHLOCATION, "HomeScreen.mp4");
-            var vidClone = Path.Combine(TEMPPATHLOCATION, "HomeScreen_O.mp4");
-
-            await Task.Delay(5000);
-            try
-            {
-                System.IO.File.Move(vid, vidClone);
-                File.Copy(filePath, vid, true);
-            }
-            catch (Exception e)
-            {
-                    Log.Error("Error! " + e.Message);
-            }
-            
-
-        }
-
-        private async Task CloseRiotRelatedPrograms()
+        public static async Task CloseRiotRelatedPrograms()
         {
             var rProcesses = await RiotClientService.GetCurrentRiotProcesses();
             var rC = rProcesses.Where(_p => _p.ProcessName.Contains("RiotClientServices")).FirstOrDefault();
@@ -344,6 +295,125 @@ namespace Assist.Services.Riot
 
             if (val != null) { val.Kill(); }
             if (rC != null) { rC.Kill(); }
+        }
+
+        private static readonly string defaultConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data");
+        private static readonly string defaultBetaConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta", "Data");
+        
+        public static async Task CreateBackupFile()
+        {
+            var _currentDataFolderPath = Path.Exists(defaultBetaConfigLocation) ? defaultBetaConfigLocation : defaultConfigLocation;
+
+            var settings = await ReadPrivateSettings(_currentDataFolderPath);
+
+            if (settings is null)
+            {
+                Log.Error("Failed to create backup, settings were non-existent.");
+            }
+            
+            var subOfClient = await GetSub(settings);
+            var ssidOfClient = await GetSSID(settings);
+            var accountProfile = AccountSettings.Default.Accounts.Find(x => x.Id == subOfClient);
+            
+            Log.Information("Attempting to Zip up Data Folder");
+
+                Directory.CreateDirectory(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient));
+
+                if (File.Exists(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"))) // Deletes Zip File if it exists.
+                    File.Delete(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"));
+
+                Log.Information("Delaying... Rito Client slow");
+                await Task.Delay(3000);
+                
+                try
+                {
+                    ZipFile.CreateFromDirectory(_currentDataFolderPath, Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"), CompressionLevel.Fastest, false);
+                    accountProfile.BackupZipPath = Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,
+                        $"{subOfClient}_data.zip");
+                    accountProfile.UsesBackupZip = true;
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Failed to Create Zip Backup");
+                    Log.Error("Attempting to Do Code LauncherBackup");
+
+                    if (string.IsNullOrEmpty(ssidOfClient))
+                    {
+                        Log.Error("Failed to get SSID of User.");
+                        Log.Error("DEATHPOINT: Yea i dont know how the fuck we got here tbh.");
+                        return;
+                    }
+                    
+                    accountProfile.SaveAccountCAuthCode(ssidOfClient);
+                    accountProfile.UsesLauncherCode = true;
+                }
+                
+                Log.Information("Account Modified");
+                Log.Information("Updating/Modifying Settings");
+                accountProfile.CanLauncherBoot = true;
+                await AccountSettings.Default.UpdateAccount(accountProfile);
+        }
+
+        public static async Task<ClientPrivateModel?> ReadPrivateSettings(string path)
+        {
+            ClientPrivateModel settings = new ClientPrivateModel();
+            try
+            {
+                var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
+                    .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                    .Build();
+                return settings = deserializer.Deserialize<ClientPrivateModel>(File.ReadAllText(Path.Combine(path, "RiotGamesPrivateSettings.yaml")));
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to Parse Settings after Change");
+                Log.Error("Failed to Parse");
+                return null;
+            }
+        }
+        
+        private static async Task<string> GetSSID(ClientPrivateModel config)
+        {
+            try
+            {
+                if (config.RiotLogin?.Persist?.Session?.Cookies != null)
+                {
+                    var ssid = config.RiotLogin.Persist.Session.Cookies.Find(c => c.name == "ssid");
+
+                    if (ssid != null)
+                    {
+                        return ssid.value;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+            }
+
+            return string.Empty;
+        }
+        
+        private static async Task<string> GetSub(ClientPrivateModel config)
+        {
+            try
+            {
+                if (config.RiotLogin?.Persist?.Session?.Cookies != null)
+                {
+                    var cookie = config.RiotLogin.Persist.Session.Cookies.Find(c => c.name == "sub");
+
+                    if (cookie != null)
+                    {
+                        return cookie.value;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+            }
+
+            return string.Empty;
         }
     }
 

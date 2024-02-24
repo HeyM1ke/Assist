@@ -1,0 +1,68 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Setup"
+        xmlns:general="clr-namespace:Assist.Controls.General">
+    <Design.PreviewWith>
+        <controls:AssistAccountSelectionControl/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|AssistAccountSelectionControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource AssistControlBackground}"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Padding="12"
+                >
+                
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="8">
+                        <Image Width="65"
+                               Height="65"
+                               Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <TextBlock Text="Select a Mode"
+                                   FontWeight="ExtraBold"
+                                   TextAlignment="Center"
+                                   FontSize="24"/>
+                        <ScrollViewer>
+                            <StackPanel Orientation="Vertical"
+                                        Spacing="12">
+                                <general:TwoTextButton Width="310"
+                                        Height="130"
+                                        HeaderText="Create an Assist Account"
+                                        BodyText="Using an Assist Account allows you to unlock the full suite of tools that assist offers."
+                                        Command="{TemplateBinding AccountSelectionCommand}"
+                                        CommandParameter="0"></general:TwoTextButton>
+                                
+                                <general:TwoTextButton Width="310"
+                                                       Height="70"
+                                                       HeaderText="Skip Assist Account"
+                                                       BodyText="Skip creating an Assist Account and receive only basic features."
+                                                       Command="{TemplateBinding AccountSelectionCommand}"
+                                                       CommandParameter="1"></general:TwoTextButton>
+                                
+                               
+                            </StackPanel>
+                        </ScrollViewer>
+                        
+                        
+                        <TextBlock Text="Note: This can be changed in the settings later."
+                                FontSize="11"
+                                Opacity=".4"
+                                HorizontalAlignment="Center"
+                        />
+                    </StackPanel>
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

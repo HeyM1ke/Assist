@@ -1,0 +1,135 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.ProfileSwap"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+        xmlns:p="clr-namespace:Assist.Properties">
+    <Design.PreviewWith>
+        <controls:AccProfilePreviewControl Width="296"
+                                           Height="180"
+                                           PlayerName="TestForPlayer"
+                                           PlayerIconImage="https://titles.trackercdn.com/valorant-api/playercards/68b0c8c2-4158-7b21-658d-b4ae86f137ce/displayicon.png"
+                                           />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|AccProfilePreviewControl">
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border CornerRadius="10"
+                        Padding="10"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1">
+                    <Grid>
+                        <StackPanel Orientation="Vertical"
+                                    Spacing="10"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Spacing="20">
+                            <asyncImageLoader:AdvancedImage Source="{TemplateBinding PlayerIconImage}"
+                                                            CornerRadius="15"
+                                                            Width="96"
+                                                            Height="96"/>
+                            
+                            <StackPanel Orientation="Vertical"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding PlayerName}"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"></TextBlock>
+                                
+                                <TextBlock Text="{TemplateBinding RegionText}"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Opacity=".6"></TextBlock>
+                                
+                                
+                                
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="-4,0,0,0"
+                                            IsVisible="{TemplateBinding AssistEnabled}">
+                                            <Image 
+                                                   Height="20"
+                                                   Source="{SvgImage /Assets/Default/Check_Icon.svg}"></Image>
+                                    
+                                    <TextBlock Text="{x:Static p:Resources.Common_Assist}"
+                                               FontSize="10"
+                                               VerticalAlignment="Center"
+                                               FontWeight="SemiBold"
+                                               Opacity=".8"></TextBlock>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal"
+                                            IsVisible="{TemplateBinding GameLaunchEnabled}"
+                                            Margin="-4,0,0,0">
+                                    <Image 
+                                        Height="20"
+                                        Source="{SvgImage /Assets/Default/Check_Icon.svg}"></Image>
+                                    
+                                    <TextBlock Text="{x:Static p:Resources.ProfileManager_GameLaunch}"
+                                               FontSize="10"
+                                               VerticalAlignment="Center"
+                                               FontWeight="SemiBold"
+                                               Opacity=".8"></TextBlock>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="-4,0,0,0"
+                                            IsVisible="{TemplateBinding IsExpired}">
+                                    <Image 
+                                        Height="20"
+                                        Source="{SvgImage /Assets/Default/X_Icon.svg}"></Image>
+                                    
+                                    <TextBlock Text="{x:Static p:Resources.Common_Expired}"
+                                               FontSize="10"
+                                               VerticalAlignment="Center"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource AssistPrimaryColor}"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            
+                        </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Spacing="5">
+                                <StackPanel.Styles>
+                                    <Style Selector="Button">
+                                        <Setter Property="Width" Value="125"/>
+                                        <Setter Property="Height" Value="35"/>
+                                    </Style>
+                                </StackPanel.Styles>
+                                <Button Content="{x:Static p:Resources.Common_Switch}"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        IsEnabled="{TemplateBinding IsCurrent}"
+                                        BorderBrush="{DynamicResource AssistControlOutline}"
+                                        Command="{TemplateBinding SwitchCommand}"
+                                        CommandParameter="{TemplateBinding AccountId}"
+                                        BorderThickness="1"></Button>
+                                <Rectangle Width="1"
+                                           VerticalAlignment="Stretch"
+                                           Fill="{DynamicResource AssistControlOutline}"></Rectangle>
+                                <Button Content="{x:Static p:Resources.ProfileManager_ManageAccountText}"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        BorderBrush="{DynamicResource AssistControlOutline}"
+                                        BorderThickness="1"
+                                        CommandParameter="{TemplateBinding AccountId}"
+                                        Command="{TemplateBinding ManageCommand}"></Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

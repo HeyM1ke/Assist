@@ -1,0 +1,41 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d" 
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="Assist.Views.Extras.VLRLaunchedPage"
+             Loaded="VLRLaunchPage_Loaded"
+             Unloaded="VLRLaunchPage_Unloaded">
+    <Grid>
+        <Image Source="/Assets/Extras/VLRSplash.png"
+               Stretch="UniformToFill">
+        
+            <Image.Effect>
+                <BlurEffect></BlurEffect>
+            </Image.Effect>
+        </Image>
+        <Rectangle Fill="{DynamicResource AssistControlBackground}"
+                   Opacity=".8"></Rectangle>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="5">
+            <Image Source="/Assets/Default/AssistTextWhite_Temp.png"
+                   Width="200"></Image>
+            <TextBlock Text="Loading VALORANT"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Center"></TextBlock>
+            <avaloniaProgressRing:ProgressRing Width="20" 
+                                               Height="20"
+                                               IsActive="True"
+                                               Foreground="WhiteSmoke"
+                                               HorizontalAlignment="Center"
+                                               />
+            
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

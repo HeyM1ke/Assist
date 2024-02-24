@@ -1,0 +1,52 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:dashboard="clr-namespace:Assist.Controls.Dashboard"
+             xmlns:dashboard1="clr-namespace:Assist.ViewModels.Dashboard"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Dashboard.ArticleContainerControl"
+             Initialized="ArticleContainer_Init"
+             Loaded="ArticleContainer_Loaded">
+    
+    <Design.DataContext>
+        <dashboard1:ArticleContainerViewModel/>
+    </Design.DataContext>
+    
+    <Border Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            CornerRadius="10"
+            BorderThickness="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClipToBounds="True">
+        <Grid>
+            <TransitioningContentControl HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch" Content="{Binding FeaturedArticle}">
+            
+        </TransitioningContentControl>
+        
+        <ItemsControl ItemsSource="{Binding ArticleButtons}"
+                      Margin="10">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                ClipToBounds="True"
+                                Spacing="10"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+                    
+            <ItemsControl.Styles>
+                <Style Selector="dashboard|ArticleContainerButton">
+                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                    <Setter Property="Width" Value="30"></Setter>
+                    <Setter Property="Height" Value="30"></Setter>
+                </Style>
+            </ItemsControl.Styles>
+                    
+        </ItemsControl>
+        </Grid>
+    </Border>
+</UserControl>

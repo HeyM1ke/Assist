@@ -1,76 +1,127 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:store="clr-namespace:Assist.Controls.Store"
-             mc:Ignorable="d"
-             d:DesignWidth="1125"
-             d:DesignHeight="690"
-             x:Class="Assist.Views.Store.StoreView">
-	<Grid  RowDefinitions="Auto,180, Auto" Margin="10"
-           >
-
-        <Grid Row="0"
-              Margin="0,0,0,20">
-
-            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                <store:BundleContainer Width="810"
-                                       Height="395"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       isLoading="True"
-                                       Initialized="BundleContainer_Init"></store:BundleContainer>
-
-                <store:NightMarketButtonControl HorizontalAlignment="Right"
-                                                VerticalAlignment="Top"
-                                                Margin="10,0"
-                                                Width="250"
-                                                Height="395"
-                                                IsVisible="{Binding NightMarketEnabled}"/>
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:pages="clr-namespace:Assist.Views.Store.Pages"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="652"
+             x:Class="Assist.Views.Store.StoreView"
+             Loaded="Store_OnLoaded"
+             Initialized="Store_Init">
+    <Grid RowDefinitions="*,35"
+          Margin="10">
+        <TransitioningContentControl Grid.Row="0"
+                                     Content="{Binding CurrentContent}">
+            
+        </TransitioningContentControl>
+        
+        <Grid Row="1"
+              IsVisible="{Binding !LoadingStore}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Spacing="5">
+                <store:MenuSelectionOption Icon="{SvgImage /Assets/Icons/RegStore_Icon.svg}"
+                                           IsChecked="True"
+                                           Content="{x:Static lang:Resources.Store_Store}"></store:MenuSelectionOption>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           IsVisible="{Binding AccessoriesActive}"></Rectangle>
+                <store:MenuSelectionOption Icon="{SvgImage /Assets/Icons/Accessories_Icon.svg}"
+                                           Content="{x:Static lang:Resources.Store_Accessories}"
+                                           IsVisible="{Binding AccessoriesActive}"></store:MenuSelectionOption>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           IsVisible="{Binding NightMarketActive}"></Rectangle>
+                <store:MenuSelectionOption Icon="{SvgImage /Assets/Icons/NM_Icon.svg}"
+                                           Content="{x:Static lang:Resources.Store_NightMarket}"
+                                           IsVisible="{Binding NightMarketActive}"></store:MenuSelectionOption>
+                
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Spacing="10"
+                        Margin="0,0,0,0">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+                    <Image Source="/Assets/Extras/VP_Icon.png"
+                           Width="16"
+                           Height="16"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                    <TextBlock Text="{Binding VpText}"
+                               TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontWeight="Regular"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           ></Rectangle>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+                    <Image Source="/Assets/Extras/RP_Icon.png"
+                           Width="16"
+                           Height="16"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                    <TextBlock Text="{Binding RpText}"
+                               TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontWeight="Regular"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                <Rectangle Fill="White"
+                           Width="10"
+                           Height="2"
+                           Opacity=".3"
+                           ></Rectangle>
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+                    <Image Source="/Assets/Extras/KC_Icon.png"
+                           Width="16"
+                           Height="16"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                    <TextBlock Text="{Binding KcText}"
+                               TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontWeight="Regular"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+                
             </StackPanel>
         </Grid>
-
-
         
-        <Panel Grid.Row="1">
-            <store:OfferContainer Grid.Row="1"></store:OfferContainer>
-            
-        </Panel>
-        <Panel Grid.Row="2" HorizontalAlignment="Left"
-               Height="30"
-               Margin="10,30,0,0"
-               VerticalAlignment="Bottom">
-            <StackPanel Orientation="Horizontal" Spacing="20">
-                <StackPanel Orientation="Horizontal"
-                            Spacing="5"
-                            HorizontalAlignment="Center">
-                    <Image Source="/Resources/Icons/VP_Icon.png"
-                           Height="18"
-                           Stretch="Uniform"
-                           VerticalAlignment="Center"></Image>
-                    <TextBlock Text="{Binding AccountVP, FallbackValue='0 VP'}"
-                               FontFamily="{StaticResource Inter}"
-                               FontWeight="Medium"
-                               FontSize="16"
-                               VerticalAlignment="Center"></TextBlock>
-                </StackPanel>
-                    
-                <Rectangle Width="2"
-                           Fill="{DynamicResource AssistRed}"></Rectangle>
-                    
-                <StackPanel Orientation="Horizontal"
-                            Spacing="5"
-                            HorizontalAlignment="Center">
-                    <Image Source="/Resources/Icons/RP_Icon.png"
-                           Height="18"
-                           Stretch="Uniform"
-                           VerticalAlignment="Center"></Image>
-                    <TextBlock Text="{Binding AccountRP, FallbackValue='0 RP'}"
-                               FontFamily="{StaticResource Inter}"
-                               FontWeight="Medium"
-                               FontSize="16"
-                               VerticalAlignment="Center"></TextBlock>
-                </StackPanel>
+        <Panel Grid.RowSpan="2"
+               Grid.Row="0"
+               VerticalAlignment="Stretch"
+               HorizontalAlignment="Stretch"
+               Background="#50000000"
+               Margin="0"
+               IsVisible="{Binding LoadingStore}"
+               >
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom" Spacing="20">
+                <Image Source="/Assets/Default/Assist_Logo_SweetRed.png"
+                       Height="100"
+                       Width="100"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       ></Image>
+                <avaloniaProgressRing:ProgressRing Width="32" 
+                                                   Height="32"
+                                                   IsActive="True"
+                                                   Foreground="WhiteSmoke"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Bottom"
+                                                   Margin="0,10"
+                />
             </StackPanel>
         </Panel>
     </Grid>

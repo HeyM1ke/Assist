@@ -1,0 +1,92 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Game.Live"
+        xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+    <Design.PreviewWith>
+        <controls:MenuPartyPlayerControl Width="225"
+                                         Height="550"
+                                         />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|MenuPartyPlayerControl">
+        <!-- Set Defaults -->
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+
+                    <Grid>
+                        <asyncImageLoader:AdvancedImage CornerRadius="10"
+                                                        ClipToBounds="True"
+                                                        Stretch="UniformToFill"
+                                                        Source="{TemplateBinding PlayercardImage}"/>
+                        <Border ClipToBounds="True"
+                                CornerRadius="10"
+                                >
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="100%,0%" StartPoint="0%,100%" Opacity=".5">
+                                    <GradientStop Offset="0" Color="#F61E51" />
+                                    <GradientStop Offset="1" Color="#00F61E51" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <asyncImageLoader:AdvancedImage Width="50"
+                                                        Height="50"
+                                                        Source="{TemplateBinding PlayerRankIcon}"
+                                                        RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                        VerticalAlignment="Top"
+                                                        Margin="10"></asyncImageLoader:AdvancedImage>
+                        <StackPanel VerticalAlignment="Bottom"
+                                    Margin="10,0,10,130"
+                                    >
+                            
+                            <Border Background="{DynamicResource AssistSecondaryBackground}"
+                                    BorderBrush="{DynamicResource AssistControlOutline}"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    Margin="0,0,0,5"
+                                    Height="20"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Center"
+                            >
+                                <TextBlock Text="{TemplateBinding LevelText}"
+                                           Margin="10,0"
+                                           FontSize="12"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           TextAlignment="Center"
+                                           FontWeight="Bold"/>
+                            </Border>
+                            <Border Background="{DynamicResource AssistPrimaryColor}"
+                                    Height="30">
+                                <TextBlock Text="{TemplateBinding PlayerName}"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontWeight="SemiBold"
+                                           FontSize="14"
+                                           Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            </Border>
+                            <Border Background="{DynamicResource AssistControlBackground}"
+                                       Height="18"
+                                       >
+                                <TextBlock Text="{TemplateBinding PlayerTitle}"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Regular"
+                                           Opacity=".5"
+                                           FontSize="12"
+                                           Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            </Border>
+                        </StackPanel>
+                        
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

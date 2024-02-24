@@ -1,0 +1,40 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dashboard="clr-namespace:Assist.ViewModels.Dashboard"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="370" d:DesignHeight="223"
+             x:Class="Assist.Controls.Dashboard.GameLaunchControl"
+             Loaded="GameLaunchControl_Loaded">
+    
+    <Design.DataContext>
+        <dashboard:GameLaunchControlViewModel/>
+    </Design.DataContext>
+    <Grid>
+        <assist:LargeImageButton HorizontalAlignment="Stretch"
+                                 Content="{x:Static lang:Resources.Common_Play}"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 ImageLink="{Binding ImageLink}"
+                                 IsEnabled="{Binding LaunchBtnEnabled}"
+                                 Command="{Binding LaunchButtonClickCommand}"></assist:LargeImageButton>
+        
+        <Button Background="Transparent"
+                Content="Settings"
+                VerticalAlignment="Bottom"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="12"
+                FontWeight="Medium"
+                IsVisible="False"
+                FontFamily="{StaticResource Inter}"></Button>
+        
+        <Border Background="Black"
+                Opacity=".6"
+                CornerRadius="10"
+                IsVisible="{Binding !LaunchBtnEnabled}"></Border>
+    </Grid>
+    
+</UserControl>

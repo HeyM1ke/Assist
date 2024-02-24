@@ -1,0 +1,68 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Assist.Authentication">
+    <Design.PreviewWith>
+        <controls:OAuthMethodButton HorizontalAlignment="Stretch"
+                                    Margin="2,0"
+                                    Background="{DynamicResource DiscordBlurple75}"
+                                    BorderBrush="{DynamicResource DiscordBlurple}"
+                                    Icon="{SvgImage /Assets/Extras/Discord_White.svg}"
+                                    CornerRadius="2"
+                                    Content="Login with Discord"
+                                    Width="113"
+                                    HoverColor="{DynamicResource DeluxeGrad}"
+                                    Height="75"
+                                    />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|OAuthMethodButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Padding="10"
+                        CornerRadius="10"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        >
+                    
+                    <Grid ColumnDefinitions="2*, 8*">
+                        <Image Source="{TemplateBinding Icon}"
+                               HorizontalAlignment="Left"
+                               Margin="1"></Image>
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   TextAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Grid.Column="1"
+                        ></TextBlock>
+                    </Grid>
+                    
+                    
+                    
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|OAuthMethodButton:pointerover">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    
+    <Style Selector="controls|OAuthMethodButton:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.98)" />
+    </Style>
+</Styles>
