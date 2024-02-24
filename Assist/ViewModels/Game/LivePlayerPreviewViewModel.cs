@@ -74,7 +74,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 var pData = pres.presences.FirstOrDefault(x => x.puuid == Player.Subject);
                 #endregion
                 
-                if (pData is null) // Presence data for the player does not exist, this is a common issue.
+                if (true) // Presence data for the player does not exist, this is a common issue. OLD: pData is null TODO BRING THIS BACK WITH EXTRA CHECKS ON RANK DUE TO RIOT CHANGE
                 {
                     Log.Information("Player Presence could not be found for ID of " + Player.Subject);
                     Log.Information("Retrieving Data from Server");
@@ -161,7 +161,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
 
                 #endregion
 
-                if (pData is null) // Presence data for the CorePlayer does not exist, this is a common issue.
+                if (true) // Presence data for the CorePlayer does not exist, this is a common issue. OLD: pData is null TODO BRING THIS BACK WITH EXTRA CHECKS ON RANK DUE TO RIOT CHANGE
                 {
                     Log.Information("CorePlayer Presence could not be found for ID of " + CorePlayer.Subject);
                     Log.Information("Retrieving Data from Server");

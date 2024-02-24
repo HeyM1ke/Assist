@@ -77,13 +77,13 @@ public class ValorantPlayerStorage
         {
             if (_playerMmr.LatestCompetitiveUpdate != null)
             {
-                CompetitiveTier = _playerMmr.LatestCompetitiveUpdate.TierAfterUpdate;
-                RankRating = _playerMmr.LatestCompetitiveUpdate.RankedRatingAfterUpdate;
                 if (_playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID is not null)
                 {
                     _playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID.TryGetValue(_playerMmr.LatestCompetitiveUpdate
                         .SeasonID, out var seasonMatches);
-
+                    
+                    CompetitiveTier = seasonMatches.CompetitiveTier;
+                    RankRating = seasonMatches.RankedRating;
                     LeaderboardPosition = seasonMatches?.LeaderboardRank ?? -1;   
                 }
                 
