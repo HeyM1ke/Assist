@@ -239,7 +239,7 @@ public static class AssistApplication
             {
                 try
                 {
-                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/beta/win/");
+                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/live/win/");
                     var newVer = await mgr.CheckForUpdatesAsync();
                     if (newVer == null)
                         return false;
@@ -256,7 +256,7 @@ public static class AssistApplication
             {
                 try
                 {
-                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/beta/mac/");
+                    var mgr = new UpdateManager("https://cdn.assistval.com/releases/live/mac/");
                     var newVer = await mgr.CheckForUpdatesAsync();
                     if (newVer == null)
                         return false;
