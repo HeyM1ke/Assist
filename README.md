@@ -10,7 +10,7 @@
 
 <p align="center">
   </a>
-  <a href="https://github.com/HeyM1ke/Assist/releases/download/V1.0.0/AssistSetup.exe"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
+  <a href="https://assistval.com"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
   </p>
 
 [<p align="center"><img src="https://img.shields.io/github/downloads/heym1ke/Assist/total.svg?style=for-the-badge&color=f71d51" alt="Downloads">](https://github.com/Heym1ke/Assist/releases) [<img src="https://img.shields.io/github/v/release/heym1ke/Assist?style=for-the-badge&color=f71d51" alt="Latest Release">](https://github.com/Heym1ke/Assist/releases)</p>
