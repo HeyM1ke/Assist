@@ -91,7 +91,7 @@
                        Fill="{DynamicResource AssistControlOutline}"/>
             
             <StackPanel MinWidth="293"
-                        Spacing="4">
+                        Spacing="4" IsVisible="False">
                 
                 <StackPanel.Styles>
                     <Style Selector="TextBox">

@@ -1,7 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
 using System;
+using Assist.Shared.Settings;
+using Assist.Shared.Settings.Accounts;
+using Assist.ViewModels;
 using Avalonia.Svg.Skia;
+using Serilog;
 using Velopack;
 using Velopack.Windows;
 
@@ -16,10 +20,32 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        VelopackApp.Build().WithAfterInstallFastCallback((v) => new Shortcuts().CreateShortcutForThisExe(ShortcutLocation.Desktop))
-            .Run();
-        BuildAvaloniaApp()
-            .StartWithClassicDesktopLifetime(args);
+        try
+        {
+            VelopackApp.Build()
+                .WithAfterInstallFastCallback((v) => new Shortcuts().CreateShortcutForThisExe(ShortcutLocation.Desktop))
+                .Run();
+            BuildAvaloniaApp()
+                .StartWithClassicDesktopLifetime(args);
+        }
+        catch (Exception e)
+        {
+            Log.Fatal("Fatal Error");
+            Log.Fatal(e.Message);
+            Log.Fatal("Fatal Error STACK == ");
+            Log.Fatal(e.StackTrace);
+            Log.CloseAndFlush();
+        }
+        finally
+        {
+#if (!DEBUG)
+                Log.CloseAndFlush();
+                AssistSettings.Save();
+                AccountSettings.Save();
+                AssistApplication.CurrentApplication.Shutdown();
+#endif
+
+        }
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
