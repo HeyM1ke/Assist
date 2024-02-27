@@ -10,6 +10,7 @@
     <StyleInclude Source="avares://Assist/Controls/Assist/Launcher/AccountProfileSwap.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Assist/LargeImageButton.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Assist/MenuSelectorButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/ImageToggleButton.axaml"/>
 
     <StyleInclude Source="avares://Assist/Controls/Navigation/NavigationButton.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Startup/BasicStartupControl.axaml"/>

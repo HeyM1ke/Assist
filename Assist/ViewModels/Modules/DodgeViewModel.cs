@@ -6,6 +6,7 @@ using Assist.Controls.Navigation;
 using Assist.Core.Helpers;
 using Assist.Services.Assist;
 using AssistUser.Lib.V2.Models.Dodge;
+using Avalonia.Controls;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,7 +18,7 @@ namespace Assist.ViewModels.Modules;
 public partial class DodgeViewModel : ViewModelBase
 {
     [ObservableProperty] private ObservableCollection<DodgePlayerPreviewControl> _playerControls = new ObservableCollection<DodgePlayerPreviewControl>();
-
+    [ObservableProperty] private Control _popupControl;
     [ObservableProperty] private bool _isLoading = true;
     [ObservableProperty] private bool _isListEmpty = false;
 
@@ -115,5 +116,17 @@ public partial class DodgeViewModel : ViewModelBase
         {
             NavigationContainer.ViewModel.ChangeToPreviousPage();
         });
+    }
+
+    [RelayCommand]
+    public void OpenPlayerAddPopup()
+    {
+        PopupControl = new DodgeAddPlayerControl(ClosePopupsCommand);
+    }
+    
+    [RelayCommand]
+    public void ClosePopups()
+    {
+        PopupControl = null;
     }
 }

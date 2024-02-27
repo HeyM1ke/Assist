@@ -1,0 +1,70 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Assist">
+    <Design.PreviewWith>
+        <controls:ImageToggleButton Width="100"
+                                    Height="120"
+                                    />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ImageToggleButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="Opacity" Value="0.9"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="CornerRadius" Value="0"></Setter>
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid RowDefinitions="*, Auto"
+                          Margin="2">
+                        
+                        <Image Margin="{TemplateBinding Padding}"
+                               Source="{TemplateBinding ImageIcon}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                        
+                        <Grid Row="1"
+                              VerticalAlignment="Bottom"
+                              >
+                            
+                            <Ellipse Fill="White"
+                                     Width="20"
+                                     Height="20"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"></Ellipse>
+                            <Ellipse Fill="{TemplateBinding Background}" 
+                                     Width="17"
+                                     Height="17"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"></Ellipse>
+                            
+                            <Ellipse Fill="White" 
+                                     Width="13"
+                                     Height="13"
+                                     IsVisible="{TemplateBinding IsChecked}"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"></Ellipse>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|ImageToggleButton:pointerover">
+        <Setter Property="Opacity" Value="1"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    <Style Selector="controls|ImageToggleButton[IsChecked=True]">
+        <Setter Property="Opacity" Value="1"></Setter>
+        <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"/>
+    </Style>
+</Styles>

@@ -1,0 +1,139 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             mc:Ignorable="d" d:DesignWidth="500" 
+             x:Class="Assist.Controls.Modules.Dodge.DodgeAddPlayerControl"
+             Background="{DynamicResource AssistBackground}">
+    <Border Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderThickness="1"
+            CornerRadius="10"
+            Padding="10"
+            Width="450"
+            VerticalAlignment="Center"
+    >
+        <Grid RowDefinitions="Auto,Auto,Auto">
+            
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        Spacing="5"
+                        Margin="0,0,0,10">
+                <Image Source="/Assets/Extras/DodgeLogo_Icon.png"
+                       Width="50"
+                       Height="50"
+                       RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="{x:Static lang:Resources.Dodge_DodgeList}"
+                               FontWeight="SemiBold"
+                               FontSize="15"
+                               Opacity=".3"
+                               HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Text="{x:Static lang:Resources.Dodge_AddPlayer}"
+                               FontWeight="SemiBold"
+                               FontSize="24"
+                               Opacity="1"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            
+            <assist:SmallImageButton
+                Grid.Row="0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Width="29"
+                Height="29"
+                Icon="{SvgImage /Assets/Default/X_Icon.svg}"
+                CornerRadius="5"
+                BorderBrush="{DynamicResource AssistControlOutline}"
+                BorderThickness="1"
+                Command="{Binding CloseViewCommand}"
+            />
+            
+            <Grid Row="1">
+                 <StackPanel MinWidth="293"
+                        Spacing="10">
+                
+                <StackPanel.Styles>
+                    <Style Selector="TextBox">
+                        <Setter Property="AcceptsReturn" Value="False"/>
+                        <Setter Property="AcceptsTab" Value="False"/>
+                        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+                        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+                    </Style>
+                </StackPanel.Styles>
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Player Name (Username#Tag):"
+                               FontWeight="Light"
+                               FontSize="14"
+                               Opacity=".5"
+                               HorizontalAlignment="Left"/>
+                    <TextBox Watermark="EX: ValorantPlayer#000"
+                             x:Name="EmailBox"
+                             FontSize="16"
+                             ></TextBox>
+                </StackPanel>
+                     
+                     <StackPanel Spacing="2">
+                         <TextBlock Text="Category:"
+                                    FontWeight="Light"
+                                    FontSize="13"
+                                    Opacity=".5"
+                                    HorizontalAlignment="Left"/>
+                         <UniformGrid Rows="2"
+                                      Columns="5">
+                             <assist:ImageToggleButton ImageIcon="/Assets/Extras/DodgeLogo_Icon.png"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Extras/Discord_White.svg}"/>
+                             <assist:ImageToggleButton/>
+                             <assist:ImageToggleButton/>
+                             <assist:ImageToggleButton/>
+                             <assist:ImageToggleButton/>
+                             <assist:ImageToggleButton/>
+                             <assist:ImageToggleButton/>
+                             <assist:ImageToggleButton/>
+                             <assist:ImageToggleButton/>
+                         </UniformGrid>
+                         </StackPanel>
+                     
+                    
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Note (Optional):"
+                               FontWeight="Light"
+                               FontSize="13"
+                               Opacity=".5"
+                               HorizontalAlignment="Left"/>
+                    <TextBox Watermark="This player was toxic..."
+                             TextAlignment="Left"
+                             x:Name="UsernameBox"
+                             FontSize="14"
+                             MaxLength="120"
+                             MinHeight="50"
+                             ></TextBox>
+                </StackPanel>
+                     
+                <TextBlock Text="{Binding ErrorMessage}"
+                           FontWeight="Light"
+                           IsVisible="{Binding ErrorMessageVisible}"
+                           FontSize="13"
+                           Foreground="{DynamicResource AssistPrimaryColor}"
+                           HorizontalAlignment="Center"/>
+                
+                
+            </StackPanel>
+            </Grid>
+            
+            <Button Content="{x:Static lang:Resources.Common_Add}"
+                    Classes="default"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="2"/>
+        </Grid>
+    </Border>
+</UserControl>

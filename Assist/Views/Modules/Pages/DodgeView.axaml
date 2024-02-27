@@ -17,14 +17,14 @@
                 <modules:DodgeViewModel/>
         </Design.DataContext>
         <Grid>
-       <Border Background="{DynamicResource AssistControlBackground}"
-               BorderBrush="{DynamicResource AssistControlOutline}"
-               BorderThickness="1"
-               CornerRadius="10"
-               Padding="10"
-               Width="650"
-               Height="500"
-               >
+                <Border Background="{DynamicResource AssistControlBackground}"
+                                BorderBrush="{DynamicResource AssistControlOutline}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Padding="10"
+                                Width="650"
+                                Height="500"
+                        >
            <Grid RowDefinitions="29,33,Auto, *">
                    <Grid Row="0">
                            <StackPanel Orientation="Horizontal"
@@ -96,7 +96,8 @@
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                Padding="8,7"
-                               FontSize="12"></Button>
+                               FontSize="12"
+                               Command="{Binding OpenPlayerAddPopupCommand}"/>
                        
                        <Button Content="Refresh"
                                Classes="default"
@@ -200,5 +201,9 @@
                               HorizontalAlignment="Center"></TextBlock>
            </Grid>
        </Border> 
-    </Grid>
+                <TransitioningContentControl Padding="10"
+                                             Content="{Binding PopupControl}">
+                        
+                </TransitioningContentControl>
+        </Grid>
 </UserControl>
