@@ -771,11 +771,119 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your list is empty..
+        /// </summary>
+        public static string Dodge_ListEmpty {
+            get {
+                return ResourceManager.GetString("Dodge_ListEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DODGE.
         /// </summary>
         public static string Dodge_Title {
             get {
                 return ResourceManager.GetString("Dodge_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bad Comms.
+        /// </summary>
+        public static string DodgeCategory_BadComms {
+            get {
+                return ResourceManager.GetString("DodgeCategory_BadComms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bad Teammate.
+        /// </summary>
+        public static string DodgeCategory_BadTeammate {
+            get {
+                return ResourceManager.GetString("DodgeCategory_BadTeammate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bot.
+        /// </summary>
+        public static string DodgeCategory_Bot {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Bot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cheater.
+        /// </summary>
+        public static string DodgeCategory_Cheater {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Cheater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Griefer.
+        /// </summary>
+        public static string DodgeCategory_Griefer {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Griefer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignore.
+        /// </summary>
+        public static string DodgeCategory_Ignore {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Ignore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smurf.
+        /// </summary>
+        public static string DodgeCategory_Smurf {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Smurf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stream Sniper.
+        /// </summary>
+        public static string DodgeCategory_Streamsniper {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Streamsniper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thrower.
+        /// </summary>
+        public static string DodgeCategory_Thrower {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Thrower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toxic.
+        /// </summary>
+        public static string DodgeCategory_Toxic {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Toxic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Trading.
+        /// </summary>
+        public static string DodgeCategory_Wintrader {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Wintrader", resourceCulture);
             }
         }
         

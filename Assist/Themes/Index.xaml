@@ -27,6 +27,8 @@
     
     <StyleInclude Source="avares://Assist/Controls/Modules/ModulePreviewControl.axaml"/>
     
+    <StyleInclude Source="avares://Assist/Controls/Modules/Dodge/DodgePlayerPreviewControl.axaml"/>
+    
     <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountMethodSelectionControl.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountSecondarySelectionControl.axaml"/>
 
@@ -207,6 +209,16 @@
     <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
         <Setter Property="Background" Value="#b3153b" />
         <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}" />
+    </Style>
+    
+    <Style Selector="ToolTip">
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="Padding" Value="5"></Setter>
+        <Setter Property="MaxWidth" Value="215"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="FontWeight" Value="Regular"></Setter>
     </Style>
     
     <Styles.Resources>

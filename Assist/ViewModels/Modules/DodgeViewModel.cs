@@ -1,6 +1,119 @@
-﻿namespace Assist.ViewModels.Modules;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Assist.Controls.Modules.Dodge;
+using Assist.Controls.Navigation;
+using Assist.Core.Helpers;
+using Assist.Services.Assist;
+using AssistUser.Lib.V2.Models.Dodge;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Serilog;
+using ValNet.Core.Player;
+
+namespace Assist.ViewModels.Modules;
 
 public partial class DodgeViewModel : ViewModelBase
 {
+    [ObservableProperty] private ObservableCollection<DodgePlayerPreviewControl> _playerControls = new ObservableCollection<DodgePlayerPreviewControl>();
+
+    [ObservableProperty] private bool _isLoading = true;
+    [ObservableProperty] private bool _isListEmpty = false;
+
+    /// <summary>
+    /// Method gets called when the page is loaded.
+    /// </summary>
+    public async Task Load()
+    {
+        IsLoading = true;
+        if (DodgeService.Current is null)
+        {
+            Log.Information("DodgeService is Null, Starting up a service instance.");
+            new DodgeService();
+        }
+
+        if (string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken))// Simple Check before real checks later.
+        {
+            Log.Information("User somehow loaded Assist Dodge View, without a token.");
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                NavigationContainer.ViewModel.ChangeToPreviousPage();
+            });
+            return;   
+        }
+        CreateDodgeControls();
+        
+        DodgeService.Current.DodgeUserAddedToList += DodgeUserAddedToList;
+        DodgeService.Current.DodgeUserRemovedFromList += DodgeUserRemovedFromList;
+        IsLoading = false;
+    }
+
+    public void Unload()
+    {
+        Log.Information("Dodge View Unloaded, Unsubscribing");
+        DodgeService.Current.DodgeUserAddedToList -= DodgeUserAddedToList;
+        DodgeService.Current.DodgeUserRemovedFromList -= DodgeUserRemovedFromList;
+    }
     
+    private async void CreateDodgeControls()
+    {
+        await DodgeService.Current.UpdateDodgeList();
+        for (int i = 0; i < DodgeService.Current.DodgeList.Players.Count; i++)
+        {
+            var p = DodgeService.Current.DodgeList.Players[i];
+            
+            PlayerControls.Add(new DodgePlayerPreviewControl()
+            {
+                PlayerId = p.PlayerId,
+                PlayerName = p.AddedAs is null ? "Player" : $"{p.AddedAs.GameName}#{p.AddedAs.TagLine}",
+                PlayerCategory = AssistHelper.DodgeCategories.ContainsKey((EAssistDodgeCategory)p.Category) ? $"{AssistHelper.DodgeCategories[(EAssistDodgeCategory)p.Category]}" : "Not Found",
+                PlayerNote = p.Note,
+                NoteEnabled = string.IsNullOrEmpty(p.Note),
+                DateAdded = $"{p.Added.ToLocalTime().ToShortDateString()}"
+            });
+        }
+
+        if (DodgeService.Current.DodgeList.Players.Count == 0)
+            IsListEmpty = true;
+    }
+    
+    private void DodgeUserRemovedFromList(UserDodgePlayer? obj)
+    {
+        Log.Information("Player has been removed from the list.");
+        var onList = PlayerControls.FirstOrDefault(x => x.PlayerId == obj.PlayerId);
+
+        if (onList is null) return;
+
+        PlayerControls.Remove(onList);
+    }
+
+    private void DodgeUserAddedToList(UserDodgePlayer obj)
+    {
+        Log.Information("Player has been added to the list.");
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            PlayerControls.Add(new DodgePlayerPreviewControl()
+            {
+                PlayerId = obj.PlayerId,
+                PlayerName = obj.AddedAs is null ? "Player" : $"{obj.AddedAs.GameName}#{obj.AddedAs.TagLine}",
+                PlayerCategory = AssistHelper.DodgeCategories.ContainsKey((EAssistDodgeCategory)obj.Category)
+                    ? $"{AssistHelper.DodgeCategories[(EAssistDodgeCategory)obj.Category]}"
+                    : "Not Found",
+                PlayerNote = obj.Note,
+                NoteEnabled = string.IsNullOrEmpty(obj.Note),
+                DateAdded = $"{obj.Added.ToLocalTime().ToShortDateString()}"
+            });
+        });
+    }
+
+    [RelayCommand]
+    public void ReturnToModules()
+    {
+        Log.Information("Player is attempting to return to modules page.");
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            NavigationContainer.ViewModel.ChangeToPreviousPage();
+        });
+    }
 }

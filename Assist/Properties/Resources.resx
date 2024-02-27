@@ -535,4 +535,40 @@
   <data name="Dodge_AddPlayer" xml:space="preserve">
     <value>Add Player</value>
   </data>
+  <data name="Dodge_ListEmpty" xml:space="preserve">
+    <value>Your list is empty.</value>
+  </data>
+  <data name="DodgeCategory_Toxic" xml:space="preserve">
+    <value>Toxic</value>
+  </data>
+  <data name="DodgeCategory_Thrower" xml:space="preserve">
+    <value>Thrower</value>
+  </data>
+  <data name="DodgeCategory_BadTeammate" xml:space="preserve">
+    <value>Bad Teammate</value>
+  </data>
+  <data name="DodgeCategory_Streamsniper" xml:space="preserve">
+    <value>Stream Sniper</value>
+  </data>
+  <data name="DodgeCategory_Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="DodgeCategory_Wintrader" xml:space="preserve">
+    <value>Win Trading</value>
+  </data>
+  <data name="DodgeCategory_Cheater" xml:space="preserve">
+    <value>Cheater</value>
+  </data>
+  <data name="DodgeCategory_BadComms" xml:space="preserve">
+    <value>Bad Comms</value>
+  </data>
+  <data name="DodgeCategory_Griefer" xml:space="preserve">
+    <value>Griefer</value>
+  </data>
+  <data name="DodgeCategory_Bot" xml:space="preserve">
+    <value>Bot</value>
+  </data>
+  <data name="DodgeCategory_Smurf" xml:space="preserve">
+    <value>Smurf</value>
+  </data>
 </root>

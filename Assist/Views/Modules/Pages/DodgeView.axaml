@@ -4,10 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:assist="clr-namespace:Assist.Controls.Assist"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:properties="clr-namespace:Assist.Properties"
+             xmlns:dodge="clr-namespace:Assist.Controls.Modules.Dodge"
+             xmlns:modules="clr-namespace:Assist.ViewModels.Modules"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
              x:Class="Assist.Views.Modules.Pages.DodgeView"
+             Loaded="DodgeView_Loaded"
+             Unloaded="DodgeView_Unloaded"
              Background="{DynamicResource AssistBackground}">
-    <Grid>
+        
+        <Design.DataContext>
+                <modules:DodgeViewModel/>
+        </Design.DataContext>
+        <Grid>
        <Border Background="{DynamicResource AssistControlBackground}"
                BorderBrush="{DynamicResource AssistControlOutline}"
                BorderThickness="1"
@@ -18,12 +27,24 @@
                >
            <Grid RowDefinitions="29,33,Auto, *">
                    <Grid Row="0">
-                   <TextBlock Text="DODGE"
-                              FontSize="20"
-                              FontWeight="20"
-                              TextAlignment="Left"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Left"/>
+                           <StackPanel Orientation="Horizontal"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Spacing="3">
+                                   
+                                  <Image Source="/Assets/Extras/DodgeLogo_Icon.png"
+                                         Width="18"
+                                         Height="18"
+                                         RenderOptions.BitmapInterpolationMode="MediumQuality"></Image>
+                                   
+                                   <TextBlock Text="DODGE"
+                                              FontSize="20"
+                                              FontWeight="20"
+                                              TextAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                           </StackPanel>
+                           
                    
                    <StackPanel Orientation="Horizontal"
                                VerticalAlignment="Center"
@@ -32,7 +53,7 @@
                        
                        <StackPanel Orientation="Horizontal"
                                    VerticalAlignment="Center"
-                                   
+                                   IsVisible="{Binding IsLoading}"
                                    Height="25"
                                    Spacing="5">
                            <TextBlock Text="Thinking..."
@@ -58,6 +79,7 @@
                                CornerRadius="5"
                                BorderBrush="{DynamicResource AssistControlOutline}"
                                BorderThickness="1"
+                               Command="{Binding ReturnToModulesCommand}"
                                />
                        
                       
@@ -145,13 +167,27 @@
                                          VerticalAlignment="Stretch"
                                          MinHeight="360"
                                          >
-                                           <ItemsControl>
+                                           <ItemsControl ItemsSource="{Binding PlayerControls}">
                                                    <ItemsControl.ItemsPanel>
                                                            <ItemsPanelTemplate>
                                                                    <StackPanel Orientation="Vertical"/>
                                                            </ItemsPanelTemplate>
                                                    </ItemsControl.ItemsPanel>
+                                                   <ItemsControl.Styles>
+                                                           <Style Selector="dodge|DodgePlayerPreviewControl">
+                                                                   <Setter Property="Height" Value="36"></Setter>
+                                                           </Style>
+                                                   </ItemsControl.Styles>
+                                                  
                                            </ItemsControl>
+                                           
+                                           <TextBlock Text="{x:Static properties:Resources.Dodge_ListEmpty}"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"
+                                                      TextAlignment="Center"
+                                                      FontWeight="SemiBold"
+                                                      IsVisible="{Binding IsListEmpty}"
+                                                      FontSize="16"></TextBlock>
                                    </Grid>
                            </Grid>
                    </Grid>
