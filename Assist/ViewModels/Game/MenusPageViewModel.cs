@@ -138,9 +138,10 @@ public partial class MenusPageViewModel : ViewModelBase
                         var member = partyData.Members[i];
                         var currentUserBtn = CurrentUsers.FirstOrDefault(member => member.PlayerId == partyData.Members[i].Subject);
                         var pData = pres.presences.Find(pres => pres.puuid == member.Subject);
+                        if (pData is null) {continue; }
                         var privatePres = await ValorantHelper.GetPresenceData(pData);
                         
-                        if (currentUserBtn == null)
+                        if (currentUserBtn == null )
                         {
                             Dispatcher.UIThread.InvokeAsync(async () =>
                             {

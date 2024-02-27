@@ -2,9 +2,165 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Assist.Views.Modules.Pages.DodgeView">
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+             x:Class="Assist.Views.Modules.Pages.DodgeView"
+             Background="{DynamicResource AssistBackground}">
     <Grid>
-        
+       <Border Background="{DynamicResource AssistControlBackground}"
+               BorderBrush="{DynamicResource AssistControlOutline}"
+               BorderThickness="1"
+               CornerRadius="10"
+               Padding="10"
+               >
+           <Grid RowDefinitions="29,33,Auto, *">
+                   <Grid Row="0">
+                   <TextBlock Text="DODGE"
+                              FontSize="20"
+                              FontWeight="20"
+                              TextAlignment="Left"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"/>
+                   
+                   <StackPanel Orientation="Horizontal"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Spacing="15">
+                       
+                       <StackPanel Orientation="Horizontal"
+                                   VerticalAlignment="Center"
+                                   
+                                   Height="25"
+                                   Spacing="5">
+                           <TextBlock Text="Thinking..."
+                                      FontSize="10"
+                                      FontWeight="Light"
+                                      TextAlignment="Left"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"/>
+                           <avaloniaProgressRing:ProgressRing Width="14"
+                                                              Height="14"
+                                                              IsActive="True"
+                                                              VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"
+                                                              Foreground="WhiteSmoke"
+                                                              
+                           />
+                       </StackPanel>
+                       
+                       <assist:SmallImageButton
+                               Width="29"
+                               Height="29"
+                               Icon="{SvgImage /Assets/Default/X_Icon.svg}"
+                               CornerRadius="5"
+                               BorderBrush="{DynamicResource AssistControlOutline}"
+                               BorderThickness="1"
+                               />
+                       
+                      
+                   </StackPanel>
+               </Grid>
+                   <Grid Row="1" Margin="0,4,0,0">
+                   <StackPanel Orientation="Horizontal"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Spacing="8">
+                       
+                       <Button Content="Add"
+                               Classes="default"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               Padding="8,7"
+                               FontSize="12"></Button>
+                       
+                       <Button Content="Refresh"
+                               Classes="default"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               Padding="8,7"
+                               FontSize="12"></Button>
+                       
+                       <Button Content="Clear"
+                               Classes="default"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               Padding="8,7"
+                               FontSize="12"></Button>
+                   </StackPanel>
+                   
+                   
+                   <StackPanel Orientation="Horizontal"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Spacing="8">
+                       <Button Content="Export"
+                               Classes="default"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               Padding="8,7"
+                               FontSize="12"></Button>
+                       
+                       <Button Content="Import"
+                               Classes="default"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               Padding="8,7"
+                               FontSize="12"></Button>
+                   </StackPanel>
+               </Grid>
+                   <Grid Row="2" Margin="0,10,0,0">
+                           <Grid RowDefinitions="15, Auto">
+                                   <Grid Row="0"
+                                         Margin="9,0"
+                                         ColumnDefinitions="*,*,*">
+                                           <TextBlock Grid.Column="0"
+                                                      Text="Name"
+                                                      FontSize="12"
+                                                      FontWeight="Light"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"></TextBlock>
+                                           
+                                           <TextBlock Grid.Column="1"
+                                                      Text="Category"
+                                                      FontSize="12"
+                                                      FontWeight="Light"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"></TextBlock>
+                                           
+                                           <TextBlock Grid.Column="2"
+                                                      Text="Date Added"
+                                                      FontSize="12"
+                                                      FontWeight="Light"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Right"></TextBlock>
+                                   </Grid>
+                                   
+                                   <Grid Row="1"
+                                         Margin="0,6,0,0"
+                                         Background="{DynamicResource AssistBackground}"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         MinHeight="360"
+                                         >
+                                           <ItemsControl>
+                                                   <ItemsControl.ItemsPanel>
+                                                           <ItemsPanelTemplate>
+                                                                   <StackPanel Orientation="Vertical"/>
+                                                           </ItemsPanelTemplate>
+                                                   </ItemsControl.ItemsPanel>
+                                           </ItemsControl>
+                                   </Grid>
+                           </Grid>
+                   </Grid>
+                   <TextBlock Grid.Row="3"
+                              Text="Assist’s Global List is enabled by default. Players on the global list are individuals that have information backing their addition."
+                              FontSize="10"
+                              FontWeight="Light"
+                              Opacity=".4"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"></TextBlock>
+           </Grid>
+       </Border> 
     </Grid>
 </UserControl>

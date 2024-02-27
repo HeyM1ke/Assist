@@ -76,10 +76,7 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
 
             
             
-            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --allow-multiple-clients")
-            {
-                UseShellExecute = true
-            };
+            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --allow-multiple-clients") { UseShellExecute = true };
 
             Process.Start(riotClientStart);
             await Task.Delay(1000);
