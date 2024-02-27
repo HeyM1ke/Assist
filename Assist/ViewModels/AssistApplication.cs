@@ -202,12 +202,18 @@ public static class AssistApplication
     {
         NavigationContainer.ViewModel.EnableButton(AssistPage.DASHBOARD);
         NavigationContainer.ViewModel.EnableButton(AssistPage.STORE);
+#if DEBUG
+        NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES);
+#endif
         NavigationContainer.ViewModel.EnableAllButtons();
     }
     
     public static void EnableDefaultGameButtons()
     {
         NavigationContainer.ViewModel.EnableButton(AssistPage.LIVE);
+#if DEBUG
+        NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES);
+#endif
         //NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES); not yet lmao
         NavigationContainer.ViewModel.EnableAllButtons();
     }

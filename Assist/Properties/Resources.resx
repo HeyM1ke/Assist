@@ -160,6 +160,12 @@
   <data name="Common_Expired" xml:space="preserve">
     <value>Expired</value>
   </data>
+  <data name="Common_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Common_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
   <data name="Common_Information" xml:space="preserve">
     <value>Information</value>
   </data>
@@ -510,5 +516,23 @@
   </data>
   <data name="Live_OpenTracker" xml:space="preserve">
     <value>Open Tracker Profile</value>
+  </data>
+  <data name="Common_Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="Dodge_Title" xml:space="preserve">
+    <value>DODGE</value>
+  </data>
+  <data name="Dodge_Description" xml:space="preserve">
+    <value>Assist DODGE allows for you to be warned about players on your team and game. Add, Remove, Edit, and overall manage your own DODGE List. Additionally, a Global List is available for all players.</value>
+  </data>
+  <data name="Dodge_DodgeList" xml:space="preserve">
+    <value>DODGE LIST</value>
+  </data>
+  <data name="Dodge_EditPlayer" xml:space="preserve">
+    <value>Edit Player</value>
+  </data>
+  <data name="Dodge_AddPlayer" xml:space="preserve">
+    <value>Add Player</value>
   </data>
 </root>

@@ -25,6 +25,8 @@
     <StyleInclude Source="avares://Assist/Controls/Progression/DailyTicketDiamond.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Progression/PreviewMissionControl.axaml"/>
     
+    <StyleInclude Source="avares://Assist/Controls/Modules/ModulePreviewControl.axaml"/>
+    
     <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountMethodSelectionControl.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/RAccount/RAccountSecondarySelectionControl.axaml"/>
 

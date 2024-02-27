@@ -2,8 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:modules="clr-namespace:Assist.Controls.Modules"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             xmlns:modules1="clr-namespace:Assist.ViewModels.Modules"
+             mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="670"
              x:Class="Assist.Views.Modules.ModulesView">
+    
+    <Design.DataContext>
+        <modules1:ModulesViewModel/>
+    </Design.DataContext>
+    
     <Grid>
          <Grid.Styles>
                 <Style Selector="TabItem">
@@ -107,7 +115,22 @@
             </Grid.Styles>
         <TabControl>
             <TabItem Header="Current Modules">
-                
+                <StackPanel Spacing="20">
+                    <StackPanel.Styles>
+                        <Style Selector="modules|ModulePreviewControl">
+                            <Setter Property="Height" Value="290"/>
+                            <Setter Property="Width" Value="267"/>
+                        </Style>
+                    </StackPanel.Styles>
+                    <modules:ModulePreviewControl ModuleIcon="/Assets/Extras/DodgeLogo_Icon.png"
+                                                  ModuleName="{x:Static lang:Resources.Dodge_Title}"
+                                                  ModuleDesc="{x:Static lang:Resources.Dodge_Description}"
+                                                  ManageButtonCommand="{Binding OpenDodgeViewCommand}"/>
+                    <modules:ModulePreviewControl ModuleIcon="{SvgImage /Assets/Extras/Discord_White.svg}"
+                                                  ModuleName="Rich Presence"
+                                                  IsEnabled="False"
+                                                  ModuleDesc="Showcase your VALORANT game on discord for all your friends to see. Customize what your presence shows."></modules:ModulePreviewControl>
+               </StackPanel>
             </TabItem>
             <TabItem Header="Available Modules"></TabItem>
         </TabControl>

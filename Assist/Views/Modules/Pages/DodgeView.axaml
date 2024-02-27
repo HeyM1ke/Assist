@@ -13,6 +13,8 @@
                BorderThickness="1"
                CornerRadius="10"
                Padding="10"
+               Width="650"
+               Height="500"
                >
            <Grid RowDefinitions="29,33,Auto, *">
                    <Grid Row="0">

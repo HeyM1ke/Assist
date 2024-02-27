@@ -1,0 +1,67 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Modules"
+        xmlns:lang="clr-namespace:Assist.Properties">
+    <Design.PreviewWith>
+        <controls:ModulePreviewControl Width="267"
+                                       Height="290"
+                                       
+                                       />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ModulePreviewControl">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="CornerRadius" Value="20"></Setter>
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid RowDefinitions="*, 37">
+                        
+                        <StackPanel Orientation="Vertical"
+                                    Grid.Row="0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Spacing="9">
+                            <Image Width="80"
+                                   Height="80"
+                                   Source="{TemplateBinding ModuleIcon}"></Image>
+                            <TextBlock Text="{TemplateBinding ModuleName}"
+                                       FontSize="32"
+                                       TextAlignment="Center"
+                                       FontWeight="Bold"/>
+                            
+                            <TextBlock Text="{TemplateBinding ModuleDesc}"
+                                       FontSize="12"
+                                       FontWeight="Light"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Opacity=".8"
+                                       TextWrapping="WrapWithOverflow"/>
+                        </StackPanel>
+                        
+                        <Button Content="{x:Static lang:Resources.Common_Manage}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Padding="0,109"
+                                FontSize="1"
+                                Grid.Row="1"
+                                Command="{TemplateBinding ManageButtonCommand}"
+                                Classes="default"
+                                />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

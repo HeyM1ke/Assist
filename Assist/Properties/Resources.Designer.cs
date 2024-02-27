@@ -402,6 +402,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string Common_Export {
+            get {
+                return ResourceManager.GetString("Common_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hour.
         /// </summary>
         public static string Common_Hour {
@@ -416,6 +425,15 @@ namespace Assist.Properties {
         public static string Common_Hour_Plural {
             get {
                 return ResourceManager.GetString("Common_Hour_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        public static string Common_Import {
+            get {
+                return ResourceManager.GetString("Common_Import", resourceCulture);
             }
         }
         
@@ -443,6 +461,15 @@ namespace Assist.Properties {
         public static string Common_Loading {
             get {
                 return ResourceManager.GetString("Common_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage.
+        /// </summary>
+        public static string Common_Manage {
+            get {
+                return ResourceManager.GetString("Common_Manage", resourceCulture);
             }
         }
         
@@ -704,6 +731,51 @@ namespace Assist.Properties {
         public static string Common_Yes {
             get {
                 return ResourceManager.GetString("Common_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Player.
+        /// </summary>
+        public static string Dodge_AddPlayer {
+            get {
+                return ResourceManager.GetString("Dodge_AddPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist DODGE allows for you to be warned about players on your team and game. Add, Remove, Edit, and overall manage your own DODGE List. Additionally, a Global List is available for all players..
+        /// </summary>
+        public static string Dodge_Description {
+            get {
+                return ResourceManager.GetString("Dodge_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DODGE LIST.
+        /// </summary>
+        public static string Dodge_DodgeList {
+            get {
+                return ResourceManager.GetString("Dodge_DodgeList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Player.
+        /// </summary>
+        public static string Dodge_EditPlayer {
+            get {
+                return ResourceManager.GetString("Dodge_EditPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DODGE.
+        /// </summary>
+        public static string Dodge_Title {
+            get {
+                return ResourceManager.GetString("Dodge_Title", resourceCulture);
             }
         }
         
