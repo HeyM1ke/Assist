@@ -12,7 +12,7 @@
     <Style Selector="controls|SmallImageButton">
         
         <Setter Property="Background" Value="Transparent"></Setter><!-- Set Defaults -->
-        <Setter Property="Opacity" Value=".6"></Setter>
+        <Setter Property="Opacity" Value=".7"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Background="{TemplateBinding Background}"
