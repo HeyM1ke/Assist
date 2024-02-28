@@ -37,7 +37,8 @@ public partial class ProfileSwapViewViewModel : ViewModelBase
             {
                 PlayerName = string.IsNullOrEmpty(AccountSettings.Default.Accounts[i].Personalization.AccountNickName) ? AccountSettings.Default.Accounts[i].Personalization.RiotId : AccountSettings.Default.Accounts[i].Personalization.AccountNickName,
                 AccountId = AccountSettings.Default.Accounts[i].Id,
-                PlayerIconImage = $"https://content.assistapp.dev/playercards/{AccountSettings.Default.Accounts[i].Personalization.PlayerCardId}_DisplayIcon.png",
+                PlayerIconImage = $"https://cdn.assistval.com/playercards/{AccountSettings.Default.Accounts[i].Personalization.PlayerCardId}_DisplayIcon.png",
+                PlayerRankImage = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{AccountSettings.Default.Accounts[i].Personalization.ValRankTier}.png",
                 AssistEnabled = AccountSettings.Default.Accounts[i].CanAssistBoot && !AccountSettings.Default.Accounts[i].IsExpired,
                 GameLaunchEnabled = AccountSettings.Default.Accounts[i].CanLauncherBoot && !AccountSettings.Default.Accounts[i].IsExpired,
                 IsExpired = AccountSettings.Default.Accounts[i].IsExpired,
