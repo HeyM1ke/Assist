@@ -22,7 +22,8 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
     private static List<Mission> allMissions = null;
     private static ContactsFetchObj _userContacts = null;
     public static DailyTicketObj UserTicket = null;
-
+    private static string _currentUser;
+    
     [ObservableProperty]
     private ObservableCollection<DailyTicketDiamond> _dailyDiamonds = new ObservableCollection<DailyTicketDiamond>();
     
@@ -35,15 +36,28 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
     [ObservableProperty] private string _playerRankIcon = "";
     [ObservableProperty] private string _rankName = "";
     [ObservableProperty] private string _playerRR = "";
-    
-    
+
+    private bool _newUser = false;
     public async Task Setup()
     {
         await HandleDailyTicket();
         await SetupWeeklyMissions();
         await SetupCompetitiveDetails();
+        _currentUser = AssistApplication.ActiveUser.UserData.sub;
+        _newUser = false;
+        
     }
 
+    public async Task LoadedCheck()
+    {
+        if (!string.IsNullOrEmpty(_currentUser) && _currentUser != AssistApplication.ActiveUser.UserData.sub)
+        {
+            _newUser = true;
+            DailyDiamonds.Clear();
+            WeeklyMissions.Clear();
+            await Setup();
+        }
+    }
     public async Task HandleDailyTicket()
     {
         try
@@ -136,7 +150,7 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
 
     public async Task SetupWeeklyMissions()
     {
-        if (_userContacts is null)
+        if (_userContacts is null || _newUser)
             _userContacts = await AssistApplication.ActiveUser.Contracts.GetAllContracts();
 
         if (allMissions is null)
