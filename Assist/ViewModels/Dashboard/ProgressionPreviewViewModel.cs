@@ -8,7 +8,7 @@ using Assist.Core.Helpers;
 using Assist.Objects.AssistApi.Valorant;
 using Assist.Shared.Settings;
 using Assist.Shared.Settings.Accounts;
-using AssistUser.Lib.Account;
+
 using AssistUser.Lib.Base.Exceptions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Serilog;

@@ -72,7 +72,7 @@ public partial class MenusPageViewModel : ViewModelBase
                     
                     if (CurrentUsers.Count == 0)
                     {
-                        if (LiveViewViewModel.AssistProfiles.TryGetValue(obj.MessageData.Presences[0].puuid, out var profileData))
+                        /*if (LiveViewViewModel.AssistProfiles.TryGetValue(obj.MessageData.Presences[0].puuid, out var profileData))
                         {
                             
                             AddUserToList(
@@ -88,7 +88,7 @@ public partial class MenusPageViewModel : ViewModelBase
                             );
                         }
                         else
-                        {
+                        {*/
                             AddUserToList(
                                 new MenuPartyPlayerControl()
                                 {
@@ -100,7 +100,7 @@ public partial class MenusPageViewModel : ViewModelBase
                                     PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
                                 }
                             );    
-                        }
+                        //}
                     }
 
                     if (data.partySize == 1)
@@ -146,7 +146,7 @@ public partial class MenusPageViewModel : ViewModelBase
                             Dispatcher.UIThread.InvokeAsync(async () =>
                             {
 
-                                if (LiveViewViewModel.AssistProfiles.TryGetValue(member.Subject, out var profileData))
+                                /*if (LiveViewViewModel.AssistProfiles.TryGetValue(member.Subject, out var profileData))
                                 {
                                         AddUserToList(new MenuPartyPlayerControl()
                                             {
@@ -160,7 +160,7 @@ public partial class MenusPageViewModel : ViewModelBase
                                         );
                                 }
                                 else
-                                {
+                                {*/
                                         AddUserToList(
                                             new MenuPartyPlayerControl()
                                             {
@@ -172,7 +172,7 @@ public partial class MenusPageViewModel : ViewModelBase
                                                 PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{privatePres.competitiveTier}.png"
                                             }
                                         );    
-                                }
+                                //}
                             });
                             // This means this is a new Party Member
                             
@@ -282,7 +282,7 @@ public partial class MenusPageViewModel : ViewModelBase
                     {
                         var pData = await ValorantHelper.GetPresenceData(obj);
                         
-                        if (LiveViewViewModel.AssistProfiles.TryGetValue(obj.puuid, out var profileData))
+                        /*if (LiveViewViewModel.AssistProfiles.TryGetValue(obj.puuid, out var profileData))
                         {
                             AddUserToList(
                                 new MenuPartyPlayerControl()
@@ -297,7 +297,7 @@ public partial class MenusPageViewModel : ViewModelBase
                             );
                         }
                         else
-                        {
+                        {*/
                             AddUserToList(
                                 new MenuPartyPlayerControl()
                                 {
@@ -309,7 +309,7 @@ public partial class MenusPageViewModel : ViewModelBase
                                     PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
                                 }
                             );    
-                        }
+                        //}
                     }
 
                     if (data.partySize == 1)

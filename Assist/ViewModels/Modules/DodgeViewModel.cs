@@ -53,6 +53,7 @@ public partial class DodgeViewModel : ViewModelBase
     public void Unload()
     {
         Log.Information("Dodge View Unloaded, Unsubscribing");
+        PlayerControls.Clear();
         DodgeService.Current.DodgeUserAddedToList -= DodgeUserAddedToList;
         DodgeService.Current.DodgeUserRemovedFromList -= DodgeUserRemovedFromList;
     }
@@ -70,7 +71,7 @@ public partial class DodgeViewModel : ViewModelBase
                 PlayerName = p.AddedAs is null ? "Player" : $"{p.AddedAs.GameName}#{p.AddedAs.TagLine}",
                 PlayerCategory = AssistHelper.DodgeCategories.ContainsKey((EAssistDodgeCategory)p.Category) ? $"{AssistHelper.DodgeCategories[(EAssistDodgeCategory)p.Category]}" : "Not Found",
                 PlayerNote = p.Note,
-                NoteEnabled = string.IsNullOrEmpty(p.Note),
+                NoteEnabled = !string.IsNullOrEmpty(p.Note),
                 DateAdded = $"{p.Added.ToLocalTime().ToShortDateString()}"
             });
         }

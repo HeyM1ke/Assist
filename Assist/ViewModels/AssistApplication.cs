@@ -36,7 +36,7 @@ public static class AssistApplication
     public static RiotUser? ActiveUser;
     public static AssistApiService AssistApiService = new AssistApiService();
     public static AccountProfile? ActiveAccountProfile;
-    public static AUser? AssistUser = new AssistUserBuilder().Construct();
+    public static AUser? AssistUser = new AUserBuilder().Build();
     public static AssistGameServerConnection? Server = new AssistGameServerConnection();
     public static ValorantWebsocketClient? WebsocketClient;
     

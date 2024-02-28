@@ -21,7 +21,6 @@ using Assist.Views.Extras;
 using Assist.Views.Game;
 using Assist.Views.RAccount;
 using Assist.Views.Setup;
-using AssistUser.Lib.Account;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Svg.Skia;

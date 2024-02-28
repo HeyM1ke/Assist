@@ -11,7 +11,7 @@
         <!-- Set Defaults -->
         <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
-        <Setter Property="Opacity" Value="0.9"></Setter>
+        <Setter Property="Opacity" Value="0.7"></Setter>
         <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="CornerRadius" Value="0"></Setter>
         <Setter Property="Padding" Value="10"></Setter>
@@ -41,14 +41,14 @@
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Center"></Ellipse>
                             <Ellipse Fill="{TemplateBinding Background}" 
-                                     Width="17"
-                                     Height="17"
+                                     Width="16"
+                                     Height="16"
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Center"></Ellipse>
                             
                             <Ellipse Fill="White" 
-                                     Width="13"
-                                     Height="13"
+                                     Width="12"
+                                     Height="12"
                                      IsVisible="{TemplateBinding IsChecked}"
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Center"></Ellipse>

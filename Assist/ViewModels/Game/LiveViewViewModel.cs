@@ -7,8 +7,6 @@ using Assist.Models.Enums;
 using Assist.Models.Game;
 using Assist.Models.Socket;
 using Assist.Views.Game.Live.Pages;
-using AssistUser.Lib.Profiles.Models;
-using AssistUser.Lib.Reputations.Models;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -23,8 +21,6 @@ public partial class LiveViewViewModel : ViewModelBase
 
     [ObservableProperty] private UserControl _currentView = new UserControl();
     
-    public static Dictionary<string, AssistReputationUserV2> ReputationUserV2s = new Dictionary<string, AssistReputationUserV2>();
-    public static Dictionary<string, AssistProfile> AssistProfiles = new Dictionary<string, AssistProfile>();
     public static Dictionary<string, ValorantPlayerStorage> ValorantPlayers = new Dictionary<string, ValorantPlayerStorage>();
 
     public async Task Setup()

@@ -76,31 +76,81 @@
                                Opacity=".5"
                                HorizontalAlignment="Left"/>
                     <TextBox Watermark="EX: ValorantPlayer#000"
-                             x:Name="EmailBox"
+                             x:Name="PlayerNameBox"
                              FontSize="16"
+                             Text="{Binding PlayerNameText}"
                              ></TextBox>
                 </StackPanel>
                      
                      <StackPanel Spacing="2">
-                         <TextBlock Text="Category:"
-                                    FontWeight="Light"
-                                    FontSize="13"
-                                    Opacity=".5"
-                                    HorizontalAlignment="Left"/>
-                         <UniformGrid Rows="2"
-                                      Columns="5">
-                             <assist:ImageToggleButton ImageIcon="/Assets/Extras/DodgeLogo_Icon.png"/>
-                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Extras/Discord_White.svg}"/>
-                             <assist:ImageToggleButton/>
-                             <assist:ImageToggleButton/>
-                             <assist:ImageToggleButton/>
-                             <assist:ImageToggleButton/>
-                             <assist:ImageToggleButton/>
-                             <assist:ImageToggleButton/>
-                             <assist:ImageToggleButton/>
-                             <assist:ImageToggleButton/>
-                         </UniformGrid>
+                         <StackPanel Orientation="Horizontal"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Bottom"
+                                     Spacing="4">
+                             <TextBlock Text="Category:"
+                                        FontWeight="Light"
+                                        FontSize="13"
+                                        Opacity=".5"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Left"/>
+                             <TextBlock Text="{Binding DodgeSelectedTitle}"
+                                        FontWeight="Regular"
+                                        FontSize="18"
+                                        Foreground="{DynamicResource AssistPrimaryColor}"
+                                        Padding="0,0,0,0"
+                                        Margin="-1"
+                                        VerticalAlignment="Top"
+                                        />
                          </StackPanel>
+                         
+                         
+                         
+                         <UniformGrid Rows="2"
+                                      Columns="5"
+                                      >
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeToxic_Icon.svg}"
+                                                       Tag="0"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Toxic}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeThrower_Icon.svg}"
+                                                       Tag="1"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Thrower}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBadTeammate_Icon.svg}"
+                                                       Tag="2"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_BadTeammate}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeStreamSniper_Icon.svg}"
+                                                       Tag="3"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Streamsniper}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeIgnore_Icon.svg}"
+                                                       Tag="4"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Ignore}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBadWintrading_Icon.svg}"
+                                                       Tag="5"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Wintrader}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeCheater_Icon.svg}"
+                                                       Tag="6"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Cheater}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBadComms_Icon.svg}"
+                                                       Tag="7"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_BadComms}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBot_Icon.svg}"
+                                                       Tag="9"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Bot}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeSmurf_Icon.svg}"
+                                                       Tag="10"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Smurf}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                         </UniformGrid>
+                     </StackPanel>
                      
                     
                 
@@ -112,7 +162,8 @@
                                HorizontalAlignment="Left"/>
                     <TextBox Watermark="This player was toxic..."
                              TextAlignment="Left"
-                             x:Name="UsernameBox"
+                             x:Name="NoteBox"
+                             Text="{Binding PlayerNoteText}"
                              FontSize="14"
                              MaxLength="120"
                              MinHeight="50"
@@ -132,7 +183,9 @@
             
             <Button Content="{x:Static lang:Resources.Common_Add}"
                     Classes="default"
+                    Command="{Binding AddPlayerCommand}"
                     HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding !IsProcessing}"
                     Grid.Row="2"/>
         </Grid>
     </Border>
