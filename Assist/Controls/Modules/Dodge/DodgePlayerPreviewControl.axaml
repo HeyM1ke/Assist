@@ -1,9 +1,11 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:Assist.Controls.Modules.Dodge">
+        xmlns:controls="using:Assist.Controls.Modules.Dodge"
+        xmlns:lang="clr-namespace:Assist.Properties"
+        xmlns:assist="clr-namespace:Assist.Controls.Assist">
     <Design.PreviewWith>
         <controls:DodgePlayerPreviewControl Width="610"
-                                            Height="36"
+                                            Height="38"
                                             />
     </Design.PreviewWith>
 
@@ -63,6 +65,37 @@
                                    VerticalAlignment="Center"
                                    TextAlignment="Right"
                                    HorizontalAlignment="Right"></TextBlock>
+                        
+                        <Grid Grid.Column="2"
+                              IsVisible="{TemplateBinding IsPointerOver}"
+                              Background="{TemplateBinding Background}">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        Spacing="25"
+                                        Margin="0">
+                                <assist:SmallImageButton Icon="{SvgImage /Assets/Icons/Edit_Icon.svg}"
+                                                         BorderBrush="{DynamicResource AssistControlOutline}"
+                                                         BorderThickness="1"
+                                                         Padding="5"
+                                                         Width="30"
+                                                         IsVisible="False"
+                                                         Height="30"
+                                                         CornerRadius="5"
+                                        Command="{TemplateBinding EditPlayerCommand}"
+                                        ></assist:SmallImageButton>
+                                <assist:SmallImageButton Icon="{SvgImage /Assets/Icons/Trash_Icon.svg}"
+                                                         BorderBrush="{DynamicResource AssistControlOutline}"
+                                                         BorderThickness="1"
+                                                         Padding="5"
+                                                         Width="30"
+                                                         CommandParameter="{TemplateBinding PlayerId}"
+                                                         Height="30"
+                                                         CornerRadius="5"
+                                                         Command="{TemplateBinding DeletePlayerCommand}"
+                                ></assist:SmallImageButton>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </Border>
             </ControlTemplate>

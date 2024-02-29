@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Assist.Controls.Modules.Dodge;
@@ -45,6 +46,7 @@ public partial class DodgeViewModel : ViewModelBase
         }
         CreateDodgeControls();
         
+        Log.Information("Dodge View Loaded, Subscribing");
         DodgeService.Current.DodgeUserAddedToList += DodgeUserAddedToList;
         DodgeService.Current.DodgeUserRemovedFromList += DodgeUserRemovedFromList;
         IsLoading = false;
@@ -72,7 +74,9 @@ public partial class DodgeViewModel : ViewModelBase
                 PlayerCategory = AssistHelper.DodgeCategories.ContainsKey((EAssistDodgeCategory)p.Category) ? $"{AssistHelper.DodgeCategories[(EAssistDodgeCategory)p.Category]}" : "Not Found",
                 PlayerNote = p.Note,
                 NoteEnabled = !string.IsNullOrEmpty(p.Note),
-                DateAdded = $"{p.Added.ToLocalTime().ToShortDateString()}"
+                DateAdded = $"{p.Added.ToLocalTime().ToShortDateString()}",
+                EditPlayerCommand = OpenPlayerEditPopupCommand,
+                DeletePlayerCommand = DeletePlayerFromListCommand
             });
         }
 
@@ -103,8 +107,10 @@ public partial class DodgeViewModel : ViewModelBase
                     ? $"{AssistHelper.DodgeCategories[(EAssistDodgeCategory)obj.Category]}"
                     : "Not Found",
                 PlayerNote = obj.Note,
-                NoteEnabled = string.IsNullOrEmpty(obj.Note),
-                DateAdded = $"{obj.Added.ToLocalTime().ToShortDateString()}"
+                NoteEnabled = !string.IsNullOrEmpty(obj.Note),
+                DateAdded = $"{obj.Added.ToLocalTime().ToShortDateString()}",
+                EditPlayerCommand = OpenPlayerEditPopupCommand,
+                DeletePlayerCommand = DeletePlayerFromListCommand
             });
         });
     }
@@ -120,9 +126,40 @@ public partial class DodgeViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    public void RefreshList()
+    {
+        Log.Information("Refreshing Dodge List");
+        PlayerControls.Clear();
+        CreateDodgeControls();
+    }
+
+    [RelayCommand]
     public void OpenPlayerAddPopup()
     {
         PopupControl = new DodgeAddPlayerControl(ClosePopupsCommand);
+    }
+
+    [RelayCommand]
+    public void OpenPlayerEditPopup()
+    {
+        
+    }
+    
+    [RelayCommand]
+    public async void DeletePlayerFromList(string id)
+    {
+        Log.Information("Player Requested to Delete player");
+        IsLoading = true;
+        try
+        {
+            var resp = await DodgeService.Current.RemovePlayerFromUserDodgeList(id);
+        }
+        catch (Exception e)
+        {
+            IsLoading = false;
+            return;
+        }
+        IsLoading = false;
     }
     
     [RelayCommand]

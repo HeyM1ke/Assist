@@ -108,6 +108,7 @@
                        
                        <Button Content="Clear"
                                Classes="default"
+                               IsVisible="False"
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                Padding="8,7"
@@ -121,6 +122,7 @@
                                Spacing="8">
                        <Button Content="Export"
                                Classes="default"
+                               IsVisible="False"
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                Padding="8,7"
@@ -128,6 +130,7 @@
                        
                        <Button Content="Import"
                                Classes="default"
+                               IsVisible="False"
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                Padding="8,7"
@@ -176,7 +179,7 @@
                                                    </ItemsControl.ItemsPanel>
                                                    <ItemsControl.Styles>
                                                            <Style Selector="dodge|DodgePlayerPreviewControl">
-                                                                   <Setter Property="Height" Value="36"></Setter>
+                                                                   <Setter Property="Height" Value="38"></Setter>
                                                            </Style>
                                                    </ItemsControl.Styles>
                                                   

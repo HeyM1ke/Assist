@@ -90,7 +90,7 @@ public class DodgeService
         catch
         {
             Log.Error("Dodge Settings File was not found or tampered with.");
-        }
+        }   
     }
 
     public async Task<UserDodgePlayer> AddPlayerToUserDodgeList(AddUserToDodgeListModel data)
@@ -109,7 +109,7 @@ public class DodgeService
         return newUser;
     }
     
-    public async Task<UserDodgePlayer> AddPlayerToUserDodgeList(string userIdToRemove)
+    public async Task<UserDodgePlayer> RemovePlayerFromUserDodgeList(string userIdToRemove)
     {
         var resp = await AssistApplication.AssistUser.DodgeList.RemovePlayerFromPlayerDodgeList(userIdToRemove);
 
@@ -118,7 +118,7 @@ public class DodgeService
 
         var newUser = JsonSerializer.Deserialize<UserDodgePlayer>(resp.Data.ToString());
         
-        DodgeList.Players.Add(newUser); // This updates the list locally without having to pull from the server.
+        DodgeList.Players.Remove(newUser); // This updates the list locally without having to pull from the server.
         
         DodgeUserRemovedFromList?.Invoke(newUser); // Alerts that there is a new user added
         

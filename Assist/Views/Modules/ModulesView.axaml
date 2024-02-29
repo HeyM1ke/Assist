@@ -113,26 +113,23 @@
                     <Setter Property="TextBlock.Foreground" Value="{DynamicResource TabItemHeaderForegroundDisabled}" />
                 </Style>
             </Grid.Styles>
-        <TabControl>
-            <TabItem Header="Current Modules">
-                <StackPanel Spacing="20">
-                    <StackPanel.Styles>
-                        <Style Selector="modules|ModulePreviewControl">
-                            <Setter Property="Height" Value="290"/>
-                            <Setter Property="Width" Value="267"/>
-                        </Style>
-                    </StackPanel.Styles>
-                    <modules:ModulePreviewControl ModuleIcon="/Assets/Extras/DodgeLogo_Icon.png"
-                                                  ModuleName="{x:Static lang:Resources.Dodge_Title}"
-                                                  ModuleDesc="{x:Static lang:Resources.Dodge_Description}"
-                                                  ManageButtonCommand="{Binding OpenDodgeViewCommand}"/>
-                    <modules:ModulePreviewControl ModuleIcon="{SvgImage /Assets/Extras/Discord_White.svg}"
-                                                  ModuleName="Rich Presence"
-                                                  IsEnabled="False"
-                                                  ModuleDesc="Showcase your VALORANT game on discord for all your friends to see. Customize what your presence shows."></modules:ModulePreviewControl>
-               </StackPanel>
-            </TabItem>
-            <TabItem Header="Available Modules"></TabItem>
-        </TabControl>
+        <StackPanel Spacing="20" HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <StackPanel.Styles>
+                <Style Selector="modules|ModulePreviewControl">
+                    <Setter Property="Height" Value="290"/>
+                    <Setter Property="Width" Value="267"/>
+                </Style>
+            </StackPanel.Styles>
+            <modules:ModulePreviewControl ModuleIcon="/Assets/Extras/DodgeLogo_Icon.png"
+                                          ModuleName="{x:Static lang:Resources.Dodge_Title}"
+                                          ModuleDesc="{x:Static lang:Resources.Dodge_Description}"
+                                          ManageButtonCommand="{Binding OpenDodgeViewCommand}"/>
+            <modules:ModulePreviewControl ModuleIcon="{SvgImage /Assets/Extras/Discord_White.svg}"
+                                          ModuleName="Rich Presence"
+                                          IsEnabled="False"
+                                          ModuleDesc="Showcase your VALORANT game on discord for all your friends to see. Customize what your presence shows."/>
+        </StackPanel>
     </Grid>
 </UserControl>
