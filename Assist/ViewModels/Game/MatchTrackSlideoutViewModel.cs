@@ -36,6 +36,7 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
     {
         if (RecentService.Current.RecentMatches?.Count > 0)
         {
+            MatchControls.Clear();
             int limiter = 0;
             for (int i = RecentService.Current.RecentMatches.Count-1; i >= 0; i--)
             {
