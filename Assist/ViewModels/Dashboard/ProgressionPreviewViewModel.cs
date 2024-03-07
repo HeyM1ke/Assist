@@ -91,16 +91,16 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
 
             bool _prevCompleted = false;
             if (i > 0)
-                _prevCompleted = UserTicket.DailyRewards.Milestones[i - 1].BonusApplied;
+                _prevCompleted = UserTicket.DailyRewards.Milestones[i - 1].BonusApplied || UserTicket.DailyRewards.Milestones[i - 1].Progress == 4;
             else
                 _prevCompleted = true;
             
             DailyDiamonds.Add(new DailyTicketDiamond()
             {
                 DiamondNumber = $"{i+1}",
-                IsCompleted = currMilestone.BonusApplied,
-                IsCurrent = !currMilestone.BonusApplied && _prevCompleted,
-                ProgressText = !currMilestone.BonusApplied && _prevCompleted ? $"{currMilestone.Progress}/4" : string.Empty
+                IsCompleted = currMilestone.BonusApplied || currMilestone.Progress == 4,
+                IsCurrent = _prevCompleted && currMilestone.Progress != 4,
+                ProgressText = currMilestone.Progress != 4 && _prevCompleted ? $"{currMilestone.Progress}/4" : string.Empty
             });
         }
     }
