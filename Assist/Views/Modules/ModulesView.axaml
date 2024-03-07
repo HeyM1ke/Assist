@@ -128,7 +128,7 @@
                                           ManageButtonCommand="{Binding OpenDodgeViewCommand}"/>
             <modules:ModulePreviewControl ModuleIcon="{SvgImage /Assets/Extras/Discord_White.svg}"
                                           ModuleName="Rich Presence"
-                                          IsEnabled="False"
+                                          ManageButtonCommand="{Binding OpenDiscordViewCommand}"
                                           ModuleDesc="Showcase your VALORANT game on discord for all your friends to see. Customize what your presence shows."/>
         </StackPanel>
     </Grid>

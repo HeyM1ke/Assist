@@ -2,7 +2,107 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:properties="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Views.Modules.Pages.DiscordView">
-    Welcome to Avalonia!
+     <Grid>
+         <Border Background="{DynamicResource AssistControlBackground}"
+                         BorderBrush="{DynamicResource AssistControlOutline}"
+                         BorderThickness="1"
+                         CornerRadius="10"
+                         Padding="10"
+                         MaxWidth="650"
+                         MaxHeight="500">
+             <Grid RowDefinitions="Auto,*">
+                 <Grid Row="0">
+                           <StackPanel Orientation="Vertical">
+                               <StackPanel Orientation="Horizontal"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Spacing="3">
+                                   
+                                   <Image Source="{SvgImage /Assets/Extras/Discord_White.svg}"
+                                          Width="20"
+                                          Height="20"
+                                   ></Image>
+                                   
+                                   <TextBlock Text="Rich Presence"
+                                              FontSize="20"
+                                              FontWeight="20"
+                                              TextAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                               </StackPanel>
+                               <TextBlock Text="Customize your Presence by selecting what you would like showcased."
+                                          FontSize="13"
+                                          Opacity=".7"
+                                          TextAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"/>
+                               <Rectangle Height="1"
+                                          Margin="0,5,0,0"
+                                          Fill="{DynamicResource AssistControlOutline}"></Rectangle>
+                           </StackPanel>
+                           
+                   
+                   <StackPanel Orientation="Horizontal"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Right"
+                               Spacing="15">
+                       
+                      
+                       
+                       <assist:SmallImageButton
+                               Width="29"
+                               Height="29"
+                               Icon="{SvgImage /Assets/Default/X_Icon.svg}"
+                               CornerRadius="5"
+                               BorderBrush="{DynamicResource AssistControlOutline}"
+                               BorderThickness="1"
+                               Command="{Binding ReturnToModulesCommand}"
+                               />
+                       
+                      
+                   </StackPanel>
+               </Grid>
+                 <Grid Row="1"
+                       Margin="0,10">
+                     <StackPanel Orientation="Vertical">
+                         <TextBlock Text="Large Image"
+                                    FontSize="24"
+                                    FontWeight="20"
+                                    TextAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"/>
+                         
+                         <TextBlock Text="Details"
+                                    FontSize="24"
+                                    FontWeight="20"
+                                    TextAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"/>
+                         
+                         <TextBlock Text="Details"
+                                    FontSize="24"
+                                    FontWeight="20"
+                                    TextAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"/>
+                         
+                         <TextBlock Text="Privacy"
+                                    FontSize="24"
+                                    FontWeight="20"
+                                    TextAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"/>
+                     </StackPanel>
+                 </Grid>
+             </Grid>
+         </Border> 
+         <TransitioningContentControl Padding="10">
+                        
+         </TransitioningContentControl>
+     </Grid>
 </UserControl>

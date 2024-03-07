@@ -14,4 +14,12 @@ public partial class ModulesViewModel : ViewModelBase
         
         NavigationContainer.ViewModel.ChangePage(AssistPage.DODGE);
     }
+    
+    [RelayCommand]
+    public void OpenDiscordView()
+    {
+        Log.Information("Player has asked to open the dodge module");
+        
+        NavigationContainer.ViewModel.ChangePage(AssistPage.DISCORD);
+    }
 }

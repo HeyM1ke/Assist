@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assist.Models.Enums;
 using Assist.Services.Assist;
+using Assist.Services.Modules;
 using Assist.Services.Riot;
 using Assist.Shared.Settings;
 using Avalonia.Controls;
@@ -74,7 +75,8 @@ public partial class GameInitalStartupViewModel : ViewModelBase
 
         // TODO: Start Module Service which will then active these in turn if they are enabled.
         new DodgeService();
-        new RecentService();
+        new RecentService(); 
+        RichPresenceService.Default.Initialize();
         Message = "Welcome to Assist";
         await AssistApplication.SetupComplete_Game();
     }
