@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Assist.Models.Enums;
 using Assist.Shared.Controls;
 using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings;
@@ -28,11 +29,11 @@ namespace Assist.ViewModels.RAccount;
 /// </summary>
 public partial class RAccountCloudViewModel : ViewModelBase
 {
-    [ObservableProperty] private WebView _currentContent = new();
+    [ObservableProperty] private WebView _currentContent = new WebView();
     [ObservableProperty] private bool _webViewVisible = true;
     [ObservableProperty] private ICommand? _loginCompletedCommand;
 
-    private const string authUrl = "https://auth.riotgames.com/authorize?redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&client_id=play-valorant-web-prod&response_type=token%20id_token&nonce=1";
+    private const string authUrl = "https://account.riotgames.com/";
     private string cacheLoc = System.IO.Path.Combine(AssistSettings.FolderPath, "Cache", "web");
     private const string socialGuide = "https://github.com/HeyM1ke/Assist/wiki/Social-Login-Guide";
 
@@ -41,12 +42,63 @@ public partial class RAccountCloudViewModel : ViewModelBase
         CurrentContent.View = new WebView2();
         var webView2Environment = await CoreWebView2Environment.CreateAsync(null, cacheLoc);
         await CurrentContent.View.EnsureCoreWebView2Async(webView2Environment);
+        
         CurrentContent.View.NavigationStarting += EnsureHttps;
         CurrentContent.View.SourceChanged += SourceChanged;
         CurrentContent.View.Source = new Uri(authUrl);
         
+        ChangeViewResolution();
     }
-    
+
+    private void ChangeViewResolution()
+    {
+        switch (AssistSettings.Default.SelectedResolution)
+        {
+            case EResolution.R360:
+                CurrentContent.View.Width = 500;
+                CurrentContent.View.Height = 325;
+                CurrentContent.Width = 500;
+                CurrentContent.Height = 325;
+                CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                break;
+            case EResolution.R540:
+                CurrentContent.View.Width = 750;
+                CurrentContent.View.Height = 488;
+                CurrentContent.Width = 750;
+                CurrentContent.Height = 488;
+                CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                break;
+            case EResolution.R900:
+                CurrentContent.View.Width = 1250;
+                CurrentContent.View.Height = 813;
+                CurrentContent.Width = 1250;
+                CurrentContent.Height = 813;
+                CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                break;
+            case EResolution.R1080:
+                CurrentContent.View.Width = 1500;
+                CurrentContent.View.Height = 975;
+                CurrentContent.Width = 1500;
+                CurrentContent.Height = 975;
+                CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                break;
+            case EResolution.R1260:
+                CurrentContent.View.Width = 1750;
+                CurrentContent.View.Height = 1300;
+                CurrentContent.Width = 1750;
+                CurrentContent.Height = 1300;
+                CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                break;
+            default:
+                CurrentContent.View.Width = 1000;
+                CurrentContent.View.Height = 650;
+                CurrentContent.Width = 1000;
+                CurrentContent.Height = 650;
+                CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                break;
+        }
+    }
+
     private async Task LoginWithWebCookies(Dictionary<string, Cookie> cookieContainer)
     {
         Log.Information("Attempting to login with Riot Account with Cloud");
@@ -133,7 +185,8 @@ public partial class RAccountCloudViewModel : ViewModelBase
         Log.Information(redirectUrl);
         CurrentContent.View.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
         CurrentContent.View.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
-        if (redirectUrl.Contains("https://playvalorant.com/opt_in#"))
+        
+        if (redirectUrl.Contains("https://login.riotgames.com/oauth2-callback?"))
         {
             var cookies = await GetCookies(this.CurrentContent.View);
             var valid = cookies.Find(_c => _c.Name == "ssid") != null;
@@ -144,10 +197,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 var cc = new Dictionary<string, Cookie>();
                 cookies.ForEach(x =>
                 {
-                    if (x.Domain.Contains("riotgames.com"))
-                    {
-                        cc.TryAdd(x.Name, new Cookie(x.Name, x.Value, x.Path, x.Domain));
-                    }
+                    cc.TryAdd(x.Name, new Cookie(x.Name, x.Value, x.Path, x.Domain));
                 });
                 
 
