@@ -310,8 +310,8 @@
   <data name="Common_Training" xml:space="preserve">
     <value>Training</value>
   </data>
-  <data name="Common_Enable" xml:space="preserve">
-    <value>Enable</value>
+  <data name="Common_Unknown" xml:space="preserve">
+    <value>Unknown</value>
   </data>
   <data name="RichPres_Enable" xml:space="preserve">
     <value>Enable Discord Rich Presence</value>
@@ -570,5 +570,75 @@
   </data>
   <data name="DodgeCategory_Smurf" xml:space="preserve">
     <value>Smurf</value>
+  </data>
+  <data name="VALORANT_Jett" xml:space="preserve">
+    <value>Jett</value>
+  </data>
+  <data name="VALORANT_Brimstone" xml:space="preserve">
+    <value>Brimstone</value>
+  </data>
+  <data name="VALORANT_Phoenix" xml:space="preserve">
+    <value>Phoenix</value>
+  </data>
+  <data name="VALORANT_Skye" xml:space="preserve">
+    <value>Skye</value>
+  </data><data name="VALORANT_Cypher" xml:space="preserve">
+    <value>Cypher</value>
+  </data>
+  <data name="VALORANT_Killjoy" xml:space="preserve">
+    <value>Killjoy</value>
+  </data>
+  <data name="VALORANT_Chamber" xml:space="preserve">
+    <value>Chamber</value>
+  </data>
+  <data name="VALORANT_Sova" xml:space="preserve">
+    <value>Sova</value>
+  </data>
+  <data name="VALORANT_Astra" xml:space="preserve">
+    <value>Astra</value>
+  </data>
+  <data name="VALORANT_Breach" xml:space="preserve">
+    <value>Breach</value>
+  </data><data name="VALORANT_KAYO" xml:space="preserve">
+    <value>KAY/O</value>
+  </data>
+  <data name="VALORANT_Viper" xml:space="preserve">
+    <value>Viper</value>
+  </data>
+  <data name="VALORANT_Yoru" xml:space="preserve">
+    <value>Yoru</value>
+  </data>
+  <data name="VALORANT_Omen" xml:space="preserve">
+    <value>Omen</value>
+  </data>
+  <data name="VALORANT_Harbor" xml:space="preserve">
+    <value>Harbor</value>
+  </data>
+  <data name="VALORANT_Reyna" xml:space="preserve">
+    <value>Reyna</value>
+  </data>
+  <data name="VALORANT_Raze" xml:space="preserve">
+    <value>Raze</value>
+  </data>
+  <data name="VALORANT_Sage" xml:space="preserve">
+    <value>Sage</value>
+  </data>
+  <data name="VALORANT_Fade" xml:space="preserve">
+    <value>Fade</value>
+  </data>
+  <data name="VALORANT_Neon" xml:space="preserve">
+    <value>Neon</value>
+  </data>
+  <data name="VALORANT_Gekko" xml:space="preserve">
+    <value>Gekko</value>
+  </data>
+  <data name="VALORANT_Deadlock" xml:space="preserve">
+    <value>Deadlock</value>
+  </data>
+  <data name="VALORANT_Iso" xml:space="preserve">
+    <value>Iso</value>
+  </data>
+  <data name="VALORANT_Unknown" xml:space="preserve">
+    <value>Clove</value>
   </data>
 </root>
