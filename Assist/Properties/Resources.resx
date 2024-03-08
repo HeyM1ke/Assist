@@ -641,4 +641,58 @@
   <data name="VALORANT_Unknown" xml:space="preserve">
     <value>Clove</value>
   </data>
+  
+  
+  <data name="VALORANT_Ascent" xml:space="preserve">
+    <value>Ascent</value>
+  </data>
+  <data name="VALORANT_Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="VALORANT_Fracture" xml:space="preserve">
+    <value>Fracture</value>
+  </data>
+  <data name="VALORANT_Bind" xml:space="preserve">
+    <value>Bind</value>
+  </data>
+
+  <data name="VALORANT_Breeze" xml:space="preserve">
+    <value>Breeze</value>
+  </data>
+  <data name="VALORANT_Pearl" xml:space="preserve">
+    <value>Pearl</value>
+  </data>
+  <data name="VALORANT_Icebox" xml:space="preserve">
+    <value>Icebox</value>
+  </data>
+  <data name="VALORANT_Lotus" xml:space="preserve">
+    <value>Lotus</value>
+  </data>
+  <data name="VALORANT_TheRange" xml:space="preserve">
+    <value>The Range</value>
+  </data>
+  <data name="VALORANT_Haven" xml:space="preserve">
+    <value>Haven</value>
+  </data>
+  <data name="VALORANT_District" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="VALORANT_Kasbah" xml:space="preserve">
+    <value>Kasbah</value>
+  </data>
+  <data name="VALORANT_Piazza" xml:space="preserve">
+    <value>Piazza</value>
+  </data>
+  <data name="VALORANT_Sunset" xml:space="preserve">
+    <value>Sunset</value>
+  </data>
+  <data name="VALORANT_Drift" xml:space="preserve">
+    <value>Drift</value>
+  </data>
+  <data name="VALORANT_Unknown" xml:space="preserve">
+    <value>Temple</value>
+  </data>
+  <data name="VALORANT_CustomGame" xml:space="preserve">
+    <value>Custom Game</value>
+  </data>
 </root>

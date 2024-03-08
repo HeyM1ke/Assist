@@ -1419,6 +1419,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ascent.
+        /// </summary>
+        public static string VALORANT_Ascent {
+            get {
+                return ResourceManager.GetString("VALORANT_Ascent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Astra.
         /// </summary>
         public static string VALORANT_Astra {
@@ -1428,11 +1437,29 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bind.
+        /// </summary>
+        public static string VALORANT_Bind {
+            get {
+                return ResourceManager.GetString("VALORANT_Bind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breach.
         /// </summary>
         public static string VALORANT_Breach {
             get {
                 return ResourceManager.GetString("VALORANT_Breach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breeze.
+        /// </summary>
+        public static string VALORANT_Breeze {
+            get {
+                return ResourceManager.GetString("VALORANT_Breeze", resourceCulture);
             }
         }
         
@@ -1455,6 +1482,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Game.
+        /// </summary>
+        public static string VALORANT_CustomGame {
+            get {
+                return ResourceManager.GetString("VALORANT_CustomGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cypher.
         /// </summary>
         public static string VALORANT_Cypher {
@@ -1473,11 +1509,38 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to District.
+        /// </summary>
+        public static string VALORANT_District {
+            get {
+                return ResourceManager.GetString("VALORANT_District", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drift.
+        /// </summary>
+        public static string VALORANT_Drift {
+            get {
+                return ResourceManager.GetString("VALORANT_Drift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fade.
         /// </summary>
         public static string VALORANT_Fade {
             get {
                 return ResourceManager.GetString("VALORANT_Fade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture.
+        /// </summary>
+        public static string VALORANT_Fracture {
+            get {
+                return ResourceManager.GetString("VALORANT_Fracture", resourceCulture);
             }
         }
         
@@ -1500,6 +1563,24 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Haven.
+        /// </summary>
+        public static string VALORANT_Haven {
+            get {
+                return ResourceManager.GetString("VALORANT_Haven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icebox.
+        /// </summary>
+        public static string VALORANT_Icebox {
+            get {
+                return ResourceManager.GetString("VALORANT_Icebox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Iso.
         /// </summary>
         public static string VALORANT_Iso {
@@ -1514,6 +1595,15 @@ namespace Assist.Properties {
         public static string VALORANT_Jett {
             get {
                 return ResourceManager.GetString("VALORANT_Jett", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kasbah.
+        /// </summary>
+        public static string VALORANT_Kasbah {
+            get {
+                return ResourceManager.GetString("VALORANT_Kasbah", resourceCulture);
             }
         }
         
@@ -1536,6 +1626,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lotus.
+        /// </summary>
+        public static string VALORANT_Lotus {
+            get {
+                return ResourceManager.GetString("VALORANT_Lotus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Neon.
         /// </summary>
         public static string VALORANT_Neon {
@@ -1554,11 +1653,29 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pearl.
+        /// </summary>
+        public static string VALORANT_Pearl {
+            get {
+                return ResourceManager.GetString("VALORANT_Pearl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phoenix.
         /// </summary>
         public static string VALORANT_Phoenix {
             get {
                 return ResourceManager.GetString("VALORANT_Phoenix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Piazza.
+        /// </summary>
+        public static string VALORANT_Piazza {
+            get {
+                return ResourceManager.GetString("VALORANT_Piazza", resourceCulture);
             }
         }
         
@@ -1608,7 +1725,34 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clove.
+        ///   Looks up a localized string similar to Split.
+        /// </summary>
+        public static string VALORANT_Split {
+            get {
+                return ResourceManager.GetString("VALORANT_Split", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sunset.
+        /// </summary>
+        public static string VALORANT_Sunset {
+            get {
+                return ResourceManager.GetString("VALORANT_Sunset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Range.
+        /// </summary>
+        public static string VALORANT_TheRange {
+            get {
+                return ResourceManager.GetString("VALORANT_TheRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temple.
         /// </summary>
         public static string VALORANT_Unknown {
             get {
