@@ -1,14 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Assist.Core.Helpers;
+using Assist.Models.Enums;
 using Assist.Models.Socket;
+using Assist.Shared.Settings.Modules;
 using Assist.ViewModels;
+using Avalonia.Controls.Documents;
 using DiscordRPC;
 using DiscordRPC.Logging;
 using DiscordRPC.Message;
 using Microsoft.Win32;
 using Serilog;
+using ValNet.Objects.Coregame;
+using ValNet.Objects.Exceptions;
+using ValNet.Objects.Local;
 
 namespace Assist.Services.Modules;
 
@@ -67,11 +75,12 @@ public class RichPresenceService
         };
 
         Default._client.SetPresence(_currentPresence);
-        
         try
         {
             Default._client.Initialize();
             BDiscordPresenceActive = true;
+
+            ResetTimer();
         }
         catch (Exception e)
         {
@@ -108,50 +117,320 @@ public class RichPresenceService
 
     private void DeterminePregamePresence(PlayerPresence pres)
     {
-        
-    }
-
-    private void DetermineIngamePresence(PlayerPresence pres)
-    {
         if (pres.partyState.Equals("MATCHMADE_GAME_STARTING") || string.IsNullOrEmpty(pres.matchMap))
             return;
+
+        if (!_prevInGame)
+        {
+            ResetTimer();
+            _prevInGame = true;
+        }
         
-        // Update Basic Party Details
-        
+        // Handle Party
+        HandlePlayerParty(pres);
+
+        HandleSmallImageData(pres);
+        HandleLargeImageData(pres);
+        HandleDetails(pres);
+
+        _client.UpdateState("Agent Select");
     }
 
+    private bool _prevInGame = false;
+    private void DetermineIngamePresence(PlayerPresence pres)
+    {
+        if (!_prevInGame)
+        {
+            ResetTimer();
+            _prevInGame = true;
+        }
+        
+        // Handle Party
+        HandlePlayerParty(pres);
+
+        HandleSmallImageData(pres);
+        HandleLargeImageData(pres);
+        HandleDetails(pres);
+        _client.UpdateState(null);
+    }
+
+    private bool _prevInQueue = false;
     private void DetermineMenusPresence(PlayerPresence pres)
     {
+        // Player isnt in a game anymore.
+        _prevInGame = false;
         switch (pres.partyState)
         {
             case "MATCHMAKING":
-                _client.UpdateDetails($"Queueing: {ValorantHelper.DetermineQueueKey(pres.queueId)}"); 
+                if (ModuleSettings.Default.RichPresenceSettings.ShowMode)
+                {
+                    _client.UpdateDetails($"Queueing: {ValorantHelper.DetermineQueueKey(pres.queueId)}");
+                    if (!_prevInQueue)
+                        ResetTimer();
+
+                    _prevInQueue = true;
+                }
                 break;
             default:
                 _client.UpdateDetails($"In Lobby");
+                _prevInQueue = false;
+                
+                
+                
                 break;
         }
         
         // Handle Party
-        _client.UpdateParty(new Party()
-        {
-            ID = pres.partyId,
-            Max = pres.maxPartySize,
-            Privacy = pres.partyAccessibility.Equals("CLOSED") ? Party.PrivacySetting.Private : Party.PrivacySetting.Public,
-            Size = pres.partySize
-        });
+        HandlePlayerParty(pres);
 
-        HandleSecrets(pres.partyId); // Handle to see if players can enable launching.
-
-        ResetTimer();
-        
-        _client.UpdateSmallAsset($"rank_{pres.competitiveTier}",
-            ValorantHelper.RankNames[pres.competitiveTier]);
-        
-        _client.UpdateLargeAsset("default", "Updating...");
-        
+        HandleSmallImageData(pres);
+        HandleLargeImageData(pres);
+        //HandleDetails(pres);
+        _client.UpdateState("In Menus");
     }
 
+    private void HandleDetails(PlayerPresence pres)
+    {
+        string detailsFinal = string.Empty;
+        
+        // First Determine Queue
+
+        if (ModuleSettings.Default.RichPresenceSettings.ShowMode)
+        {
+            if (pres.partyState.Contains("CUSTOM_GAME"))
+                detailsFinal += Properties.Resources.VALORANT_CustomGame;
+            else
+            {
+                var queueName = ValorantHelper.DetermineQueueKey(pres.queueId);
+                detailsFinal += queueName;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(detailsFinal)) // Adds Spacer if there is already data.
+            detailsFinal += " | ";
+        
+        if (ModuleSettings.Default.RichPresenceSettings.ShowScore)
+        {
+           detailsFinal += $"{pres.partyOwnerMatchScoreAllyTeam} - {pres.partyOwnerMatchScoreEnemyTeam}";
+        }
+
+        if (string.IsNullOrEmpty(detailsFinal))
+        {
+            detailsFinal = Properties.Resources.Common_Assist;
+        }
+
+        _client.UpdateDetails(detailsFinal);
+    }
+
+    private string _latestMatchId; 
+    
+    private async void HandleSmallImageData(PlayerPresence pres)
+    {
+        if (BDiscordPresenceActive)
+        {
+            switch (ModuleSettings.Default.RichPresenceSettings.SmallImageData)
+            {
+                case ERPDataType.RANK:
+                    if (ModuleSettings.Default.RichPresenceSettings.ShowRank)
+                    {
+                        ValorantHelper.RankNames.TryGetValue(pres.competitiveTier, out string compName);
+                        _client.UpdateSmallAsset($"rank_{pres.competitiveTier}", compName);   
+                    }
+                    break;
+                case ERPDataType.LOGO:
+                    _client.UpdateSmallAsset($"default", "Assist");
+                    break;
+                case ERPDataType.AGENT: // Agent is only showcased within INGAME, Not During Agent Select. 
+                    if (ModuleSettings.Default.RichPresenceSettings.ShowRank)
+                    {
+                        if (pres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var data = await DisplayAgent(pres);
+                            _client.UpdateSmallAsset(data.Key, data.Value);   
+                        }
+                    }
+                    break;
+                case ERPDataType.MAP:
+                    if (!pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ValorantHelper.MapsByPath.TryGetValue(pres.matchMap, out string MapName);
+                        _client.UpdateSmallAsset(MapName.ToLower(), MapName); 
+                    }
+                    break;
+                case ERPDataType.DEFAULT:
+                    if (pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
+                        _client.UpdateSmallAsset(null, null);
+                    break;
+                default:
+                    _client.UpdateSmallAsset(null,null); 
+                    break;
+            }
+        }
+    }
+    
+    private async void HandleLargeImageData(PlayerPresence pres)
+    {
+        if (BDiscordPresenceActive)
+        {
+            switch (ModuleSettings.Default.RichPresenceSettings.LargeImageData)
+            {
+                case ERPDataType.RANK:
+                    if (ModuleSettings.Default.RichPresenceSettings.ShowRank)
+                    {
+                        ValorantHelper.RankNames.TryGetValue(pres.competitiveTier, out string compName);
+                        _client.UpdateLargeAsset($"rank_{pres.competitiveTier}", compName);   
+                    }
+                    break;
+                case ERPDataType.LOGO:
+                    _client.UpdateLargeAsset($"default", "Assist");
+                    break;
+                case ERPDataType.AGENT: // Agent is only showcased within INGAME, Not During Agent Select. 
+                    if (ModuleSettings.Default.RichPresenceSettings.ShowRank)
+                    {
+                        if (pres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var data = await DisplayAgent(pres);
+                            _client.UpdateLargeAsset(data.Key, data.Value);   
+                        }
+                    }
+                    break;
+                case ERPDataType.MAP:
+                    if (!pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ValorantHelper.MapsByPath.TryGetValue(pres.matchMap, out string MapName);
+                        _client.UpdateLargeAsset(MapName.ToLower(), MapName); 
+                    }
+                    break;
+                case ERPDataType.DEFAULT:
+                    if (pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
+                        _client.UpdateLargeAsset(null, null);
+                    break;
+                default:
+                    _client.UpdateLargeAsset(null,null); 
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the key, and Tooltip for the agent currently being played the client.
+    /// </summary>
+    /// <returns></returns>
+    private async Task<KeyValuePair<string, string>> DisplayAgent(PlayerPresence pres)
+    {
+        var characterId= await GetAgent_Ingame();
+
+        ValorantHelper.AgentIdToNames.TryGetValue(characterId.ToLower(), out var charName);
+        
+        if (charName is null)
+            return new KeyValuePair<string, string>("unknown", Properties.Resources.Common_Unknown);
+        
+        return new KeyValuePair<string, string>(characterId, charName);
+    }
+
+
+    /// <summary>
+    /// Gets and Returns the Character ID of the Current Local Player INGAME
+    /// </summary>
+    /// <param name="retry"></param>
+    /// <returns></returns>
+    private async Task<string> GetAgent_Ingame(bool retry = false)
+    {
+        if (!await GetIngamePlayerMatch()) return null;
+        
+        if (string.IsNullOrEmpty(_latestMatchId))
+            return null;
+        
+        CoregameMatch MatchResp = new CoregameMatch();
+        ChatV4PresenceObj PresenceResp = new ChatV4PresenceObj();
+        try
+        {
+            MatchResp = await AssistApplication.ActiveUser.CoreGame.FetchMatch(_latestMatchId!);
+            
+            if (MatchResp == null)
+            {
+                Log.Error("Failed on getting COREGAME Match Data within the Discord RPC Module Service.");
+                return null;
+            }
+        }
+        catch (RequestException e)
+        {
+            Log.Fatal("Error on getting player match");
+            Log.Fatal("DISCORDRPC_COREGAME ERROR: " + e.StatusCode);
+            Log.Fatal("DISCORDRPC_COREGAME ERROR: " + e.Content);
+            Log.Fatal("DISCORDRPC_COREGAME ERROR: " + e.Message);
+
+            if (e.StatusCode == HttpStatusCode.BadRequest)
+            {
+                Log.Fatal("DISCORDRPC_COREGAME TOKEN ERROR: ");
+                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+            }
+
+            return null;
+        }
+
+        if (MatchResp.Players == null || MatchResp.Players.Count == 0)
+            return null;
+        
+        var localPlayer =
+            MatchResp.Players.Find(player => player.Subject == AssistApplication.ActiveUser.UserData.sub);
+
+        if (localPlayer is null)
+         return null;
+
+        return localPlayer.CharacterID;
+
+    }
+    private async Task<bool> GetIngamePlayerMatch()
+    {
+        try
+        {
+            var getPlayerResp = await AssistApplication.ActiveUser.CoreGame.FetchPlayer();
+            if (getPlayerResp != null)
+            {
+                _latestMatchId = getPlayerResp.MatchID;
+            }
+
+            if (string.IsNullOrEmpty(_latestMatchId))
+            {
+                Log.Error("Failed to get MatchID");
+
+                return false;
+            }
+        }
+        catch (RequestException e)
+        {
+            Log.Fatal("Error on getting player coregame");
+            Log.Fatal("COREGAME ERROR: " + e.StatusCode);
+            Log.Fatal("COREGAME ERROR: " + e.Content);
+            Log.Fatal("COREGAME ERROR: " + e.Message);
+
+            if (e.StatusCode == HttpStatusCode.BadRequest)
+            {
+                Log.Fatal("TOKEN ERROR: " + e.Message);
+                await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+                return false;
+            }
+        }
+
+        return true;
+    }
+    private void HandlePlayerParty(PlayerPresence pres)
+    {
+        if (ModuleSettings.Default.RichPresenceSettings.ShowParty)
+        {
+            _client.UpdateParty(new Party()
+            {
+                ID = pres.partyId,
+                Max = pres.maxPartySize,
+                Privacy = pres.partyAccessibility.Equals("CLOSED") ? Party.PrivacySetting.Private : Party.PrivacySetting.Public,
+                Size = pres.partySize
+            });
+
+            if (ModuleSettings.Default.RichPresenceSettings.EnableDiscordInvite)
+                HandleSecrets(pres.partyId); // Handle to see if players can enable launching.            
+        }
+    }
     private void ResetTimer()
     {
         _client.UpdateClearTime();
@@ -165,6 +444,8 @@ public class RichPresenceService
         _client.SetPresence(data);
         _client.Invoke();
     }
+    
+    #region Discord Game Invites
 
     private void HandleDiscordClient_OnJoin(object sender, JoinMessage args)
     {
@@ -175,9 +456,9 @@ public class RichPresenceService
     {
         Log.Information("On Join Requested Event sent from Discord");
         Log.Information("Someone is requesting to join your game.");
-        
-        
     }
+
+    #endregion
     
     public async Task Shutdown()
     {
@@ -190,6 +471,7 @@ public class RichPresenceService
         _client = new DiscordRpcClient(CLIENTID);
         BDiscordPresenceActive = false;
     }
+    
     public void Deinitialize() 
     {
         if (_client == null)return;
