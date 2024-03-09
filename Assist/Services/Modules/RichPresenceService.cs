@@ -253,7 +253,7 @@ public class RichPresenceService
                 case ERPDataType.MAP:
                     if (!pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
                     {
-                        ValorantHelper.MapsByPath.TryGetValue(pres.matchMap, out string MapName);
+                        ValorantHelper.MapsByPath.TryGetValue(pres.matchMap.ToLower(), out string MapName);
                         _client.UpdateSmallAsset(MapName.ToLower(), MapName); 
                     }
                     break;
@@ -297,7 +297,7 @@ public class RichPresenceService
                 case ERPDataType.MAP:
                     if (!pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
                     {
-                        ValorantHelper.MapsByPath.TryGetValue(pres.matchMap, out string MapName);
+                        ValorantHelper.MapsByPath.TryGetValue(pres.matchMap.ToLower(), out string MapName);
                         _client.UpdateLargeAsset(MapName.ToLower(), MapName); 
                     }
                     break;
