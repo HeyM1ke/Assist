@@ -15,7 +15,7 @@
     
     <Border Background="{DynamicResource AssistControlBackground}"
             CornerRadius="12"
-            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderBrush="{Binding DodgeBorder}"
             BorderThickness="1.2"
             Padding="10">
         <Grid ColumnDefinitions="Auto,*">

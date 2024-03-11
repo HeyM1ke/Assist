@@ -6,6 +6,7 @@ using Assist.Core.Helpers;
 using Assist.Models.Game;
 using Assist.Properties;
 using Assist.Services.Assist;
+using AssistUser.Lib.V2.Models.Dodge;
 using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -43,7 +44,8 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
     [ObservableProperty] private bool _playerIsHidden = true;
     [ObservableProperty] private bool _trackerEnabled = false;
     [ObservableProperty]private bool _usingAssistProfile = false;
-    
+    [ObservableProperty]private bool _isPlayerDodge = false;
+    [ObservableProperty] private IBrush _dodgeBorder = new SolidColorBrush(new Color(255, 35, 38, 51));
     
     private string _playerId;
     private string _currentAgentId = "0";
@@ -323,22 +325,21 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
             }
             
             
-            /*// Check if user is on dodge list
+            //*#1#/ Check if user is on dodge list
             // if so enable red border and icon popup.
-            var user = DodgeService.Current.UserList.Find(player => player.UserId == userId);
-            var checkGlobal =
-                AssistApplication.AssistUser.Dodge.GlobalDodgeUsers.Find(player => player.id == userId);
+            var user = DodgeService.Current.DodgeList.Players.Find(player => player.PlayerId == userId);
             if (user != null)
             {
                 // This means the user was found on the dodge list.
-                IsPlayerDodge = true;
+                DodgeVisible = true;
+                DodgeText = AssistHelper.DodgeCategories[(EAssistDodgeCategory)user.Category];
                 Dispatcher.UIThread.InvokeAsync(async () =>
                 {
                     DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
                 });
             }
 
-            if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
+            /*if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
             {
                 // This means the user was found on the global dodge list.
                 IsPlayerDodge = true;

@@ -6,7 +6,8 @@
              xmlns:lang="clr-namespace:Assist.Properties"
              xmlns:modules1="clr-namespace:Assist.ViewModels.Modules"
              mc:Ignorable="d" d:DesignWidth="1190" d:DesignHeight="670"
-             x:Class="Assist.Views.Modules.ModulesView">
+             x:Class="Assist.Views.Modules.ModulesView"
+             Loaded="ModulePage_Loaded">
     
     <Design.DataContext>
         <modules1:ModulesViewModel/>
@@ -128,6 +129,7 @@
                                           ManageButtonCommand="{Binding OpenDodgeViewCommand}"/>
             <modules:ModulePreviewControl ModuleIcon="{SvgImage /Assets/Extras/Discord_White.svg}"
                                           ModuleName="Rich Presence"
+                                          IsEnabled="{Binding IsGameMode}"
                                           ManageButtonCommand="{Binding OpenDiscordViewCommand}"
                                           ModuleDesc="Showcase your VALORANT game on discord for all your friends to see. Customize what your presence shows."/>
         </StackPanel>
