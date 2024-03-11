@@ -1,0 +1,71 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Assist">
+    <Design.PreviewWith>
+        <controls:WideToggleButton Width="200"
+                                   Height="50"/>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|WideToggleButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Padding" Value="5"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid ColumnDefinitions="1*, 9*">
+                        <Grid VerticalAlignment="Center"
+                              Margin="5,0,0,0"
+                        >
+                            
+                            <Ellipse Fill="White"
+                                     Width="20"
+                                     Height="20"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"></Ellipse>
+                            <Ellipse Fill="{TemplateBinding Background}" 
+                                     Width="16"
+                                     Height="16"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"></Ellipse>
+                            
+                            <Ellipse Fill="White" 
+                                     Width="12"
+                                     Height="12"
+                                     IsVisible="{TemplateBinding IsChecked}"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"></Ellipse>
+                        </Grid>
+                        
+                        <Grid Column="1"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       FontSize="14"></TextBlock>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|WideToggleButton:pointerover">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+    </Style>
+    
+    <Style Selector="controls|WideToggleButton[IsChecked=True]">
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlPressed}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+        
+    </Style>
+</Styles>

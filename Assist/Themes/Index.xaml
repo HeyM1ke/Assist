@@ -11,10 +11,14 @@
     <StyleInclude Source="avares://Assist/Controls/Assist/LargeImageButton.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Assist/MenuSelectorButton.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Assist/ImageToggleButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/WideToggleButton.axaml"/>
+    <StyleInclude Source="avares://Assist/Controls/Assist/EnableDisableTextButton.axaml"/>
 
     <StyleInclude Source="avares://Assist/Controls/Navigation/NavigationButton.axaml"/>
+    
     <StyleInclude Source="avares://Assist/Controls/Startup/BasicStartupControl.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Startup/AccountPreviewStartupControl.axaml"/>
+    
     <StyleInclude Source="avares://Assist/Controls/Setup/WelcomeSetupControl.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Setup/LangSetupControl.axaml"/>
     <StyleInclude Source="avares://Assist/Controls/Setup/ModeSelectionControl.axaml"/>
