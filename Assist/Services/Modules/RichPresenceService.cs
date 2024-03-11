@@ -95,6 +95,9 @@ public class RichPresenceService
 
     public async void ForceUpdate()
     {
+        if (!BDiscordPresenceActive)
+            return;
+        
         Log.Information("Forcing Discord RPC Update");
         var data = AssistApplication.RiotWebsocketService.GetLatestMessage();
         if (data is null) return;

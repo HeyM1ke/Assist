@@ -87,11 +87,13 @@ public partial class DodgeViewModel : ViewModelBase
     private void DodgeUserRemovedFromList(UserDodgePlayer? obj)
     {
         Log.Information("Player has been removed from the list.");
-        var onList = PlayerControls.FirstOrDefault(x => x.PlayerId == obj.PlayerId);
 
-        if (onList is null) return;
+        Dispatcher.UIThread.Invoke(() => { 
+            
+            var onList = PlayerControls.FirstOrDefault(x => x.PlayerId == obj.PlayerId);
 
-        PlayerControls.Remove(onList);
+            if (onList is null) return;
+            PlayerControls.Remove(onList); });
     }
 
     private void DodgeUserAddedToList(UserDodgePlayer obj)

@@ -93,5 +93,7 @@ public partial class DodgeAddPlayerViewModel : ViewModelBase
             IsProcessing = false;
             return;
         }
+        
+        CloseViewCommand?.Execute(null);
     }
 }
