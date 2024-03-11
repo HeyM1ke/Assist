@@ -47,28 +47,8 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
         {
             await RiotClientService.CloseRiotRelatedPrograms();
             
-            // Check if there is a Riot Games file already.
+            ClearPreviousConfig();
 
-            if (Directory.Exists(defaultConfigLocation))
-            {
-                DirectoryInfo di = new DirectoryInfo(defaultConfigLocation);
-                foreach (var filePath in di.GetFiles())
-                {
-                    filePath.Delete();
-                }
-                // removed any currently logged in client
-            }
-
-            if (Directory.Exists(defaultBetaConfigLocation))
-            {
-                DirectoryInfo di = new DirectoryInfo(defaultBetaConfigLocation);
-                foreach (var filePath in di.GetFiles())
-                {
-                    filePath.Delete();
-                }
-                // removed any currently logged in client
-            }
-            
             string clientLocation = await RiotClientService.FindRiotClient();
             
             if (clientLocation == null)
@@ -96,6 +76,31 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
                 await Task.Delay(1500);
             }
 
+        }
+
+        private void ClearPreviousConfig()
+        {
+            // Check if there is a Riot Games file already.
+
+            if (Directory.Exists(defaultConfigLocation))
+            {
+                DirectoryInfo di = new DirectoryInfo(defaultConfigLocation);
+                foreach (var filePath in di.GetFiles())
+                {
+                    filePath.Delete();
+                }
+                // removed any currently logged in client
+            }
+
+            if (Directory.Exists(defaultBetaConfigLocation))
+            {
+                DirectoryInfo di = new DirectoryInfo(defaultBetaConfigLocation);
+                foreach (var filePath in di.GetFiles())
+                {
+                    filePath.Delete();
+                }
+                // removed any currently logged in client
+            }
         }
 
         [RelayCommand]
@@ -225,17 +230,53 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
                 accountProfile.CanLauncherBoot = true;
                 await AccountSettings.Default.UpdateAccount(accountProfile);
                 AssistApplication.ActiveAccountProfile = accountProfile; // Sets this as the updated one.
-                
+                ClearPreviousConfig();
                 LoginCompletedCommand?.Execute("");
             }
             else
             {
+                var badLogin = await CheckForBadLogin(settings);
+
+                if (badLogin)
+                {
+                    // If the login is bad (AKA: User forgot to put Remember me but logged in.
+                    // Close Riot Client, Clear the Settings, and Showcase a message that states to click Remember Me.
+                    await RiotClientService.CloseRiotRelatedPrograms();
+                    _authFileWatcher.Changed -= AuthFileWatcherOnChanged;
+                    _authFileWatcher.Dispose();
+                    
+                    ClearPreviousConfig();
+                    
+                    // Showcase Message/Window stating issue.
+                    
+                    IsProcessing = false; // Unhides UI to progress
+                }
+                
                 Log.Error("Parse Passed but failed Check");
                 Log.Error("APOINT: PPBFC");
                 return;
             }
         }
-        
+
+        private async Task<bool> CheckForBadLogin(ClientPrivateModel config)
+        {
+            try
+            {
+                if (config.RiotLogin?.Persist?.Session?.Cookies != null)
+                {
+                    var tdid = config.RiotLogin.Persist.Session.Cookies.Find(c => c.name == "tdid");
+
+                    return tdid != null;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+            }
+
+            return false;
+        }
+
         private async Task<bool> CheckSettings(ClientPrivateModel config)
         {
             try

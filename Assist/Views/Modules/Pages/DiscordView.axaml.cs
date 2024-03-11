@@ -1,4 +1,5 @@
-﻿using Assist.ViewModels.Modules;
+﻿using System;
+using Assist.ViewModels.Modules;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -13,5 +14,10 @@ public partial class DiscordView : UserControl
     {
         DataContext = _viewModel = new DiscordRPViewModel();
         InitializeComponent();
+    }
+
+    private void DiscordView_Init(object? sender, EventArgs e)
+    {
+        _viewModel.Setup();
     }
 }

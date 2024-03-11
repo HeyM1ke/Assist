@@ -81,6 +81,7 @@ public class RichPresenceService
             BDiscordPresenceActive = true;
 
             ResetTimer();
+            ForceUpdate();
         }
         catch (Exception e)
         {
@@ -90,6 +91,14 @@ public class RichPresenceService
         }
             
         AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += UpdateDiscordRpcWithDataFromPresence;
+    }
+
+    public async void ForceUpdate()
+    {
+        Log.Information("Forcing Discord RPC Update");
+        var data = AssistApplication.RiotWebsocketService.GetLatestMessage();
+        if (data is null) return;
+        UpdateDiscordRpcWithDataFromPresence(data);
     }
     
     private async void UpdateDiscordRpcWithDataFromPresence(PresenceV4Message obj)
@@ -159,6 +168,9 @@ public class RichPresenceService
     {
         // Player isnt in a game anymore.
         _prevInGame = false;
+        // Handle Party
+        HandlePlayerParty(pres);
+        
         switch (pres.partyState)
         {
             case "MATCHMAKING":
@@ -180,9 +192,6 @@ public class RichPresenceService
                 break;
         }
         
-        // Handle Party
-        HandlePlayerParty(pres);
-
         HandleSmallImageData(pres);
         HandleLargeImageData(pres);
         //HandleDetails(pres);
@@ -236,6 +245,8 @@ public class RichPresenceService
                         ValorantHelper.RankNames.TryGetValue(pres.competitiveTier, out string compName);
                         _client.UpdateSmallAsset($"rank_{pres.competitiveTier}", compName);   
                     }
+                    else
+                        _client.UpdateSmallAsset(string.Empty,null); 
                     break;
                 case ERPDataType.LOGO:
                     _client.UpdateSmallAsset($"default", "Assist");
@@ -248,21 +259,32 @@ public class RichPresenceService
                             var data = await DisplayAgent(pres);
                             _client.UpdateSmallAsset(data.Key, data.Value);   
                         }
+                        else
+                            _client.UpdateSmallAsset(string.Empty,null); 
                     }
+                    else
+                        _client.UpdateSmallAsset(string.Empty,null); 
                     break;
                 case ERPDataType.MAP:
                     if (!pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
                     {
+                        if (string.IsNullOrEmpty(pres.matchMap)) return;
                         ValorantHelper.MapsByPath.TryGetValue(pres.matchMap.ToLower(), out string MapName);
-                        _client.UpdateSmallAsset(MapName.ToLower(), MapName); 
+                        string code = MapName.ToLower();
+                        if (pres.matchMap.Equals("/game/maps/poveglia/range", StringComparison.OrdinalIgnoreCase))
+                            code = "range";
+                        
+                        _client.UpdateSmallAsset(code, MapName); 
                     }
+                    else
+                        _client.UpdateSmallAsset(string.Empty,null); 
                     break;
                 case ERPDataType.DEFAULT:
                     if (pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
-                        _client.UpdateSmallAsset(null, null);
+                        _client.UpdateSmallAsset(string.Empty, null);
                     break;
                 default:
-                    _client.UpdateSmallAsset(null,null); 
+                    _client.UpdateSmallAsset(string.Empty,null); 
                     break;
             }
         }
@@ -280,26 +302,39 @@ public class RichPresenceService
                         ValorantHelper.RankNames.TryGetValue(pres.competitiveTier, out string compName);
                         _client.UpdateLargeAsset($"rank_{pres.competitiveTier}", compName);   
                     }
+                    else
+                        _client.UpdateLargeAsset($"default", "Assist");
                     break;
                 case ERPDataType.LOGO:
                     _client.UpdateLargeAsset($"default", "Assist");
                     break;
                 case ERPDataType.AGENT: // Agent is only showcased within INGAME, Not During Agent Select. 
-                    if (ModuleSettings.Default.RichPresenceSettings.ShowRank)
+                    if (ModuleSettings.Default.RichPresenceSettings.ShowAgent)
                     {
                         if (pres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
                         {
                             var data = await DisplayAgent(pres);
                             _client.UpdateLargeAsset(data.Key, data.Value);   
                         }
+                        else
+                            _client.UpdateLargeAsset($"default", "Assist");
                     }
+                    else
+                        _client.UpdateLargeAsset($"default", "Assist");
                     break;
                 case ERPDataType.MAP:
                     if (!pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
                     {
+                        if (string.IsNullOrEmpty(pres.matchMap)) return;
                         ValorantHelper.MapsByPath.TryGetValue(pres.matchMap.ToLower(), out string MapName);
-                        _client.UpdateLargeAsset(MapName.ToLower(), MapName); 
+                        string code = MapName.ToLower();
+                        if (pres.matchMap.Equals("/game/maps/poveglia/range", StringComparison.OrdinalIgnoreCase))
+                            code = "range";
+                        
+                        _client.UpdateLargeAsset(code, MapName); 
                     }
+                    else
+                        _client.UpdateLargeAsset($"default", "Assist");
                     break;
                 case ERPDataType.DEFAULT:
                     if (pres.sessionLoopState.Equals("MENUS", StringComparison.OrdinalIgnoreCase))
@@ -320,15 +355,14 @@ public class RichPresenceService
     {
         var characterId= await GetAgent_Ingame();
 
-        ValorantHelper.AgentIdToNames.TryGetValue(characterId.ToLower(), out var charName);
+        ValorantHelper.AgentIdToNames.TryGetValue(characterId, out var charName);
         
         if (charName is null)
             return new KeyValuePair<string, string>("unknown", Properties.Resources.Common_Unknown);
         
         return new KeyValuePair<string, string>(characterId, charName);
     }
-
-
+    
     /// <summary>
     /// Gets and Returns the Character ID of the Current Local Player INGAME
     /// </summary>
@@ -342,7 +376,6 @@ public class RichPresenceService
             return null;
         
         CoregameMatch MatchResp = new CoregameMatch();
-        ChatV4PresenceObj PresenceResp = new ChatV4PresenceObj();
         try
         {
             MatchResp = await AssistApplication.ActiveUser.CoreGame.FetchMatch(_latestMatchId!);
@@ -378,7 +411,7 @@ public class RichPresenceService
         if (localPlayer is null)
          return null;
 
-        return localPlayer.CharacterID;
+        return localPlayer.CharacterID.ToLower();
 
     }
     private async Task<bool> GetIngamePlayerMatch()
@@ -419,6 +452,9 @@ public class RichPresenceService
     {
         if (ModuleSettings.Default.RichPresenceSettings.ShowParty)
         {
+            if (!pres.sessionLoopState.Equals("MENUS"))
+                _client.UpdateState($"In Party: ");
+            
             _client.UpdateParty(new Party()
             {
                 ID = pres.partyId,
