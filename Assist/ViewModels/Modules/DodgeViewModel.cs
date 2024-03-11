@@ -129,8 +129,10 @@ public partial class DodgeViewModel : ViewModelBase
     public void RefreshList()
     {
         Log.Information("Refreshing Dodge List");
+        IsLoading = true;
         PlayerControls.Clear();
         CreateDodgeControls();
+        IsLoading = false;
     }
 
     [RelayCommand]
@@ -143,6 +145,32 @@ public partial class DodgeViewModel : ViewModelBase
     public void OpenPlayerEditPopup()
     {
         
+    }
+
+    [RelayCommand]
+    public async void ClearPlayerList()
+    {
+        try
+        {
+            IsLoading = true;
+            var r = await AssistApplication.AssistUser.DodgeList.ClearPlayerDodgeList();
+
+            if (r.Code != 200)
+            {
+                Log.Error("Failed to clear Dodgelist");
+                Log.Error("CODE: " + r.Code);
+                Log.Error("MESSAGE: " + r.Message);
+                return;
+            }
+            
+            PlayerControls.Clear();
+            IsLoading = false;
+        }
+        catch (Exception e)
+        {
+            Log.Error("Failed to clear Dodgelist");
+            Log.Error("MESSAGE: " + e.Message);
+        }
     }
     
     [RelayCommand]

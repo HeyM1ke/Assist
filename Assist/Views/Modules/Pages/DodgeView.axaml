@@ -104,14 +104,15 @@
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                Padding="8,7"
+                               Command="{Binding RefreshListCommand}"
                                FontSize="12"></Button>
                        
                        <Button Content="Clear"
                                Classes="default"
-                               IsVisible="False"
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Center"
                                Padding="8,7"
+                               Command="{Binding ClearPlayerListCommand}"
                                FontSize="12"></Button>
                    </StackPanel>
                    
