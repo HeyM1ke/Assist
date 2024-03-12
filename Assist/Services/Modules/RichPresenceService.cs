@@ -163,7 +163,6 @@ public class RichPresenceService
         HandleSmallImageData(pres);
         HandleLargeImageData(pres);
         HandleDetails(pres);
-        _client.UpdateState(null);
     }
 
     private bool _prevInQueue = false;
@@ -179,7 +178,7 @@ public class RichPresenceService
             case "MATCHMAKING":
                 if (ModuleSettings.Default.RichPresenceSettings.ShowMode)
                 {
-                    _client.UpdateDetails($"Queueing: {ValorantHelper.DetermineQueueKey(pres.queueId)}");
+                    _client.UpdateDetails($"In Queue: {ValorantHelper.DetermineQueueKey(pres.queueId)}");
                     if (!_prevInQueue)
                         ResetTimer();
 
@@ -255,7 +254,7 @@ public class RichPresenceService
                     _client.UpdateSmallAsset($"default", "Assist");
                     break;
                 case ERPDataType.AGENT: // Agent is only showcased within INGAME, Not During Agent Select. 
-                    if (ModuleSettings.Default.RichPresenceSettings.ShowRank)
+                    if (ModuleSettings.Default.RichPresenceSettings.ShowAgent)
                     {
                         if (pres.sessionLoopState.Equals("INGAME", StringComparison.OrdinalIgnoreCase))
                         {
