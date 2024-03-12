@@ -126,6 +126,7 @@
             <modules:ModulePreviewControl ModuleIcon="/Assets/Extras/DodgeLogo_Icon.png"
                                           ModuleName="{x:Static lang:Resources.Dodge_Title}"
                                           ModuleDesc="{x:Static lang:Resources.Dodge_Description}"
+                                          IsEnabled="{Binding IsAssistLoggedIn}"
                                           ManageButtonCommand="{Binding OpenDodgeViewCommand}"/>
             <modules:ModulePreviewControl ModuleIcon="{SvgImage /Assets/Extras/Discord_White.svg}"
                                           ModuleName="Rich Presence"

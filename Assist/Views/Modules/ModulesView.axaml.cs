@@ -20,6 +20,7 @@ public partial class ModulesView : UserControl
 
     private void ModulePage_Loaded(object? sender, RoutedEventArgs e)
     {
+        _viewModel.IsAssistLoggedIn = !string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken);
         _viewModel.IsGameMode = AssistApplication.CurrentMode == EAssistMode.GAME; 
     }
 }

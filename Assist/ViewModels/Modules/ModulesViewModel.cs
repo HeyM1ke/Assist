@@ -10,6 +10,7 @@ namespace Assist.ViewModels.Modules;
 public partial class ModulesViewModel : ViewModelBase
 {
     [ObservableProperty] private bool _isGameMode =  AssistApplication.CurrentMode == EAssistMode.GAME;
+    [ObservableProperty] private bool _isAssistLoggedIn =  !string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken);
     
     
     [RelayCommand]

@@ -16,7 +16,9 @@ public partial class DiscordRPViewModel : ViewModelBase
 {
     /// This is a really Janky Setup btw, but since its toggle buttons this is a bit of a pain.
 
-    [ObservableProperty] private bool _discordEnabled = false;
+    [ObservableProperty] private bool _discordEnabled;
+
+    private bool _setup = true;
 
     [ObservableProperty]private ObservableCollection<WideToggleButton> _largeImageButtons = new ObservableCollection<WideToggleButton>();
     [ObservableProperty]private ObservableCollection<EnableDisableTextButton> _privacyButtons = new ObservableCollection<EnableDisableTextButton>();
@@ -28,6 +30,7 @@ public partial class DiscordRPViewModel : ViewModelBase
         CreateSmallImageButtons();
         CreatePrivacyButtons();
         DiscordEnabled = ModuleSettings.Default.RichPresenceSettings.IsEnabled;
+        _setup = false;
     }
     
     
@@ -222,6 +225,7 @@ public partial class DiscordRPViewModel : ViewModelBase
 
     public async void HandleDiscordEnableChange()
     {
+        if (_setup) return;
         Log.Information("User has asked to change if discord Pres is enabled");
         DiscordEnabled = !DiscordEnabled;
         if (!DiscordEnabled && ModuleSettings.Default.RichPresenceSettings.IsEnabled)
