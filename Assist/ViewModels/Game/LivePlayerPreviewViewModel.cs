@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Assist.Controls.Modules.Dodge;
 using Assist.Core.Helpers;
 using Assist.Models.Game;
 using Assist.Properties;
@@ -52,7 +53,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
     [ObservableProperty]private string _playerRealName = "";
     private bool _basePlayerDataFlag = false;
     private bool _recentChecked = false;
-    
+    [ObservableProperty] bool _assistAccountLoggedIn = !string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken);
 
 
     public async Task UpdatePlayerData()
@@ -421,6 +422,15 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 FileName = url,
                 UseShellExecute = true
             });
+        }
+    }
+
+    [RelayCommand]
+    public async void OpenDodgeAddPage()
+    {
+        if (!PlayerIsHidden && !DodgeVisible)
+        {
+            AssistApplication.ChangeMainWindowPopupView(new DodgeQuickAddPlayerControl(_playerId));
         }
     }
 }

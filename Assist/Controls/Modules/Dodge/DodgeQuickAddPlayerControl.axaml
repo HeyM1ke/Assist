@@ -5,10 +5,10 @@
              xmlns:lang="clr-namespace:Assist.Properties"
              xmlns:assist="clr-namespace:Assist.Controls.Assist"
              xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
-             mc:Ignorable="d" d:DesignWidth="500" 
-             x:Class="Assist.Controls.Modules.Dodge.DodgeAddPlayerControl"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Modules.Dodge.DodgeQuickAddPlayerControl"
              Background="{DynamicResource AssistBackground}">
-    <Border Background="{DynamicResource AssistControlBackground}"
+      <Border Background="{DynamicResource AssistControlBackground}"
             BorderBrush="{DynamicResource AssistControlOutline}"
             BorderThickness="1"
             CornerRadius="10"
@@ -42,7 +42,6 @@
                                HorizontalAlignment="Left"></TextBlock>
                 </StackPanel>
             </StackPanel>
-            
             <StackPanel Orientation="Horizontal"
                         Grid.Row="0"
                         VerticalAlignment="Top"
@@ -86,6 +85,8 @@
                       
                    </StackPanel>
             
+           
+            
             <Grid Row="1">
                  <StackPanel MinWidth="293"
                         Spacing="10">
@@ -99,20 +100,6 @@
                         <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
                     </Style>
                 </StackPanel.Styles>
-                
-                <StackPanel Spacing="2">
-                    <TextBlock Text="Player Name (Username#Tag):"
-                               FontWeight="Light"
-                               FontSize="14"
-                               Opacity=".5"
-                               HorizontalAlignment="Left"/>
-                    <TextBox Watermark="EX: ValorantPlayer#000"
-                             x:Name="PlayerNameBox"
-                             FontSize="16"
-                             Text="{Binding PlayerNameText}"
-                             ></TextBox>
-                </StackPanel>
-                     
                      <StackPanel Spacing="2">
                          <StackPanel Orientation="Horizontal"
                                      HorizontalAlignment="Left"

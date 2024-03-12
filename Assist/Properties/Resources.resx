@@ -259,6 +259,7 @@
   <data name="Common_Month" xml:space="preserve">
     <value>Month</value>
   </data>
+  
   <data name="Common_Month_Plural" xml:space="preserve">
     <value>Months</value>
   </data>
@@ -270,6 +271,9 @@
   </data>
   <data name="Common_Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="Common_AssistAccountRequired" xml:space="preserve">
+    <value>Assist Account Required</value>
   </data>
   <data name="ProfileManager_AddAccountText" xml:space="preserve">
     <value>Add Account</value>

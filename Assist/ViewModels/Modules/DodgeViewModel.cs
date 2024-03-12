@@ -79,9 +79,8 @@ public partial class DodgeViewModel : ViewModelBase
                 DeletePlayerCommand = DeletePlayerFromListCommand
             });
         }
-
-        if (DodgeService.Current.DodgeList.Players.Count == 0)
-            IsListEmpty = true;
+        
+        IsListEmpty = DodgeService.Current.DodgeList.Players.Count == 0;
     }
     
     private void DodgeUserRemovedFromList(UserDodgePlayer? obj)
@@ -89,11 +88,12 @@ public partial class DodgeViewModel : ViewModelBase
         Log.Information("Player has been removed from the list.");
 
         Dispatcher.UIThread.Invoke(() => { 
-            
             var onList = PlayerControls.FirstOrDefault(x => x.PlayerId == obj.PlayerId);
-
             if (onList is null) return;
-            PlayerControls.Remove(onList); });
+            PlayerControls.Remove(onList);
+            IsListEmpty = PlayerControls.Count == 0;
+        });
+        IsListEmpty = PlayerControls.Count == 0;
     }
 
     private void DodgeUserAddedToList(UserDodgePlayer obj)
@@ -115,6 +115,8 @@ public partial class DodgeViewModel : ViewModelBase
                 DeletePlayerCommand = DeletePlayerFromListCommand
             });
         });
+        
+        IsListEmpty = DodgeService.Current.DodgeList.Players.Count == 0;
     }
 
     [RelayCommand]

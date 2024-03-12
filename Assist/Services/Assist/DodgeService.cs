@@ -117,11 +117,13 @@ public class DodgeService
             throw new Exception(resp.Message);
 
         var newUser = JsonSerializer.Deserialize<UserDodgePlayer>(resp.Data.ToString());
+
+        var oldP = DodgeList.Players.Find(x => x.PlayerId == newUser.PlayerId);
         
-        DodgeList.Players.Remove(newUser); // This updates the list locally without having to pull from the server.
+        DodgeList.Players.Remove(oldP); // This updates the list locally without having to pull from the server.
         
-        DodgeUserRemovedFromList?.Invoke(newUser); // Alerts that there is a new user added
+        DodgeUserRemovedFromList?.Invoke(oldP); // Alerts that there is a new user added
         
-        return newUser;
+        return oldP;
     }
 }

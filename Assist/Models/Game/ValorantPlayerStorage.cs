@@ -60,7 +60,7 @@ public class ValorantPlayerStorage
             var t = await AssistApplication.ActiveUser.Player.GetPlayerMmr(PlayerId);
             _playerMmr = t;
         }
-        catch (RequestException e)
+        catch (ValNet.Objects.Exceptions.RequestException e)
         {
             if(e.StatusCode == HttpStatusCode.BadRequest){
                 Log.Fatal("(ValorantPlayerStorage) FetchPlayer Names Expired.: ");

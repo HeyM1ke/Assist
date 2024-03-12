@@ -56,7 +56,7 @@
                                    IsVisible="{Binding IsLoading}"
                                    Height="25"
                                    Spacing="5">
-                           <TextBlock Text="Thinking..."
+                           <TextBlock Text="{x:Static properties:Resources.Common_Loading}"
                                       FontSize="10"
                                       FontWeight="Light"
                                       TextAlignment="Left"

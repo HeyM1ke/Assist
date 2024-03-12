@@ -276,6 +276,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assist Account Required.
+        /// </summary>
+        public static string Common_AssistAccountRequired {
+            get {
+                return ResourceManager.GetString("Common_AssistAccountRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Common_BackText {
