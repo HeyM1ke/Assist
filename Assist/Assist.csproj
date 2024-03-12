@@ -10,6 +10,7 @@
         <SignAssembly>False</SignAssembly>
         <ApplicationIcon>./Assets/Assist_IconBlack.ico</ApplicationIcon>
         <Company>Mike Creations LLC</Company>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
