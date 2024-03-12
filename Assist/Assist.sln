@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assist", "Assist.csproj", "{EAB15ED8-08F7-4E95-BF1C-852BB26CAEB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assist.Shared", "..\..\Assist.Shared\Assist.Shared\Assist.Shared.csproj", "{87822688-AA35-467C-987C-1A41FA997E2E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
