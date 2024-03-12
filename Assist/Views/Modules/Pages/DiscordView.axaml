@@ -91,6 +91,22 @@
                                  <Setter Property="Margin" Value="0,0,8,0"/>
                              </Style>
                          </StackPanel.Styles>
+                         <Grid>
+                             <TextBlock Text="Enable Discord Presence"
+                                        FontSize="16"
+                                        FontWeight="Medium"
+                                        TextAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"/>
+                             
+                             <CheckBox HorizontalAlignment="Right"
+                                       IsCheckedChanged="DiscordEnabled_CheckChanged"
+                                       IsChecked="{Binding DiscordEnabled}"></CheckBox>
+                         </Grid>
+                         <Rectangle Height="1"
+                                    Margin="0,5,0,5"
+                                    Fill="{DynamicResource AssistControlOutline}"></Rectangle>
+                         
                          <TextBlock Text="Large Image"
                                     FontSize="16"
                                     FontWeight="20"
