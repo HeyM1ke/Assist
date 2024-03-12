@@ -1,0 +1,51 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Assist">
+    <Design.PreviewWith>
+        <controls:EnableDisableTextButton Content="Show Party" />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|EnableDisableTextButton">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="CornerRadius" Value="5"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Template">
+             <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid>
+                        <Image 
+                            VerticalAlignment="Stretch"
+                            Height="100"
+                            Opacity=".2"
+                            IsVisible="{TemplateBinding IsChecked}"
+                            Source="{SvgImage /Assets/Default/Check_Icon.svg}"></Image>
+                        <TextBlock Text="{TemplateBinding Content}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   FontSize="14"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></TextBlock>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|EnableDisableTextButton:pointerover">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"></Setter>
+    </Style>
+    
+    <Style Selector="controls|EnableDisableTextButton[IsChecked=True]">
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlPressed}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+    </Style>
+</Styles>

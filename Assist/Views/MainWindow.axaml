@@ -39,7 +39,11 @@
             
             <Grid Row="1">
                 <TransitioningContentControl Content="{Binding CurrentView}"
-                                             Padding="0"/>
+                                             Padding="0">
+                    <TransitioningContentControl.PageTransition>
+                        <CrossFade Duration="0.25" />
+                    </TransitioningContentControl.PageTransition>
+                </TransitioningContentControl>
                 <TransitioningContentControl Content="{Binding CurrentPopup}"/>
             </Grid>
         </Grid>

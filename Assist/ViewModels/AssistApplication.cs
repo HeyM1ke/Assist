@@ -36,7 +36,7 @@ public static class AssistApplication
     public static RiotUser? ActiveUser;
     public static AssistApiService AssistApiService = new AssistApiService();
     public static AccountProfile? ActiveAccountProfile;
-    public static AUser? AssistUser = new AssistUserBuilder().Construct();
+    public static AUser? AssistUser = new AUserBuilder().Build();
     public static AssistGameServerConnection? Server = new AssistGameServerConnection();
     public static ValorantWebsocketClient? WebsocketClient;
     
@@ -202,13 +202,14 @@ public static class AssistApplication
     {
         NavigationContainer.ViewModel.EnableButton(AssistPage.DASHBOARD);
         NavigationContainer.ViewModel.EnableButton(AssistPage.STORE);
+        NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES);
         NavigationContainer.ViewModel.EnableAllButtons();
     }
     
     public static void EnableDefaultGameButtons()
     {
         NavigationContainer.ViewModel.EnableButton(AssistPage.LIVE);
-        //NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES); not yet lmao
+        NavigationContainer.ViewModel.EnableButton(AssistPage.MODULES);
         NavigationContainer.ViewModel.EnableAllButtons();
     }
     

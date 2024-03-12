@@ -24,6 +24,7 @@ public class ValorantWebsocketClient
     private LockfileData _currentLockfileData;
     public WebSocket ClientSocket;
 
+    private PresenceV4Message? _latestUserPresResponse;
     #region Events
 
     public event Action<object>? RecieveMessageEvent;
@@ -80,6 +81,7 @@ public class ValorantWebsocketClient
         SubscribeToEvents();
     }
 
+    public PresenceV4Message? GetLatestMessage() => _latestUserPresResponse;
     private void SubscribeToEvents()
     {
         ClientSocket.OnMessage += ClientSocketOnOnMessage;
@@ -124,9 +126,13 @@ public class ValorantWebsocketClient
         var presData = JsonSerializer.Deserialize<PresenceV4Message>(data.ToString());
 
         PresenceMessageEvent?.Invoke(presData);
-        
-        if(presData.MessageData.Presences[0].puuid == AssistApplication.ActiveUser.UserData.sub)
+
+        if (presData.MessageData.Presences[0].puuid == AssistApplication.ActiveUser.UserData.sub)
+        {
             UserPresenceMessageEvent?.Invoke(presData);
+            _latestUserPresResponse = presData;
+        }
+            
 
     }
 

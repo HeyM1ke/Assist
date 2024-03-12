@@ -160,6 +160,12 @@
   <data name="Common_Expired" xml:space="preserve">
     <value>Expired</value>
   </data>
+  <data name="Common_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Common_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
   <data name="Common_Information" xml:space="preserve">
     <value>Information</value>
   </data>
@@ -253,6 +259,7 @@
   <data name="Common_Month" xml:space="preserve">
     <value>Month</value>
   </data>
+  
   <data name="Common_Month_Plural" xml:space="preserve">
     <value>Months</value>
   </data>
@@ -264,6 +271,9 @@
   </data>
   <data name="Common_Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="Common_AssistAccountRequired" xml:space="preserve">
+    <value>Assist Account Required</value>
   </data>
   <data name="ProfileManager_AddAccountText" xml:space="preserve">
     <value>Add Account</value>
@@ -304,8 +314,8 @@
   <data name="Common_Training" xml:space="preserve">
     <value>Training</value>
   </data>
-  <data name="Common_Enable" xml:space="preserve">
-    <value>Enable</value>
+  <data name="Common_Unknown" xml:space="preserve">
+    <value>Unknown</value>
   </data>
   <data name="RichPres_Enable" xml:space="preserve">
     <value>Enable Discord Rich Presence</value>
@@ -510,5 +520,183 @@
   </data>
   <data name="Live_OpenTracker" xml:space="preserve">
     <value>Open Tracker Profile</value>
+  </data>
+  <data name="Common_Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="Dodge_Title" xml:space="preserve">
+    <value>DODGE</value>
+  </data>
+  <data name="Dodge_Description" xml:space="preserve">
+    <value>Assist DODGE allows for you to be warned about players on your team and game. Add, Remove, Edit, and overall manage your own DODGE List. Additionally, a Global List is available for all players.</value>
+  </data>
+  <data name="Dodge_DodgeList" xml:space="preserve">
+    <value>DODGE LIST</value>
+  </data>
+  <data name="Dodge_EditPlayer" xml:space="preserve">
+    <value>Edit Player</value>
+  </data>
+  <data name="Dodge_AddPlayer" xml:space="preserve">
+    <value>Add Player</value>
+  </data>
+  <data name="Dodge_ListEmpty" xml:space="preserve">
+    <value>Your list is empty.</value>
+  </data>
+  <data name="DodgeCategory_Toxic" xml:space="preserve">
+    <value>Toxic</value>
+  </data>
+  <data name="DodgeCategory_Thrower" xml:space="preserve">
+    <value>Thrower</value>
+  </data>
+  <data name="DodgeCategory_BadTeammate" xml:space="preserve">
+    <value>Bad Teammate</value>
+  </data>
+  <data name="DodgeCategory_Streamsniper" xml:space="preserve">
+    <value>Stream Sniper</value>
+  </data>
+  <data name="DodgeCategory_Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="DodgeCategory_Wintrader" xml:space="preserve">
+    <value>Win Trading</value>
+  </data>
+  <data name="DodgeCategory_Cheater" xml:space="preserve">
+    <value>Cheater</value>
+  </data>
+  <data name="DodgeCategory_BadComms" xml:space="preserve">
+    <value>Bad Comms</value>
+  </data>
+  <data name="DodgeCategory_Griefer" xml:space="preserve">
+    <value>Griefer</value>
+  </data>
+  <data name="DodgeCategory_Bot" xml:space="preserve">
+    <value>Bot</value>
+  </data>
+  <data name="DodgeCategory_Smurf" xml:space="preserve">
+    <value>Smurf</value>
+  </data>
+  <data name="VALORANT_Jett" xml:space="preserve">
+    <value>Jett</value>
+  </data>
+  <data name="VALORANT_Brimstone" xml:space="preserve">
+    <value>Brimstone</value>
+  </data>
+  <data name="VALORANT_Phoenix" xml:space="preserve">
+    <value>Phoenix</value>
+  </data>
+  <data name="VALORANT_Skye" xml:space="preserve">
+    <value>Skye</value>
+  </data><data name="VALORANT_Cypher" xml:space="preserve">
+    <value>Cypher</value>
+  </data>
+  <data name="VALORANT_Killjoy" xml:space="preserve">
+    <value>Killjoy</value>
+  </data>
+  <data name="VALORANT_Chamber" xml:space="preserve">
+    <value>Chamber</value>
+  </data>
+  <data name="VALORANT_Sova" xml:space="preserve">
+    <value>Sova</value>
+  </data>
+  <data name="VALORANT_Astra" xml:space="preserve">
+    <value>Astra</value>
+  </data>
+  <data name="VALORANT_Breach" xml:space="preserve">
+    <value>Breach</value>
+  </data><data name="VALORANT_KAYO" xml:space="preserve">
+    <value>KAY/O</value>
+  </data>
+  <data name="VALORANT_Viper" xml:space="preserve">
+    <value>Viper</value>
+  </data>
+  <data name="VALORANT_Yoru" xml:space="preserve">
+    <value>Yoru</value>
+  </data>
+  <data name="VALORANT_Omen" xml:space="preserve">
+    <value>Omen</value>
+  </data>
+  <data name="VALORANT_Harbor" xml:space="preserve">
+    <value>Harbor</value>
+  </data>
+  <data name="VALORANT_Reyna" xml:space="preserve">
+    <value>Reyna</value>
+  </data>
+  <data name="VALORANT_Raze" xml:space="preserve">
+    <value>Raze</value>
+  </data>
+  <data name="VALORANT_Sage" xml:space="preserve">
+    <value>Sage</value>
+  </data>
+  <data name="VALORANT_Fade" xml:space="preserve">
+    <value>Fade</value>
+  </data>
+  <data name="VALORANT_Neon" xml:space="preserve">
+    <value>Neon</value>
+  </data>
+  <data name="VALORANT_Gekko" xml:space="preserve">
+    <value>Gekko</value>
+  </data>
+  <data name="VALORANT_Deadlock" xml:space="preserve">
+    <value>Deadlock</value>
+  </data>
+  <data name="VALORANT_Iso" xml:space="preserve">
+    <value>Iso</value>
+  </data>
+  <data name="VALORANT_Unknown" xml:space="preserve">
+    <value>Clove</value>
+  </data>
+  
+  
+  <data name="VALORANT_Ascent" xml:space="preserve">
+    <value>Ascent</value>
+  </data>
+  <data name="VALORANT_Split" xml:space="preserve">
+    <value>Split</value>
+  </data>
+  <data name="VALORANT_Fracture" xml:space="preserve">
+    <value>Fracture</value>
+  </data>
+  <data name="VALORANT_Bind" xml:space="preserve">
+    <value>Bind</value>
+  </data>
+
+  <data name="VALORANT_Breeze" xml:space="preserve">
+    <value>Breeze</value>
+  </data>
+  <data name="VALORANT_Pearl" xml:space="preserve">
+    <value>Pearl</value>
+  </data>
+  <data name="VALORANT_Icebox" xml:space="preserve">
+    <value>Icebox</value>
+  </data>
+  <data name="VALORANT_Lotus" xml:space="preserve">
+    <value>Lotus</value>
+  </data>
+  <data name="VALORANT_TheRange" xml:space="preserve">
+    <value>The Range</value>
+  </data>
+  <data name="VALORANT_Haven" xml:space="preserve">
+    <value>Haven</value>
+  </data>
+  <data name="VALORANT_District" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="VALORANT_Kasbah" xml:space="preserve">
+    <value>Kasbah</value>
+  </data>
+  <data name="VALORANT_Piazza" xml:space="preserve">
+    <value>Piazza</value>
+  </data>
+  <data name="VALORANT_Sunset" xml:space="preserve">
+    <value>Sunset</value>
+  </data>
+  <data name="VALORANT_Drift" xml:space="preserve">
+    <value>Drift</value>
+  </data>
+  <data name="VALORANT_Unknown" xml:space="preserve">
+    <value>Temple</value>
+  </data>
+  <data name="VALORANT_CustomGame" xml:space="preserve">
+    <value>Custom Game</value>
   </data>
 </root>

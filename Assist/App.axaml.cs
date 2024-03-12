@@ -10,6 +10,7 @@ using Assist.Models.Enums;
 using Assist.Services.Navigation;
 using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings;
+using Assist.Shared.Settings.Modules;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -123,6 +124,18 @@ public partial class App : Application
         }
         
         AssistSettings.Save();
+        
+        try
+        {
+            ModuleSettings.Default =
+                JsonSerializer.Deserialize<ModuleSettings>(File.ReadAllText(ModuleSettings.FilePath));
+        }
+        catch
+        {
+            ModuleSettings.Default = new ModuleSettings();
+        }
+        
+        ModuleSettings.Save();
         
     }
     

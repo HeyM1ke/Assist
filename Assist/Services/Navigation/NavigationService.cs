@@ -91,5 +91,7 @@ public enum AssistPage
     SETUP,
     SWAP,
     LEAGUE,
-    
+    DODGE,
+    DISCORD,
+    ASSSOCKET
 }

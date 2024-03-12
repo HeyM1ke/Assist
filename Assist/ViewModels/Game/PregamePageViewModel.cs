@@ -338,7 +338,7 @@ public partial class PregamePageViewModel : ViewModelBase
                     PlayerAgentId = playerObj.CharacterID,
                     PlayerRealName = data._viewModel.PlayerRealName,
                     PlayerName = !data._viewModel.UsingAssistProfile ? data._viewModel.PlayerName : data._viewModel.SecondaryText.Split('#')[0],
-                    PlayerTag = !data._viewModel.UsingAssistProfile ? $"{data._viewModel.TagLineText}" : data._viewModel.SecondaryText.Split('#')[^1],
+                    PlayerTag = !data._viewModel.UsingAssistProfile ? $"{data._viewModel.TagLineText.Replace("#","")}" : data._viewModel.SecondaryText.Split('#')[^1],
                     TeamId = matchDetails.AllyTeam.TeamID,
                     Statistics = null
                 };

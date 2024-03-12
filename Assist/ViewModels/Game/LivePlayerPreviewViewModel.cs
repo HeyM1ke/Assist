@@ -2,10 +2,12 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Assist.Controls.Modules.Dodge;
 using Assist.Core.Helpers;
 using Assist.Models.Game;
 using Assist.Properties;
 using Assist.Services.Assist;
+using AssistUser.Lib.V2.Models.Dodge;
 using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -43,14 +45,15 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
     [ObservableProperty] private bool _playerIsHidden = true;
     [ObservableProperty] private bool _trackerEnabled = false;
     [ObservableProperty]private bool _usingAssistProfile = false;
-    
+    [ObservableProperty]private bool _isPlayerDodge = false;
+    [ObservableProperty] private IBrush _dodgeBorder = new SolidColorBrush(new Color(255, 35, 38, 51));
     
     private string _playerId;
     private string _currentAgentId = "0";
     [ObservableProperty]private string _playerRealName = "";
     private bool _basePlayerDataFlag = false;
     private bool _recentChecked = false;
-    
+    [ObservableProperty] bool _assistAccountLoggedIn = !string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken);
 
 
     public async Task UpdatePlayerData()
@@ -74,7 +77,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 var pData = pres.presences.FirstOrDefault(x => x.puuid == Player.Subject);
                 #endregion
                 
-                if (pData is null) // Presence data for the player does not exist, this is a common issue.
+                if (true) // Presence data for the player does not exist, this is a common issue. OLD: pData is null TODO BRING THIS BACK WITH EXTRA CHECKS ON RANK DUE TO RIOT CHANGE
                 {
                     Log.Information("Player Presence could not be found for ID of " + Player.Subject);
                     Log.Information("Retrieving Data from Server");
@@ -161,7 +164,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
 
                 #endregion
 
-                if (pData is null) // Presence data for the CorePlayer does not exist, this is a common issue.
+                if (true) // Presence data for the CorePlayer does not exist, this is a common issue. OLD: pData is null TODO BRING THIS BACK WITH EXTRA CHECKS ON RANK DUE TO RIOT CHANGE
                 {
                     Log.Information("CorePlayer Presence could not be found for ID of " + CorePlayer.Subject);
                     Log.Information("Retrieving Data from Server");
@@ -323,22 +326,21 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
             }
             
             
-            /*// Check if user is on dodge list
+            //*#1#/ Check if user is on dodge list
             // if so enable red border and icon popup.
-            var user = DodgeService.Current.UserList.Find(player => player.UserId == userId);
-            var checkGlobal =
-                AssistApplication.AssistUser.Dodge.GlobalDodgeUsers.Find(player => player.id == userId);
+            var user = DodgeService.Current.DodgeList.Players.Find(player => player.PlayerId == userId);
             if (user != null)
             {
                 // This means the user was found on the dodge list.
-                IsPlayerDodge = true;
+                DodgeVisible = true;
+                DodgeText = AssistHelper.DodgeCategories[(EAssistDodgeCategory)user.Category];
                 Dispatcher.UIThread.InvokeAsync(async () =>
                 {
                     DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
                 });
             }
 
-            if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
+            /*if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
             {
                 // This means the user was found on the global dodge list.
                 IsPlayerDodge = true;
@@ -420,6 +422,15 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 FileName = url,
                 UseShellExecute = true
             });
+        }
+    }
+
+    [RelayCommand]
+    public async void OpenDodgeAddPage()
+    {
+        if (!PlayerIsHidden && !DodgeVisible)
+        {
+            AssistApplication.ChangeMainWindowPopupView(new DodgeQuickAddPlayerControl(_playerId));
         }
     }
 }

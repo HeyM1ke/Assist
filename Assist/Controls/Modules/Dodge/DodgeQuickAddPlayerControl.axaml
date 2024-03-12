@@ -1,0 +1,210 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Modules.Dodge.DodgeQuickAddPlayerControl"
+             Background="{DynamicResource AssistBackground}">
+      <Border Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderThickness="1"
+            CornerRadius="10"
+            Padding="10"
+            Width="450"
+            VerticalAlignment="Center"
+    >
+        <Grid RowDefinitions="Auto,Auto,Auto">
+            
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        Spacing="5"
+                        Margin="0,0,0,10">
+                <Image Source="/Assets/Extras/DodgeLogo_Icon.png"
+                       Width="50"
+                       Height="50"
+                       RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="{x:Static lang:Resources.Dodge_DodgeList}"
+                               FontWeight="SemiBold"
+                               FontSize="15"
+                               Opacity=".3"
+                               HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Text="{x:Static lang:Resources.Dodge_AddPlayer}"
+                               FontWeight="SemiBold"
+                               FontSize="24"
+                               Opacity="1"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                               Spacing="15">
+                       
+                       <StackPanel Orientation="Horizontal"
+                                   VerticalAlignment="Center"
+                                   IsVisible="{Binding IsProcessing}"
+                                   Height="25"
+                                   Spacing="5">
+                           <TextBlock Text="{x:Static lang:Resources.Common_Loading}"
+                                      FontSize="10"
+                                      FontWeight="Light"
+                                      TextAlignment="Left"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"/>
+                           <avaloniaProgressRing:ProgressRing Width="14"
+                                                              Height="14"
+                                                              IsActive="True"
+                                                              VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"
+                                                              Foreground="WhiteSmoke"
+                                                              
+                           />
+                       </StackPanel>
+                       
+                <assist:SmallImageButton
+                    Grid.Row="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Width="29"
+                    Height="29"
+                    Icon="{SvgImage /Assets/Default/X_Icon.svg}"
+                    CornerRadius="5"
+                    BorderBrush="{DynamicResource AssistControlOutline}"
+                    BorderThickness="1"
+                    Command="{Binding ClosePopupCommand}"
+                />
+                       
+                      
+                   </StackPanel>
+            
+           
+            
+            <Grid Row="1">
+                 <StackPanel MinWidth="293"
+                        Spacing="10">
+                
+                <StackPanel.Styles>
+                    <Style Selector="TextBox">
+                        <Setter Property="AcceptsReturn" Value="False"/>
+                        <Setter Property="AcceptsTab" Value="False"/>
+                        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+                        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+                    </Style>
+                </StackPanel.Styles>
+                     <StackPanel Spacing="2">
+                         <StackPanel Orientation="Horizontal"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Bottom"
+                                     Spacing="4">
+                             <TextBlock Text="Category:"
+                                        FontWeight="Light"
+                                        FontSize="13"
+                                        Opacity=".5"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Left"/>
+                             <TextBlock Text="{Binding DodgeSelectedTitle}"
+                                        FontWeight="Regular"
+                                        FontSize="18"
+                                        Foreground="{DynamicResource AssistPrimaryColor}"
+                                        Padding="0,0,0,0"
+                                        Margin="-1"
+                                        VerticalAlignment="Top"
+                                        />
+                         </StackPanel>
+                         
+                         
+                         
+                         <UniformGrid Rows="2"
+                                      Columns="5"
+                                      >
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeToxic_Icon.svg}"
+                                                       Tag="0"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Toxic}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeThrower_Icon.svg}"
+                                                       Tag="1"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Thrower}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBadTeammate_Icon.svg}"
+                                                       Tag="2"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_BadTeammate}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeStreamSniper_Icon.svg}"
+                                                       Tag="3"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Streamsniper}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeIgnore_Icon.svg}"
+                                                       Tag="4"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Ignore}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBadWintrading_Icon.svg}"
+                                                       Tag="5"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Wintrader}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeCheater_Icon.svg}"
+                                                       Tag="6"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Cheater}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBadComms_Icon.svg}"
+                                                       Tag="7"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_BadComms}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeBot_Icon.svg}"
+                                                       Tag="9"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Bot}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                             <assist:ImageToggleButton ImageIcon="{SvgImage /Assets/Icons/DodgeSmurf_Icon.svg}"
+                                                       Tag="10"
+                                                       ToolTip.Tip="{x:Static lang:Resources.DodgeCategory_Smurf}"
+                                                       IsCheckedChanged="CategorySelectionChanged"/>
+                         </UniformGrid>
+                     </StackPanel>
+                     
+                    
+                
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Note (Optional):"
+                               FontWeight="Light"
+                               FontSize="13"
+                               Opacity=".5"
+                               HorizontalAlignment="Left"/>
+                    <TextBox Watermark="This player was toxic..."
+                             TextAlignment="Left"
+                             x:Name="NoteBox"
+                             Text="{Binding PlayerNoteText}"
+                             FontSize="14"
+                             MaxLength="120"
+                             MinHeight="50"
+                             ></TextBox>
+                </StackPanel>
+                     
+                <TextBlock Text="{Binding ErrorMessage}"
+                           FontWeight="Light"
+                           IsVisible="{Binding ErrorMessageVisible}"
+                           FontSize="13"
+                           Foreground="{DynamicResource AssistPrimaryColor}"
+                           HorizontalAlignment="Center"/>
+                
+                
+            </StackPanel>
+            </Grid>
+            
+            <Button Content="{x:Static lang:Resources.Common_Add}"
+                    Classes="default"
+                    Command="{Binding AddPlayerCommand}"
+                    HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding !IsProcessing}"
+                    Grid.Row="2"/>
+        </Grid>
+    </Border>
+</UserControl>

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assist.Models.Enums;
 using Assist.Services.Assist;
+using Assist.Services.Modules;
 using Assist.Services.Riot;
 using Assist.Shared.Settings;
+using Assist.Shared.Settings.Modules;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -75,6 +77,13 @@ public partial class GameInitalStartupViewModel : ViewModelBase
         // TODO: Start Module Service which will then active these in turn if they are enabled.
         new DodgeService();
         new RecentService();
+
+        if (ModuleSettings.Default.RichPresenceSettings.IsEnabled)
+        {
+            Message = "Starting Discord Presence";
+            RichPresenceService.Default.Initialize();
+        }
+        
         Message = "Welcome to Assist";
         await AssistApplication.SetupComplete_Game();
     }

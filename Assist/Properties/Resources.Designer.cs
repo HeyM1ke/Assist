@@ -276,6 +276,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assist Account Required.
+        /// </summary>
+        public static string Common_AssistAccountRequired {
+            get {
+                return ResourceManager.GetString("Common_AssistAccountRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Common_BackText {
@@ -402,6 +411,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string Common_Export {
+            get {
+                return ResourceManager.GetString("Common_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hour.
         /// </summary>
         public static string Common_Hour {
@@ -416,6 +434,15 @@ namespace Assist.Properties {
         public static string Common_Hour_Plural {
             get {
                 return ResourceManager.GetString("Common_Hour_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        public static string Common_Import {
+            get {
+                return ResourceManager.GetString("Common_Import", resourceCulture);
             }
         }
         
@@ -443,6 +470,15 @@ namespace Assist.Properties {
         public static string Common_Loading {
             get {
                 return ResourceManager.GetString("Common_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage.
+        /// </summary>
+        public static string Common_Manage {
+            get {
+                return ResourceManager.GetString("Common_Manage", resourceCulture);
             }
         }
         
@@ -663,6 +699,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string Common_Unknown {
+            get {
+                return ResourceManager.GetString("Common_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updating....
         /// </summary>
         public static string Common_Updating {
@@ -704,6 +749,159 @@ namespace Assist.Properties {
         public static string Common_Yes {
             get {
                 return ResourceManager.GetString("Common_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Player.
+        /// </summary>
+        public static string Dodge_AddPlayer {
+            get {
+                return ResourceManager.GetString("Dodge_AddPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist DODGE allows for you to be warned about players on your team and game. Add, Remove, Edit, and overall manage your own DODGE List. Additionally, a Global List is available for all players..
+        /// </summary>
+        public static string Dodge_Description {
+            get {
+                return ResourceManager.GetString("Dodge_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DODGE LIST.
+        /// </summary>
+        public static string Dodge_DodgeList {
+            get {
+                return ResourceManager.GetString("Dodge_DodgeList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Player.
+        /// </summary>
+        public static string Dodge_EditPlayer {
+            get {
+                return ResourceManager.GetString("Dodge_EditPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your list is empty..
+        /// </summary>
+        public static string Dodge_ListEmpty {
+            get {
+                return ResourceManager.GetString("Dodge_ListEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DODGE.
+        /// </summary>
+        public static string Dodge_Title {
+            get {
+                return ResourceManager.GetString("Dodge_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bad Comms.
+        /// </summary>
+        public static string DodgeCategory_BadComms {
+            get {
+                return ResourceManager.GetString("DodgeCategory_BadComms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bad Teammate.
+        /// </summary>
+        public static string DodgeCategory_BadTeammate {
+            get {
+                return ResourceManager.GetString("DodgeCategory_BadTeammate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bot.
+        /// </summary>
+        public static string DodgeCategory_Bot {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Bot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cheater.
+        /// </summary>
+        public static string DodgeCategory_Cheater {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Cheater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Griefer.
+        /// </summary>
+        public static string DodgeCategory_Griefer {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Griefer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignore.
+        /// </summary>
+        public static string DodgeCategory_Ignore {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Ignore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smurf.
+        /// </summary>
+        public static string DodgeCategory_Smurf {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Smurf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stream Sniper.
+        /// </summary>
+        public static string DodgeCategory_Streamsniper {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Streamsniper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thrower.
+        /// </summary>
+        public static string DodgeCategory_Thrower {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Thrower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toxic.
+        /// </summary>
+        public static string DodgeCategory_Toxic {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Toxic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Trading.
+        /// </summary>
+        public static string DodgeCategory_Wintrader {
+            get {
+                return ResourceManager.GetString("DodgeCategory_Wintrader", resourceCulture);
             }
         }
         
@@ -1226,6 +1424,366 @@ namespace Assist.Properties {
         public static string Store_Store {
             get {
                 return ResourceManager.GetString("Store_Store", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ascent.
+        /// </summary>
+        public static string VALORANT_Ascent {
+            get {
+                return ResourceManager.GetString("VALORANT_Ascent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Astra.
+        /// </summary>
+        public static string VALORANT_Astra {
+            get {
+                return ResourceManager.GetString("VALORANT_Astra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bind.
+        /// </summary>
+        public static string VALORANT_Bind {
+            get {
+                return ResourceManager.GetString("VALORANT_Bind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breach.
+        /// </summary>
+        public static string VALORANT_Breach {
+            get {
+                return ResourceManager.GetString("VALORANT_Breach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breeze.
+        /// </summary>
+        public static string VALORANT_Breeze {
+            get {
+                return ResourceManager.GetString("VALORANT_Breeze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brimstone.
+        /// </summary>
+        public static string VALORANT_Brimstone {
+            get {
+                return ResourceManager.GetString("VALORANT_Brimstone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chamber.
+        /// </summary>
+        public static string VALORANT_Chamber {
+            get {
+                return ResourceManager.GetString("VALORANT_Chamber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Game.
+        /// </summary>
+        public static string VALORANT_CustomGame {
+            get {
+                return ResourceManager.GetString("VALORANT_CustomGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cypher.
+        /// </summary>
+        public static string VALORANT_Cypher {
+            get {
+                return ResourceManager.GetString("VALORANT_Cypher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deadlock.
+        /// </summary>
+        public static string VALORANT_Deadlock {
+            get {
+                return ResourceManager.GetString("VALORANT_Deadlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to District.
+        /// </summary>
+        public static string VALORANT_District {
+            get {
+                return ResourceManager.GetString("VALORANT_District", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drift.
+        /// </summary>
+        public static string VALORANT_Drift {
+            get {
+                return ResourceManager.GetString("VALORANT_Drift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fade.
+        /// </summary>
+        public static string VALORANT_Fade {
+            get {
+                return ResourceManager.GetString("VALORANT_Fade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fracture.
+        /// </summary>
+        public static string VALORANT_Fracture {
+            get {
+                return ResourceManager.GetString("VALORANT_Fracture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gekko.
+        /// </summary>
+        public static string VALORANT_Gekko {
+            get {
+                return ResourceManager.GetString("VALORANT_Gekko", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Harbor.
+        /// </summary>
+        public static string VALORANT_Harbor {
+            get {
+                return ResourceManager.GetString("VALORANT_Harbor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Haven.
+        /// </summary>
+        public static string VALORANT_Haven {
+            get {
+                return ResourceManager.GetString("VALORANT_Haven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icebox.
+        /// </summary>
+        public static string VALORANT_Icebox {
+            get {
+                return ResourceManager.GetString("VALORANT_Icebox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Iso.
+        /// </summary>
+        public static string VALORANT_Iso {
+            get {
+                return ResourceManager.GetString("VALORANT_Iso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jett.
+        /// </summary>
+        public static string VALORANT_Jett {
+            get {
+                return ResourceManager.GetString("VALORANT_Jett", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kasbah.
+        /// </summary>
+        public static string VALORANT_Kasbah {
+            get {
+                return ResourceManager.GetString("VALORANT_Kasbah", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KAY/O.
+        /// </summary>
+        public static string VALORANT_KAYO {
+            get {
+                return ResourceManager.GetString("VALORANT_KAYO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Killjoy.
+        /// </summary>
+        public static string VALORANT_Killjoy {
+            get {
+                return ResourceManager.GetString("VALORANT_Killjoy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lotus.
+        /// </summary>
+        public static string VALORANT_Lotus {
+            get {
+                return ResourceManager.GetString("VALORANT_Lotus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neon.
+        /// </summary>
+        public static string VALORANT_Neon {
+            get {
+                return ResourceManager.GetString("VALORANT_Neon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Omen.
+        /// </summary>
+        public static string VALORANT_Omen {
+            get {
+                return ResourceManager.GetString("VALORANT_Omen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pearl.
+        /// </summary>
+        public static string VALORANT_Pearl {
+            get {
+                return ResourceManager.GetString("VALORANT_Pearl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phoenix.
+        /// </summary>
+        public static string VALORANT_Phoenix {
+            get {
+                return ResourceManager.GetString("VALORANT_Phoenix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Piazza.
+        /// </summary>
+        public static string VALORANT_Piazza {
+            get {
+                return ResourceManager.GetString("VALORANT_Piazza", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raze.
+        /// </summary>
+        public static string VALORANT_Raze {
+            get {
+                return ResourceManager.GetString("VALORANT_Raze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reyna.
+        /// </summary>
+        public static string VALORANT_Reyna {
+            get {
+                return ResourceManager.GetString("VALORANT_Reyna", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sage.
+        /// </summary>
+        public static string VALORANT_Sage {
+            get {
+                return ResourceManager.GetString("VALORANT_Sage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skye.
+        /// </summary>
+        public static string VALORANT_Skye {
+            get {
+                return ResourceManager.GetString("VALORANT_Skye", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sova.
+        /// </summary>
+        public static string VALORANT_Sova {
+            get {
+                return ResourceManager.GetString("VALORANT_Sova", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Split.
+        /// </summary>
+        public static string VALORANT_Split {
+            get {
+                return ResourceManager.GetString("VALORANT_Split", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sunset.
+        /// </summary>
+        public static string VALORANT_Sunset {
+            get {
+                return ResourceManager.GetString("VALORANT_Sunset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Range.
+        /// </summary>
+        public static string VALORANT_TheRange {
+            get {
+                return ResourceManager.GetString("VALORANT_TheRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temple.
+        /// </summary>
+        public static string VALORANT_Unknown {
+            get {
+                return ResourceManager.GetString("VALORANT_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viper.
+        /// </summary>
+        public static string VALORANT_Viper {
+            get {
+                return ResourceManager.GetString("VALORANT_Viper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yoru.
+        /// </summary>
+        public static string VALORANT_Yoru {
+            get {
+                return ResourceManager.GetString("VALORANT_Yoru", resourceCulture);
             }
         }
     }

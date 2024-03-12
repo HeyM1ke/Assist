@@ -17,6 +17,7 @@ public class AccProfilePreviewControl : TemplatedControl
     public static readonly StyledProperty<ICommand?> SwitchCommandProperty = AvaloniaProperty.Register<AccProfilePreviewControl, ICommand?>("SwitchCommand");
     public static readonly StyledProperty<string?> AccountIdProperty = AvaloniaProperty.Register<AccProfilePreviewControl, string?>("AccountId");
     public static readonly StyledProperty<ICommand?> ManageCommandProperty = AvaloniaProperty.Register<AccProfilePreviewControl, ICommand?>("ManageCommand");
+    public static readonly StyledProperty<string?> PlayerRankImageProperty = AvaloniaProperty.Register<AccProfilePreviewControl, string?>("PlayerRankImage");
 
     public string? PlayerName
     {
@@ -76,5 +77,11 @@ public class AccProfilePreviewControl : TemplatedControl
     {
         get { return (ICommand?)GetValue(ManageCommandProperty); }
         set { SetValue(ManageCommandProperty, value); }
+    }
+
+    public string? PlayerRankImage
+    {
+        get { return (string?)GetValue(PlayerRankImageProperty); }
+        set { SetValue(PlayerRankImageProperty, value); }
     }
 }

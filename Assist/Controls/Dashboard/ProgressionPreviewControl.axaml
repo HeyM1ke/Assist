@@ -7,6 +7,7 @@
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
              mc:Ignorable="d"
              Initialized="ProgressionPreview_Init"
+             Loaded="ProgressionPreview_Loaded"
              x:Class="Assist.Controls.Dashboard.ProgressionPreviewControl">
     <Border Background="{DynamicResource AssistControlBackground}"
             BorderBrush="{DynamicResource AssistControlOutline}"

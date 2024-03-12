@@ -8,7 +8,6 @@ using Assist.Core.Settings.Options;
 using Assist.Models.Enums;
 using Assist.Shared.Settings;
 using Assist.Views.Startup;
-using AssistUser.Lib.Account;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;

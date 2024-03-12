@@ -60,7 +60,7 @@ public class ValorantPlayerStorage
             var t = await AssistApplication.ActiveUser.Player.GetPlayerMmr(PlayerId);
             _playerMmr = t;
         }
-        catch (RequestException e)
+        catch (ValNet.Objects.Exceptions.RequestException e)
         {
             if(e.StatusCode == HttpStatusCode.BadRequest){
                 Log.Fatal("(ValorantPlayerStorage) FetchPlayer Names Expired.: ");
@@ -77,14 +77,24 @@ public class ValorantPlayerStorage
         {
             if (_playerMmr.LatestCompetitiveUpdate != null)
             {
-                CompetitiveTier = _playerMmr.LatestCompetitiveUpdate.TierAfterUpdate;
-                RankRating = _playerMmr.LatestCompetitiveUpdate.RankedRatingAfterUpdate;
                 if (_playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID is not null)
                 {
                     _playerMmr.QueueSkills.competitive.SeasonalInfoBySeasonID.TryGetValue(_playerMmr.LatestCompetitiveUpdate
                         .SeasonID, out var seasonMatches);
 
-                    LeaderboardPosition = seasonMatches?.LeaderboardRank ?? -1;   
+                    if (seasonMatches is null)
+                    {
+                        CompetitiveTier = 0;
+                        RankRating = 0;
+                    }
+                    else
+                    {
+                        CompetitiveTier = seasonMatches.CompetitiveTier;
+                        RankRating = seasonMatches.RankedRating;
+                        LeaderboardPosition = seasonMatches?.LeaderboardRank ?? -1;       
+                    }
+                    
+                    
                 }
                 
             }

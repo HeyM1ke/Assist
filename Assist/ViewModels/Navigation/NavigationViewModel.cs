@@ -9,6 +9,7 @@ using Assist.Services.Navigation;
 using Assist.Views.Dashboard;
 using Assist.Views.Game.Live;
 using Assist.Views.Modules;
+using Assist.Views.Modules.Pages;
 using Assist.Views.ProfileSwap;
 using Assist.Views.Settings;
 using Assist.Views.Store;
@@ -203,6 +204,14 @@ public partial class NavigationViewModel : ViewModelBase
                     break;
                 case AssistPage.MODULES:
                     newPage = new ModulesView();
+                    break;
+                case AssistPage.DODGE:
+                    newPage = new DodgeView();
+                    break;
+                case AssistPage.DISCORD:
+                    newPage = new DiscordView();
+                    break;
+                case AssistPage.ASSSOCKET:
                     break;
                 default:
                     Log.Error("Tried swapping to a page which is not supported. EP01");

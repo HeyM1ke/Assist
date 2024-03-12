@@ -8,7 +8,7 @@ using Assist.Core.Helpers;
 using Assist.Objects.AssistApi.Valorant;
 using Assist.Shared.Settings;
 using Assist.Shared.Settings.Accounts;
-using AssistUser.Lib.Account;
+
 using AssistUser.Lib.Base.Exceptions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Serilog;
@@ -22,7 +22,8 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
     private static List<Mission> allMissions = null;
     private static ContactsFetchObj _userContacts = null;
     public static DailyTicketObj UserTicket = null;
-
+    private static string _currentUser;
+    
     [ObservableProperty]
     private ObservableCollection<DailyTicketDiamond> _dailyDiamonds = new ObservableCollection<DailyTicketDiamond>();
     
@@ -35,15 +36,28 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
     [ObservableProperty] private string _playerRankIcon = "";
     [ObservableProperty] private string _rankName = "";
     [ObservableProperty] private string _playerRR = "";
-    
-    
+
+    private bool _newUser = false;
     public async Task Setup()
     {
         await HandleDailyTicket();
         await SetupWeeklyMissions();
         await SetupCompetitiveDetails();
+        _currentUser = AssistApplication.ActiveUser.UserData.sub;
+        _newUser = false;
+        
     }
 
+    public async Task LoadedCheck()
+    {
+        if (!string.IsNullOrEmpty(_currentUser) && _currentUser != AssistApplication.ActiveUser.UserData.sub)
+        {
+            _newUser = true;
+            DailyDiamonds.Clear();
+            WeeklyMissions.Clear();
+            await Setup();
+        }
+    }
     public async Task HandleDailyTicket()
     {
         try
@@ -77,16 +91,16 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
 
             bool _prevCompleted = false;
             if (i > 0)
-                _prevCompleted = UserTicket.DailyRewards.Milestones[i - 1].BonusApplied;
+                _prevCompleted = UserTicket.DailyRewards.Milestones[i - 1].BonusApplied || UserTicket.DailyRewards.Milestones[i - 1].Progress == 4;
             else
                 _prevCompleted = true;
             
             DailyDiamonds.Add(new DailyTicketDiamond()
             {
                 DiamondNumber = $"{i+1}",
-                IsCompleted = currMilestone.BonusApplied,
-                IsCurrent = !currMilestone.BonusApplied && _prevCompleted,
-                ProgressText = !currMilestone.BonusApplied && _prevCompleted ? $"{currMilestone.Progress}/4" : string.Empty
+                IsCompleted = currMilestone.BonusApplied || currMilestone.Progress == 4,
+                IsCurrent = _prevCompleted && currMilestone.Progress != 4,
+                ProgressText = currMilestone.Progress != 4 && _prevCompleted ? $"{currMilestone.Progress}/4" : string.Empty
             });
         }
     }
@@ -136,7 +150,7 @@ public partial class ProgressionPreviewViewModel : ViewModelBase
 
     public async Task SetupWeeklyMissions()
     {
-        if (_userContacts is null)
+        if (_userContacts is null || _newUser)
             _userContacts = await AssistApplication.ActiveUser.Contracts.GetAllContracts();
 
         if (allMissions is null)

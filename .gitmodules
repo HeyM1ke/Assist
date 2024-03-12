@@ -1,0 +1,3 @@
+[submodule "Assist.Shared"]
+	path = Assist.Shared
+	url = https://github.com/AssistTeam/Assist.Shared.git

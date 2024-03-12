@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings.Accounts;
-using AssistUser.Lib.Account;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Serilog;

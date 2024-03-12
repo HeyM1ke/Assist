@@ -1,0 +1,104 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Assist.Controls.Modules.Dodge"
+        xmlns:lang="clr-namespace:Assist.Properties"
+        xmlns:assist="clr-namespace:Assist.Controls.Assist">
+    <Design.PreviewWith>
+        <controls:DodgePlayerPreviewControl Width="610"
+                                            Height="38"
+                                            />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|DodgePlayerPreviewControl">
+        <!-- Set Defaults -->
+        <Setter Property="Background" Value="{DynamicResource AssistButtonControlBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid ColumnDefinitions="*,*,*"
+                          >
+                        <TextBlock Grid.Column="0"
+                                   Text="{TemplateBinding PlayerName}"
+                                   FontSize="14"
+                                   MinWidth="215"
+                                   FontWeight="Regular"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"></TextBlock>
+                        
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="5"
+                                    Grid.Column="1">
+                            <TextBlock 
+                                       Text="{TemplateBinding PlayerCategory}"
+                                       FontSize="13"
+                                       FontWeight="Regular"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       Foreground="{DynamicResource AssistPrimaryColor}"
+                                       HorizontalAlignment="Left"></TextBlock>
+                            
+                            <Border Width="20"
+                                    Height="20"
+                                    Background="#1C1E29"
+                                    CornerRadius="5"
+                                    IsVisible="{TemplateBinding NoteEnabled}"
+                                    ToolTip.Tip="{TemplateBinding PlayerNote}"
+                                    >
+                                <Image Width="14"
+                                       Height="14"
+                                       Source="{SvgImage /Assets/Icons/Note_Icon.svg}"
+                                       Opacity=".2"></Image>
+                            </Border>
+                        </StackPanel>
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{TemplateBinding DateAdded}"
+                                   FontSize="13"
+                                   FontWeight="Regular"
+                                   VerticalAlignment="Center"
+                                   TextAlignment="Right"
+                                   HorizontalAlignment="Right"></TextBlock>
+                        
+                        <Grid Grid.Column="2"
+                              IsVisible="{TemplateBinding IsPointerOver}"
+                              Background="{TemplateBinding Background}">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        Spacing="25"
+                                        Margin="0">
+                                <assist:SmallImageButton Icon="{SvgImage /Assets/Icons/Edit_Icon.svg}"
+                                                         BorderBrush="{DynamicResource AssistControlOutline}"
+                                                         BorderThickness="1"
+                                                         Padding="5"
+                                                         Width="30"
+                                                         IsVisible="False"
+                                                         Height="30"
+                                                         CornerRadius="5"
+                                        Command="{TemplateBinding EditPlayerCommand}"
+                                        ></assist:SmallImageButton>
+                                <assist:SmallImageButton Icon="{SvgImage /Assets/Icons/Trash_Icon.svg}"
+                                                         BorderBrush="{DynamicResource AssistControlOutline}"
+                                                         BorderThickness="1"
+                                                         Padding="5"
+                                                         Width="30"
+                                                         CommandParameter="{TemplateBinding PlayerId}"
+                                                         Height="30"
+                                                         CornerRadius="5"
+                                                         Command="{TemplateBinding DeletePlayerCommand}"
+                                ></assist:SmallImageButton>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

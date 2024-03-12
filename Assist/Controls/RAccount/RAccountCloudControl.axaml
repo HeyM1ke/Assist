@@ -8,11 +8,12 @@
              x:Class="Assist.Controls.RAccount.RAccountCloudControl"
              Initialized="CloudWebview_Init">
     <Grid 
-          RowDefinitions="650, Auto">
+          RowDefinitions="650, 25">
         <TransitioningContentControl Padding="20"
                                      Grid.Row="0"
-                                     Height="600"
-                                     Width="1000"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Stretch"
                                      Content="{Binding CurrentContent}"
                                      IsVisible="{Binding WebviewVisible}"/>
         <TextBlock HorizontalAlignment="Center"

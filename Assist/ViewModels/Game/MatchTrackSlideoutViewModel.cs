@@ -36,6 +36,7 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
     {
         if (RecentService.Current.RecentMatches?.Count > 0)
         {
+            MatchControls.Clear();
             int limiter = 0;
             for (int i = RecentService.Current.RecentMatches.Count-1; i >= 0; i--)
             {
@@ -49,8 +50,8 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
                 
         }
 
-        /*RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated; 
-        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated; */
+        RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated; 
+        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated; 
     }
     
     private void RecentServiceUpdated()
@@ -94,13 +95,13 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
 
     public void LoadPage()
     {
-        Log.Information("Page has been loaded, subbing from events.");
-        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated; 
+        /*Log.Information("Page has been loaded, subbing from events.");
+        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated; */
     }
     public void UnloadPage()
     {
-        Log.Information("Page has been unloaded, unsubbing from events.");
-        RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated; 
+        /*Log.Information("Page has been unloaded, unsubbing from events.");
+        RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated; */
     }
 
     

@@ -10,7 +10,6 @@ using Assist.Services.Riot;
 using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings.Accounts;
 using Assist.Views.Dashboard;
-using AssistUser.Lib.Account;
 using AssistUser.Lib.V2;
 using Avalonia.Controls;
 using Avalonia.Threading;

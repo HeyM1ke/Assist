@@ -134,10 +134,13 @@ public class RecentService
         if (!RecentMatches.Exists(mth => mth.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)))
             return;
         
-        var mth = RecentMatches.Find(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
-        RecentMatches.Remove(mth);
-        SaveSettings();
-        RecentServiceUpdated?.Invoke();
+        var mth = RecentMatches.FindAll(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
+        foreach (var match in mth)
+        {
+            RecentMatches.Remove(mth);
+            SaveSettings();
+            RecentServiceUpdated?.Invoke();    
+        }
     }
 
 

@@ -10,6 +10,7 @@
         <SignAssembly>False</SignAssembly>
         <ApplicationIcon>./Assets/Assist_IconBlack.ico</ApplicationIcon>
         <Company>Mike Creations LLC</Company>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -35,6 +36,7 @@
         <PackageReference Include="CliWrap" Version="3.6.6" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.5" />
+        <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.1" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
         <PackageReference Include="Serilog" Version="3.1.1" />
@@ -65,7 +67,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Assist.Shared\Assist.Shared\Assist.Shared.csproj" />
+      <ProjectReference Include="..\Assist.Shared\Assist.Shared\Assist.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

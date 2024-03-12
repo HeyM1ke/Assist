@@ -15,7 +15,7 @@
     
     <Border Background="{DynamicResource AssistControlBackground}"
             CornerRadius="12"
-            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderBrush="{Binding DodgeBorder}"
             BorderThickness="1.2"
             Padding="10">
         <Grid ColumnDefinitions="Auto,*">
@@ -143,6 +143,23 @@
                 </Style>
 
             </ContextMenu.Styles>
+            
+            <MenuItem Header="{x:Static lang:Resources.Dodge_AddPlayer}"
+                      FontWeight="Medium"
+                      IsEnabled="{Binding AssistAccountLoggedIn}"
+                      IsVisible="{Binding !DodgeVisible}"
+                      Command="{Binding OpenDodgeAddPageCommand}"
+            >
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Extras/DodgeLogo_Icon.png"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Stretch="UniformToFill"
+                    />
+                </MenuItem.Icon>
+            </MenuItem>
+            
             <MenuItem Header="{x:Static lang:Resources.Live_OpenTracker}"
                       FontWeight="Medium"
                       IsEnabled="{Binding TrackerEnabled}"
