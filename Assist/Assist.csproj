@@ -66,7 +66,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Assist.Shared\Assist.Shared\Assist.Shared.csproj" />
+      <ProjectReference Include="..\Assist.Shared\Assist.Shared\Assist.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
