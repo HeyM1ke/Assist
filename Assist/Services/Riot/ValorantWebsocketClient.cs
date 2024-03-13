@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Models.Enums;
 using Assist.Models.Socket;
+using Assist.Services.Modules;
 using Assist.ViewModels;
 using Assist.Views.Game;
 using Assist.Views.Startup;
@@ -93,6 +94,8 @@ public class ValorantWebsocketClient
     {
         Log.Information("Client Socket has Closed, Moving back to Launcher");
         await RiotClientService.CloseRiotRelatedPrograms();
+
+        await RichPresenceService.Default.Shutdown();
 
         if (AssistApplication.ActiveUser is null)
         {

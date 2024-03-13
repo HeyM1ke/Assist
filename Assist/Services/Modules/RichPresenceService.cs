@@ -500,6 +500,12 @@ public class RichPresenceService
     
     public async Task Shutdown()
     {
+        if (!BDiscordPresenceActive)
+        {
+            Log.Information("Attempted to Shutdown Discord RPC while inactive.");
+            return;
+        }
+        
         if (!_client.IsDisposed)
             _client.Dispose();
 
