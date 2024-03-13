@@ -132,8 +132,9 @@ public partial class RAccountAddViewModel : ViewModelBase
            NoSecondaryLoginCommandCommand.Execute(null);
            return;
        }
-
-       if (File.Exists(AssistApplication.ActiveAccountProfile.BackupZipPath))
+       // If you account resets, this will check regardless.
+       var possiblePath = Path.Combine(AccountSettings.BaseFolderPath, "Backups", AssistApplication.ActiveAccountProfile.Id, $"{AssistApplication.ActiveAccountProfile.Id}_data.zip");
+       if (File.Exists(possiblePath))
        {
            
            AssistApplication.ActiveAccountProfile.CanLauncherBoot = true;

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Assist.Shared.Models.Assist;
 using Assist.Shared.Settings;
 using Assist.ViewModels;
-using AssistUser.Lib.Base.Exceptions;
 using DynamicData;
 using Serilog;
+using ValNet.Objects.Exceptions;
 using ValNet.Objects.Player;
 
 namespace Assist.Services.Assist;

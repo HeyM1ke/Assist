@@ -146,11 +146,26 @@ public partial class RAccountUsernameLoginViewModel : ViewModelBase
                 GameName = usr.UserData.acct.game_name,
                 TagLine = usr.UserData.acct.tag_line
             };
-            var inventory = await usr.Inventory.GetPlayerInventory();
-            var pMmr = await usr.Player.GetPlayerMmr();
-            profile.Personalization.PlayerCardId = inventory.PlayerData.PlayerCardID;
-            profile.Personalization.PlayerLevel = inventory.PlayerData.AccountLevel;
-            profile.Personalization.ValRankTier = pMmr.LatestCompetitiveUpdate.TierAfterUpdate;
+            try
+            {
+                var inventory = await usr.Inventory.GetPlayerInventory();
+                profile.Personalization.PlayerCardId = inventory.PlayerData.PlayerCardID;
+                profile.Personalization.PlayerLevel = inventory.PlayerData.AccountLevel;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to Get Inventory Data when setting up profile");
+            }
+            
+            try
+            {
+                var pMmr = await usr.Player.GetPlayerMmr();
+                profile.Personalization.ValRankTier = pMmr.LatestCompetitiveUpdate.TierAfterUpdate;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to Get MMR Data when setting up profile");
+            }
             profile.CanAssistBoot = true;
             profile.CanLauncherBoot = false;
             profile.IsExpired = false;

@@ -2,9 +2,9 @@
 using System.Net;
 using System.Threading.Tasks;
 using Assist.ViewModels;
-using AssistUser.Lib.Base.Exceptions;
 using Serilog;
 using ValNet.Objects.DisplayNameService;
+using ValNet.Objects.Exceptions;
 using ValNet.Objects.Player;
 
 namespace Assist.Models.Game;

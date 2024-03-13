@@ -40,12 +40,15 @@ public class RiotUserTokenRefreshService
             switch (AssistApplication.ActiveUser.Authentication.AuthType)
             {
                 case EAuthType.LOCAL:
+                    Log.Information("Attempting Token Refresh with Local");
                     await AssistApplication.ActiveUser.Authentication.AuthenticateWithLocal();
                     break;
                 case EAuthType.CLOUD:
-                    await AssistApplication.ActiveUser.Authentication.AuthenticateWithCookies(); // User doesnt need to reauth if cookies are stored from login
+                    Log.Information("Attempting Token Refresh with Cloud");
+                    await AssistApplication.ActiveUser.Authentication.ReAuthWithCookies(); // User doesnt need to reauth if cookies are stored from login
                     break;
                 case EAuthType.COOKIE:
+                    Log.Information("Attempting Token Refresh with Cookies");
                     await AssistApplication.ActiveUser.Authentication.ReAuthWithCookies();
                     break;
                 default:
@@ -54,6 +57,8 @@ public class RiotUserTokenRefreshService
             }
             
             timeOfLastRe = DateTime.Now.AddMinutes(1);
+            
+            Log.Information("Time of Last Reauth: " + timeOfLastRe.ToLongTimeString());
             _attemptingReauth = false;
         }
         catch (Exception e)

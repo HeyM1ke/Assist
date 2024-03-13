@@ -60,6 +60,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 CurrentContent.Width = 500;
                 CurrentContent.Height = 325;
                 CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                CurrentContent.VerticalAlignment = VerticalAlignment.Center;
                 break;
             case EResolution.R540:
                 CurrentContent.View.Width = 750;
@@ -67,6 +68,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 CurrentContent.Width = 750;
                 CurrentContent.Height = 488;
                 CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                CurrentContent.VerticalAlignment = VerticalAlignment.Center;
                 break;
             case EResolution.R900:
                 CurrentContent.View.Width = 1250;
@@ -74,6 +76,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 CurrentContent.Width = 1250;
                 CurrentContent.Height = 813;
                 CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                CurrentContent.VerticalAlignment = VerticalAlignment.Center;
                 break;
             case EResolution.R1080:
                 CurrentContent.View.Width = 1500;
@@ -81,6 +84,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 CurrentContent.Width = 1500;
                 CurrentContent.Height = 975;
                 CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                CurrentContent.VerticalAlignment = VerticalAlignment.Center;
                 break;
             case EResolution.R1260:
                 CurrentContent.View.Width = 1750;
@@ -88,6 +92,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 CurrentContent.Width = 1750;
                 CurrentContent.Height = 1300;
                 CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                CurrentContent.VerticalAlignment = VerticalAlignment.Center;
                 break;
             default:
                 CurrentContent.View.Width = 1000;
@@ -95,6 +100,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 CurrentContent.Width = 1000;
                 CurrentContent.Height = 650;
                 CurrentContent.HorizontalAlignment = HorizontalAlignment.Center;
+                CurrentContent.VerticalAlignment = VerticalAlignment.Center;
                 break;
         }
     }
@@ -130,7 +136,7 @@ public partial class RAccountCloudViewModel : ViewModelBase
     
     private async Task HandleSuccessfulLogin(RiotUser usr)
     {
-        Log.Information("Successful login with Riot Account with Username/Password");
+        Log.Information("Successful login with Riot Account with CloudWebLogin");
         AccountProfile profile = new AccountProfile();
         if (AccountSettings.Default.Accounts.Exists(x => x.Id == usr.UserData.sub))
             profile = AccountSettings.Default.Accounts.Find(x => x.Id == usr.UserData.sub);
@@ -145,11 +151,28 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 GameName = usr.UserData.acct.game_name,
                 TagLine = usr.UserData.acct.tag_line
             };
-            var inventory = await usr.Inventory.GetPlayerInventory();
-            var pMmr = await usr.Player.GetPlayerMmr();
-            profile.Personalization.PlayerCardId = inventory.PlayerData.PlayerCardID;
-            profile.Personalization.PlayerLevel = inventory.PlayerData.AccountLevel;
-            profile.Personalization.ValRankTier = pMmr.LatestCompetitiveUpdate.TierAfterUpdate;
+
+            try
+            {
+                var inventory = await usr.Inventory.GetPlayerInventory();
+                profile.Personalization.PlayerCardId = inventory.PlayerData.PlayerCardID;
+                profile.Personalization.PlayerLevel = inventory.PlayerData.AccountLevel;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to Get Inventory Data when setting up profile");
+            }
+            
+            try
+            {
+                var pMmr = await usr.Player.GetPlayerMmr();
+                profile.Personalization.ValRankTier = pMmr.LatestCompetitiveUpdate.TierAfterUpdate;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to Get MMR Data when setting up profile");
+            }
+            
             profile.CanAssistBoot = true;
             profile.CanLauncherBoot = false;
             profile.IsExpired = false;
@@ -197,7 +220,11 @@ public partial class RAccountCloudViewModel : ViewModelBase
                 var cc = new Dictionary<string, Cookie>();
                 cookies.ForEach(x =>
                 {
-                    cc.TryAdd(x.Name, new Cookie(x.Name, x.Value, x.Path, x.Domain));
+                    if (!x.Name.Contains("osano") || !x.Name.Contains("PVPNET") || !x.Name.Contains("_ga_") || !x.Name.Contains("_ga"))
+                    {
+                        cc.TryAdd(x.Name, new Cookie(x.Name, x.Value, x.Path, x.Domain));    
+                    }
+                    
                 });
                 
 
