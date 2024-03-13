@@ -10,6 +10,7 @@ using Assist.Models.Enums;
 using Assist.Services.Navigation;
 using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings;
+using Assist.Shared.Settings.Accounts;
 using Assist.Shared.Settings.Modules;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -136,6 +137,20 @@ public partial class App : Application
         }
         
         ModuleSettings.Save();
+        
+        try
+        {
+            AccountSettings.Default =
+                JsonSerializer.Deserialize<AccountSettings>(File.ReadAllText(AccountSettings.FilePath));
+        }
+        catch(Exception e)
+        {
+            Log.Error("Failed to read account settings");
+            Log.Error(e.Message);
+            AccountSettings.Default = new AccountSettings();
+        }
+        
+        AccountSettings.Save();
         
     }
     
