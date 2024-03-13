@@ -8,11 +8,10 @@ using Assist.Core.Helpers;
 using Assist.Objects.AssistApi.Valorant;
 using Assist.Shared.Settings;
 using Assist.Shared.Settings.Accounts;
-
-using AssistUser.Lib.Base.Exceptions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Serilog;
 using ValNet.Objects.Contracts;
+using ValNet.Objects.Exceptions;
 
 namespace Assist.ViewModels.Dashboard;
 
