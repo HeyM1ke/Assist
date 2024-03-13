@@ -140,6 +140,12 @@ public partial class App : Application
         
         try
         {
+            if (File.Exists(AccountSettings.FilePath))
+            {
+                Log.Information("Found Account Settings File!");
+            }
+            
+            
             AccountSettings.Default =
                 JsonSerializer.Deserialize<AccountSettings>(File.ReadAllText(AccountSettings.FilePath));
         }
