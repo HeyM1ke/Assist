@@ -8,7 +8,7 @@
                                            Height="180"
                                            PlayerName="TestForPlayer"
                                            PlayerIconImage="https://titles.trackercdn.com/valorant-api/playercards/68b0c8c2-4158-7b21-658d-b4ae86f137ce/displayicon.png"
-                                           PlayerRankImage="https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_0.png"
+                                           PlayerRankImage="https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_0.png"
                                            />
     </Design.PreviewWith>
 

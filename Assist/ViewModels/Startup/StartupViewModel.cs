@@ -227,7 +227,7 @@ public partial class StartupViewModel : ViewModelBase
         
         CurrentContent = new AccountPreviewStartupControl()
         {
-            Icon = $"https://content.assistapp.dev/playercards/{defaultAccount.Personalization.PlayerCardId}_DisplayIcon.png",
+            Icon = $"https://cdn.assistval.com/playercards/{defaultAccount.Personalization.PlayerCardId}_DisplayIcon.png",
             AccountName = !string.IsNullOrEmpty(defaultAccount.Personalization.AccountNickName)
                 ? defaultAccount.Personalization.AccountNickName
                 : defaultAccount.Personalization.RiotId,

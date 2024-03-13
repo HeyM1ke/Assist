@@ -25,7 +25,7 @@ public partial class TitlebarViewModel : ViewModelBase
     {
         AccountName = _profile.Personalization.RiotId;
         AccountProfilePic =
-            $"https://content.assistapp.dev/playercards/{_profile.Personalization.PlayerCardId}_DisplayIcon.png";
+            $"https://cdn.assistval.com/playercards/{_profile.Personalization.PlayerCardId}_DisplayIcon.png";
     }
     
     [RelayCommand]

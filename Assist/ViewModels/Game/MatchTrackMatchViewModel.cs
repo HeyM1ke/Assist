@@ -46,7 +46,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
         if (RecentMatchData is null)
             return;
         
-        MapImage = $"https://content.assistapp.dev/maps/{ValorantHelper.MapsByPath[RecentMatchData.MapId.ToLower()]}_BWlistview.png";
+        MapImage = $"https://cdn.assistval.com/maps/{ValorantHelper.MapsByPath[RecentMatchData.MapId.ToLower()]}_BWlistview.png";
         
         
         // Determine Match State
@@ -103,7 +103,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
 
         if (localUserData != null)
         {
-            LocalPlayerAgentIcon = $"https://content.assistapp.dev/agents/{localUserData.PlayerAgentId.ToLower()}_displayicon.png";
+            LocalPlayerAgentIcon = $"https://cdn.assistval.com/agents/{localUserData.PlayerAgentId.ToLower()}_displayicon.png";
             LocalPlayerStats = localUserData.Statistics is not null
                 ? $"{localUserData.Statistics.Kills} / {localUserData.Statistics.Deaths} / {localUserData.Statistics.Assists}"
                 : "";
@@ -134,6 +134,10 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     {
                         name = $"{player.PlayerName}#{player.PlayerTag}";
                     }
+                    else if(player.PlayerName.Equals("player", StringComparison.OrdinalIgnoreCase))
+                    {
+                        name = $"{player.PlayerName}";
+                    }
                     else if (!string.IsNullOrEmpty(player.PlayerRealName) && RecentMatchData.Result != RecentMatch.MatchResult.IN_PROGRESS)
                     {
                         name = player.PlayerRealName;
@@ -141,13 +145,15 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     var teamMateObj = new MatchTrackTeammateDisplayControl()
                     {
                         AgentIcon =
-                            $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
+                            $"https://cdn.assistval.com/agents/{player.PlayerAgentId}_displayicon.png",
                         TeammateName = name,
                         RankIcon =
-                            $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
+                            $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline = player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
 
+                    if (string.IsNullOrEmpty(player.PlayerAgentId))
+                        teamMateObj.AgentIcon = $"https://cdn.assistval.com/agents/unknown_displayicon.png";
                    
                     teamObj.TeammateControls.Add(teamMateObj);
                 });
@@ -188,10 +194,10 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     var teamMateObj = new MatchTrackTeammateDisplayControl()
                     {
                         AgentIcon =
-                            $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
+                            $"https://cdn.assistval.com/agents/{player.PlayerAgentId}_displayicon.png",
                         TeammateName = name,
                         RankIcon =
-                            $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
+                            $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline =
                             player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };
@@ -230,10 +236,10 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     var teamMateObj = new MatchTrackTeammateDisplayControl()
                     {
                         AgentIcon =
-                            $"https://content.assistapp.dev/agents/{player.PlayerAgentId}_displayicon.png",
+                            $"https://cdn.assistval.com/agents/{player.PlayerAgentId}_displayicon.png",
                         TeammateName = name,
                         RankIcon =
-                            $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
+                            $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{player.CompetitiveTier}.png",
                         Statline =
                             player.Statistics is not null ? $"{player.Statistics.Kills} // {player.Statistics.Deaths} // {player.Statistics.Assists}" : ""
                     };

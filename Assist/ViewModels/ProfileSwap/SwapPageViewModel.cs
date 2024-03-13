@@ -69,7 +69,7 @@ public partial class SwapPageViewModel : ViewModelBase
         
         CurrentContent = new AccountPreviewStartupControl()
         {
-            Icon = $"https://content.assistapp.dev/playercards/{account.Personalization.PlayerCardId}_DisplayIcon.png",
+            Icon = $"https://cdn.assistval.com/playercards/{account.Personalization.PlayerCardId}_DisplayIcon.png",
             AccountName = !string.IsNullOrEmpty(account.Personalization.AccountNickName)
                 ? account.Personalization.AccountNickName
                 : account.Personalization.RiotId,
