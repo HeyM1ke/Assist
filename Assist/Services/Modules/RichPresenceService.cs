@@ -217,7 +217,7 @@ public class RichPresenceService
             }
         }
 
-        if (!string.IsNullOrEmpty(detailsFinal)) // Adds Spacer if there is already data.
+        if (!string.IsNullOrEmpty(detailsFinal) && ModuleSettings.Default.RichPresenceSettings.ShowScore) // Adds Spacer if there is already data.
             detailsFinal += " | ";
         
         if (ModuleSettings.Default.RichPresenceSettings.ShowScore)
