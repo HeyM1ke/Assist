@@ -6,6 +6,7 @@ using Assist.Controls.Modules.Dodge;
 using Assist.Controls.Navigation;
 using Assist.Core.Helpers;
 using Assist.Services.Assist;
+using Assist.Services.Navigation;
 using AssistUser.Lib.V2.Models.Dodge;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -40,7 +41,7 @@ public partial class DodgeViewModel : ViewModelBase
             Log.Information("User somehow loaded Assist Dodge View, without a token.");
             Dispatcher.UIThread.Invoke(() =>
             {
-                NavigationContainer.ViewModel.ChangeToPreviousPage();
+                NavigationContainer.ViewModel.ChangePage(AssistPage.MODULES);
             });
             return;   
         }
