@@ -123,6 +123,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login/Register.
+        /// </summary>
+        public static string Authentication_LoginRegisterText {
+            get {
+                return ResourceManager.GetString("Authentication_LoginRegisterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Authentication_LoginText {
@@ -470,6 +479,15 @@ namespace Assist.Properties {
         public static string Common_Loading {
             get {
                 return ResourceManager.GetString("Common_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string Common_Logout {
+            get {
+                return ResourceManager.GetString("Common_Logout", resourceCulture);
             }
         }
         

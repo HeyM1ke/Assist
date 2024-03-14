@@ -17,6 +17,11 @@ public partial class AssistAccountSettingsPageView : UserControl
         InitializeComponent();
     }
 
-   
-    
+
+    private async void AssistAccountPage_Loaded(object? sender, RoutedEventArgs e)
+    {
+        if (Design.IsDesignMode)return;
+
+        await _viewModel.SetupPage();
+    }
 }
