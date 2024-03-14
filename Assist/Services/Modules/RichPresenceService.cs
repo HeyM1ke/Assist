@@ -100,7 +100,26 @@ public class RichPresenceService
         
         Log.Information("Forcing Discord RPC Update");
         var data = AssistApplication.RiotWebsocketService.GetLatestMessage();
-        if (data is null) return;
+        if (data is null)
+        {
+            try
+            {
+                var t = await AssistApplication.ActiveUser.Presence.GetPresences();
+                var pres = t.presences.Find(x => x.puuid == AssistApplication.ActiveUser.UserData.sub);
+
+                if (pres != null)
+                {
+                    var pp = await ValorantHelper.GetPresenceData(pres);
+                    UpdateDiscordRpcWithDataFromPresence(pp);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+            }
+            
+            return;
+        };
         UpdateDiscordRpcWithDataFromPresence(data);
     }
     
@@ -108,6 +127,29 @@ public class RichPresenceService
     {
         // Decode Pres
         var pres = await ValorantHelper.GetPresenceData(obj.MessageData.Presences[0]);
+        
+        switch (pres.sessionLoopState)
+        {
+            case "MENUS":
+                DetermineMenusPresence(pres);
+                break;
+            case "INGAME":
+                DetermineIngamePresence(pres);
+                break;
+            case "PREGAME":
+                DeterminePregamePresence(pres);
+                break;
+            default:
+                break;
+        }
+
+
+    }
+    
+    private async void UpdateDiscordRpcWithDataFromPresence(PlayerPresence pres)
+    {
+        // Decode Pres
+        
         
         switch (pres.sessionLoopState)
         {
@@ -210,6 +252,10 @@ public class RichPresenceService
         {
             if (pres.partyState.Contains("CUSTOM_GAME"))
                 detailsFinal += Properties.Resources.VALORANT_CustomGame;
+            else if (pres.matchMap.Equals("/game/maps/poveglia/range", StringComparison.OrdinalIgnoreCase))
+            {
+                detailsFinal += Properties.Resources.VALORANT_TheRange;
+            }
             else
             {
                 var queueName = ValorantHelper.DetermineQueueKey(pres.queueId);
@@ -217,10 +263,10 @@ public class RichPresenceService
             }
         }
 
-        if (!string.IsNullOrEmpty(detailsFinal) && ModuleSettings.Default.RichPresenceSettings.ShowScore) // Adds Spacer if there is already data.
+        if (!string.IsNullOrEmpty(detailsFinal) && ModuleSettings.Default.RichPresenceSettings.ShowScore && !pres.matchMap.Equals("/game/maps/poveglia/range", StringComparison.OrdinalIgnoreCase)) // Adds Spacer if there is already data.
             detailsFinal += " | ";
         
-        if (ModuleSettings.Default.RichPresenceSettings.ShowScore)
+        if (ModuleSettings.Default.RichPresenceSettings.ShowScore && !pres.matchMap.Equals("/game/maps/poveglia/range", StringComparison.OrdinalIgnoreCase))
         {
            detailsFinal += $"{pres.partyOwnerMatchScoreAllyTeam} - {pres.partyOwnerMatchScoreEnemyTeam}";
         }

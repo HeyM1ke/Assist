@@ -169,7 +169,7 @@ public partial class DiscordRPViewModel : ViewModelBase
             Command = HandlePrivacyChangeCommand,
             CommandParameter = "mode",
             IsChecked = ModuleSettings.Default.RichPresenceSettings.ShowMode,
-            Content = "Show Gamemode"
+            Content = "Show Mode"
         });
         
         PrivacyButtons.Add(new EnableDisableTextButton()
