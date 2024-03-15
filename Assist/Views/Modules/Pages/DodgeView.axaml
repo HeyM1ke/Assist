@@ -172,19 +172,23 @@
                                          VerticalAlignment="Stretch"
                                          MinHeight="360"
                                          >
-                                           <ItemsControl ItemsSource="{Binding PlayerControls}">
-                                                   <ItemsControl.ItemsPanel>
-                                                           <ItemsPanelTemplate>
-                                                                   <StackPanel Orientation="Vertical"/>
-                                                           </ItemsPanelTemplate>
-                                                   </ItemsControl.ItemsPanel>
-                                                   <ItemsControl.Styles>
-                                                           <Style Selector="dodge|DodgePlayerPreviewControl">
-                                                                   <Setter Property="Height" Value="38"></Setter>
-                                                           </Style>
-                                                   </ItemsControl.Styles>
+                                           <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                         VerticalScrollBarVisibility="Auto"
+                                                         MaxHeight="360">
+                                                   <ItemsControl ItemsSource="{Binding PlayerControls}">
+                                                           <ItemsControl.ItemsPanel>
+                                                                   <ItemsPanelTemplate>
+                                                                           <StackPanel Orientation="Vertical"/>
+                                                                   </ItemsPanelTemplate>
+                                                           </ItemsControl.ItemsPanel>
+                                                           <ItemsControl.Styles>
+                                                                   <Style Selector="dodge|DodgePlayerPreviewControl">
+                                                                           <Setter Property="Height" Value="38"></Setter>
+                                                                   </Style>
+                                                           </ItemsControl.Styles>
                                                   
-                                           </ItemsControl>
+                                                   </ItemsControl>
+                                           </ScrollViewer>
                                            
                                            <TextBlock Text="{x:Static properties:Resources.Dodge_ListEmpty}"
                                                       VerticalAlignment="Center"
