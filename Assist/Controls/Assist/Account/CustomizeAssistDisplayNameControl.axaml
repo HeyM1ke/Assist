@@ -1,0 +1,139 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Assist.Account.CustomizeAssistDisplayNameControl"
+             Background="{DynamicResource AssistBackground}">
+    <Border Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderThickness="1"
+            CornerRadius="10"
+            Padding="10"
+            Width="450"
+            VerticalAlignment="Center"
+    >
+        <Grid RowDefinitions="Auto,Auto,Auto">
+            
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        Spacing="5"
+                        Margin="0,0,0,10">
+                <Image Source="{SvgImage /Assets/Icons/Edit_Icon.svg}"
+                       Width="50"
+                       Height="50"/>
+                
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="{x:Static lang:Resources.Settings_AssistAccount}"
+                               FontWeight="SemiBold"
+                               FontSize="15"
+                               Opacity=".3"
+                               HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Text="Change Display Name"
+                               FontWeight="SemiBold"
+                               FontSize="24"
+                               Opacity="1"
+                               HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                               Spacing="15">
+                       
+                       <StackPanel Orientation="Horizontal"
+                                   VerticalAlignment="Center"
+                                   IsVisible="{Binding IsProcessing}"
+                                   Height="25"
+                                   Spacing="5">
+                           <TextBlock Text="{x:Static lang:Resources.Common_Loading}"
+                                      FontSize="10"
+                                      FontWeight="Light"
+                                      TextAlignment="Left"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"/>
+                           <avaloniaProgressRing:ProgressRing Width="14"
+                                                              Height="14"
+                                                              IsActive="True"
+                                                              VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"
+                                                              Foreground="WhiteSmoke"
+                                                              
+                           />
+                       </StackPanel>
+                       
+                <assist:SmallImageButton
+                    Grid.Row="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Width="29"
+                    Height="29"
+                    IsVisible="{Binding CanClose}"
+                    Icon="{SvgImage /Assets/Default/X_Icon.svg}"
+                    CornerRadius="5"
+                    BorderBrush="{DynamicResource AssistControlOutline}"
+                    BorderThickness="1"
+                    Command="{Binding CloseViewCommand}"
+                />
+                       
+                      
+                   </StackPanel>
+            
+            <Grid Row="1">
+                 <StackPanel MinWidth="293"
+                        Spacing="10">
+                
+                <StackPanel.Styles>
+                    <Style Selector="TextBox">
+                        <Setter Property="AcceptsReturn" Value="False"/>
+                        <Setter Property="AcceptsTab" Value="False"/>
+                        <Setter Property="Background" Value="{DynamicResource AssistControlBackground}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AssistControlOutline}"/>
+                        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+                    </Style>
+                </StackPanel.Styles>
+                
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Display Name:"
+                               FontWeight="Light"
+                               FontSize="14"
+                               Opacity=".5"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="Name requires to be 4-16 characters in length."
+                               FontWeight="Light"
+                               FontSize="12"
+                               Opacity=".6"
+                               HorizontalAlignment="Left"/>
+                    <TextBox Watermark="EX: CoolGamer47"
+                             x:Name="PlayerNameBox"
+                             FontSize="16"
+                             MaxLength="16"
+                             Text="{Binding DisplayNameText}"
+                             ></TextBox>
+                    <TextBlock Text="{Binding ErrorMessage}"
+                               FontWeight="Light"
+                               FontSize="13"
+                               IsVisible="{Binding ErrorVisible}"
+                               Foreground="{DynamicResource AssistPrimaryColor}"
+                               HorizontalAlignment="Left"/>
+                </StackPanel>
+                 </StackPanel>
+            </Grid>
+            
+            <Button Content="{x:Static lang:Resources.Common_Apply}"
+                    Classes="default"
+                    Command="{Binding ChangeDisplayNameCommand}"
+                    HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding !IsProcessing}"
+                    Margin="0,10,0,0"
+                    Grid.Row="2"/>
+        </Grid>
+    </Border>
+</UserControl>

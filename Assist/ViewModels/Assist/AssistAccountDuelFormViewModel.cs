@@ -28,7 +28,7 @@ public partial class AssistAccountDuelFormViewModel : ViewModelBase
     [ObservableProperty] private bool _requestedCancel = false;
 
     private const string _discordAuthUrl =
-        "https://discord.com/oauth2/authorize?client_id=984912187837526038&response_type=code&redirect_uri=https%3A%2F%2Fassistval.com%2Fapi%2Foauth%2Fdiscord%2Fredirect&scope=guilds.join+email+connections+identify&state={0}";
+        "https://discord.com/oauth2/authorize?client_id=984912187837526038&response_type=code&redirect_uri=https%3A%2F%2Flive.assistval.com%2Fapi%2Foauth%2Fdiscord%2Fredirect&scope=guilds.join+email+connections+identify&state={0}";
     
     [RelayCommand]
     public async Task DiscordOAuthCommand()

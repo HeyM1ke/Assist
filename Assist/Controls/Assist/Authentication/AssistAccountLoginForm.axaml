@@ -20,6 +20,7 @@
             Background="{DynamicResource AssistControlBackground}"
             BorderBrush="{DynamicResource AssistControlOutline}"
             BorderThickness="1"
+            
             CornerRadius="10"
             Padding="10">
         <Grid>
@@ -183,9 +184,12 @@
                     <TextBlock Text="{x:Static lang:Resources.Common_Loading}"
                                FontWeight="SemiBold"
                                FontSize="16"
+                               TextAlignment="Center"
                                HorizontalAlignment="Center"/>
                     
                     <Button Content="{x:Static lang:Resources.Common_BackText}"
+                            HorizontalAlignment="Center"
+                            Classes="default"
                             Command="{Binding CancelOAuthCommand}"></Button>
                 </StackPanel>
             </Border>

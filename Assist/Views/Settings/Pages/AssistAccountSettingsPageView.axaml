@@ -3,47 +3,147 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lang="clr-namespace:Assist.Properties"
+             xmlns:settings="clr-namespace:Assist.ViewModels.Settings"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Views.Settings.Pages.AssistAccountSettingsPageView"
+             Loaded="AssistAccountPage_Loaded"
              >
-    <Grid>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Spacing="10">
-                <Image Width="100"
-                       HorizontalAlignment="Left"
-                       Source="/Assets/Default/AssistText_Temp.png"
-                       RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+    
+    <Design.DataContext>
+        <settings:AssistAccountSettingsViewModel/>
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="Auto,Auto">
+            <StackPanel Orientation="Vertical" Spacing="3">
+               <StackPanel Orientation="Horizontal" Spacing="10">
+                   <Image Width="100"
+                          HorizontalAlignment="Left"
+                          Source="/Assets/Default/AssistText_Temp.png"
+                          RenderOptions.BitmapInterpolationMode="MediumQuality"/>
                         
-                <TextBlock Text="{x:Static lang:Resources.Common_Account}"
-                           FontWeight="SemiBold"
-                           FontSize="23"
-                           Opacity=".3"
-                           HorizontalAlignment="Left"
-                           TextAlignment="Center"/>
+                   <TextBlock Text="{x:Static lang:Resources.Common_Account}"
+                              FontWeight="SemiBold"
+                              FontSize="23"
+                              Opacity=".3"
+                              HorizontalAlignment="Left"
+                              TextAlignment="Center"/>
+               </StackPanel>
+                <Rectangle Height="1"
+                           HorizontalAlignment="Stretch"
+                           Fill="{DynamicResource AssistControlOutline}"
+                           IsVisible="True"
+                           Margin="0,0,0,10"/>
             </StackPanel>
-            <Rectangle Height="1"
-                       HorizontalAlignment="Stretch"
-                       Fill="{DynamicResource AssistControlOutline}"
-                       IsVisible="True"
-                       Margin="0,0,0,10"/>
+            
+        <Grid Row="1">
             <Grid x:Name="LoggedOutGrid"
                   IsVisible="{Binding !CurrentlyLoggedIn}">
-               <Grid>
+               <StackPanel Orientation="Vertical"
+                           Spacing="5">
                    <TextBlock Text="You are currently not logged in."
-                              HorizontalAlignment="Left"></TextBlock>
-                   <Button Content="{x:Static lang:Resources.Authentication_LoginText}"
-                           HorizontalAlignment="Right"
-                           Command="{Binding OpenAssistLoginPopupCommand}"></Button>
-               </Grid>
+                              FontSize="16"
+                              HorizontalAlignment="Center"/>
+                   <Button Content="{x:Static lang:Resources.Authentication_LoginRegisterText}"
+                           HorizontalAlignment="Stretch"
+                           Classes="default"
+                           Command="{Binding OpenAssistLoginPopupCommand}"/>
+               </StackPanel>
             </Grid>
             
             <Grid x:Name="LoggedInGrid"
                   IsVisible="{Binding CurrentlyLoggedIn}">
                 <Grid>
-                    <TextBlock Text="You are currently logged in."
+                   <StackPanel Orientation="Vertical" Spacing="20">
+                        <StackPanel Orientation="Horizontal"
+                                Spacing="5">
+                        <asyncImageLoader:AdvancedImage RenderOptions.BitmapInterpolationMode="HighQuality"
+                                                        Width="100"
+                                                        CornerRadius="5"
+                                                        Height="100"
+                                                        Source="{Binding DisplayImage}"/>
+                       
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Details"
+                                       FontSize="20"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Left"/>
+                            <Rectangle Height="1"
+                                       HorizontalAlignment="Stretch"
+                                       Fill="{DynamicResource AssistPrimaryColor}"
+                                       IsVisible="True"
+                                       Margin="0,0,0,10"/>
+                            
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <TextBlock Text="Display Name:"
+                                           FontSize="16"
+                                           FontWeight="Medium"
+                                           
+                                           HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding DisplayName}"
+                                           FontSize="16"
+                                           FontWeight="Regular"
+                                           HorizontalAlignment="Left"/>
+                                <assist:SmallImageButton 
+                                    BorderBrush="{DynamicResource AssistControlOutline}"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    Width="16"
+                                    Command="{Binding OpenChangeDisplayNameCommand}"
+                                    Icon="{SvgImage /Assets/Icons/Edit_Icon.svg}"
+                                    VerticalAlignment="Center"
+                                    Classes="default"
+                                    ToolTip.Tip="Change Display Name"
+                                    IsVisible="{Binding CanChangeDisplayName}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <TextBlock Text="Email:"
+                                           FontSize="16"
+                                           FontWeight="Medium"
+                                           HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding EmailText}"
+                                           FontSize="16"
+                                           FontWeight="Regular"
+                                           HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </StackPanel>
+                        </StackPanel>
+                       
+                       
+                        <StackPanel Orientation="Vertical" IsVisible="False">
+                            <TextBlock Text="Connections"
+                                       FontSize="20"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Left"/>
+                            <TextBlock Text="Current Connections tied to this Assist Account."
+                                       FontSize="14"
+                                       FontWeight="Regular"
+                                       HorizontalAlignment="Left"/>
+                            <Rectangle Height="1"
+                                       HorizontalAlignment="Stretch"
+                                       Fill="{DynamicResource AssistPrimaryColor}"
+                                       IsVisible="True"
+                                       Margin="0,0,0,10"/>
+                            
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                               
+                            </StackPanel>
+                        </StackPanel>
+                       <Button Content="{x:Static lang:Resources.Common_Logout}"
+                               HorizontalAlignment="Stretch"
+                               Classes="default"
+                               Command="{Binding HandleAssistLogoutCommand}"/>
+                   </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid x:Name="FailedToGetInfoGrid"
+                  IsVisible="{Binding FailedToGetInfo}">
+                <Grid>
+                    <TextBlock Text="An error occured getting your account information. Please come back at a later time."
                                HorizontalAlignment="Left"></TextBlock>
                 </Grid>
             </Grid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

@@ -218,7 +218,11 @@ public partial class NavigationViewModel : ViewModelBase
                     return;
             }
 
-            _pages.Add(CurrentPage, newPage);
+            if (CurrentPage != AssistPage.LIVE) // Live is no longer stored.
+            {
+                _pages.Add(CurrentPage, newPage);    
+            }
+            
         }
 
         _history[0] = _history[1];

@@ -235,6 +235,9 @@
   <data name="Common_Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="Common_Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
   <data name="Common_SignIn" xml:space="preserve">
     <value>Sign In</value>
   </data>
@@ -379,6 +382,9 @@
   </data>
   <data name="Authentication_LoginText" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="Authentication_LoginRegisterText" xml:space="preserve">
+    <value>Login/Register</value>
   </data>
   <data name="Authentication_MultiFactorCodeText" xml:space="preserve">
     <value>Code</value>

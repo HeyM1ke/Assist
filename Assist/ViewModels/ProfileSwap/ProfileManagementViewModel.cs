@@ -34,7 +34,7 @@ public partial class ProfileManagementViewModel : ViewModelBase
         var profile = AccountSettings.Default.Accounts.FirstOrDefault(x => x.Id == ProfileId);
 
         ProfileRiotName = profile.Personalization.RiotId;
-        ProfilePlayercard =  $"https://content.assistapp.dev/playercards/{profile.Personalization.PlayerCardId}_DisplayIcon.png";
+        ProfilePlayercard =  $"https://cdn.assistval.com/playercards/{profile.Personalization.PlayerCardId}_DisplayIcon.png";
         
         GameLaunchEnabled = profile.CanLauncherBoot;
         AssistEnabled = profile.CanAssistBoot;

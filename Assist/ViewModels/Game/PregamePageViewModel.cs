@@ -12,7 +12,6 @@ using Assist.Core.Helpers;
 using Assist.Models.Socket;
 using Assist.Services.Assist;
 using Assist.Shared.Models.Assist;
-using AssistUser.Lib.Base.Exceptions;
 using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -97,7 +96,7 @@ public partial class PregamePageViewModel : ViewModelBase
             {
                 await PageSetup();
             }
-            Log.Error("Updating Data");
+            Log.Error("Updating Data on Pregame");
             PregameMatch MatchResp = new PregameMatch();
             ChatV4PresenceObj PresenceResp = new ChatV4PresenceObj();
             try

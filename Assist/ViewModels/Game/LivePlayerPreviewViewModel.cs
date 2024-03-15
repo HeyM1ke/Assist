@@ -108,7 +108,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                         var t = await ValorantHelper.GetPresenceData(pData);
                         PlayerCompetitiveTier = t.competitiveTier;
                         RankIcon =
-                            $"https://content.assistapp.dev/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
+                            $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{t.competitiveTier}.png";
                         LevelText = $"{t.accountLevel:N0}";
                         _playerId = pData.puuid;
                         _playerRealName = $"{pData.game_name}#{pData.game_tag}";
@@ -125,7 +125,7 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
                 try
                 {
                     // Set Agent Icon
-                    AgentIconUrl = $"https://content.assistapp.dev/agents/{Player.CharacterID.ToLower()}_displayicon.png";
+                    AgentIconUrl = $"https://cdn.assistval.com/agents/{Player.CharacterID.ToLower()}_displayicon.png";
                     // Set Agent Name
                     if (!UsingAssistProfile)
                         SecondaryText = ValorantHelper.AgentIdToNames?[Player.CharacterID.ToLower()];
@@ -305,9 +305,16 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
     
     private void SetupAssistFeatures(string userId)
         {
+            if (string.IsNullOrEmpty(userId))
+            {
+                Log.Information("UserID was null");
+                return;
+            }
+            
             if (!_recentChecked)
             {
-                var p = RecentService.Current.RecentPlayers.Find(x => x.PlayerId.Equals(userId));
+                Log.Information("Checking Recent");
+                var p = RecentService.Current.RecentPlayers?.Find(x => x.PlayerId.Equals(userId));
 
                 if (p != null)
                 {
@@ -328,17 +335,22 @@ public partial class LivePlayerPreviewViewModel : ViewModelBase
             
             //*#1#/ Check if user is on dodge list
             // if so enable red border and icon popup.
-            var user = DodgeService.Current.DodgeList.Players.Find(player => player.PlayerId == userId);
-            if (user != null)
+            Log.Information("Checking Dodge Members on List");
+            if (DodgeService.Current.DodgeList.Players is not null)
             {
-                // This means the user was found on the dodge list.
-                DodgeVisible = true;
-                DodgeText = AssistHelper.DodgeCategories[(EAssistDodgeCategory)user.Category];
-                Dispatcher.UIThread.InvokeAsync(async () =>
+                var user = DodgeService.Current.DodgeList.Players.Find(player => player.PlayerId == userId);
+                if (user != null)
                 {
-                    DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
-                });
+                    // This means the user was found on the dodge list.
+                    DodgeVisible = true;
+                    DodgeText = AssistHelper.DodgeCategories[(EAssistDodgeCategory)user.Category];
+                    Dispatcher.UIThread.InvokeAsync(async () =>
+                    {
+                        DodgeBorder = new SolidColorBrush(new Color(255, 246, 30, 81));
+                    });
+                }
             }
+           
 
             /*if (checkGlobal != null && GameSettings.Current.GlobalListEnabled)
             {

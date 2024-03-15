@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Controls.Assist.Account;
 using Assist.Controls.Infobars;
 using Assist.Controls.Navigation;
 using Assist.Controls.Startup;
@@ -21,11 +22,14 @@ using Assist.Views.Extras;
 using Assist.Views.Game;
 using Assist.Views.RAccount;
 using Assist.Views.Setup;
+using Assist.Views.Startup;
+using AssistUser.Lib.V2.Models;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Svg.Skia;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Serilog;
 using SkiaSharp;
 using Svg.Skia;
@@ -68,7 +72,7 @@ public partial class StartupViewModel : ViewModelBase
         }
 
         Log.Information("Checking for Assist Account Login");
-        if (!string.IsNullOrEmpty(AssistSettings.Default.AssistUserCode))
+        if (!string.IsNullOrEmpty(AssistSettings.Default.AssistUserCode) && string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken))
         {
             Log.Information("Settings is Reading that an Assist Account exists. Attempting to login");
             try
@@ -93,6 +97,32 @@ public partial class StartupViewModel : ViewModelBase
                 
             }
         }
+
+        if (!string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken))
+        {
+            Log.Information("Checking Assist Account Information");
+            try
+            {
+                var accountInfo = await AssistApplication.AssistUser.Account.GetAccountInfo();
+
+                if (accountInfo.Code == 200)
+                {
+                    var _accountInfo = JsonSerializer.Deserialize<AAccount>(accountInfo.Data.ToString());
+                    if (string.IsNullOrEmpty(_accountInfo.Personalization.DisplayName))
+                    {
+                        AssistApplication.ChangeMainWindowPopupView(new CustomizeAssistDisplayNameControl(DisplayNameCompletedCommand));
+                        return; 
+                    }
+                }
+                
+            }
+            catch (Exception e)
+            {
+               
+            }
+            
+        }
+        
         
         switch (AssistSettings.Default.AppType)
         {
@@ -119,9 +149,6 @@ public partial class StartupViewModel : ViewModelBase
 
     private async Task LauncherSetup()
     {
-        try { AccountSettings.Default = JsonSerializer.Deserialize<AccountSettings>(File.ReadAllText(AccountSettings.FilePath)); }
-        catch { AccountSettings.Default = new AccountSettings(); }
-        
         Log.Information("Checking for any Accounts Stored");
 
         if (AccountSettings.Default.Accounts.Count == 0)
@@ -230,7 +257,7 @@ public partial class StartupViewModel : ViewModelBase
         
         CurrentContent = new AccountPreviewStartupControl()
         {
-            Icon = $"https://content.assistapp.dev/playercards/{defaultAccount.Personalization.PlayerCardId}_DisplayIcon.png",
+            Icon = $"https://cdn.assistval.com/playercards/{defaultAccount.Personalization.PlayerCardId}_DisplayIcon.png",
             AccountName = !string.IsNullOrEmpty(defaultAccount.Personalization.AccountNickName)
                 ? defaultAccount.Personalization.AccountNickName
                 : defaultAccount.Personalization.RiotId,
@@ -291,11 +318,26 @@ public partial class StartupViewModel : ViewModelBase
                 GameName = usr.UserData.acct.game_name,
                 TagLine = usr.UserData.acct.tag_line
             };
-            var inventory = await usr.Inventory.GetPlayerInventory();
-            var pMmr = await usr.Player.GetPlayerMmr();
-            profile.Personalization.PlayerCardId = inventory.PlayerData.PlayerCardID;
-            profile.Personalization.PlayerLevel = inventory.PlayerData.AccountLevel;
-            profile.Personalization.ValRankTier = pMmr.LatestCompetitiveUpdate.TierAfterUpdate;
+            try
+            {
+                var inventory = await usr.Inventory.GetPlayerInventory();
+                profile.Personalization.PlayerCardId = inventory.PlayerData.PlayerCardID;
+                profile.Personalization.PlayerLevel = inventory.PlayerData.AccountLevel;
+            }
+            catch (Exception e)
+            {
+               Log.Error("Failed to Get Inventory Data when setting up profile");
+            }
+            
+            try
+            {
+                var pMmr = await usr.Player.GetPlayerMmr();
+                profile.Personalization.ValRankTier = pMmr.LatestCompetitiveUpdate.TierAfterUpdate;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to Get MMR Data when setting up profile");
+            }
             
             profile.ConvertCookiesTo64(usr.GetAuthClient().ClientCookies);
         }
@@ -313,5 +355,14 @@ public partial class StartupViewModel : ViewModelBase
         
         Log.Information("Finished Setting up Riot Account as the Main User & To the settings.");
     }
-    
+
+    [RelayCommand]
+    private async void DisplayNameCompleted()
+    {
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            AssistApplication.ChangeMainWindowPopupView(null);
+            AssistApplication.ChangeMainWindowView(new StartupView());
+        });
+    }
 }

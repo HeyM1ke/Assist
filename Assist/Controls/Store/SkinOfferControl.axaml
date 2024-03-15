@@ -6,7 +6,7 @@
         <controls:SkinOfferControl Width="365"
                                    Height="144"
                                    TierGradient="{DynamicResource ExclusiveGrad}"
-                                   SkinImage="https://content.assistapp.dev/valorant/skin/abef8114-4495-6da7-2ade-02bd0f014fd3_DisplayIcon.png"
+                                   SkinImage="https://cdn.assistval.com/valorant/skin/abef8114-4495-6da7-2ade-02bd0f014fd3_DisplayIcon.png"
                                    
                                    />
     </Design.PreviewWith>

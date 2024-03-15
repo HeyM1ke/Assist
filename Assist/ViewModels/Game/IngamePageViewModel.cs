@@ -106,7 +106,7 @@ public partial class IngamePageViewModel : ViewModelBase
             await PageSetup();
         }
 
-        Log.Error("Updating Data");
+        Log.Error("Updating Data on Ingame");
         CoregameMatch MatchResp = new CoregameMatch();
         ChatV4PresenceObj PresenceResp = new ChatV4PresenceObj();
         try

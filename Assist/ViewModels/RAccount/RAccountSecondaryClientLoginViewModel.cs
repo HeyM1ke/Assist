@@ -35,7 +35,7 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
     public async Task ClientLaunchButtonPressed()
     {
         Log.Information("Client Launch Button Launched");
-
+        ErrorMessageVisible = false;
         IsProcessing = true;
         
         await StartRiotClient();
@@ -69,7 +69,14 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
                 if (_riotClientProcess != null)
                 {
                     Log.Information("Riot Client Found");
-                    _riotClientProcess.EnableRaisingEvents = true;
+                    try
+                    {
+                        _riotClientProcess.EnableRaisingEvents = true;
+                    }
+                    catch (Exception e)
+                    {
+                        
+                    }
                     return;
                 }
 
@@ -248,7 +255,8 @@ public partial class RAccountSecondaryClientLoginViewModel : ViewModelBase
                     ClearPreviousConfig();
                     
                     // Showcase Message/Window stating issue.
-                    
+                    ErrorMessage = "Login Failed! Please Remember to Select Remember Me Options!";
+                    ErrorMessageVisible = true;
                     IsProcessing = false; // Unhides UI to progress
                 }
                 

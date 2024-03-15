@@ -39,13 +39,23 @@
                         
                         <TextBlock FontWeight="Regular"
                                    FontSize="13"
-                                   Foreground="{DynamicResource AssistPrimaryColor}"
+                                   Foreground="{DynamicResource AssistForeground}"
                                    HorizontalAlignment="Center"
                                    TextWrapping="WrapWithOverflow"
                                    Width="300"
                                    TextAlignment="Center"
                                    Text="{x:Static lang:Resources.Authentication_RiotClientTitleInstructions}"
                                    />
+                        <TextBlock FontWeight="Regular"
+                                   FontSize="13"
+                                   Foreground="{DynamicResource AssistPrimaryColor}"
+                                   HorizontalAlignment="Center"
+                                   TextWrapping="WrapWithOverflow"
+                                   Width="300"
+                                   TextAlignment="Center"
+                                   IsVisible="{Binding ErrorMessageVisible}"
+                                   Text="{Binding ErrorMessage}"
+                        />
                 
                         <Button Content="{x:Static lang:Resources.Authentication_LaunchRiotClient}"
                                 HorizontalAlignment="Stretch"
