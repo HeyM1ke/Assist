@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Assist.Controls.Assist.Account;
 using Assist.Services.Assist;
 using Assist.Shared.Settings;
 using Assist.Views.Assist;
@@ -40,11 +42,19 @@ public partial class AssistAccountSettingsViewModel : ViewModelBase
 
         DisplayName = _accountInfo.Personalization.DisplayName;
         DisplayImage = _accountInfo.Personalization.AvatarUrl;
-        EmailText = _accountInfo.Email;
+        HandleEmailText();
         
         CanChangeDisplayName = _accountInfo.Personalization.LastDisplaySet.AddDays(14) < DateTime.UtcNow;
     }
 
+
+    private void HandleEmailText()
+    {
+        string pattern = @"(?<=[\w]{1})[\w\-._\+%]*(?=[\w]{1}@)";
+        string result = Regex.Replace(_accountInfo.Email, pattern, m => new string('*', m.Length));
+        EmailText = result;
+    }
+    
     private async Task GetAccountInfo()
     {
         try
@@ -69,6 +79,38 @@ public partial class AssistAccountSettingsViewModel : ViewModelBase
         }
     }
 
+    [RelayCommand]
+    public async void OpenChangeDisplayName()
+    {
+        Log.Information("Player Requested to Open Change Displayname Page");
+        
+        
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            AssistApplication.ChangeMainWindowPopupView(new CustomizeAssistDisplayNameControl(CompletedDisplayNameCommand, ClosePopupCommand));
+        });
+    }
+
+    [RelayCommand]
+    private async void ClosePopup()
+    {
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            AssistApplication.ChangeMainWindowPopupView(null);
+        });
+    }
+    
+    [RelayCommand]
+    private async void CompletedDisplayName()
+    {
+        await this.SetupPage();
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            AssistApplication.ChangeMainWindowPopupView(null);
+        });
+        
+        
+    }
 
     [RelayCommand]
     public async void OpenAssistLoginPopup()

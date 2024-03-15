@@ -78,7 +78,7 @@ public partial class DodgeViewModel : ViewModelBase
                 DateAdded = $"{p.Added.ToLocalTime().ToShortDateString()}",
                 EditPlayerCommand = OpenPlayerEditPopupCommand,
                 DeletePlayerCommand = DeletePlayerFromListCommand
-            });
+            });  
         }
         
         IsListEmpty = DodgeService.Current.DodgeList.Players.Count == 0;

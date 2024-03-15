@@ -90,7 +90,7 @@
                                     BorderThickness="1"
                                     CornerRadius="5"
                                     Width="16"
-                                    
+                                    Command="{Binding OpenChangeDisplayNameCommand}"
                                     Icon="{SvgImage /Assets/Icons/Edit_Icon.svg}"
                                     VerticalAlignment="Center"
                                     Classes="default"
@@ -111,7 +111,7 @@
                         </StackPanel>
                        
                        
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" IsVisible="False">
                             <TextBlock Text="Connections"
                                        FontSize="20"
                                        FontWeight="SemiBold"
