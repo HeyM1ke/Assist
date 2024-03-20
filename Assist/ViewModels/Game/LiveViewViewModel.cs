@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Assist.Models.Enums;
 using Assist.Models.Game;
 using Assist.Models.Socket;
+using Assist.Services.Modules;
 using Assist.Views.Game.Live.Pages;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -23,10 +24,13 @@ public partial class LiveViewViewModel : ViewModelBase
     
     public static Dictionary<string, ValorantPlayerStorage> ValorantPlayers = new Dictionary<string, ValorantPlayerStorage>();
 
+    private SocketService _socketService = new SocketService();
+    
     public async Task Setup()
     {
         Log.Information("Setting up LiveView Page");
         ChangePage(new UnknownPageView());
+        _socketService.Start();
         AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent; 
         AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent; 
     }
