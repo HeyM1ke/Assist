@@ -38,7 +38,6 @@ public static class AssistApplication
     public static AccountProfile? ActiveAccountProfile;
     public static AUser? AssistUser = new AUserBuilder().Build();
     public static AssistGameServerConnection? Server = new AssistGameServerConnection();
-    public static ValorantWebsocketClient? WebsocketClient;
     
     //TODO: Move to proper class
     public static bool CurrentlyInAssistLeagueMatch = false;

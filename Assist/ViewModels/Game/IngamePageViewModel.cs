@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Controls.Game.Live;
 using Assist.Core.Helpers;
@@ -113,6 +114,8 @@ public partial class IngamePageViewModel : ViewModelBase
         {
             MatchResp = await AssistApplication.ActiveUser.CoreGame.FetchMatch(MatchId!);
             PresenceResp = await AssistApplication.ActiveUser.Presence.GetPresences();
+            
+            
             if (MatchResp == null || PresenceResp == null)
             {
                 Log.Error("Failed on getting update data. Match or Presence");
@@ -122,18 +125,19 @@ public partial class IngamePageViewModel : ViewModelBase
         catch (RequestException e)
         {
             Log.Fatal("Error on getting player match or Pres");
-            Log.Fatal("PREGAME ERROR: " + e.StatusCode);
-            Log.Fatal("PREGAME ERROR: " + e.Content);
-            Log.Fatal("PREGAME ERROR: " + e.Message);
+            Log.Fatal("COREGAME ERROR: " + e.StatusCode);
+            Log.Fatal("COREGAME ERROR: " + e.Content);
+            Log.Fatal("COREGAME ERROR: " + e.Message);
 
             if (e.StatusCode == HttpStatusCode.BadRequest)
             {
-                Log.Fatal("PREGAME TOKEN ERROR: ");
+                Log.Fatal("COREGAME TOKEN ERROR: ");
                 await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
             }
 
             return;
         }
+        
 
         if (MatchResp.Players == null || MatchResp.Players.Count == 0)
             return;
