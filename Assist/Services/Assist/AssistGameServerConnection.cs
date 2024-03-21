@@ -18,28 +18,10 @@ public class AssistGameServerConnection: HubClient
     public async Task Connect()
     {
         HubConnectionUrl = GAMESERVERURL;
-
-        base.InitWithAuth(AssistApplication.AssistUser.userTokens.AccessToken);
-
-        _hubConnection.On<string>("inviteLobbyPlayerToParty", PartyInviteRequestedFromLobbyUser);
-        _hubConnection.On<string>("inviteLobbyRecieved", PartyInviteSentFromCreator);
-        _hubConnection.On<string>("recieveGlobalChatMessage", GlobalChatMessageReceived);
-        _hubConnection.On<string>("receiveLeaguePartyInformation", PartyUpdateReceived);
-        _hubConnection.On<string>("receiveLeaguePartyKickedUpdate", PartyKickReceived);
+        InitWithAuth(AssistApplication.AssistUser.userTokens.AccessToken);
         
         _hubConnection.On<string?>("receiveInQueueMessage", InQueueMessageReceived);
         _hubConnection.On<string?>("receiveLeaveQueueMessage", LeaveQueueMessageReceived);
-        
-        _hubConnection.On<string?>("receiveMatchUpdate", MatchUpdateMessageReceived);
-        
-        _hubConnection.On<string?>("receiveJoinedMatchMessage", JoinedMatchMessageReceived);
-        
-        _hubConnection.On<string?>("receiveValorantPartyJoinMatch", ValorantPartyJoinMatchReceived);
-        _hubConnection.On<string?>("receiveMatchValorantPartyCreate", MatchValorantPartyCreateReceived);
-        _hubConnection.On<string?>("requestValorantPartyInformation", PartyInformationRequested);
-        
-        _hubConnection.On<string?>("receiveStartValorantMatch", StartValorantMatchReceived);
-        _hubConnection.On<string?>("receiveTransferValorantPartyOwnership", TransferValorantPartyOwnershipReceived);
         
         await StartHubInternal();
     }
