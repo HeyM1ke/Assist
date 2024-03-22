@@ -22,5 +22,7 @@ public partial class ModulesView : UserControl
     {
         _viewModel.IsAssistLoggedIn = !string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken);
         _viewModel.IsGameMode = AssistApplication.CurrentMode == EAssistMode.GAME; 
+        _viewModel.AccessToSocket = AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-socket-access") && _viewModel.IsGameMode;
+        _viewModel.AccessToExtension = AssistApplication.AssistUser.Authentication.Roles.Contains("ASS-extension-access");
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.ReactiveUI;
 using System;
 using Assist.Shared.Settings;
 using Assist.Shared.Settings.Accounts;

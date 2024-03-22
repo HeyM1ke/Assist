@@ -9,9 +9,11 @@ using Assist.Services.Assist;
 using Assist.Shared.Models.Assist;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using Serilog;
 using ValNet.Objects.Exceptions;
 using ValNet.Objects.Local;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
 namespace Assist.ViewModels.Game;
@@ -127,6 +129,8 @@ public partial class MenusPageViewModel : ViewModelBase
                 {
                     if(partyData.Members.Count <= 1)
                         return;
+                    
+
 
                     var allIds = partyData.Members.Select(x => x.Subject).ToList();
 

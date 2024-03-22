@@ -328,9 +328,16 @@ public class ValorantHelper
             
             if (string.IsNullOrEmpty(data.Private))
                 return new PlayerPresence();
-            byte[] stringData = Convert.FromBase64String(data.Private);
-            string decodedString = Encoding.UTF8.GetString(stringData);
-            return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+            try
+            {
+                byte[] stringData = Convert.FromBase64String(data.Private);
+                string decodedString = Encoding.UTF8.GetString(stringData);
+                return JsonSerializer.Deserialize<PlayerPresence>(decodedString);
+            }
+            catch (Exception e)
+            {
+                return new PlayerPresence();
+            }
         }
 
         public static string DetermineQueueKey(string codeNameQueue)

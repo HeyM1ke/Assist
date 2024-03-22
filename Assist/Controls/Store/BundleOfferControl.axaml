@@ -30,7 +30,11 @@
                                    VerticalAlignment="Bottom"
                                    HorizontalAlignment="Left"
                                    Padding="5"
-                                   TextAlignment="Left"></TextBlock>
+                                   TextAlignment="Left">
+                            <TextBlock.Effect>
+                                <DropShadowDirectionEffect Direction="255" Color="Black" BlurRadius="5" Opacity=".5" ></DropShadowDirectionEffect>
+                            </TextBlock.Effect>
+                        </TextBlock>
                         
                         <Border BorderBrush="{DynamicResource AssistControlOutline}"
                                 BorderThickness="1"

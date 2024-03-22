@@ -10,54 +10,17 @@ namespace Assist.Services.Assist;
 public class AssistGameServerConnection: HubClient
 {
     public event Action<object>? RecieveMessageEvent;
-    private const string GAMESERVERURL = "http://localhost:5029/server";
-
-    public event Action<string?> LOBBY_InviteRequested;
-    public event Action<string?> LOBBY_InviteSentFromCreator;
-    public event Action<string?> GLOBALCHAT_MessageReceived; 
+    private string GAMESERVERURL = $"https://live.assistval.com/server";
+    
+    public event Action ASSIST_NewNotificationAlert;
     public async Task Connect()
     {
         HubConnectionUrl = GAMESERVERURL;
-
-        base.InitWithAuth(AssistApplication.AssistUser.userTokens.AccessToken);
-
-        _hubConnection.On<string>("inviteLobbyPlayerToParty", PartyInviteRequestedFromLobbyUser);
-        _hubConnection.On<string>("inviteLobbyRecieved", PartyInviteSentFromCreator);
-        _hubConnection.On<string>("recieveGlobalChatMessage", GlobalChatMessageReceived);
-        _hubConnection.On<string>("receiveLeaguePartyInformation", PartyUpdateReceived);
-        _hubConnection.On<string>("receiveLeaguePartyKickedUpdate", PartyKickReceived);
+        InitWithAuth(AssistApplication.AssistUser.userTokens.AccessToken);
         
-        _hubConnection.On<string?>("receiveInQueueMessage", InQueueMessageReceived);
-        _hubConnection.On<string?>("receiveLeaveQueueMessage", LeaveQueueMessageReceived);
-        
-        _hubConnection.On<string?>("receiveMatchUpdate", MatchUpdateMessageReceived);
-        
-        _hubConnection.On<string?>("receiveJoinedMatchMessage", JoinedMatchMessageReceived);
-        
-        _hubConnection.On<string?>("receiveValorantPartyJoinMatch", ValorantPartyJoinMatchReceived);
-        _hubConnection.On<string?>("receiveMatchValorantPartyCreate", MatchValorantPartyCreateReceived);
-        _hubConnection.On<string?>("requestValorantPartyInformation", PartyInformationRequested);
-        
-        _hubConnection.On<string?>("receiveStartValorantMatch", StartValorantMatchReceived);
-        _hubConnection.On<string?>("receiveTransferValorantPartyOwnership", TransferValorantPartyOwnershipReceived);
+        _hubConnection.On<object?>("clientNewNotificationAlert", (object data) => ASSIST_NewNotificationAlert?.Invoke());
         
         await StartHubInternal();
-    }
-
-
-    private async void GlobalChatMessageReceived(string data)
-    {
-        GLOBALCHAT_MessageReceived?.Invoke(data);
-    }
-
-    private void PartyInviteSentFromCreator(string data)
-    {
-        LOBBY_InviteSentFromCreator?.Invoke(data);
-    }
-
-    private async void PartyInviteRequestedFromLobbyUser(string data)
-    {
-        LOBBY_InviteRequested?.Invoke(data);
     }
     
     

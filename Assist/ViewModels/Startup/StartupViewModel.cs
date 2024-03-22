@@ -7,6 +7,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Controls.Assist.Account;
+using Assist.Controls.Assist.Authentication;
 using Assist.Controls.Infobars;
 using Assist.Controls.Navigation;
 using Assist.Controls.Startup;
@@ -17,6 +18,7 @@ using Assist.Shared.Services.Utils;
 using Assist.Shared.Settings;
 using Assist.Shared.Settings.Accounts;
 using Assist.ViewModels.Infobars;
+using Assist.Views.Assist;
 using Assist.Views.Dashboard;
 using Assist.Views.Extras;
 using Assist.Views.Game;
@@ -93,7 +95,12 @@ public partial class StartupViewModel : ViewModelBase
                 Log.Error(e.Message);
                 Log.Error(e.StackTrace);
                 Log.Information("Assist Account Login Unsuccessful");
-                //AssistSettings.Default.AssistUserCode = "";
+                AssistSettings.Default.AssistUserCode = ""; // Doing this since this will make it only show once.
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    AssistApplication.ChangeMainWindowPopupView(new AssistAuthenticationView());
+                });
+                
                 
             }
         }
@@ -115,14 +122,27 @@ public partial class StartupViewModel : ViewModelBase
                     }
                 }
                 
+                
             }
             catch (Exception e)
             {
-               
+                
             }
             
         }
-        
+
+        if (!string.IsNullOrEmpty(AssistApplication.AssistUser.userTokens.AccessToken))
+        {
+            try
+            {
+                Log.Information("Attempting to connect to the Assist Server.");
+                await AssistApplication.Server.Connect();
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to connect to Assist Server");
+            }
+        }
         
         switch (AssistSettings.Default.AppType)
         {

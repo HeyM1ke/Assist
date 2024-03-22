@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Assist.Shared.Models.Assist;
 using Assist.Shared.Settings;
 using Assist.ViewModels;
-using DynamicData;
 using Serilog;
 using ValNet.Objects.Exceptions;
 using ValNet.Objects.Player;
@@ -107,9 +106,11 @@ public class RecentService
             
         
         
-        var original = RecentMatches.Find(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
+        var original = RecentMatches.FindIndex(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
+
+        if (original != -1!)
+            RecentMatches[original] = t;        
         
-        RecentMatches.Replace(original, t);
         SaveSettings();
         RecentServiceUpdated?.Invoke();
     }
@@ -122,9 +123,11 @@ public class RecentService
         if (!RecentMatches.Exists(mth => mth.MatchId.Equals(matchData.MatchId, StringComparison.OrdinalIgnoreCase)))
             return;
         
-        var original = RecentMatches.Find(x => x.MatchId.Equals(matchData.MatchId, StringComparison.OrdinalIgnoreCase));
+        var original = RecentMatches.FindIndex(x => x.MatchId.Equals(matchData.MatchId, StringComparison.OrdinalIgnoreCase));
+
+        if (original != -1!)
+            RecentMatches[original] = matchData;
         
-        RecentMatches.Replace(original, matchData);
         SaveSettings();
         RecentServiceUpdated?.Invoke();
     }
@@ -137,7 +140,7 @@ public class RecentService
         var mth = RecentMatches.FindAll(x => x.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase));
         foreach (var match in mth)
         {
-            RecentMatches.Remove(mth);
+            RecentMatches.Remove(match);
             SaveSettings();
             RecentServiceUpdated?.Invoke();    
         }

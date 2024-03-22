@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Assist.Models.Enums;
 using Assist.Models.Game;
 using Assist.Models.Socket;
+using Assist.Services.Modules;
 using Assist.Views.Game.Live.Pages;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -22,7 +23,7 @@ public partial class LiveViewViewModel : ViewModelBase
     [ObservableProperty] private UserControl _currentView = new UserControl();
     
     public static Dictionary<string, ValorantPlayerStorage> ValorantPlayers = new Dictionary<string, ValorantPlayerStorage>();
-
+    
     public async Task Setup()
     {
         Log.Information("Setting up LiveView Page");

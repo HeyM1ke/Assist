@@ -10,7 +10,13 @@
         <SignAssembly>False</SignAssembly>
         <ApplicationIcon>./Assets/Assist_IconBlack.ico</ApplicationIcon>
         <Company>Mike Creations LLC</Company>
-        <Version>1.0.1</Version>
+        <Version>1.0.16</Version>
+        <LangVersion>default</LangVersion>
+        <PackageIcon>Assets\Default\Assist_Logo_White.png</PackageIcon>
+        <RepositoryUrl>https://github.com/HeyM1ke/Assist</RepositoryUrl>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,29 +30,27 @@
 
     <ItemGroup>
         <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.2.1" />
-        <PackageReference Include="Avalonia" Version="11.0.9" />
-        <PackageReference Include="Avalonia.Browser" Version="11.0.9" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.9" />
+        <PackageReference Include="Avalonia" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.9" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.9" />
-        <PackageReference Include="Avalonia.Skia" Version="11.0.9" />
-        <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.13" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.9" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Skia" Version="11.0.10" />
+        <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.16" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
         <PackageReference Include="CliWrap" Version="3.6.6" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-        <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.5" />
+        <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.6" />
         <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
-        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.3" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
         <PackageReference Include="Serilog" Version="3.1.1" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
         <PackageReference Include="System.Management" Version="8.0.0" />
-        <PackageReference Include="System.Text.Json" Version="8.0.1" />
-        <PackageReference Include="Velopack" Version="0.0.327" />
+        <PackageReference Include="System.Text.Json" Version="8.0.3" />
+        <PackageReference Include="Velopack" Version="0.0.359" />
         <PackageReference Include="websocketsharp.core" Version="1.0.0" />
         <PackageReference Include="YamlDotNet" Version="15.1.0" />
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1185.39" />

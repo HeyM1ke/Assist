@@ -212,6 +212,7 @@ public partial class NavigationViewModel : ViewModelBase
                     newPage = new DiscordView();
                     break;
                 case AssistPage.ASSSOCKET:
+                    newPage = new SocketView();
                     break;
                 default:
                     Log.Error("Tried swapping to a page which is not supported. EP01");
