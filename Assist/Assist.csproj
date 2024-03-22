@@ -10,7 +10,13 @@
         <SignAssembly>False</SignAssembly>
         <ApplicationIcon>./Assets/Assist_IconBlack.ico</ApplicationIcon>
         <Company>Mike Creations LLC</Company>
-        <Version>1.0.1</Version>
+        <Version>1.0.16</Version>
+        <LangVersion>default</LangVersion>
+        <PackageIcon>Assets\Default\Assist_Logo_White.png</PackageIcon>
+        <RepositoryUrl>https://github.com/HeyM1ke/Assist</RepositoryUrl>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     </PropertyGroup>
 
     <ItemGroup>

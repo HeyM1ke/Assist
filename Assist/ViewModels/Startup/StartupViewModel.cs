@@ -95,11 +95,12 @@ public partial class StartupViewModel : ViewModelBase
                 Log.Error(e.Message);
                 Log.Error(e.StackTrace);
                 Log.Information("Assist Account Login Unsuccessful");
+                AssistSettings.Default.AssistUserCode = ""; // Doing this since this will make it only show once.
                 Dispatcher.UIThread.Invoke(() =>
                 {
                     AssistApplication.ChangeMainWindowPopupView(new AssistAuthenticationView());
                 });
-                //AssistSettings.Default.AssistUserCode = "";
+                
                 
             }
         }
