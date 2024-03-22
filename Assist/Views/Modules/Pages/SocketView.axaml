@@ -1,0 +1,147 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:assist="clr-namespace:Assist.Controls.Assist"
+             xmlns:avaloniaProgressRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+             xmlns:properties="clr-namespace:Assist.Properties"
+             xmlns:modules="clr-namespace:Assist.ViewModels.Modules"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+             x:Class="Assist.Views.Modules.Pages.SocketView">
+    
+    <Design.DataContext>
+        <modules:SocketViewModel/>
+    </Design.DataContext>
+    
+    <Grid>
+        <Border Background="{DynamicResource AssistControlBackground}"
+                BorderBrush="{DynamicResource AssistControlOutline}"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="10"
+                Width="650"
+                VerticalAlignment="Center"
+        >
+           <Grid RowDefinitions="Auto,Auto">
+                   <Grid Row="0">
+                           <StackPanel Orientation="Vertical"
+                                       Spacing="5">
+                                   <Grid >
+                                   <StackPanel Orientation="Horizontal"
+                                               VerticalAlignment="Center" 
+                                               HorizontalAlignment="Left"
+                                               Spacing="3">
+                                   
+                                           <Image Source="/Assets/Default/Assist_Logo_White.png"
+                                                  Width="18"
+                                                  Height="18"
+                                                  RenderOptions.BitmapInterpolationMode="MediumQuality"></Image>
+                                   
+                                           <TextBlock Text="Socket"
+                                                      FontSize="20"
+                                                      FontWeight="20"
+                                                      TextAlignment="Left"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"/>
+                                   </StackPanel>
+                               
+                               <StackPanel Orientation="Horizontal"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Spacing="15">
+                       
+                                   <StackPanel Orientation="Horizontal"
+                                               VerticalAlignment="Center"
+                                               IsVisible="{Binding IsLoading}"
+                                               Height="25"
+                                               Spacing="5">
+                                       <TextBlock Text="{x:Static properties:Resources.Common_Loading}"
+                                                  FontSize="10"
+                                                  FontWeight="Light"
+                                                  TextAlignment="Left"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                                       <avaloniaProgressRing:ProgressRing Width="14"
+                                                                          Height="14"
+                                                                          IsActive="True"
+                                                                          VerticalAlignment="Center"
+                                                                          HorizontalAlignment="Center"
+                                                                          Foreground="WhiteSmoke"
+                                                                          
+                                       />
+                                   </StackPanel>
+                       
+                               <assist:SmallImageButton
+                                       Width="29"
+                                       Height="29"
+                                       Icon="{SvgImage /Assets/Default/X_Icon.svg}"
+                                       CornerRadius="5"
+                                       BorderBrush="{DynamicResource AssistControlOutline}"
+                                       BorderThickness="1"
+                                       Command="{Binding ReturnToModulesCommand}"
+                                       />
+                       
+                      
+                                </StackPanel>
+                           </Grid>
+                               
+                               <TextBlock Text="Assist Socket allows you to send information regarding your current match out to an external source."
+                                          FontSize="12"
+                                          Opacity=".7"
+                                          FontWeight="Regular"
+                                          TextAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          TextWrapping="WrapWithOverflow"
+                                          HorizontalAlignment="Left"/>
+                                   
+                               <Rectangle Height="1"
+                                          Fill="{DynamicResource AssistControlOutline}"></Rectangle>
+                           </StackPanel>
+                       
+               </Grid>
+               
+               <Grid Row="1"
+                     Margin="0,10,0,0">
+                   <StackPanel Orientation="Vertical" Spacing="5">
+                       <StackPanel Orientation="Horizontal"
+                                   HorizontalAlignment="Center"
+                                   Spacing="10">
+                           <TextBox Width="250"
+                                    FontSize="16"
+                                    Padding="5"
+                                    TextAlignment="Left"
+                                    VerticalContentAlignment="Center"
+                                    Text="{Binding SocketAddressText}"
+                                    IsEnabled="{Binding SocketTextEnabled}"
+                                    Watermark="Websocket Address"></TextBox>
+                           <Button Classes="default"
+                                   Content="{Binding SocketButtonText}"
+                                   Command="{Binding ConnectToSocketCommand}"></Button>
+                       </StackPanel>
+                       <Button Classes="default"
+                               Content="Create New Session"
+                               IsEnabled="{Binding !SocketTextEnabled}"
+                               HorizontalAlignment="Center"
+                               Width="330"
+                               Command="{Binding CreateNewSessionCommand}"></Button>
+                       <TextBlock Text="{Binding ErrorMessageText}"
+                                  FontSize="12"
+                                  IsVisible="{Binding ErrorMessageEnabled}"
+                                  Foreground="{DynamicResource AssistPrimaryColor}"
+                                  FontWeight="Regular"
+                                  TextAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  TextWrapping="WrapWithOverflow"
+                                  HorizontalAlignment="Center"/>
+
+                   </StackPanel>
+               </Grid>
+               
+           </Grid>
+       </Border> 
+                <TransitioningContentControl Padding="10"
+                                             Content="{Binding PopupControl}">
+                        
+                </TransitioningContentControl>
+        </Grid>
+</UserControl>

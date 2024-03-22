@@ -133,6 +133,18 @@
                                           IsEnabled="{Binding IsGameMode}"
                                           ManageButtonCommand="{Binding OpenDiscordViewCommand}"
                                           ModuleDesc="Showcase your VALORANT game on discord for all your friends to see. Customize what your presence shows."/>
+            <modules:ModulePreviewControl ModuleIcon="/Assets/Default/Assist_Logo_White.png"
+                                          ModuleName="Socket"
+                                          IsVisible="{Binding AccessToSocket}"
+                                          IsEnabled="{Binding IsGameMode}"
+                                          ManageButtonCommand="{Binding OpenSocketViewCommand}"
+                                          ModuleDesc="Connect to an external program and send information regarding your current match out to an external source."/>
+            <modules:ModulePreviewControl ModuleIcon="/Assets/Default/AssistTextWhite_Temp.png"
+                                          ModuleName="Extension"
+                                          IsVisible="{Binding AccessToExtension}"
+                                          IsEnabled="{Binding IsGameMode}"
+                                          ManageButtonCommand="{Binding OpenExtensionViewCommand}"
+                                          ModuleDesc="Extension Control Panel"/>
         </StackPanel>
     </Grid>
 </UserControl>

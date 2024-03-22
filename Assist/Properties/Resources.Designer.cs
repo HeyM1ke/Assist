@@ -348,6 +348,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        public static string Common_Connect {
+            get {
+                return ResourceManager.GetString("Common_Connect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Day.
         /// </summary>
         public static string Common_Day {
@@ -371,6 +380,15 @@ namespace Assist.Properties {
         public static string Common_Details {
             get {
                 return ResourceManager.GetString("Common_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect.
+        /// </summary>
+        public static string Common_Disconnect {
+            get {
+                return ResourceManager.GetString("Common_Disconnect", resourceCulture);
             }
         }
         

@@ -93,5 +93,6 @@ public enum AssistPage
     LEAGUE,
     DODGE,
     DISCORD,
-    ASSSOCKET
+    ASSSOCKET,
+    EXTENSION,
 }

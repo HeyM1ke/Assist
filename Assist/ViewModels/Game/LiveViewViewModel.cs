@@ -23,14 +23,11 @@ public partial class LiveViewViewModel : ViewModelBase
     [ObservableProperty] private UserControl _currentView = new UserControl();
     
     public static Dictionary<string, ValorantPlayerStorage> ValorantPlayers = new Dictionary<string, ValorantPlayerStorage>();
-
-    private SocketService _socketService = new SocketService();
     
     public async Task Setup()
     {
         Log.Information("Setting up LiveView Page");
         ChangePage(new UnknownPageView());
-        _socketService.Start();
         AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent; 
         AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent; 
     }

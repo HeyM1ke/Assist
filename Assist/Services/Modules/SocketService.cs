@@ -21,24 +21,49 @@ namespace Assist.Services.Modules;
 
 public class SocketService
 {
+    public static SocketService Instance = new SocketService();
+    
     public WebSocket Websocket;
+
+    public Action OnConnect;
+    public Action OnDisconnect;
+    
+    public bool IsConnected = false;
+    private string wbsUrl = string.Empty;
     private string _sessionId = string.Empty;
     private CoregameMatch? _latestCoregameMatchData = null;
     private PregameMatch? _latestPregameMatchData = null;
     private Dictionary<string, PlayerInformation> _playerInformations = new Dictionary<string, PlayerInformation>();
     private Dictionary<string, int> _matchScores = new Dictionary<string, int>();
-    public void Start()
+    public void Connect(string url)
     {
+        wbsUrl = url;
+        try
+        {
+            ConnectToSocket(wbsUrl);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        
         SubscribeToEvent();
-        ConnectToSocket("ws://127.0.0.1:11012/");
-        CreateNewSession();
+        
+        if (string.IsNullOrEmpty(_sessionId)) // This makes it so when a reconnect happens it doesnt override the current session
+            CreateNewSession();
+    }
+    
+    public void Disconnect()
+    {
+        UnSubscribeToEvent();
+        Websocket.Close();
     }
 
     public void CreateNewSession()
     {
         Log.Information("Player Requested to start new Session");
 
-        _sessionId = new Guid().ToString();
+        _sessionId = Guid.NewGuid().ToString();
         _playerInformations = new Dictionary<string, PlayerInformation>();
         _latestPregameMatchData = null;
         _latestCoregameMatchData = null;
@@ -63,31 +88,27 @@ public class SocketService
             Data = data
         };
 
-        Websocket.Send(JsonSerializer.Serialize(content, serializeOptions));
+        if (Websocket.IsAlive)
+            Websocket.Send(JsonSerializer.Serialize(content, serializeOptions));
     }
 
     private void ConnectToSocket(string address)
     {
         Websocket = new WebSocket(address);
-        
-        
-        Websocket.Connect();
-
         Websocket.OnOpen += (sender, args) =>
         {
             Log.Information("Socket is connected");
+            IsConnected = true;
+            OnConnect?.Invoke();
         };
-
-        Websocket.OnMessage += (sender, args) =>
-        {
-            Log.Information("Socket Sent a Message to Assist!");
-            Log.Information("MESSAGE: " + args.Data);
-        };
-
+        
+        Websocket.Connect();
+        
         Websocket.OnClose += (sender, args) =>
         {
-            Log.Information("Socket Service: Disconnected. Attempting Reconnect");
-            ConnectToSocket("ws://127.0.0.1:11012/");
+            Log.Information("Socket Service: Disconnected.");
+            IsConnected = false;
+            OnDisconnect?.Invoke();
         };
     }
 
@@ -95,6 +116,12 @@ public class SocketService
     {
         AssistApplication.RiotWebsocketService.RecieveMessageEvent -= ValorantSocket_OnMessageEvent;
         AssistApplication.RiotWebsocketService.RecieveMessageEvent += ValorantSocket_OnMessageEvent;
+    }
+    
+    private void UnSubscribeToEvent()
+    {
+        AssistApplication.RiotWebsocketService.RecieveMessageEvent -= ValorantSocket_OnMessageEvent;
+        
     }
 
     private void ValorantSocket_OnMessageEvent(object obj)
