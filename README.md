@@ -1,16 +1,13 @@
 <h1 align="center">
-  <img src="https://cdn.discordapp.com/attachments/939379020808720444/971892878206976020/LogoBanner.jpg">
+  <img src="https://assistsite.pages.dev/assets/logo-B8TPb_93.png" width='450'>
   <br>
 </h1>
-
-<h1 align="center">Assist</h2>
 <h3 align="center">VALORANT Extension Launcher that adds contains different features regarding VALORANT.</h3>
 <h5 align="center">Assist was created under Riot Games' "Legal Jibber Jabber" policy using assets that are owned by Riot Games.</h5>
 <h5 align="center">Riot Games does not endorse or sponsor this project.</h5>
 
 <p align="center">
   </a>
-  <a href="https://assistval.com"><img src="https://cdn.discordapp.com/attachments/939379020808720444/971898844432433182/Download.png" ></a>
   </p>
 
 [<p align="center"><img src="https://img.shields.io/github/downloads/heym1ke/Assist/total.svg?style=for-the-badge&color=f71d51" alt="Downloads">](https://github.com/Heym1ke/Assist/releases) [<img src="https://img.shields.io/github/v/release/heym1ke/Assist?style=for-the-badge&color=f71d51" alt="Latest Release">](https://github.com/Heym1ke/Assist/releases)</p>
