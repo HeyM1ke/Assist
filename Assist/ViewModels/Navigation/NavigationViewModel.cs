@@ -232,7 +232,7 @@ public partial class NavigationViewModel : ViewModelBase
         
         
         AssistApplication.ChangeMainWindowView(newPage);
-        GC.Collect();
+        //GC.Collect();
     }
     
     

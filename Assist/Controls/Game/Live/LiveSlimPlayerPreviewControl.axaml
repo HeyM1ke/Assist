@@ -1,0 +1,133 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:game="clr-namespace:Assist.ViewModels.Game"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:lang="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.Game.Live.LiveSlimPlayerPreviewControl"
+             Initialized="LiveSlimPlayerPreviewControl_Init">
+    
+    <Design.DataContext>
+        <game:LivePlayerPreviewViewModel/>
+    </Design.DataContext>
+    
+    <Border Background="{DynamicResource AssistControlBackground}"
+            BorderBrush="{Binding DodgeBorder}"
+            BorderThickness="1"
+            CornerRadius="5"
+            HorizontalAlignment="Stretch"
+            Padding="5">
+        
+        <Grid ColumnDefinitions="Auto,Auto,*">
+            <asyncImageLoader:AdvancedImage Source="{Binding AgentIconUrl}"
+                                            RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+            
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Grid.Column="1">
+                <Rectangle Width="1"
+                           Margin="5,0,0,0"
+                           Fill="{DynamicResource AssistControlOutline}"></Rectangle>
+                <asyncImageLoader:AdvancedImage Source="{Binding RankIcon}"
+                                                VerticalAlignment="Center"
+                                                Margin="3"
+                                                RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+                <TextBlock Text="{Binding PlayerName}"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           ToolTip.Tip="{Binding SecondaryText}"
+                           FontWeight="SemiBold"></TextBlock>
+                <TextBlock Text="{Binding TagLineText}"
+                           IsVisible="{Binding TagLineVisible}"
+                           FontSize="12"
+                           FontWeight="Regular"
+                           Foreground="{DynamicResource AssistForeground}"
+                           TextAlignment="Left"
+                           Opacity=".5"
+                           Margin="0,2,0,0"
+                           VerticalAlignment="Center"></TextBlock>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Grid.Column="2">
+                
+                <TextBlock Text="{Binding DodgeText}"
+                           FontSize="12"
+                           TextAlignment="Left"
+                           IsVisible="{Binding DodgeVisible}"
+                           FontWeight="ExtraBold"
+                           Margin="0,2,0,0"
+                           Foreground="{DynamicResource AssistPrimaryColor}"
+                           VerticalAlignment="Center"></TextBlock>
+                
+            </StackPanel>
+        </Grid>
+        
+    </Border>
+    
+    <UserControl.ContextMenu >
+        <ContextMenu Background="{DynamicResource AssistBackground}"
+                     CornerRadius="10"
+                     BorderBrush="{DynamicResource AssistControlOutline}"
+                     BorderThickness="1"
+                     Padding="10"
+                     IsVisible="{Binding !PlayerIsHidden}">
+            <ContextMenu.Styles>
+                <Style Selector="MenuItem /template/ ContentPresenter#PART_HeaderPresenter">
+
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    
+                    
+                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                </Style>
+
+                <Style Selector="MenuItem /template/ Viewbox#PART_IconPresenter">
+                    <Setter Property="Width" Value="100"></Setter>
+                    <Setter Property="Height" Value="100"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                </Style>
+
+                <Style Selector="MenuItem:pointerover /template/ Border#PART_LayoutRoot">
+                    <Setter Property="Background" Value="{DynamicResource AssistPrimaryColor}"></Setter>
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Style>
+
+            </ContextMenu.Styles>
+            
+            <MenuItem Header="{x:Static lang:Resources.Dodge_AddPlayer}"
+                      FontWeight="Medium"
+                      IsEnabled="{Binding AssistAccountLoggedIn}"
+                      IsVisible="{Binding !DodgeVisible}"
+                      Command="{Binding OpenDodgeAddPageCommand}"
+            >
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Extras/DodgeLogo_Icon.png"
+                           RenderOptions.BitmapInterpolationMode="MediumQuality"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Stretch="UniformToFill"
+                    />
+                </MenuItem.Icon>
+            </MenuItem>
+            
+            <MenuItem Header="{x:Static lang:Resources.Live_OpenTracker}"
+                      FontWeight="Medium"
+                      IsEnabled="{Binding TrackerEnabled}"
+                      IsVisible="{Binding !PlayerIsHidden}"
+                      Command="{Binding OpenTrackerCommand}"
+            >
+                <MenuItem.Icon>
+                    <Image Source="{SvgImage /Assets/Default/Cloud_Icon.svg}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Stretch="UniformToFill"
+                    />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+</UserControl>

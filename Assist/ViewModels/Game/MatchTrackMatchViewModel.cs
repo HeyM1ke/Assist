@@ -133,6 +133,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     if (RecentMatchData.Result == RecentMatch.MatchResult.IN_PROGRESS)
                     {
                         name = $"{player.PlayerName}#{player.PlayerTag}";
+                        name.Replace("##", "#");
                     }
                     else if(player.PlayerName.Equals("player", StringComparison.OrdinalIgnoreCase))
                     {
@@ -161,7 +162,8 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
             
             
            
-            
+            TeamControls.Clear(); // Prevents Multiple without a Check 
+            // TODO: Implement a check to see if the team is already there.
             TeamControls.Add(teamObj);
             return;
         }
@@ -185,6 +187,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     if (RecentMatchData.Result == RecentMatch.MatchResult.IN_PROGRESS)
                     {
                         name = $"{player.PlayerName}#{player.PlayerTag}";
+                        name.Replace("##", "#");
                     }
                     else if (!string.IsNullOrEmpty(player.PlayerRealName) && RecentMatchData.Result != RecentMatch.MatchResult.IN_PROGRESS)
                     {
@@ -209,6 +212,9 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                 });
             }
             
+            // TODO: Implement a check to see if the team is already there.
+            TeamControls.Clear();
+            
             TeamControls.Add(teamObj);
             return;
         }
@@ -227,6 +233,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     if (RecentMatchData.Result == RecentMatch.MatchResult.IN_PROGRESS)
                     {
                         name = $"{player.PlayerName}#{player.PlayerTag}";
+                        name.Replace("##", "#");
                     }
                     else if (!string.IsNullOrEmpty(player.PlayerRealName) && RecentMatchData.Result != RecentMatch.MatchResult.IN_PROGRESS)
                     {
@@ -271,6 +278,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                 });
             }
 
+            // Check for existing team to replace.
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 var controls = displayControls.Values.ToList();
@@ -279,9 +287,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
                     var index = controls.FindIndex(x =>
                         x.TeamId.Equals(RecentMatchData.AllyTeamId, StringComparison.OrdinalIgnoreCase));
 
-                    var tp = controls[0];
-                    controls[0] = controls[index];
-                    controls[index] = tp;
+                    (controls[0], controls[index]) = (controls[index], controls[0]);
                 }
                 TeamControls = new ObservableCollection<MatchTrackTeamShowcaseControl>(controls);
             });

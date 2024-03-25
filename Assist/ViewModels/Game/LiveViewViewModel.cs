@@ -28,8 +28,6 @@ public partial class LiveViewViewModel : ViewModelBase
     {
         Log.Information("Setting up LiveView Page");
         ChangePage(new UnknownPageView());
-        AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent; 
-        AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent; 
     }
 
     private async void RiotWebsocketServiceOnUserPresenceMessageEvent(PresenceV4Message message)
@@ -42,8 +40,8 @@ public partial class LiveViewViewModel : ViewModelBase
 
     public async Task AttemptCurrentPage()
     {
+        AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent; 
         var pres = await AssistApplication.ActiveUser.Presence.GetPresences();
-
         var user = pres.presences.Find(p => p.puuid == AssistApplication.ActiveUser.UserData.sub);
         var data = await GetPresenceData(user);
         await DeterminePage(data, user);
@@ -123,6 +121,10 @@ public partial class LiveViewViewModel : ViewModelBase
                     break;
             }
         });
+    }
+    
+    public void Unsubscribe(){
+         AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent; 
     }
 
     private void ChangePage(UserControl newPageView)

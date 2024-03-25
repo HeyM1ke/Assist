@@ -9,127 +9,232 @@
              x:Class="Assist.Views.Game.Live.Pages.IngamePageView"
              Initialized="IngamePage_Init"
              Unloaded="IngamePage_Unloaded">
-    <Grid ColumnDefinitions="*, 250, *">
-        
-        <ItemsControl Grid.Column="0"
-                      VerticalAlignment="Center"
-                      HorizontalAlignment="Left"
-                      ItemsSource="{Binding AllyTeamControls}"
-                      >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"
-                                Spacing="17"></StackPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            
-            <ItemsControl.Styles>
-                <Style Selector="live|LivePlayerPreviewControl">
-                    <Setter Property="Width" Value="431"/>
-                    <Setter Property="Height" Value="114"/>
-                </Style>
-            </ItemsControl.Styles>
-        </ItemsControl>
-        <Border CornerRadius="10"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Center"
-                Width="250"
-                BorderBrush="{DynamicResource AssistControlOutline}"
-                BorderThickness="1.4"
-                Margin="20,0,20,0"
-                IsVisible="{Binding !IsRange}"
-                Grid.Column="1">
-            <Grid>
-                <asyncImageLoader:AdvancedImage VerticalAlignment="Stretch"
-                                                HorizontalAlignment="Stretch"
-                                                Stretch="UniformToFill"
-                                                CornerRadius="5"
-                                                ClipToBounds="True"
-                                                Source="{Binding MapImage}">
-                    <asyncImageLoader:AdvancedImage.Effect>
-                        <BlurEffect Radius="5"></BlurEffect>
+    <Grid>
+        <Grid ColumnDefinitions="250,*"
+              IsEnabled="{Binding IsDeathmatch}"
+              IsVisible="{Binding IsDeathmatch}">
+            <Border CornerRadius="10"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Left"
+                        Width="250"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1.4"
+                        Margin="20,0,20,0"
+                        IsVisible="{Binding !IsRange}"
+                        Grid.Column="0">
+                    <Grid>
+                        <asyncImageLoader:AdvancedImage VerticalAlignment="Stretch"
+                                                        HorizontalAlignment="Stretch"
+                                                        Stretch="UniformToFill"
+                                                        CornerRadius="5"
+                                                        ClipToBounds="True"
+                                                        Source="{Binding MapImage}">
+                            <asyncImageLoader:AdvancedImage.Effect>
+                                <BlurEffect Radius="5"></BlurEffect>
+                                
+                            </asyncImageLoader:AdvancedImage.Effect>
+                        </asyncImageLoader:AdvancedImage>
                         
-                    </asyncImageLoader:AdvancedImage.Effect>
-                </asyncImageLoader:AdvancedImage>
-                
-                <Border VerticalAlignment="Stretch"
-                        HorizontalAlignment="Stretch"
-                        Background="Black"
-                        Opacity=".2"
-                        ClipToBounds="True"/>
-                
-                <StackPanel VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
-                    <Grid ColumnDefinitions="95,60,95">
-                        <TextBlock Text="{Binding AllyScore}"
-                                   FontWeight="Bold"
-                                   TextAlignment="Right"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   FontSize="48"
-                                   Padding="0,0,10,0"
-                                   Grid.Column="0"
-                                   Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                        <Border VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Background="Black"
+                                Opacity=".2"
+                                ClipToBounds="True"/>
                         
-                        <asyncImageLoader:AdvancedImage Width="60"
-                                                        Height="60"
-                                                        Grid.Column="1"
-                                                        HorizontalAlignment="Center"
-                                                        RenderOptions.BitmapInterpolationMode="MediumQuality"
-                                                        Source="https://static.wikia.nocookie.net/valorant/images/9/98/Swiftplay.png"/>
-                        <TextBlock Text="{Binding EnemyScore}"
-                                   FontWeight="Bold"
-                                   Grid.Column="2"
-                                   Padding="10,0,0,0"
-                                   TextAlignment="Left"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   FontSize="48"
-                                   Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Grid ColumnDefinitions="95,60,95">
+                                <TextBlock Text="{Binding AllyScore}"
+                                           FontWeight="Bold"
+                                           TextAlignment="Right"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           FontSize="48"
+                                           Padding="0,0,10,0"
+                                           Grid.Column="0"
+                                           Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                                
+                                <asyncImageLoader:AdvancedImage Width="60"
+                                                                Height="60"
+                                                                Grid.Column="1"
+                                                                HorizontalAlignment="Center"
+                                                                RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                                Source="https://static.wikia.nocookie.net/valorant/images/9/98/Swiftplay.png"/>
+                                <TextBlock Text="{Binding EnemyScore}"
+                                           FontWeight="Bold"
+                                           Grid.Column="2"
+                                           Padding="10,0,0,0"
+                                           TextAlignment="Left"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontSize="48"
+                                           Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            </Grid>
+                            
+                            <TextBlock Text="{Binding QueueName}"
+                                       FontWeight="Medium"
+                                       TextAlignment="Center"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            
+                            <TextBlock Text="{Binding MapName}"
+                                       FontWeight="Black"
+                                       TextAlignment="Center"
+                                       FontSize="40"
+                                       Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            
+                            <TextBlock Text="{Binding ServerName}"
+                                       FontWeight="Medium"
+                                       TextAlignment="Center"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                        </StackPanel>
                     </Grid>
+                </Border>
+            <ItemsControl Grid.Column="1"
+                          ItemsSource="{Binding DeathMatchControls}"
+                          VerticalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel VerticalAlignment="Center"
+                                    Spacing="6"
+                        ></StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.Styles>
+                    <Style Selector="live|LiveSlimPlayerPreviewControl">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="Height" Value="48"></Setter>
+                    </Style>
+                </ItemsControl.Styles>
+                
+            </ItemsControl>
+        </Grid>
+        
+        
+        <Grid ColumnDefinitions="*, 250, *"
+              IsEnabled="{Binding !IsDeathmatch}"
+              IsVisible="{Binding !IsDeathmatch}">
+                <ItemsControl Grid.Column="0"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              ItemsSource="{Binding AllyTeamControls}"
+                              >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"
+                                        Spacing="17"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                     
-                    <TextBlock Text="{Binding QueueName}"
-                               FontWeight="Medium"
-                               TextAlignment="Center"
-                               FontSize="13"
-                               Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                    <ItemsControl.Styles>
+                        <Style Selector="live|LivePlayerPreviewControl">
+                            <Setter Property="Width" Value="431"/>
+                            <Setter Property="Height" Value="114"/>
+                        </Style>
+                    </ItemsControl.Styles>
+                </ItemsControl>
+                <Border CornerRadius="10"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Center"
+                        Width="250"
+                        BorderBrush="{DynamicResource AssistControlOutline}"
+                        BorderThickness="1.4"
+                        Margin="20,0,20,0"
+                        Grid.Column="1">
+                    <Grid>
+                        <asyncImageLoader:AdvancedImage VerticalAlignment="Stretch"
+                                                        HorizontalAlignment="Stretch"
+                                                        Stretch="UniformToFill"
+                                                        CornerRadius="5"
+                                                        ClipToBounds="True"
+                                                        Source="{Binding MapImage}">
+                            <asyncImageLoader:AdvancedImage.Effect>
+                                <BlurEffect Radius="5"></BlurEffect>
+                                
+                            </asyncImageLoader:AdvancedImage.Effect>
+                        </asyncImageLoader:AdvancedImage>
+                        
+                        <Border VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Background="Black"
+                                Opacity=".2"
+                                ClipToBounds="True"/>
+                        
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Grid ColumnDefinitions="95,60,95">
+                                <TextBlock Text="{Binding AllyScore}"
+                                           FontWeight="Bold"
+                                           TextAlignment="Right"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           FontSize="48"
+                                           Padding="0,0,10,0"
+                                           Grid.Column="0"
+                                           Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                                
+                                <asyncImageLoader:AdvancedImage Width="60"
+                                                                Height="60"
+                                                                Grid.Column="1"
+                                                                HorizontalAlignment="Center"
+                                                                RenderOptions.BitmapInterpolationMode="MediumQuality"
+                                                                Source="https://static.wikia.nocookie.net/valorant/images/9/98/Swiftplay.png"/>
+                                <TextBlock Text="{Binding EnemyScore}"
+                                           FontWeight="Bold"
+                                           Grid.Column="2"
+                                           Padding="10,0,0,0"
+                                           TextAlignment="Left"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontSize="48"
+                                           Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            </Grid>
+                            
+                            <TextBlock Text="{Binding QueueName}"
+                                       FontWeight="Medium"
+                                       TextAlignment="Center"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            
+                            <TextBlock Text="{Binding MapName}"
+                                       FontWeight="Black"
+                                       TextAlignment="Center"
+                                       FontSize="40"
+                                       Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                            
+                            <TextBlock Text="{Binding ServerName}"
+                                       FontWeight="Medium"
+                                       TextAlignment="Center"
+                                       FontSize="13"
+                                       Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <ItemsControl Grid.Column="2"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Right"
+                              ItemsSource="{Binding EnemyTeamControls}"
+                >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"
+                                        Spacing="17"
+                                        ></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                     
-                    <TextBlock Text="{Binding MapName}"
-                               FontWeight="Black"
-                               TextAlignment="Center"
-                               FontSize="40"
-                               Foreground="{DynamicResource AssistForeground}"></TextBlock>
+                    <ItemsControl.Styles>
+                        <Style Selector="live|LiveEnemyPlayerPreviewControl">
+                            <Setter Property="Width" Value="431"/>
+                            <Setter Property="Height" Value="114"/>
+                            
+                        </Style>
+                    </ItemsControl.Styles>
                     
-                    <TextBlock Text="{Binding ServerName}"
-                               FontWeight="Medium"
-                               TextAlignment="Center"
-                               FontSize="13"
-                               Foreground="{DynamicResource AssistForeground}"></TextBlock>
-                </StackPanel>
-            </Grid>
-        </Border>
-        <ItemsControl Grid.Column="2"
-                      VerticalAlignment="Center"
-                      HorizontalAlignment="Right"
-                      ItemsSource="{Binding EnemyTeamControls}"
-        >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"
-                                Spacing="17"
-                                ></StackPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            
-            <ItemsControl.Styles>
-                <Style Selector="live|LiveEnemyPlayerPreviewControl">
-                    <Setter Property="Width" Value="431"/>
-                    <Setter Property="Height" Value="114"/>
-                    
-                </Style>
-            </ItemsControl.Styles>
-            
-        </ItemsControl>
+                </ItemsControl>
+        </Grid>
         
         <Grid Background="{DynamicResource AssistBackground}"
               IsVisible="{Binding IsRange}"
@@ -143,7 +248,7 @@
                                                 Width="250"
                                                 Height="250"
                                                 RenderOptions.BitmapInterpolationMode="MediumQuality"/>
-                
+                        
                 <StackPanel Orientation="Vertical"
                             VerticalAlignment="Center">
                     <TextBlock Text="{x:Static lang:Resources.Common_Training}"
@@ -151,7 +256,7 @@
                                FontSize="26"
                                Opacity=".7"
                                VerticalAlignment="Center"
-                               
+                                       
                                Foreground="White"></TextBlock>
                     <TextBlock Text="{Binding MapName}"
                                FontWeight="Black"

@@ -17,10 +17,7 @@ public partial class LiveView : UserControl
     
     public LiveView()
     {
-        if (!Design.IsDesignMode)
-        {
-            NavigationViewModel.SetActivePage(AssistPage.LIVE);
-        }
+        if (!Design.IsDesignMode) { NavigationViewModel.SetActivePage(AssistPage.LIVE); }
         DataContext = _viewModel = new LiveViewViewModel();
         InitializeComponent();
     }
@@ -39,6 +36,8 @@ public partial class LiveView : UserControl
 
     private void LivePage_Unloaded(object? sender, RoutedEventArgs e)
     {
+        if (Design.IsDesignMode) return;
         _viewModel.CurrentPage = ELivePage.UNKNOWN;
+        _viewModel.Unsubscribe();
     }
 }

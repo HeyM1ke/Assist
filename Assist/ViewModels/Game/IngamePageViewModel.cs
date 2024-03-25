@@ -30,8 +30,8 @@ public partial class IngamePageViewModel : ViewModelBase
         new ObservableCollection<LiveEnemyPlayerPreviewControl>();
     
     [ObservableProperty]
-    private ObservableCollection<LivePlayerPreviewControl> _deathMatchControls =
-        new ObservableCollection<LivePlayerPreviewControl>();
+    private ObservableCollection<LiveSlimPlayerPreviewControl> _deathMatchControls =
+        new ObservableCollection<LiveSlimPlayerPreviewControl>();
 
     [ObservableProperty] private bool _isDeathmatch;
     [ObservableProperty] private bool _isRange = false;
@@ -86,8 +86,7 @@ public partial class IngamePageViewModel : ViewModelBase
         {
             // First Subscribe to Updates from the PREGAME Api on Websocket. To Update the Data for whenever there is an UPDATE.
             await UpdateData(); // Do inital Pregame Check
-
-            AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
+            
             AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
 
             _setupFlag = true;
@@ -164,6 +163,29 @@ public partial class IngamePageViewModel : ViewModelBase
             // Update Map Data
             HandleMatchData(MatchResp,
                 PresenceResp.presences.Find(p => p.puuid == AssistApplication.ActiveUser.UserData.sub));
+
+            if (IsDeathmatch)
+            {
+                if (DeathMatchControls.Count == 0)
+                {
+                    foreach (var allyPlayer in allyTeam)
+                    {
+                        Log.Information("Adding Deathmatch Player to Coregame. : " + allyPlayer.Subject);
+                        await AddUserToAllyList(allyPlayer);
+                    }
+                }
+                else
+                {
+                    // For every other time around, Update the Players that already excist.
+                    foreach (var allyPlayer in allyTeam)
+                    {
+                        Log.Information("Updating Deathmatch Player to Coregame. : " + allyPlayer.Subject);
+                        await UpdateUserInAllyList(allyPlayer);
+                    }
+                }
+                
+                return;
+            }
             
             if (AllyTeamControls.Count == 0)
             {
@@ -301,6 +323,10 @@ public partial class IngamePageViewModel : ViewModelBase
         var checkForExcisting = AllyTeamControls.FirstOrDefault(control => control.PlayerId == Player.Subject);
         if (checkForExcisting != null)
             return;
+        
+        var dmexistingPlayer = DeathMatchControls.FirstOrDefault(control => control.PlayerId == Player.Subject);
+        if (dmexistingPlayer != null)
+            return;
 
         if (dic != null)
             dic.TryGetValue(Player.Subject, out IBrush? color);
@@ -311,7 +337,7 @@ public partial class IngamePageViewModel : ViewModelBase
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
             if (IsDeathmatch)
-                DeathMatchControls.Add(new LivePlayerPreviewControl(Player));
+                DeathMatchControls.Add(new LiveSlimPlayerPreviewControl(Player));
             else
                 AllyTeamControls.Add(new LivePlayerPreviewControl(Player));
         });
@@ -320,16 +346,25 @@ public partial class IngamePageViewModel : ViewModelBase
     private async Task UpdateUserInAllyList(CoregameMatch.Player Player, Dictionary<string, IBrush> dic = null)
     {
         LivePlayerPreviewControl? control = null;
+        LiveSlimPlayerPreviewControl? dmControl = null;
         if (IsRange)
             return;
         
         if (IsDeathmatch)
-            control = DeathMatchControls.FirstOrDefault(control => control.PlayerId == Player.Subject);
+            dmControl = DeathMatchControls.FirstOrDefault(control => control.PlayerId == Player.Subject);
         else
             control = AllyTeamControls.FirstOrDefault(control => control.PlayerId == Player.Subject);
 
         if (dic != null)
             dic.TryGetValue(Player.Subject, out IBrush? color);
+        
+        if (dmControl != null)
+        {
+            Log.Information("Updating Data for Previously found player for Coregame deathmatch. : " + Player.Subject);
+            Dispatcher.UIThread.InvokeAsync(async () => { await dmControl.UpdatePlayer(Player); });
+
+            return;
+        }
         
         if (control != null)
         {
@@ -477,9 +512,10 @@ public partial class IngamePageViewModel : ViewModelBase
             {
                 LivePlayerPreviewControl? data = null;
                 LiveEnemyPlayerPreviewControl? dataEnemy = null;
+                LiveSlimPlayerPreviewControl? dmEnemy = null;
                 if (IsDeathmatch)
                 {
-                    data = DeathMatchControls.ToList().Find(x =>
+                    dmEnemy = DeathMatchControls.ToList().Find(x =>
                         x.PlayerId.Equals(playerObj.Subject, StringComparison.OrdinalIgnoreCase));
                 }
                 else
@@ -494,7 +530,7 @@ public partial class IngamePageViewModel : ViewModelBase
                     }
                 }
 
-                if (data is null && dataEnemy is null)
+                if (data is null && dataEnemy is null && dmEnemy is null)
                 {
                     continue;
                 }
@@ -506,9 +542,10 @@ public partial class IngamePageViewModel : ViewModelBase
 
                 RecentMatch.Player p = null;
 
-                if (data is null && dataEnemy is not null)
+                
+                if (data == null && dataEnemy != null && dmEnemy == null)
                 {
-                    var nP = new RecentMatch.Player()
+                    p = new RecentMatch.Player()
                     {
                         PlayerId = playerObj.Subject,
                         CompetitiveTier = (int)dataEnemy._viewModel.PlayerCompetitiveTier,
@@ -521,9 +558,9 @@ public partial class IngamePageViewModel : ViewModelBase
                     };
                 }
 
-                if (data is not null && dataEnemy is null)
+                if (data != null && dataEnemy ==  null && dmEnemy == null)
                 {
-                    var nP = new RecentMatch.Player()
+                    p = new RecentMatch.Player()
                     {
                         PlayerId = playerObj.Subject,
                         CompetitiveTier = (int)data._viewModel.PlayerCompetitiveTier,
@@ -532,6 +569,21 @@ public partial class IngamePageViewModel : ViewModelBase
                         PlayerTag = !data._viewModel.UsingAssistProfile ? data._viewModel.TagLineText : $"{data._viewModel.SecondaryText.Split('#')[^1]}",
                         TeamId = playerObj.TeamID,
                         PlayerRealName = data._viewModel.PlayerRealName,
+                        Statistics = null
+                    };
+                }
+                
+                if (data == null && dataEnemy ==  null && dmEnemy != null)
+                {
+                    p = new RecentMatch.Player()
+                    {
+                        PlayerId = playerObj.Subject,
+                        CompetitiveTier = (int)dmEnemy._viewModel.PlayerCompetitiveTier,
+                        PlayerAgentId = playerObj.CharacterID,
+                        PlayerName = !dmEnemy._viewModel.UsingAssistProfile ? dmEnemy._viewModel.PlayerName : dmEnemy._viewModel.SecondaryText.Split('#')[0],
+                        PlayerTag = !dmEnemy._viewModel.UsingAssistProfile ? dmEnemy._viewModel.TagLineText : $"{dmEnemy._viewModel.SecondaryText.Split('#')[^1]}",
+                        TeamId = playerObj.TeamID,
+                        PlayerRealName = dmEnemy._viewModel.PlayerRealName,
                         Statistics = null
                     };
                 }

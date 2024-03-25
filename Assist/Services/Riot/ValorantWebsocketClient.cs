@@ -151,10 +151,6 @@ public class ValorantWebsocketClient
     private void DetermineCustomEvent(object data)
     {
         var d = JsonSerializer.Deserialize<DefaultSocketDataMessage>(data.ToString());
-
-#if DEBUG
-        
-#endif
         
         switch (d.uri)
         {
