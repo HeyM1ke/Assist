@@ -7,6 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Assist.Views.Game.Live.Pages.MenusPageView"
              Initialized="MenuPage_Init"
+             Loaded="MenuPage_Loaded"
              Unloaded="MenuPageControl_OnUnloaded"
              >
     <Grid RowDefinitions="55,*">

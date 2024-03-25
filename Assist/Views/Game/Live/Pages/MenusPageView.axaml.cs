@@ -49,4 +49,9 @@ public partial class MenusPageView : UserControl
     {
         _viewModel.UnsubscribeFromEvents();
     }
+
+    private void MenuPage_Loaded(object? sender, RoutedEventArgs e)
+    {
+        _viewModel.CheckAndHandleRecentMatchTracking();
+    }
 }

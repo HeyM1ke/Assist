@@ -29,7 +29,6 @@ public partial class MenusPageViewModel : ViewModelBase
     
     public async Task Setup(PresenceV4Message start = null)
     {
-        AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
         AssistApplication.RiotWebsocketService.UserPresenceMessageEvent += RiotWebsocketServiceOnUserPresenceMessageEvent;
 
         if (start != null)
@@ -37,7 +36,7 @@ public partial class MenusPageViewModel : ViewModelBase
             RiotWebsocketServiceOnUserPresenceMessageEvent(start);
         }
         
-        CheckAndHandleRecentMatchTracking();
+        //CheckAndHandleRecentMatchTracking();
         //EndorseEnabled = true;
     }
 
@@ -336,7 +335,7 @@ public partial class MenusPageViewModel : ViewModelBase
             AssistApplication.RiotWebsocketService.UserPresenceMessageEvent -= RiotWebsocketServiceOnUserPresenceMessageEvent;
         }
         
-        private async void CheckAndHandleRecentMatchTracking()
+        public async void CheckAndHandleRecentMatchTracking()
         {
             var allUnfinished = RecentService.Current.RecentMatches.FindAll(x => !x.IsCompleted);
 
