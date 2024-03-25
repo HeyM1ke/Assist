@@ -42,16 +42,23 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
             {
                 MatchControls.Add(new MatchTrackMatchControl(RecentService.Current.RecentMatches[i]));
                 limiter++;
-                if (limiter == 5)
+                if (limiter == 10)
                 {
                     i = 0;
                 }
             }
                 
         }
+    }
 
-        RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated; 
-        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated; 
+    public void Subscribe()
+    {
+        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated;
+    }
+    
+    public void Unsubscribe()
+    {
+        RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated;
     }
     
     private void RecentServiceUpdated()
@@ -95,13 +102,13 @@ public partial class MatchTrackSlideoutViewModel : ViewModelBase
 
     public void LoadPage()
     {
-        /*Log.Information("Page has been loaded, subbing from events.");
-        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated; */
+        Log.Information("Page has been loaded, subbing from events.");
+        RecentService.Current.RecentServiceUpdated += RecentServiceUpdated; 
     }
     public void UnloadPage()
     {
-        /*Log.Information("Page has been unloaded, unsubbing from events.");
-        RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated; */
+        Log.Information("Page has been unloaded, unsubbing from events.");
+        RecentService.Current.RecentServiceUpdated -= RecentServiceUpdated; 
     }
 
     
