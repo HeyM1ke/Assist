@@ -39,6 +39,8 @@ public partial class LiveView : UserControl
 
     private void LivePage_Unloaded(object? sender, RoutedEventArgs e)
     {
+        if (Design.IsDesignMode) return;
         _viewModel.CurrentPage = ELivePage.UNKNOWN;
+        _viewModel.Unsubscribe();
     }
 }

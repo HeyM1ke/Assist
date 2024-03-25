@@ -114,14 +114,12 @@ public class SocketService
 
     private void SubscribeToEvent()
     {
-        AssistApplication.RiotWebsocketService.RecieveMessageEvent -= ValorantSocket_OnMessageEvent;
         AssistApplication.RiotWebsocketService.RecieveMessageEvent += ValorantSocket_OnMessageEvent;
     }
     
     private void UnSubscribeToEvent()
     {
         AssistApplication.RiotWebsocketService.RecieveMessageEvent -= ValorantSocket_OnMessageEvent;
-        
     }
 
     private void ValorantSocket_OnMessageEvent(object obj)

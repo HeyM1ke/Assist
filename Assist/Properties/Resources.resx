@@ -653,8 +653,11 @@
   <data name="VALORANT_Iso" xml:space="preserve">
     <value>Iso</value>
   </data>
-  <data name="VALORANT_Unknown" xml:space="preserve">
+  <data name="VALORANT_Clove" xml:space="preserve">
     <value>Clove</value>
+  </data>
+  <data name="VALORANT_Unknown" xml:space="preserve">
+    <value>Unknown</value>
   </data>
   
   

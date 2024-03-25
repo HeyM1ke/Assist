@@ -1527,6 +1527,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clove.
+        /// </summary>
+        public static string VALORANT_Clove {
+            get {
+                return ResourceManager.GetString("VALORANT_Clove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Game.
         /// </summary>
         public static string VALORANT_CustomGame {
