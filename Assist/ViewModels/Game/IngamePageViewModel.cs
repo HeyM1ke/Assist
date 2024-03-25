@@ -164,7 +164,7 @@ public partial class IngamePageViewModel : ViewModelBase
             HandleMatchData(MatchResp,
                 PresenceResp.presences.Find(p => p.puuid == AssistApplication.ActiveUser.UserData.sub));
 
-            if (!IsDeathmatch)
+            if (IsDeathmatch)
             {
                 if (DeathMatchControls.Count == 0)
                 {
