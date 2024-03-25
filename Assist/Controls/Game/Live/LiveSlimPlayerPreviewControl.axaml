@@ -14,7 +14,7 @@
     </Design.DataContext>
     
     <Border Background="{DynamicResource AssistControlBackground}"
-            BorderBrush="{DynamicResource AssistControlOutline}"
+            BorderBrush="{Binding DodgeBorder}"
             BorderThickness="1"
             CornerRadius="5"
             HorizontalAlignment="Stretch"
