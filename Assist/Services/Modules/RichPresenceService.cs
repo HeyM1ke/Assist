@@ -401,7 +401,10 @@ public class RichPresenceService
     /// <returns></returns>
     private async Task<KeyValuePair<string, string>> DisplayAgent(PlayerPresence pres)
     {
-        var characterId= await GetAgent_Ingame();
+        var characterId = await GetAgent_Ingame();
+
+        if (characterId is null)
+            return new KeyValuePair<string, string>("unknown", Properties.Resources.Common_Unknown);
 
         ValorantHelper.AgentIdToNames.TryGetValue(characterId, out var charName);
         

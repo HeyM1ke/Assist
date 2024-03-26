@@ -1806,11 +1806,20 @@ namespace Assist.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Temple.
+        ///   Looks up a localized string similar to Unknown.
         /// </summary>
         public static string VALORANT_Unknown {
             get {
                 return ResourceManager.GetString("VALORANT_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temple.
+        /// </summary>
+        public static string VALORANT_UnknownMap {
+            get {
+                return ResourceManager.GetString("VALORANT_UnknownMap", resourceCulture);
             }
         }
         

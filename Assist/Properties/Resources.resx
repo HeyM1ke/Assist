@@ -707,7 +707,7 @@
   <data name="VALORANT_Drift" xml:space="preserve">
     <value>Drift</value>
   </data>
-  <data name="VALORANT_Unknown" xml:space="preserve">
+  <data name="VALORANT_UnknownMap" xml:space="preserve">
     <value>Temple</value>
   </data>
   <data name="VALORANT_CustomGame" xml:space="preserve">
