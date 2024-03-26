@@ -80,6 +80,9 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Resources.resx</DependentUpon>
       </Compile>
+      <Compile Update="Views\Leagues\LeaguesView.axaml.cs">
+        <DependentUpon>LeaguesView.axaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
