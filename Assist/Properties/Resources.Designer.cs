@@ -339,6 +339,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Common_Close {
+            get {
+                return ResourceManager.GetString("Common_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         public static string Common_ConfirmPassword {
@@ -578,6 +587,15 @@ namespace Assist.Properties {
         public static string Common_Notification {
             get {
                 return ResourceManager.GetString("Common_Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Common_Ok {
+            get {
+                return ResourceManager.GetString("Common_Ok", resourceCulture);
             }
         }
         

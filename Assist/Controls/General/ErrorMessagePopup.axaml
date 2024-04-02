@@ -1,0 +1,61 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:general="clr-namespace:Assist.Controls.General"
+             xmlns:properties="clr-namespace:Assist.Properties"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Assist.Controls.General.ErrorMessagePopup">
+    
+    <Design.DataContext>
+        <general:ErrorMessagePopupViewModel/>
+    </Design.DataContext>
+    <Grid Background="{DynamicResource AssistBackground85}">
+        <Border Background="{DynamicResource AssistBackground}"
+                Padding="80,40"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                BorderBrush="{DynamicResource AssistControlOutline}"
+                BorderThickness="1"
+                CornerRadius="10">
+            <Grid RowDefinitions="*,*,*">
+                
+                <StackPanel Spacing="5" HorizontalAlignment="Stretch">
+                    <TextBlock Text="{Binding ErrorMessageTitle}"
+                               Grid.Row="0"
+                               FontSize="22"
+                               MaxWidth="500"
+                               TextWrapping="WrapWithOverflow"
+                               FontWeight="Bold"></TextBlock>
+                    <Rectangle Fill="{DynamicResource AssistControlOutline}"
+                               Height="1"></Rectangle>
+                </StackPanel>
+                
+                <TextBlock Text="{Binding ErrorMessageBody}"
+                           Grid.Row="1"
+                           FontSize="16"
+                           FontWeight="Regular"
+                           TextAlignment="Center"
+                           TextWrapping="WrapWithOverflow"
+                           MaxWidth="500"
+                           Padding="0,8"
+                           Margin="0,0,0,5"/>
+                
+                <StackPanel Spacing="10"
+                            Grid.Row="2">
+                    <Rectangle Fill="{DynamicResource AssistControlOutline}"
+                               Height="1"></Rectangle>
+                    <Button Classes="default"
+                            FontSize="13"
+                            Padding="30,5"
+                            Command="{Binding ErrorControlButtonCommand}"
+                            Content="{x:Static properties:Resources.Common_Close}"
+                            HorizontalAlignment="Center">
+                    </Button>
+                </StackPanel>
+                
+                
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

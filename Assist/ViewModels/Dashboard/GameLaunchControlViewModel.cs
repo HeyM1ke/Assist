@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
+using Assist.Controls.General;
 using Assist.Controls.Navigation;
 using Assist.Core.Settings.Options;
 using Assist.Services.Riot;
@@ -66,9 +67,14 @@ public partial class GameLaunchControlViewModel : ViewModelBase
     
     private async Task ApplyLauncherFiles()
     {
-        if (!File.Exists(_currentlySelected.BackupZipPath))return;
-        
-        
+        if (!File.Exists(_currentlySelected.BackupZipPath))
+        {
+            Log.Error("Launcher files dont exist");
+
+            AssistApplication.ChangeMainWindowPopupView(new ErrorMessagePopup());
+            NavigationContainer.ViewModel.EnableAllButtons();
+            return;
+        }
         
         Log.Information("Backup File Exists.");
         try

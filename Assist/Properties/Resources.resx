@@ -142,6 +142,12 @@
   <data name="Common_Play" xml:space="preserve">
     <value>Play</value>
   </data>
+  <data name="Common_Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="Common_Add" xml:space="preserve">
     <value>Add</value>
   </data>
