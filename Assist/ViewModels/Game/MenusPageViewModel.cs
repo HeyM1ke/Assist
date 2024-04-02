@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assist.Controls.Game.Live;
 using Assist.Core.Helpers;
+using Assist.Models.Game;
 using Assist.Models.Socket;
 using Assist.Services.Assist;
 using Assist.Shared.Models.Assist;
@@ -13,6 +14,7 @@ using Newtonsoft.Json;
 using Serilog;
 using ValNet.Objects.Exceptions;
 using ValNet.Objects.Local;
+using ValNet.Objects.Parties;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
@@ -129,59 +131,38 @@ public partial class MenusPageViewModel : ViewModelBase
                     if(partyData.Members.Count <= 1)
                         return;
                     
-
-
                     var allIds = partyData.Members.Select(x => x.Subject).ToList();
-
-                   // await LiveViewViewModel.GetUserReputations(allIds);
-
+                    
                     for (int i = 0; i < partyData.Members.Count; i++)
                     {
-                        
                         var member = partyData.Members[i];
                         var currentUserBtn = CurrentUsers.FirstOrDefault(member => member.PlayerId == partyData.Members[i].Subject);
                         var pData = pres.presences.Find(pres => pres.puuid == member.Subject);
-                        if (pData is null) {continue; }
-                        var privatePres = await ValorantHelper.GetPresenceData(pData);
+                        
+                        if (pData is null && currentUserBtn is null)
+                        {
+                            await CreatePartyPlayerControl(member);
+                            continue;
+                        }
                         
                         if (currentUserBtn == null )
                         {
+                            var privatePres = await ValorantHelper.GetPresenceData(pData);
                             Dispatcher.UIThread.InvokeAsync(async () =>
                             {
-
-                                /*if (LiveViewViewModel.AssistProfiles.TryGetValue(member.Subject, out var profileData))
-                                {
-                                        AddUserToList(new MenuPartyPlayerControl()
-                                            {
-                                                LevelText = $"{privatePres.accountLevel:n0}",
-                                                PlayerId = pData.puuid,
-                                                PlayerName = string.IsNullOrEmpty(profileData.DisplayName) ? pData.game_name : profileData.DisplayName ,
-                                                PlayerTitle = !string.IsNullOrEmpty(profileData.DisplayName) ?  $"{pData.game_name}#{pData.game_tag}" : "", 
-                                                PlayercardImage = $"https://cdn.assistval.com/playercards/{privatePres.playerCardId}_LargeArt.png",
-                                                PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{privatePres.competitiveTier}.png"
-                                            }
-                                        );
-                                }
-                                else
-                                {*/
-                                        AddUserToList(
-                                            new MenuPartyPlayerControl()
-                                            {
-                                                LevelText = $"{privatePres.accountLevel:n0}",
-                                                PlayerId = pData.puuid,
-                                                PlayerName = pData.game_name ,
-                                                PlayerTitle = pData.game_tag, 
-                                                PlayercardImage = $"https://cdn.assistval.com/playercards/{privatePres.playerCardId}_LargeArt.png",
-                                                PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{privatePres.competitiveTier}.png"
-                                            }
-                                        );    
-                                //}
+                                AddUserToList(
+                                    new MenuPartyPlayerControl()
+                                    {
+                                        LevelText = $"{privatePres.accountLevel:n0}",
+                                        PlayerId = pData.puuid,
+                                        PlayerName = pData.game_name ,
+                                        PlayerTitle = pData.game_tag, 
+                                        PlayercardImage = $"https://cdn.assistval.com/playercards/{privatePres.playerCardId}_LargeArt.png",
+                                        PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{privatePres.competitiveTier}.png"
+                                    }
+                                );
                             });
-                            // This means this is a new Party Member
-                            
                         }
-
-
                     }
 
                     for (int i = 0; i < CurrentUsers.Count; i++)
@@ -211,7 +192,55 @@ public partial class MenusPageViewModel : ViewModelBase
                 }
             }
         }
-     
+
+        private async Task CreatePartyPlayerControl(ValorantPartyPlayer member)
+        {
+            Log.Information("Party member information is not available from the presence.");
+            if (LiveViewViewModel.ValorantPlayers.TryGetValue(member.Subject, out var possiblePlayerData))
+            {
+                if (!possiblePlayerData.IsOld()) { Log.Information("Previously found playerdata is not null, continuing."); }
+                else { await possiblePlayerData.Setup(); }
+                
+                Dispatcher.UIThread.InvokeAsync(async () =>
+                {
+                    AddUserToList(
+                        new MenuPartyPlayerControl()
+                        {
+                            LevelText = $"{member.AccountLevel:n0}",
+                            PlayerId = member.Subject,
+                            PlayerName = possiblePlayerData.GameName ,
+                            PlayerTitle = possiblePlayerData.Tagline, 
+                            PlayercardImage = $"https://cdn.assistval.com/playercards/{member.PlayerCardID}_LargeArt.png",
+                            PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{possiblePlayerData.CompetitiveTier}.png"
+                        }
+                    ); 
+
+                });
+
+                return;
+            }
+
+            // If it doesnt exist create and set, and add to dictionary.
+            var ply = new ValorantPlayerStorage(member.Subject);
+            await ply.Setup();
+            LiveViewViewModel.ValorantPlayers.TryAdd(member.Subject, ply);
+            
+            Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                AddUserToList(
+                    new MenuPartyPlayerControl()
+                    {
+                        LevelText = $"{member.AccountLevel:n0}",
+                        PlayerId = member.Subject,
+                        PlayerName = possiblePlayerData.GameName ,
+                        PlayerTitle = possiblePlayerData.Tagline, 
+                        PlayercardImage = $"https://cdn.assistval.com/playercards/{member.PlayerCardID}_LargeArt.png",
+                        PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{possiblePlayerData.CompetitiveTier}.png"
+                    }
+                ); 
+            });
+        }
+
         public async void AddUserToList(MenuPartyPlayerControl u)
         {
             Dispatcher.UIThread.InvokeAsync(() =>
@@ -248,9 +277,6 @@ public partial class MenusPageViewModel : ViewModelBase
                     
                 });
             }
-
-            // Update UI Elements
-            
         }
 
         public async Task SetupWithLocalPresence(ChatV4PresenceObj.Presence obj = null)
@@ -270,49 +296,19 @@ public partial class MenusPageViewModel : ViewModelBase
                 }
                 else
                 {
-                    /*var alreadyHere = LiveViewViewModel.ReputationUserV2s.ContainsKey(obj.puuid);
-                    if (!alreadyHere)
-                    {
-                        await LiveViewViewModel.GetUserReputations(new List<string>() { obj.puuid });
-                    }
-                    var profileAlreadyHere = LiveViewViewModel.AssistProfiles.ContainsKey(obj.puuid);
-                    if (!profileAlreadyHere)
-                    {
-                        await LiveViewViewModel.GetUserProfile(obj.puuid);
-                    }*/
-                    
                     if (CurrentUsers.Count == 0)
                     {
                         var pData = await ValorantHelper.GetPresenceData(obj);
                         
-                        /*if (LiveViewViewModel.AssistProfiles.TryGetValue(obj.puuid, out var profileData))
-                        {
-                            AddUserToList(
-                                new MenuPartyPlayerControl()
-                                {
-                                    LevelText = $"{data.accountLevel:n0}",
-                                    PlayerId = obj.puuid,
-                                    PlayerName = string.IsNullOrEmpty(profileData.DisplayName) ? obj.game_name : profileData.DisplayName ,
-                                    PlayerTitle = !string.IsNullOrEmpty(profileData.DisplayName) ?  $"{obj.game_name}#{obj.game_tag}" : "", 
-                                    PlayercardImage = $"https://cdn.assistval.com/playercards/{data.playerCardId}_LargeArt.png",
-                                    PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
-                                }
-                            );
-                        }
-                        else
-                        {*/
-                            AddUserToList(
-                                new MenuPartyPlayerControl()
-                                {
-                                    LevelText = $"{data.accountLevel:n0}",
-                                    PlayerId = obj.puuid,
-                                    PlayerName = obj.game_name ,
-                                    PlayerTitle = obj.game_tag, 
-                                    PlayercardImage = $"https://cdn.assistval.com/playercards/{data.playerCardId}_LargeArt.png",
-                                    PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
-                                }
-                            );    
-                        //}
+                        AddUserToList(new MenuPartyPlayerControl()
+                            {
+                                LevelText = $"{data.accountLevel:n0}",
+                                PlayerId = obj.puuid,
+                                PlayerName = obj.game_name ,
+                                PlayerTitle = obj.game_tag, 
+                                PlayercardImage = $"https://cdn.assistval.com/playercards/{data.playerCardId}_LargeArt.png",
+                                PlayerRankIcon = $"https://cdn.assistval.com/ranks/TX_CompetitiveTier_Large_{data.competitiveTier}.png"
+                            });    
                     }
 
                     if (data.partySize == 1)
