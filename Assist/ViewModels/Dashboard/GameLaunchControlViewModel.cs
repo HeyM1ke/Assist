@@ -22,8 +22,7 @@ public partial class GameLaunchControlViewModel : ViewModelBase
 {
     [ObservableProperty] private bool _launchBtnEnabled = false;
 
-    [ObservableProperty] private string _imageLink =
-        "https://www.dexerto.com/cdn-image/wp-content/uploads/2024/01/10/valorant-episode-8-act-1-release-date.jpg?width=600&quality=75";
+    [ObservableProperty] private string _imageLink = "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt771c027adeb49ffb/65f4c76f55464d0a8f0dfe10/8-2-Clove-Gameplay-Thumb-16x9_textless.jpg?width=600&quality=75";
 
     private AccountProfile? _currentlySelected;
 
@@ -54,81 +53,9 @@ public partial class GameLaunchControlViewModel : ViewModelBase
         NavigationContainer.ViewModel.DisableAllButtons();
         AssistApplication.ChangeMainWindowPopupView(new VLRLaunchedPage());
         Log.Information("Popup View changed to showcase that Valorant is Booting.");
-        
         Log.Information("Setting up Riot Client Files");
-        await ApplyLauncherFiles();
-        
-        
-    }
+        await new RiotClientService().ApplyLauncherFiles(); // Instance currently being used is stored within the class Instance Variable
 
+    }
     
-    private static readonly string defaultConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data");
-    private static readonly string defaultBetaConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta", "Data");
-    
-    private async Task ApplyLauncherFiles()
-    {
-        if (!File.Exists(_currentlySelected.BackupZipPath))
-        {
-            Log.Error("Launcher files dont exist");
-
-            AssistApplication.ChangeMainWindowPopupView(new ErrorMessagePopup());
-            NavigationContainer.ViewModel.EnableAllButtons();
-            return;
-        }
-        
-        Log.Information("Backup File Exists.");
-        try
-        {
-            await RiotClientService.CloseRiotRelatedPrograms();
-            Log.Information("Deleting Files");
-            RemoveAnyExistingClientDataFiles();
-            var _currentDataFolderPath = Path.Exists(defaultBetaConfigLocation) ? defaultBetaConfigLocation : defaultConfigLocation;
-            ZipFile.ExtractToDirectory(_currentlySelected.BackupZipPath, _currentDataFolderPath, true);
-        }
-        catch (Exception e)
-        {
-           Log.Error(e.Message);
-           Log.Error(e.StackTrace);
-           return;
-        }
-        string clientLocation = await RiotClientService.FindRiotClient();
-            
-        if (clientLocation == null)
-            Log.Error("DID NOT FIND CLIENT");
-
-        Log.Information("Launching VALORANT.");
-            
-        ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline=live")
-        {
-            UseShellExecute = true
-        };
-
-        Process.Start(riotClientStart);
-        await Task.Delay(1000);
-        var serv = new RiotClientService();
-        serv.StartWorker();
-    }
-
-    private void RemoveAnyExistingClientDataFiles()
-    {
-        if (Directory.Exists(defaultConfigLocation))
-        {
-            DirectoryInfo di = new DirectoryInfo(defaultConfigLocation);
-            foreach (var filePath in di.GetFiles())
-            {
-                filePath.Delete();
-            }
-            // removed any currently logged in client
-        }
-
-        if (Directory.Exists(defaultBetaConfigLocation))
-        {
-            DirectoryInfo di = new DirectoryInfo(defaultBetaConfigLocation);
-            foreach (var filePath in di.GetFiles())
-            {
-                filePath.Delete();
-            }
-            // removed any currently logged in client
-        }
-    }
 }

@@ -9,6 +9,8 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assist.Controls.General;
+using Assist.Controls.Navigation;
 using Assist.Core.Settings.Options;
 using Assist.Models.Riot;
 using Assist.Shared.Services.Utils;
@@ -24,9 +26,11 @@ namespace Assist.Services.Riot
 {
     internal class RiotClientService
     {
+        public static RiotClientService Instance;
         public static event EventHandler ValorantGameLaunched;
         public static event EventHandler RiotClientLaunched;
 
+        private Process? _riotClient;
         private string RiotClientLocation;
         public static bool ClientOpened = false;
         private BackgroundWorker _worker;
@@ -34,7 +38,59 @@ namespace Assist.Services.Riot
         public string AdditionalRiotClientArguments = string.Empty;
 
         private const string bgVidUrl = "https://cdn.rumblemike.com/Static/live/assistBackVideo_dev.mp4";
+
+        public RiotClientService() { Instance = this; }
         
+        public async Task ApplyLauncherFiles()
+        {
+            if (!File.Exists(AssistApplication.ActiveAccountProfile.BackupZipPath))
+            {
+                Log.Error("Launcher files dont exist");
+
+                AssistApplication.ChangeMainWindowPopupView(new ErrorMessagePopup());
+                NavigationContainer.ViewModel.EnableAllButtons();
+                return;
+            }
+        
+            Log.Information("Backup File Exists.");
+            try
+            {
+                await RiotClientService.CloseRiotRelatedPrograms();
+                Log.Information("Deleting Files");
+                RemoveAnyExistingClientDataFiles();
+                var _currentDataFolderPath = Path.Exists(defaultBetaConfigLocation) ? defaultBetaConfigLocation : defaultConfigLocation;
+                ZipFile.ExtractToDirectory(AssistApplication.ActiveAccountProfile.BackupZipPath, _currentDataFolderPath, true);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
+                return;
+            }
+            
+            await StartClient();
+        }
+
+        public async Task StartClient(string profileCurrentId = "")
+        {
+            string clientLocation = await RiotClientService.FindRiotClient();
+            
+            if (clientLocation == null)
+                Log.Error("DID NOT FIND CLIENT");
+
+            Log.Information("Launching VALORANT.");
+            
+            ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline=live")
+            {
+                UseShellExecute = true
+            };
+
+            _riotClient = Process.Start(riotClientStart);
+            await Task.Delay(1000);
+            var serv = new RiotClientService();
+            serv.StartWorker();
+        }
+
         /*public async Task<bool> LaunchClient()
         {
             Log.Information("Attempting to Start Client");
@@ -145,13 +201,19 @@ namespace Assist.Services.Riot
             Log.Information("Background Worker Started");
             _worker = new BackgroundWorker();
             _worker.DoWork += _worker_DoWork;
-
+            
             _worker.RunWorkerAsync();
+        }
+        
+        public void StopWorker()
+        {
+            Log.Information("Background Worker Attempting to Stop");
+            _worker.CancelAsync();
         }
 
         private async void _worker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            while (!ClientOpened)
+            while (!ClientOpened && !_worker.CancellationPending)
             {
                 var rProcesses = await GetCurrentRiotProcesses();
                 var rC = rProcesses.Where(_p => _p.ProcessName.Contains("RiotClientServices")).FirstOrDefault();
@@ -248,6 +310,28 @@ namespace Assist.Services.Riot
             Log.Information("Completed download of BG Video");
         }
 
+        public void RemoveAnyExistingClientDataFiles()
+        {
+            if (Directory.Exists(defaultConfigLocation))
+            {
+                DirectoryInfo di = new DirectoryInfo(defaultConfigLocation);
+                foreach (var filePath in di.GetFiles())
+                {
+                    filePath.Delete();
+                }
+                // removed any currently logged in client
+            }
+
+            if (Directory.Exists(defaultBetaConfigLocation))
+            {
+                DirectoryInfo di = new DirectoryInfo(defaultBetaConfigLocation);
+                foreach (var filePath in di.GetFiles())
+                {
+                    filePath.Delete();
+                }
+                // removed any currently logged in client
+            }
+        }
         internal static async Task<string> FindRiotClient()
         {
             if (!OperatingSystem.IsWindows())
@@ -300,6 +384,7 @@ namespace Assist.Services.Riot
         private static readonly string defaultConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data");
         private static readonly string defaultBetaConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Beta", "Data");
         
+        
         public static async Task CreateBackupFile()
         {
             var _currentDataFolderPath = Path.Exists(defaultBetaConfigLocation) ? defaultBetaConfigLocation : defaultConfigLocation;
@@ -309,6 +394,7 @@ namespace Assist.Services.Riot
             if (settings is null)
             {
                 Log.Error("Failed to create backup, settings were non-existent.");
+                return;
             }
             
             var subOfClient = await GetSub(settings);
@@ -317,13 +403,13 @@ namespace Assist.Services.Riot
             
             Log.Information("Attempting to Zip up Data Folder");
 
-                Directory.CreateDirectory(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient));
+            Directory.CreateDirectory(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient));
 
-                if (File.Exists(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"))) // Deletes Zip File if it exists.
-                    File.Delete(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"));
+            if (File.Exists(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"))) // Deletes Zip File if it exists.
+                File.Delete(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"));
 
-                Log.Information("Delaying... Rito Client slow");
-                await Task.Delay(3000);
+            Log.Information("Delaying... Rito Client slow");
+            await Task.Delay(3000);
                 
                 try
                 {

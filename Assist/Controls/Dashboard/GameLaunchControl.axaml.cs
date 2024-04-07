@@ -18,6 +18,7 @@ public partial class GameLaunchControl : UserControl
 
     private async void GameLaunchControl_Loaded(object? sender, RoutedEventArgs e)
     {
+        if (Design.IsDesignMode)return;
         await _viewModel.LoadProfiles();
     }
 }
