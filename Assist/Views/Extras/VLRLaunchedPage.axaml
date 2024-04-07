@@ -52,6 +52,7 @@
                     Classes="default"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
+                    Command="{Binding HandleLongTimeCommandCommand}"
                     IsVisible="{Binding LoadingLongButtonVisible}"
                     Margin="0,0,0,0"
             ></Button>

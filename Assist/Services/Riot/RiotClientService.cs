@@ -39,7 +39,11 @@ namespace Assist.Services.Riot
 
         private const string bgVidUrl = "https://cdn.rumblemike.com/Static/live/assistBackVideo_dev.mp4";
 
-        public RiotClientService() { Instance = this; }
+        public RiotClientService()
+        {
+            Instance = this;
+            Log.Information($"Created RiotClientService Instance");
+        }
         
         public async Task ApplyLauncherFiles()
         {
@@ -58,13 +62,19 @@ namespace Assist.Services.Riot
                 await RiotClientService.CloseRiotRelatedPrograms();
                 Log.Information("Deleting Files");
                 RemoveAnyExistingClientDataFiles();
+                
+                Log.Information("Deciding Current Data Path");
                 var _currentDataFolderPath = Path.Exists(defaultBetaConfigLocation) ? defaultBetaConfigLocation : defaultConfigLocation;
+                Log.Information($"Current Data Path: {_currentDataFolderPath}" );
+                Log.Information("Extracting to Directory");
                 ZipFile.ExtractToDirectory(AssistApplication.ActiveAccountProfile.BackupZipPath, _currentDataFolderPath, true);
             }
             catch (Exception e)
             {
                 Log.Error(e.Message);
                 Log.Error(e.StackTrace);
+
+                AssistApplication.ShowcaseErrorMessage("Error Occured while Launching", $"{e.Message} \n \n Please open a ticket on the discord, if this issue persists.");
                 return;
             }
             
@@ -73,18 +83,28 @@ namespace Assist.Services.Riot
 
         public async Task StartClient(string profileCurrentId = "")
         {
-            string clientLocation = await RiotClientService.FindRiotClient();
             
-            if (clientLocation == null)
-                Log.Error("DID NOT FIND CLIENT");
+            string clientLocation = await RiotClientService.FindRiotClient();
 
-            Log.Information("Launching VALORANT.");
+            if (clientLocation == null)
+            {
+                Log.Error("DID NOT FIND CLIENT");
+                AssistApplication.ShowcaseErrorMessage("No Riot Client Found", $"We could not find any Riot Client install, please install or repair your Riot Client");
+                return;
+            }
+                
+
+            Log.Information("Attempting to Launch VALORANT.");
             
             ProcessStartInfo riotClientStart = new ProcessStartInfo(clientLocation, $"--launch-product=valorant --launch-patchline=live")
             {
                 UseShellExecute = true
             };
-
+            
+            Log.Information($"Launch Path: {clientLocation}");
+            Log.Information($"Launch Args: {riotClientStart.Arguments}");
+            
+            Log.Information($"Starting Process: {riotClientStart.FileName}");
             _riotClient = Process.Start(riotClientStart);
             await Task.Delay(1000);
             var serv = new RiotClientService();
@@ -198,7 +218,7 @@ namespace Assist.Services.Riot
         
         public void StartWorker()
         {
-            Log.Information("Background Worker Started");
+            Log.Information("RCS: Background Worker Started");
             _worker = new BackgroundWorker();
             _worker.DoWork += _worker_DoWork;
             
@@ -215,15 +235,27 @@ namespace Assist.Services.Riot
         {
             while (!ClientOpened && !_worker.CancellationPending)
             {
+                Log.Information("RCS: Worker Background Work Start");
                 var rProcesses = await GetCurrentRiotProcesses();
                 var rC = rProcesses.Where(_p => _p.ProcessName.Contains("RiotClientServices")).FirstOrDefault();
                 var val = rProcesses.Where(_p => _p.ProcessName.Contains("VALORANT-Win64-Shipping")).FirstOrDefault();
 
                 if (rC != null && RiotApplicationData.RiotClientProcess == null)
                 {
+                    Log.Information("RCS: Found Riot Client Process");
                     RiotApplicationData.RiotClientProcess = rC;
-                    RiotApplicationData.RiotClientProcess.EnableRaisingEvents = true;
 
+                    try
+                    {
+                        RiotApplicationData.RiotClientProcess.EnableRaisingEvents = true;
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("RCS: Failed to Enable Raise Events for RC");
+                        Log.Error($"RCS: RC ERR MESSAGE; {exception.Message}");
+                        Log.Error($"RCS: RC ERR STACK; {exception.StackTrace}");
+                    }
+                    
                     Log.Information("Found Riot Client Process");
                     Log.Information($"Process ID: {rC.Id}");
                     Log.Information($"Process Name: {rC.ProcessName}");
@@ -233,7 +265,18 @@ namespace Assist.Services.Riot
                 if (val != null && RiotApplicationData.ValorantGameProcess == null)
                 {
                     RiotApplicationData.ValorantGameProcess = val;
-                    RiotApplicationData.ValorantGameProcess.EnableRaisingEvents = true;
+                    
+                    try
+                    {
+                        RiotApplicationData.ValorantGameProcess.EnableRaisingEvents = true;
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("RCS: Failed to Enable Raise Events for VAL");
+                        Log.Error($"RCS: VAL ERR MESSAGE; {exception.Message}");
+                        Log.Error($"RCS: VAL ERR STACK; {exception.StackTrace}");
+                    }
+                    
                     RiotApplicationData.ValorantGameProcess.Exited += async (o, args) =>
                     {
                         ClientOpened = false;
@@ -261,14 +304,15 @@ namespace Assist.Services.Riot
         
         private async void OnValorantGameLaunched()
         {
-            Log.Information("Valorant Launched Taking Backup");
+            Log.Information("RCS: Valorant has Launched");
+            Log.Information("RCS: Creating BackupFile");
 
             await CreateBackupFile();
             
-            Log.Information("Checking if Gamemode is Enabled");
+            Log.Information("RCS: Checking if Gamemode is Enabled");
             if (AssistSettings.Default.AppType != AssistApplicationType.LAUNCHER_ONLY)
             {
-                Log.Information("Swapping over to Game View as Mode is allowed");
+                Log.Information("RCS: Swapping over to Game View as Mode is allowed");
                 Dispatcher.UIThread.Invoke(() => {
                     AssistApplication.ChangeMainWindowPopupView(null);
                     AssistApplication.ChangeMainWindowView(new GameInitialStartupView());
@@ -279,6 +323,7 @@ namespace Assist.Services.Riot
             // Automatically Closes Valorant After Launch
             Dispatcher.UIThread.InvokeAsync(() =>
             {
+                Log.Information("RCS: Gamemode is not enabled, Shutting Assist Down.");
                 AssistApplication.CurrentApplication.Shutdown();
             });
             
@@ -286,6 +331,7 @@ namespace Assist.Services.Riot
 
         static internal async Task<IEnumerable<Process>> GetCurrentRiotProcesses()
         {
+            Log.Information("RCS: Checking for Riot Processes");
             var processlist = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Where(process => process.Id != Process.GetCurrentProcess().Id).ToList();
             processlist.AddRange(Process.GetProcessesByName("VALORANT-Win64-Shipping"));
             processlist.AddRange(Process.GetProcessesByName("RiotClientServices"));
@@ -314,71 +360,124 @@ namespace Assist.Services.Riot
         {
             if (Directory.Exists(defaultConfigLocation))
             {
+                Log.Information("Found Directory of Default Config Client, Removing Files");
                 DirectoryInfo di = new DirectoryInfo(defaultConfigLocation);
                 foreach (var filePath in di.GetFiles())
                 {
                     filePath.Delete();
                 }
                 // removed any currently logged in client
+                Log.Information("Found Directory of Default Config Client, Removed Files");
             }
 
             if (Directory.Exists(defaultBetaConfigLocation))
             {
+                Log.Information("Found Directory of Beta Config Client, Removing Files");
                 DirectoryInfo di = new DirectoryInfo(defaultBetaConfigLocation);
                 foreach (var filePath in di.GetFiles())
                 {
                     filePath.Delete();
                 }
                 // removed any currently logged in client
+                Log.Information("Found Directory of Beta Config Client, Removed Files");
             }
         }
+
         internal static async Task<string> FindRiotClient()
         {
+            Log.Information("Finding Riot Client");
             if (!OperatingSystem.IsWindows())
                 return null;
 
             List<string> clients = new List<string>();
 
-            string riotInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
-                "Riot Games/RiotClientInstalls.json"); ;
+            Log.Information("Finding Riot Client Installs Data");
+            string riotInstallPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "Riot Games/RiotClientInstalls.json");
+            ;
 
             if (!File.Exists(riotInstallPath)) return null;
 
             JsonDocument config;
             try
             {
+                Log.Information("Parsing Riot Client Config Data");
                 config = JsonDocument.Parse(File.ReadAllText(riotInstallPath));
             }
             catch (Exception e)
             {
                 Log.Error("Riot Client Check: Could not properly parse json file");
+                Log.Error("RCC MESSAGE: " + e.Message);
+                Log.Error("RCC STACK: " + e.StackTrace);
                 return null;
             }
-            
-            if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta)) { clients.Add(rcBeta.GetString()); }
-            if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive)) { clients.Add(rcLive.GetString()); }
-            if (config.RootElement.TryGetProperty("rc_esports", out JsonElement rcEsports)) { clients.Add(rcEsports.GetString()); }
-            if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault)) { clients.Add(rcDefault.GetString()); }
 
-            foreach (var clientPath in clients)
+
+            if (config.RootElement.TryGetProperty("rc_live", out JsonElement rcLive))
             {
-                if (File.Exists(clientPath))
-                    return clientPath;
+                Log.Information("Found rc_live");
+                clients.Add(rcLive.GetString());
             }
 
+            // Beta has second priority due to issues...
+            if (config.RootElement.TryGetProperty("rc_beta", out JsonElement rcBeta))
+            {
+                Log.Information("Found rc_beta");
+                clients.Add(rcBeta.GetString());
+            }
+
+            if (config.RootElement.TryGetProperty("rc_esports", out JsonElement rcEsports))
+            {
+                Log.Information("Found rc_esports");
+                clients.Add(rcEsports.GetString());
+            }
+
+            if (config.RootElement.TryGetProperty("rc_default", out JsonElement rcDefault))
+            {
+                Log.Information("Found rc_default");
+                clients.Add(rcDefault.GetString());
+            }
+
+            // Expected behavior is to find Live & Default.
+            foreach (var clientPath in clients)
+            {
+                Log.Information("Checking for Client Path: " + clientPath);
+                if (File.Exists(clientPath))
+                {
+                    Log.Information("Client Path found: " + clientPath);
+                    return clientPath;
+                }
+            }
+            
+            
+            Log.Error("No Client Paths were found, returning Null");
             return null;
+            
         }
 
-        
+
 
         public static async Task CloseRiotRelatedPrograms()
         {
+            Log.Information("Closing any Riot Related Programs");
             var rProcesses = await RiotClientService.GetCurrentRiotProcesses();
             var rC = rProcesses.Where(_p => _p.ProcessName.Contains("RiotClientServices")).FirstOrDefault();
             var val = rProcesses.Where(_p => _p.ProcessName.Contains("VALORANT-Win64-Shipping")).FirstOrDefault();
+            Log.Information("Finished Searching for Riot Programs");
+            if (val != null)
+            {
+                Log.Information("Found VALORANT-Win64-Shipping, Killing VALORANT-Win64-Shipping");
+                val.Kill();
+            }
 
-            if (val != null) { val.Kill(); }
-            if (rC != null) { rC.Kill(); }
+            if (rC != null)
+            {
+                Log.Information("Found RiotClientServices, Killing RiotClientServices");
+                rC.Kill();
+            }
+            
+            Log.Information("Completed Closing Riot Programs");
         }
 
         private static readonly string defaultConfigLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data");
@@ -387,8 +486,10 @@ namespace Assist.Services.Riot
         
         public static async Task CreateBackupFile()
         {
+            Log.Information("RCS: Checking for DataPath");
             var _currentDataFolderPath = Path.Exists(defaultBetaConfigLocation) ? defaultBetaConfigLocation : defaultConfigLocation;
-
+            Log.Information($"RCS: Data Path being used: {_currentDataFolderPath}");
+            Log.Information($"RCS: Reading Private Settings");
             var settings = await ReadPrivateSettings(_currentDataFolderPath);
 
             if (settings is null)
@@ -399,45 +500,57 @@ namespace Assist.Services.Riot
             
             var subOfClient = await GetSub(settings);
             var ssidOfClient = await GetSSID(settings);
+            Log.Information($"RCS: Finding Profile that is equal to current launch of profile.");
             var accountProfile = AccountSettings.Default.Accounts.Find(x => x.Id == subOfClient);
             
-            Log.Information("Attempting to Zip up Data Folder");
+            Log.Information("RCS: Attempting to Zip up Data Folder");
 
+            Log.Information($"RCS: Creating DIR for Backup for User");
             Directory.CreateDirectory(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient));
 
             if (File.Exists(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"))) // Deletes Zip File if it exists.
                 File.Delete(Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"));
 
-            Log.Information("Delaying... Rito Client slow");
+            Log.Information("RCS: Delaying... Rito Client slow");
             await Task.Delay(3000);
                 
                 try
                 {
+                    Log.Information($"RCS: Creating Zip file Backup");
                     ZipFile.CreateFromDirectory(_currentDataFolderPath, Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,  $"{subOfClient}_data.zip"), CompressionLevel.Fastest, false);
-                    accountProfile.BackupZipPath = Path.Combine(AccountSettings.BaseFolderPath, "Backups", subOfClient,
-                        $"{subOfClient}_data.zip");
-                    accountProfile.UsesBackupZip = true;
+                    if (accountProfile != null)
+                    {
+                        accountProfile.BackupZipPath = Path.Combine(AccountSettings.BaseFolderPath, "Backups",
+                            subOfClient, $"{subOfClient}_data.zip");
+                        accountProfile.UsesBackupZip = true;
+                    }
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Failed to Create Zip Backup");
-                    Log.Error("Attempting to Do Code LauncherBackup");
+                    Log.Error("RCS: Failed to Create Zip Backup");
+                    Log.Error("RCS: Attempting to Do Code LauncherBackup");
 
                     if (string.IsNullOrEmpty(ssidOfClient))
                     {
-                        Log.Error("Failed to get SSID of User.");
-                        Log.Error("DEATHPOINT: Yea i dont know how the fuck we got here tbh.");
+                        Log.Error("RCS:Failed to get SSID of User.");
+                        Log.Error("RCS: DEATHPOINT: Yea i dont know how the fuck we got here tbh.");
                         return;
                     }
-                    
-                    accountProfile.SaveAccountCAuthCode(ssidOfClient);
-                    accountProfile.UsesLauncherCode = true;
+
+                    if (accountProfile != null)
+                    {
+                        accountProfile.SaveAccountCAuthCode(ssidOfClient);
+                        accountProfile.UsesLauncherCode = true;
+                    }
                 }
                 
-                Log.Information("Account Modified");
-                Log.Information("Updating/Modifying Settings");
-                accountProfile.CanLauncherBoot = true;
-                await AccountSettings.Default.UpdateAccount(accountProfile);
+                if (accountProfile != null)
+                {
+                    Log.Information("RCS: Account Modified");
+                    Log.Information("RCS: Updating/Modifying Settings");
+                    accountProfile.CanLauncherBoot = true;
+                    await AccountSettings.Default.UpdateAccount(accountProfile);
+                }
         }
 
         public static async Task<ClientPrivateModel?> ReadPrivateSettings(string path)
@@ -452,8 +565,8 @@ namespace Assist.Services.Riot
             }
             catch (Exception e)
             {
-                Log.Error("Failed to Parse Settings after Change");
-                Log.Error("Failed to Parse");
+                Log.Error("RCS: Failed to Parse Settings after Change");
+                Log.Error("RCS: Failed to Parse");
                 return null;
             }
         }
@@ -462,6 +575,7 @@ namespace Assist.Services.Riot
         {
             try
             {
+                Log.Information($"RCS: Getting SSID Private Settings Value");
                 if (config.RiotLogin?.Persist?.Session?.Cookies != null)
                 {
                     var ssid = config.RiotLogin.Persist.Session.Cookies.Find(c => c.name == "ssid");
@@ -482,8 +596,10 @@ namespace Assist.Services.Riot
         
         private static async Task<string> GetSub(ClientPrivateModel config)
         {
+            
             try
             {
+                Log.Information($"RCS: Getting SUB Private Settings Value");
                 if (config.RiotLogin?.Persist?.Session?.Cookies != null)
                 {
                     var cookie = config.RiotLogin.Persist.Session.Cookies.Find(c => c.name == "sub");

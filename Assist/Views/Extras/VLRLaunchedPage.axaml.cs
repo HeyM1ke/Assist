@@ -54,7 +54,7 @@ internal partial class VLRLaunchPageViewModel : ViewModelBase
 
     private void TimerOnComplete(object? sender, ElapsedEventArgs e)
     {
-        Log.Information("Timer has Completed");
+        Log.Information("Valorant Loading Timer has Completed");
 
         LoadingLongButtonVisible = true;
     }
