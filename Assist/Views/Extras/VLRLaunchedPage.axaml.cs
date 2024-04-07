@@ -33,6 +33,9 @@ public partial class VLRLaunchedPage : UserControl
 
     private void VLRLaunchPage_Unloaded(object? sender, RoutedEventArgs e)
     {
+        if (Design.IsDesignMode) return;
+        Titlebar.ViewModel.SettingsEnabled = true;
+        Titlebar.ViewModel.AccountSwapEnabled = true;
         _viewModel.StopTimer();
     }
 }
@@ -46,6 +49,7 @@ internal partial class VLRLaunchPageViewModel : ViewModelBase
     
     public void SetTimer()
     {
+        LoadingLongButtonVisible = false;
         _checkingTimer = new Timer(_timerCheckInSeconds * 1000);
         _checkingTimer.Elapsed += TimerOnComplete;
         _checkingTimer.AutoReset = false;

@@ -51,7 +51,7 @@ namespace Assist.Services.Riot
             {
                 Log.Error("Launcher files dont exist");
 
-                AssistApplication.ChangeMainWindowPopupView(new ErrorMessagePopup());
+                AssistApplication.ShowcaseErrorMessage("Required Files do not exist, please repair the profile.\nWithin Profile Management");
                 NavigationContainer.ViewModel.EnableAllButtons();
                 return;
             }
@@ -220,6 +220,7 @@ namespace Assist.Services.Riot
         {
             Log.Information("RCS: Background Worker Started");
             _worker = new BackgroundWorker();
+            _worker.WorkerSupportsCancellation = true;
             _worker.DoWork += _worker_DoWork;
             
             _worker.RunWorkerAsync();

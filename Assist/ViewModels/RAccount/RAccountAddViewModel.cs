@@ -136,8 +136,9 @@ public partial class RAccountAddViewModel : ViewModelBase
        var possiblePath = Path.Combine(AccountSettings.BaseFolderPath, "Backups", AssistApplication.ActiveAccountProfile.Id, $"{AssistApplication.ActiveAccountProfile.Id}_data.zip");
        if (File.Exists(possiblePath))
        {
-           
            AssistApplication.ActiveAccountProfile.CanLauncherBoot = true;
+           AssistApplication.ActiveAccountProfile.UsesBackupZip = true;
+           AssistApplication.ActiveAccountProfile.BackupZipPath = possiblePath;
            await AccountSettings.Default.UpdateAccount(AssistApplication.ActiveAccountProfile);
            _sequenceControls.Clear();
            _sequenceHistory.Clear();

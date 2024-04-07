@@ -111,7 +111,6 @@
                       <Button Classes="default"
                               Command="{Binding OpenGameLaunchWindowCommand}"
                               Content="{Binding GameLaunchButtonText}"
-                              IsVisible="{Binding !GameLaunchEnabled}"
                               IsEnabled="{Binding GameLaunchButtonEnabled}"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Center"></Button>
