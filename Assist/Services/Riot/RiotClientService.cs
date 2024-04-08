@@ -47,6 +47,14 @@ namespace Assist.Services.Riot
         
         public async Task ApplyLauncherFiles()
         {
+            if (string.IsNullOrEmpty(AssistApplication.ActiveAccountProfile.BackupZipPath))
+            {
+                var possiblePath = Path.Combine(AccountSettings.BaseFolderPath, "Backups", AssistApplication.ActiveAccountProfile.Id, $"{AssistApplication.ActiveAccountProfile.Id}_data.zip");
+                if (File.Exists(possiblePath))
+                    AssistApplication.ActiveAccountProfile.BackupZipPath = possiblePath;
+            }
+            
+            
             if (!File.Exists(AssistApplication.ActiveAccountProfile.BackupZipPath))
             {
                 Log.Error("Launcher files dont exist");

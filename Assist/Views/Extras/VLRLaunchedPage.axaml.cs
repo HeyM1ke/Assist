@@ -2,10 +2,8 @@
 using Assist.Controls.Infobars;
 using Assist.Services.Riot;
 using Assist.ViewModels;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Serilog;
