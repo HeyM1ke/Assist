@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Assist.Controls.General;
 using Assist.Controls.Infobars;
 using Assist.Controls.Navigation;
 using Assist.Models.Enums;
@@ -275,30 +276,20 @@ public static class AssistApplication
         return false;
 
     }
-
-    public static void OpenMainWindowToSettings()
+    
+    public static void ShowcaseErrorMessage(string message)
     {
-        
-            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                Window mainRef = desktop.MainWindow;
-
-                mainRef.Hide();
-
-                // Initial Window Opened at launch.
-
-                Dispatcher.UIThread.Invoke(() =>
-                {
-                    var main = new MainWindow();
-
-                    main.Show();
-
-                    mainRef.Close();
-                    desktop.MainWindow = main;
-                });
-                //NavigationContainer.ViewModel.ChangePage(AssistPage.SETTINGS);
-
-
-            }
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            ChangeMainWindowPopupView(new ErrorMessagePopup(message));
+        });
+    }
+    
+    public static void ShowcaseErrorMessage(string title, string message)
+    {
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            ChangeMainWindowPopupView(new ErrorMessagePopup(title, message));
+        });
     }
 }

@@ -51,6 +51,7 @@
     
     <Style Selector="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource Inter}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource AssistForeground}"></Setter>
     </Style>
     
     <Style Selector="Button">

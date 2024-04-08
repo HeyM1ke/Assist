@@ -33,6 +33,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
     [ObservableProperty]private string _statusText;
     [ObservableProperty]private IBrush? _specialColor = DefaultWhite;
     [ObservableProperty]private bool _scoreVisible = false;
+    [ObservableProperty]private bool _statsVisible = false;
     [ObservableProperty]private bool _inProgress = false;
     [ObservableProperty]private string _allyScore = "0";
     [ObservableProperty]private string _enemyScore = "0";
@@ -104,6 +105,7 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
         if (localUserData != null)
         {
             LocalPlayerAgentIcon = $"https://cdn.assistval.com/agents/{localUserData.PlayerAgentId.ToLower()}_displayicon.png";
+            StatsVisible = localUserData.Statistics is not null;
             LocalPlayerStats = localUserData.Statistics is not null
                 ? $"{localUserData.Statistics.Kills} / {localUserData.Statistics.Deaths} / {localUserData.Statistics.Assists}"
                 : "";

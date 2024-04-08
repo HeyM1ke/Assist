@@ -44,6 +44,7 @@
                             
                             <TextBlock Text="{Binding LocalPlayerStats}"
                                        FontWeight="Bold"
+                                       IsVisible="{Binding StatsVisible}"
                                        FontSize="14"
                                        Opacity=".7"
                                        Foreground="{DynamicResource AssistForeground}"

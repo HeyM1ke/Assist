@@ -71,7 +71,8 @@ public partial class App : Application
         CreateDirectories();
         CreateLogger();
         CheckForSettings();
-        ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader();
+        ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader(AssistSettings.CacheFolderPath);
+        
     }
 
     

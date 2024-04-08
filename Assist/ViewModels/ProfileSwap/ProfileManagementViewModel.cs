@@ -41,6 +41,8 @@ public partial class ProfileManagementViewModel : ViewModelBase
         AccountExpired = profile.IsExpired;
         DefaultAccount = AccountSettings.Default.DefaultAccount.Equals(ProfileId, StringComparison.OrdinalIgnoreCase);
 
+        
+        
         if (!profile.CanLauncherBoot)
         {
             var riotPath = await RiotClientService.FindRiotClient();
@@ -49,7 +51,10 @@ public partial class ProfileManagementViewModel : ViewModelBase
                 GameLaunchButtonEnabled = false;
                 GameLaunchButtonText = Resources.ProfileManager_NoRiotClient;
             }
-            
+        }
+        else
+        {
+            GameLaunchButtonText = "Repair";
         }
     }
 

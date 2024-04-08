@@ -126,7 +126,7 @@ public partial class DodgeViewModel : ViewModelBase
         Log.Information("Player is attempting to return to modules page.");
         Dispatcher.UIThread.Invoke(() =>
         {
-            NavigationContainer.ViewModel.ChangeToPreviousPage();
+            NavigationContainer.ViewModel.ChangePage(AssistPage.MODULES);
         });
     }
 

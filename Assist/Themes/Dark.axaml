@@ -5,12 +5,13 @@
     <Color x:Key="AssistPrimaryColor">#F71D51</Color>
 
     <Color x:Key="AssistBackground">#0C0F0D</Color>
+    <Color x:Key="AssistBackground85">#D90C0F0D</Color>
     <Color x:Key="AssistSecondaryBackground">#15171A</Color>
     
     <Color x:Key="AssistControlBackground">#121514</Color>
     <Color x:Key="AssistControlOutline">#232633</Color>
     <!--414342old color-->
-    <Color x:Key="AssistForeground">#FFF</Color>
+    <Color x:Key="AssistForeground">#FBFBFB</Color>
     
     
     <Color x:Key="AssistButtonControlBackground">#151719</Color>
