@@ -46,7 +46,7 @@ public partial class AssistAccountLoginFormViewModel : ViewModelBase
         
         string hash1 = BitConverter.ToString(bytes);
 
-        var state = string.Concat(hash1, MotionCat.GetHardwareId());
+        var state = string.Concat(hash1, MotionCat.GetMotherboardId());
         
         Log.Information("Opening Discord Window");
         
