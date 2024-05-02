@@ -225,6 +225,8 @@ public partial class MenusPageViewModel : ViewModelBase
             await ply.Setup();
             LiveViewViewModel.ValorantPlayers.TryAdd(member.Subject, ply);
             
+            Log.Information("Party Member Info: SUB : {0} | PCARD : {1}", member.Subject, member.PlayerCardID);
+            
             Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 AddUserToList(
