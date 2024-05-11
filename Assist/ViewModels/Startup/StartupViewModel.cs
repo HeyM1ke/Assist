@@ -191,10 +191,7 @@ public partial class StartupViewModel : ViewModelBase
 
     private bool IsValorantRunning()
     {
-        var processlist = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Where(process => process.Id != Process.GetCurrentProcess().Id).ToList();
-        processlist.AddRange(Process.GetProcessesByName("VALORANT-Win64-Shipping"));
-            
-        return processlist.Any();
+        return Process.GetProcessesByName("VALORANT-Win64-Shipping").Any(process => process.Id != Process.GetCurrentProcess().Id);
     }
 
     private async Task AttemptAuthentication()
