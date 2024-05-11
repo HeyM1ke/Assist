@@ -15,6 +15,7 @@
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="49"
+        Background="Transparent"
         Loaded="UpdateWindow_Loaded">
     <Border Background="{DynamicResource AssistBackground}"
             CornerRadius="20"
