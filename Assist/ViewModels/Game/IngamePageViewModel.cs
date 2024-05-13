@@ -7,8 +7,11 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assist.Controls.Game.Live;
 using Assist.Core.Helpers;
+using Assist.Models.Enums;
 using Assist.Services.Assist;
 using Assist.Shared.Models.Assist;
+using Assist.Views.Game.Live;
+using Assist.Views.Game.Live.Pages;
 using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -132,6 +135,21 @@ public partial class IngamePageViewModel : ViewModelBase
             {
                 Log.Fatal("COREGAME TOKEN ERROR: ");
                 await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+                return;
+            }
+            
+            if (e.Content.Contains("match was not found", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    var getPlayerResp = await AssistApplication.ActiveUser.CoreGame.FetchPlayer();
+                    LiveView._viewModel.ChangePage(new MenusPageView());
+                    LiveView._viewModel.CurrentPage = ELivePage.MENUS;
+                }
+                catch (Exception exception)
+                {
+                    return;
+                }
             }
 
             return;
