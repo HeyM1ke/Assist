@@ -70,5 +70,15 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"></Button>
         </Grid>
+        
+        <Grid>
+            <TextBlock Text="Open Logs Folder"
+                       VerticalAlignment="Center"/>
+            <Button Content="Open"
+                    Classes="default"
+                    HorizontalAlignment="Right"
+                    Command="{Binding OpenFolderCommand}"
+                    VerticalAlignment="Center"></Button>
+        </Grid>
     </StackPanel>
 </UserControl>
