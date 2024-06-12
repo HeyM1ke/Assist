@@ -1482,6 +1482,15 @@ namespace Assist.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abyss.
+        /// </summary>
+        public static string VALORANT_Abyss {
+            get {
+                return ResourceManager.GetString("VALORANT_Abyss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ascent.
         /// </summary>
         public static string VALORANT_Ascent {

@@ -236,6 +236,7 @@ public class ValorantHelper
             {"de28aa9b-4cbe-1003-320e-6cb3ec309557",Properties.Resources.VALORANT_Piazza},
             {"92584fbe-486a-b1b2-9faa-39b0f486b498",Properties.Resources.VALORANT_Sunset},
             {"2c09d728-42d5-30d8-43dc-96a05cc7ee9d",Properties.Resources.VALORANT_Drift},
+            {"224b0a95-48b9-f703-1bd8-67aca101a61f", Properties.Resources.VALORANT_Abyss}
         };
 
         public static Dictionary<string, string> MapsByPath = new Dictionary<string, string>
@@ -256,6 +257,7 @@ public class ValorantHelper
             {"/game/maps/hurm/hurm_yard/hurm_yard",Properties.Resources.VALORANT_Piazza},
             {"/game/maps/juliett/juliett",Properties.Resources.VALORANT_Sunset},
             {"/game/maps/hurm/hurm_helix/hurm_helix",Properties.Resources.VALORANT_Drift},
+            {"/game/maps/infinity/infinity" , Properties.Resources.VALORANT_Abyss}
             
         };
         

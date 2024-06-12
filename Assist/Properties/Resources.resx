@@ -713,6 +713,9 @@
   <data name="VALORANT_Drift" xml:space="preserve">
     <value>Drift</value>
   </data>
+  <data name="VALORANT_Abyss" xml:space="preserve">
+    <value>Abyss</value>
+  </data>
   <data name="VALORANT_UnknownMap" xml:space="preserve">
     <value>Temple</value>
   </data>
