@@ -366,7 +366,7 @@ public class ValorantHelper
                 case "lotus":
                     return "Lotus";
                 case "newmap":
-                    return "Sunset";
+                    return Properties.Resources.VALORANT_Abyss;
                 case "premier-seasonmatch":
                     return "Premier";
                 case "premier":
