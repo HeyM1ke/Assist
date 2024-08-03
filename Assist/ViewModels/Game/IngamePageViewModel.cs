@@ -19,6 +19,7 @@ using Serilog;
 using ValNet.Objects.Coregame;
 using ValNet.Objects.Exceptions;
 using ValNet.Objects.Local;
+using WebSocketSharp;
 
 namespace Assist.ViewModels.Game;
 
@@ -273,7 +274,7 @@ public partial class IngamePageViewModel : ViewModelBase
             
             Log.Information("Getting map data for ID of: " + Match.MapID.ToLower());
             MapName = ValorantHelper.MapsByPath?[Match.MapID.ToLower()].ToUpper();
-            if (Match.MapID.Equals("/game/maps/poveglia/range", StringComparison.OrdinalIgnoreCase))
+            if (Match.MapID.Contains("poveglia", StringComparison.OrdinalIgnoreCase))
                 IsRange = true;
             else
                 MapImage = $"https://cdn.assistval.com/maps/{ValorantHelper.MapsByPath?[Match.MapID.ToLower()]}_Featured.png";
@@ -291,7 +292,7 @@ public partial class IngamePageViewModel : ViewModelBase
             // Check if the Queue is Deathmatch.
             IsDeathmatch = Match.MatchData.QueueID.ToLower() == "deathmatch";
 
-            IsRange = Match.MapID.Equals("/game/maps/poveglia/range"); // this is dumb but works.
+            IsRange = Match.MapID.Contains("poveglia"); // this is dumb but works.
             QueueName = queueName.ToUpper();
 
             try

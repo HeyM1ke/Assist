@@ -250,6 +250,7 @@ public class ValorantHelper
             {"/game/maps/pitt/pitt",Properties.Resources.VALORANT_Pearl},
             {"/game/maps/port/port",Properties.Resources.VALORANT_Icebox},
             {"/game/maps/poveglia/range",Properties.Resources.VALORANT_TheRange},
+            {"/game/maps/povegliav2/rangev2",Properties.Resources.VALORANT_TheRange},
             {"/game/maps/triad/triad",Properties.Resources.VALORANT_Haven},
             {"/game/maps/jam/jam",Properties.Resources.VALORANT_Lotus},
             {"/game/maps/hurm/hurm_alley/hurm_alley",Properties.Resources.VALORANT_District},
