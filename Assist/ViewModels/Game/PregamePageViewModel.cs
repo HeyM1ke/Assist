@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 using Assist.Controls.Game.Live;
 using Assist.Controls.Store;
 using Assist.Core.Helpers;
+using Assist.Models.Enums;
 using Assist.Models.Socket;
 using Assist.Services.Assist;
 using Assist.Shared.Models.Assist;
+using Assist.Views.Game.Live;
+using Assist.Views.Game.Live.Pages;
 using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -66,6 +69,24 @@ public partial class PregamePageViewModel : ViewModelBase
                 if(ex.StatusCode == HttpStatusCode.BadRequest){
                     Log.Fatal("PREGAME TOKEN ERROR: ");
                     await AssistApplication.RefreshService.CurrentUserOnTokensExpired();
+                    return;
+                }
+
+                if (ex.Content.Contains("PREGAME_MNF", StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        var getPlayerResp = await AssistApplication.ActiveUser.CoreGame.FetchPlayer();
+                        Dispatcher.UIThread.Invoke(() =>
+                        {
+                            LiveView._viewModel.ChangePage(new IngamePageView());
+                            LiveView._viewModel.CurrentPage = ELivePage.INGAME;
+                        });
+                    }
+                    catch (Exception exception)
+                    {
+                        return;
+                    }
                 }
             }
                 

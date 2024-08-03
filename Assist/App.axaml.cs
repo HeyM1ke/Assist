@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Threading;
 using Assist.Models.Enums;
@@ -17,6 +18,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Assist.ViewModels;
 using Assist.Views;
+using Assist.Views.Extras;
 using Assist.Views.Startup;
 using AsyncImageLoader;
 using AsyncImageLoader.Loaders;
@@ -24,6 +26,7 @@ using Avalonia.Controls;
 using Avalonia.Styling;
 using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 
@@ -31,8 +34,13 @@ namespace Assist;
 
 public partial class App : Application
 {
-    
-    
+#if DEBUG
+    public const string APPPROTOCOL = "assistdebug";
+#else
+    public const string APPPROTOCOL = "assist";
+#endif
+    public bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+
     public override void Initialize()
     {
         OnStartup();   
@@ -46,10 +54,10 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+
+        if (OperatingSystem.IsWindows())
         {
-            //desktop.Exit += OnExit;
-            desktop.MainWindow = new MainWindow();
+            HandleWindowsDesktopInitialization();
         }
         
         base.OnFrameworkInitializationCompleted();
@@ -72,11 +80,9 @@ public partial class App : Application
         CreateLogger();
         CheckForSettings();
         ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader(AssistSettings.CacheFolderPath);
-        
+        HandleProtocol();
     }
-
     
-
     private void CreateDirectories()
     {
         Directory.CreateDirectory(GetApplicationDataFolder());
@@ -199,6 +205,69 @@ public partial class App : Application
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
         });
+    }
+    
+    private void HandleProtocol()
+    {
+        Log.Information("Handling Protocol");
+        
+        // First Check for Permissions of the app.
+        RegistryKey key = Registry.ClassesRoot.OpenSubKey(APPPROTOCOL);
+        if (key == null)
+        {
+            Log.Information("Key does not exist.");
+            if (IsElevated)
+                CreateAssistAppProtocol();
+            else
+                Log.Information("No Admin Access");
+        }
+    }
+
+    private void HandleWindowsDesktopInitialization()
+    {
+        // args[0] is always going to be the application path. When using the protocol it will show it.
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+
+
+            if (desktop.Args.Length <= 0)
+            {
+                desktop.MainWindow = new MainWindow();
+                return;
+            }
+            
+            switch (desktop.Args[0].ToLower())
+            {
+                case { } uri when uri.Contains($"{APPPROTOCOL}://launch/"):
+                    desktop.MainWindow = new AssistLaunchWindow();
+                    break;
+                case { } uri when uri.Contains($"{APPPROTOCOL}://join/"):
+                    desktop.MainWindow = new AssistJoinWindow();
+                    break;
+                default:
+                    desktop.MainWindow = new MainWindow();
+                    break;
+            }
+        }
+    }
+    private void CreateAssistAppProtocol()
+    {
+        Log.Information("Creating Assist Protocol");
+        RegistryKey key = Registry.ClassesRoot.OpenSubKey(APPPROTOCOL);
+        string applicationPath = Process.GetCurrentProcess().MainModule.FileName;
+        if (key == null)
+        {
+            
+            key = Registry.ClassesRoot.CreateSubKey(APPPROTOCOL);
+            key.SetValue(string.Empty, "URL: " + APPPROTOCOL);
+            key.SetValue("URL Protocol", string.Empty);
+
+            key = key.CreateSubKey(@"shell\open\command");
+            key.SetValue(string.Empty, applicationPath + " " + "%1");
+            key.Close();
+        }
+        
+        Log.Information("Created Assist Protocol");
     }
     
     private static string GetApplicationDataFolder() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AssistData");

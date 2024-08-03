@@ -77,6 +77,7 @@ public class ValorantWebsocketClient
         }
         
         ClientSocket.Send(RWS_SUBTOEVENTS);
+        ClientSocket.Send(RWS_SUBTOEVENTS);
 
         Log.Information("Subscribing to Socket Events");
         SubscribeToEvents();
@@ -113,6 +114,8 @@ public class ValorantWebsocketClient
         Log.Fatal("Websocket Error:");
         Log.Fatal(e.Exception.Message);
         Log.Fatal(e.Exception.StackTrace);
+
+        Connect();
     }
 
     private void ClientSocketOnOnMessage(object? sender, MessageEventArgs e)

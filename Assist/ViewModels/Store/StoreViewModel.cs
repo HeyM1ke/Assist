@@ -56,7 +56,7 @@ public partial class StoreViewModel : ViewModelBase
         if (store.Store.BonusStore is not null)
         {
             Log.Information("Night market is Active, Loading Night Market Tab");
-            //NightMarketActive = true;
+            NightMarketActive = true;
         }
         
         var wallet = await GetCurrentUserWallet();

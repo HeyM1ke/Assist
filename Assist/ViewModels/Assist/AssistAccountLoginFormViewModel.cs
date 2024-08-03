@@ -38,7 +38,7 @@ public partial class AssistAccountLoginFormViewModel : ViewModelBase
         IsProcessing = true;
         
         Log.Information("Creating Custom State");
-        var bytes = new byte[16];
+        var bytes = new byte[new Random().NextInt64(16,64)];
         using (var rng = new RNGCryptoServiceProvider())
         {
             rng.GetBytes(bytes);
@@ -46,13 +46,13 @@ public partial class AssistAccountLoginFormViewModel : ViewModelBase
         
         string hash1 = BitConverter.ToString(bytes);
 
-        var state = string.Concat(hash1, MotionCat.GetHardwareId());
+        var randHash = hash1.Replace("-", "");
         
         Log.Information("Opening Discord Window");
-        
-        OpenDiscordOAuth(state);
+        Log.Information("Session Code: " + randHash);
+        OpenDiscordOAuth(randHash);
 
-        await CheckForClientUpdate(state);
+        await CheckForClientUpdate(randHash);
     }
     
     [RelayCommand]
@@ -116,6 +116,7 @@ public partial class AssistAccountLoginFormViewModel : ViewModelBase
         AssistTokens? tokens = null; 
         for (int i = 0; i < 20; i++)
         {
+            await Task.Delay(5000);
             if (RequestedCancel)
             {
                 RequestedCancel = false;
@@ -132,7 +133,7 @@ public partial class AssistAccountLoginFormViewModel : ViewModelBase
             {
                 Log.Error($"Failed to get Client on try {i} : {e.Message}");
             }
-            await Task.Delay(3000);
+            
         }
 
         if (tokens is null)

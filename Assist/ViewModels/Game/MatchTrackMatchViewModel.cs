@@ -46,8 +46,9 @@ public partial class MatchTrackMatchViewModel : ViewModelBase
     {
         if (RecentMatchData is null)
             return;
-        
-        MapImage = $"https://cdn.assistval.com/maps/{ValorantHelper.MapsByPath[RecentMatchData.MapId.ToLower()]}_BWlistview.png";
+
+        if (!string.IsNullOrEmpty(RecentMatchData.MapId))
+            MapImage = $"https://cdn.assistval.com/maps/{ValorantHelper.MapsByPath[RecentMatchData.MapId.ToLower()]}_BWlistview.png";
         
         
         // Determine Match State

@@ -13,7 +13,7 @@ namespace Assist.Views.Game.Live;
 
 public partial class LiveView : UserControl
 {
-    private readonly LiveViewViewModel _viewModel;
+    public static LiveViewViewModel _viewModel;
     
     public LiveView()
     {

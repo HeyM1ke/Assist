@@ -6,6 +6,7 @@
              xmlns:assist="clr-namespace:Assist.ViewModels.Assist"
              xmlns:lang="clr-namespace:Assist.Properties"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             
              x:Class="Assist.Controls.Assist.Authentication.AssistAccountLoginForm">
     
     <Design.DataContext>
@@ -20,12 +21,12 @@
             Background="{DynamicResource AssistControlBackground}"
             BorderBrush="{DynamicResource AssistControlOutline}"
             BorderThickness="1"
-            
             CornerRadius="10"
-            Padding="10">
-        <Grid>
+            Padding="10"
+            MinWidth="250"
+            Height="250">
+        <Grid HorizontalAlignment="Center">
             <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
                     Orientation="Vertical"
                     Spacing="8">
             <StackPanel Orientation="Horizontal" Spacing="10">

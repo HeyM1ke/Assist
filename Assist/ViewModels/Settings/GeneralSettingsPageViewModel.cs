@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Assist.Core.Settings.Options;
 using Assist.Models.Enums;
@@ -66,6 +68,20 @@ public partial class GeneralSettingsPageViewModel : ViewModelBase
             Log.Information("New Version Available. Showing to Update Page");
             AssistApplication.OpenUpdateWindow();
             return;
+        }
+        
+    }
+    
+    [RelayCommand]
+    public async void OpenFolder()
+    {
+        try
+        {
+            Process.Start("explorer.exe", $"{Path.Combine(AssistSettings.FolderPath, "Logs")}");
+        }
+        catch (Exception e)
+        {
+            
         }
         
     }

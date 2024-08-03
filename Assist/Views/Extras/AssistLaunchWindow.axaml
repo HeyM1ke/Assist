@@ -1,0 +1,38 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
+        x:Class="Assist.Views.Extras.AssistLaunchWindow"
+        Title="AssistLaunchWindow">
+        <Border Background="{DynamicResource AssistBackground}"
+                CornerRadius="20"
+                Padding="10"
+                BorderBrush="{DynamicResource AssistControlOutline}"
+                BorderThickness="2"
+        >
+        
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Spacing="10">
+                        <Image Source="/Assets/Default/AssistText_Temp.png"
+                               Stretch="UniformToFill"
+                               Width="230"
+                               RenderOptions.BitmapInterpolationMode="MediumQuality"/>
+            
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Spacing="20">
+                                
+                                <TextBlock Text="Launching"
+                                           FontSize="22"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontWeight="SemiBold"></TextBlock>
+                
+                        </StackPanel>
+                </StackPanel>
+        
+        </Border>
+</Window>
