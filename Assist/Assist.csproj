@@ -49,7 +49,7 @@
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
         <PackageReference Include="System.Management" Version="8.0.0" />
-        <PackageReference Include="System.Text.Json" Version="8.0.3" />
+        <PackageReference Include="System.Text.Json" Version="8.0.4" />
         <PackageReference Include="Velopack" Version="0.0.359" />
         <PackageReference Include="websocketsharp.core" Version="1.0.0" />
         <PackageReference Include="YamlDotNet" Version="15.1.0" />
